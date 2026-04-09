@@ -31,7 +31,7 @@ const engage: KurumsalScreenConfig[] = [
     type: "hero",
     title: "Kurumsal AI Olgunluk Degerlendirmesi",
     subtitle: "3 dakikada sirketinizin AI hazirlik seviyesini ogrenin.",
-    caption: "21 soru \u00B7 Ucretsiz \u00B7 Aninda sonuc",
+    caption: "20 soru \u00B7 Ucretsiz \u00B7 Aninda sonuc",
     cta: "Degerlendirmeyi Baslat",
   },
   {

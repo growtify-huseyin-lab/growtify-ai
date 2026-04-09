@@ -9,7 +9,7 @@ export const KURUMSAL_COPY: Record<number, PartialScreen> = {
   1: {
     title: "Kurumsal AI Olgunluk Değerlendirmesi",
     subtitle: "3 dakikada şirketinizin AI hazırlık seviyesini öğrenin. Sektörel karşılaştırma dahil.",
-    caption: "21 soru · Ücretsiz · Anında sonuç",
+    caption: "20 soru · Ücretsiz · Anında sonuç",
     cta: "Değerlendirmeyi Başlat",
   },
   2: {
