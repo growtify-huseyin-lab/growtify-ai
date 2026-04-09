@@ -21,25 +21,41 @@ const PAIN_LABELS: Record<string, string> = {
   q_overthink: "Aşırı Düşünme", q_motivation: "Motivasyon",
 };
 
-// CSS letter icons instead of emoji (Puppeteer on Vercel has no emoji font)
+// Inline SVG icons (Puppeteer on Vercel has no emoji font — SVGs render perfectly)
+function svg(path: string, color: string, size = 18): string {
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><${path}/></svg>`;
+}
+const ICONS = {
+  search: (c: string, s?: number) => svg('circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"', c, s),
+  bolt: (c: string, s?: number) => svg('polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"', c, s),
+  wrench: (c: string, s?: number) => svg('path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"', c, s),
+  rocket: (c: string, s?: number) => svg('path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09zM12 15l-3-3m3 3a22 22 0 0 0 4-11 22 22 0 0 0-11 4l7 7z"', c, s),
+  building: (c: string, s?: number) => svg('rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M8 10h.01M16 10h.01M12 14h.01M8 14h.01M16 14h.01"', c, s),
+  target: (c: string, s?: number) => svg('circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"', c, s),
+  clock: (c: string, s?: number) => svg('circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"', c, s),
+  clipboard: (c: string, s?: number) => svg('path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"', c, s),
+  chart: (c: string, s?: number) => svg('line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"', c, s),
+  lightbulb: (c: string, s?: number) => svg('line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"', c, s),
+};
+
 const PERSONA_INFO: Record<Persona, { icon: string; iconBg: string; subtitle: string; desc: string }> = {
   "Meraklı Gözlemci": {
-    icon: "G", iconBg: "#22C55E",
+    icon: ICONS.search("#fff"), iconBg: "#22C55E",
     subtitle: "Merak var, adım henüz yok — en güçlü başlangıç noktası",
     desc: "AI dünyasına ilgiyle bakıyorsun. GROWT Method ile neredesin ve hangi küçük adımla başlamalısın sorusunu birlikte cevaplayacağız.",
   },
   "Aktif Deneyici": {
-    icon: "D", iconBg: "#F59E0B",
+    icon: ICONS.bolt("#fff"), iconBg: "#F59E0B",
     subtitle: "Deneme var, sistem yok — doğru yol haritasına ihtiyacın var",
     desc: "Bazı araçları denedin ama sonuçlar dağınık. Doğru araç, doğru sıra ve net bir plan ile deneme-yanılma dönemini bitireceksin.",
   },
   Uygulamacı: {
-    icon: "U", iconBg: "#2563EB",
+    icon: ICONS.wrench("#fff"), iconBg: "#2563EB",
     subtitle: "Kullanıyorsun ama parçalı — sisteme dönüştürme vakti",
     desc: "AI araçlarıyla çalışıyorsun ama bütünleşik değil. Dağınık uygulamaları sistematik bir yapıya dönüştürerek gerçek verimlilik kazanacaksın.",
   },
   "AI Lideri": {
-    icon: "L", iconBg: "#7C3AED",
+    icon: ICONS.rocket("#fff"), iconBg: "#7C3AED",
     subtitle: "İleri düzeydesin — ölçülebilir sonuçlara bağlama vakti",
     desc: "AI'ı aktif kullanıyorsun. Şimdi mevcut kazanımlarını sistematik hale getirip ölçülebilir iş büyütme sonuçlarına dönüştüreceksin.",
   },
@@ -260,7 +276,7 @@ export function generatePdfHtml(state: QuizState): string {
         <div class="score-label">AI Olgunluk Seviyesi</div>
       </div>
       <div class="score-card score-card-neutral">
-        <div class="score-val" style="font-size:22px;"><div style="width:36px;height:36px;border-radius:10px;background:${persona.iconBg};color:white;display:flex;align-items:center;justify-content:center;font-weight:900;margin:0 auto;">${persona.icon}</div></div>
+        <div class="score-val" style="font-size:22px;"><div style="width:40px;height:40px;border-radius:10px;background:${persona.iconBg};display:flex;align-items:center;justify-content:center;margin:0 auto;">${persona.icon}</div></div>
         <div style="font-size:14px; font-weight:800; color:${DARK}; margin-top:4px;">${esc(state.persona)}</div>
         <div class="score-label">Profil</div>
       </div>
@@ -276,22 +292,22 @@ export function generatePdfHtml(state: QuizState): string {
     <!-- Detail Grid -->
     <div class="details-grid">
       <div class="detail-box">
-        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:${PRIMARY}15;color:${PRIMARY};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;">S</div>
+        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:${PRIMARY}15;display:flex;align-items:center;justify-content:center;">${ICONS.building(PRIMARY, 14)}</div>
         <div class="detail-label">Sektör</div>
         <div class="detail-val">${esc(SECTOR_LABELS[state.sector ?? ""] ?? state.sector ?? "Belirtilmedi")}</div>
       </div>
       <div class="detail-box">
-        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:${YELLOW}15;color:${YELLOW};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;">H</div>
+        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:${YELLOW}15;display:flex;align-items:center;justify-content:center;">${ICONS.target(YELLOW, 14)}</div>
         <div class="detail-label">Hedef</div>
         <div class="detail-val">${esc(GOAL_LABELS[state.q_goal ?? ""] ?? "Belirtilmedi")}</div>
       </div>
       <div class="detail-box">
-        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:${GREEN}15;color:${GREEN};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;">G</div>
+        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:${GREEN}15;display:flex;align-items:center;justify-content:center;">${ICONS.clock(GREEN, 14)}</div>
         <div class="detail-label">Günlük</div>
         <div class="detail-val">${state.commitment ?? 30} dk</div>
       </div>
       <div class="detail-box">
-        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:#7C3AED15;color:#7C3AED;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;">A</div>
+        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:#7C3AED15;display:flex;align-items:center;justify-content:center;">${ICONS.clipboard("#7C3AED", 14)}</div>
         <div class="detail-label">Alan Sayısı</div>
         <div class="detail-val">${state.q_areas?.length ?? 0} alan</div>
       </div>
@@ -317,7 +333,7 @@ export function generatePdfHtml(state: QuizState): string {
 
     <!-- Motivasyon mesajı -->
     <div style="margin-top:28px; background:linear-gradient(135deg, ${ACCENT}20, ${ACCENT}08); border:1.5px solid ${ACCENT}50; border-radius:16px; padding:20px;">
-      <div style="width:32px;height:32px;border-radius:8px;background:${ACCENT}30;color:${DARK};display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;margin-bottom:8px;">!</div>
+      <div style="width:32px;height:32px;border-radius:8px;background:${ACCENT}30;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">${ICONS.lightbulb(DARK, 16)}</div>
       <div style="font-size:13px; font-weight:700; color:${DARK}; margin-bottom:6px;">Unutma</div>
       <div style="font-size:12px; color:#475569; line-height:1.7;">Doğru zamanda doğru adımı atmak, her şeyi bilmekten daha önemli. Bu rapor senin başlangıç noktanı gösteriyor — gerisi sana bağlı. Günde ${state.commitment ?? 30} dakika bile fark yaratır.</div>
     </div>
@@ -371,14 +387,14 @@ export function generatePdfHtml(state: QuizState): string {
   <div class="section-title" style="font-size:15px;">Sana Özel Öneriler</div>
   <div class="rec-section">
     <div class="rec-box">
-      <div class="rec-icon rec-icon-purple" style="font-weight:900;color:${PRIMARY};">1</div>
+      <div class="rec-icon rec-icon-purple" style="display:flex;align-items:center;justify-content:center;">${ICONS.target(PRIMARY)}</div>
       <div>
         <div class="rec-title">Günlük ${state.commitment ?? 30} Dakika Ayır</div>
         <div class="rec-body">GROWT Method ile yapılandırılmış şekilde ilerle. İlk adım: mevcut durumunu anlamak ve doğru AI araçlarını belirlemek.</div>
       </div>
     </div>
     <div class="rec-box">
-      <div class="rec-icon rec-icon-green" style="font-weight:900;color:${GREEN};">2</div>
+      <div class="rec-icon rec-icon-green" style="display:flex;align-items:center;justify-content:center;">${ICONS.lightbulb(GREEN)}</div>
       <div>
         <div class="rec-title">Farkında Ol</div>
         <div class="rec-body">${state.q_habits?.length
@@ -387,7 +403,7 @@ export function generatePdfHtml(state: QuizState): string {
       </div>
     </div>
     <div class="rec-box">
-      <div class="rec-icon rec-icon-yellow" style="font-weight:900;color:${YELLOW};">3</div>
+      <div class="rec-icon rec-icon-yellow" style="display:flex;align-items:center;justify-content:center;">${ICONS.chart(YELLOW)}</div>
       <div>
         <div class="rec-title">Ölçmeye Başla</div>
         <div class="rec-body">Haftada kazandığın zamanı, tamamladığın görevleri ve AI ile ürettiğin çıktıları takip et. Ölçemediğin şeyi iyileştiremezsin.</div>
