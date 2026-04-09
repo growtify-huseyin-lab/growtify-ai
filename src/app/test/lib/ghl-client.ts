@@ -224,8 +224,8 @@ export async function createQuizCoupon(
   const code = "GROWT" + generateCouponSuffix();
   const now = new Date();
   const startDate = now.toISOString().replace(/\.\d+Z$/, "Z");
-  // Coupon expires in 15 minutes — matches quiz countdown timer
-  const endDate = new Date(now.getTime() + 15 * 60 * 1000)
+  // Coupon expires in 60 minutes — enough time to complete quiz + decide
+  const endDate = new Date(now.getTime() + 60 * 60 * 1000)
     .toISOString()
     .replace(/\.\d+Z$/, "Z");
 

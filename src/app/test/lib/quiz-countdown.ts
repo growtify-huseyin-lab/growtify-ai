@@ -7,7 +7,7 @@
 // cleared with the browser or via /test reset.
 
 const COOKIE_NAME = "growtify_quiz_paywall_expiry";
-const DURATION_MINUTES_DEFAULT = 15;
+const DURATION_MINUTES_DEFAULT = 60;
 
 function isBrowser(): boolean {
   return typeof document !== "undefined";

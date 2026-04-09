@@ -503,12 +503,11 @@ export const LOADING_STEPS: Record<number, string[]> = {
 export const PAYWALL_COPY = {
 
   // Blok 1 — Countdown
-  // NOT: durationMinutes: 15 — bu gerçek bir cookie-based timer.
-  // Metin gerçek zamanlı sayacı destekler şekilde yazıldı.
+  // NOT: durationMinutes: 60 — GHL kupon expire süresiyle eşleşiyor.
   countdown: {
     headline: "Özel indirim süresi dolmak üzere",
     sublabel: "Bu indirim kişiselleştirilmiş bir tekliftir ve sadece bu oturum için geçerlidir.",
-    durationMinutes: 15,
+    durationMinutes: 60,
   },
 
   // Blok 2 — Hero Promise
