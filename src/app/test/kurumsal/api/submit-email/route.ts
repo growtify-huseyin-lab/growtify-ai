@@ -3,7 +3,7 @@
 // then background PDF generation + upload + email (~25s, non-blocking).
 // NO coupon — CTA is strategy call booking.
 
-export const maxDuration = 300; // 5 min: PDF gen (~30s) + 2 min email delay + buffer
+export const maxDuration = 60;
 
 import { after } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
@@ -206,7 +206,7 @@ async function backgroundPdfFlow(
     console.log(`[kurumsal/bg] PDF uploaded — url=${pdfUrl}`);
 
     if (pdfUrl) {
-      // Save PDF URL + note immediately
+      // Save PDF URL + note immediately. Email is sent by GHL workflow (2 min delay).
       await Promise.all([
         savePdfUrlToContact(contactId, pdfUrl).then((r) =>
           console.log(`[kurumsal/bg] URL saved=${r.ok}`),
@@ -215,12 +215,7 @@ async function backgroundPdfFlow(
           console.log(`[kurumsal/bg] note=${r.ok}`),
         ),
       ]);
-
-      // Delay email by 2 minutes — user should finish viewing results first
-      console.log(`[kurumsal/bg] email scheduled in 2 minutes`);
-      await new Promise((r) => setTimeout(r, 120_000));
-      const emailResult = await sendKurumsalReportEmail(contactId, state, pdfUrl, config);
-      console.log(`[kurumsal/bg] email=${emailResult}`);
+      console.log(`[kurumsal/bg] done — email will be sent by GHL workflow`);
     }
   } catch (err) {
     console.error("[kurumsal/bg] error:", err);

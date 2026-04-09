@@ -2,7 +2,7 @@
 // Quiz lead capture: fast response (contact + opportunity + coupon ~3s)
 // then background PDF generation + upload + email (~25s, non-blocking).
 
-export const maxDuration = 300; // 5 min: PDF gen (~30s) + 2 min email delay + buffer
+export const maxDuration = 60;
 
 import { after } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
@@ -148,16 +148,8 @@ async function backgroundPdfFlow(
         ).then((r) => console.log(`[quiz/bg] note=${r.ok}`)),
       ]);
 
-      // Delay email by 2 minutes — user should finish viewing results first
-      console.log(`[quiz/bg] email scheduled in 2 minutes`);
-      await new Promise((r) => setTimeout(r, 120_000));
-      const emailResult = await sendQuizReportEmail(
-        contactId,
-        state.firstName,
-        state.persona,
-        pdfUrl,
-      );
-      console.log(`[quiz/bg] email=${emailResult.ok} id=${emailResult.messageId ?? emailResult.error}`);
+      // Email is sent by GHL workflow (2 min delay) — not from code
+      console.log(`[quiz/bg] done — email will be sent by GHL workflow`);
     }
   } catch (err) {
     console.error("[quiz/bg] error:", err);
