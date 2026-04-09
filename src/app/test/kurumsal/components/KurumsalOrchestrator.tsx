@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, LazyMotion, domAnimation, motion } from "motion/react";
 import { useQuiz } from "../lib/QuizContext-kurumsal";
 import { SCREENS } from "../lib/content-kurumsal-runtime";
@@ -41,6 +42,11 @@ export function KurumsalOrchestrator() {
   const { currentIndex } = useQuiz();
   const hasMounted = useHasMounted();
   const screen = SCREENS[currentIndex];
+
+  // Scroll to top on every screen change (fixes mobile staying at bottom)
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [currentIndex]);
 
   if (!screen) {
     return (

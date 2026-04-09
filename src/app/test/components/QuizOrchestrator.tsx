@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, LazyMotion, domAnimation, motion } from "motion/react";
 import { useQuiz } from "../lib/QuizContext";
 import { SCREENS } from "../lib/content-runtime";
@@ -59,6 +60,11 @@ export function QuizOrchestrator() {
   const { currentIndex } = useQuiz();
   const hasMounted = useHasMounted();
   const screen = SCREENS[currentIndex];
+
+  // Scroll to top on every screen change (fixes mobile staying at bottom)
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [currentIndex]);
   if (!screen) {
     return (
       <div className="p-10 text-center text-sm text-gray-500">
