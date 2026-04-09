@@ -15,6 +15,8 @@ interface StoredSnapshot {
   state: QuizState;
   /** True when the user reached the paywall (quiz completed). */
   completed?: boolean;
+  /** Coupon code from GHL (persisted for returning users). */
+  couponCode?: string;
 }
 
 function isBrowser(): boolean {
@@ -59,15 +61,14 @@ export function saveQuizSnapshot(
   try {
     // Preserve the existing completed flag if not explicitly overridden
     const existing = window.localStorage.getItem(STORAGE_KEY);
-    const existingCompleted = existing
-      ? (JSON.parse(existing) as StoredSnapshot).completed
-      : false;
+    const parsed = existing ? (JSON.parse(existing) as StoredSnapshot) : null;
     const snapshot: StoredSnapshot = {
       version: STORAGE_VERSION,
       savedAt: Date.now(),
       currentIndex,
       state,
-      completed: completed ?? existingCompleted ?? false,
+      completed: completed ?? parsed?.completed ?? false,
+      couponCode: parsed?.couponCode,
     };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
   } catch {
@@ -92,6 +93,26 @@ export function hasResumableSnapshot(): boolean {
     snap.currentIndex < 36 &&
     !snap.completed
   );
+}
+
+/** Save coupon code to the snapshot. */
+export function saveCouponToSnapshot(code: string): void {
+  if (!isBrowser()) return;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const snap = JSON.parse(raw) as StoredSnapshot;
+    snap.couponCode = code;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(snap));
+  } catch {
+    // ignore
+  }
+}
+
+/** Get coupon code from snapshot. */
+export function loadCouponFromSnapshot(): string | null {
+  const snap = loadQuizSnapshot();
+  return snap?.couponCode ?? null;
 }
 
 /** Mark the current snapshot as completed (quiz reached paywall). */

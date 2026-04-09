@@ -15,7 +15,12 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
   const isEmail = key === "email";
   const isPhone = key === ("phone" as string);
   // Submit trigger: email (bireysel) or phone (kurumsal — last capture before loading)
-  const isSubmitTrigger = screen.cta === "Raporumu Oluştur" || screen.cta === "Raporumu Olustur";
+  const isSubmitTrigger =
+    isEmail ||
+    isPhone ||
+    screen.cta === "Planımı Hazırla" ||
+    screen.cta === "Raporumu Oluştur" ||
+    screen.cta === "Raporumu Olustur";
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [kvkkConsent, setKvkkConsent] = useState(false);

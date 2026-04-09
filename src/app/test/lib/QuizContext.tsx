@@ -13,7 +13,9 @@ import { computeResults, pickDiscount } from "./scoring";
 import {
   clearQuizSnapshot,
   loadQuizSnapshot,
+  loadCouponFromSnapshot,
   markQuizCompleted,
+  saveCouponToSnapshot,
   saveQuizSnapshot,
 } from "./quiz-storage";
 import { QuizCtx } from "./quiz-context-core";
@@ -49,12 +51,12 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const snap = loadQuizSnapshot();
     if (snap?.completed) {
-      // Returning visitor with a completed quiz — load state immediately
-      // so the CompletedModal can display persona info. The paywall index
-      // is set but won't be visible until the user dismisses the modal.
       setState(snap.state);
       setCurrentIndex(TOTAL_SCREENS - 1);
       setHasCompletedResult(true);
+      // Restore coupon code from storage
+      const savedCoupon = loadCouponFromSnapshot();
+      if (savedCoupon) setCouponCode(savedCoupon);
     } else if (
       snap &&
       snap.currentIndex > 0 &&
@@ -171,6 +173,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
       const json = await res.json();
       if (json.couponCode) {
         setCouponCode(json.couponCode);
+        saveCouponToSnapshot(json.couponCode);
       }
       return { ok: true, couponCode: json.couponCode };
     } catch (err) {
