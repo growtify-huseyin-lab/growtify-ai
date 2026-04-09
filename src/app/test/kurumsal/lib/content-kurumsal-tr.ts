@@ -147,9 +147,9 @@ export const KURUMSAL_COPY: Record<number, PartialScreen> = {
     ] as KurumsalOptionItem[],
   },
   15: {
-    title: "Adınız nedir?",
-    subtitle: "Kişisel raporunuzda kullanılacak.",
-    placeholder: "Adınız",
+    title: "Adınız ve soyadınız?",
+    subtitle: "Raporunuzda ve görüşme davetinizde kullanılacak.",
+    placeholder: "Ad Soyad",
     cta: "Devam",
   },
   16: {

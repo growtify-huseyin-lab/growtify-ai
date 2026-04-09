@@ -222,9 +222,9 @@ const personalize: KurumsalScreenConfig[] = [
     phaseName: "PERSONALIZE",
     type: "text_input",
     stateKey: "firstName",
-    title: "Adiniz nedir?",
-    subtitle: "Kisisel raporunuzda kullanilacak.",
-    placeholder: "Adiniz",
+    title: "Adiniz ve soyadiniz?",
+    subtitle: "Raporunuzda ve gorusme davetinizde kullanilacak.",
+    placeholder: "Ad Soyad",
     cta: "Devam",
   },
   {
