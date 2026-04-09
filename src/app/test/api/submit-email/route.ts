@@ -126,7 +126,7 @@ async function backgroundPdfFlow(
     console.log(`[quiz/bg] PDF uploaded — url=${pdfUrl}`);
 
     if (pdfUrl) {
-      // Parallel: save URL + add note + send email
+      // Save PDF URL + note immediately
       await Promise.all([
         savePdfUrlToContact(contactId, pdfUrl).then((r) =>
           console.log(`[quiz/bg] URL saved=${r.ok}`),
@@ -146,15 +146,18 @@ async function backgroundPdfFlow(
             .filter(Boolean)
             .join("\n"),
         ).then((r) => console.log(`[quiz/bg] note=${r.ok}`)),
-        sendQuizReportEmail(
-          contactId,
-          state.firstName,
-          state.persona,
-          pdfUrl,
-        ).then((r) =>
-          console.log(`[quiz/bg] email=${r.ok} id=${r.messageId ?? r.error}`),
-        ),
       ]);
+
+      // Delay email by 2 minutes — user should finish viewing results first
+      console.log(`[quiz/bg] email scheduled in 2 minutes`);
+      await new Promise((r) => setTimeout(r, 120_000));
+      const emailResult = await sendQuizReportEmail(
+        contactId,
+        state.firstName,
+        state.persona,
+        pdfUrl,
+      );
+      console.log(`[quiz/bg] email=${emailResult.ok} id=${emailResult.messageId ?? emailResult.error}`);
     }
   } catch (err) {
     console.error("[quiz/bg] error:", err);

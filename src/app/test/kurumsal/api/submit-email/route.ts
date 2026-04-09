@@ -206,6 +206,7 @@ async function backgroundPdfFlow(
     console.log(`[kurumsal/bg] PDF uploaded — url=${pdfUrl}`);
 
     if (pdfUrl) {
+      // Save PDF URL + note immediately
       await Promise.all([
         savePdfUrlToContact(contactId, pdfUrl).then((r) =>
           console.log(`[kurumsal/bg] URL saved=${r.ok}`),
@@ -213,10 +214,13 @@ async function backgroundPdfFlow(
         addNoteToContact(contactId, buildContactNote(state)).then((r) =>
           console.log(`[kurumsal/bg] note=${r.ok}`),
         ),
-        sendKurumsalReportEmail(contactId, state, pdfUrl, config).then((r) =>
-          console.log(`[kurumsal/bg] email=${r}`),
-        ),
       ]);
+
+      // Delay email by 2 minutes — user should finish viewing results first
+      console.log(`[kurumsal/bg] email scheduled in 2 minutes`);
+      await new Promise((r) => setTimeout(r, 120_000));
+      const emailResult = await sendKurumsalReportEmail(contactId, state, pdfUrl, config);
+      console.log(`[kurumsal/bg] email=${emailResult}`);
     }
   } catch (err) {
     console.error("[kurumsal/bg] error:", err);
