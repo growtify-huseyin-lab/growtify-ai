@@ -151,7 +151,7 @@ export function PainEmojiScreen({ screen }: { screen: ScreenConfig }) {
       title={screen.title}
       subtitle={screen.subtitle}
     >
-      <div className="grid grid-cols-5 gap-2">
+      <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
         {screen.options?.map((opt) => {
           const val = Number(opt.value);
           const selected = current === val;
@@ -160,14 +160,14 @@ export function PainEmojiScreen({ screen }: { screen: ScreenConfig }) {
               key={opt.value}
               type="button"
               onClick={() => handle(val)}
-              className={`flex flex-col items-center gap-2 rounded-xl border-2 p-3 transition-all active:scale-95 ${
+              className={`flex flex-col items-center gap-1 sm:gap-2 rounded-xl border-2 px-1 py-2 sm:p-3 transition-all active:scale-95 ${
                 selected
                   ? "border-primary bg-primary/10"
                   : "border-gray-200 hover:border-primary/40 dark:border-dark-border"
               }`}
             >
-              <span className="text-4xl">{opt.emoji}</span>
-              <span className="text-[10px] font-semibold uppercase tracking-wide text-gray-600 dark:text-dark-muted">
+              <span className="text-2xl sm:text-4xl">{opt.emoji}</span>
+              <span className="text-[8px] sm:text-[10px] font-semibold uppercase tracking-wide text-gray-600 dark:text-dark-muted leading-tight text-center break-words hyphens-auto">
                 {opt.label}
               </span>
             </button>
