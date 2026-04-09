@@ -94,7 +94,7 @@ export async function POST(request: Request) {
         email: state.email,
         firstName: state.firstName || undefined,
         phone: state.phone || undefined,
-        country: "GB",
+        country: "TR",
         source: "Growtify.ai kurumsal quiz",
         tags,
         customFields,

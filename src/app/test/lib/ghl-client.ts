@@ -62,7 +62,7 @@ export async function upsertQuizContact(state: QuizState): Promise<UpsertResult>
     locationId: config.locationId,
     email: state.email,
     firstName: state.firstName || undefined,
-    country: "GB", // matches sub-account country
+    country: "TR",
     source: "Growtify.ai quiz",
     tags: buildGhlTags(state),
     customFields: buildGhlCustomFields(state),
