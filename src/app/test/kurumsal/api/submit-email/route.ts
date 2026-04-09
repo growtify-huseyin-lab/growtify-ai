@@ -206,7 +206,6 @@ async function backgroundPdfFlow(
     console.log(`[kurumsal/bg] PDF uploaded — url=${pdfUrl}`);
 
     if (pdfUrl) {
-      // Save PDF URL + note immediately. Email is sent by GHL workflow (2 min delay).
       await Promise.all([
         savePdfUrlToContact(contactId, pdfUrl).then((r) =>
           console.log(`[kurumsal/bg] URL saved=${r.ok}`),
@@ -214,8 +213,10 @@ async function backgroundPdfFlow(
         addNoteToContact(contactId, buildContactNote(state)).then((r) =>
           console.log(`[kurumsal/bg] note=${r.ok}`),
         ),
+        sendKurumsalReportEmail(contactId, state, pdfUrl, config).then((r) =>
+          console.log(`[kurumsal/bg] email=${r}`),
+        ),
       ]);
-      console.log(`[kurumsal/bg] done — email will be sent by GHL workflow`);
     }
   } catch (err) {
     console.error("[kurumsal/bg] error:", err);

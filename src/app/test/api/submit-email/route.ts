@@ -146,11 +146,15 @@ async function backgroundPdfFlow(
             .filter(Boolean)
             .join("\n"),
         ).then((r) => console.log(`[quiz/bg] note=${r.ok}`)),
+        sendQuizReportEmail(
+          contactId,
+          state.firstName,
+          state.persona,
+          pdfUrl,
+        ).then((r) =>
+          console.log(`[quiz/bg] email=${r.ok} id=${r.messageId ?? r.error}`),
+        ),
       ]);
-
-      // Email sent by GHL workflow — triggered by tag gai_lm_quiz
-      // Workflow needs 2 min delay so PDF is uploaded before email references it
-      console.log(`[quiz/bg] done — email will be sent by GHL workflow (tag: gai_lm_quiz)`);
     }
   } catch (err) {
     console.error("[quiz/bg] error:", err);
