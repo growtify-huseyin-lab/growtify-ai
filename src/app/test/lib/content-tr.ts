@@ -305,8 +305,8 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   },
 
   26: {
-    title: "Kişisel planını hangi e-postaya gönderelim?",
-    subtitle: "Raporunu ve 30 günlük AI yol haritanı bu adrese göndereceğiz. Kişisel verileriniz KVKK kapsamında işlenir, üçüncü taraflarla paylaşılmaz.",
+    title: "Son adım — raporun sana ulaşsın",
+    subtitle: "E-postan ve telefonun güvende. Raporunu ve önerilerini bu bilgilerle göndereceğiz.",
     placeholder: "ornek@mail.com",
     cta: "Planımı Hazırla",
   },

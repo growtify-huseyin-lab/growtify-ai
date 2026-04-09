@@ -45,6 +45,7 @@ export interface QuizState {
   commitment: Commitment | null;
   firstName: string;
   email: string;
+  phone: string;
 
   // Bonus
   bonus_q1: boolean | null;
@@ -80,6 +81,7 @@ export const initialQuizState: QuizState = {
   commitment: null,
   firstName: "",
   email: "",
+  phone: "",
   bonus_q1: null,
   bonus_q2: null,
   totalScore: 0,

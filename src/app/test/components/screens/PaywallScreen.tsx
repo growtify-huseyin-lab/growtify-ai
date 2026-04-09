@@ -299,7 +299,16 @@ function DiscountDisclaimerBlock() {
 }
 
 function FinalCtaBlock({ discounted }: { discounted: number }) {
-  const { couponCode } = useQuiz();
+  const { couponCode, state } = useQuiz();
+
+  // Build prefilled payment link with contact info + coupon
+  const params = new URLSearchParams();
+  if (state.firstName) params.set("firstName", state.firstName);
+  if (state.email) params.set("email", state.email);
+  if (state.phone) params.set("phone", state.phone);
+  if (couponCode) params.set("couponCode", couponCode);
+  const paymentUrl = PAYMENT_LINK + (params.toString() ? "?" + params.toString() : "");
+
   return (
     <section className="sticky bottom-4 space-y-3 rounded-2xl bg-primary p-4 shadow-2xl">
       <div className="text-center text-xs font-semibold uppercase tracking-wider text-white/70">
@@ -311,18 +320,18 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
       {couponCode && (
         <div className="rounded-xl bg-white/15 px-4 py-2 text-center">
           <div className="text-[10px] font-semibold uppercase tracking-wider text-white/60">
-            İndirim kodun
+            İndirim kodun (otomatik uygulanacak)
           </div>
           <div className="font-mono text-lg font-black tracking-widest text-white">
             {couponCode}
           </div>
           <div className="text-[10px] text-white/50">
-            Ödeme sayfasında kupon alanına yapıştır
+            15 dakika geçerli · Tek kullanımlık
           </div>
         </div>
       )}
       <a
-        href={PAYMENT_LINK}
+        href={paymentUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="block w-full rounded-xl bg-white px-6 py-3 text-center text-base font-bold text-primary shadow-lg active:scale-[0.98]"
