@@ -2,7 +2,7 @@
 // Quiz lead capture: fast response (contact + opportunity + coupon ~3s)
 // then background PDF generation + upload + email (~25s, non-blocking).
 
-export const maxDuration = 60; // Vercel Pro: 60s timeout for PDF generation
+export const maxDuration = 300; // 5 min: PDF gen (~30s) + 2 min email delay + buffer
 
 import { after } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";

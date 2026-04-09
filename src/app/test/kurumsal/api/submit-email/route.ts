@@ -3,7 +3,7 @@
 // then background PDF generation + upload + email (~25s, non-blocking).
 // NO coupon — CTA is strategy call booking.
 
-export const maxDuration = 60;
+export const maxDuration = 300; // 5 min: PDF gen (~30s) + 2 min email delay + buffer
 
 import { after } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
