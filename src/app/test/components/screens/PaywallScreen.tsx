@@ -4,7 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
-import { PRODUCT } from "@/lib/constants";
+// GHL payment link — hardcoded here because PRODUCT.ctaHref now points to /test (quiz entry)
+const PAYMENT_LINK = "https://app.growtify.app/payment-link/69d20484c6a0e600f4d07a46";
 import { PAYWALL_COPY, interpolate } from "../../lib/content-runtime";
 import {
   getOrStartPaywallExpiry,
@@ -321,7 +322,7 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
         </div>
       )}
       <a
-        href={PRODUCT.ctaHref}
+        href={PAYMENT_LINK}
         target="_blank"
         rel="noopener noreferrer"
         className="block w-full rounded-xl bg-white px-6 py-3 text-center text-base font-bold text-primary shadow-lg active:scale-[0.98]"
