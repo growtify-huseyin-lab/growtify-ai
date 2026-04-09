@@ -148,8 +148,14 @@ async function backgroundPdfFlow(
         ).then((r) => console.log(`[quiz/bg] note=${r.ok}`)),
       ]);
 
-      // Email is sent by GHL workflow (2 min delay) — not from code
-      console.log(`[quiz/bg] done — email will be sent by GHL workflow`);
+      // Send report email with PDF link
+      const emailResult = await sendQuizReportEmail(
+        contactId,
+        state.firstName,
+        state.persona,
+        pdfUrl,
+      );
+      console.log(`[quiz/bg] email=${emailResult.ok} id=${emailResult.messageId ?? emailResult.error}`);
     }
   } catch (err) {
     console.error("[quiz/bg] error:", err);

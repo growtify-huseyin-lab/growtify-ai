@@ -79,6 +79,16 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
           autoFocus
           className="w-full rounded-xl border-2 border-gray-200 bg-white px-5 py-4 text-lg font-medium text-dark placeholder-gray-400 outline-none transition-colors focus:border-primary dark:border-dark-border dark:bg-dark-bg dark:text-white"
         />
+        {/* Phone field only on bireysel quiz email screen (kurumsal has separate phone screen) */}
+        {isEmail && state.segment !== "kurumsal" && (
+          <input
+            type="tel"
+            value={(state as Record<string, unknown>).phone as string ?? ""}
+            onChange={(e) => setField("phone" as keyof typeof state, e.target.value as never)}
+            placeholder="Telefon (opsiyonel)"
+            className="w-full rounded-xl border-2 border-gray-200 bg-white px-5 py-4 text-lg font-medium text-dark placeholder-gray-400 outline-none transition-colors focus:border-primary dark:border-dark-border dark:bg-dark-bg dark:text-white"
+          />
+        )}
         {error && (
           <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
         )}
