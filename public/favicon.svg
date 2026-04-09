@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="dot" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="50%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <!-- "gr" letters -->
+  <text x="20" y="420" font-family="Inter, -apple-system, system-ui, sans-serif" font-size="460" font-weight="900" fill="#3a3a3a" letter-spacing="-20">gr</text>
+  <!-- Gradient dot -->
+  <circle cx="438" cy="420" r="52" fill="url(#dot)"/>
+</svg>

@@ -1,0 +1,3 @@
+# NOINDEX — Site henüz public değil. İçerik kontrolü tamamlandığında açılacak.
+User-agent: *
+Disallow: /

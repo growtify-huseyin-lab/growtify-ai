@@ -1,0 +1,345 @@
+{
+  "human_summary": "Growtify.ai websitesi teknik olarak saglam (Next.js 16, Tailwind 4, dark mode, responsive) ancak brand-config ve offer-library ile kritik uyumsuzluklar var. Fiyatlandirma modeli farkli, lead capture mekanizmasi yok, blog placeholder, iletisim formu calismaz, SEO altyapisi eksik, sektor sayfalari yok. 27 duzenleme maddesi belirlendi.",
+  "structured_data": {
+    "audit_date": "2026-04-04",
+    "auditor": "Content Manager Department",
+    "overall_score": "6.5/10",
+    "score_breakdown": {
+      "teknik_altyapi": "8/10 — Modern stack, clean code, responsive, dark mode",
+      "icerik_uyumu": "4/10 — Fiyatlar, CTA'lar, mesajlar offer-library ile uyumsuz",
+      "seo_hazirlik": "3/10 — Meta tag'ler minimal, schema yok, sitemap yok, OG images yok",
+      "lead_capture": "2/10 — Lead magnet yok, popup yok, quiz yok, newsletter form yok",
+      "funnel_entegrasyonu": "3/10 — GHL entegrasyonu yok, form calismaz, tracking yok",
+      "icerik_zenginligi": "5/10 — Sayfalar var ama placeholder, derinlik yok"
+    },
+    "findings": {
+      "kritik_uyumsuzluklar": [
+        {
+          "id": "CRIT-01",
+          "severity": "KRITIK",
+          "area": "Fiyatlandirma",
+          "finding": "Website'deki fiyatlar offer-library ile UYUMSUZ. Website: Community 999, Pro 2.499, Premium 4.999 TL/ay (aylik abonelik). Offer-library: Community 999 TL/ay, Professional 12.000-15.000 TL (tek seferlik), Premium 18.000-25.000 TL (tek seferlik). Website tamamen farkli bir fiyat modeli gosteriyor.",
+          "source_file": "src/lib/constants.ts:139-201",
+          "reference": "marketing/knowledge/offer-library.json",
+          "fix": "PRODUCTS dizisini offer-library'ye gore yeniden yaz. Community aylik, Professional/Premium tek seferlik fiyat modeline cevir."
+        },
+        {
+          "id": "CRIT-02",
+          "severity": "KRITIK",
+          "area": "Urun Yapisi",
+          "finding": "Website 3 aylik abonelik katmani (Community/Pro/Premium) gosteriyor. Offer-library ise 4 katman tanimliyor: Free (ucretsiz icerik) + Community (aylik) + Professional (tek seferlik, 8-12 hafta) + Premium (tek seferlik, done-with-you). Urun mimarisi tamamen farkli.",
+          "source_file": "src/lib/constants.ts:139-201",
+          "reference": "marketing/knowledge/offer-library.json",
+          "fix": "Urun katmanlarini offer-library'ye hizala. Free tier'i acikca goster. Professional/Premium'u danismanlik programi olarak konumlandir."
+        },
+        {
+          "id": "CRIT-03",
+          "severity": "KRITIK",
+          "area": "Kocluk Sayfalari",
+          "finding": "Website'de kocluk ayri satin alinan paketler olarak gosteriliyor (Tekli 1.500 TL, 4'lu 5.000 TL, 8'li 9.000 TL). Offer-library'de ise kocluk Professional/Premium paketlerin ICINDE. Ayri kocluk paketi yok.",
+          "source_file": "src/lib/constants.ts:204-232, src/app/kocluk/page.tsx",
+          "reference": "marketing/knowledge/offer-library.json",
+          "fix": "Kocluk sayfasini Professional ve Premium danismanlik programlarinin tanitim sayfasina donustur. Ayri kocluk paketi kavramindan vazgec veya add-on olarak yeniden konumlandir."
+        },
+        {
+          "id": "CRIT-04",
+          "severity": "KRITIK",
+          "area": "CTA Tutarsizligi",
+          "finding": "Hero CTA: 'Ucretsiz Basla' → go.growtify.ai. Offer-library CTA: 'Ucretsiz AI Baslangic Rehberini Indir' (TOFU) veya '7 Gun Ucretsiz Dene' (MOFU). Website'deki CTA funnel stratejisiyle uyumsuz — direkt platforma yonlendiriyor, lead capture yapmiyor.",
+          "source_file": "src/components/sections/Hero.tsx:35, CTA.tsx:18",
+          "reference": "marketing/knowledge/messaging-library.json (cta_library)",
+          "fix": "Primary CTA'yi lead magnet indirmeye cevir (email capture). Secondary CTA'yi ucretsiz tanisma gorusmesine birak. go.growtify.ai linkini MOFU/BOFU asamasina tasiy."
+        },
+        {
+          "id": "CRIT-05",
+          "severity": "KRITIK",
+          "area": "Lead Capture",
+          "finding": "Website'de HICBIR lead capture mekanizmasi yok. Newsletter signup formu yok, lead magnet indirme yok, quiz embed yok, exit intent popup yok. Tum trafik direkt go.growtify.ai'ya yonlendiriliyor — email listesi buyumuyor.",
+          "source_file": "Tum sayfalar",
+          "reference": "marketing/knowledge/offer-library.json (lead_magnets), content-strategy.json",
+          "fix": "Her sayfaya lead capture ekle: inline CTA (lead magnet), footer newsletter form, blog yazilari icinde opt-in, sektor sayfalarinda sektore ozel rehber indirme."
+        }
+      ],
+      "onemli_eksikler": [
+        {
+          "id": "IMP-01",
+          "severity": "ONEMLI",
+          "area": "Sektor Sayfalari",
+          "finding": "SectorGrid 12 sektoru listeleyen kart gosteriyor ama tiklanamaz. Her sektor icin ayri landing page yok. Offer-library'de 15 sektor tanimli, her biri icin hook, awareness/interest/decision mesajlari ve sektore ozel lead magnet var.",
+          "source_file": "src/components/sections/SectorGrid.tsx",
+          "reference": "marketing/knowledge/messaging-library.json (sector_hooks)",
+          "fix": "Her sektor icin /sektor/[slug] dinamik sayfa olustur. Her sayfa: sektor hook + AI kullanim ornekleri + sektore ozel testimonial + lead magnet CTA + demo gorusmesi CTA icermeli."
+        },
+        {
+          "id": "IMP-02",
+          "severity": "ONEMLI",
+          "area": "Blog",
+          "finding": "Blog sayfasi placeholder — 6 ornek post var, hicbiri tiklanabilir degil, blog/[slug] route'u yok. Content calendar'da 90 gunde 26 blog yazisi planlanmis.",
+          "source_file": "src/app/blog/page.tsx",
+          "reference": "marketing/content/content-calendar-90day.json",
+          "fix": "Blog altyapisini kur: blog/[slug] dinamik route, MDX veya CMS entegrasyonu, kategori filtreleme, ilgili yazilar, yazi ici lead capture CTA, sosyal paylasim butonlari."
+        },
+        {
+          "id": "IMP-03",
+          "severity": "ONEMLI",
+          "area": "Iletisim Formu",
+          "finding": "Form frontend-only, backend entegrasyonu yok. Submit butonu hicbir sey yapmiyor. GHL form entegrasyonu veya API route yok.",
+          "source_file": "src/app/iletisim/page.tsx:39-115",
+          "fix": "GHL webhook veya Next.js server action ile form submission'i bagla. Success/error state ekle. Spam koruma (honeypot veya reCAPTCHA) ekle."
+        },
+        {
+          "id": "IMP-04",
+          "severity": "ONEMLI",
+          "area": "SEO",
+          "finding": "Sayfa bazli meta description'lar minimal. robots.txt yok, sitemap.xml yok, structured data (JSON-LD) yok, canonical URL'ler yok, OG image'lar yok.",
+          "source_file": "src/app/layout.tsx:13-32, next.config.ts",
+          "fix": "robots.txt + sitemap.xml olustur. Her sayfaya zengin meta data ekle. Organization + WebSite + FAQ schema markup ekle. OG image template olustur. Canonical URL'leri ayarla."
+        },
+        {
+          "id": "IMP-05",
+          "severity": "ONEMLI",
+          "area": "Analytics & Tracking",
+          "finding": "Hicbir analytics kodu yok. Google Analytics, Meta Pixel, GHL tracking yok. UTM parametreleri takip edilmiyor.",
+          "source_file": "src/app/layout.tsx",
+          "fix": "GA4, Meta Pixel, GHL tracking script'lerini ekle. Event tracking: CTA tiklamalari, form submission, sayfa goruntulenmeleri. GTM container olustur."
+        },
+        {
+          "id": "IMP-06",
+          "severity": "ONEMLI",
+          "area": "7 Gunluk Deneme Mesaji",
+          "finding": "CTA section ve FAQ'da '7 gunluk ucretsiz deneme' ve 'Level 1 ilk 2 modul ucretsiz' mesajlari birbiriyle celisiyor. Offer-library'de Community icin 7 gun trial var ama Free tier ayri bir katman.",
+          "source_file": "src/components/sections/CTA.tsx:13, FAQ.tsx:24",
+          "reference": "marketing/knowledge/offer-library.json",
+          "fix": "Mesajlari tutarli hale getir: Free tier = Level 1 ilk 2 modul (surekli ucretsiz). Community = 7 gun full trial. Ikisi farkli teklifler — acikca ayir."
+        },
+        {
+          "id": "IMP-07",
+          "severity": "ONEMLI",
+          "area": "Testimonials",
+          "finding": "3 placeholder testimonial var, sayfada 'Gosterim amacli orneklerdir' disclaimeri mevcut. Gercek testimonial'lar henuz yok — founding member programi baslamadan normal. Ancak disclaimer kaldirilmali, daha guclu sosyal kanit stratejisi planlanmali.",
+          "source_file": "src/components/sections/Testimonials.tsx",
+          "fix": "Founding member'lar alininca gercek testimonial'larla degistir. O zamana kadar istatistik bazli sosyal kanit kullan (orn: TUIK verileri, global AI adoption rakamlari)."
+        }
+      ],
+      "iyilestirme_onerileri": [
+        {
+          "id": "ENH-01",
+          "severity": "IYILESTIRME",
+          "area": "Huseyin Tanitimi",
+          "finding": "Hakkimizda sayfasinda kurucu Huseyin'in kisisel tanitimi, fotosu, hikayesi yok. Offer-library ve messaging-library'de 'mentor esliginde' vurgusu cok guclu — ziyaretci mentor'un kim oldugunu bilmeli.",
+          "fix": "Hakkimizda sayfasina Huseyin biyografi bolumu ekle: foto, kisa hikaye, deneyim, neden Growtify'i kurdu. Homepage'e de kucuk bir 'Kurucu' bolumu eklenebilir."
+        },
+        {
+          "id": "ENH-02",
+          "severity": "IYILESTIRME",
+          "area": "GROWT Method Sayfasi",
+          "finding": "GROWT Method sayfasi var ve icerik iyi. Ancak her asamada somut ornek/demo linki yok. Video embed veya canli demo butonu eklenebilir.",
+          "fix": "Her GROWT asamasina 1 kisa video veya gorsel demo ekle. 'Bu asamada ne yapacaksin?' somut output listesi ekle."
+        },
+        {
+          "id": "ENH-03",
+          "severity": "IYILESTIRME",
+          "area": "Ilerleme/Gamification",
+          "finding": "Ilerleme sayfasi gamification sistemini gosteriyor ama platform uzerinde calisan bir ozellik degil — sadece tanitim. Bu sayfa mevcut haliyle 'coming soon' gibi duruyor.",
+          "fix": "Sayfayi 'Platform Deneyimi' olarak yeniden cercevele. Canli GHL platformundaki gercek deneyimi gosteren screenshot'lar veya demo video ekle."
+        },
+        {
+          "id": "ENH-04",
+          "severity": "IYILESTIRME",
+          "area": "Mobil UX",
+          "finding": "Responsive tasarim var ama nav menude 7 item fazla. Mobilde onemli CTA'lar (lead magnet, demo gorusmesi) gorunur degil.",
+          "fix": "Mobil menude ana CTA'yi one cikar. Sticky mobile CTA bar ekle (sayfanin altinda sabit CTA butonu)."
+        },
+        {
+          "id": "ENH-05",
+          "severity": "IYILESTIRME",
+          "area": "Footer",
+          "finding": "Footer'da newsletter signup yok. Sosyal medya linkleri sadece text — ikon kullanilabilir. Gizlilik politikasi ve kullanim sartlari linki yok.",
+          "fix": "Footer'a newsletter email signup formu ekle. Sosyal medya ikonlari ekle. Gizlilik politikasi ve KVKK sayfasi olustur."
+        },
+        {
+          "id": "ENH-06",
+          "severity": "IYILESTIRME",
+          "area": "Performans",
+          "finding": "Public klasorunde sadece varsayilan Next.js SVG'leri var. Logo dosyalari (growtify-ai-logo-purple.svg vb.) eksik. Favicon generic Next.js favicon'u.",
+          "source_file": "public/",
+          "fix": "Gercek logo dosyalarini public/'e ekle. Ozel favicon olustur. OG image template olustur."
+        },
+        {
+          "id": "ENH-07",
+          "severity": "IYILESTIRME",
+          "area": "Hiz Optimizasyonu",
+          "finding": "Henuz resim kullanilmadigindan Core Web Vitals problemi yok. Ancak ileride eklenmesi gereken: next/image kullanimi, font-display swap kontrolu, lazy loading.",
+          "fix": "Image component'i ve optimization pipeline'i hazir tut. Gorsel eklendikce next/image ile optimize et."
+        },
+        {
+          "id": "ENH-08",
+          "severity": "IYILESTIRME",
+          "area": "Eksik Sayfalar",
+          "finding": "Content strategy'ye gore gerekli ama websitede olmayan sayfalar: /sektor/[slug] (15 sektor sayfasi), /webinar (webinar kayit), /quiz (AI olgunluk testi), /rehber (lead magnet indirme), /gizlilik (KVKK), /sartlar (kullanim sartlari).",
+          "fix": "Oncelik sirasina gore ekle: 1) /sektor/[slug], 2) /quiz, 3) /webinar, 4) /gizlilik + /sartlar"
+        },
+        {
+          "id": "ENH-09",
+          "severity": "IYILESTIRME",
+          "area": "Sosyal Medya Linkleri",
+          "finding": "Footer'daki sosyal medya linkleri generic (linkedin.com/company/growtify). Gercek URL'ler dogrulanmali.",
+          "source_file": "src/components/layout/Footer.tsx:24-28",
+          "fix": "Gercek sosyal medya URL'lerini dogrula ve guncelle."
+        },
+        {
+          "id": "ENH-10",
+          "severity": "IYILESTIRME",
+          "area": "Founding Member Vurgusu",
+          "finding": "Fiyat kartlarinda 'Founding Member' fiyati gosteriliyor ama aciliyet/scarcity unsuru yok. Kac kisi kaldi, ne zaman bitiyor bilgisi yok.",
+          "fix": "Founding member badge'ine kalan kota ve bitis tarihi ekle. Countdown timer veya 'X kisi kaldi' gostergesi ekle."
+        }
+      ],
+      "missing_pages": [
+        {"route": "/sektor/[slug]", "purpose": "Sektore ozel landing page — lead capture + SEO", "priority": "P1"},
+        {"route": "/quiz", "purpose": "AI Dijital Olgunluk Testi — ana lead magnet", "priority": "P1"},
+        {"route": "/webinar", "purpose": "Webinar kayit sayfasi", "priority": "P2"},
+        {"route": "/rehber/[slug]", "purpose": "Lead magnet indirme sayfalari", "priority": "P2"},
+        {"route": "/blog/[slug]", "purpose": "Blog yazi detay sayfasi", "priority": "P1"},
+        {"route": "/gizlilik", "purpose": "KVKK / Gizlilik politikasi", "priority": "P2"},
+        {"route": "/sartlar", "purpose": "Kullanim sartlari", "priority": "P2"},
+        {"route": "/basari-hikayeleri", "purpose": "Case study / testimonial detay", "priority": "P3"}
+      ]
+    },
+    "duzenleme_plani": {
+      "faz_1_acil": {
+        "name": "Kritik Uyumsuzluk Giderme",
+        "items": [
+          "CRIT-01: Fiyatlandirmayi offer-library'ye hizala",
+          "CRIT-02: Urun katmanlarini yeniden yapilandir (Free + Community + Professional + Premium)",
+          "CRIT-03: Kocluk sayfasini danismanlik programi tanitimina donustur",
+          "CRIT-04: CTA'lari funnel stratejisine hizala — primary CTA = lead capture",
+          "CRIT-05: Ana sayfaya lead capture mekanizmasi ekle (newsletter form + lead magnet CTA)"
+        ],
+        "affected_files": [
+          "src/lib/constants.ts",
+          "src/components/sections/Hero.tsx",
+          "src/components/sections/CTA.tsx",
+          "src/components/sections/ProductTiers.tsx",
+          "src/app/kocluk/page.tsx",
+          "src/app/programlar/page.tsx",
+          "src/components/layout/Footer.tsx"
+        ]
+      },
+      "faz_2_altyapi": {
+        "name": "SEO + Tracking + Form Altyapisi",
+        "items": [
+          "IMP-04: robots.txt, sitemap.xml, structured data ekle",
+          "IMP-05: GA4 + Meta Pixel + GHL tracking entegrasyonu",
+          "IMP-03: Iletisim formunu GHL webhook'a bagla",
+          "ENH-06: Logo, favicon, OG image ekle",
+          "ENH-05: Footer'a newsletter form + gizlilik linki ekle"
+        ],
+        "affected_files": [
+          "src/app/layout.tsx",
+          "next.config.ts",
+          "public/robots.txt (yeni)",
+          "src/app/sitemap.ts (yeni)",
+          "src/app/iletisim/page.tsx",
+          "src/components/layout/Footer.tsx",
+          "public/ (logo + favicon dosyalari)"
+        ]
+      },
+      "faz_3_icerik_sayfalari": {
+        "name": "Yeni Sayfalar + Blog Altyapisi",
+        "items": [
+          "IMP-01: /sektor/[slug] dinamik sektor sayfalari (ilk 3: saglik, hukuk, e-ticaret)",
+          "IMP-02: Blog altyapisi — MDX veya CMS, blog/[slug] route, kategori filtreleme",
+          "ENH-08: /quiz embed sayfasi (GHL quiz formu)",
+          "ENH-08: /gizlilik + /sartlar sayfalari",
+          "ENH-01: Hakkimizda sayfasina kurucu bolumu ekle"
+        ],
+        "affected_files": [
+          "src/app/sektor/[slug]/page.tsx (yeni)",
+          "src/app/blog/[slug]/page.tsx (yeni)",
+          "src/app/quiz/page.tsx (yeni)",
+          "src/app/gizlilik/page.tsx (yeni)",
+          "src/app/sartlar/page.tsx (yeni)",
+          "src/app/hakkimizda/page.tsx"
+        ]
+      },
+      "faz_4_optimizasyon": {
+        "name": "UX + Performans + Sosyal Kanit",
+        "items": [
+          "ENH-04: Mobil sticky CTA bar",
+          "IMP-06: Ucretsiz deneme vs free tier mesaj tutarliligi",
+          "IMP-07: Testimonial stratejisi guncelleme",
+          "ENH-02: GROWT Method sayfasina video/demo ekle",
+          "ENH-03: Ilerleme sayfasini platform demo'suna donustur",
+          "ENH-10: Founding member scarcity unsurlari"
+        ]
+      }
+    }
+  },
+  "decisions": [
+    {
+      "decision": "Audit'i 4 fazli duzenleme planina donusturduk",
+      "rationale": "Kritik uyumsuzluklar (fiyat, urun yapisi, CTA) oncelikli cikarildi cunku yanlis bilgi yayinlamak marka guvenilirligine zarar verir",
+      "alternatives_considered": ["Tum degisiklikleri tek seferde yapmak", "Sadece teknik iyilestirmelere odaklanmak"]
+    },
+    {
+      "decision": "Fiyatlandirma ve urun yapisi offer-library'ye hizalanacak",
+      "rationale": "offer-library.json master referans belgesidir ve funnel stratejisiyle entegre. Website'deki farkli fiyat modeli karisisiklik yaratir",
+      "alternatives_considered": ["Website fiyatlarini master yapmak — reddedildi cunku funnel/messaging tum kanallar icin offer-library'ye bagli"]
+    },
+    {
+      "decision": "Lead capture mekanizmasi eklenmesi en kritik islevsel eksik",
+      "rationale": "Website'in ana gorevi lead toplamak. Simdi tum trafik go.growtify.ai'ya yonleniyor — email listesi buyumuyor, nurture yapilmiyor, funnel calismIyor",
+      "alternatives_considered": ["Sadece go.growtify.ai'ya yonlendirmeye devam etmek — reddedildi cunku funnel stratejisi email-first"]
+    }
+  ],
+  "assumptions": [
+    {
+      "assumption": "offer-library.json master fiyatlandirma referansidir",
+      "risk_if_wrong": "Website fiyatlari guncellense bile diger kanallardaki fiyatlarla uyumsuzluk olur",
+      "how_to_validate": "Huseyin ile fiyat modelini teyit et: aylik abonelik mi tek seferlik mi?"
+    },
+    {
+      "assumption": "GHL platform (go.growtify.ai) zaten kurulu ve calisir durumda",
+      "risk_if_wrong": "CTA linkleri bos sayfaya yonlendirir",
+      "how_to_validate": "go.growtify.ai URL'sini kontrol et"
+    },
+    {
+      "assumption": "Blog icin MDX yeterli — CMS gerekmez",
+      "risk_if_wrong": "Content uretim hizi dulebilir, Huseyin dogrudan icerik ekleyemez",
+      "how_to_validate": "Huseyin'in icerik ekleme workflow'unu sor"
+    }
+  ],
+  "next_required_input": [
+    {
+      "field": "fiyat_modeli_konfirmasyonu",
+      "from": "user",
+      "description": "Website'deki aylik abonelik modeli mi gecerli (Community 999, Pro 2.499, Premium 4.999 TL/ay) yoksa offer-library'deki model mi (Community 999/ay + Professional 12-15K tek seferlik + Premium 18-25K tek seferlik)?"
+    },
+    {
+      "field": "kocluk_paketi_karari",
+      "from": "user",
+      "description": "Kocluk ayri satin alinan paketler mi olacak (website'deki gibi) yoksa Professional/Premium'un icinde mi (offer-library'deki gibi)?"
+    },
+    {
+      "field": "ghl_entegrasyon_detaylari",
+      "from": "user",
+      "description": "GHL webhook URL'leri, form ID'leri, tracking script'leri — form ve lead capture entegrasyonu icin gerekli"
+    },
+    {
+      "field": "logo_dosyalari",
+      "from": "user",
+      "description": "brand-config'deki logo dosyalari (growtify-ai-logo-purple.svg, white, icon) — public/ klasorune eklenmeli"
+    },
+    {
+      "field": "analytics_id",
+      "from": "user",
+      "description": "GA4 Measurement ID, Meta Pixel ID, GHL tracking kodu"
+    },
+    {
+      "field": "faz_1_onay",
+      "from": "user",
+      "description": "Kritik duzenleme planini onayla — hangi fazdan baslamak istiyorsun?"
+    }
+  ]
+}
