@@ -12,24 +12,25 @@ const GREEN = "#22C55E";
 const RED = "#EF4444";
 const YELLOW = "#F59E0B";
 
-const PERSONA_INFO: Record<KurumsalPersona, { emoji: string; subtitle: string; desc: string }> = {
+// CSS letter icons instead of emoji (Puppeteer on Vercel has no emoji font)
+const PERSONA_INFO: Record<KurumsalPersona, { icon: string; iconBg: string; subtitle: string; desc: string }> = {
   Baslangic: {
-    emoji: "\u{1F331}",
+    icon: "B", iconBg: "#22C55E",
     subtitle: "AI Fark\u0131ndal\u0131k A\u015famas\u0131",
     desc: "Organizasyonunuz AI yolculuğunun başında. Doğru temeller atıldığında hızlı ilerleme potansiyeli yüksek.",
   },
   Kesif: {
-    emoji: "\u{1F50D}",
+    icon: "K", iconBg: "#F59E0B",
     subtitle: "AI Deneyimleme A\u015famas\u0131",
     desc: "AI araçlarını deniyorsunuz ama sistematik yaklaşım eksik. Doğru yol haritası ile hızlanabilirsiniz.",
   },
   Uygulama: {
-    emoji: "\u2699\uFE0F",
+    icon: "U", iconBg: "#2563EB",
     subtitle: "AI Operasyonu A\u015famas\u0131",
     desc: "AI çözümleri aktif kullanılıyor. Ölçeklendirme ve yönetişim üzerine odaklanma zamanı.",
   },
   Lider: {
-    emoji: "\u{1F680}",
+    icon: "L", iconBg: "#7C3AED",
     subtitle: "AI D\u00f6n\u00fc\u015f\u00fcm\u00fc A\u015famas\u0131",
     desc: "AI stratejik rekabet avantajı olarak kullanılıyor. Yeni fırsatları keşfetme zamanı.",
   },
@@ -141,7 +142,7 @@ export function generateKurumsalPdfHtml(state: KurumsalQuizState): string {
     border: 1.5px solid ${PRIMARY}20; border-radius: 20px;
     padding: 24px; margin-bottom: 20px;
   }
-  .persona-emoji { font-size: 36px; margin-bottom: 8px; }
+  .persona-emoji { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 900; color: white; margin-bottom: 10px; }
   .persona-name { font-size: 20px; font-weight: 900; color: ${PRIMARY}; margin-bottom: 4px; }
   .persona-sub { font-size: 12px; color: ${GRAY}; font-style: italic; margin-bottom: 12px; }
   .persona-desc { font-size: 12px; color: #475569; line-height: 1.7; }
@@ -189,7 +190,7 @@ export function generateKurumsalPdfHtml(state: KurumsalQuizState): string {
         <div class="score-label">Ortalama Olgunluk</div>
       </div>
       <div class="score-card score-card-neutral">
-        <div class="score-val" style="font-size:24px; color:${PRIMARY}">${persona.emoji}</div>
+        <div class="score-val" style="font-size:24px;"><div style="width:36px;height:36px;border-radius:10px;background:${persona.iconBg};color:white;display:flex;align-items:center;justify-content:center;font-weight:900;margin:0 auto;">${persona.icon}</div></div>
         <div style="font-size:13px; font-weight:800; color:${DARK}; margin-top:4px;">${esc(persona.subtitle)}</div>
         <div class="score-label">Olgunluk Seviyesi</div>
       </div>
@@ -228,22 +229,22 @@ export function generateKurumsalPdfHtml(state: KurumsalQuizState): string {
     <!-- Detail Grid -->
     <div class="details-grid">
       <div class="detail-box">
-        <div class="detail-icon">\u{1F3E2}</div>
+        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:${PRIMARY}15;color:${PRIMARY};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;">S</div>
         <div class="detail-label">Sekt\u00f6r</div>
         <div class="detail-val">${esc(SECTOR_LABELS[state.sector ?? ""] ?? state.sector ?? "Belirtilmedi")}</div>
       </div>
       <div class="detail-box">
-        <div class="detail-icon">\u{1F465}</div>
+        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:${GREEN}15;color:${GREEN};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;">E</div>
         <div class="detail-label">Ekip</div>
         <div class="detail-val">${esc(state.companySize ?? "Belirtilmedi")}</div>
       </div>
       <div class="detail-box">
-        <div class="detail-icon">\u{1F3AF}</div>
+        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:${YELLOW}15;color:${YELLOW};display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;">H</div>
         <div class="detail-label">Hedef</div>
         <div class="detail-val">${esc(GOAL_LABELS[state.q_goal ?? ""] ?? "Belirtilmedi")}</div>
       </div>
       <div class="detail-box">
-        <div class="detail-icon">\u{1F4CB}</div>
+        <div class="detail-icon" style="width:28px;height:28px;border-radius:8px;background:#7C3AED15;color:#7C3AED;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;">D</div>
         <div class="detail-label">\u00d6ncelik</div>
         <div class="detail-val">${state.q_priority_depts?.length ?? 0} departman</div>
       </div>
@@ -270,7 +271,7 @@ export function generateKurumsalPdfHtml(state: KurumsalQuizState): string {
 
   <!-- Persona Card -->
   <div class="persona-card">
-    <div class="persona-emoji">${persona.emoji}</div>
+    <div class="persona-emoji" style="background:${persona.iconBg};">${persona.icon}</div>
     <div class="persona-name">${esc(persona.subtitle)}</div>
     <div class="persona-sub">${esc(state.persona === "Baslangic" ? "Ba\u015flang\u0131\u00e7" : state.persona === "Kesif" ? "Ke\u015fif" : state.persona === "Uygulama" ? "Uygulama" : "Lider")} Seviyesi</div>
     <div class="persona-desc">${esc(persona.desc)}</div>
@@ -280,21 +281,21 @@ export function generateKurumsalPdfHtml(state: KurumsalQuizState): string {
   <div class="section-title" style="font-size:15px;">Size \u00d6zel \u00d6neriler</div>
   <div style="margin-top:12px; margin-bottom:20px;">
     <div class="rec-box">
-      <div class="rec-icon">\u{1F4CB}</div>
+      <div class="rec-icon" style="background:${PRIMARY}15;color:${PRIMARY};font-weight:900;">1</div>
       <div>
         <div class="rec-title">AI Strateji De\u011ferlendirmesi</div>
         <div class="rec-body">30 dakikal\u0131k \u00fccretsiz strateji g\u00f6r\u00fc\u015fmesi ile ba\u015flayal\u0131m. Ekibinizi, hedeflerinizi ve mevcut durumunuzu birlikte de\u011ferlendirelim.</div>
       </div>
     </div>
     <div class="rec-box">
-      <div class="rec-icon">\u{1F4CA}</div>
+      <div class="rec-icon" style="background:${GREEN}15;color:${GREEN};font-weight:900;">2</div>
       <div>
         <div class="rec-title">ROI \u00d6l\u00e7\u00fcm \u00c7er\u00e7evesi</div>
         <div class="rec-body">AI yat\u0131r\u0131mlar\u0131n\u0131z\u0131n geri d\u00f6n\u00fc\u015f\u00fcn\u00fc \u00f6l\u00e7mek i\u00e7in sistematik bir yap\u0131 kurman\u0131z\u0131 \u00f6neriyoruz.</div>
       </div>
     </div>
     <div class="rec-box">
-      <div class="rec-icon">\u{1F465}</div>
+      <div class="rec-icon" style="background:${YELLOW}15;color:${YELLOW};font-weight:900;">3</div>
       <div>
         <div class="rec-title">Ekip Yetkinlik Haritas\u0131</div>
         <div class="rec-body">Ekibinizin AI yetkinliklerini haritalay\u0131n ve e\u011fitim ihtiya\u00e7lar\u0131n\u0131 belirleyin.</div>
@@ -321,7 +322,7 @@ export function generateKurumsalPdfHtml(state: KurumsalQuizState): string {
   <div class="cta-bar">
     <div class="cta-name">\u00dccretsiz Strateji G\u00f6r\u00fc\u015fmesi</div>
     <div class="cta-sub">30 dakikal\u0131k ke\u015fif g\u00f6r\u00fc\u015fmesi \u2014 ekibiniz, hedefleriniz ve yol haritan\u0131z</div>
-    <div class="cta-btn">G\u00f6r\u00fc\u015fme Planla \u2192</div>
+    <a href="https://app.growtify.app/widget/bookings/kurumsal-on-gorusme" class="cta-btn" style="text-decoration:none;color:${PRIMARY};">G\u00f6r\u00fc\u015fme Planla &rarr;</a>
     <div class="cta-url">app.growtify.app/widget/bookings/kurumsal-on-gorusme</div>
   </div>
 
