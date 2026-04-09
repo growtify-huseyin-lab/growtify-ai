@@ -9,7 +9,7 @@ export function Logo({ className = "" }: { className?: string }) {
   return (
     <Link href="/" className={`inline-block ${className}`}>
       <Image
-        src="/images/GROWTIFY-ai-.png"
+        src="/images/growtify-light.png"
         alt="Growtify.ai"
         width={280}
         height={80}
