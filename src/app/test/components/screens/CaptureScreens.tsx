@@ -42,10 +42,10 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
     setError(null);
     const startTime = Date.now();
     const res = await submitEmail();
-    // Ensure processing overlay shows for at least 3 seconds (feels more "real")
+    // Ensure processing overlay shows for at least 5 seconds
     const elapsed = Date.now() - startTime;
-    if (elapsed < 3000) {
-      await new Promise((r) => setTimeout(r, 3000 - elapsed));
+    if (elapsed < 5000) {
+      await new Promise((r) => setTimeout(r, 5000 - elapsed));
     }
     setSubmitting(false);
     if (!res.ok) {
@@ -123,22 +123,33 @@ const PROCESSING_STEPS = [
   "Kişisel raporun hazırlanıyor...",
   "Profilin oluşturuluyor...",
   "Neredeyse hazır...",
+  "Hazır! ✓",
 ];
 
 function ProcessingOverlay() {
   const [step, setStep] = useState(0);
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
+    // 5 steps over ~5 seconds (1s per step)
     const interval = setInterval(() => {
-      setStep((s) => (s + 1 < PROCESSING_STEPS.length ? s + 1 : s));
-    }, 1500);
+      setStep((s) => {
+        if (s + 1 >= PROCESSING_STEPS.length) {
+          clearInterval(interval);
+          // Trigger fade-out on last step
+          setTimeout(() => setFadeOut(true), 400);
+          return s;
+        }
+        return s + 1;
+      });
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-2xl flex-col items-center justify-center px-4 py-6">
+    <div className={`mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-2xl flex-col items-center justify-center px-4 py-6 transition-opacity duration-700 ${fadeOut ? "opacity-0" : "opacity-100"}`}>
       <div className="flex flex-col items-center gap-6">
-        <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-200 border-t-primary" />
+        <div className={`h-16 w-16 rounded-full border-4 border-gray-200 border-t-primary ${step >= PROCESSING_STEPS.length - 1 ? "" : "animate-spin"}`} />
         <div className="space-y-3 w-full max-w-xs">
           {PROCESSING_STEPS.map((text, i) => (
             <div
