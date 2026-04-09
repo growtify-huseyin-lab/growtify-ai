@@ -1,6 +1,8 @@
 // GET /test/kurumsal/api/download-pdf
 // Download kurumsal PDF (real Puppeteer render).
 
+export const maxDuration = 60;
+
 import { generateKurumsalPdfHtml } from "../../lib/pdf-html-template-kurumsal";
 import { generatePdfFromHtml } from "../../../lib/pdf-generate";
 import { initialKurumsalState } from "../../lib/types-kurumsal";

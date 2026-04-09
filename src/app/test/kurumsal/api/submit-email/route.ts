@@ -5,6 +5,7 @@
 
 export const maxDuration = 60;
 
+import { after } from "next/server";
 import type { KurumsalQuizState } from "../../lib/types-kurumsal";
 import {
   uploadPdfToContact,
@@ -144,9 +145,13 @@ export async function POST(request: Request) {
   }
 
   // ========== RESPOND TO CLIENT ==========
-  backgroundPdfFlow(contactId, state, config).catch((err) =>
-    console.error("[kurumsal/submit-email] Background PDF flow error:", err),
-  );
+  after(async () => {
+    try {
+      await backgroundPdfFlow(contactId, state, config);
+    } catch (err) {
+      console.error("[kurumsal/submit-email] Background PDF flow error:", err);
+    }
+  });
 
   return Response.json({ ok: true, contactId, isNew });
 }

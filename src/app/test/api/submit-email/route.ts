@@ -4,6 +4,7 @@
 
 export const maxDuration = 60; // Vercel Pro: 60s timeout for PDF generation
 
+import { after } from "next/server";
 import type { QuizState } from "../../lib/types";
 import {
   upsertQuizContact,
@@ -73,10 +74,14 @@ export async function POST(request: Request) {
   // ========== RESPOND TO CLIENT (user can proceed) ==========
   // PDF generation happens in background — don't block the quiz flow.
 
-  // Fire background tasks (no await — runs after response is sent)
-  backgroundPdfFlow(contactId, state, couponCode).catch((err) =>
-    console.error("[quiz/submit-email] Background PDF flow error:", err),
-  );
+  // Schedule background PDF flow via Next.js after() — runs after response on Vercel
+  after(async () => {
+    try {
+      await backgroundPdfFlow(contactId, state, couponCode);
+    } catch (err) {
+      console.error("[quiz/submit-email] Background PDF flow error:", err);
+    }
+  });
 
   return Response.json({
     ok: true,
