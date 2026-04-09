@@ -5,6 +5,7 @@
 export const maxDuration = 60; // Vercel Pro: 60s timeout for PDF generation
 
 import { after } from "next/server";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import type { QuizState } from "../../lib/types";
 import {
   upsertQuizContact,
@@ -20,6 +21,16 @@ import { generateQuizPdf, getPdfFilename } from "../../lib/pdf-generate";
 import { computeResults, pickDiscount } from "../../lib/scoring";
 
 export async function POST(request: Request) {
+  // Rate limit: max 5 submissions per IP per minute
+  const ip = getClientIp(request);
+  const rl = checkRateLimit(ip, 5, 60_000);
+  if (!rl.ok) {
+    return Response.json(
+      { ok: false, error: "rate_limited", retryAfter: Math.ceil((rl.resetAt - Date.now()) / 1000) },
+      { status: 429 },
+    );
+  }
+
   let state: QuizState;
   try {
     state = (await request.json()) as QuizState;

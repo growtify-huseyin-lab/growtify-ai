@@ -6,6 +6,7 @@
 export const maxDuration = 60;
 
 import { after } from "next/server";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import type { KurumsalQuizState } from "../../lib/types-kurumsal";
 import {
   uploadPdfToContact,
@@ -17,6 +18,15 @@ import { computeKurumsalResults } from "../../lib/scoring-kurumsal";
 import { generateKurumsalPdfHtml } from "../../lib/pdf-html-template-kurumsal";
 
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  const rl = checkRateLimit(ip, 5, 60_000);
+  if (!rl.ok) {
+    return Response.json(
+      { ok: false, error: "rate_limited", retryAfter: Math.ceil((rl.resetAt - Date.now()) / 1000) },
+      { status: 429 },
+    );
+  }
+
   let state: KurumsalQuizState;
   try {
     state = (await request.json()) as KurumsalQuizState;

@@ -29,6 +29,9 @@ export const KURUMSAL_PIPELINE = {
     gorusmeYapildi: "2caea178-2e52-4061-8b39-2971eea4c1b5",
     teklifGonderildi: "ede281a2-07de-494f-bae4-df6da2fc5ce2",
     musteri: "4d77bb43-1ee7-4781-a58d-09f12dbd1654",
+    aktifEgitimde: "4b14a432-4c39-4caa-b56d-a36227776b52",
+    mezun: "c9ba337a-d0d4-47fb-b504-a2e845c117c0",
+    appAbone: "eefbb22c-17e7-41c3-b6fb-50363cccfb80",
     kaybedildi: "93a29393-424c-467f-bda5-4dea59f19bf8",
   },
 } as const;

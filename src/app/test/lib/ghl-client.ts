@@ -221,7 +221,12 @@ export async function createQuizCoupon(
   if (!config) return { ok: false, error: "GHL credentials missing" };
 
   const code = "GROWT" + generateCouponSuffix();
-  const now = new Date().toISOString().replace(/\.\d+Z$/, "Z");
+  const now = new Date();
+  const startDate = now.toISOString().replace(/\.\d+Z$/, "Z");
+  // Coupon expires in 15 minutes — matches quiz countdown timer
+  const endDate = new Date(now.getTime() + 15 * 60 * 1000)
+    .toISOString()
+    .replace(/\.\d+Z$/, "Z");
 
   try {
     const res = await fetch(`${config.apiBase}/payments/coupon`, {
@@ -241,7 +246,8 @@ export async function createQuizCoupon(
         discountValue: discountPercent,
         durationType: "once",
         maxRedemptions: 1,
-        startDate: now,
+        startDate,
+        endDate,
       }),
       signal: AbortSignal.timeout(10000),
     });

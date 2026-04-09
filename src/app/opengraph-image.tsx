@@ -1,7 +1,8 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Growtify.ai — AI ile İşini Büyüten Profesyonellerin Platformu";
+export const alt =
+  "Growtify.ai — Yapay Zeka ile İşini Büyüten Profesyonellerin Platformu";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -16,72 +17,117 @@ export default function OGImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#0f172a",
-          backgroundImage: "linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)",
+          backgroundColor: "#0f0f13",
+          backgroundImage:
+            "radial-gradient(circle at 30% 40%, rgba(93,71,240,0.15) 0%, transparent 50%), radial-gradient(circle at 70% 60%, rgba(6,182,212,0.1) 0%, transparent 50%)",
         }}
       >
+        {/* Logo text */}
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "60px",
+            alignItems: "baseline",
+            gap: 4,
           }}
         >
-          <div
+          <span
             style={{
-              fontSize: 48,
-              fontWeight: 800,
+              fontSize: 80,
+              fontWeight: 900,
               color: "#ffffff",
-              display: "flex",
-              alignItems: "baseline",
+              letterSpacing: -3,
             }}
           >
-            <span>Growtify</span>
-            <span style={{ color: "#3b82f6", marginLeft: 4 }}>.ai</span>
-          </div>
+            growtify
+          </span>
+          {/* Gradient dot */}
           <div
             style={{
-              fontSize: 24,
-              color: "#94a3b8",
-              marginTop: 20,
-              textAlign: "center",
-              maxWidth: 800,
+              width: 20,
+              height: 20,
+              borderRadius: "50%",
+              background: "linear-gradient(135deg, #8B5CF6, #06B6D4)",
+              marginBottom: 8,
             }}
-          >
-            AI ile İşini Büyüten Profesyonellerin Platformu
-          </div>
-          <div
-            style={{
-              display: "flex",
-              gap: 16,
-              marginTop: 40,
-            }}
-          >
-            {["G", "R", "O", "W", "T"].map((letter, i) => (
-              <div
-                key={letter}
-                style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: 12,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 24,
-                  fontWeight: 700,
-                  color: "#ffffff",
-                  backgroundColor: ["#ef4444", "#f97316", "#eab308", "#22c55e", "#3b82f6"][i],
-                }}
-              >
-                {letter}
-              </div>
-            ))}
-          </div>
+          />
+        </div>
+
+        {/* Tagline */}
+        <div
+          style={{
+            fontSize: 26,
+            color: "#9090a0",
+            marginTop: 24,
+            textAlign: "center",
+            maxWidth: 800,
+          }}
+        >
+          Yapay zeka ile işini büyüten profesyonellerin platformu
+        </div>
+
+        {/* GROWT letters */}
+        <div
+          style={{
+            display: "flex",
+            gap: 12,
+            marginTop: 48,
+          }}
+        >
+          {["G", "R", "O", "W", "T"].map((letter, i) => (
+            <div
+              key={letter}
+              style={{
+                width: 52,
+                height: 52,
+                borderRadius: 14,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 22,
+                fontWeight: 800,
+                color: "#ffffff",
+                backgroundColor: [
+                  "#EF4444",
+                  "#F97316",
+                  "#EAB308",
+                  "#22C55E",
+                  "#5d47f0",
+                ][i],
+              }}
+            >
+              {letter}
+            </div>
+          ))}
+        </div>
+
+        {/* Badge */}
+        <div
+          style={{
+            marginTop: 32,
+            padding: "8px 24px",
+            borderRadius: 20,
+            backgroundColor: "rgba(93,71,240,0.15)",
+            color: "#9886fe",
+            fontSize: 16,
+            fontWeight: 600,
+          }}
+        >
+          GROWT Method™ ile 5 Seviyede Dönüşüm
+        </div>
+
+        {/* Domain */}
+        <div
+          style={{
+            position: "absolute",
+            bottom: 30,
+            fontSize: 16,
+            color: "#4a4a5a",
+          }}
+        >
+          growtify.ai
         </div>
       </div>
     ),
-    { ...size }
+    { ...size },
   );
 }

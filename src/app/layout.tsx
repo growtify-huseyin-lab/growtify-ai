@@ -46,18 +46,9 @@ export const metadata: Metadata = {
     locale: "tr_TR",
     siteName: "Growtify.ai",
     url: BASE_URL,
-    images: [
-      {
-        url: "/images/og-image.svg",
-        width: 1200,
-        height: 630,
-        alt: "Growtify.ai — Yapay zeka ile işini büyüten profesyonellerin platformu",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/images/og-image.svg"],
   },
 };
 
