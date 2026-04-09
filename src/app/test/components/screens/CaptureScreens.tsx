@@ -79,15 +79,6 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
           autoFocus
           className="w-full rounded-xl border-2 border-gray-200 bg-white px-5 py-4 text-lg font-medium text-dark placeholder-gray-400 outline-none transition-colors focus:border-primary dark:border-dark-border dark:bg-dark-bg dark:text-white"
         />
-        {isEmail && (
-          <input
-            type="tel"
-            value={state.phone ?? ""}
-            onChange={(e) => setField("phone", e.target.value)}
-            placeholder="Telefon (opsiyonel)"
-            className="w-full rounded-xl border-2 border-gray-200 bg-white px-5 py-4 text-lg font-medium text-dark placeholder-gray-400 outline-none transition-colors focus:border-primary dark:border-dark-border dark:bg-dark-bg dark:text-white"
-          />
-        )}
         {error && (
           <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
         )}
