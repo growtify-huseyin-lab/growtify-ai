@@ -415,7 +415,7 @@ export function generatePdfHtml(state: QuizState): string {
   <div class="cta-bar" style="flex-direction:column; text-align:center;">
     <div class="cta-name">GROWT Programı</div>
     <div class="cta-sub">5 seviye · 26 modül · Kendi hızında ilerle</div>
-    <a href="https://growtify.ai/test" style="background:white; color:${PRIMARY}; font-size:13px; font-weight:800; border-radius:24px; padding:10px 32px; margin-top:12px; display:inline-block; text-decoration:none;">Hemen Başla &rarr;</a>
+    <a href="https://app.growtify.app/payment-link/69d20484c6a0e600f4d07a46" style="background:white; color:${PRIMARY}; font-size:13px; font-weight:800; border-radius:24px; padding:10px 32px; margin-top:12px; display:inline-block; text-decoration:none;">Hemen Başla &rarr;</a>
     <div style="font-size:10px; opacity:0.5; margin-top:6px;">growtify.ai</div>
   </div>
 
