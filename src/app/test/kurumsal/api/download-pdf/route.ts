@@ -36,7 +36,7 @@ export async function GET(request: Request) {
   const pdfBuffer = await generatePdfFromHtml(html);
   const filename = `growtify-kurumsal-rapor-${name.toLowerCase().replace(/\s+/g, "-")}.pdf`;
 
-  return new Response(pdfBuffer, {
+  return new Response(new Uint8Array(pdfBuffer), {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": `inline; filename="${filename}"`,
