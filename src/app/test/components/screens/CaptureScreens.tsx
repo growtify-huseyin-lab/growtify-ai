@@ -13,7 +13,7 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
   const current = key ? (state[key] as string) : "";
 
   const isEmail = key === "email";
-  const isPhone = key === "phone";
+  const isPhone = key === ("phone" as string);
   // Submit trigger: email (bireysel) or phone (kurumsal — last capture before loading)
   const isSubmitTrigger = screen.cta === "Raporumu Oluştur" || screen.cta === "Raporumu Olustur";
   const [submitting, setSubmitting] = useState(false);
