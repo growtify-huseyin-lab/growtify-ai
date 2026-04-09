@@ -2,8 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 /**
- * Growtify.ai Logo — Light/Dark mode ayrı orijinal PNG
- * Light: koyu gri text, Dark: beyaz text
+ * Growtify.ai Logo
+ * Light mode: orijinal (koyu gri text)
+ * Dark mode: CSS invert ile beyaz text
  */
 export function Logo({ className = "" }: { className?: string }) {
   return (
@@ -13,15 +14,7 @@ export function Logo({ className = "" }: { className?: string }) {
         alt="Growtify.ai"
         width={280}
         height={80}
-        className="h-16 w-auto dark:hidden"
-        priority
-      />
-      <Image
-        src="/images/growtify-dark.png"
-        alt="Growtify.ai"
-        width={280}
-        height={80}
-        className="h-16 w-auto hidden dark:block"
+        className="h-14 w-auto dark:brightness-0 dark:invert"
         priority
       />
     </Link>
@@ -29,17 +22,17 @@ export function Logo({ className = "" }: { className?: string }) {
 }
 
 /**
- * Logo büyük versiyon — Footer (koyu arka plan, her zaman dark logo)
+ * Footer logo — koyu arka plan, her zaman beyaz (invert)
  */
 export function LogoLarge({ className = "" }: { className?: string }) {
   return (
     <Link href="/" className={`inline-block ${className}`}>
       <Image
-        src="/images/growtify-dark.png"
+        src="/images/growtify-light.png"
         alt="Growtify.ai"
         width={280}
         height={80}
-        className="h-12 w-auto"
+        className="h-12 w-auto brightness-0 invert"
       />
     </Link>
   );
