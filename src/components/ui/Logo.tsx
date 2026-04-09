@@ -10,13 +10,13 @@ export function Logo({ className = "" }: { className?: string }) {
       <img
         src="/images/growtify-light.png"
         alt="Growtify.ai"
-        className="h-14 w-auto dark:hidden"
+        className="h-20 w-auto dark:hidden"
       />
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/images/growtify-dark.png"
         alt="Growtify.ai"
-        className="h-14 w-auto hidden dark:block"
+        className="h-20 w-auto hidden dark:block"
       />
     </Link>
   );
