@@ -17,9 +17,16 @@ import {
   saveQuizSnapshot,
 } from "./quiz-storage";
 import { QuizCtx } from "./quiz-context-core";
+import type { QuizContextValue } from "./quiz-context-core";
 
 export { useQuiz } from "./quiz-context-core";
 export type { QuizContextValue } from "./quiz-context-core";
+
+interface ResumeInfo {
+  screenId: number;
+  currentIndex: number;
+  savedAt: number;
+}
 
 export function QuizProvider({ children }: { children: React.ReactNode }) {
   // Initial state ALWAYS matches server render (empty quiz, index 0, no
@@ -80,7 +87,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
 
   /* -------------------- Actions -------------------- */
   const setField = useCallback(
-    <K extends keyof QuizState>(key: K, value: QuizState[K]) => {
+    (key: string, value: unknown) => {
       setState((prev) => ({ ...prev, [key]: value }));
     },
     [],
