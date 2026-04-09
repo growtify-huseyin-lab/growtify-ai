@@ -302,11 +302,17 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
   const { couponCode, state } = useQuiz();
 
   // Build prefilled payment link with contact info + coupon
+  // Split full name into firstName + lastName for GHL checkout
+  const nameParts = (state.firstName || "").trim().split(/\s+/);
+  const firstName = nameParts[0] || "";
+  const lastName = nameParts.slice(1).join(" ") || "";
+
   const params = new URLSearchParams();
-  if (state.firstName) params.set("firstName", state.firstName);
+  if (firstName) params.set("firstName", firstName);
+  if (lastName) params.set("lastName", lastName);
   if (state.email) params.set("email", state.email);
   if (state.phone) params.set("phone", state.phone);
-  if (couponCode) params.set("couponCode", couponCode);
+  if (couponCode) params.set("coupon_code", couponCode); // GHL uses coupon_code
   const paymentUrl = PAYMENT_LINK + (params.toString() ? "?" + params.toString() : "");
 
   return (

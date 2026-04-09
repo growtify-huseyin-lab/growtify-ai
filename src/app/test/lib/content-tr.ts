@@ -298,9 +298,9 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   },
 
   25: {
-    title: "Adın ne?",
-    subtitle: "Raporunu sana özel hazırlayalım.",
-    placeholder: "Adın",
+    title: "Adını ve soyadını yaz",
+    subtitle: "Raporunu ve önerilerini kişiselleştirmek için.",
+    placeholder: "Adın Soyadın",
     cta: "Devam",
   },
 
