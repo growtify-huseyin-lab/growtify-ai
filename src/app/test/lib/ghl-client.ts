@@ -412,7 +412,7 @@ export async function createQuizOpportunity(
         contactId,
         assignedTo: "A63MyodDNnjwGmZIW4zd",
         status: "open",
-        monetaryValue: 4999,
+        monetaryValue: 0, // 0 until payment — post-payment workflow updates to actual amount
       }),
       signal: AbortSignal.timeout(10000),
     });
