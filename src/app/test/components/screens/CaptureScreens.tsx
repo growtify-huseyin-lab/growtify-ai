@@ -37,10 +37,16 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
       next();
       return;
     }
-    // Submit screen — fire webhook, then continue.
+    // Submit screen — fire webhook, show processing overlay for min 3s, then continue.
     setSubmitting(true);
     setError(null);
+    const startTime = Date.now();
     const res = await submitEmail();
+    // Ensure processing overlay shows for at least 3 seconds (feels more "real")
+    const elapsed = Date.now() - startTime;
+    if (elapsed < 3000) {
+      await new Promise((r) => setTimeout(r, 3000 - elapsed));
+    }
     setSubmitting(false);
     if (!res.ok) {
       setError(
