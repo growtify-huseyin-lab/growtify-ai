@@ -2,6 +2,8 @@
 // Quiz lead capture: fast response (contact + opportunity + coupon ~3s)
 // then background PDF generation + upload + email (~25s, non-blocking).
 
+export const maxDuration = 60; // Vercel Pro: 60s timeout for PDF generation
+
 import type { QuizState } from "../../lib/types";
 import {
   upsertQuizContact,

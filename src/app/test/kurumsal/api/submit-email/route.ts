@@ -3,6 +3,8 @@
 // then background PDF generation + upload + email (~25s, non-blocking).
 // NO coupon — CTA is strategy call booking.
 
+export const maxDuration = 60;
+
 import type { KurumsalQuizState } from "../../lib/types-kurumsal";
 import {
   uploadPdfToContact,

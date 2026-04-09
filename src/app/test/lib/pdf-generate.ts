@@ -1,7 +1,8 @@
-// Growtify AI — PDF Generation via Puppeteer (server-only)
-// Singleton browser + retry + timeout handling.
+// Growtify AI — PDF Generation via puppeteer-core + @sparticuz/chromium
+// Vercel serverless compatible. Singleton browser + retry.
 
-import puppeteer, { type Browser } from "puppeteer";
+import chromium from "@sparticuz/chromium";
+import puppeteerCore, { type Browser } from "puppeteer-core";
 import { generatePdfHtml } from "./pdf-html-template";
 import type { QuizState } from "./types";
 
@@ -16,7 +17,6 @@ async function getBrowser(): Promise<Browser> {
   // Reuse if alive
   if (browserInstance) {
     try {
-      // Quick health check — if browser crashed, this throws
       await browserInstance.version();
       return browserInstance;
     } catch {
@@ -26,24 +26,19 @@ async function getBrowser(): Promise<Browser> {
 
   // Prevent concurrent launches
   if (launching) {
-    // Wait for the other launch to finish
     await new Promise((r) => setTimeout(r, 1000));
     if (browserInstance) return browserInstance;
   }
 
   launching = true;
   try {
-    browserInstance = await puppeteer.launch({
+    const executablePath = await chromium.executablePath();
+
+    browserInstance = await puppeteerCore.launch({
+      args: chromium.args,
+      defaultViewport: { width: 1280, height: 720 },
+      executablePath,
       headless: true,
-      args: [
-        "--no-sandbox",
-        "--disable-setuid-sandbox",
-        "--disable-dev-shm-usage",
-        "--disable-gpu",
-        "--disable-extensions",
-        "--no-first-run",
-      ],
-      timeout: 30000,
     });
 
     browserInstance.on("disconnected", () => {
@@ -73,7 +68,7 @@ async function killBrowser(): Promise<void> {
 /* -------------------------------------------------------------------------- */
 
 const MAX_RETRIES = 2;
-const PAGE_TIMEOUT = 60000; // 60s per page operation
+const PAGE_TIMEOUT = 60000;
 
 /**
  * Generate PDF with retry. If first attempt fails (timeout, crash),
@@ -90,10 +85,8 @@ export async function generateQuizPdf(state: QuizState): Promise<Buffer> {
         `[pdf] attempt ${attempt}/${MAX_RETRIES} failed:`,
         (err as Error).message,
       );
-      // Kill stale browser before retry
       await killBrowser();
       if (attempt === MAX_RETRIES) throw err;
-      // Brief pause before retry
       await new Promise((r) => setTimeout(r, 500));
     }
   }
@@ -127,7 +120,7 @@ async function renderPdf(html: string): Promise<Buffer> {
 
 /**
  * Generate PDF from raw HTML string. Used by kurumsal quiz (different template).
- * Reuses the same Puppeteer singleton.
+ * Reuses the same browser singleton.
  */
 export async function generatePdfFromHtml(html: string): Promise<Buffer> {
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {

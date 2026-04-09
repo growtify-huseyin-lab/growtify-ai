@@ -1,6 +1,7 @@
 // GET /test/api/download-pdf
 // Generates and returns an actual PDF file using Puppeteer.
-// Uses mock data for preview purposes.
+
+export const maxDuration = 60;
 
 import { generateQuizPdf, getPdfFilename } from "../../lib/pdf-generate";
 import { computeResults, pickDiscount } from "../../lib/scoring";
