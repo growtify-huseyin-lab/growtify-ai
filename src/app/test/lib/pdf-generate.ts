@@ -32,7 +32,10 @@ async function getBrowser(): Promise<Browser> {
 
   launching = true;
   try {
+    // Disable WebGL to reduce binary size requirements
+    chromium.setGraphicsMode = false;
     const executablePath = await chromium.executablePath();
+    console.log("[pdf] chromium executablePath:", executablePath);
 
     browserInstance = await puppeteerCore.launch({
       args: chromium.args,

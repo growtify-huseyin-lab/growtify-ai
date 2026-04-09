@@ -410,6 +410,7 @@ export async function createQuizOpportunity(
         name: firstName || "Lead",
         pipelineStageId: STAGE_YENI_LEAD,
         contactId,
+        assignedTo: "A63MyodDNnjwGmZIW4zd",
         status: "open",
         monetaryValue: 4999,
       }),

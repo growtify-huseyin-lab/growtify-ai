@@ -134,6 +134,7 @@ export async function POST(request: Request) {
         name: state.firstName || "Kurumsal Lead",
         pipelineStageId: "2f045a6f-3b41-423f-a968-89f3cb5db60c", // Quiz Lead
         contactId,
+        assignedTo: "A63MyodDNnjwGmZIW4zd", // Huseyin Sanliturk
         status: "open",
       }),
       signal: AbortSignal.timeout(10000),
