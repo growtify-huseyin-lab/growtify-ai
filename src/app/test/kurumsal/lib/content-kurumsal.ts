@@ -21,6 +21,9 @@ const KURUMSAL_SECTORS: KurumsalOptionItem[] = [
   { value: "egitim", label: "Egitim", icon: "GraduationCap" },
   { value: "medya", label: "Medya & Reklam", icon: "Megaphone" },
   { value: "insaat", label: "Insaat & Gayrimenkul", icon: "Building2" },
+  { value: "turizm", label: "Turizm & Konaklama", icon: "Plane" },
+  { value: "otomotiv", label: "Otomotiv", icon: "Car" },
+  { value: "enerji", label: "Enerji & Altyapi", icon: "Zap" },
   { value: "diger", label: "Diger", icon: "MoreHorizontal" },
 ];
 
