@@ -79,7 +79,11 @@ export default function RootLayout({
                   url: BASE_URL,
                   description: "Bireysel profesyonellere ve mikro KOBİ'lere GROWT Method ile AI dönüşümü sağlıyoruz.",
                   foundingDate: "2024",
-                  sameAs: [],
+                  sameAs: [
+                    "https://www.linkedin.com/company/growtify-app",
+                    "https://www.instagram.com/growtify.app/",
+                    "https://www.youtube.com/@Growtifyappp",
+                  ],
                 },
                 {
                   "@type": "WebSite",

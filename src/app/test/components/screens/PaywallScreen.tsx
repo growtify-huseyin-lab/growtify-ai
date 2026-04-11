@@ -38,13 +38,13 @@ export function PaywallScreen({ screen }: { screen: ScreenConfig }) {
         <HeroPromiseBlock firstName={state.firstName} persona={state.persona} />
         <BeforeAfterBlock />
         <StatsBlock />
-        <MediaFeaturesBlock />
+        {/* <MediaFeaturesBlock /> — hidden until real press coverage */}
         <PricingTableBlock
           discount={state.discount}
           base={price.base}
           discounted={price.discounted}
         />
-        <TestimonialsBlock />
+        {/* <TestimonialsBlock /> — hidden until real customer reviews */}
         <FaqBlock />
         <GuaranteeBlock />
         <DiscountDisclaimerBlock />

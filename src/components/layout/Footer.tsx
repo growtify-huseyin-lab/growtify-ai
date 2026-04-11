@@ -21,9 +21,9 @@ const footerLinks = [
   {
     title: "Sosyal Medya",
     links: [
-      { label: "LinkedIn", href: "https://linkedin.com/company/growtify" },
-      { label: "Instagram", href: "https://instagram.com/growtify.ai" },
-      { label: "YouTube", href: "https://youtube.com/@growtify.ai" },
+      { label: "LinkedIn", href: "https://www.linkedin.com/company/growtify-app" },
+      { label: "Instagram", href: "https://www.instagram.com/growtify.app/" },
+      { label: "YouTube", href: "https://www.youtube.com/@Growtifyappp" },
     ],
   },
   {
