@@ -386,7 +386,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   36: {
     caption: "",
     title: "Tebrikler {firstName}!",
-    subtitle: "İndirim hesabına tanımlandı. 15 dakika geçerli — planın seni bekliyor.",
+    subtitle: "İndirim hesabına tanımlandı. 60 dakika geçerli — planın seni bekliyor.",
     cta: "Programı İncele",
   },
 
