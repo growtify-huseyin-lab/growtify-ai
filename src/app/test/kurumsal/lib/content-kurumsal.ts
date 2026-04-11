@@ -19,6 +19,8 @@ const KURUMSAL_SECTORS: KurumsalOptionItem[] = [
   { value: "hukuk", label: "Hukuk & Danismanlik", icon: "Scale" },
   { value: "uretim", label: "Uretim & Lojistik", icon: "Factory" },
   { value: "egitim", label: "Egitim", icon: "GraduationCap" },
+  { value: "medya", label: "Medya & Reklam", icon: "Megaphone" },
+  { value: "insaat", label: "Insaat & Gayrimenkul", icon: "Building2" },
   { value: "diger", label: "Diger", icon: "MoreHorizontal" },
 ];
 
@@ -194,6 +196,7 @@ const declare: KurumsalScreenConfig[] = [
       { value: "operasyon", label: "Operasyon" },
       { value: "ik", label: "Insan Kaynaklari" },
       { value: "it", label: "IT" },
+      { value: "arge", label: "Ar-Ge" },
     ],
   },
 ];

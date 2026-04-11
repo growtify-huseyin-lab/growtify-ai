@@ -23,6 +23,8 @@ export const KURUMSAL_COPY: Record<number, PartialScreen> = {
       { value: "hukuk", label: "Hukuk & Danışmanlık", icon: "Scale" },
       { value: "uretim", label: "Üretim & Lojistik", icon: "Factory" },
       { value: "egitim", label: "Eğitim", icon: "GraduationCap" },
+      { value: "medya", label: "Medya & Reklam", icon: "Megaphone" },
+      { value: "insaat", label: "İnşaat & Gayrimenkul", icon: "Building2" },
       { value: "diger", label: "Diğer", icon: "MoreHorizontal" },
     ] as KurumsalOptionItem[],
   },
@@ -133,6 +135,7 @@ export const KURUMSAL_COPY: Record<number, PartialScreen> = {
       { value: "operasyon", label: "Operasyon" },
       { value: "ik", label: "İnsan Kaynakları" },
       { value: "it", label: "IT" },
+      { value: "arge", label: "Ar-Ge" },
     ] as KurumsalOptionItem[],
   },
   14: {
