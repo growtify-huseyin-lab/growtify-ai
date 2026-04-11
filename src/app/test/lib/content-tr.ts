@@ -513,7 +513,7 @@ export const PAYWALL_COPY = {
   // Blok 2 — Hero Promise
   // {firstName} ve {persona} runtime'da değiştirilecek
   heroPromise: {
-    text: "{firstName}, test sonuçların gösteriyor ki {persona} profilindesin. Bu planı 4 hafta boyunca takip edersen — tekrarlayan işlerden kurtulacak, ilk AI iş akışını kuracak ve mesleğinde net bir ilerleme hissedeceksin. Kurs değil, mesleğine özel dönüşüm.",
+    text: "test sonuçların gösteriyor ki {persona} profilindesin. Bu planı 4 hafta boyunca takip edersen — tekrarlayan işlerden kurtulacak, ilk AI iş akışını kuracak ve mesleğinde net bir ilerleme hissedeceksin. Kurs değil, mesleğine özel dönüşüm.",
   },
 
   // Blok 3 — Before / After

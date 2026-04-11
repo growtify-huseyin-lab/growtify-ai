@@ -135,22 +135,13 @@ function HeroPromiseBlock({
           Kişisel Plan
         </div>
 
-        <h2
-          className="text-2xl font-extrabold leading-snug tracking-tight text-dark dark:text-white sm:text-[26px]"
-          style={{
-            fontFamily:
-              "var(--font-serif, 'Playfair Display'), Georgia, 'Times New Roman', serif",
-          }}
-        >
-          <span className="block text-primary">{firstName || "Sen"},</span>
-          <span className="block">
-            {before.replace(/^[,\s]+/, "")}
-            <span className="relative inline-block px-1">
-              <span className="relative z-10 font-black text-primary">
-                {persona}
-              </span>
-              <span className="absolute inset-x-0 bottom-0.5 z-0 h-2 bg-accent/60" />
-            </span>
+        <h2 className="text-[22px] font-bold leading-[1.4] tracking-tight text-dark dark:text-white sm:text-[24px]">
+          <span className="mb-2 block text-3xl font-black tracking-tight text-primary sm:text-4xl">
+            {firstName || "Sen"},
+          </span>
+          <span className="block text-gray-700 dark:text-dark-muted">
+            {(before.charAt(0).toUpperCase() + before.slice(1)).replace(/^[,\s]+/, "")}
+            <span className="font-extrabold text-primary">{persona}</span>
             {after}
           </span>
         </h2>
