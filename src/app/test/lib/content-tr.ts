@@ -625,8 +625,8 @@ export const PAYWALL_COPY = {
   // kapsamında hazırlanmıştır. "Blanket refund" vaadi içermez.
   // Canlıya almadan önce avukat incelemesi ZORUNLUDUR.
   guarantee: {
-    headline: "Erişim güvencesi",
-    text: "Ödeme yaptıktan sonra platforma teknik nedenlerle hiç erişim sağlayamazsan, 14 gün içinde bize ulaş — sorunu çözelim ya da ödemeyi iade edelim. Bu güvence, dijital içerik satışına ilişkin UK tüketici koruma mevzuatı kapsamındadır.",
+    headline: "Güvendesin",
+    text: "Satın aldığın an platforma anında erişim alırsın — 4 hafta boyunca tüm içerik, AI araç kütüphanesi ve topluluğun yanında. Herhangi bir teknik sorun yaşarsan 7/24 destek ekibimiz senin yanında. Sen yolu tamamlamaya odaklan, gerisi bizde.",
     legalNote:
       "// AVUKAT İNCELEMESİ GEREKLİDİR — UK Consumer Rights Act 2015 Section 42. Canlıya almadan önce onay alınmalıdır.",
   },

@@ -115,15 +115,46 @@ function HeroPromiseBlock({
   firstName: string;
   persona: string;
 }) {
-  const text = interpolate(PAYWALL_COPY.heroPromise.text, {
+  // Split sentence around persona for visual emphasis
+  const rawText = interpolate(PAYWALL_COPY.heroPromise.text, {
     firstName,
-    persona,
+    persona: "__PERSONA__",
   });
+  const parts = rawText.split("__PERSONA__");
+  const [before, after] = [parts[0] ?? "", parts[1] ?? ""];
+
   return (
-    <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-dark-border dark:bg-dark-bg">
-      <h2 className="text-xl font-extrabold leading-snug text-dark dark:text-white">
-        {text}
-      </h2>
+    <section className="relative overflow-hidden rounded-3xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 p-8 shadow-lg dark:border-primary/30 dark:from-primary/10 dark:via-accent/5 dark:to-primary/15">
+      {/* Decorative orbs */}
+      <div className="pointer-events-none absolute -right-8 -top-8 h-32 w-32 rounded-full bg-primary/10 blur-2xl" />
+      <div className="pointer-events-none absolute -bottom-8 -left-8 h-32 w-32 rounded-full bg-accent/10 blur-2xl" />
+
+      <div className="relative">
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary shadow-sm backdrop-blur dark:bg-dark-bg/80">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+          Kişisel Plan
+        </div>
+
+        <h2
+          className="text-2xl font-extrabold leading-snug tracking-tight text-dark dark:text-white sm:text-[26px]"
+          style={{
+            fontFamily:
+              "var(--font-serif, 'Playfair Display'), Georgia, 'Times New Roman', serif",
+          }}
+        >
+          <span className="block text-primary">{firstName || "Sen"},</span>
+          <span className="block">
+            {before.replace(/^[,\s]+/, "")}
+            <span className="relative inline-block px-1">
+              <span className="relative z-10 font-black text-primary">
+                {persona}
+              </span>
+              <span className="absolute inset-x-0 bottom-0.5 z-0 h-2 bg-accent/60" />
+            </span>
+            {after}
+          </span>
+        </h2>
+      </div>
     </section>
   );
 }
