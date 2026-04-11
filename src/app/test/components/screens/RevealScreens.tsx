@@ -121,10 +121,8 @@ export function ScratchCardScreen({ screen }: { screen: ScreenConfig }) {
           <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-dark-muted">
             Kupon kodun
           </div>
-          <div className="mt-1 font-mono text-2xl font-black tracking-widest text-primary">
-            {couponCode}
-          </div>
-          <div className="mt-1 text-[10px] text-gray-500 dark:text-dark-muted">
+          <CopyableCouponCode code={couponCode} />
+          <div className="mt-2 text-[10px] text-gray-500 dark:text-dark-muted">
             Tek kullanımlık · Kişiselleştirilmiş teklif · Devredilemez
           </div>
         </div>
@@ -168,20 +166,62 @@ export function CelebrationScreen({ screen }: { screen: ScreenConfig }) {
           %{state.discount} İNDİRİM
         </div>
         {couponCode && (
-          <div className="mt-3 rounded-lg bg-white/50 px-4 py-2 dark:bg-dark-bg/50">
-            <div className="font-mono text-lg font-black tracking-widest text-green-800 dark:text-green-200">
-              {couponCode}
-            </div>
+          <div className="mt-3">
+            <CopyableCouponCode code={couponCode} variant="celebration" />
           </div>
         )}
         <p className="mt-2 text-sm text-green-800 dark:text-green-400">
-          Kupon kodun aktif. Ödeme sayfasında uygulayabilirsin.
+          Ödeme sayfasında <b>Coupon Code</b> alanına yapıştır.
         </p>
       </motion.div>
       <div className="mt-8">
         <PrimaryButton onClick={next}>{screen.cta ?? "Devam"}</PrimaryButton>
       </div>
     </ScreenShell>
+  );
+}
+
+/* -------------------- Copyable Coupon Code -------------------- */
+function CopyableCouponCode({
+  code,
+  variant = "default",
+}: {
+  code: string;
+  variant?: "default" | "celebration";
+}) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      const textarea = document.createElement("textarea");
+      textarea.value = code;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      } catch {}
+      document.body.removeChild(textarea);
+    }
+  };
+
+  const baseStyle =
+    variant === "celebration"
+      ? "mt-1 flex w-full items-center justify-center gap-2 rounded-lg bg-white/70 px-3 py-2.5 font-mono text-lg font-black tracking-widest text-green-800 transition-all active:scale-[0.98] dark:bg-dark-bg/70 dark:text-green-200"
+      : "mt-1.5 flex w-full items-center justify-center gap-2 rounded-lg bg-white px-3 py-2.5 font-mono text-2xl font-black tracking-widest text-primary transition-all active:scale-[0.98] dark:bg-dark-bg";
+
+  return (
+    <button type="button" onClick={handleCopy} className={baseStyle}>
+      <span>{code}</span>
+      <span className="text-xs font-sans font-semibold opacity-80">
+        {copied ? "✓ Kopyalandı" : "📋 Kopyala"}
+      </span>
+    </button>
   );
 }
 

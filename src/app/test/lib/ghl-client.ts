@@ -221,58 +221,73 @@ export async function createQuizCoupon(
   const config = readConfig();
   if (!config) return { ok: false, error: "GHL credentials missing" };
 
-  const code = "GROWT" + generateCouponSuffix();
-  const now = new Date();
-  const startDate = now.toISOString().replace(/\.\d+Z$/, "Z");
-  // Coupon expires in 60 minutes — enough time to complete quiz + decide
-  const endDate = new Date(now.getTime() + 60 * 60 * 1000)
-    .toISOString()
-    .replace(/\.\d+Z$/, "Z");
+  const MAX_ATTEMPTS = 3;
+  let lastError: string | undefined;
 
-  try {
-    const res = await fetch(`${config.apiBase}/payments/coupon`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${config.apiToken}`,
-        Version: config.apiVersion,
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        altId: config.locationId,
-        altType: "location",
-        name: "Quiz Discount — " + code,
-        code,
-        discountType: "percentage",
-        discountValue: discountPercent,
-        durationType: "once",
-        maxRedemptions: 1,
-        startDate,
-        endDate,
-      }),
-      signal: AbortSignal.timeout(10000),
-    });
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    // New code per attempt — avoids collision if previous attempt partially succeeded
+    const code = "GROWT" + generateCouponSuffix();
+    const now = new Date();
+    const startDate = now.toISOString().replace(/\.\d+Z$/, "Z");
+    const endDate = new Date(now.getTime() + 60 * 60 * 1000)
+      .toISOString()
+      .replace(/\.\d+Z$/, "Z");
 
-    const json = (await res.json().catch(() => ({}))) as {
-      _id?: string;
-      code?: string;
-      message?: string | string[];
-      error?: string;
-    };
+    try {
+      const res = await fetch(`${config.apiBase}/payments/coupon`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${config.apiToken}`,
+          Version: config.apiVersion,
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          altId: config.locationId,
+          altType: "location",
+          name: "Quiz Discount — " + code,
+          code,
+          discountType: "percentage",
+          discountValue: discountPercent,
+          durationType: "once",
+          maxRedemptions: 1,
+          startDate,
+          endDate,
+        }),
+        signal: AbortSignal.timeout(10000),
+      });
 
-    if (!res.ok) {
-      return {
-        ok: false,
-        error: Array.isArray(json.message)
-          ? json.message.join("; ")
-          : json.message ?? json.error ?? `HTTP ${res.status}`,
+      const json = (await res.json().catch(() => ({}))) as {
+        _id?: string;
+        code?: string;
+        message?: string | string[];
+        error?: string;
       };
+
+      if (res.ok) {
+        return { ok: true, code: json.code ?? code, couponId: json._id };
+      }
+
+      lastError = Array.isArray(json.message)
+        ? json.message.join("; ")
+        : json.message ?? json.error ?? `HTTP ${res.status}`;
+      console.warn(
+        `[coupon] attempt ${attempt}/${MAX_ATTEMPTS} failed: ${lastError}`,
+      );
+    } catch (err) {
+      lastError = (err as Error).message;
+      console.warn(
+        `[coupon] attempt ${attempt}/${MAX_ATTEMPTS} threw: ${lastError}`,
+      );
     }
 
-    return { ok: true, code: json.code ?? code, couponId: json._id };
-  } catch (err) {
-    return { ok: false, error: (err as Error).message };
+    // Brief delay before retry (exponential-ish: 300ms, 800ms)
+    if (attempt < MAX_ATTEMPTS) {
+      await new Promise((r) => setTimeout(r, 300 * attempt));
+    }
   }
+
+  return { ok: false, error: lastError ?? "Unknown coupon error" };
 }
 
 function generateCouponSuffix(): string {

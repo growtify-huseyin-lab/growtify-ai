@@ -322,6 +322,7 @@ function DiscountDisclaimerBlock() {
 
 function FinalCtaBlock({ discounted }: { discounted: number }) {
   const { couponCode, state } = useQuiz();
+  const [copied, setCopied] = useState(false);
 
   // Build prefilled payment link with contact info + coupon
   // Split full name into firstName + lastName for GHL checkout
@@ -337,6 +338,25 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
   if (couponCode) params.set("couponCode", couponCode);
   const paymentUrl = PAYMENT_LINK + (params.toString() ? "?" + params.toString() : "");
 
+  const handleCopy = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!couponCode) return;
+    try {
+      await navigator.clipboard.writeText(couponCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // fallback
+      const textarea = document.createElement("textarea");
+      textarea.value = couponCode;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try { document.execCommand("copy"); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch {}
+      document.body.removeChild(textarea);
+    }
+  };
+
   return (
     <section className="sticky bottom-4 space-y-3 rounded-2xl bg-primary p-4 shadow-2xl">
       <div className="text-center text-xs font-semibold uppercase tracking-wider text-white/70">
@@ -346,15 +366,22 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
         {discounted.toLocaleString("tr-TR")} TL
       </div>
       {couponCode && (
-        <div className="rounded-xl bg-white/15 px-4 py-2 text-center">
-          <div className="text-[10px] font-semibold uppercase tracking-wider text-white/60">
-            İndirim kodun (otomatik uygulanacak)
+        <div className="rounded-xl bg-white/15 p-3">
+          <div className="text-center text-[10px] font-semibold uppercase tracking-wider text-white/60">
+            İndirim Kodun
           </div>
-          <div className="font-mono text-lg font-black tracking-widest text-white">
-            {couponCode}
-          </div>
-          <div className="text-[10px] text-white/50">
-            15 dakika geçerli · Tek kullanımlık
+          <button
+            type="button"
+            onClick={handleCopy}
+            className="mt-1.5 flex w-full items-center justify-center gap-2 rounded-lg bg-white px-3 py-2.5 font-mono text-base font-black tracking-widest text-primary transition-all active:scale-[0.98]"
+          >
+            <span>{couponCode}</span>
+            <span className="text-xs font-sans font-semibold">
+              {copied ? "✓ Kopyalandı" : "📋 Kopyala"}
+            </span>
+          </button>
+          <div className="mt-2 text-center text-[10px] leading-relaxed text-white/70">
+            Ödeme sayfasında <b>Coupon Code</b> alanına yapıştır · Tek kullanımlık
           </div>
         </div>
       )}
