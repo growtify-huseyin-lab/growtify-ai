@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { COMPANY } from "@/lib/company-info";
 
 export const metadata: Metadata = {
   title: "Çerez Politikası",
@@ -22,10 +23,12 @@ export default function CerezPolitikasiPage() {
 
         <div className="mt-10 space-y-8 text-gray-600 dark:text-dark-muted leading-relaxed">
           <p>
-            Bu çerez politikası, Birleşik Krallık&apos;ta kayıtlı Growtify
-            (&ldquo;Şirket&rdquo;, &ldquo;biz&rdquo;) tarafından işletilen
-            growtify.ai web sitesinde kullanılan çerezler hakkında sizi
-            bilgilendirmek amacıyla hazırlanmıştır.
+            Bu çerez politikası, Birleşik Krallık&apos;ta kayıtlı{" "}
+            <strong>{COMPANY.legalName}</strong> (&ldquo;Şirket&rdquo;,
+            &ldquo;biz&rdquo;) tarafından işletilen {COMPANY.website} web
+            sitesinde kullanılan çerezler hakkında sizi bilgilendirmek amacıyla
+            hazırlanmıştır. {COMPANY.brand} markaları ({COMPANY.brand}.ai,{" "}
+            {COMPANY.brand}.app) {COMPANY.legalName} bünyesinde yönetilmektedir.
           </p>
 
           <div>
@@ -278,10 +281,10 @@ export default function CerezPolitikasiPage() {
               Çerezler hakkında daha detaylı bilgi almak veya sorularınızı
               iletmek için{" "}
               <a
-                href="mailto:info@growtify.app"
+                href={`mailto:${COMPANY.email}`}
                 className="text-primary hover:underline"
               >
-                info@growtify.app
+                {COMPANY.email}
               </a>{" "}
               adresine e-posta gönderebilirsiniz.
             </p>

@@ -320,7 +320,6 @@ const authority: ScreenConfig[] = [
         "Uluslararası dijital dönüşüm raporları",
         "Sektörel verimlilik çalışmaları",
       ],
-      note: "Not: Kaynaklar launch öncesi gerçek akademik referanslarla değiştirilecek (etik/legal uyum).",
     },
   },
   {

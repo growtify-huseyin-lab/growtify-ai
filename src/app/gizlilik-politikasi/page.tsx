@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { COMPANY } from "@/lib/company-info";
 
 export const metadata: Metadata = {
   title: "Gizlilik Politikası",
@@ -26,23 +27,28 @@ export default function GizlilikPolitikasiPage() {
               1. Veri Sorumlusu
             </h2>
             <p className="mt-3">
-              Kişisel verileriniz, İngiltere&apos;de (UK) kayıtlı Growtify
-              (&ldquo;Şirket&rdquo;) tarafından veri sorumlusu sıfatıyla
-              işlenmektedir.
+              Kişisel verileriniz, Birleşik Krallık&apos;ta (UK) kayıtlı{" "}
+              {COMPANY.legalName} (&ldquo;Şirket&rdquo;) tarafından veri
+              sorumlusu sıfatıyla işlenmektedir. {COMPANY.brand} markaları
+              ({COMPANY.brand}.ai, {COMPANY.brand}.app) {COMPANY.legalName}{" "}
+              bünyesinde yönetilmektedir.
             </p>
             <ul className="mt-3 list-disc pl-6 space-y-1">
-              <li>Şirket Adı: Growtify</li>
-              <li>Ülke: Birleşik Krallık (UK)</li>
+              <li>Şirket Unvanı: {COMPANY.legalName}</li>
+              <li>Adres: {COMPANY.address}</li>
+              <li>Ülke: {COMPANY.country}</li>
               <li>
-                İletişim:{" "}
+                E-posta:{" "}
                 <a
-                  href="mailto:info@growtify.app"
+                  href={`mailto:${COMPANY.email}`}
                   className="text-primary hover:underline"
                 >
-                  info@growtify.app
+                  {COMPANY.email}
                 </a>
               </li>
-              <li>Web Sitesi: growtify.ai</li>
+              <li>Telefon (UK): {COMPANY.phoneUK}</li>
+              <li>Telefon (US): {COMPANY.phoneUS}</li>
+              <li>Web Sitesi: {COMPANY.website}</li>
             </ul>
           </div>
 
@@ -153,7 +159,7 @@ export default function GizlilikPolitikasiPage() {
               6. Yurtdışı Veri Aktarımı
             </h2>
             <p className="mt-3">
-              Şirketimiz Birleşik Krallık&apos;ta (UK) kayıtlı olup sunucularımız
+              {COMPANY.legalName} Birleşik Krallık&apos;ta (UK) kayıtlı olup sunucularımız
               ve hizmet sağlayıcılarımızın bir kısmı yurtdışında
               bulunmaktadır. Kişisel verileriniz, 6698 sayılı KVKK&apos;nın 9.
               maddesi ve UK GDPR düzenlemeleri çerçevesinde, yeterli koruma
@@ -223,10 +229,10 @@ export default function GizlilikPolitikasiPage() {
             <p className="mt-3">
               Haklarınızı kullanmak için{" "}
               <a
-                href="mailto:info@growtify.app"
+                href={`mailto:${COMPANY.email}`}
                 className="text-primary hover:underline"
               >
-                info@growtify.app
+                {COMPANY.email}
               </a>{" "}
               adresine başvurabilirsiniz.
             </p>
@@ -241,16 +247,20 @@ export default function GizlilikPolitikasiPage() {
               geçebilirsiniz:
             </p>
             <ul className="mt-3 list-disc pl-6 space-y-1">
+              <li>Şirket: {COMPANY.legalName}</li>
+              <li>Adres: {COMPANY.address}</li>
               <li>
                 E-posta:{" "}
                 <a
-                  href="mailto:info@growtify.app"
+                  href={`mailto:${COMPANY.email}`}
                   className="text-primary hover:underline"
                 >
-                  info@growtify.app
+                  {COMPANY.email}
                 </a>
               </li>
-              <li>Web sitesi: growtify.ai</li>
+              <li>Telefon (UK): {COMPANY.phoneUK}</li>
+              <li>Telefon (US): {COMPANY.phoneUS}</li>
+              <li>Web sitesi: {COMPANY.website}</li>
             </ul>
           </div>
 

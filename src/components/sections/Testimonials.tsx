@@ -34,9 +34,6 @@ export function Testimonials() {
           <p className="mt-4 text-lg text-gray-600 dark:text-dark-muted">
             GROWT Method ile işini büyüten profesyoneller
           </p>
-          <p className="mt-2 text-sm text-gray-400 dark:text-dark-muted/60">
-            * Gösterim amaçlı örneklerdir. Gerçek hikayeler yakın zamanda eklenecektir.
-          </p>
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-3">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { COMPANY } from "@/lib/company-info";
 
 export const metadata: Metadata = {
   title: "İade Politikası",
@@ -22,10 +23,12 @@ export default function IadePolitikasiPage() {
 
         <div className="mt-10 space-y-8 text-gray-600 dark:text-dark-muted leading-relaxed">
           <p>
-            İşbu İade Politikası, Birleşik Krallık&apos;ta kayıtlı Growtify
-            (&ldquo;Şirket&rdquo;) tarafından growtify.ai üzerinden sunulan
-            dijital içerik hizmetlerine ilişkin iade koşullarını
-            düzenlemektedir.
+            İşbu İade Politikası, Birleşik Krallık&apos;ta kayıtlı{" "}
+            <strong>{COMPANY.legalName}</strong> (&ldquo;Şirket&rdquo;)
+            tarafından {COMPANY.website} üzerinden sunulan dijital içerik
+            hizmetlerine ilişkin iade koşullarını düzenlemektedir.
+            {COMPANY.brand} markaları ({COMPANY.brand}.ai, {COMPANY.brand}.app){" "}
+            {COMPANY.legalName} bünyesinde yönetilmektedir.
           </p>
 
           <div>
@@ -113,10 +116,10 @@ export default function IadePolitikasiPage() {
               <li>
                 İade talebinizi{" "}
                 <a
-                  href="mailto:info@growtify.app"
+                  href={`mailto:${COMPANY.email}`}
                   className="text-primary hover:underline"
                 >
-                  info@growtify.app
+                  {COMPANY.email}
                 </a>{" "}
                 adresine e-posta göndererek iletiniz.
               </li>
@@ -144,16 +147,20 @@ export default function IadePolitikasiPage() {
               İade politikamızla ilgili tüm sorularınız için:
             </p>
             <ul className="mt-3 list-disc pl-6 space-y-1">
+              <li>Şirket: {COMPANY.legalName}</li>
+              <li>Adres: {COMPANY.address}</li>
               <li>
                 E-posta:{" "}
                 <a
-                  href="mailto:info@growtify.app"
+                  href={`mailto:${COMPANY.email}`}
                   className="text-primary hover:underline"
                 >
-                  info@growtify.app
+                  {COMPANY.email}
                 </a>
               </li>
-              <li>Web sitesi: growtify.ai</li>
+              <li>Telefon (UK): {COMPANY.phoneUK}</li>
+              <li>Telefon (US): {COMPANY.phoneUS}</li>
+              <li>Web sitesi: {COMPANY.website}</li>
             </ul>
           </div>
 

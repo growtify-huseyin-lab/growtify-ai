@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { COMPANY } from "@/lib/company-info";
 
 export const metadata: Metadata = {
   title: "Kullanım Koşulları",
@@ -23,12 +24,14 @@ export default function KullanimKosullariPage() {
         <div className="mt-10 space-y-8 text-gray-600 dark:text-dark-muted leading-relaxed">
           <p>
             İşbu Kullanım Koşulları (&ldquo;Koşullar&rdquo;), Birleşik
-            Krallık&apos;ta kayıtlı Growtify (&ldquo;Şirket&rdquo;,
-            &ldquo;biz&rdquo;) tarafından growtify.ai web sitesi ve ilişkili
-            dijital hizmetler üzerinden sunulan hizmetlerin kullanımına
-            ilişkin şart ve koşulları düzenlemektedir. Web sitemizi kullanarak
-            veya hizmetlerimize kaydolarak bu koşulları kabul etmiş
-            sayılırsınız.
+            Krallık&apos;ta kayıtlı <strong>{COMPANY.legalName}</strong>{" "}
+            (&ldquo;Şirket&rdquo;, &ldquo;biz&rdquo;) tarafından{" "}
+            {COMPANY.website} web sitesi ve ilişkili dijital hizmetler
+            üzerinden sunulan hizmetlerin kullanımına ilişkin şart ve
+            koşulları düzenlemektedir. {COMPANY.brand} markaları{" "}
+            ({COMPANY.brand}.ai, {COMPANY.brand}.app) {COMPANY.legalName}{" "}
+            bünyesinde yönetilmektedir. Web sitemizi kullanarak veya
+            hizmetlerimize kaydolarak bu koşulları kabul etmiş sayılırsınız.
           </p>
 
           <div>
@@ -133,8 +136,8 @@ export default function KullanimKosullariPage() {
             <ul className="mt-3 list-disc pl-6 space-y-1">
               <li>
                 Web sitemizdeki tüm içerikler (metin, grafik, logo, video,
-                yazılım, GROWT Method dahil) Growtify&apos;ın fikri mülkiyeti
-                olup telif hakkı ile korunmaktadır.
+                yazılım, GROWT Method dahil) {COMPANY.legalName}&apos;in fikri
+                mülkiyeti olup telif hakkı ile korunmaktadır.
               </li>
               <li>
                 GROWT Programı kapsamında sunulan eğitim materyalleri yalnızca
@@ -251,16 +254,20 @@ export default function KullanimKosullariPage() {
               geçebilirsiniz:
             </p>
             <ul className="mt-3 list-disc pl-6 space-y-1">
+              <li>Şirket: {COMPANY.legalName}</li>
+              <li>Adres: {COMPANY.address}</li>
               <li>
                 E-posta:{" "}
                 <a
-                  href="mailto:info@growtify.app"
+                  href={`mailto:${COMPANY.email}`}
                   className="text-primary hover:underline"
                 >
-                  info@growtify.app
+                  {COMPANY.email}
                 </a>
               </li>
-              <li>Web sitesi: growtify.ai</li>
+              <li>Telefon (UK): {COMPANY.phoneUK}</li>
+              <li>Telefon (US): {COMPANY.phoneUS}</li>
+              <li>Web sitesi: {COMPANY.website}</li>
             </ul>
           </div>
 

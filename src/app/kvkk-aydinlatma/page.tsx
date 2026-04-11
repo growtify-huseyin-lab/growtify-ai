@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { COMPANY } from "@/lib/company-info";
 
 export const metadata: Metadata = {
   title: "KVKK Aydınlatma Metni",
@@ -25,8 +26,9 @@ export default function KVKKAydinlatmaPage() {
             İşbu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması
             Kanunu (&ldquo;KVKK&rdquo;) md. 10 ve Aydınlatma Yükümlülüğünün
             Yerine Getirilmesinde Uyulacak Usul ve Esaslar Hakkında Tebliğ
-            uyarınca, veri sorumlusu sıfatıyla Growtify tarafından
-            hazırlanmıştır.
+            uyarınca, veri sorumlusu sıfatıyla {COMPANY.legalName} tarafından
+            hazırlanmıştır. {COMPANY.brand} markaları ({COMPANY.brand}.ai,{" "}
+            {COMPANY.brand}.app) {COMPANY.legalName} bünyesinde yönetilmektedir.
           </p>
 
           <div>
@@ -34,18 +36,22 @@ export default function KVKKAydinlatmaPage() {
               1. Veri Sorumlusunun Kimliği
             </h2>
             <p className="mt-3">
-              Veri Sorumlusu: Growtify (Birleşik Krallık&apos;ta kayıtlı şirket)
+              Veri Sorumlusu: <strong>{COMPANY.legalName}</strong> (Birleşik
+              Krallık&apos;ta kayıtlı şirket)
             </p>
+            <p className="mt-1">Adres: {COMPANY.address}</p>
             <p className="mt-1">
-              İletişim:{" "}
+              E-posta:{" "}
               <a
-                href="mailto:info@growtify.app"
+                href={`mailto:${COMPANY.email}`}
                 className="text-primary hover:underline"
               >
-                info@growtify.app
+                {COMPANY.email}
               </a>
             </p>
-            <p className="mt-1">Web Sitesi: growtify.ai</p>
+            <p className="mt-1">Telefon (UK): {COMPANY.phoneUK}</p>
+            <p className="mt-1">Telefon (US): {COMPANY.phoneUS}</p>
+            <p className="mt-1">Web Sitesi: {COMPANY.website}</p>
           </div>
 
           <div>
@@ -146,10 +152,10 @@ export default function KVKKAydinlatmaPage() {
               </li>
             </ul>
             <p className="mt-3">
-              Şirketimiz Birleşik Krallık&apos;ta (UK) kayıtlı olduğundan, kişisel
-              verileriniz yurtdışına aktarılmaktadır. Bu aktarım, KVKK md. 9
-              kapsamında açık rızanız veya yeterli koruma bulunması şartıyla
-              gerçekleştirilmektedir.
+              {COMPANY.legalName} Birleşik Krallık&apos;ta (UK) kayıtlı
+              olduğundan, kişisel verileriniz yurtdışına aktarılmaktadır. Bu
+              aktarım, KVKK md. 9 kapsamında açık rızanız veya yeterli koruma
+              bulunması şartıyla gerçekleştirilmektedir.
             </p>
           </div>
 
@@ -231,10 +237,10 @@ export default function KVKKAydinlatmaPage() {
             <p className="mt-3">
               Başvurularınızı{" "}
               <a
-                href="mailto:info@growtify.app"
+                href={`mailto:${COMPANY.email}`}
                 className="text-primary hover:underline"
               >
-                info@growtify.app
+                {COMPANY.email}
               </a>{" "}
               e-posta adresi üzerinden iletebilirsiniz. Başvurularınız en geç 30
               gün içinde sonuçlandırılacaktır.

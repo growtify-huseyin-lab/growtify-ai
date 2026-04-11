@@ -189,7 +189,7 @@ export default function IletisimPage() {
                     <div>
                       <p className="text-sm text-gray-500 dark:text-dark-muted">Sosyal Medya</p>
                       <p className="font-medium text-dark dark:text-white">
-                        @growtify.ai
+                        @growtify.app
                       </p>
                     </div>
                   </div>
