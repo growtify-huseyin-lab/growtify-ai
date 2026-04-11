@@ -40,8 +40,8 @@ export function Header() {
             >
               {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-            <Button href="https://app.growtify.app/payment-link/69d20484c6a0e600f4d07a46" variant="primary" size="sm" external>
-              Hemen Başla
+            <Button href="/test" variant="primary" size="sm">
+              Kişisel Planını Oluştur
             </Button>
           </div>
 
@@ -79,8 +79,8 @@ export function Header() {
                 </Link>
               ))}
               <div className="mt-3 px-4">
-                <Button href="https://app.growtify.app/payment-link/69d20484c6a0e600f4d07a46" variant="primary" size="md" external className="w-full">
-                  Hemen Başla
+                <Button href="/test" variant="primary" size="md" className="w-full">
+                  Kişisel Planını Oluştur
                 </Button>
               </div>
             </div>

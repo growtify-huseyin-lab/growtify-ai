@@ -128,11 +128,11 @@ export default async function SectorPage({ params }: Props) {
               {sector.heroSubtitle}
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Button href="https://app.growtify.app/payment-link/69d20484c6a0e600f4d07a46" variant="primary" size="lg" external>
-                Programa Katıl <ArrowRight size={18} className="ml-2" />
+              <Button href="/test" variant="primary" size="lg">
+                Kişisel Planını Oluştur <ArrowRight size={18} className="ml-2" />
               </Button>
-              <Button href="/test" variant="ghost" size="lg" className="border border-gray-200 dark:border-dark-border">
-                AI Olgunluk Testi
+              <Button href="/growt-method" variant="ghost" size="lg" className="border border-gray-200 dark:border-dark-border">
+                GROWT Method&apos;u İncele
               </Button>
             </div>
           </div>
@@ -310,12 +310,9 @@ export default async function SectorPage({ params }: Props) {
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Yapay zeka ile {sector.title.toLowerCase()} işini büyütmeye hazır mısın?
             </h2>
-            <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Button href="https://app.growtify.app/payment-link/69d20484c6a0e600f4d07a46" variant="accent" size="lg" external>
-                Programa Katıl <ArrowRight size={18} className="ml-2" />
-              </Button>
-              <Button href="/test" variant="ghost" size="lg" className="text-white/80 border border-white/20 hover:border-white/40 hover:text-white hover:bg-white/5">
-                AI Olgunluk Testine Başla
+            <div className="mt-8 flex justify-center">
+              <Button href="/test" variant="accent" size="lg">
+                Kişisel Planını Oluştur <ArrowRight size={18} className="ml-2" />
               </Button>
             </div>
           </div>

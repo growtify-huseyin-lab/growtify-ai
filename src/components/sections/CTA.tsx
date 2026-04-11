@@ -34,8 +34,8 @@ export function CTA() {
               Kişisel Planını Oluştur
               <ArrowRight size={18} className="ml-2" />
             </Button>
-            <Button href="/test" variant="ghost" size="lg" className="text-white/80 border border-white/20 hover:border-white/40 hover:text-white hover:bg-white/5">
-              Ücretsiz AI Olgunluk Testine Başla
+            <Button href="/growt-method" variant="ghost" size="lg" className="text-white/80 border border-white/20 hover:border-white/40 hover:text-white hover:bg-white/5">
+              GROWT Method&apos;u İncele
             </Button>
           </div>
         </div>

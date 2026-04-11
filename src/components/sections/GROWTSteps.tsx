@@ -65,12 +65,12 @@ export function GROWTSteps() {
 
         {/* CTA */}
         <div className="mt-12 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <Button href="https://app.growtify.app/payment-link/69d20484c6a0e600f4d07a46" variant="primary" size="lg" external>
-            Programa Katıl
+          <Button href="/test" variant="primary" size="lg">
+            Kişisel Planını Oluştur
             <ArrowRight size={18} className="ml-2" />
           </Button>
-          <Button href="/test" variant="ghost" size="lg" className="border border-gray-200 dark:border-dark-border">
-            AI Olgunluk Testi
+          <Button href="/growt-method" variant="ghost" size="lg" className="border border-gray-200 dark:border-dark-border">
+            Detaylı İncele
             <ArrowRight size={16} className="ml-2" />
           </Button>
         </div>

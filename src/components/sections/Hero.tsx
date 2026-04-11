@@ -48,17 +48,17 @@ export function Hero() {
           </p>
 
           <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Button href="https://app.growtify.app/payment-link/69d20484c6a0e600f4d07a46" variant="primary" size="lg" external>
-              Hemen Başla
+            <Button href="/test" variant="primary" size="lg">
+              Kişisel Planını Oluştur
               <ArrowRight size={18} className="ml-2" />
             </Button>
             <Button
-              href="/test"
+              href="/growt-method"
               variant="ghost"
               size="lg"
               className="text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:border-primary hover:text-primary dark:hover:text-white hover:bg-primary/5 dark:hover:bg-primary/10"
             >
-              AI Olgunluk Testi
+              GROWT Method Nasıl Çalışıyor?
             </Button>
           </div>
         </div>
