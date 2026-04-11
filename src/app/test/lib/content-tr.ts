@@ -626,7 +626,7 @@ export const PAYWALL_COPY = {
   // Canlıya almadan önce avukat incelemesi ZORUNLUDUR.
   guarantee: {
     headline: "Güvendesin",
-    text: "Satın aldığın an platforma anında erişim alırsın — 4 hafta boyunca tüm içerik, AI araç kütüphanesi ve topluluğun yanında. Herhangi bir teknik sorun yaşarsan 7/24 destek ekibimiz senin yanında. Sen yolu tamamlamaya odaklan, gerisi bizde.",
+    text: "Satın alma sonrasında hesabın kısa süre içinde hazırlanır ve platforma erişimin başlar — 4 hafta boyunca tüm içerik, AI araç kütüphanesi ve topluluk yanında. Herhangi bir sorunda destek ekibimiz senin yanında. Sen yolu tamamlamaya odaklan, gerisi bizde.",
     legalNote:
       "// AVUKAT İNCELEMESİ GEREKLİDİR — UK Consumer Rights Act 2015 Section 42. Canlıya almadan önce onay alınmalıdır.",
   },
