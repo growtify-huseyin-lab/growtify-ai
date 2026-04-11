@@ -174,10 +174,33 @@ export default function GROWTMethodPage() {
         </Container>
       </section>
 
-      {/* 4. Modül Kartları */}
-      <section className="py-20 bg-light dark:bg-dark-bg/50 transition-colors">
+      {/* 4. Modül Kartları — Desktop: card grid · Mobile: compact journey */}
+      <section className="py-14 lg:py-20 bg-light dark:bg-dark-bg/50 transition-colors">
         <Container>
-          <div className="grid gap-4 sm:grid-cols-5">
+          {/* Mobile — compact journey visual (no content repeat) */}
+          <div className="lg:hidden">
+            <p className="text-center text-xs font-semibold text-gray-500 dark:text-dark-muted uppercase tracking-wider mb-6">
+              Yolculuğun özeti
+            </p>
+            <div className="flex items-center justify-between gap-0 max-w-[300px] mx-auto">
+              {GROWT_PHASES.map((phase, i) => (
+                <div key={phase.letter} className="flex items-center shrink-0">
+                  <div
+                    className={`flex h-11 w-11 items-center justify-center rounded-xl text-lg font-black text-white shadow-md ${phase.color}`}
+                    aria-label={`Seviye ${phase.level} — ${phase.name}`}
+                  >
+                    {phase.letter}
+                  </div>
+                  {i < GROWT_PHASES.length - 1 && (
+                    <div className="w-2 h-[2px] bg-gray-300 dark:bg-dark-border" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop — card grid (unchanged layout) */}
+          <div className="hidden lg:grid lg:grid-cols-5 gap-4">
             {GROWT_PHASES.map((phase) => (
               <Card key={phase.letter} hover className="text-center">
                 <div

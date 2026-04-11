@@ -39,11 +39,11 @@ export function ContactForm() {
         form.reset();
       } else {
         setStatus("error");
-        setErrorMsg(json.error || "Bir hata olustu.");
+        setErrorMsg(json.error || "Bir hata oluştu.");
       }
     } catch {
       setStatus("error");
-      setErrorMsg("Baglanti hatasi. Lutfen tekrar dene.");
+      setErrorMsg("Bağlantı hatası. Lütfen tekrar dene.");
     }
   }
 
@@ -55,20 +55,20 @@ export function ContactForm() {
           className="mx-auto text-green-500 dark:text-green-400"
         />
         <h3 className="mt-4 text-xl font-bold text-dark dark:text-white">
-          Mesajin bize ulasti!
+          Mesajın bize ulaştı!
         </h3>
         <p className="mt-2 text-gray-600 dark:text-dark-muted">
-          En kisa surede sana donecegiz. Bu arada{" "}
+          En kısa sürede sana döneceğiz. Bu arada{" "}
           <a href="/test" className="text-primary underline font-medium">
             AI Olgunluk Testini
           </a>{" "}
-          cozebilirsin.
+          çözebilirsin.
         </p>
         <button
           onClick={() => setStatus("idle")}
           className="mt-6 text-sm text-primary underline"
         >
-          Yeni mesaj gonder
+          Yeni mesaj gönder
         </button>
       </div>
     );
@@ -84,7 +84,7 @@ export function ContactForm() {
           htmlFor="name"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Adin <span className="text-red-500">*</span>
+          Adın <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -92,7 +92,7 @@ export function ContactForm() {
           name="name"
           required
           className={inputClass}
-          placeholder="Adin Soyadin"
+          placeholder="Adın Soyadın"
         />
       </div>
       <div>
@@ -132,21 +132,21 @@ export function ContactForm() {
           htmlFor="sector"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Sektorun
+          Sektörün
         </label>
         <select id="sector" name="sector" className={inputClass}>
-          <option value="">Seciniz</option>
-          <option value="saglik">Saglik</option>
+          <option value="">Seçiniz</option>
+          <option value="saglik">Sağlık</option>
           <option value="hukuk">Hukuk</option>
-          <option value="guzellik">Guzellik / Estetik</option>
+          <option value="guzellik">Güzellik / Estetik</option>
           <option value="emlak">Emlak</option>
           <option value="e-ticaret">E-Ticaret</option>
-          <option value="dis">Dis Hekimligi</option>
+          <option value="dis">Diş Hekimliği</option>
           <option value="muhasebe">Muhasebe</option>
-          <option value="egitim">Egitim</option>
+          <option value="egitim">Eğitim</option>
           <option value="turizm">Turizm</option>
           <option value="fitness">Fitness</option>
-          <option value="diger">Diger</option>
+          <option value="diger">Diğer</option>
         </select>
       </div>
       <div>
@@ -154,14 +154,14 @@ export function ContactForm() {
           htmlFor="interest"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Ne hakkinda?
+          Ne hakkında?
         </label>
         <select id="interest" name="interest" className={inputClass}>
-          <option value="">Seciniz</option>
-          <option value="bireysel">Bireysel program hakkinda bilgi</option>
-          <option value="kurumsal">Kurumsal cozumler hakkinda bilgi</option>
-          <option value="genel">Genel soru / oneri</option>
-          <option value="ortaklik">Ortaklik / is birligi</option>
+          <option value="">Seçiniz</option>
+          <option value="bireysel">Bireysel program hakkında bilgi</option>
+          <option value="kurumsal">Kurumsal çözümler hakkında bilgi</option>
+          <option value="genel">Genel soru / öneri</option>
+          <option value="ortaklik">Ortaklık / iş birliği</option>
         </select>
       </div>
       <div>
@@ -169,14 +169,14 @@ export function ContactForm() {
           htmlFor="message"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Mesajin
+          Mesajın
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
           className={`${inputClass} resize-none`}
-          placeholder="Sana nasil yardimci olabiliriz?"
+          placeholder="Sana nasıl yardımcı olabiliriz?"
         />
       </div>
 
@@ -195,11 +195,11 @@ export function ContactForm() {
         {status === "loading" ? (
           <>
             <Loader2 size={18} className="animate-spin" />
-            Gonderiliyor...
+            Gönderiliyor...
           </>
         ) : (
           <>
-            Gonder
+            Gönder
             <ArrowRight size={18} />
           </>
         )}
