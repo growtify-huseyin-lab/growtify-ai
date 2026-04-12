@@ -11,6 +11,7 @@ import {
   upsertQuizContact,
   uploadPdfToContact,
   savePdfUrlToContact,
+  saveCouponToContact,
   sendQuizReportEmail,
   addNoteToContact,
   createQuizOpportunity,
@@ -81,6 +82,15 @@ export async function POST(request: Request) {
 
   const couponCode = couponResult.ok ? couponResult.code : undefined;
   console.log(`[quiz/submit-email] opp=${oppResult.ok} coupon=${couponCode ?? "FAILED"}`);
+
+  // 3. Save coupon code to contact custom field (for nurture email merge tags)
+  if (couponCode) {
+    const expiresAt = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString();
+    const saveResult = await saveCouponToContact(contactId, couponCode, expiresAt);
+    if (!saveResult.ok) {
+      console.warn("[quiz/submit-email] coupon field save failed:", saveResult.error);
+    }
+  }
 
   // ========== RESPOND TO CLIENT (user can proceed) ==========
   // PDF generation happens in background — don't block the quiz flow.

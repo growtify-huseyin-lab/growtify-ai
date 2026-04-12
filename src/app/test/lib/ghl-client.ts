@@ -229,7 +229,11 @@ export async function createQuizCoupon(
     const code = "GROWT" + generateCouponSuffix();
     const now = new Date();
     const startDate = now.toISOString().replace(/\.\d+Z$/, "Z");
-    const endDate = new Date(now.getTime() + 60 * 60 * 1000)
+    // Coupon technically valid 14 days but shown to user progressively:
+    // A1 (T+50m): "10 dakikan kaldı", A2 (T+65m): "24 saat uzattım",
+    // A9 (T+10d): "48 saat", A10 (T+14d): "son 24 saat" (gerçekten bitiyor)
+    // This avoids regenerating coupons — all nurture emails reuse same code.
+    const endDate = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000)
       .toISOString()
       .replace(/\.\d+Z$/, "Z");
 
@@ -297,6 +301,49 @@ function generateCouponSuffix(): string {
     result += chars[Math.floor(Math.random() * chars.length)];
   }
   return result;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Save Coupon Code + Expiry to Contact Custom Fields                        */
+/* -------------------------------------------------------------------------- */
+
+const COUPON_CODE_FIELD_ID = "d8uadNfpblyEuwG0GwTe";
+const COUPON_EXPIRES_FIELD_ID = "ERE8bqENPdpd0zkxfjan";
+
+/**
+ * Store the coupon code and expiry in contact custom fields so nurture
+ * workflow emails can use {{contact.gai__coupon_code}} merge tag.
+ */
+export async function saveCouponToContact(
+  contactId: string,
+  couponCode: string,
+  expiresAt: string,
+): Promise<{ ok: boolean; error?: string }> {
+  const config = readConfig();
+  if (!config) return { ok: false, error: "GHL credentials missing" };
+
+  try {
+    const res = await fetch(`${config.apiBase}/contacts/${contactId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${config.apiToken}`,
+        Version: config.apiVersion,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        customFields: [
+          { id: COUPON_CODE_FIELD_ID, value: couponCode },
+          { id: COUPON_EXPIRES_FIELD_ID, value: expiresAt },
+        ],
+      }),
+      signal: AbortSignal.timeout(10000),
+    });
+    if (!res.ok) return { ok: false, error: `HTTP ${res.status}` };
+    return { ok: true };
+  } catch (err) {
+    return { ok: false, error: (err as Error).message };
+  }
 }
 
 /* -------------------------------------------------------------------------- */
