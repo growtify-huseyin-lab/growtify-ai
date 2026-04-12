@@ -93,6 +93,7 @@ export async function POST(req: NextRequest) {
       lastName,
       email: body.email,
       phone: body.phone,
+      country: "TR",
       tags,
       customFields,
       locationId: GHL_LOCATION_ID,
