@@ -14,10 +14,8 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
 
   const isEmail = key === "email";
   const isPhone = key === ("phone" as string);
-  // Submit trigger: email (bireysel) or phone (kurumsal — last capture before loading)
+  // Submit trigger: only fire on screens with explicit submit CTA
   const isSubmitTrigger =
-    isEmail ||
-    isPhone ||
     screen.cta === "Planımı Hazırla" ||
     screen.cta === "Raporumu Oluştur" ||
     screen.cta === "Raporumu Olustur";
@@ -91,7 +89,7 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
         {error && (
           <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
         )}
-        {(isEmail || isSubmitTrigger) && (
+        {isSubmitTrigger && (
           <label className="flex items-start gap-3 cursor-pointer rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-dark-border dark:bg-dark-bg">
             <input
               type="checkbox"
@@ -109,7 +107,7 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
         )}
         <PrimaryButton
           onClick={handleSubmit}
-          disabled={!valid || submitting || ((isEmail || isSubmitTrigger) && !kvkkConsent)}
+          disabled={!valid || submitting || (isSubmitTrigger && !kvkkConsent)}
         >
           {screen.cta ?? "Devam"}
         </PrimaryButton>
