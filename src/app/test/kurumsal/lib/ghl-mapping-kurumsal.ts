@@ -97,7 +97,7 @@ export function buildGhlCustomFields(state: KurumsalQuizState): GhlCustomField[]
   const fields: GhlCustomField[] = [];
 
   fields.push({ id: GHL_FIELD_IDS.profession, value: "kurumsal" });
-  fields.push({ id: GHL_FIELD_IDS.quizScore, value: state.totalScore });
+  fields.push({ id: GHL_FIELD_IDS.quizScore, value: 70 - state.totalScore }); // maturity score (inverted)
   fields.push({ id: GHL_FIELD_IDS.leadSource, value: "kurumsal_quiz" });
   fields.push({ id: GHL_FIELD_IDS.landingPage, value: "https://growtify.ai/test/kurumsal" });
 
@@ -129,7 +129,7 @@ export function buildContactNote(state: KurumsalQuizState): string {
     "Kurumsal AI Olgunluk Değerlendirmesi Tamamlandı",
     "",
     `Persona: ${state.persona}`,
-    `Toplam Skor: ${state.totalScore}/70`,
+    `Olgunluk Skoru: ${70 - state.totalScore}/70`,
     `Pain Level: ${state.painLevel}`,
     "",
     "5 Boyut Skorları:",

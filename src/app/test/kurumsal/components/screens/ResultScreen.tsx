@@ -52,10 +52,10 @@ export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
         </div>
         <div className="rounded-2xl bg-gray-100 px-6 py-3 text-center dark:bg-dark-border">
           <div className="text-2xl font-black text-dark dark:text-white">
-            {s.totalScore}/70
+            {70 - s.totalScore}/70
           </div>
           <div className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-            Toplam Skor
+            Olgunluk Skoru
           </div>
         </div>
       </div>
