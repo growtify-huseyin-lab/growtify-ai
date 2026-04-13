@@ -41,23 +41,23 @@ const ICONS = {
 const PERSONA_INFO: Record<Persona, { icon: string; iconBg: string; subtitle: string; desc: string }> = {
   "Meraklı Gözlemci": {
     icon: ICONS.search("#fff"), iconBg: "#22C55E",
-    subtitle: "Merak var, adım henüz yok — en güçlü başlangıç noktası",
-    desc: "AI dünyasına ilgiyle bakıyorsun. GROWT Method ile neredesin ve hangi küçük adımla başlamalısın sorusunu birlikte cevaplayacağız.",
+    subtitle: "Farkındalık yolculuğunun başındasın",
+    desc: "AI henüz gündeminde büyük bir yer tutmuyor. Büyük bir baskı veya engel hissetmiyorsun — ama merakın var. Bu en doğru başlangıç noktası.",
   },
   "Aktif Deneyici": {
     icon: ICONS.bolt("#fff"), iconBg: "#F59E0B",
-    subtitle: "Deneme var, sistem yok — doğru yol haritasına ihtiyacın var",
-    desc: "Bazı araçları denedin ama sonuçlar dağınık. Doğru araç, doğru sıra ve net bir plan ile deneme-yanılma dönemini bitireceksin.",
+    subtitle: "Engeller seni yavaşlatıyor ama isteğin var",
+    desc: "AI konusunda bir rahatsızlık hissediyorsun — geride kalma endişesi, nereden başlayacağını bilememe ve zaman baskısı. Doğru rehberlikle bu engelleri aşabilirsin.",
   },
   Uygulamacı: {
     icon: ICONS.wrench("#fff"), iconBg: "#2563EB",
-    subtitle: "Kullanıyorsun ama parçalı — sisteme dönüştürme vakti",
-    desc: "AI araçlarıyla çalışıyorsun ama bütünleşik değil. Dağınık uygulamaları sistematik bir yapıya dönüştürerek gerçek verimlilik kazanacaksın.",
+    subtitle: "Ciddi farkındalık — rehberlik zamanı",
+    desc: "AI konusunda ciddi bir farkındalığın var ve engelleri açıkça görüyorsun. Motivasyonun var ama doğru yönlendirme eksik. Sana özel bir yol haritasıyla engelleri aşacaksın.",
   },
   "Dönüşüm Adayı": {
     icon: ICONS.rocket("#fff"), iconBg: "#7C3AED",
-    subtitle: "İleri düzeydesin — ölçülebilir sonuçlara bağlama vakti",
-    desc: "AI'ı aktif kullanıyorsun. Şimdi mevcut kazanımlarını sistematik hale getirip ölçülebilir iş büyütme sonuçlarına dönüştüreceksin.",
+    subtitle: "En yüksek farkındalık — değişime hazırsın",
+    desc: "Engelleri net görüyorsun, geride kaldığını hissediyorsun, fırsatları kaçırdığının farkındasın ve değişime tamamen hazırsın. İhtiyacın olan tek şey doğru yapı ve rehberlik.",
   },
 };
 
@@ -269,16 +269,12 @@ export function generatePdfHtml(state: QuizState): string {
   </div>
 
   <div class="p1-body">
-    <!-- Score Cards -->
-    <div class="score-row">
-      <div class="score-card score-card-primary" style="flex:1.5">
-        <div class="score-val" style="color:${PRIMARY}">%${scorePct}</div>
-        <div class="score-label">AI Olgunluk Seviyesi</div>
-      </div>
-      <div class="score-card score-card-neutral">
-        <div class="score-val" style="font-size:22px;"><div style="width:40px;height:40px;border-radius:10px;background:${persona.iconBg};display:flex;align-items:center;justify-content:center;margin:0 auto;">${persona.icon}</div></div>
-        <div style="font-size:14px; font-weight:800; color:${DARK}; margin-top:4px;">${esc(state.persona)}</div>
-        <div class="score-label">Profil</div>
+    <!-- Persona Badge -->
+    <div style="display:flex; align-items:center; gap:14px; background:${LIGHT}; border-radius:16px; padding:16px 20px; margin-bottom:16px;">
+      <div style="width:48px;height:48px;border-radius:12px;background:${persona.iconBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">${persona.icon}</div>
+      <div>
+        <div style="font-size:18px; font-weight:800; color:${DARK};">${esc(state.persona)}</div>
+        <div style="font-size:11px; color:${GRAY}; margin-top:2px;">Senin profilin</div>
       </div>
     </div>
 
