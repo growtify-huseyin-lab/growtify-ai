@@ -331,12 +331,6 @@ export function generatePdfHtml(state: QuizState): string {
       </div>
     </div>` : ""}
 
-    <!-- Motivasyon mesajı -->
-    <div style="margin-top:28px; background:linear-gradient(135deg, ${ACCENT}20, ${ACCENT}08); border:1.5px solid ${ACCENT}50; border-radius:16px; padding:20px;">
-      <div style="width:32px;height:32px;border-radius:8px;background:${ACCENT}30;display:flex;align-items:center;justify-content:center;margin-bottom:8px;">${ICONS.lightbulb(DARK, 16)}</div>
-      <div style="font-size:13px; font-weight:700; color:${DARK}; margin-bottom:6px;">Unutma</div>
-      <div style="font-size:12px; color:#475569; line-height:1.7;">Doğru zamanda doğru adımı atmak, her şeyi bilmekten daha önemli. Bu rapor senin başlangıç noktanı gösteriyor — gerisi sana bağlı. Günde ${state.commitment ?? 30} dakika bile fark yaratır.</div>
-    </div>
   </div>
 
   <div class="p1-footer">Bu rapor Growtify.ai AI Dijital Olgunluk Testi'ne verilen cevaplara dayalı otomatik bir değerlendirmedir. Profesyonel, hukuki, mali veya tıbbi danışmanlık niteliği taşımaz ve yerine geçmez. Sonuçlar bireysel algıya dayalıdır, nesnel bir ölçüm değildir. Raporda yer alan öneriler genel bilgi amaçlıdır. Kişisel verileriniz 6698 sayılı KVKK kapsamında işlenmektedir. © ${new Date().getFullYear()} Growtify — growtify.ai</div>

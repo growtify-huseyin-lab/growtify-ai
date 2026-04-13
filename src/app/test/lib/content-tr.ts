@@ -408,11 +408,11 @@ export const PERSONA_SUMMARIES = {
   "Meraklı Gözlemci": {
     scoreRange: [0, 27],
     summary:
-      "{firstName}, AI henüz gündeminde büyük bir yer tutmuyor — ama bu testteysen merakın var demektir. Şu an AI'ı çok zorunlu hissetmiyorsun, belki birkaç şey duydun ama somut bir adım atmadın. Güzel haber: başlamak için en doğru zamandasın.",
+      "{firstName}, AI konusunda şu an büyük bir baskı veya engel hissetmiyorsun. Belki zaten bazı şeyleri deniyorsun, belki de henüz gündemine almadın. Her iki durumda da doğru yerdesin — çünkü farkındalık yolculuğun ilk adımı.",
     painIdentification: [
-      "AI benim işime uyar mı emin değilim.",
-      "Ne yapacağımı bilsem başlardım.",
-      "Henüz acil bir ihtiyaç hissetmiyorum ama meraklıyım.",
+      "AI şu an benim için acil bir mesele değil.",
+      "İlgimi çekiyor ama nereden başlasam bilmiyorum.",
+      "Belki de ihtiyacım olduğunu henüz fark etmedim.",
     ],
     projection:
       "4 hafta sonra AI'ın senin işinde ne yapabileceğini net görmüş ve ilk adımını atmış olacaksın.",
@@ -422,42 +422,42 @@ export const PERSONA_SUMMARIES = {
   "Aktif Deneyici": {
     scoreRange: [30, 59],
     summary:
-      "{firstName}, AI'ı bir şekilde denedin — belki ChatGPT'ye birkaç soru sordun, belki bir araç indirdin. Ama sonuçlar beklentini karşılamadı veya nereye uygulayacağını bilemedın. Problem sen değilsin — doğru rehberlik eksik.",
+      "{firstName}, AI konusunda bir rahatsızlık hissediyorsun — geride kalma endişesi, nereden başlayacağını bilememe ve zaman baskısı var. Bazı engeller seni yavaşlatıyor ama harekete geçme isteğin de mevcut. Doğru rehberlikle bu engelleri aşabilirsin.",
     painIdentification: [
-      "Denedim ama verimli kullanamadım.",
-      "Hangi aracı hangi işte kullanacağımı bilmiyorum.",
-      "Geride kalmak istemiyorum ama nereden ilerleyeceğim belirsiz.",
+      "AI'a geçmem gerektiğini biliyorum ama zorlanıyorum.",
+      "Seçenekler kafamı karıştırıyor.",
+      "Zaman bulamıyorum ama geride kalma hissi artıyor.",
     ],
     projection:
-      "4 hafta sonra işine uygun AI araçlarını tanımış ve günlük rutinine entegre etmeye başlamış olacaksın.",
+      "4 hafta sonra engellerini tanımlamış, doğru araçları seçmiş ve ilk AI rutinini kurmuş olacaksın.",
     recommendedLevel: "",
   },
 
   Uygulamacı: {
     scoreRange: [60, 92],
     summary:
-      "{firstName}, AI'ın farkındasın ve kullanmaya çalışıyorsun ama engeller büyük — zaman, bilgi eksikliği, nereden başlayacağını bilememek. Eksik olan teknik yetenek değil, sana özel bir yol haritası.",
+      "{firstName}, AI konusunda ciddi bir farkındalığın var ve engelleri açıkça görüyorsun. Zaman yetersizliği, doğru aracı seçememe, geride kalma hissi — bunlar seni hem motive ediyor hem durduruyor. Sana özel bir yol haritasıyla bu engelleri tek tek aşacaksın.",
     painIdentification: [
-      "Biliyorum yapmalıyım ama başlayamıyorum.",
-      "Çok fazla seçenek var, kayboluyorum.",
-      "Tek başıma ilerleyemiyorum, rehberlik lazım.",
+      "Engeller net — ama çözümü bulamıyorum.",
+      "Motivasyonum var ama doğru yönlendirme eksik.",
+      "Tek başıma deneyip zaman kaybetmek istemiyorum.",
     ],
     projection:
-      "4 hafta sonra engellerini aşmış, net bir AI yol haritasıyla sistematik ilerlemeye başlamış olacaksın.",
+      "4 hafta sonra engelleri aşmış, AI'ı günlük iş akışına entegre etmiş ve somut sonuçlar görmeye başlamış olacaksın.",
     recommendedLevel: "",
   },
 
   "AI Lideri": {
     scoreRange: [93, 999],
     summary:
-      "{firstName}, AI konusunda ciddi bir farkındalığın ve aciliyetin var. Engelleri net görüyorsun, geride kaldığını hissediyorsun ve değişime hazırsın. İhtiyacın sadece doğru yapı ve rehberlik — biz tam da bunu sunuyoruz.",
+      "{firstName}, AI konusunda en yüksek farkındalık ve aciliyet seviyesindesin. Engelleri net görüyorsun, geride kaldığını hissediyorsun, fırsatları kaçırdığının farkındasın ve değişime tamamen hazırsın. Şimdi ihtiyacın olan tek şey doğru yapı ve rehberlik.",
     painIdentification: [
-      "Acil ihtiyaç hissediyorum ama yol haritam yok.",
-      "Engeller çok ama motivasyonum yüksek.",
-      "Doğru rehberlikle hızla ilerleyebileceğimi biliyorum.",
+      "Her gün geçtikçe daha çok geride kalıyorum.",
+      "Ne yapacağımı biliyorum ama yapamıyorum — rehberlik şart.",
+      "Artık erteleyecek zamanım kalmadı.",
     ],
     projection:
-      "4 hafta sonra AI'ı iş akışına entegre etmiş, ölçülebilir sonuçlar görmeye başlamış olacaksın.",
+      "4 hafta sonra AI'ı iş akışının merkezine koymuş, somut ve ölçülebilir sonuçlar görüyor olacaksın.",
     recommendedLevel: "",
   },
 };
