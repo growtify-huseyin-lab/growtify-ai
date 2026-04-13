@@ -149,7 +149,7 @@ export function buildGhlCustomFields(state: QuizState): GhlCustomField[] {
   const fields: GhlCustomField[] = [];
 
   // Simple TEXT / NUMERICAL
-  if (state.segment) fields.push({ id: GHL_FIELD_IDS.profession, value: state.segment });
+  if (state.segment) fields.push({ id: GHL_FIELD_IDS.profession, value: state.segment === "bireysel" ? "Bireysel Profesyonel" : state.segment === "isletme" ? "İşletme Sahibi" : state.segment });
   // Score not sent — persona name is the primary identifier
   // fields.push({ id: GHL_FIELD_IDS.quizScore, value: 0 });
   fields.push({ id: GHL_FIELD_IDS.leadSource, value: "quiz_organic" });
