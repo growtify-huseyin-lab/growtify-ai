@@ -109,7 +109,10 @@ export function buildGhlCustomFields(state: QuizState): GhlCustomField[] {
 
   // Simple TEXT / NUMERICAL
   if (state.segment) fields.push({ id: GHL_FIELD_IDS.profession, value: state.segment });
-  fields.push({ id: GHL_FIELD_IDS.quizScore, value: state.totalScore });
+  // Normalize score to 0-100 (same formula as PDF: totalScore / 110 * 100, capped at 100)
+  const MAX_PRACTICAL_SCORE = 5 * 6 + 10 * 8; // 110
+  const normalizedScore = Math.min(100, Math.round((state.totalScore / MAX_PRACTICAL_SCORE) * 100));
+  fields.push({ id: GHL_FIELD_IDS.quizScore, value: normalizedScore });
   fields.push({ id: GHL_FIELD_IDS.leadSource, value: "quiz_organic" });
   fields.push({ id: GHL_FIELD_IDS.landingPage, value: "https://growtify.ai/test" });
 
