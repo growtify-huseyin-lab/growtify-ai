@@ -78,8 +78,8 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   4: {
     caption: "Soru 1 / 14",
-    title: "Gün sonunda 'yine zaman yetmedi' diye mi kapatıyorsun?",
-    subtitle: "Yapacaklar listesi büyüyor, tamamlananlar listesi küçülüyor.",
+    title: "AI'ın mesleğinde yapabileceklerini ne kadar biliyorsun?",
+    subtitle: "Sadece ChatGPT değil — sektörüne özel onlarca araç ve yöntem var.",
     options: [
       { value: 1, label: "Hiç", emoji: "😌" },
       { value: 2, label: "Az", emoji: "🙂" },
@@ -91,8 +91,8 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   5: {
     caption: "Soru 2 / 14",
-    title: "AI araçlarını öğrenmeyi sürekli 'bir gün' diye erteliyor musun?",
-    subtitle: "O 'bir gün' hep bir sonraki haftaya taşıyor.",
+    title: "İşinde AI araçlarını ne kadar aktif kullanıyorsun?",
+    subtitle: "Haftada en az bir kez iş için AI kullananlar zaten farkı görüyor.",
     options: [
       { value: 1, label: "Hiç", emoji: "😌" },
       { value: 2, label: "Az", emoji: "🙂" },
@@ -104,8 +104,8 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   6: {
     caption: "Soru 3 / 14",
-    title: "İşin ortasında dikkat dağılıp başka şeylere mi kayıyorsun?",
-    subtitle: "Odağını korumak istiyorsun — ama zihin başka yerde.",
+    title: "AI'ı öğrenmeye başlamak seni ne kadar tedirgin ediyor?",
+    subtitle: "'Teknik değilim' diye düşünüyor olabilirsin — ama çoğu araç 5 dakikada öğreniliyor.",
     options: [
       { value: 1, label: "Hiç", emoji: "😌" },
       { value: 2, label: "Az", emoji: "🙂" },
@@ -117,8 +117,8 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   7: {
     caption: "Soru 4 / 14",
-    title: "Meslektaşların AI ile daha hızlı ilerliyor gibi mi hissediyorsun?",
-    subtitle: "Etrafındaki profesyoneller bir şeyler yapıyor — sen neredesin?",
+    title: "AI kullanmadığın için kaçırdığın fırsatlar olduğunu hissediyor musun?",
+    subtitle: "Meslektaşların aynı işi yarı sürede yapıyor olabilir — sen hâlâ manuel.",
     options: [
       { value: 1, label: "Hiç", emoji: "😌" },
       { value: 2, label: "Az", emoji: "🙂" },
@@ -130,8 +130,8 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   8: {
     caption: "Soru 5 / 14",
-    title: "AI ile ilgili önemli bir şeyi kaçırıyor olma hissin var mı?",
-    subtitle: "Herkes bir şeyler yapıyor — sen nerede durduğunu bilemiyorsun.",
+    title: "AI ile ürettiğin sonuçlardan ne kadar memnunsun?",
+    subtitle: "Denediysen — çıktılar gerçekten işine yaradı mı, yoksa hayal kırıklığı mı?",
     options: [
       { value: 1, label: "Hiç", emoji: "😌" },
       { value: 2, label: "Az", emoji: "🙂" },
@@ -143,8 +143,8 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   9: {
     caption: "Soru 6 / 14",
-    title: "Son aylarda mesleki gelişiminde somut bir ilerleme hissediyor musun?",
-    subtitle: "Dürüst ol — konfor alanın büyüdü mü küçüldü mü?",
+    title: "Mesleğine özel AI araçlarını ve kullanım alanlarını ne kadar biliyorsun?",
+    subtitle: "Genel bilgi değil — senin işine direkt uyan çözümleri biliyor musun?",
     options: [
       { value: 2, label: "Hiç", emoji: "😞" },
       { value: 4, label: "Az", emoji: "😕" },
@@ -156,72 +156,72 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   10: {
     caption: "Soru 7 / 14",
-    title: "AI konusunda ne kadar belirsiz hissediyorsun?",
-    subtitle: "Nereden başlayacağını, neye güveneceğini bilmek zor.",
-    likertMin: "Tamamen netim",
-    likertMax: "Tamamen belirsizim",
+    title: "Bu kadar AI aracı arasında hangisiyle başlayacağına karar vermek ne kadar zor?",
+    subtitle: "Seçenek çok, rehber yok — kaybolmuş gibi hissediyor musun?",
+    likertMin: "Kolayca karar veririm",
+    likertMax: "Tamamen kayboluyorum",
   },
 
   11: {
     caption: "Soru 8 / 14",
-    title: "Şu anki iş yükün seni ne kadar bunaltıyor?",
-    subtitle: "Günün sonunda gerçekten dinlenebiliyor musun?",
-    likertMin: "Yönetilebilir",
-    likertMax: "Bunaltıcı",
+    title: "AI'ı yanlış kullanıp zaman kaybetme korkun ne kadar güçlü?",
+    subtitle: "Denemek istiyorsun ama 'boşa mı gidecek' diye duraksıyorsun.",
+    likertMin: "Hiç korkmuyorum",
+    likertMax: "Çok güçlü",
   },
 
   12: {
     caption: "Soru 9 / 14",
-    title: "Hangi AI aracıyla başlayacağına karar vermek ne kadar zor?",
-    subtitle: "Bu kadar seçenek arasında hangisiyle başlayacağını bilmek zor mu?",
-    likertMin: "Kolayca karar veririm",
-    likertMax: "Çok zor, kayboluyorum",
+    title: "Haftada kaç saatini AI'ın yapabileceği tekrarlayan işlere harcıyorsun?",
+    subtitle: "İçerik, raporlama, müşteri takibi, randevu — bunlar otomatize edilebilir.",
+    likertMin: "Neredeyse hiç",
+    likertMax: "Çok fazla (10+ saat)",
   },
 
   13: {
     caption: "Soru 10 / 14",
-    title: "Yeni bir şeye başlayıp başarısız olma korkusu ne kadar güçlü?",
-    subtitle: "Bu korku bazen hiç başlamamana yol açıyor mu?",
-    likertMin: "Hiç yok",
-    likertMax: "Çok güçlü",
+    title: "AI için zamanın olmadığını düşünüyor musun?",
+    subtitle: "Belki de doğru yöntemle günde 15 dakika yeterli.",
+    likertMin: "Zamanım var",
+    likertMax: "Hiç zamanım yok",
   },
 
   14: {
     caption: "Soru 11 / 14",
-    title: "Kendi mesleki değerine ve yetkinliğine ne kadar güveniyorsun?",
-    subtitle: "İşini iyi yaptığına içten inanıyor musun?",
+    title: "AI'ı günlük iş akışına entegre edebileceğine ne kadar güveniyorsun?",
+    subtitle: "Öğrensen bile gerçekten uygulayabilir misin?",
     likertMin: "Hiç güvenmiyorum",
     likertMax: "Tamamen güveniyorum",
   },
 
   15: {
     caption: "Soru 12 / 14",
-    title: "Çevrenden 'geride kalıyorsun' gibi bir baskı hissediyor musun?",
-    subtitle: "Meslektaşların, sosyal medya, haberler — bunlar seni etkiliyor mu?",
-    likertMin: "Hiç hissetmiyorum",
-    likertMax: "Sürekli hissediyorum",
+    title: "AI kullanan meslektaşlarına göre ne kadar geride kaldığını düşünüyorsun?",
+    subtitle: "Farkı hissediyorsun — peki bu fark her geçen gün büyüyor mu?",
+    likertMin: "Geride değilim",
+    likertMax: "Çok gerideyim",
   },
 
   16: {
     caption: "Soru 13 / 14",
-    title: "Bir şeye başlamadan önce ne kadar aşırı düşünüyorsun?",
-    subtitle: "Mükemmel planı beklerken başlamayı ertelediğin oluyor mu?",
-    likertMin: "Hiç",
-    likertMax: "Aşırı derecede",
+    title: "AI konusunda nereden başlayacağını bilememek seni ne kadar durduruyor?",
+    subtitle: "Bilgi çok, içerik çok — ama net bir yol haritası yok.",
+    likertMin: "Hiç durdurmaz",
+    likertMax: "Tamamen durdurdu",
   },
 
   17: {
     caption: "Soru 14 / 14 ⭐",
-    title: "Şu an, gerçekten değişmek için ne kadar motive hissediyorsun?",
-    subtitle: "Sadece merak değil — içindeki değişim isteği ne kadar güçlü?",
-    likertMin: "Hiç motive değilim",
+    title: "AI ile işini dönüştürme konusundaki kararlılığın ne kadar güçlü?",
+    subtitle: "Merak mı, ihtiyaç mı, aciliyet mi — hangisi seni buraya getirdi?",
+    likertMin: "Sadece merak",
     likertMax: "Çok güçlü hissediyorum",
   },
 
   // ========== FAZ 3 — DECLARE (Ekran 18-20) ==========
 
   18: {
-    title: "Önümüzdeki 90 günde en çok neyi başarmak istiyorsun?",
+    title: "AI ile önümüzdeki 90 günde en çok neyi başarmak istiyorsun?",
     subtitle: "Bir tane seç — en önemli olanı.",
     options: [
       { value: "yeni_gelir", label: "Yeni bir gelir kapısı açmak" },
@@ -248,14 +248,14 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   },
 
   20: {
-    title: "Hangi alışkanlıklarından kurtulmak istiyorsun?",
+    title: "AI yolculuğunda seni en çok ne engelliyor?",
     subtitle: "Dürüst ol — bunlar planında yer alacak.",
     options: [
-      { value: "son_dakika", label: "Her şeyi son dakikaya bırakmak" },
-      { value: "telefon", label: "Sürekli telefonu kontrol etmek" },
-      { value: "multitasking", label: "Her şeyi aynı anda yapmaya çalışmak" },
-      { value: "mukemmeliyetcilik", label: "Mükemmel olmadan başlayamamak" },
-      { value: "oz_sabotaj", label: "Kendimi sabote etmek" },
+      { value: "son_dakika", label: "Nereden başlayacağımı bilmiyorum" },
+      { value: "telefon", label: "Zamanım yok" },
+      { value: "multitasking", label: "Teknik bilgim yetersiz" },
+      { value: "mukemmeliyetcilik", label: "Yanlış araç seçme korkusu" },
+      { value: "oz_sabotaj", label: "Tek başıma yapamam hissi" },
     ],
   },
 
