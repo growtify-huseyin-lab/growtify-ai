@@ -89,6 +89,55 @@ export interface GhlCustomField {
   value: GhlFieldValue;
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Turkish label mappings (for GHL custom field display + email templates)    */
+/* -------------------------------------------------------------------------- */
+
+const SECTOR_LABELS: Record<string, string> = {
+  saas: "SaaS & Teknoloji", eticaret: "E-Ticaret & Perakende",
+  finans: "Finans & Bankacılık", saglik: "Sağlık & İlaç",
+  hukuk: "Hukuk & Danışmanlık", uretim: "Üretim & Lojistik",
+  egitim: "Eğitim", medya: "Medya & Reklam",
+  insaat: "İnşaat & Gayrimenkul", turizm: "Turizm & Konaklama",
+  otomotiv: "Otomotiv", enerji: "Enerji & Altyapı", diger: "Diğer",
+};
+
+const GOAL_LABELS: Record<string, string> = {
+  verimlilik: "Operasyonel verimlilik", gelir: "Gelir artışı",
+  maliyet: "Maliyet düşürme", deneyim: "Müşteri deneyimi",
+  rekabet: "Rekabet avantajı",
+};
+
+const DEPT_LABELS: Record<string, string> = {
+  pazarlama: "Pazarlama", satis: "Satış", musteri_hizmetleri: "Müşteri Hizmetleri",
+  finans: "Finans", operasyon: "Operasyon", ik: "İnsan Kaynakları",
+  it: "IT", arge: "Ar-Ge",
+};
+
+const PAIN_LEVEL_LABELS: Record<string, string> = {
+  low: "Düşük", medium: "Orta", high: "Yüksek",
+};
+
+const PERSONA_DISPLAY: Record<KurumsalPersona, string> = {
+  Baslangic: "Başlangıç (AI Farkındalık)",
+  Kesif: "Keşif (AI Deneyimleme)",
+  Uygulama: "Uygulama (AI Operasyonu)",
+  Lider: "Lider (AI Dönüşümü)",
+};
+
+const COMPANY_SIZE_LABELS: Record<string, string> = {
+  "1-10": "1-10 kişi", "11-50": "11-50 kişi",
+  "51-200": "51-200 kişi", "200+": "200+ kişi",
+};
+
+function toLabel(value: string, map: Record<string, string>): string {
+  return map[value] ?? value;
+}
+
+function toLabels(values: string[], map: Record<string, string>): string[] {
+  return values.map((v) => map[v] ?? v);
+}
+
 function nowIso(): string {
   return new Date().toISOString();
 }
@@ -96,26 +145,27 @@ function nowIso(): string {
 export function buildGhlCustomFields(state: KurumsalQuizState): GhlCustomField[] {
   const fields: GhlCustomField[] = [];
 
-  fields.push({ id: GHL_FIELD_IDS.profession, value: "kurumsal" });
-  fields.push({ id: GHL_FIELD_IDS.quizScore, value: 70 - state.totalScore }); // maturity score (inverted)
+  fields.push({ id: GHL_FIELD_IDS.profession, value: "Kurumsal" });
+  // Score not sent — persona name is the primary identifier
   fields.push({ id: GHL_FIELD_IDS.leadSource, value: "kurumsal_quiz" });
   fields.push({ id: GHL_FIELD_IDS.landingPage, value: "https://growtify.ai/test/kurumsal" });
 
-  if (state.sector) fields.push({ id: GHL_FIELD_IDS.sector, value: state.sector });
+  // Turkish labels for GHL workflow email templates
+  if (state.sector) fields.push({ id: GHL_FIELD_IDS.sector, value: toLabel(state.sector, SECTOR_LABELS) });
   fields.push({
     id: GHL_FIELD_IDS.quizPersona,
-    value: PERSONA_FIELD_MAP[state.persona] ?? "baslangic",
+    value: PERSONA_DISPLAY[state.persona] ?? state.persona,
   });
-  fields.push({ id: GHL_FIELD_IDS.quizPainLevel, value: state.painLevel });
-  if (state.q_goal) fields.push({ id: GHL_FIELD_IDS.quizGoal, value: state.q_goal });
+  fields.push({ id: GHL_FIELD_IDS.quizPainLevel, value: toLabel(state.painLevel, PAIN_LEVEL_LABELS) });
+  if (state.q_goal) fields.push({ id: GHL_FIELD_IDS.quizGoal, value: toLabel(state.q_goal, GOAL_LABELS) });
 
   fields.push({ id: GHL_FIELD_IDS.quizCompletedAt, value: nowIso() });
 
-  // Kurumsal-specific fields
+  // Kurumsal-specific fields — Turkish labels
   if (state.companySize)
-    fields.push({ id: GHL_FIELD_IDS.companySize, value: state.companySize });
+    fields.push({ id: GHL_FIELD_IDS.companySize, value: toLabel(state.companySize, COMPANY_SIZE_LABELS) });
   if (state.q_priority_depts?.length)
-    fields.push({ id: GHL_FIELD_IDS.priorityDepartments, value: state.q_priority_depts });
+    fields.push({ id: GHL_FIELD_IDS.priorityDepartments, value: toLabels(state.q_priority_depts, DEPT_LABELS) });
 
   return fields;
 }
