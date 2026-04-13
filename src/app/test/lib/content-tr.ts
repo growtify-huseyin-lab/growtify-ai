@@ -447,7 +447,7 @@ export const PERSONA_SUMMARIES = {
     recommendedLevel: "",
   },
 
-  "AI Lideri": {
+  "Dönüşüm Adayı": {
     scoreRange: [93, 999],
     summary:
       "{firstName}, AI konusunda en yüksek farkındalık ve aciliyet seviyesindesin. Engelleri net görüyorsun, geride kaldığını hissediyorsun, fırsatları kaçırdığının farkındasın ve değişime tamamen hazırsın. Şimdi ihtiyacın olan tek şey doğru yapı ve rehberlik.",

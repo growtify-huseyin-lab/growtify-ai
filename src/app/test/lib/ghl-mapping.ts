@@ -63,7 +63,7 @@ const PERSONA_TAG_MAP: Record<Persona, string> = {
   "Meraklı Gözlemci": "bilmiyorum",
   "Aktif Deneyici": "dijitale_gecis",
   Uygulamacı: "dijitale_gecis",
-  "AI Lideri": "optimize",
+  "Dönüşüm Adayı": "optimize",
 };
 
 /**
@@ -74,7 +74,7 @@ const PERSONA_FIELD_MAP: Record<Persona, string> = {
   "Meraklı Gözlemci": "merakli_gozlemci",
   "Aktif Deneyici": "aktif_deneyici",
   Uygulamacı: "uygulamaci",
-  "AI Lideri": "ai_lideri",
+  "Dönüşüm Adayı": "ai_lideri", // GHL slug unchanged for workflow compatibility
 };
 
 export function buildGhlTags(state: QuizState): string[] {

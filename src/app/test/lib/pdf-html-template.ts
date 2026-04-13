@@ -54,7 +54,7 @@ const PERSONA_INFO: Record<Persona, { icon: string; iconBg: string; subtitle: st
     subtitle: "Kullanıyorsun ama parçalı — sisteme dönüştürme vakti",
     desc: "AI araçlarıyla çalışıyorsun ama bütünleşik değil. Dağınık uygulamaları sistematik bir yapıya dönüştürerek gerçek verimlilik kazanacaksın.",
   },
-  "AI Lideri": {
+  "Dönüşüm Adayı": {
     icon: ICONS.rocket("#fff"), iconBg: "#7C3AED",
     subtitle: "İleri düzeydesin — ölçülebilir sonuçlara bağlama vakti",
     desc: "AI'ı aktif kullanıyorsun. Şimdi mevcut kazanımlarını sistematik hale getirip ölçülebilir iş büyütme sonuçlarına dönüştüreceksin.",

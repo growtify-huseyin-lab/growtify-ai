@@ -220,7 +220,7 @@ const PERSONA_TR: Record<Persona, string> = {
   "Meraklı Gözlemci": "Henüz somut bir adım atmadın ama ilgi var. GROWT Programı'nın G seviyesi (Gap Analysis) tam sana göre — neredesin, ne kaçırıyorsun sorusunu birlikte cevaplayacağız.",
   "Aktif Deneyici": "Birkaç şey denedin ama sistematik bir yapı kuramadın. GROWT Programı'nın R seviyesi (Roadmap) sana net bir yol haritası verecek.",
   Uygulamacı: "AI kullanıyorsun ama dağınık. GROWT Programı'nın O seviyesi (Operationalize) dağınık uygulamaları sisteme dönüştürüyor.",
-  "AI Lideri": "İleri düzeydesin ama ölçekleyemiyorsun. GROWT Programı mevcut kazanımlarını sistematik hale getirip ölçülebilir sonuçlara bağlayacak.",
+  "Dönüşüm Adayı": "İleri düzeydesin ama ölçekleyemiyorsun. GROWT Programı mevcut kazanımlarını sistematik hale getirip ölçülebilir sonuçlara bağlayacak.",
 };
 
 const PAIN_LEVEL_TR: Record<string, string> = {

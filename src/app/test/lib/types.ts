@@ -7,7 +7,7 @@ export type Persona =
   | "Meraklı Gözlemci"
   | "Aktif Deneyici"
   | "Uygulamacı"
-  | "AI Lideri";
+  | "Dönüşüm Adayı";
 export type Commitment = 15 | 30 | 45 | 60;
 export type Discount = number; // 20-50 arası, ağırlıklı 40-50 bandı
 

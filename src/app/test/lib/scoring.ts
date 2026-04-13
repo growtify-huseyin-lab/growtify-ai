@@ -37,7 +37,7 @@ export function determinePersona(score: number): Persona {
   if (score < 28) return "Meraklı Gözlemci";
   if (score < 60) return "Aktif Deneyici";
   if (score < 93) return "Uygulamacı";
-  return "AI Lideri"; // %85+ — ulaşılmak istenen hedef nokta
+  return "Dönüşüm Adayı"; // %85+ — ulaşılmak istenen hedef nokta
 }
 
 /**
