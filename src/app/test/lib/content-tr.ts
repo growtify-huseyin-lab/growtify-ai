@@ -78,7 +78,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   4: {
     caption: "Soru 1 / 14",
-    title: "AI'ın mesleğinde yapabileceklerini ne kadar biliyorsun?",
+    title: "AI'ın mesleğinde neler yapabileceğini bilmemek seni ne kadar rahatsız ediyor?",
     subtitle: "Sadece ChatGPT değil — sektörüne özel onlarca araç ve yöntem var.",
     options: [
       { value: 1, label: "Hiç", emoji: "😌" },
@@ -91,7 +91,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   5: {
     caption: "Soru 2 / 14",
-    title: "İşinde AI araçlarını ne kadar aktif kullanıyorsun?",
+    title: "AI araçlarını işinde kullanamamak seni ne kadar engelliyor?",
     subtitle: "Haftada en az bir kez iş için AI kullananlar zaten farkı görüyor.",
     options: [
       { value: 1, label: "Hiç", emoji: "😌" },
@@ -117,7 +117,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   7: {
     caption: "Soru 4 / 14",
-    title: "AI kullanmadığın için kaçırdığın fırsatlar olduğunu hissediyor musun?",
+    title: "AI kullanmadığın için fırsat kaçırdığını hissetmek seni ne kadar rahatsız ediyor?",
     subtitle: "Meslektaşların aynı işi yarı sürede yapıyor olabilir — sen hâlâ manuel.",
     options: [
       { value: 1, label: "Hiç", emoji: "😌" },
@@ -130,8 +130,8 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   8: {
     caption: "Soru 5 / 14",
-    title: "AI ile ürettiğin sonuçlardan ne kadar memnunsun?",
-    subtitle: "Denediysen — çıktılar gerçekten işine yaradı mı, yoksa hayal kırıklığı mı?",
+    title: "AI deneyipte istediğin sonucu alamamak seni ne kadar hayal kırıklığına uğrattı?",
+    subtitle: "Denediysen — çıktılar beklentini karşıladı mı, yoksa yarım mı kaldı?",
     options: [
       { value: 1, label: "Hiç", emoji: "😌" },
       { value: 2, label: "Az", emoji: "🙂" },
