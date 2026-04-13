@@ -96,6 +96,47 @@ export interface GhlCustomField {
   value: GhlFieldValue;
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Turkish label mappings (for GHL custom field display)                      */
+/* -------------------------------------------------------------------------- */
+
+const SECTOR_LABELS: Record<string, string> = {
+  saglik: "Sağlık", hukuk: "Hukuk", guzellik: "Güzellik & Estetik", emlak: "Emlak",
+  e_ticaret: "E-Ticaret", dis: "Diş Hekimliği", muhasebe: "Muhasebe", eczacilik: "Eczacılık",
+  turizm: "Turizm", mimarlik: "Mimarlık", egitim: "Eğitim", fitness: "Fitness",
+  sigorta: "Sigorta", restoran: "Restoran", veteriner: "Veteriner", diger: "Diğer",
+};
+
+const GOAL_LABELS: Record<string, string> = {
+  yeni_gelir: "Yeni gelir kapısı açmak", zaman: "Haftada 10+ saat kazanmak",
+  musteri: "Daha fazla müşteri çekmek", otomasyon: "Tekrarlayan işleri otomatikleştirmek",
+  bilgi: "AI konusunda uzmanlaşmak",
+};
+
+const AREA_LABELS: Record<string, string> = {
+  icerik: "İçerik Üretimi", musteri: "Müşteri İletişimi", satis: "Satış Süreçleri",
+  analiz: "Veri Analizi", egitim: "Danışan Materyalleri", tasarim: "Tasarım & Görseller",
+  operasyon: "Operasyonel Otomasyon", finans: "Finans & Muhasebe",
+};
+
+const HABIT_LABELS: Record<string, string> = {
+  son_dakika: "Nereden başlayacağımı bilmiyorum", telefon: "Zamanım yok",
+  multitasking: "Teknik bilgim yetersiz", mukemmeliyetcilik: "Yanlış araç seçme korkusu",
+  oz_sabotaj: "Tek başıma yapamam hissi",
+};
+
+const PAIN_LEVEL_LABELS: Record<string, string> = {
+  low: "Düşük", medium: "Orta", high: "Yüksek",
+};
+
+function toLabel(value: string, map: Record<string, string>): string {
+  return map[value] ?? value;
+}
+
+function toLabels(values: string[], map: Record<string, string>): string[] {
+  return values.map((v) => map[v] ?? v);
+}
+
 /**
  * GHL DATE fields expect ISO 8601 strings.
  * We emit the current timestamp as the quiz completion moment.
@@ -109,21 +150,19 @@ export function buildGhlCustomFields(state: QuizState): GhlCustomField[] {
 
   // Simple TEXT / NUMERICAL
   if (state.segment) fields.push({ id: GHL_FIELD_IDS.profession, value: state.segment });
-  // Normalize score to 0-100 (same formula as PDF: totalScore / 110 * 100, capped at 100)
-  const MAX_PRACTICAL_SCORE = 5 * 6 + 10 * 8; // 110
-  const normalizedScore = Math.min(100, Math.round((state.totalScore / MAX_PRACTICAL_SCORE) * 100));
-  fields.push({ id: GHL_FIELD_IDS.quizScore, value: normalizedScore });
+  // Score not sent — persona name is the primary identifier
+  // fields.push({ id: GHL_FIELD_IDS.quizScore, value: 0 });
   fields.push({ id: GHL_FIELD_IDS.leadSource, value: "quiz_organic" });
   fields.push({ id: GHL_FIELD_IDS.landingPage, value: "https://growtify.ai/test" });
 
-  // SINGLE_OPTIONS
-  if (state.sector) fields.push({ id: GHL_FIELD_IDS.sector, value: state.sector });
+  // SINGLE_OPTIONS — Turkish labels for GHL workflow email templates
+  if (state.sector) fields.push({ id: GHL_FIELD_IDS.sector, value: toLabel(state.sector, SECTOR_LABELS) });
   fields.push({
     id: GHL_FIELD_IDS.quizPersona,
-    value: PERSONA_FIELD_MAP[state.persona] ?? "merakli_gozlemci",
+    value: state.persona, // Already Turkish (Meraklı Gözlemci, Aktif Deneyici, etc.)
   });
-  fields.push({ id: GHL_FIELD_IDS.quizPainLevel, value: state.painLevel });
-  if (state.q_goal) fields.push({ id: GHL_FIELD_IDS.quizGoal, value: state.q_goal });
+  fields.push({ id: GHL_FIELD_IDS.quizPainLevel, value: toLabel(state.painLevel, PAIN_LEVEL_LABELS) });
+  if (state.q_goal) fields.push({ id: GHL_FIELD_IDS.quizGoal, value: toLabel(state.q_goal, GOAL_LABELS) });
 
   // NUMERICAL
   if (state.commitment)
@@ -132,11 +171,11 @@ export function buildGhlCustomFields(state: QuizState): GhlCustomField[] {
   // DATE
   fields.push({ id: GHL_FIELD_IDS.quizCompletedAt, value: nowIso() });
 
-  // MULTIPLE_OPTIONS (pass as arrays — GHL v2 accepts string[])
+  // MULTIPLE_OPTIONS — Turkish labels
   if (state.q_areas?.length)
-    fields.push({ id: GHL_FIELD_IDS.quizPainAreas, value: state.q_areas });
+    fields.push({ id: GHL_FIELD_IDS.quizPainAreas, value: toLabels(state.q_areas, AREA_LABELS) });
   if (state.q_habits?.length)
-    fields.push({ id: GHL_FIELD_IDS.quizHabitsToQuit, value: state.q_habits });
+    fields.push({ id: GHL_FIELD_IDS.quizHabitsToQuit, value: toLabels(state.q_habits, HABIT_LABELS) });
 
   return fields;
 }
