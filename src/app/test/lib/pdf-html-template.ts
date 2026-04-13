@@ -270,7 +270,7 @@ export function generatePdfHtml(state: QuizState): string {
 
   <div class="p1-body">
     <!-- Persona Badge -->
-    <div style="display:flex; align-items:center; gap:14px; background:${LIGHT}; border-radius:16px; padding:16px 20px; margin-bottom:16px;">
+    <div style="display:flex; align-items:center; gap:14px; background:#F8F8F8; border-radius:16px; padding:16px 20px; margin-bottom:16px;">
       <div style="width:48px;height:48px;border-radius:12px;background:${persona.iconBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">${persona.icon}</div>
       <div>
         <div style="font-size:18px; font-weight:800; color:${DARK};">${esc(state.persona)}</div>
