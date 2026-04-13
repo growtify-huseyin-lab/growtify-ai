@@ -14,11 +14,11 @@ const YELLOW = "#F59E0B";
 const BLUE = "#3B82F6";
 
 const PAIN_LABELS: Record<string, string> = {
-  q_time: "Zaman Yönetimi", q_procrastination: "Erteleme", q_focus: "Odaklanma",
-  q_comparison: "Karşılaştırma", q_fomo: "Kaçırma Korkusu", q_progress: "İlerleme Hissi",
-  q_uncertainty: "Belirsizlik", q_overwhelm: "İş Yükü", q_decision: "Karar Verememe",
-  q_fear: "Başarısızlık Korkusu", q_selfworth: "Öz Değer", q_social: "Sosyal Baskı",
-  q_overthink: "Aşırı Düşünme", q_motivation: "Motivasyon",
+  q_time: "AI Farkındalık", q_procrastination: "AI Kullanım Engeli", q_focus: "Öğrenme Tedirginliği",
+  q_comparison: "Fırsat Kaçırma Hissi", q_fomo: "Sonuç Hayal Kırıklığı", q_progress: "Sektörel AI Bilgisi",
+  q_uncertainty: "Araç Seçim Zorluğu", q_overwhelm: "Zaman Kaybı Korkusu", q_decision: "Manuel İş Yorgunluğu",
+  q_fear: "Zaman Yetersizliği", q_selfworth: "Entegrasyon Güveni", q_social: "Geride Kalma Hissi",
+  q_overthink: "Başlayamama", q_motivation: "Dönüşüm Kararlılığı",
 };
 
 // Inline SVG icons (Puppeteer on Vercel has no emoji font — SVGs render perfectly)
@@ -354,7 +354,7 @@ export function generatePdfHtml(state: QuizState): string {
   <!-- Insights: Top 3 vs Bottom 3 -->
   <div class="insights-row">
     <div class="insight-card insight-red">
-      <div class="insight-title insight-title-red">En Yüksek Zorluk</div>
+      <div class="insight-title insight-title-red">En Çok Zorlandığın</div>
       ${top3.map((item) => `
         <div class="insight-item">
           <div class="insight-dot" style="background:${RED}"></div>
@@ -363,7 +363,7 @@ export function generatePdfHtml(state: QuizState): string {
         </div>`).join("")}
     </div>
     <div class="insight-card insight-green">
-      <div class="insight-title insight-title-green">En Güçlü Alanlar</div>
+      <div class="insight-title insight-title-green">En Az Engel</div>
       ${bottom3.map((item) => `
         <div class="insight-item">
           <div class="insight-dot" style="background:${GREEN}"></div>
