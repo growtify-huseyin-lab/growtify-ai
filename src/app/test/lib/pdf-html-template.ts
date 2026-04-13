@@ -81,9 +81,9 @@ const AREA_LABELS: Record<string, string> = {
 };
 
 const HABIT_LABELS: Record<string, string> = {
-  son_dakika: "Son Dakikaya Bırakma", telefon: "Sürekli Telefon Kontrolü",
-  multitasking: "Çoklu Görev Yapma", mukemmeliyetcilik: "Aşırı Mükemmeliyetçilik",
-  oz_sabotaj: "Öz Sabotaj",
+  son_dakika: "Nereden Başlayacağını Bilmeme", telefon: "Zaman Yetersizliği",
+  multitasking: "Teknik Bilgi Eksikliği", mukemmeliyetcilik: "Yanlış Araç Seçme Korkusu",
+  oz_sabotaj: "Tek Başına Yapamama Hissi",
 };
 
 const GOAL_LABELS: Record<string, string> = {
@@ -149,7 +149,7 @@ export function generatePdfHtml(state: QuizState): string {
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; color: ${DARK}; font-size: 12px; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-  .page { width: 210mm; min-height: 297mm; position: relative; overflow: hidden; page-break-after: always; }
+  .page { width: 210mm; position: relative; overflow: hidden; page-break-after: always; }
   .page:last-child { page-break-after: auto; }
 
   /* ===== PAGE 1 ===== */
@@ -322,10 +322,10 @@ export function generatePdfHtml(state: QuizState): string {
       </div>
     </div>` : ""}
 
-    <!-- Farkında olunacak alışkanlıklar -->
+    <!-- AI engelleri -->
     ${state.q_habits?.length ? `
     <div style="margin-top:20px;">
-      <div style="font-size:13px; font-weight:700; color:${DARK}; margin-bottom:10px;">Farkında olman gereken alışkanlıklar</div>
+      <div style="font-size:13px; font-weight:700; color:${DARK}; margin-bottom:10px;">Seni engelleyen faktörler</div>
       <div style="display:flex; flex-wrap:wrap; gap:8px;">
         ${state.q_habits.map((habit) => `<div style="background:#fef2f2; border:1px solid #fecaca; border-radius:20px; padding:6px 16px; font-size:11px; font-weight:600; color:${RED};">${esc(HABIT_LABELS[habit] ?? habit)}</div>`).join("")}
       </div>
@@ -396,9 +396,9 @@ export function generatePdfHtml(state: QuizState): string {
     <div class="rec-box">
       <div class="rec-icon rec-icon-green" style="display:flex;align-items:center;justify-content:center;">${ICONS.lightbulb(GREEN)}</div>
       <div>
-        <div class="rec-title">Farkında Ol</div>
+        <div class="rec-title">Engellerini Tanı</div>
         <div class="rec-body">${state.q_habits?.length
-          ? `Kendi belirlediğin alışkanlıklar: ${esc(state.q_habits.join(", "))}. Farkındalık ilerlemenin ilk adımı.`
+          ? `Belirlediğin engeller: ${esc(state.q_habits.map(h => HABIT_LABELS[h] ?? h).join(", "))}. Bu engelleri tanımak ilerlemenin ilk adımı.`
           : "Küçük adımlarla başla. Mükemmel planı beklemek yerine bugün bir şey dene."}</div>
       </div>
     </div>

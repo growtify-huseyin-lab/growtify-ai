@@ -167,20 +167,20 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
     title: "AI'ı yanlış kullanıp zaman kaybetme korkun ne kadar güçlü?",
     subtitle: "Denemek istiyorsun ama 'boşa mı gidecek' diye duraksıyorsun.",
     likertMin: "Hiç korkmuyorum",
-    likertMax: "Çok güçlü",
+    likertMax: "Çok korkuyorum",
   },
 
   12: {
     caption: "Soru 9 / 14",
-    title: "Haftada kaç saatini AI'ın yapabileceği tekrarlayan işlere harcıyorsun?",
-    subtitle: "İçerik, raporlama, müşteri takibi, randevu — bunlar otomatize edilebilir.",
-    likertMin: "Neredeyse hiç",
-    likertMax: "Çok fazla (10+ saat)",
+    title: "AI'ın kolayca yapabileceği işleri hâlâ manuel yapmak seni ne kadar yoruyor?",
+    subtitle: "İçerik, raporlama, müşteri takibi, randevu — bunların çoğu otomatize edilebilir.",
+    likertMin: "Hiç yormuyor",
+    likertMax: "Çok yoruyor",
   },
 
   13: {
     caption: "Soru 10 / 14",
-    title: "AI için zamanın olmadığını düşünüyor musun?",
+    title: "AI'ı öğrenmeye ayıracak zamanın olmadığını ne kadar hissediyorsun?",
     subtitle: "Belki de doğru yöntemle günde 15 dakika yeterli.",
     likertMin: "Zamanım var",
     likertMax: "Hiç zamanım yok",
@@ -215,7 +215,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
     title: "AI ile işini dönüştürme konusundaki kararlılığın ne kadar güçlü?",
     subtitle: "Merak mı, ihtiyaç mı, aciliyet mi — hangisi seni buraya getirdi?",
     likertMin: "Sadece merak",
-    likertMax: "Çok güçlü hissediyorum",
+    likertMax: "Acil ihtiyaç",
   },
 
   // ========== FAZ 3 — DECLARE (Ekran 18-20) ==========
@@ -408,56 +408,56 @@ export const PERSONA_SUMMARIES = {
   "Meraklı Gözlemci": {
     scoreRange: [0, 27],
     summary:
-      "{firstName}, AI dünyasına merakla bakıyorsun ama henüz somut bir adım atmadın. Normal — çoğu profesyonel tam da burada başlıyor. Başlamak için teknik bilgi gerekmiyor. Sadece doğru ilk adımı bilmek yeterli — biz sana tam da bunu göstereceğiz.",
+      "{firstName}, AI henüz gündeminde büyük bir yer tutmuyor — ama bu testteysen merakın var demektir. Şu an AI'ı çok zorunlu hissetmiyorsun, belki birkaç şey duydun ama somut bir adım atmadın. Güzel haber: başlamak için en doğru zamandasın.",
     painIdentification: [
-      "Hangisi gerçekten işime yarar bilmiyorum.",
-      "Yanlış araçla zaman kaybetmekten çekiniyorum.",
-      "Herkes kullanıyor gibi — ben geride mi kalıyorum?",
+      "AI benim işime uyar mı emin değilim.",
+      "Ne yapacağımı bilsem başlardım.",
+      "Henüz acil bir ihtiyaç hissetmiyorum ama meraklıyım.",
     ],
     projection:
-      "4 hafta sonra ilk AI iş akışını kurmuş, haftada en az 5 saat kazanmaya başlamış olacaksın.",
+      "4 hafta sonra AI'ın senin işinde ne yapabileceğini net görmüş ve ilk adımını atmış olacaksın.",
     recommendedLevel: "",
   },
 
   "Aktif Deneyici": {
     scoreRange: [30, 59],
     summary:
-      "{firstName}, birkaç AI aracı denedin ama sonuçlar tatmin etmedi. Problem sen değilsin — strateji eksikliği. Doğru araç, doğru sıra ve net bir plan ile deneme-yanılma dönemini bitireceksin.",
+      "{firstName}, AI'ı bir şekilde denedin — belki ChatGPT'ye birkaç soru sordun, belki bir araç indirdin. Ama sonuçlar beklentini karşılamadı veya nereye uygulayacağını bilemedın. Problem sen değilsin — doğru rehberlik eksik.",
     painIdentification: [
-      "Açıyorum ama ne soracağımı bilmiyorum, yarım bırakıyorum.",
-      "İş akışıma gerçekten entegre edemedim.",
-      "Online örnekler benim işime uymuyor.",
+      "Denedim ama verimli kullanamadım.",
+      "Hangi aracı hangi işte kullanacağımı bilmiyorum.",
+      "Geride kalmak istemiyorum ama nereden ilerleyeceğim belirsiz.",
     ],
     projection:
-      "4 hafta sonra 3 AI iş akışını sistematik olarak kullanıyor, her hafta en az 8 saat kazanmış olacaksın.",
+      "4 hafta sonra işine uygun AI araçlarını tanımış ve günlük rutinine entegre etmeye başlamış olacaksın.",
     recommendedLevel: "",
   },
 
   Uygulamacı: {
     scoreRange: [60, 92],
     summary:
-      "{firstName}, AI kullanıyorsun ama dağınık. Parçalı araçlar, bağlantısız otomasyonlar. İhtiyacın olan şey daha fazla araç değil — mevcut kullanımını sistematik bir yapıya dönüştürmek. İlk gerçek verimlilik kazanımları tam da bu noktada geliyor.",
+      "{firstName}, AI'ın farkındasın ve kullanmaya çalışıyorsun ama engeller büyük — zaman, bilgi eksikliği, nereden başlayacağını bilememek. Eksik olan teknik yetenek değil, sana özel bir yol haritası.",
     painIdentification: [
-      "Hangi kısımlar gerçekten fark yaratıyor bilmiyorum.",
-      "Sistematik bir yapıya oturtamadım.",
-      "Her yeni araçta sıfırdan başlıyorum.",
+      "Biliyorum yapmalıyım ama başlayamıyorum.",
+      "Çok fazla seçenek var, kayboluyorum.",
+      "Tek başıma ilerleyemiyorum, rehberlik lazım.",
     ],
     projection:
-      "4 hafta sonra AI kullanımını ölçülebilir sonuçlara bağlamış, bütünleşik bir sistem kurmuş olacaksın.",
+      "4 hafta sonra engellerini aşmış, net bir AI yol haritasıyla sistematik ilerlemeye başlamış olacaksın.",
     recommendedLevel: "",
   },
 
   "AI Lideri": {
     scoreRange: [93, 999],
     summary:
-      "{firstName}, sektörünün ilerisinde yürüyorsun. Ama tavan var — bireysel kapasite sınırına ulaştın. İhtiyacın daha fazla araç değil, mevcut kazanımları sistematik hale getirip ölçülebilir büyümeye dönüştürmek. Doğru yoldasın — şimdi hızı artırma vakti.",
+      "{firstName}, AI konusunda ciddi bir farkındalığın ve aciliyetin var. Engelleri net görüyorsun, geride kaldığını hissediyorsun ve değişime hazırsın. İhtiyacın sadece doğru yapı ve rehberlik — biz tam da bunu sunuyoruz.",
     painIdentification: [
-      "Beklediğim sıçramayı göremedim.",
-      "Kapasite sınırına ulaştım ama sistemi kuramadım.",
-      "Gerçek ROI'yi hiç ölçemedim.",
+      "Acil ihtiyaç hissediyorum ama yol haritam yok.",
+      "Engeller çok ama motivasyonum yüksek.",
+      "Doğru rehberlikle hızla ilerleyebileceğimi biliyorum.",
     ],
     projection:
-      "4 hafta sonra ölçülebilir sonuçlara bağlamış, sistematik bir büyüme yapısı kurmuş olacaksın.",
+      "4 hafta sonra AI'ı iş akışına entegre etmiş, ölçülebilir sonuçlar görmeye başlamış olacaksın.",
     recommendedLevel: "",
   },
 };
