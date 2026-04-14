@@ -151,10 +151,17 @@ export async function POST(req: NextRequest) {
   }
 
   // GHL contact upsert
+  // Split full name into firstName + lastName for GHL
+  const nameParts = (body.firstName || "").trim().split(/\s+/);
+  const ghlFirstName = nameParts[0] || "";
+  const ghlLastName = nameParts.slice(1).join(" ") || "";
+
   const upsertPayload = {
     locationId: GHL_LOCATION_ID,
     email: body.email,
-    firstName: body.firstName,
+    firstName: ghlFirstName,
+    lastName: ghlLastName,
+    name: body.firstName,
     phone: body.phone ?? undefined,
     country: "TR",
     source: `Lead magnet: ${rehber.name}`,
@@ -211,7 +218,7 @@ export async function POST(req: NextRequest) {
         body: JSON.stringify({
           pipelineId: PIPELINE_ID,
           pipelineStageId: STAGE_YENI_LEAD,
-          name: `${body.firstName} - Lead Magnet (${rehber.name})`,
+          name: body.firstName,
           status: "open",
           contactId,
           locationId: GHL_LOCATION_ID,

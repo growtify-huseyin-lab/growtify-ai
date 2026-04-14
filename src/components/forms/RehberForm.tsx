@@ -122,7 +122,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
           htmlFor="firstName"
           className="mb-1 block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Adın <span className="text-red-500">*</span>
+          Ad Soyad <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -130,7 +130,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
           name="firstName"
           required
           className={inputClass}
-          placeholder="Adın"
+          placeholder="Ad Soyad"
         />
       </div>
       <div>
