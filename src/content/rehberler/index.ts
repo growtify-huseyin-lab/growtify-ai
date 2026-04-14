@@ -1,13 +1,17 @@
 /**
- * Lead magnet content — 6 sectoral PDF guides + metadata.
+ * Lead magnet content — 12 sectoral PDF guides + metadata.
  *
  * Each sector has:
  * - slug: URL path segment
  * - name: display name
  * - hero content (title, subtitle, pain hook)
  * - what's inside (bullet list)
- * - pdfUrl: public PDF path (placeholder until content production)
+ * - pdfUrl: public PDF path
  * - ghl tag keys (sector, lead magnet)
+ *
+ * NOT: hero.title, hero.subtitle, hero.painHook ve whatInside
+ * alanları src/content/rehberler/pdf-content.ts içindeki coverTitle,
+ * coverSubtitle, intro.painHook ve intro.whatYouGet ile senkron tutulmalıdır.
  */
 
 export interface RehberContent {
@@ -38,22 +42,24 @@ export const REHBERLER: Record<string, RehberContent> = {
     hero: {
       title: "Diyetisyenler & Sağlık Profesyonelleri için AI Başlangıç Rehberi",
       subtitle: "Haftada 15 saat tekrar eden işleri 2 saate düşüren pratik bir rehber",
-      painHook: "Danışan takip formları, seans notları, Instagram içeriği, randevu hatırlatmaları — bunlara zamanın çoğu gidiyor mu?",
+      painHook:
+        "Danışan takip formları, seans notları, Instagram içeriği, randevu hatırlatmaları — bunlara zamanın çoğu gidiyor mu? AI bu tekrar eden yükü senden alır; sen danışanına odaklanırsın.",
     },
     whatInside: [
-      "5 AI aracı — sağlık pratiği için seçilmiş (ChatGPT, Claude, Calendly, Whisper, Canva)",
-      "3 pratik uygulama senaryosu — adım adım, screenshot'lı",
-      "Danışan iletişim şablon paketi — kopyala-yapıştır hazır",
-      "İlk 7 gün checklist'i — sıfırdan başlayıp ilk sonucu alma",
-      "Örnek: 10 saat tasarruf eden bir diyetisyenin süreç haritası",
+      "5 AI aracı — sağlık pratiği için seçilmiş (Claude, ChatGPT, Calendly, Whisper, Canva AI)",
+      "3 pratik uygulama senaryosu — danışan onboarding, haftalık içerik, randevu sonrası takip",
+      "10 kopyala-yapıştır prompt — beslenme planından Instagram postuna her şey hazır",
+      "İlk 7 gün adım adım checklist — sıfırdan başlayıp ilk sonucu almak için",
+      "Araç karşılaştırması — hangisini ne zaman kullanmalısın, ücretsiz mi değil mi?",
     ],
-    targetProfile: "Diyetisyen, psikolog, doktor, fizyoterapist, eczacı",
+    targetProfile: "Diyetisyen, psikolog, fizyoterapist, sağlık koçu",
     pdfUrl: "/rehberler/growtify-saglik-rehberi.pdf",
     ghlSectorTag: "gai_sector_saglik",
     ghlLeadMagnetTag: "gai_lm_saglik",
     seo: {
       title: "Sağlık Profesyonelleri için AI Başlangıç Rehberi | Growtify AI",
-      description: "Diyetisyen, psikolog, doktor için ücretsiz AI rehberi. 5 araç, 3 senaryo, 10 saat/hafta tasarruf. İndirmek için email ver.",
+      description:
+        "Diyetisyen, psikolog, fizyoterapist için ücretsiz AI rehberi. 5 araç, 3 senaryo, 10 prompt. İndirmek için email ver.",
     },
   },
 
@@ -64,22 +70,24 @@ export const REHBERLER: Record<string, RehberContent> = {
     hero: {
       title: "Avukatlar için AI: 10 Dakikada Yapabileceğiniz 5 Şey",
       subtitle: "İçtihat araştırması, dilekçe yazımı, müvekkil iletişimi — AI ile demo eşliğinde",
-      painHook: "İçtihat araştırmasına günde 3 saat, dilekçe taslağına 2 saat — bu sürelerin çoğunu geri alabilir misin?",
+      painHook:
+        "İçtihat araştırmasına günde 3 saat, dilekçe taslağına 2 saat — bu sürelerin çoğunu geri alabilirsin. AI 3 saatlik işi 20 dakikaya sıkıştırır; müvekkile daha fazla zaman, büroyla daha az zaman.",
     },
     whatInside: [
       "AI ile içtihat araştırma — 3 saat → 20 dakika (adım adım demo)",
-      "Dilekçe şablon üretimi — ChatGPT prompt'ları + Claude örnekleri",
-      "Müvekkil iletişim şablonları — tutarlı, profesyonel, hızlı",
-      "5 dakikalık video demo — canlı ekran kaydı",
-      "Prompt kütüphanesi (15 hazır prompt, mesleğe özel)",
+      "Dilekçe şablon üretimi — Claude ve ChatGPT prompt'larıyla hazır taslaklar",
+      "Müvekkil iletişim şablonları — tutarlı, profesyonel, zaman kazandıran",
+      "15 kopyala-yapıştır prompt paketi — hukuka özel, mesleğe uygun",
+      "5 AI aracı karşılaştırması — avukatlık pratiği için hangisi ne zaman kullanılır",
     ],
-    targetProfile: "Serbest avukat, hukuk danışmanı, noter, arabulucu",
+    targetProfile: "Serbest avukat, hukuk danışmanı, arabulucu, hukuk bürosu yöneticisi",
     pdfUrl: "/rehberler/growtify-hukuk-rehberi.pdf",
     ghlSectorTag: "gai_sector_hukuk",
     ghlLeadMagnetTag: "gai_lm_hukuk",
     seo: {
       title: "Avukatlar için AI Rehberi — 10 Dakikada 5 İş | Growtify AI",
-      description: "Avukatlar için ücretsiz AI rehberi. İçtihat, dilekçe, müvekkil iletişimi. Video demo + prompt kütüphanesi.",
+      description:
+        "Avukatlar için ücretsiz AI rehberi. İçtihat, dilekçe, müvekkil iletişimi. 15 prompt + 5 araç karşılaştırması.",
     },
   },
 
@@ -90,14 +98,15 @@ export const REHBERLER: Record<string, RehberContent> = {
     hero: {
       title: "Salon & Klinik için AI İçerik Üretim Rehberi",
       subtitle: "30 günlük Instagram plan + Canva prompt'ları + hashtag stratejisi",
-      painHook: "Instagram içeriğine haftada 5 saat harcıyor musun? Sonra \"hiç kimse görmüyor\" diye üzülüyor musun?",
+      painHook:
+        "Instagram içeriğine haftada 5 saat harcıyor musun? Sonra \"hiç kimse görmüyor\" diye üzülüyor musun? Sorun kalite değil — sistematik olmaması. AI ile bir kez oturuyorsun, ayın tamamını planlıyorsun.",
     },
     whatInside: [
-      "30 günlük Instagram içerik planı (30 post, her biri hazır)",
-      "50+ Canva AI prompt'u — salon/klinik için özel tasarlandı",
-      "Hashtag stratejisi — sektörel araştırma ile seçilmiş",
-      "Reels script şablonları (5 farklı format)",
-      "Randevu booking entegrasyon rehberi (Calendly + Instagram DM)",
+      "30 günlük Instagram içerik planı — 30 post, her biri metni hazır",
+      "50+ Canva AI prompt'u — salon/klinik görsellerine özel, farklı formatlar için",
+      "Hashtag stratejisi — sektörel araştırma ile seçilmiş, segmentlere göre ayrılmış",
+      "5 Reels script şablonu — hikaye anlatımından before/after formatına kadar",
+      "Müşteri sadakat mesaj dizisi — randevu sonrasından doğum gününe kadar otomatik",
     ],
     targetProfile: "Salon sahibi, estetisyen, klinik yöneticisi, kuaför",
     pdfUrl: "/rehberler/growtify-guzellik-rehberi.pdf",
@@ -105,7 +114,8 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlLeadMagnetTag: "gai_lm_guzellik",
     seo: {
       title: "Salon & Klinik için AI İçerik Rehberi | Growtify AI",
-      description: "30 günlük Instagram plan + Canva prompt'ları + hashtag stratejisi. Güzellik ve estetik sektörüne özel.",
+      description:
+        "30 günlük Instagram plan + 50+ Canva prompt + hashtag stratejisi + 5 Reels şablonu. Güzellik ve estetik için ücretsiz.",
     },
   },
 
@@ -114,24 +124,26 @@ export const REHBERLER: Record<string, RehberContent> = {
     name: "Emlak",
     icon: "🏠",
     hero: {
-      title: "AI ile Emlak İlanı Yazmak: Adım Adım Rehber",
-      subtitle: "3 adımda AI ile ilan yazma + prompt şablonları + SEO optimize",
-      painHook: "Her yeni ilan için 30-45 dakika harcıyor musun? Hangi ilanın neden satmadığını bilmiyor musun?",
+      title: "Emlak Profesyonelleri için AI Rehberi",
+      subtitle: "İlan yazmaktan müşteri eşleştirmeye — haftada 10 saat geri kazan",
+      painHook:
+        "Bir gayrimenkul danışmanının zamanının %40'ı içerik üretimine ve idari işlere gidiyor — satışa değil. Her ilan sıfırdan, her görüşme ayrı bir rapor. AI bu tekrar eden yükü alır; sen alıcı-satıcıya odaklanırsın.",
     },
     whatInside: [
-      "3 adımda AI ilan yazma süreci — 5 dakikada profesyonel ilan",
-      "15 hazır prompt şablonu (konut tipi bazlı)",
-      "SEO-optimize formül — sahibinden, hurriyetemlak için özelleştirilmiş",
-      "Photo enhancement + AI görsel araçları",
-      "İlan A/B test checklist'i — hangi başlık daha çok tıklanır",
+      "3 pratik senaryo — ilan üretim hattı, müşteri eşleştirme, piyasa raporu",
+      "5 AI aracı karşılaştırması — emlak pratiği için hangisi ne zaman",
+      "15 kopyala-yapıştır prompt — konut/ticari/arsa ilanından bölge analizine",
+      "İlk 7 gün checklist — sıfırdan sistemi kurmak için adım adım",
+      "Eskiden → Şimdi karşılaştırma — somut zaman tasarrufu rakamlarıyla",
     ],
     targetProfile: "Emlakçı, gayrimenkul danışmanı, arsa uzmanı",
     pdfUrl: "/rehberler/growtify-emlak-rehberi.pdf",
     ghlSectorTag: "gai_sector_emlak",
     ghlLeadMagnetTag: "gai_lm_emlak",
     seo: {
-      title: "Emlakçılar için AI İlan Yazma Rehberi | Growtify AI",
-      description: "5 dakikada profesyonel emlak ilanı. 15 prompt şablonu + SEO formül + A/B test rehberi.",
+      title: "Emlak Profesyonelleri için AI Rehberi | Growtify AI",
+      description:
+        "İlan üretim hattı, müşteri eşleştirme, piyasa raporu. 15 prompt + 5 araç + 7 gün checklist. Emlakçılar için ücretsiz.",
     },
   },
 
@@ -140,24 +152,26 @@ export const REHBERLER: Record<string, RehberContent> = {
     name: "E-Ticaret",
     icon: "🛒",
     hero: {
-      title: "AI ile Ürün Açıklaması Yazma Rehberi",
-      subtitle: "50 hazır prompt + SEO formülü + A/B test framework'u + örnek sonuçlar",
-      painHook: "500 ürün açıklamasını tek tek yazmak imkansız görünüyor mu? Trendyol/Shopify SEO optimize düşen satışlar seni yoruyor mu?",
+      title: "E-Ticaret Satıcıları için AI İçerik & Büyüme Rehberi",
+      subtitle: "Yüzlerce ürün açıklaması, müşteri hizmetleri ve reklam — hepsini AI ile yönet",
+      painHook:
+        "100 ürünlük bir mağaza için 100 farklı açıklama — her biri SEO uyumlu, ikna edici, platforma özel. Bu işe haftalar harcıyorsun ya da kaliteyi feda ediyorsun. AI üç sorunu aynı anda çözüyor.",
     },
     whatInside: [
-      "50 hazır prompt paketi — ürün kategorilerine göre",
-      "SEO formülü — Trendyol, N11, Hepsiburada için özelleştirilmiş",
-      "A/B test framework'u — hangi açıklama daha çok satıyor",
-      "Örnek before/after — 3 farklı ürün üzerinde dönüşüm",
-      "Ürün fotoğrafı AI enhancement araçları listesi",
+      "3 pratik senaryo — ürün içerik fabrikası, müşteri hizmetleri asistanı, reklam optimizasyonu",
+      "5 AI aracı — e-ticaret operasyonu için seçilmiş",
+      "12 kopyala-yapıştır prompt — giyimden elektroniğe, kozmetikten gıdaya",
+      "İlk 7 gün checklist — AI sistemini mağazana entegre etmek için adım adım",
+      "Eskiden → Şimdi karşılaştırma — ürün başına zaman ve dönüşüm oranı",
     ],
     targetProfile: "E-ticaret satıcı, marka sahibi, dropshipping, butik işletme",
     pdfUrl: "/rehberler/growtify-eticaret-rehberi.pdf",
     ghlSectorTag: "gai_sector_eticaret",
     ghlLeadMagnetTag: "gai_lm_eticaret",
     seo: {
-      title: "E-Ticaret için AI Ürün Açıklama Rehberi | Growtify AI",
-      description: "50 hazır prompt + SEO formülü + A/B test framework'u. Trendyol, N11, Shopify satıcıları için.",
+      title: "E-Ticaret için AI İçerik ve Büyüme Rehberi | Growtify AI",
+      description:
+        "Ürün içerik fabrikası + müşteri hizmetleri + reklam optimizasyonu. 12 prompt + 5 araç. Trendyol, Shopify satıcıları için ücretsiz.",
     },
   },
 
@@ -166,24 +180,26 @@ export const REHBERLER: Record<string, RehberContent> = {
     name: "Diş Hekimliği",
     icon: "🦷",
     hero: {
-      title: "Dental Klinikler için Dijital Pazarlama + AI Rehberi",
-      subtitle: "Google profil optimizasyonu + AI hasta iletişimi + dental turizm stratejisi",
-      painHook: "Dental turizm pazarından pay alabilir misin? Hasta iletişimi senin zamanının yarısını mı alıyor?",
+      title: "Dental Klinikler için AI İletişim & Pazarlama Rehberi",
+      subtitle: "Çok dilli hasta iletişimi, klinik itibar ve tedavi bilgilendirmesi — AI ile sistematik",
+      painHook:
+        "Dental turizm Türkiye için büyük bir fırsat — ama dil bariyeri ve yetersiz online varlık bunu yavaşlatıyor. Türk hastalar da tedavi süreçleri hakkında yetersiz bilgiyle geliyor. AI her iki sorunu çözüyor.",
     },
     whatInside: [
-      "Google My Business optimizasyon checklist'i — dental klinikler için",
-      "AI hasta iletişim şablon paketi (Türkçe + İngilizce + Arapça)",
-      "Dental turizm pazarı — giriş rehberi + SEO stratejisi",
-      "Multi-dil website setup rehberi",
-      "Randevu chatbot kurulum örneği",
+      "3 pratik senaryo — çok dilli hasta iletişim sistemi, tedavi bilgilendirme, itibar yönetimi",
+      "5 AI aracı — dental klinik için seçilmiş",
+      "12 kopyala-yapıştır prompt — İngilizce/Almanca hasta yazışmasından Google yorum yanıtına",
+      "İlk 7 gün checklist — sistemi kurmak için adım adım",
+      "Dental turizm için özel sunum şablonu",
     ],
     targetProfile: "Diş hekimi, ortodontist, dental klinik yöneticisi",
     pdfUrl: "/rehberler/growtify-dis-rehberi.pdf",
     ghlSectorTag: "gai_sector_dis",
     ghlLeadMagnetTag: "gai_lm_dis",
     seo: {
-      title: "Dental Klinikler için AI + Dijital Pazarlama Rehberi | Growtify AI",
-      description: "Google profil + AI hasta iletişimi + dental turizm stratejisi. Diş hekimleri için özel.",
+      title: "Dental Klinikler için AI İletişim ve Pazarlama Rehberi | Growtify AI",
+      description:
+        "Çok dilli hasta iletişimi + tedavi bilgilendirme + itibar yönetimi + dental turizm şablonu. Diş hekimleri için ücretsiz.",
     },
   },
 
@@ -193,23 +209,25 @@ export const REHBERLER: Record<string, RehberContent> = {
     icon: "📊",
     hero: {
       title: "Mali Müşavirler için AI Otomasyon Rehberi",
-      subtitle: "Ay sonu kapanışını 3 güne düşüren, müşteri danışmanlığına zaman kazandıran pratik rehber",
-      painHook: "Ay sonu kapanışında her ay 3 gün uyuyamıyor musun? Belge tanıma + fatura eşleştirme hâlâ manuel mi?",
+      subtitle: "Ay sonu kapanışından mevzuat takibine — tekrar eden işleri AI'a bırak",
+      painHook:
+        "Ay sonu geliyor: yüzlerce belge, son dakika beyannameler, müşteri telefonları. Her şey aynı anda — ve danışmanlık yapmak için vakit kalmıyor. AI belge yükünü azaltıyor; sen değer katan işe odaklanıyorsun.",
     },
     whatInside: [
-      "5 AI aracı — mali müşavirler için seçilmiş (belge OCR, fatura eşleştirme, rapor üretimi)",
-      "e-Fatura / e-Arşiv işlemleri için AI iş akışı örnekleri",
-      "Müşteri danışmanlığına AI ile zaman kazanma stratejisi — düşük katma değerli işleri otomatikleştir",
-      "Vergi beyannamesi hazırlık checklist'i (AI destekli kontrol listesi)",
-      "Örnek: 3 günlük ay sonu kapanışını 1 güne indiren bir SMMM'nin iş akışı",
+      "3 pratik senaryo — belge işleme otomasyonu, mevzuat takibi, aylık müşteri raporu",
+      "5 AI aracı — muhasebe pratiği için seçilmiş",
+      "12 kopyala-yapıştır prompt — belge sınıflandırmadan vergi planlama notuna",
+      "İlk 7 gün checklist — sistemi büronuza entegre etmek için adım adım",
+      "Eskiden → Şimdi karşılaştırma — ay sonu kapanış süresinde somut tasarruf",
     ],
-    targetProfile: "SMMM, muhasebeci, finansal danışman, mali müşavir büro yöneticisi",
+    targetProfile: "SMMM, mali müşavir, muhasebe bürosu sahibi, finansal danışman",
     pdfUrl: "/rehberler/growtify-muhasebe-rehberi.pdf",
     ghlSectorTag: "gai_sector_muhasebe",
     ghlLeadMagnetTag: "gai_lm_muhasebe",
     seo: {
       title: "Mali Müşavirler için AI Otomasyon Rehberi | Growtify AI",
-      description: "Ay sonu kapanışını 3 güne düşüren AI iş akışları. SMMM'ler için ücretsiz rehber.",
+      description:
+        "Belge işleme + mevzuat takibi + aylık müşteri raporu otomasyonu. 12 prompt + 5 araç. SMMM'ler için ücretsiz.",
     },
   },
 
@@ -218,24 +236,26 @@ export const REHBERLER: Record<string, RehberContent> = {
     name: "Eczacılık",
     icon: "💊",
     hero: {
-      title: "Eczacılar için AI Stok & Müşteri Yönetimi Rehberi",
-      subtitle: "Stok yönetiminden müşteri sadakatine — eczaneni AI ile büyüt",
-      painHook: "Stok fazlası nedeniyle fireniz yüksek mi? Müşterilerin ismen hatırlayamıyor musun?",
+      title: "Eczacılar için AI Stok, Müşteri & İçerik Rehberi",
+      subtitle: "Stok tahmini, kronik hasta takibi ve e-eczane içeriği — hepsini sistematize et",
+      painHook:
+        "Mevsim değişiyor ama hangi ürünün stoğunu ne kadar artıracağını tam bilemiyorsun. Kronik hastalara düzenli hatırlatma gönderecek vakit yok. E-eczane içeriği ayrı bir iş. AI üç sorunu aynı anda çözüyor.",
     },
     whatInside: [
-      "AI destekli stok tahmin modelleri — mevsime ve satış geçmişine göre optimum sipariş",
-      "Kronik hasta takip otomasyonu — reçete hatırlatma + takip WhatsApp şablonları",
-      "Reçetesiz ürün (OTC) çapraz satış önerileri — AI ile kişisel tavsiye",
-      "Eczane için Google Maps ve sosyal medya optimizasyonu rehberi",
-      "Örnek: Fire oranını %30 düşüren bir eczanenin AI stok sistemi",
+      "3 pratik senaryo — stok ve talep tahmini, e-eczane içerik üretimi, müşteri sadakat sistemi",
+      "5 AI aracı — eczane operasyonu için seçilmiş",
+      "10 kopyala-yapıştır prompt — ürün açıklamasından kronik hasta takibine",
+      "İlk 7 gün checklist — sistemi eczanenize entegre etmek için adım adım",
+      "Yasal uyarı şablonları — ilaç içeriğinde zorunlu uyarıları otomatize et",
     ],
-    targetProfile: "Serbest eczacı, eczane müdürü, eczane zinciri yöneticisi",
+    targetProfile: "Serbest eczacı, eczane sahibi, eczane zinciri yöneticisi",
     pdfUrl: "/rehberler/growtify-eczacilik-rehberi.pdf",
     ghlSectorTag: "gai_sector_eczacilik",
     ghlLeadMagnetTag: "gai_lm_eczacilik",
     seo: {
-      title: "Eczacılar için AI Stok ve Müşteri Yönetimi Rehberi | Growtify AI",
-      description: "Fire oranını %30 düşüren AI stok modelleri + kronik hasta takip otomasyonu. Eczacılar için ücretsiz.",
+      title: "Eczacılar için AI Stok, Müşteri ve İçerik Rehberi | Growtify AI",
+      description:
+        "Stok tahmini + kronik hasta takibi + e-eczane içeriği. 10 prompt + 5 araç + yasal uyarı şablonları. Eczacılar için ücretsiz.",
     },
   },
 
@@ -245,15 +265,16 @@ export const REHBERLER: Record<string, RehberContent> = {
     icon: "✈️",
     hero: {
       title: "Turizm Profesyonelleri için AI Rehberi",
-      subtitle: "7/24 çok dilli hizmet + kişisel tur deneyimi + rezervasyon otomasyonu",
-      painHook: "Gece 2'de yabancı müşterinin WhatsApp mesajına cevap veriyor musun? Tur planlaması hâlâ manuel mi?",
+      subtitle: "Çok dilli 7/24 hizmet, kişisel tur planı ve rezervasyon otomasyonu tek rehberde",
+      painHook:
+        "Rusça müşteri mesaj attı, Almanca misafir özel tur istedi, İngilizce bir soru DM'de bekliyor. Hepsi anında cevap bekliyor — ama sen bir kişisin. AI bu çok dilli iletişimi 7/24 üstlenir.",
     },
     whatInside: [
-      "5 dilli AI chatbot kurulum rehberi (TR, EN, AR, DE, RU)",
-      "Kişisel tur planlayıcısı — müşteri profiline göre özel rota üretimi",
-      "Rezervasyon otomasyonu (Calendly + Stripe + email hatırlatma)",
-      "TripAdvisor ve Google yorum yönetimi için AI şablonları",
-      "Örnek: Sezon dışında bile günde 3 rezervasyon alan bir butik tur şirketi",
+      "5 AI aracı — turizm operasyonu için seçilmiş (Claude, ChatGPT, ManyChat, Calendly, Canva AI)",
+      "3 pratik senaryo — çok dilli chatbot, kişisel tur planı, yorum yönetimi",
+      "10 kopyala-yapıştır prompt — rezervasyon onayından gezi programına her şey hazır",
+      "İlk 7 gün checklist — sıfırdan çok dilli sistemi kurmak için adım adım",
+      "5 dil şablonu — TR, EN, AR, DE, RU için hazır mesajlar",
     ],
     targetProfile: "Tur operatörü, rehber, butik otel sahibi, seyahat acentesi",
     pdfUrl: "/rehberler/growtify-turizm-rehberi.pdf",
@@ -261,7 +282,8 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlLeadMagnetTag: "gai_lm_turizm",
     seo: {
       title: "Turizm Profesyonelleri için AI Rehberi | Growtify AI",
-      description: "5 dilli chatbot + kişisel tur planlayıcısı + rezervasyon otomasyonu. Tur operatörleri için ücretsiz.",
+      description:
+        "Çok dilli chatbot + kişisel tur planı + yorum yönetimi. 5 dil şablonu + 10 prompt + 5 araç. Tur operatörleri için ücretsiz.",
     },
   },
 
@@ -271,23 +293,25 @@ export const REHBERLER: Record<string, RehberContent> = {
     icon: "📐",
     hero: {
       title: "Mimarlar için AI Render & Sunum Rehberi",
-      subtitle: "2 günlük render beklentisini 2 dakikaya düşüren AI araçları",
-      painHook: "Müşteri 3 konsept istediğinde hâlâ \"1 hafta sonra\" mı diyorsun? Konsept aşamasında rakiplere iş kaptırıyor musun?",
+      subtitle: "2 günlük render beklentisini 2 dakikaya düşüren AI araçları — konsept, sunum, proje yönetimi",
+      painHook:
+        "Müşteri \"şöyle bir şey hayal ediyorum\" dediğinde, 3 farklı konsept için bir haftayı beklemek zorunda mı? O bir hafta içinde rakibine gidiyor. AI render araçları süreci dakikalara indiriyor.",
     },
     whatInside: [
-      "AI render araçları karşılaştırması (Midjourney, Leonardo AI, Stable Diffusion) — mimarlık için",
-      "Konsept → render prompt kütüphanesi (iç mekan, dış cephe, peyzaj)",
-      "Müşteri sunumu için AI destekli pitch deck şablonu",
-      "Proje yönetimi otomasyonu: Müşteri brief → konsept → revizyon akışı",
-      "Örnek: 2 günlük konsept sürecini 2 saate indiren bir iç mimarlık ofisi",
+      "5 AI aracı — mimarlık için seçilmiş (Midjourney, Leonardo AI, Claude, Canva, Stable Diffusion)",
+      "3 pratik senaryo — AI render üretimi, müşteri sunumu, proje akışı otomasyonu",
+      "10 prompt kütüphanesi — iç mekan, dış cephe, peyzaj, detay render için",
+      "İlk 7 gün checklist — AI render sisteminizi kurmak için adım adım",
+      "Müşteri sunumu pitch deck şablonu — konseptten teslim planına",
     ],
     targetProfile: "Mimar, iç mimar, peyzaj mimarı, proje tasarım ofisi",
     pdfUrl: "/rehberler/growtify-mimarlik-rehberi.pdf",
     ghlSectorTag: "gai_sector_mimarlik",
     ghlLeadMagnetTag: "gai_lm_mimarlik",
     seo: {
-      title: "Mimarlar için AI Render ve Konsept Rehberi | Growtify AI",
-      description: "2 dakikada 3 konsept render. Midjourney, Leonardo AI prompt kütüphanesi. Mimarlar için ücretsiz.",
+      title: "Mimarlar için AI Render ve Sunum Rehberi | Growtify AI",
+      description:
+        "2 dakikada 3 konsept render + pitch deck şablonu + proje akışı. 10 prompt + 5 araç. Mimarlar için ücretsiz.",
     },
   },
 
@@ -297,23 +321,25 @@ export const REHBERLER: Record<string, RehberContent> = {
     icon: "🎓",
     hero: {
       title: "Eğitmenler için AI Materyal Üretim Rehberi",
-      subtitle: "Kişisel materyali dakikalar içinde üret — soru bankası + sunumlar + kişisel geri bildirim",
-      painHook: "Ders materyali hazırlamaya haftada 10 saat harcıyor musun? Her öğrenciye özel geri bildirim fizibil değil mi?",
+      subtitle: "Soru bankası, sunum, kişisel geri bildirim — 10 saatlik materyal işi 90 dakikada",
+      painHook:
+        "Pazar gecesi, önündeki yığın: ders sunumu, 3 sınıfa soru, 20 ödev değerlendirmesi. Bunlar bitince ders anlatmaya mecal kalmıyor. AI bu yığını 1/5'ine indiriyor.",
     },
     whatInside: [
-      "AI ile soru bankası üretimi — her zorluk seviyesinde, her konu için",
-      "Sunum ve ders notu otomasyonu — konu başlığından slide'a",
-      "Her öğrenciye özel geri bildirim şablonları — 10 saatlik iş 30 dakikada",
-      "Online kurs platformu setup rehberi (Teachable, Thinkific alternatifleri)",
-      "Örnek: Haftalık materyal hazırlığını 10 saatten 1.5 saate indiren bir öğretmenin iş akışı",
+      "5 AI aracı — eğitim için seçilmiş (Claude, ChatGPT, Canva, Kahoot, Notion AI)",
+      "3 pratik senaryo — soru bankası, sunum üretimi, kişisel geri bildirim sistemi",
+      "10 kopyala-yapıştır prompt — her konu ve zorluk seviyesinde materyal için",
+      "İlk 7 gün checklist — materyal iş akışını AI ile yeniden tasarlamak için",
+      "Kişisel geri bildirim şablonu — 30 öğrenciye özel yorum 30 dakikada",
     ],
-    targetProfile: "Eğitmen, online kurs yapımcısı, akademisyen, özel ders öğretmeni",
+    targetProfile: "Eğitmen, akademisyen, özel ders öğretmeni, online kurs yapımcısı",
     pdfUrl: "/rehberler/growtify-egitim-rehberi.pdf",
     ghlSectorTag: "gai_sector_egitim",
     ghlLeadMagnetTag: "gai_lm_egitim",
     seo: {
       title: "Eğitmenler için AI Materyal Üretim Rehberi | Growtify AI",
-      description: "Soru bankası + sunum + kişisel geri bildirim otomasyonu. Eğitmenler için ücretsiz rehber.",
+      description:
+        "Soru bankası + sunum + kişisel geri bildirim. 10 prompt + 5 araç + 7 gün checklist. Eğitmenler için ücretsiz rehber.",
     },
   },
 
@@ -323,15 +349,16 @@ export const REHBERLER: Record<string, RehberContent> = {
     icon: "💪",
     hero: {
       title: "Fitness Profesyonelleri için AI Program Rehberi",
-      subtitle: "Her müşteriye özel program — dakikalar içinde, haftada onlarca müşteri",
-      painHook: "Her müşteriye özel program yazmak zaman alıyor mu? Müşteri takibi eksik kalıyor mu?",
+      subtitle: "Her müşteriye özel antrenman + beslenme + takip — dakikalar içinde, ölçeklenebilir",
+      painHook:
+        "15 müşterin var, her birine özel program yazmak haftada 10 saat. Motivasyon mesajları, takip, beslenme düzeltmeleri birikiyor — sonra müşteri gidiyor. AI bu yükü senden alır.",
     },
     whatInside: [
-      "AI ile kişiye özel antrenman planı üretimi — seviye, hedef, ekipman bazında",
-      "Beslenme planı otomasyonu — hedef kalori + makro bazlı",
-      "Müşteri ilerleme takibi (fotoğraf + metrik analizi)",
-      "WhatsApp motivasyon mesajları için AI şablon paketi",
-      "Örnek: Haftada 50 müşteriye kişisel hizmet veren bir PT'nin AI iş akışı",
+      "5 AI aracı — fitness pratiği için seçilmiş (Claude, ChatGPT, Trainerize, Canva AI, WhatsApp Business)",
+      "3 pratik senaryo — antrenman programı üretimi, beslenme planı, motivasyon takibi",
+      "10 kopyala-yapıştır prompt — seviye × hedef × ekipman matrisinde hazır program",
+      "İlk 7 gün checklist — müşteri sisteminizi AI ile yeniden kurmak için",
+      "Motivasyon mesajı şablon paketi — haftanın her günü için hazır",
     ],
     targetProfile: "Personal trainer, fitness stüdyosu sahibi, beslenme danışmanı",
     pdfUrl: "/rehberler/growtify-fitness-rehberi.pdf",
@@ -339,7 +366,8 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlLeadMagnetTag: "gai_lm_fitness",
     seo: {
       title: "Fitness Profesyonelleri için AI Program Rehberi | Growtify AI",
-      description: "Kişiye özel antrenman ve beslenme planı otomasyonu. PT'ler ve stüdyolar için ücretsiz.",
+      description:
+        "Kişisel antrenman + beslenme planı + motivasyon takibi. 10 prompt + 5 araç + 7 gün şablon paketi. PT'ler için ücretsiz.",
     },
   },
 };
