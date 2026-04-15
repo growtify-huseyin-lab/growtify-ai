@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
       assignedTo: ASSIGNED_USER,
     };
 
-    const contactRes = await fetch(`${GHL_API_BASE}/contacts/`, {
+    const contactRes = await fetch(`${GHL_API_BASE}/contacts/upsert`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${GHL_API_TOKEN}`,
@@ -124,27 +124,49 @@ export async function POST(req: NextRequest) {
     const contactId =
       contactData.contact?.id || contactData.id || contactData._id;
 
-    // Create opportunity in GAI - Satis pipeline
+    // Create opportunity in GAI - Satis pipeline (skip if open one already exists)
     if (contactId) {
-      const oppPayload = {
-        pipelineId: PIPELINE_ID,
-        pipelineStageId: STAGE_YENI_LEAD,
-        name: `${firstName} ${lastName} - Iletisim`.trim(),
-        status: "open",
-        contactId,
-        locationId: GHL_LOCATION_ID,
-        assignedTo: ASSIGNED_USER,
-      };
+      // Check for existing open opportunity in this pipeline
+      let hasOpenOpp = false;
+      try {
+        const searchRes = await fetch(
+          `${GHL_API_BASE}/opportunities/search?location_id=${GHL_LOCATION_ID}&contact_id=${contactId}&pipeline_id=${PIPELINE_ID}&status=open`,
+          {
+            headers: {
+              Authorization: `Bearer ${GHL_API_TOKEN}`,
+              Version: GHL_API_VERSION,
+            },
+          }
+        );
+        if (searchRes.ok) {
+          const searchData = await searchRes.json();
+          hasOpenOpp = (searchData.opportunities?.length ?? 0) > 0;
+        }
+      } catch {
+        // If search fails, create anyway to not lose the lead
+      }
 
-      await fetch(`${GHL_API_BASE}/opportunities/`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${GHL_API_TOKEN}`,
-          Version: GHL_API_VERSION,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(oppPayload),
-      });
+      if (!hasOpenOpp) {
+        const oppPayload = {
+          pipelineId: PIPELINE_ID,
+          pipelineStageId: STAGE_YENI_LEAD,
+          name: `${firstName} ${lastName} - Iletisim`.trim(),
+          status: "open",
+          contactId,
+          locationId: GHL_LOCATION_ID,
+          assignedTo: ASSIGNED_USER,
+        };
+
+        await fetch(`${GHL_API_BASE}/opportunities/`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${GHL_API_TOKEN}`,
+            Version: GHL_API_VERSION,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(oppPayload),
+        });
+      }
     }
 
     return NextResponse.json({ success: true });
