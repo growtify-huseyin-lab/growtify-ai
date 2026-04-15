@@ -335,7 +335,7 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
   if (lastName) params.set("lastName", lastName);
   if (state.email) params.set("email", state.email);
   if (state.phone) params.set("phone", state.phone);
-  if (couponCode) params.set("couponCode", couponCode);
+  if (couponCode) params.set("coupon", couponCode);
   const paymentUrl = PAYMENT_LINK + (params.toString() ? "?" + params.toString() : "");
 
   const handleCopy = async (e: React.MouseEvent) => {
