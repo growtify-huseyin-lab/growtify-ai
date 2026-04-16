@@ -5,7 +5,7 @@ import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
 // GHL payment link — hardcoded here because PRODUCT.ctaHref now points to /test (quiz entry)
-const PAYMENT_LINK = "https://e8zrrmoybs08x5l6qgss.app.clientclub.net/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062";
+const PAYMENT_LINK = "https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062";
 import { PAYWALL_COPY, interpolate } from "../../lib/content-runtime";
 import {
   getOrStartPaywallExpiry,
