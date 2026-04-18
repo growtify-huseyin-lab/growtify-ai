@@ -432,7 +432,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
       <div style="font-size:20px; font-weight:900; color:${DARK}; font-family:'Courier New', monospace; letter-spacing:2px;">${esc(couponCode)}</div>
       <div style="font-size:11px; font-weight:700; color:${PRIMARY}; background:white; border:1px solid ${PRIMARY}; border-radius:20px; padding:4px 10px;">%${state.discount} indirim</div>
     </div>
-    <div style="font-size:10px; color:${GRAY}; margin-top:6px;">Ödeme sayfasında "Kupon Kodu" alanına gir · 14 gün geçerli</div>
+    <div style="font-size:10px; color:${GRAY}; margin-top:6px;">Ödeme sayfasında "Kupon Kodu" alanına gir</div>
   </div>
   ` : ''}
 
@@ -441,7 +441,6 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
     <div class="cta-name">GROWT Programı</div>
     <div class="cta-sub">5 seviye · 26 modül · Kendi hızında ilerle</div>
     <a href="https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062" style="background:white; color:${PRIMARY}; font-size:13px; font-weight:800; border-radius:24px; padding:10px 32px; margin-top:12px; display:inline-block; text-decoration:none;">Hemen Başla &rarr;</a>
-    <div style="font-size:10px; opacity:0.5; margin-top:6px;">growtify.ai</div>
   </div>
 
   <!-- Community CTA — secondary / alternative engagement path -->
@@ -449,7 +448,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
     <div style="font-size:9px; font-weight:700; color:${GRAY}; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">— veya —</div>
     <div style="border:1.5px solid #E2E8F0; border-radius:12px; padding:12px 14px; background:white;">
       <div style="font-size:11px; font-weight:700; color:${DARK};">Önce Ücretsiz Denemek İster misin?</div>
-      <div style="font-size:10px; color:${GRAY}; margin-top:2px;">GROWT Topluluğu · haftalık ipucu + peer support</div>
+      <div style="font-size:10px; color:${GRAY}; margin-top:2px;">GROWT Topluluğu · Haftalık İpucu + Topluluk Desteği</div>
       <a href="https://panel.growtify.ai/communities/groups/growtify-ai/" style="display:inline-block; margin-top:8px; padding:6px 18px; border:1.5px solid ${PRIMARY}; border-radius:20px; font-size:11px; font-weight:700; color:${PRIMARY}; text-decoration:none; background:#F5F8FF;">Topluluğa Ücretsiz Katıl →</a>
     </div>
   </div>
