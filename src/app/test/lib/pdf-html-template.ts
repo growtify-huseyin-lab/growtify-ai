@@ -23,13 +23,14 @@ const PAIN_LABELS: Record<string, string> = {
 };
 
 // Strength labels — shown in GREEN insight box. Positive inversion of pain labels.
-// Displayed percentage is (100 - pain_pct) so higher number reads as stronger.
+// All labels are AI/business context — NO irrelevant wellness terms.
+// Displayed percentage is (100 - pain_pct).
 const STRENGTH_LABELS: Record<string, string> = {
-  q_time: "AI Olgunluğu", q_procrastination: "AI'ya Açıklık", q_focus: "Öğrenme Rahatlığı",
-  q_comparison: "İçsel Kararlılık", q_fomo: "Gerçekçi Beklenti", q_progress: "Sektör Hakimiyeti",
-  q_uncertainty: "Karar Netliği", q_overwhelm: "Risk Toleransı", q_decision: "Enerji Dengesi",
-  q_fear: "Zaman Kontrolü", q_selfworth: "Entegrasyon Güveni", q_social: "İçsel Güven",
-  q_overthink: "Aksiyon Hazırlığı", q_motivation: "Dönüşüm Kararlılığı",
+  q_time: "AI Kullanım Deneyimi", q_procrastination: "AI'ya Açıklık", q_focus: "Öğrenme Rahatlığı",
+  q_comparison: "Kendi Yoluna Odaklanma", q_fomo: "Sakin Değerlendirme", q_progress: "Sektörel Bilinç",
+  q_uncertainty: "Araç Seçimi Kolaylığı", q_overwhelm: "Bilişsel Netlik", q_decision: "Aksiyon Alabilme",
+  q_fear: "Zaman Yönetimi", q_selfworth: "AI Entegrasyon Güveni", q_social: "İçsel Güven",
+  q_overthink: "Başlama Hazırlığı", q_motivation: "Dönüşüm Kararlılığı",
 };
 
 // Inline SVG icons (Puppeteer on Vercel has no emoji font — SVGs render perfectly)
@@ -386,7 +387,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
         </div>`).join("")}
     </div>
     <div class="insight-card insight-green">
-      <div class="insight-title insight-title-green">En Güçlü Alanların</div>
+      <div class="insight-title insight-title-green">Daha Az Zorlandığın Alanlar</div>
       ${bottom3.map((item) => `
         <div class="insight-item">
           <div class="insight-dot" style="background:${GREEN}"></div>
