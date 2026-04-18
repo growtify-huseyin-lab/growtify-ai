@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { ArrowRight, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { ArrowRight, Loader2, CheckCircle2, AlertCircle, Users } from "lucide-react";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -70,6 +70,30 @@ export function ContactForm() {
         >
           Yeni mesaj gönder
         </button>
+
+        {/* Community CTA — secondary engagement step */}
+        <div className="mt-8 pt-6 border-t border-green-200/60 dark:border-green-800/40">
+          <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-dark-muted">
+            <Users size={14} />
+            <span className="text-xs font-semibold uppercase tracking-wider">
+              Bu Arada
+            </span>
+          </div>
+          <p className="mx-auto mt-3 max-w-sm text-sm text-gray-600 dark:text-dark-muted">
+            Sorunu çözmeyi beklerken GROWT Topluluğu&apos;nda aynı yolculuktaki
+            profesyonellerle tanışabilirsin — ücretsiz.
+          </p>
+          <a
+            href="https://panel.growtify.ai/communities/groups/growtify-ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 rounded-xl border-2 border-primary/20 bg-white/70 dark:bg-dark-card/70 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-primary/40 hover:bg-white dark:hover:bg-dark-card"
+          >
+            <Users size={16} />
+            Topluluğa Ücretsiz Katıl
+            <ArrowRight size={14} />
+          </a>
+        </div>
       </div>
     );
   }

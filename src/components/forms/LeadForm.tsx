@@ -8,6 +8,7 @@ import {
   AlertCircle,
   Download,
   ExternalLink,
+  Users,
 } from "lucide-react";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
@@ -119,6 +120,33 @@ export function LeadForm({
         <p className="mt-4 text-xs text-gray-400 dark:text-dark-muted">
           Growtify AI bültenine de kaydoldun — istediğin zaman çıkabilirsin.
         </p>
+
+        {/* Community CTA — secondary engagement step */}
+        <div className="mt-8 pt-6 border-t border-gray-200 dark:border-dark-border">
+          <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-dark-muted">
+            <Users size={14} />
+            <span className="text-xs font-semibold uppercase tracking-wider">
+              Sıradaki Adım
+            </span>
+          </div>
+          <h5 className="mt-3 text-base font-bold text-dark dark:text-white">
+            Tek başına ilerleme
+          </h5>
+          <p className="mx-auto mt-2 max-w-sm text-sm text-gray-600 dark:text-dark-muted">
+            Aynı yolculuğa çıkmış profesyonellerle GROWT Topluluğu&apos;nda
+            ücretsiz buluş. Sorular, vakalar, haftalık ipuçları.
+          </p>
+          <a
+            href="https://panel.growtify.ai/communities/groups/growtify-ai/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 rounded-xl border-2 border-primary/20 bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-primary/40 hover:bg-primary/10"
+          >
+            <Users size={16} />
+            Topluluğa Ücretsiz Katıl
+            <ArrowRight size={14} />
+          </a>
+        </div>
       </div>
     );
   }
