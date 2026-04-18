@@ -13,12 +13,23 @@ const RED = "#EF4444";
 const YELLOW = "#F59E0B";
 const BLUE = "#3B82F6";
 
+// Pain labels — shown in RED insight box + pain grid. High score = more struggle.
 const PAIN_LABELS: Record<string, string> = {
-  q_time: "AI Farkındalık", q_procrastination: "AI Kullanım Engeli", q_focus: "Öğrenme Tedirginliği",
-  q_comparison: "Fırsat Kaçırma Hissi", q_fomo: "Sonuç Hayal Kırıklığı", q_progress: "Sektörel AI Bilgisi",
+  q_time: "AI Farkındalık Baskısı", q_procrastination: "AI Kullanım Engeli", q_focus: "Öğrenme Tedirginliği",
+  q_comparison: "Fırsat Kaçırma Hissi", q_fomo: "Sonuç Hayal Kırıklığı", q_progress: "Sektörel Bilgi Eksikliği",
   q_uncertainty: "Araç Seçim Zorluğu", q_overwhelm: "Zaman Kaybı Korkusu", q_decision: "Manuel İş Yorgunluğu",
-  q_fear: "Zaman Yetersizliği", q_selfworth: "Entegrasyon Güveni", q_social: "Geride Kalma Hissi",
-  q_overthink: "Başlayamama", q_motivation: "Dönüşüm Kararlılığı",
+  q_fear: "Zaman Yetersizliği", q_selfworth: "Entegrasyon Endişesi", q_social: "Geride Kalma Hissi",
+  q_overthink: "Başlayamama", q_motivation: "Dönüşüm Tereddütü",
+};
+
+// Strength labels — shown in GREEN insight box. Positive inversion of pain labels.
+// Displayed percentage is (100 - pain_pct) so higher number reads as stronger.
+const STRENGTH_LABELS: Record<string, string> = {
+  q_time: "AI Olgunluğu", q_procrastination: "AI'ya Açıklık", q_focus: "Öğrenme Rahatlığı",
+  q_comparison: "İçsel Kararlılık", q_fomo: "Gerçekçi Beklenti", q_progress: "Sektör Hakimiyeti",
+  q_uncertainty: "Karar Netliği", q_overwhelm: "Risk Toleransı", q_decision: "Enerji Dengesi",
+  q_fear: "Zaman Kontrolü", q_selfworth: "Entegrasyon Güveni", q_social: "İçsel Güven",
+  q_overthink: "Aksiyon Hazırlığı", q_motivation: "Dönüşüm Kararlılığı",
 };
 
 // Inline SVG icons (Puppeteer on Vercel has no emoji font — SVGs render perfectly)
@@ -363,12 +374,12 @@ export function generatePdfHtml(state: QuizState): string {
         </div>`).join("")}
     </div>
     <div class="insight-card insight-green">
-      <div class="insight-title insight-title-green">En Az Engel</div>
+      <div class="insight-title insight-title-green">En Güçlü Alanların</div>
       ${bottom3.map((item) => `
         <div class="insight-item">
           <div class="insight-dot" style="background:${GREEN}"></div>
-          <div class="insight-text">${esc(item.label)}</div>
-          <div class="insight-pct">%${item.pct}</div>
+          <div class="insight-text">${esc(STRENGTH_LABELS[item.key] ?? item.label)}</div>
+          <div class="insight-pct">%${100 - item.pct}</div>
         </div>`).join("")}
     </div>
   </div>
