@@ -229,11 +229,15 @@ export async function createQuizCoupon(
     const code = "GROWT" + generateCouponSuffix();
     const now = new Date();
     const startDate = now.toISOString().replace(/\.\d+Z$/, "Z");
-    // Coupon technically valid 14 days but shown to user progressively:
+    // Coupon technically valid 60 days (backend) but shown to user as 14 days (UX urgency):
     // A1 (T+50m): "10 dakikan kaldı", A2 (T+65m): "24 saat uzattım",
-    // A9 (T+10d): "48 saat", A10 (T+14d): "son 24 saat" (gerçekten bitiyor)
+    // A9 (T+10d): "48 saat", A10 (T+14d): "son 24 saat" (UX urgency, not actual expiry)
+    // Backend extension to 60 days (2026-04-16) enables v3 free funnel:
+    //   free signup → Course 1 → GATE submit (~Day 12-14) → admin decline → re-engagement
+    //   nurture (Day 14-60 window) gives 46-day buffer for conversion email + WhatsApp
+    //   re-engagement after initial urgency. User-facing messaging stays at 14-day urgency.
     // This avoids regenerating coupons — all nurture emails reuse same code.
-    const endDate = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000)
+    const endDate = new Date(now.getTime() + 60 * 24 * 60 * 60 * 1000)
       .toISOString()
       .replace(/\.\d+Z$/, "Z");
 

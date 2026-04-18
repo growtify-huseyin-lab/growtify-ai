@@ -85,7 +85,9 @@ export async function POST(request: Request) {
 
   // 3. Save coupon code to contact custom field (for nurture email merge tags)
   if (couponCode) {
-    const expiresAt = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString();
+    // Backend expiry 60 days (matches ghl-client.ts), UX urgency 14 days.
+    // Free funnel re-engagement (post-GATE-decline) uses Day 14-60 window.
+    const expiresAt = new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString();
     const saveResult = await saveCouponToContact(contactId, couponCode, expiresAt);
     if (!saveResult.ok) {
       console.warn("[quiz/submit-email] coupon field save failed:", saveResult.error);
