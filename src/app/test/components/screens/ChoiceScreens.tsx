@@ -253,7 +253,14 @@ export function MultiSelectScreen({ screen }: { screen: ScreenConfig }) {
             selected={current.includes(String(opt.value))}
             onClick={() => toggle(String(opt.value))}
           >
-            {opt.label}
+            <div className="text-left">
+              <div className="font-semibold">{opt.label}</div>
+              {opt.description && (
+                <div className="mt-1 text-xs text-gray-500 dark:text-dark-muted leading-snug">
+                  {opt.description}
+                </div>
+              )}
+            </div>
           </OptionButton>
         ))}
       </div>

@@ -86,15 +86,27 @@ const SECTOR_LABELS: Record<string, string> = {
 };
 
 const AREA_LABELS: Record<string, string> = {
-  icerik: "İçerik Üretimi", musteri: "Müşteri İletişimi", satis: "Satış Süreçleri",
-  analiz: "Veri Analizi", egitim: "Danışan Materyalleri", tasarim: "Tasarım & Görseller",
-  operasyon: "Operasyonel Otomasyon", finans: "Finans & Muhasebe",
+  pazarlama: "Pazarlama Süreçleri",
+  satis: "Satış Süreçleri",
+  musteri: "Müşteri İletişimi",
+  operasyon: "Operasyonel Otomasyon",
+  finans: "Finans ve Muhasebe",
+  strateji: "Strateji ve Analiz",
+  personel: "Personel ve Çalışan Takibi",
+  egitim: "Eğitim & Danışan Materyalleri",
+  // Legacy values (pre-2026-04-18 quiz) — keep for backward compat in old PDF renders
+  icerik: "Pazarlama Süreçleri",
+  analiz: "Strateji ve Analiz",
+  tasarim: "Pazarlama Süreçleri",
 };
 
 const HABIT_LABELS: Record<string, string> = {
-  son_dakika: "Nereden Başlayacağını Bilmeme", telefon: "Zaman Yetersizliği",
-  multitasking: "Teknik Bilgi Eksikliği", mukemmeliyetcilik: "Yanlış Araç Seçme Korkusu",
+  son_dakika: "Nereden Başlayacağını Bilmeme",
+  telefon: "Zaman Yetersizliği",
+  multitasking: "Teknik Bilgi Eksikliği",
+  mukemmeliyetcilik: "Yanlış Araç Seçme Korkusu",
   oz_sabotaj: "Tek Başına Yapamama Hissi",
+  mentor_yok: "Mentor/Rehber Yokluğu",
 };
 
 const GOAL_LABELS: Record<string, string> = {
@@ -140,7 +152,7 @@ function esc(str: string): string {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-export function generatePdfHtml(state: QuizState): string {
+export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   const now = new Date().toLocaleDateString("tr-TR", { year: "numeric", month: "long", day: "numeric" });
   const painScores = getPainScores(state);
   const top3 = [...painScores].sort((a, b) => b.pct - a.pct).slice(0, 3);
@@ -412,12 +424,34 @@ export function generatePdfHtml(state: QuizState): string {
     </div>
   </div>
 
+  ${couponCode ? `
+  <!-- Personal Coupon Block -->
+  <div style="margin-top:16px; padding:14px 16px; border:2px dashed ${PRIMARY}; border-radius:12px; background:#F5F8FF; text-align:center;">
+    <div style="font-size:9px; font-weight:700; color:${GRAY}; letter-spacing:1px; text-transform:uppercase;">Kişisel Kupon Kodun</div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin-top:6px;">
+      <div style="font-size:20px; font-weight:900; color:${DARK}; font-family:'Courier New', monospace; letter-spacing:2px;">${esc(couponCode)}</div>
+      <div style="font-size:11px; font-weight:700; color:${PRIMARY}; background:white; border:1px solid ${PRIMARY}; border-radius:20px; padding:4px 10px;">%${state.discount} indirim</div>
+    </div>
+    <div style="font-size:10px; color:${GRAY}; margin-top:6px;">Ödeme sayfasında "Kupon Kodu" alanına gir · 14 gün geçerli</div>
+  </div>
+  ` : ''}
+
   <!-- CTA Bar -->
   <div class="cta-bar" style="flex-direction:column; text-align:center;">
     <div class="cta-name">GROWT Programı</div>
     <div class="cta-sub">5 seviye · 26 modül · Kendi hızında ilerle</div>
     <a href="https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062" style="background:white; color:${PRIMARY}; font-size:13px; font-weight:800; border-radius:24px; padding:10px 32px; margin-top:12px; display:inline-block; text-decoration:none;">Hemen Başla &rarr;</a>
     <div style="font-size:10px; opacity:0.5; margin-top:6px;">growtify.ai</div>
+  </div>
+
+  <!-- Community CTA — secondary / alternative engagement path -->
+  <div style="margin-top:12px; text-align:center;">
+    <div style="font-size:9px; font-weight:700; color:${GRAY}; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">— veya —</div>
+    <div style="border:1.5px solid #E2E8F0; border-radius:12px; padding:12px 14px; background:white;">
+      <div style="font-size:11px; font-weight:700; color:${DARK};">Önce Ücretsiz Denemek İster misin?</div>
+      <div style="font-size:10px; color:${GRAY}; margin-top:2px;">GROWT Topluluğu · haftalık ipucu + peer support</div>
+      <a href="https://panel.growtify.ai/communities/groups/growtify-ai/" style="display:inline-block; margin-top:8px; padding:6px 18px; border:1.5px solid ${PRIMARY}; border-radius:20px; font-size:11px; font-weight:700; color:${PRIMARY}; text-decoration:none; background:#F5F8FF;">Topluluğa Ücretsiz Katıl →</a>
+    </div>
   </div>
 
   <div class="p2-footer">Bu rapor Growtify.ai AI Dijital Olgunluk Testi'ne verilen cevaplara dayalı otomatik bir değerlendirmedir. Profesyonel, hukuki, mali veya tıbbi danışmanlık niteliği taşımaz ve yerine geçmez. Sonuçlar bireysel algıya dayalıdır, nesnel bir ölçüm değildir. İstatistikler ve oranlar test cevaplarından hesaplanmıştır. Kişisel verileriniz 6698 sayılı KVKK kapsamında işlenmekte olup üçüncü taraflarla paylaşılmamaktadır. © ${new Date().getFullYear()} Growtify — growtify.ai</div>

@@ -117,6 +117,8 @@ export type ScreenType =
 export interface OptionItem {
   value: string | number;
   label: string;
+  /** Optional sub-pain / hint shown below the label (used in multi_select boxes). */
+  description?: string;
   emoji?: string;
   icon?: string;
 }

@@ -77,8 +77,8 @@ const PAGE_TIMEOUT = 60000;
  * Generate PDF with retry. If first attempt fails (timeout, crash),
  * kills browser and retries with a fresh instance.
  */
-export async function generateQuizPdf(state: QuizState): Promise<Buffer> {
-  const html = generatePdfHtml(state);
+export async function generateQuizPdf(state: QuizState, couponCode?: string): Promise<Buffer> {
+  const html = generatePdfHtml(state, couponCode);
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {

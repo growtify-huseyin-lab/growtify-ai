@@ -124,7 +124,7 @@ async function backgroundPdfFlow(
   couponCode: string | undefined,
 ): Promise<void> {
   try {
-    const pdfBuffer = await generateQuizPdf(state);
+    const pdfBuffer = await generateQuizPdf(state, couponCode);
     const filename = getPdfFilename(state.firstName);
     console.log(`[quiz/bg] PDF generated — ${filename} (${pdfBuffer.length} bytes)`);
 

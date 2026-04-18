@@ -38,7 +38,8 @@ const MOCK_STATE: QuizState = {
 
 export async function GET() {
   const state = { ...MOCK_STATE, ...computeResults(MOCK_STATE) };
-  const html = generatePdfHtml(state);
+  // Preview uses a sample coupon so the block renders; real flow passes the generated code.
+  const html = generatePdfHtml(state, "GROWT9VHLEZ");
   return new Response(html, {
     headers: { "Content-Type": "text/html; charset=utf-8" },
   });

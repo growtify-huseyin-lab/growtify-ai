@@ -180,7 +180,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
 
   13: {
     caption: "Soru 10 / 14",
-    title: "AI'ı öğrenmeye ayıracak zamanın olmadığını ne kadar hissediyorsun?",
+    title: "AI'ı öğrenmeye ayıracak zamanın olmadığını düşünüyor musun?",
     subtitle: "Belki de doğru yöntemle günde 15 dakika yeterli.",
     likertMin: "Zamanım var",
     likertMax: "Hiç zamanım yok",
@@ -236,14 +236,46 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
     title: "Hangi alanlarda AI'dan yardım almak istiyorsun?",
     subtitle: "Birden fazla seçebilirsin — hepsini görmek istiyoruz.",
     options: [
-      { value: "icerik", label: "İçerik üretimi" },
-      { value: "musteri", label: "Müşteri iletişimi" },
-      { value: "satis", label: "Satış süreçleri" },
-      { value: "analiz", label: "Veri analizi" },
-      { value: "egitim", label: "Danışan / müşteri materyalleri" },
-      { value: "tasarim", label: "Tasarım ve görseller" },
-      { value: "operasyon", label: "Operasyonel otomasyon" },
-      { value: "finans", label: "Finans ve muhasebe" },
+      {
+        value: "pazarlama",
+        label: "Pazarlama Süreçleri",
+        description: "reklam yönetimi · içerik üretimi · SEO · sosyal medya",
+      },
+      {
+        value: "satis",
+        label: "Satış Süreçleri",
+        description: "lead takibi · teklif hazırlama · müşteri karşılama",
+      },
+      {
+        value: "musteri",
+        label: "Müşteri İletişimi",
+        description: "CRM · otomasyon · takip mesajları · WhatsApp/email",
+      },
+      {
+        value: "operasyon",
+        label: "Operasyonel Otomasyon",
+        description: "tekrarlayan işler · süreç yönetimi · workflow",
+      },
+      {
+        value: "finans",
+        label: "Finans ve Muhasebe",
+        description: "fatura · rapor · gider takibi · bütçe planı",
+      },
+      {
+        value: "strateji",
+        label: "Strateji ve Analiz",
+        description: "veri analizi · rapor · karar destek · trend tespiti",
+      },
+      {
+        value: "personel",
+        label: "Personel ve Çalışan Takibi",
+        description: "performans · vardiya · eğitim · iç iletişim",
+      },
+      {
+        value: "egitim",
+        label: "Eğitim & Danışan Materyalleri",
+        description: "sunum · rehber · bilgilendirme · özel program",
+      },
     ],
   },
 
@@ -256,6 +288,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
       { value: "multitasking", label: "Teknik bilgim yetersiz" },
       { value: "mukemmeliyetcilik", label: "Yanlış araç seçme korkusu" },
       { value: "oz_sabotaj", label: "Tek başıma yapamam hissi" },
+      { value: "mentor_yok", label: "Mentor veya rehber yok" },
     ],
   },
 

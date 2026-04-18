@@ -114,15 +114,27 @@ const GOAL_LABELS: Record<string, string> = {
 };
 
 const AREA_LABELS: Record<string, string> = {
-  icerik: "İçerik Üretimi", musteri: "Müşteri İletişimi", satis: "Satış Süreçleri",
-  analiz: "Veri Analizi", egitim: "Danışan Materyalleri", tasarim: "Tasarım & Görseller",
-  operasyon: "Operasyonel Otomasyon", finans: "Finans & Muhasebe",
+  pazarlama: "Pazarlama Süreçleri",
+  satis: "Satış Süreçleri",
+  musteri: "Müşteri İletişimi",
+  operasyon: "Operasyonel Otomasyon",
+  finans: "Finans ve Muhasebe",
+  strateji: "Strateji ve Analiz",
+  personel: "Personel ve Çalışan Takibi",
+  egitim: "Eğitim & Danışan Materyalleri",
+  // Legacy (pre-2026-04-18) — old contacts may still have these values
+  icerik: "Pazarlama Süreçleri",
+  analiz: "Strateji ve Analiz",
+  tasarim: "Pazarlama Süreçleri",
 };
 
 const HABIT_LABELS: Record<string, string> = {
-  son_dakika: "Nereden başlayacağımı bilmiyorum", telefon: "Zamanım yok",
-  multitasking: "Teknik bilgim yetersiz", mukemmeliyetcilik: "Yanlış araç seçme korkusu",
+  son_dakika: "Nereden başlayacağımı bilmiyorum",
+  telefon: "Zamanım yok",
+  multitasking: "Teknik bilgim yetersiz",
+  mukemmeliyetcilik: "Yanlış araç seçme korkusu",
   oz_sabotaj: "Tek başıma yapamam hissi",
+  mentor_yok: "Mentor veya rehber yok",
 };
 
 const PAIN_LEVEL_LABELS: Record<string, string> = {
