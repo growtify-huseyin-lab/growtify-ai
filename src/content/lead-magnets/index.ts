@@ -86,7 +86,42 @@ export const FORMAT_CONFIG: Record<
 // E-Series nurture flow: marketing/platform/ghl/workflows/leadmagnet-e-series-guide.md
 // ═══════════════════════════════════════════════════════════
 
-export const LEAD_MAGNETS: Record<string, LeadMagnet> = {};
+export const LEAD_MAGNETS: Record<string, LeadMagnet> = {
+  // ─────────────────────────────────────────────────────────
+  // ai-baslangic-rehberi — İlk E-Series pilot lead magnet
+  // PDF: scripts/lead-pdfs/content/ai-baslangic-rehberi.js
+  // Üretim: node scripts/lead-pdfs/render.js ai-baslangic-rehberi
+  // ─────────────────────────────────────────────────────────
+  "ai-baslangic-rehberi": {
+    slug: "ai-baslangic-rehberi",
+    title: "Yapay Zeka ile İşini Büyütme: Başlangıç Rehberi",
+    subtitle:
+      "5 AI aracı + 3 pratik senaryo + 7 günlük aksiyon planı — ücretsiz PDF",
+    painHook:
+      "Yapay zeka kullanmak istiyorsun ama nereden başlayacağını bilmiyor musun? Bu rehber tam sana göre.",
+    format: "pdf",
+    formatLabel: "PDF Rehber",
+    icon: "🚀",
+    whatInside: [
+      "5 AI aracı — ChatGPT, Perplexity, Canva AI, Otter, Make",
+      "3 pratik uygulama senaryosu — güzellik, emlak, muhasebe sektörlerinden",
+      "7 günlük aksiyon planı — bugün başla, haftaya sonuç gör",
+      "Sektörel örnekler ve kopyala-yapıştır prompt önerileri",
+      "Sıradaki adım: kişisel AI yol haritanı oluştur",
+    ],
+    targetProfile: "Yapay zekayı işinde kullanmak isteyen tüm profesyoneller",
+    assetUrl: "/assets/lead/ai-baslangic-rehberi.pdf",
+    assetDelivery: "download",
+    ghlTag: "gai_lm_ai_baslangic",
+    active: true,
+    createdAt: "2026-04-19",
+    seo: {
+      title: "Yapay Zeka Başlangıç Rehberi — Ücretsiz PDF | Growtify.ai",
+      description:
+        "Yapay zeka ile işini büyütmeye başla. 5 AI aracı, 3 pratik senaryo, 7 günlük aksiyon planı — ücretsiz indir.",
+    },
+  },
+};
 
 // ═══════════════════════════════════════════════════════════
 // HELPER FONKSİYONLAR
