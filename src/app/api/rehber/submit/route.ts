@@ -20,6 +20,10 @@ const FIELD_FIRST_UTM_SOURCE = "GGDUtGyBC9k4FDQU5AYg";
 const FIELD_FIRST_UTM_CAMPAIGN = "RmJaQvw2C7ewgDF6ufR1";
 const FIELD_FIRST_CONTACT_DATE = "odWIx5KCfWrrwCDf2W8U";
 const FIELD_ENTRY_POINT = "aRKxT2Dcz4bUFQVhfNBo";
+const FIELD_REHBER_PDF_URL = "GrBYWlIe002WEweJaE20";
+
+// Public base URL — used to build full PDF URL for email merge tag
+const PUBLIC_BASE_URL = "https://growtify.ai";
 
 // UTM source → Tag mapping (organic/default)
 const UTM_SOURCE_TAGS_ORGANIC: Record<string, string> = {
@@ -142,6 +146,7 @@ export async function POST(req: NextRequest) {
     { id: FIELD_LANDING_PAGE, value: body.landingPage ?? `/rehber/${body.sector}` },
     { id: FIELD_FIRST_CONTACT_DATE, value: now },
     { id: FIELD_ENTRY_POINT, value: "lead_magnet" },
+    { id: FIELD_REHBER_PDF_URL, value: `${PUBLIC_BASE_URL}${rehber.pdfUrl}` },
   ];
   if (body.utmSource) {
     customFields.push({ id: FIELD_FIRST_UTM_SOURCE, value: body.utmSource });
