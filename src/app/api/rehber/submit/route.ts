@@ -132,8 +132,11 @@ export async function POST(req: NextRequest) {
   }
 
   // Build tags
+  // gai_lm_any_rehber → unified D-series indicator for E-series Goal Action.
+  // Lets E-series workflow exit on "user entered D-series" without listing 12 sector tags.
   const tags: string[] = [
     "gai_lifecycle_lead",
+    "gai_lm_any_rehber",
     rehber.ghlLeadMagnetTag,
     rehber.ghlSectorTag,
     resolveSourceTag(body.utmSource, body.utmMedium),
