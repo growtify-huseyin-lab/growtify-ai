@@ -18,6 +18,12 @@ const FIELD_FIRST_UTM_SOURCE = "GGDUtGyBC9k4FDQU5AYg";
 const FIELD_FIRST_UTM_CAMPAIGN = "RmJaQvw2C7ewgDF6ufR1";
 const FIELD_FIRST_CONTACT_DATE = "odWIx5KCfWrrwCDf2W8U";
 const FIELD_ENTRY_POINT = "aRKxT2Dcz4bUFQVhfNBo";
+// Shared asset URL field — used by both rehber + lead magnet systems.
+// Stores the "most recently downloaded" asset URL for use in nurture emails.
+const FIELD_ASSET_URL = "GrBYWlIe002WEweJaE20"; // gai__rehber_pdf_url
+
+// Public base for asset URLs (absolute URL for email merge tags)
+const PUBLIC_BASE_URL = "https://growtify.ai";
 
 // UTM → source tag mapping
 const UTM_ORGANIC: Record<string, string> = {
@@ -130,6 +136,13 @@ export async function POST(req: NextRequest) {
         { id: FIELD_LANDING_PAGE, value: landingPage || `/lead/${slug}` },
         { id: FIELD_FIRST_CONTACT_DATE, value: new Date().toISOString() },
         { id: FIELD_ENTRY_POINT, value: "lead_magnet" },
+        {
+          id: FIELD_ASSET_URL,
+          // For redirect assets (video), store as-is. For download assets, prepend base URL.
+          value: magnet.assetDelivery === "redirect"
+            ? magnet.assetUrl
+            : `${PUBLIC_BASE_URL}${magnet.assetUrl}`,
+        },
         ...(utmSource
           ? [{ id: FIELD_FIRST_UTM_SOURCE, value: utmSource }]
           : []),
