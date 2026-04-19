@@ -106,9 +106,13 @@ export async function POST(req: NextRequest) {
     }
 
     // Build tags
+    // gai_nurture_e_series → canonical trigger flag for E-Series nurture workflow.
+    // Allows the GHL workflow to listen to ONE tag instead of every magnet slug,
+    // so adding a new lead magnet does NOT require workflow trigger updates.
     const sourceTag = resolveSourceTag(utmSource || "", utmMedium || "");
     const tags = [
       "gai_lifecycle_lead",
+      "gai_nurture_e_series",
       magnet.ghlTag,
       sourceTag,
     ];
