@@ -146,7 +146,8 @@ export function buildGhlCustomFields(state: KurumsalQuizState): GhlCustomField[]
   const fields: GhlCustomField[] = [];
 
   fields.push({ id: GHL_FIELD_IDS.profession, value: "Kurumsal" });
-  // Score not sent — persona name is the primary identifier
+  // User-facing maturity score (0-70 scale, inverted — matches ResultScreen display)
+  fields.push({ id: GHL_FIELD_IDS.quizScore, value: 70 - state.totalScore });
   fields.push({ id: GHL_FIELD_IDS.leadSource, value: "kurumsal_quiz" });
   fields.push({ id: GHL_FIELD_IDS.landingPage, value: "https://growtify.ai/test/kurumsal" });
 
