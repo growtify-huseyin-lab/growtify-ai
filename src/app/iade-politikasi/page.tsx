@@ -148,6 +148,7 @@ export default function IadePolitikasiPage() {
             </p>
             <ul className="mt-3 list-disc pl-6 space-y-1">
               <li>Şirket: {COMPANY.legalName}</li>
+              <li>UK Companies House No: {COMPANY.companyNumber}</li>
               <li>Adres: {COMPANY.address}</li>
               <li>
                 E-posta:{" "}

@@ -15,8 +15,8 @@ export const COMPANY = {
   phoneUS: "+1 825-906-9996",
   website: "growtify.ai",
   websiteUrl: "https://growtify.ai",
-  // Companies House registration number — sonradan eklenecek
-  companyNumber: null as string | null,
+  // Companies House registration number (UK)
+  companyNumber: "14920614" as string | null,
   // VAT / Tax number — sonradan eklenecek
   vatNumber: null as string | null,
 } as const;

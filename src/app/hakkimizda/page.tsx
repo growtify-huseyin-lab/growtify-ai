@@ -65,11 +65,13 @@ export default function HakkimizdaPage() {
             <div>
               <h2 className="text-3xl font-bold text-dark dark:text-white">Misyonumuz</h2>
               <p className="mt-4 text-gray-600 dark:text-dark-muted leading-relaxed">
-                Türkiye&apos;deki işletmelerin %92.5&apos;i yapay zeka kullanmıyor.
-                Kullananlar rakiplerinden 3.7 kat fazla getiri elde ediyor.
-                Neden başlayamıyorlar? %74&apos;ü aynı şeyi söylüyor:
-                &ldquo;Nasıl yapacağımı bilmiyorum.&rdquo; Bu devasa açık,
-                Growtify.ai&apos;nin tam olarak hedeflediği boşluk.
+                Türkiye&apos;deki işletmelerin{" "}
+                <strong>büyük çoğunluğu</strong> yapay zekayı operasyonlarına
+                henüz entegre etmedi. Sistemli kullananlar ise rakiplerine
+                göre <strong>belirgin bir verimlilik avantajı</strong> elde
+                ediyor. Hâlâ adım atamayanların büyük bölümünün ortak nedeni
+                aynı: &ldquo;Nasıl yapacağımı bilmiyorum.&rdquo; Bu uygulama
+                boşluğu, Growtify.ai&apos;nin tam olarak hedeflediği alandır.
               </p>
               <p className="mt-4 text-gray-600 dark:text-dark-muted leading-relaxed">
                 6 ay önce işini büyütmek için ajanslara on binlerce TL

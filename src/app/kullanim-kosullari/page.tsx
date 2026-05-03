@@ -100,7 +100,12 @@ export default function KullanimKosullariPage() {
                 gerçekleştirilir.
               </li>
               <li>
-                Tüm fiyatlara KDV dahildir (aksi belirtilmedikçe).
+                <strong>Satış fiyatı tüm geçerli vergileri kapsayacak
+                şekilde belirlenmiştir</strong> (tax-inclusive). Müşteriden
+                ayrıca KDV/VAT veya başka bir vergi tahsil edilmez. Satıcı
+                ({COMPANY.legalName}) Birleşik Krallık&apos;ta kayıtlı bir
+                limited şirkettir; vergi yükümlülükleri ilgili mevzuata göre
+                Satıcı tarafından yerine getirilir.
               </li>
               <li>
                 Taksit seçenekleri, ödeme sayfasında kullanıcının bankasına
@@ -147,7 +152,13 @@ export default function KullanimKosullariPage() {
               </li>
               <li>
                 &ldquo;Growtify&rdquo;, &ldquo;GROWT Method&rdquo; ve ilgili
-                logo ve tasarımlar Şirket&apos;in tescilli markalarıdır.
+                logo ve tasarımlar {COMPANY.legalName}&apos;in{" "}
+                <strong>ticari marka adları ve özgün eserleridir</strong>. Bu
+                markalar ve içerikler 5846 sayılı Fikir ve Sanat Eserleri
+                Kanunu (TR) ile UK Trade Marks Act 1994 ve Copyright, Designs
+                and Patents Act 1988 (UK) kapsamında fikri mülkiyet haklarına
+                konu olup; izinsiz kullanım, çoğaltma, dağıtım veya türev eser
+                oluşturma yasaktır.
               </li>
             </ul>
           </div>
@@ -255,6 +266,7 @@ export default function KullanimKosullariPage() {
             </p>
             <ul className="mt-3 list-disc pl-6 space-y-1">
               <li>Şirket: {COMPANY.legalName}</li>
+              <li>UK Companies House No: {COMPANY.companyNumber}</li>
               <li>Adres: {COMPANY.address}</li>
               <li>
                 E-posta:{" "}

@@ -39,6 +39,7 @@ export default function KVKKAydinlatmaPage() {
               Veri Sorumlusu: <strong>{COMPANY.legalName}</strong> (Birleşik
               Krallık&apos;ta kayıtlı şirket)
             </p>
+            <p className="mt-1">UK Companies House No: {COMPANY.companyNumber}</p>
             <p className="mt-1">Adres: {COMPANY.address}</p>
             <p className="mt-1">
               E-posta:{" "}
@@ -52,6 +53,56 @@ export default function KVKKAydinlatmaPage() {
             <p className="mt-1">Telefon (UK): {COMPANY.phoneUK}</p>
             <p className="mt-1">Telefon (US): {COMPANY.phoneUS}</p>
             <p className="mt-1">Web Sitesi: {COMPANY.website}</p>
+          </div>
+
+          <div>
+            <h2 className="text-2xl font-bold text-dark dark:text-white">
+              1.1. Veri Koruma Sorumlusu (Privacy Officer)
+            </h2>
+            <p className="mt-3">
+              {COMPANY.legalName} bünyesinde KVKK kapsamındaki taleplerinizi
+              değerlendirmekle görevli Veri Koruma Sorumlusu (Privacy Officer)
+              CTO ofisinde yapılandırılmıştır. Başvuru kanalları:
+            </p>
+            <ul className="mt-3 list-disc pl-6 space-y-1">
+              <li>
+                E-posta:{" "}
+                <a
+                  href={`mailto:${COMPANY.email}?subject=KVKK%20Ba%C5%9Fvurusu`}
+                  className="text-primary hover:underline"
+                >
+                  {COMPANY.email}
+                </a>{" "}
+                (konu: &ldquo;KVKK Başvurusu&rdquo;)
+              </li>
+              <li>Posta: {COMPANY.address}</li>
+              <li>
+                Yanıt süresi: 30 gün (KVKK m.13/2). Talebin niteliğine göre
+                ücretsiz veya KVKK&apos;nın belirlediği tarife kapsamında ücretli
+                olabilir.
+              </li>
+            </ul>
+            <p className="mt-3">
+              Başvurunun reddi, verilen cevabın yetersiz olması veya yanıt
+              alınamaması hallerinde, Kişisel Verileri Koruma Kurulu&apos;na
+              (KVKK) şikayette bulunma hakkın bulunmaktadır:{" "}
+              <a
+                href="https://www.kvkk.gov.tr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                kvkk.gov.tr
+              </a>
+            </p>
+            <p className="mt-3 text-sm">
+              <strong>Yurt Dışı Temsilci:</strong> Veri sorumlusu{" "}
+              {COMPANY.legalName} Birleşik Krallık merkezlidir. KVKK m.13/5
+              kapsamındaki yurt dışında yerleşik veri sorumlusu için temsilci
+              atama yükümlülüğü, ilgili mevzuat eşikleri çerçevesinde
+              değerlendirilmektedir. Güncel statü ve temsilci bilgisi için
+              yukarıdaki e-posta adresinden iletişime geçebilirsiniz.
+            </p>
           </div>
 
           <div>

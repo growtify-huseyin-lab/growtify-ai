@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { COMPANY } from "@/lib/company-info";
 import {
   Mail,
   MapPin,
@@ -12,12 +13,13 @@ import {
   User,
   Building2,
   Phone,
+  ScrollText,
 } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "İletişim",
   description:
-    "Growtify.ai ile iletişime geç. Soruların için bize ulaş.",
+    "Humax Global LTD (Growtify) ile iletişime geç. Soruların için bize ulaş.",
   alternates: { canonical: "/iletisim" },
 };
 
@@ -129,6 +131,32 @@ export default function IletisimPage() {
               </p>
 
               <div className="space-y-4">
+                {/* Tüzel Kişilik — UK Trading Disclosures Reg 2015 + TR e-Ticaret K. m.3 */}
+                <Card className="border-primary/30 dark:border-primary/40 bg-primary/5 dark:bg-primary/10">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20 shrink-0">
+                      <ScrollText size={20} className="text-primary" />
+                    </div>
+                    <div className="space-y-1.5 text-sm">
+                      <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-dark-muted">
+                        Tüzel Kişilik
+                      </p>
+                      <p className="font-bold text-dark dark:text-white">
+                        {COMPANY.legalName}
+                      </p>
+                      <p className="text-gray-600 dark:text-dark-muted">
+                        UK Companies House No: <span className="font-medium text-dark dark:text-white">{COMPANY.companyNumber}</span>
+                      </p>
+                      <p className="text-gray-600 dark:text-dark-muted">
+                        {COMPANY.address}
+                      </p>
+                      <p className="text-xs text-gray-500 dark:text-dark-muted pt-1">
+                        Growtify ve GROWT Method, {COMPANY.legalName}&apos;in
+                        ticari marka adlarıdır.
+                      </p>
+                    </div>
+                  </div>
+                </Card>
                 <Card>
                   <div className="flex items-center gap-4">
                     <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 dark:bg-primary/20">
@@ -137,7 +165,7 @@ export default function IletisimPage() {
                     <div>
                       <p className="text-sm text-gray-500 dark:text-dark-muted">E-posta</p>
                       <p className="font-medium text-dark dark:text-white">
-                        info@growtify.app
+                        {COMPANY.email}
                       </p>
                     </div>
                   </div>

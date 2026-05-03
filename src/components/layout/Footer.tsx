@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { LogoLarge } from "@/components/ui/Logo";
+import { COMPANY } from "@/lib/company-info";
 
 const footerLinks = [
   {
@@ -34,6 +37,8 @@ const footerLinks = [
       { label: "Kullanım Koşulları", href: "/kullanim-kosullari" },
       { label: "İade Politikası", href: "/iade-politikasi" },
       { label: "Çerez Politikası", href: "/cerez-politikasi" },
+      { label: "Çerez Tercihleri", href: "#cookie-preferences" },
+      { label: "Do Not Sell or Share (CCPA)", href: "/gizlilik-politikasi#ccpa" },
     ],
   },
 ];
@@ -61,7 +66,21 @@ export function Footer() {
               <ul className="mt-4 space-y-2">
                 {group.links.map((link) => (
                   <li key={link.href}>
-                    {link.href.startsWith("http") ? (
+                    {link.href === "#cookie-preferences" ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (typeof window !== "undefined") {
+                            window.dispatchEvent(
+                              new CustomEvent("growtify:open_cookie_preferences"),
+                            );
+                          }
+                        }}
+                        className="text-sm text-gray-300 transition-colors hover:text-accent text-left"
+                      >
+                        {link.label}
+                      </button>
+                    ) : link.href.startsWith("http") ? (
                       <a
                         href={link.href}
                         target="_blank"
@@ -85,9 +104,15 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 border-t border-gray-800 pt-8 text-center">
-          <p className="text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} Growtify.ai — Tüm hakları saklıdır.
+        <div className="mt-12 border-t border-gray-800 pt-8 text-center space-y-2">
+          <p className="text-sm text-gray-400">
+            <strong>{COMPANY.legalName}</strong> · UK Companies House No:{" "}
+            {COMPANY.companyNumber} · {COMPANY.address}
+          </p>
+          <p className="text-xs text-gray-500">
+            &copy; {new Date().getFullYear()} {COMPANY.legalName} — Tüm hakları
+            saklıdır. Growtify ve GROWT Method, {COMPANY.legalName}&apos;in
+            ticari marka adlarıdır.
           </p>
         </div>
       </Container>
