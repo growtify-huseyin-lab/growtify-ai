@@ -40,7 +40,7 @@ export function Hero() {
           </h1>
 
           <p className="mx-auto mt-8 max-w-2xl text-lg text-gray-600 dark:text-gray-300 leading-relaxed sm:text-xl">
-            AI araçlarını öğretmiyoruz — işini AI ile büyütecek yapılandırılmış süreci öğretiyoruz. Sektörüne özel, kendi hızında.
+            AI araçlarını öğretmiyoruz — işini nasıl yapay zeka ile büyüteceğini gösteriyoruz. Sektörüne özel, kendi hızında.
           </p>
 
           <p className="mx-auto mt-4 max-w-2xl text-base text-gray-500 dark:text-gray-400">
