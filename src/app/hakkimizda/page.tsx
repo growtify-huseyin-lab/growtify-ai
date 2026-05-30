@@ -44,9 +44,9 @@ export default function HakkimizdaPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-extrabold tracking-tight text-dark dark:text-white sm:text-5xl">
-              Yapay zeka öğretmiyoruz —{" "}
+              AI araçlarını öğretmiyoruz —{" "}
               <span className="text-primary">
-                işini nasıl büyüteceğini gösteriyoruz
+                işini AI ile büyütecek süreci öğretiyoruz
               </span>
             </h1>
             <p className="mt-6 text-lg text-gray-600 dark:text-dark-muted leading-relaxed">

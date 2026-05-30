@@ -7,7 +7,7 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     q: "Yapay zeka benim işim değil, çok teknik. Yapabilir miyim?",
-    a: "Teknik bilgi gerektirmiyor. Sana yapay zeka öğretmiyoruz — işini yapay zeka ile nasıl büyüteceğini gösteriyoruz.",
+    a: "Teknik bilgi gerektirmiyor. Sana AI araçlarını öğretmiyoruz — işini AI ile nasıl büyüteceğini gösteriyoruz.",
   },
   {
     q: "Haftada ne kadar zaman ayırmam gerekiyor?",

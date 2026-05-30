@@ -18,12 +18,12 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "Diyetisyen olarak yapay zekayı nasıl kullanabilirim?",
         answer:
-          "Yapay zeka ile kişiselleştirilmiş beslenme planları oluşturabilir, alışveriş listeleri hazırlayabilir, danışan takip mesajlarını otomatikleştirebilir ve Instagram içeriklerinizi planlayabilirsiniz. GROWT Method ile adım adım kurulum yapıyoruz.",
+          "Yapay zeka ile kişiselleştirilmiş beslenme planları oluşturabilir, alışveriş listeleri hazırlayabilir, danışan takip mesajlarını otomatikleştirebilir ve Instagram içeriklerinizi planlayabilirsiniz. GROWT Method ile kurulumu adım adım öğretiyoruz; uygulayan sen olursun.",
       },
       {
         question: "Psikolog olarak AI kullanmak etik mi?",
         answer:
-          "AI terapinin yerini almaz — ama idari yükü azaltır. Seans notu özeti, takip hatırlatması, içerik üretimi gibi operasyonel işlerde yapay zeka kullanmak etik açıdan sorun oluşturmaz. Hasta verisi gizliliği için KVKK uyumlu araçlar kullanıyoruz.",
+          "AI terapinin yerini almaz — ama idari yükü azaltır. Seans notu özeti, takip hatırlatması, içerik üretimi gibi operasyonel işlerde yapay zeka kullanmak etik açıdan sorun oluşturmaz. Hasta verisi gizliliği için KVKK uyumlu araçlara yönlendiriyoruz.",
       },
       {
         question: "Kliniğimde AI kullanmaya başlamak için teknik bilgi gerekli mi?",
@@ -33,7 +33,7 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "Yapay zeka danışan gizliliğini tehlikeye atar mı?",
         answer:
-          "Doğru araçlar ve uygulamalarla hayır. GROWT Method'da KVKK ve hasta gizliliği uyumlu araç seçimi yapıyoruz. Hasta verileri paylaşılan AI modellerine gönderilmez — lokal ve şifreli çözümler kullanılır.",
+          "Doğru araçlar ve uygulamalarla hayır. GROWT Method'da KVKK ve hasta gizliliği uyumlu araç seçimini öğretiyoruz. Hasta verileri paylaşılan AI modellerine gönderilmez — lokal ve şifreli çözümler kullanılır.",
       },
       {
         question: "Ne kadar sürede sonuç alırım?",
@@ -43,13 +43,13 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "Hangi AI araçlarını kullanacağım?",
         answer:
-          "Mesleğinize ve ihtiyaçlarınıza göre ChatGPT, Claude, Canva AI, Make.com gibi araçlar arasından sizin için en uygun kombinasyonu belirliyoruz. Tek araç değil, entegre bir sistem kuruyoruz.",
+          "Mesleğinize ve ihtiyaçlarınıza göre ChatGPT, Claude, Canva AI, Make.com gibi araçlar arasından sana en uygun kombinasyonu birlikte belirliyoruz. Tek araç değil, entegre bir sistemi kurmayı öğretiyoruz.",
       },
     ],
   },
   hukuk: {
     introText:
-      "Hukuk büroları, yapay zekanın en somut verimlilik artışı sağladığı sektörlerden biri. Avukatlar günlerinin önemli bir bölümünü içtihat araştırması, mevzuat taraması ve dilekçe taslağı hazırlamaya harcıyor — bu işlerin büyük kısmı AI ile dakikalara indirilebilir.\n\nBir avukat yapay zeka ile binlerce emsal kararı saniyeler içinde tarayabilir, dilekçe taslağını otomatik oluşturabilir ve müvekkil iletişimini sistematikleştirebilir. Sonuç: dosya başına harcanan süre düşer, daha fazla dosya alınabilir, müvekkil memnuniyeti artar.\n\nGROWT Method ile hukuk profesyonellerini araştırma verimliliğinden tam dijital büro otomasyonuna taşıyoruz. Gizlilik ve mesleki etik kurallarına tam uyumlu araç seçimi yapıyoruz.",
+      "Hukuk büroları, yapay zekanın en somut verimlilik artışı sağladığı sektörlerden biri. Avukatlar günlerinin önemli bir bölümünü içtihat araştırması, mevzuat taraması ve dilekçe taslağı hazırlamaya harcıyor — bu işlerin büyük kısmı AI ile dakikalara indirilebilir.\n\nBir avukat yapay zeka ile binlerce emsal kararı saniyeler içinde tarayabilir, dilekçe taslağını otomatik oluşturabilir ve müvekkil iletişimini sistematikleştirebilir. Sonuç: dosya başına harcanan süre düşer, daha fazla dosya alınabilir, müvekkil memnuniyeti artar.\n\nGROWT Method ile hukuk profesyonellerini araştırma verimliliğinden tam dijital büro otomasyonuna taşıyoruz. Gizlilik ve mesleki etik kurallarına tam uyumlu araç seçimini öğretiyoruz.",
     stats: [
       { value: "3 saat", label: "Dosya başına ortalama içtihat araştırma süresi" },
       { value: "%60", label: "AI ile araştırma süresinde azalma" },
@@ -60,7 +60,7 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "Avukat olarak yapay zekayı hangi işlerde kullanabilirim?",
         answer:
-          "İçtihat araştırması, mevzuat taraması, dilekçe taslağı hazırlama, sözleşme analizi, müvekkil iletişim otomasyonu ve içerik üretimi başlıca kullanım alanları. GROWT Method ile büronuza özel bir AI iş akışı kuruyoruz.",
+          "İçtihat araştırması, mevzuat taraması, dilekçe taslağı hazırlama, sözleşme analizi, müvekkil iletişim otomasyonu ve içerik üretimi başlıca kullanım alanları. GROWT Method ile büronuza özel bir AI iş akışını kurmayı öğretiyoruz; uygulayan sen olursun.",
       },
       {
         question: "AI ile hazırlanan dilekçeler güvenilir mi?",
@@ -70,7 +70,7 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "Müvekkil bilgileri AI ile paylaşılır mı?",
         answer:
-          "Hayır. KVKK ve avukatlık meslek etiğine uyumlu araç seçimi yapıyoruz. Müvekkil verileri şifreli ortamlarda işlenir, üçüncü taraflarla paylaşılmaz. Gizlilik en üst önceliğimiz.",
+          "Hayır. KVKK ve avukatlık meslek etiğine uyumlu araç seçimini öğretiyoruz. Müvekkil verileri şifreli ortamlarda işlenir, üçüncü taraflarla paylaşılmaz. Gizlilik en üst önceliğimiz.",
       },
       {
         question: "Küçük bir büro olarak AI'dan faydalanabilir miyim?",
@@ -80,7 +80,7 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "SMMM ve mali müşavir olarak da katılabilir miyim?",
         answer:
-          "Evet. Hukuk sektörü kapsamında avukat, noter, arabulucu ve SMMM'ler programa katılabilir. Her mesleğe özel AI iş akışları tasarlıyoruz.",
+          "Evet. Hukuk sektörü kapsamında avukat, noter, arabulucu ve SMMM'ler programa katılabilir. Her mesleğe özel AI iş akışları tasarlamayı öğretiyoruz.",
       },
     ],
   },
@@ -160,7 +160,7 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
   },
   "e-ticaret": {
     introText:
-      "E-ticaret satıcıları için yapay zeka artık lüks değil, zorunluluk. Trendyol, Hepsiburada ve Shopify'da satış yapan binlerce satıcı, ürün açıklaması yazmaktan müşteri hizmetine, reklam optimizasyonundan stok yönetimine kadar her alanda zaman baskısı altında.\n\nYapay zeka ile yüzlerce ürün için SEO uyumlu açıklama saniyeler içinde yazılabilir. Müşteri sorularına otomatik yanıt verilebilir. Reklam metinleri A/B test için otomatik üretilebilir. Sonuç: daha az operasyonel yük, daha yüksek dönüşüm oranı.\n\nGROWT Method ile e-ticaret satıcılarını ürün sayfası optimizasyonundan satış otomasyonuna taşıyoruz. İster tek mağaza ister çoklu platform — AI ile rekabet avantajı kuruyoruz.",
+      "E-ticaret satıcıları için yapay zeka artık lüks değil, zorunluluk. Trendyol, Hepsiburada ve Shopify'da satış yapan binlerce satıcı, ürün açıklaması yazmaktan müşteri hizmetine, reklam optimizasyonundan stok yönetimine kadar her alanda zaman baskısı altında.\n\nYapay zeka ile yüzlerce ürün için SEO uyumlu açıklama saniyeler içinde yazılabilir. Müşteri sorularına otomatik yanıt verilebilir. Reklam metinleri A/B test için otomatik üretilebilir. Sonuç: daha az operasyonel yük, daha yüksek dönüşüm oranı.\n\nGROWT Method ile e-ticaret satıcılarını ürün sayfası optimizasyonundan satış otomasyonuna taşıyoruz. İster tek mağaza ister çoklu platform — AI ile rekabet avantajı kurmanı sağlıyoruz.",
     stats: [
       { value: "15 dk", label: "Ürün başına açıklama yazma süresi (manuel)" },
       { value: "30 sn", label: "AI ile aynı açıklamanın hazırlanma süresi" },
@@ -191,7 +191,7 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "Stok ve fiyat yönetiminde de AI kullanılabilir mi?",
         answer:
-          "Evet. Talep tahmini, dinamik fiyatlama önerileri ve stok optimizasyonu AI'ın güçlü olduğu alanlar. GROWT Programı'nda bu araçları da kuruyoruz.",
+          "Evet. Talep tahmini, dinamik fiyatlama önerileri ve stok optimizasyonu AI'ın güçlü olduğu alanlar. GROWT Programı'nda bu araçları kurmayı da öğretiyoruz.",
       },
     ],
   },
@@ -218,7 +218,7 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "Hasta verilerimi AI ile paylaşmam gerekir mi?",
         answer:
-          "Hayır. KVKK uyumlu araçlar kullanıyoruz. Hasta bilgileri şifreli ortamlarda kalır. AI genel şablonlar ve iş akışları ile çalışır — kişisel sağlık verisi paylaşımı gerekmez.",
+          "Hayır. KVKK uyumlu araçlara yönlendiriyoruz. Hasta bilgileri şifreli ortamlarda kalır. AI genel şablonlar ve iş akışları ile çalışır — kişisel sağlık verisi paylaşımı gerekmez.",
       },
       {
         question: "Kliniğim küçük, AI benim için de uygun mu?",
@@ -228,7 +228,7 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "Google'da üst sıralara çıkmam için ne yapmalıyım?",
         answer:
-          "Google Business Profile optimizasyonu, yerel SEO, hasta yorumları yönetimi ve düzenli içerik üretimi temel adımlar. GROWT Programı'nda tüm bu adımları AI destekli kuruyoruz.",
+          "Google Business Profile optimizasyonu, yerel SEO, hasta yorumları yönetimi ve düzenli içerik üretimi temel adımlar. GROWT Programı'nda tüm bu adımları AI destekli kurmayı öğretiyoruz.",
       },
     ],
   },
@@ -250,12 +250,12 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "AI muhasebe hatası yapar mı?",
         answer:
-          "AI taslak ve öneri üretir, son kontrol her zaman sizin. Belge tanıma doğruluğu %95+ seviyesindedir ama kritik işlemlerde insan kontrolü zorunlu kalır. GROWT Method'da doğru kontrol noktalarını kuruyoruz.",
+          "AI taslak ve öneri üretir, son kontrol her zaman sizin. Belge tanıma doğruluğu %95+ seviyesindedir ama kritik işlemlerde insan kontrolü zorunlu kalır. GROWT Method'da doğru kontrol noktalarını kurmayı öğretiyoruz.",
       },
       {
         question: "Müşteri verilerinin güvenliği nasıl sağlanır?",
         answer:
-          "KVKK uyumlu, şifreli ve yerel çözümler kullanıyoruz. Müşteri mali verileri bulut AI servislerine gönderilmez. Veri güvenliği GROWT Programı'nın temel taşlarından biri.",
+          "KVKK uyumlu, şifreli ve yerel çözümlere yönlendiriyoruz. Müşteri mali verileri bulut AI servislerine gönderilmez. Veri güvenliği GROWT Programı'nın temel taşlarından biri.",
       },
       {
         question: "Mevzuat değişikliklerini AI gerçekten takip edebilir mi?",
@@ -366,7 +366,7 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       {
         question: "İç mimar olarak da katılabilir miyim?",
         answer:
-          "Evet. Mimar, iç mimar, peyzaj mimarı ve tasarımcılar programa katılabilir. Her disipline özel AI iş akışları tasarlıyoruz.",
+          "Evet. Mimar, iç mimar, peyzaj mimarı ve tasarımcılar programa katılabilir. Her disipline özel AI iş akışları tasarlamayı öğretiyoruz.",
       },
       {
         question: "Müşteri brief sürecini AI nasıl iyileştirir?",

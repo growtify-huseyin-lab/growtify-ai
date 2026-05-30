@@ -72,7 +72,7 @@ export const SECTOR_PAGES: Record<string, SectorPage> = {
       },
     ],
     growtContext:
-      "Sağlık profesyonelleri için GROWT Method, danışan kazanımından klinik otomasyonuna kadar tüm süreci kapsıyor. Gap Analysis'te senin kliniğinin AI fırsatlarını keşfediyoruz, Transform'da tam otomasyon kuruyoruz.",
+      "Sağlık profesyonelleri için GROWT Method, danışan kazanımından klinik otomasyonuna kadar tüm süreci kapsıyor. Gap Analysis'te kliniğinin AI fırsatlarını birlikte keşfediyoruz, Transform'da tam otomasyonu adım adım kurmanı sağlıyoruz.",
     relatedBlogSlugs: ["saglik-profesyonelleri-icin-yapay-zeka", "diyetisyen-yapay-zeka-danisan-takibi", "psikolog-yapay-zeka-seans-yonetimi"],
   },
   hukuk: {
