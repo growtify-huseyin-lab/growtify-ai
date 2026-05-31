@@ -2,7 +2,7 @@
 // Used by /test/api/submit-email route. Do NOT import from client components.
 
 import type { QuizState } from "./types";
-import { buildGhlCustomFields, buildGhlTags } from "./ghl-mapping";
+import { buildGhlCustomFields, buildGhlTags, buildGhlTagsEn, buildGhlCustomFieldsEn } from "./ghl-mapping";
 import { getPersonaDisplayName } from "./content-runtime-i18n";
 
 interface GhlUpsertResponse {
@@ -64,10 +64,10 @@ export async function upsertQuizContact(state: QuizState, locale?: string): Prom
     email: state.email,
     firstName: state.firstName || undefined,
     phone: state.phone || undefined,
-    country: "TR",
+    country: locale === "en" ? undefined : "TR",
     source: "Growtify.ai quiz",
-    tags: locale === "en" ? [...buildGhlTags(state), "lang:eng"] : buildGhlTags(state),
-    customFields: buildGhlCustomFields(state),
+    tags: locale === "en" ? buildGhlTagsEn(state) : buildGhlTags(state),
+    customFields: locale === "en" ? buildGhlCustomFieldsEn(state) : buildGhlCustomFields(state),
   };
 
   try {

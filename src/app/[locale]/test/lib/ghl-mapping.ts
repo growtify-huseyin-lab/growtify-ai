@@ -3,6 +3,7 @@
 // All field IDs verified live on sub-account e8ZRRmOybS08x5L6qgsS.
 
 import type { Persona, QuizState } from "./types";
+import { getPersonaDisplayName } from "./content-runtime-i18n";
 
 /**
  * GHL custom field IDs (provisioned 2026-04-05).
@@ -26,6 +27,25 @@ export const GHL_FIELD_IDS = {
   quizPainAreas: "2tSiDtz06j49T4RgRC7p", // MULTIPLE_OPTIONS
   quizHabitsToQuit: "9gcKFRAKeaE1rp3FAWdA", // MULTIPLE_OPTIONS
 } as const;
+
+/**
+ * EN-SPECIFIC custom field IDs — separate from TR (no merge; EN workflows + pipelines
+ * are fully separate per CEO decision 2026-05-31). GHL agent CREATES these EN fields
+ * (REQ-development-email_marketing-en-001) and fills the IDs below. Until an ID is set,
+ * buildGhlCustomFieldsEn SKIPS that field (no invalid-id upsert breakage).
+ *
+ * Fields that are language-agnostic (leadSource, landingPage, dailyCommitmentMinutes,
+ * quizCompletedAt, coupon, pdf_url) REUSE the TR ids above — no EN duplicate needed.
+ */
+export const GHL_FIELD_IDS_EN: Record<string, string | null> = {
+  professionEn: null,
+  sectorEn: null,
+  quizPersonaEn: null,
+  quizPainLevelEn: null,
+  quizGoalEn: null,
+  quizPainAreasEn: null, // MULTIPLE_OPTIONS
+  quizHabitsToQuitEn: null, // MULTIPLE_OPTIONS
+};
 
 /* -------------------- Tag mapping -------------------- */
 
@@ -85,6 +105,25 @@ export function buildGhlTags(state: QuizState): string[] {
     "gai_lm_quiz",
     `gai_sector_${sectorKey}`,
     `gai_persona_${personaKey}`,
+  ];
+}
+
+/**
+ * EN-SPECIFIC tag set — fully separate from TR (no shared trigger tags). EN leads
+ * get ONLY these gai_en_* tags so the separate EN pipelines + workflows fire and
+ * EN leads NEVER enter TR workflows. Replaces the prior `lang:eng` colon tag
+ * (the only colon tag in the taxonomy; underscore is GHL-safe + consistent).
+ * Sector/persona slugs reuse the language-agnostic key maps (machine values).
+ */
+export function buildGhlTagsEn(state: QuizState): string[] {
+  const sectorKey = state.sector ? (SECTOR_TAG_MAP[state.sector] ?? "other") : "other";
+  const personaKey = PERSONA_TAG_MAP[state.persona] ?? "bilmiyorum";
+  return [
+    "gai_en_lifecycle_lead",
+    "gai_en_quiz",
+    `gai_en_sector_${sectorKey}`,
+    `gai_en_persona_${personaKey}`,
+    "lang_eng",
   ];
 }
 
@@ -188,6 +227,85 @@ export function buildGhlCustomFields(state: QuizState): GhlCustomField[] {
     fields.push({ id: GHL_FIELD_IDS.quizPainAreas, value: toLabels(state.q_areas, AREA_LABELS) });
   if (state.q_habits?.length)
     fields.push({ id: GHL_FIELD_IDS.quizHabitsToQuit, value: toLabels(state.q_habits, HABIT_LABELS) });
+
+  return fields;
+}
+
+/* -------------------------------------------------------------------------- */
+/*  EN label mappings (for separate EN custom fields / EN workflow templates)  */
+/* -------------------------------------------------------------------------- */
+
+const SECTOR_LABELS_EN: Record<string, string> = {
+  saglik: "Healthcare", hukuk: "Law", guzellik: "Beauty & Aesthetics", emlak: "Real Estate",
+  e_ticaret: "E-Commerce", dis: "Dentistry", muhasebe: "Accounting", eczacilik: "Pharmacy",
+  turizm: "Tourism", mimarlik: "Architecture", egitim: "Education", fitness: "Fitness",
+  sigorta: "Insurance", restoran: "Restaurant", veteriner: "Veterinary", diger: "Other",
+};
+
+const GOAL_LABELS_EN: Record<string, string> = {
+  yeni_gelir: "Open a new revenue stream", zaman: "Save 10+ hours a week",
+  musteri: "Attract more clients", otomasyon: "Automate repetitive work",
+  bilgi: "Master AI",
+};
+
+const AREA_LABELS_EN: Record<string, string> = {
+  pazarlama: "Marketing Processes",
+  satis: "Sales Processes",
+  musteri: "Customer Communication",
+  operasyon: "Operational Automation",
+  finans: "Finance & Accounting",
+  strateji: "Strategy & Analysis",
+  personel: "Staff & Employee Tracking",
+  egitim: "Training & Client Materials",
+  icerik: "Marketing Processes",
+  analiz: "Strategy & Analysis",
+  tasarim: "Marketing Processes",
+};
+
+const HABIT_LABELS_EN: Record<string, string> = {
+  son_dakika: "I don't know where to start",
+  telefon: "I don't have time",
+  multitasking: "My technical knowledge is insufficient",
+  mukemmeliyetcilik: "Fear of choosing the wrong tool",
+  oz_sabotaj: "The feeling I can't do it alone",
+  mentor_yok: "No mentor or guide",
+};
+
+const PAIN_LEVEL_LABELS_EN: Record<string, string> = {
+  low: "Low", medium: "Medium", high: "High",
+};
+
+/**
+ * EN-SPECIFIC custom fields. Mirrors buildGhlCustomFields but writes EN values into
+ * SEPARATE EN field IDs (GHL_FIELD_IDS_EN). Language-agnostic fields (leadSource,
+ * landingPage, commitment, completedAt) reuse the TR ids with EN-appropriate values.
+ * EN-specific display/option fields are SKIPPED until their GHL id is provisioned
+ * (GHL agent — REQ-development-email_marketing-en-001), so EN upsert never breaks.
+ */
+export function buildGhlCustomFieldsEn(state: QuizState): GhlCustomField[] {
+  const fields: GhlCustomField[] = [];
+  const pushEn = (id: string | null, value: GhlFieldValue) => {
+    if (id) fields.push({ id, value });
+  };
+
+  // Language-agnostic — reuse TR ids, EN values
+  fields.push({ id: GHL_FIELD_IDS.leadSource, value: "quiz_organic" });
+  fields.push({ id: GHL_FIELD_IDS.landingPage, value: "https://growtify.ai/en/test" });
+  if (state.commitment)
+    fields.push({ id: GHL_FIELD_IDS.dailyCommitmentMinutes, value: state.commitment });
+  fields.push({ id: GHL_FIELD_IDS.quizCompletedAt, value: nowIso() });
+
+  // EN-specific fields (separate ids; skipped until GHL provisions them)
+  if (state.segment)
+    pushEn(GHL_FIELD_IDS_EN.professionEn, state.segment === "bireysel" ? "Individual Professional" : state.segment === "isletme" ? "Business Owner" : state.segment);
+  if (state.sector) pushEn(GHL_FIELD_IDS_EN.sectorEn, toLabel(state.sector, SECTOR_LABELS_EN));
+  pushEn(GHL_FIELD_IDS_EN.quizPersonaEn, getPersonaDisplayName(state.persona, "en"));
+  pushEn(GHL_FIELD_IDS_EN.quizPainLevelEn, toLabel(state.painLevel, PAIN_LEVEL_LABELS_EN));
+  if (state.q_goal) pushEn(GHL_FIELD_IDS_EN.quizGoalEn, toLabel(state.q_goal, GOAL_LABELS_EN));
+  if (state.q_areas?.length)
+    pushEn(GHL_FIELD_IDS_EN.quizPainAreasEn, toLabels(state.q_areas, AREA_LABELS_EN));
+  if (state.q_habits?.length)
+    pushEn(GHL_FIELD_IDS_EN.quizHabitsToQuitEn, toLabels(state.q_habits, HABIT_LABELS_EN));
 
   return fields;
 }

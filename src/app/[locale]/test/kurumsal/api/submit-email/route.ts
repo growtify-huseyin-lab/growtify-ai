@@ -13,7 +13,7 @@ import {
   savePdfUrlToContact,
   addNoteToContact,
 } from "../../../lib/ghl-client";
-import { buildGhlCustomFields, buildGhlTags, buildContactNote } from "../../lib/ghl-mapping-kurumsal";
+import { buildGhlCustomFields, buildGhlTags, buildGhlTagsEn, buildContactNote } from "../../lib/ghl-mapping-kurumsal";
 import { computeKurumsalResults } from "../../lib/scoring-kurumsal";
 import { generateKurumsalPdfHtml } from "../../lib/pdf-html-template-kurumsal";
 import { generateKurumsalPdfHtml as generateKurumsalPdfHtmlEn } from "../../lib/pdf-html-template-kurumsal-en";
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
 
   // 1. Upsert contact — reuse bireysel ghl-client with kurumsal mapping
   const locale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
-  const tags = locale === "en" ? [...buildGhlTags(state), "lang:eng"] : buildGhlTags(state);
+  const tags = locale === "en" ? buildGhlTagsEn(state) : buildGhlTags(state);
   const customFields = buildGhlCustomFields(state);
 
   // Build a minimal state-like object that bireysel ghl-client expects
@@ -106,7 +106,7 @@ export async function POST(request: Request) {
         email: state.email,
         firstName: state.firstName || undefined,
         phone: state.phone || undefined,
-        country: "TR",
+        country: locale === "en" ? undefined : "TR",
         source: "Growtify.ai kurumsal quiz",
         tags,
         customFields,

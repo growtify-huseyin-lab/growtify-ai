@@ -120,7 +120,7 @@ export async function POST(req: NextRequest) {
     if (magnet.sectorRef) {
       tags.push(`gai_sector_${magnet.sectorRef}`);
     }
-    if (locale === "en") tags.push("lang:eng");
+    if (locale === "en") tags.push("lang_eng");
 
     // Split full name into firstName + lastName for GHL
     const nameParts = (firstName || "").trim().split(/\s+/);

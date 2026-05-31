@@ -83,6 +83,27 @@ export function buildGhlTags(state: KurumsalQuizState): string[] {
   ];
 }
 
+/**
+ * EN-SPECIFIC kurumsal tag set — fully separate from TR (no shared trigger tags),
+ * so the separate EN kurumsal pipelines + workflows fire and EN leads never enter
+ * TR workflows. Replaces the prior `lang:eng` colon tag (underscore is GHL-safe).
+ */
+export function buildGhlTagsEn(state: KurumsalQuizState): string[] {
+  const sectorKey = state.sector ? (SECTOR_TAG_MAP[state.sector] ?? "other") : "other";
+  const personaKey = PERSONA_TAG_MAP[state.persona] ?? "baslangic";
+  const sizeKey = state.companySize ? (COMPANY_SIZE_TAG_MAP[state.companySize] ?? "unknown") : "unknown";
+
+  return [
+    "gai_en_lifecycle_lead",
+    "gai_en_lm_quiz_kurumsal",
+    "gai_en_segment_kurumsal",
+    `gai_en_sector_${sectorKey}`,
+    `gai_en_persona_kurumsal_${personaKey}`,
+    `gai_en_company_size_${sizeKey}`,
+    "lang_eng",
+  ];
+}
+
 export type GhlFieldValue = string | number | string[];
 export interface GhlCustomField {
   id: string;
