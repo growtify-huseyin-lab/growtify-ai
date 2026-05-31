@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { initialQuizState, type QuizState } from "./types";
-import { SCREENS, TOTAL_SCREENS } from "./content-runtime";
+import { useQuizScreens, useTotalScreens } from "./content-runtime-hooks";
 import { computeResults, pickDiscount } from "./scoring";
 import {
   clearQuizSnapshot,
@@ -31,6 +31,8 @@ interface ResumeInfo {
 }
 
 export function QuizProvider({ children }: { children: React.ReactNode }) {
+  const SCREENS = useQuizScreens();
+  const TOTAL_SCREENS = useTotalScreens();
   // Initial state ALWAYS matches server render (empty quiz, index 0, no
   // resume modal). We defer localStorage access to a useEffect below so
   // SSR/CSR outputs stay identical and hydration succeeds.

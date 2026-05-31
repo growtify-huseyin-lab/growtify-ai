@@ -6,7 +6,8 @@ import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
 // GHL payment link — hardcoded here because PRODUCT.ctaHref now points to /test (quiz entry)
 const PAYMENT_LINK = "https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062";
-import { PAYWALL_COPY, interpolate } from "../../lib/content-runtime";
+import { interpolate } from "../../lib/content-runtime";
+import { usePaywallCopy } from "../../lib/content-runtime-hooks";
 import {
   getOrStartPaywallExpiry,
   getPaywallSecondsLeft,
@@ -19,6 +20,7 @@ import {
 
 export function PaywallScreen({ screen }: { screen: ScreenConfig }) {
   const { state } = useQuiz();
+  const PAYWALL_COPY = usePaywallCopy();
 
   const price = useMemo(() => {
     const base = PAYWALL_COPY.pricing.base;
@@ -57,6 +59,7 @@ export function PaywallScreen({ screen }: { screen: ScreenConfig }) {
 /* ---------------- Blocks ---------------- */
 
 function CountdownBlock() {
+  const PAYWALL_COPY = usePaywallCopy();
   // Real cookie-based countdown. First mount stamps the cookie; subsequent
   // visits see the remaining time from the same stamp.
   const [secondsLeft, setSecondsLeft] = useState<number>(0);
@@ -115,6 +118,7 @@ function HeroPromiseBlock({
   firstName: string;
   persona: string;
 }) {
+  const PAYWALL_COPY = usePaywallCopy();
   // Split sentence around persona for visual emphasis
   const rawText = interpolate(PAYWALL_COPY.heroPromise.text, {
     firstName,
@@ -151,6 +155,7 @@ function HeroPromiseBlock({
 }
 
 function BeforeAfterBlock() {
+  const PAYWALL_COPY = usePaywallCopy();
   const { beforeTitle, before, afterTitle, after } = PAYWALL_COPY.beforeAfter;
   return (
     <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-dark-border dark:bg-dark-bg">
@@ -187,6 +192,7 @@ function BeforeAfterBlock() {
 }
 
 function StatsBlock() {
+  const PAYWALL_COPY = usePaywallCopy();
   return (
     <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
       {PAYWALL_COPY.stats.map((s) => (
@@ -205,6 +211,7 @@ function StatsBlock() {
 }
 
 function MediaFeaturesBlock() {
+  const PAYWALL_COPY = usePaywallCopy();
   if (!PAYWALL_COPY.mediaFeatures.comingSoon) return null;
   return (
     <section className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-5 text-center dark:border-dark-border dark:bg-dark-bg">
@@ -227,6 +234,7 @@ function PricingTableBlock({
   base: number;
   discounted: number;
 }) {
+  const PAYWALL_COPY = usePaywallCopy();
   return (
     <section className="rounded-2xl border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/10 p-6 dark:border-primary dark:from-primary/10 dark:to-accent/10">
       <div className="text-xs font-semibold uppercase tracking-wider text-primary">
@@ -256,6 +264,7 @@ function PricingTableBlock({
 }
 
 function TestimonialsBlock() {
+  const PAYWALL_COPY = usePaywallCopy();
   if (PAYWALL_COPY.testimonials.strategy === "coming_soon") {
     return (
       <section className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-5 dark:border-dark-border dark:bg-dark-bg">
@@ -272,6 +281,7 @@ function TestimonialsBlock() {
 }
 
 function FaqBlock() {
+  const PAYWALL_COPY = usePaywallCopy();
   return (
     <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-dark-border dark:bg-dark-bg">
       <div className="text-xs font-semibold uppercase tracking-wider text-primary">
@@ -297,6 +307,7 @@ function FaqBlock() {
 }
 
 function GuaranteeBlock() {
+  const PAYWALL_COPY = usePaywallCopy();
   return (
     <section className="rounded-2xl border-2 border-amber-300 bg-amber-50 p-6 text-center dark:border-amber-900 dark:bg-amber-950">
       <div className="text-4xl">🛡️</div>
@@ -311,6 +322,7 @@ function GuaranteeBlock() {
 }
 
 function DiscountDisclaimerBlock() {
+  const PAYWALL_COPY = usePaywallCopy();
   const discountDisclaimer = (PAYWALL_COPY as { discountDisclaimer?: string }).discountDisclaimer;
   if (!discountDisclaimer) return null;
   return (
@@ -321,6 +333,7 @@ function DiscountDisclaimerBlock() {
 }
 
 function FinalCtaBlock({ discounted }: { discounted: number }) {
+  const PAYWALL_COPY = usePaywallCopy();
   const { couponCode, state } = useQuiz();
   const [copied, setCopied] = useState(false);
 

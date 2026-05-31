@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { AnimatePresence, LazyMotion, domAnimation, motion } from "motion/react";
 import { useQuiz } from "../lib/QuizContext";
-import { SCREENS } from "../lib/content-runtime";
+import { useQuizScreens } from "../lib/content-runtime-hooks";
 import { useHasMounted } from "../lib/useHasMounted";
 import type { ScreenConfig, ScreenType } from "../lib/types";
 import {
@@ -57,6 +57,7 @@ const RENDERERS: Record<ScreenType, ScreenRenderer> = {
 };
 
 export function QuizOrchestrator() {
+  const SCREENS = useQuizScreens();
   const { currentIndex } = useQuiz();
   const hasMounted = useHasMounted();
   const screen = SCREENS[currentIndex];

@@ -4,11 +4,12 @@ import { useState, useEffect } from "react";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig, QuizState } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
-import { LEGAL_TEXTS } from "../../lib/content-runtime";
+import { useLegalTexts } from "../../lib/content-runtime-hooks";
 
 /* -------------------- Text Input (Ekran 25 name, 26 email) -------------------- */
 export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
   const { state, setField, next, submitEmail } = useQuiz();
+  const LEGAL_TEXTS = useLegalTexts();
   const key = screen.stateKey;
   const current = key ? (state[key] as string) : "";
 

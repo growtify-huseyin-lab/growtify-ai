@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import { useQuiz } from "../lib/QuizContext";
-import { getPersonaSummary } from "../lib/content-runtime";
+import { usePersonaResolver } from "../lib/content-runtime-hooks";
 
 function formatTimeAgo(savedAt: number): string {
   const diffMs = Date.now() - savedAt;
@@ -101,12 +101,13 @@ export function ResumeModal() {
 }
 
 export function CompletedModal() {
+  const resolvePersona = usePersonaResolver();
   const { hasCompletedResult, showCompletedResult, retakeQuiz, state } =
     useQuiz();
 
   const pending = hasCompletedResult ? state : null;
   const persona = pending?.persona;
-  const personaData = persona ? getPersonaSummary(persona) : null;
+  const personaData = persona ? resolvePersona(persona) : null;
 
   return (
     <AnimatePresence>

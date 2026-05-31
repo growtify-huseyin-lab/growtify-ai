@@ -4,7 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
-import { getPersonaSummary, interpolate } from "../../lib/content-runtime";
+import { interpolate } from "../../lib/content-runtime";
+import { usePersonaResolver } from "../../lib/content-runtime-hooks";
 
 /* -------------------- Social Proof (Ekran 3) -------------------- */
 export function SocialProofScreen({ screen }: { screen: ScreenConfig }) {
@@ -184,6 +185,7 @@ export function LoadingScreen({ screen }: { screen: ScreenConfig }) {
 
 /* -------------------- Profile Summary (Ekran 27) -------------------- */
 export function ProfileSummaryScreen({ screen }: { screen: ScreenConfig }) {
+  const resolvePersona = usePersonaResolver();
   const { state, next, finalize } = useQuiz();
 
   // Kick off result computation as user reaches pre-reveal.
@@ -201,7 +203,7 @@ export function ProfileSummaryScreen({ screen }: { screen: ScreenConfig }) {
     [screen.title, state.firstName, state.persona],
   );
 
-  const personaData = getPersonaSummary(state.persona);
+  const personaData = resolvePersona(state.persona);
   const summaryText = useMemo(
     () =>
       personaData
