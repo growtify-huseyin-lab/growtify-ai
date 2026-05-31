@@ -2,14 +2,17 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Check } from "lucide-react";
 import { PRODUCT } from "@/lib/constants";
+import { getTranslations } from "next-intl/server";
 
-export function ProductTiers() {
+export async function ProductTiers() {
+  const t = await getTranslations("ProductTiersC");
+
   return (
     <section className="py-20 bg-white dark:bg-dark-bg transition-colors">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-dark dark:text-white sm:text-4xl">
-            <span className="text-primary">GROWT Method</span> — tek program, tam dönüşüm
+            <span className="text-primary">GROWT Method</span> {t("headingSuffix")}
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-dark-muted">
             {PRODUCT.subtitle}

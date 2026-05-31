@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ArrowLeft, Search } from "lucide-react";
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations("notfoundPage");
   return (
     <section className="py-32 bg-white dark:bg-dark-bg transition-colors">
       <Container>
@@ -14,26 +16,26 @@ export default function NotFound() {
             </div>
           </div>
           <h1 className="text-4xl font-extrabold text-dark dark:text-white">
-            Sayfa Bulunamadı
+            {t("heading")}
           </h1>
           <p className="mt-4 text-gray-600 dark:text-dark-muted leading-relaxed">
-            Aradığın sayfa taşınmış, silinmiş veya hiç var olmamış olabilir.
+            {t("description")}
           </p>
           <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <Button href="/" variant="primary" size="lg">
               <ArrowLeft size={18} className="mr-2" />
-              Ana Sayfaya Dön
+              {t("backHome")}
             </Button>
             <Button href="/blog" variant="ghost" size="lg" className="border border-gray-200 dark:border-dark-border">
-              Blog Yazılarına Göz At
+              {t("browseBlog")}
             </Button>
           </div>
           <div className="mt-12 text-sm text-gray-500 dark:text-dark-muted">
-            <p>Popüler sayfalar:</p>
+            <p>{t("popularPages")}</p>
             <div className="mt-3 flex flex-wrap justify-center gap-3">
               <Link href="/growt-method" className="text-primary hover:underline">GROWT Method</Link>
-              <Link href="/sektor" className="text-primary hover:underline">Sektörler</Link>
-              <Link href="/test" className="text-primary hover:underline">AI Olgunluk Testi</Link>
+              <Link href="/sektor" className="text-primary hover:underline">{t("sectors")}</Link>
+              <Link href="/test" className="text-primary hover:underline">{t("aiMaturityTest")}</Link>
             </div>
           </div>
         </div>

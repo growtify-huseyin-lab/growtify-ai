@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LegalPlaceholderEN } from "@/components/legal/LegalPlaceholderEN";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { COMPANY } from "@/lib/company-info";
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/iade-politikasi" },
 };
 
-export default function IadePolitikasiPage() {
+export default async function IadePolitikasiPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  if (locale === "en") return <LegalPlaceholderEN docType="refund" />;
   return (
     <section className="py-20 bg-white dark:bg-dark-bg transition-colors">
       <Container className="max-w-4xl">

@@ -3,17 +3,19 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { GROWT_PHASES } from "@/lib/constants";
 import { ArrowRight, ArrowDown } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
-export function GROWTSteps() {
+export async function GROWTSteps() {
+  const t = await getTranslations('GROWTStepsC');
   return (
     <section id="nasil-calisiyor" className="py-20 bg-light dark:bg-dark-bg/50 transition-colors">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-dark dark:text-white sm:text-4xl">
-            <span className="text-primary">GROWT Method</span> ile 5 Seviyede Dönüşüm
+            <span className="text-primary">GROWT Method</span> {t('headingSuffix')}
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-dark-muted">
-            Yapay zeka nedir kursu değil — işini büyütmen için yapılandırılmış bir süreç.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -50,7 +52,7 @@ export function GROWTSteps() {
                   {phase.name}
                 </h3>
                 <p className="text-sm font-medium" style={{ color: phase.badge.color }}>
-                  Seviye {phase.level}
+                  {t('levelLabel', { level: phase.level })}
                 </p>
                 <p className="mt-2 text-sm font-semibold text-dark/80 dark:text-dark-text/80">
                   {phase.motto}
@@ -66,11 +68,11 @@ export function GROWTSteps() {
         {/* CTA */}
         <div className="mt-12 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Button href="/test" variant="primary" size="lg">
-            Kişisel Planını Oluştur
+            {t('ctaPrimary')}
             <ArrowRight size={18} className="ml-2" />
           </Button>
           <Button href="/growt-method" variant="ghost" size="lg" className="border border-gray-200 dark:border-dark-border">
-            Detaylı İncele
+            {t('ctaSecondary')}
             <ArrowRight size={16} className="ml-2" />
           </Button>
         </div>

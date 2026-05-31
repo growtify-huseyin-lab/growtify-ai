@@ -7,8 +7,8 @@ import { Card } from "@/components/ui/Card";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { GROWT_PHASES } from "@/lib/constants";
 import { getAllPosts } from "@/lib/blog";
-import { getSectorBySlug, getAllSectorSlugs } from "@/data/sectors";
-import { getSectorContent } from "@/data/sector-content";
+import { getAllSectorSlugs } from "@/data/sectors";
+import { sectorPagesFor, sectorContentFor } from "@/data/sectors-i18n";
 import {
   ArrowRight,
   Clock,
@@ -34,16 +34,16 @@ const iconMap: Record<string, React.ElementType> = {
   Globe, Package, BookOpen, TrendingDown, UserPlus, Layers, BarChart, TrendingUp,
 };
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: Promise<{ slug: string; locale: string }> };
 
 export function generateStaticParams() {
   return getAllSectorSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const sector = getSectorBySlug(slug);
-  const content = getSectorContent(slug);
+  const { slug, locale } = await params;
+  const sector = sectorPagesFor(locale)[slug];
+  const content = sectorContentFor(locale)[slug];
   if (!sector) return { title: "Sektör Bulunamadı" };
 
   const faqSchema = content?.faq
@@ -68,11 +68,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function SectorPage({ params }: Props) {
-  const { slug } = await params;
-  const sector = getSectorBySlug(slug);
+  const { slug, locale } = await params;
+  const sector = sectorPagesFor(locale)[slug];
   if (!sector) notFound();
 
-  const content = getSectorContent(slug);
+  const content = sectorContentFor(locale)[slug];
   const relatedPosts = getAllPosts().filter(
     (p) => p.sectorRef === slug || sector.relatedBlogSlugs.includes(p.slug)
   );

@@ -1,49 +1,52 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { LogoLarge } from "@/components/ui/Logo";
 import { COMPANY } from "@/lib/company-info";
 
-const footerLinks = [
-  {
-    title: "Platform",
-    links: [
-      { label: "GROWT Method", href: "/growt-method" },
-      { label: "İşletme Çözümleri", href: "/kurumsal" },
-      { label: "Blog", href: "/blog" },
-    ],
-  },
-  {
-    title: "Şirket",
-    links: [
-      { label: "Hakkımızda", href: "/hakkimizda" },
-      { label: "İletişim", href: "/iletisim" },
-    ],
-  },
-  {
-    title: "Sosyal Medya",
-    links: [
-      { label: "LinkedIn", href: "https://www.linkedin.com/company/growtify-app" },
-      { label: "Instagram", href: "https://www.instagram.com/growtify.app/" },
-      { label: "YouTube", href: "https://www.youtube.com/@Growtifyappp" },
-    ],
-  },
-  {
-    title: "Yasal",
-    links: [
-      { label: "Gizlilik Politikası", href: "/gizlilik-politikasi" },
-      { label: "KVKK Aydınlatma", href: "/kvkk-aydinlatma" },
-      { label: "Kullanım Koşulları", href: "/kullanim-kosullari" },
-      { label: "İade Politikası", href: "/iade-politikasi" },
-      { label: "Çerez Politikası", href: "/cerez-politikasi" },
-      { label: "Çerez Tercihleri", href: "#cookie-preferences" },
-      { label: "Do Not Sell or Share (CCPA)", href: "/gizlilik-politikasi#ccpa" },
-    ],
-  },
-];
-
 export function Footer() {
+  const t = useTranslations("FooterC");
+
+  const footerLinks = [
+    {
+      title: t("groupPlatform"),
+      links: [
+        { label: "GROWT Method", href: "/growt-method" },
+        { label: t("linkBusinessSolutions"), href: "/kurumsal" },
+        { label: "Blog", href: "/blog" },
+      ],
+    },
+    {
+      title: t("groupCompany"),
+      links: [
+        { label: t("linkAbout"), href: "/hakkimizda" },
+        { label: t("linkContact"), href: "/iletisim" },
+      ],
+    },
+    {
+      title: t("groupSocial"),
+      links: [
+        { label: "LinkedIn", href: "https://www.linkedin.com/company/growtify-app" },
+        { label: "Instagram", href: "https://www.instagram.com/growtify.app/" },
+        { label: "YouTube", href: "https://www.youtube.com/@Growtifyappp" },
+      ],
+    },
+    {
+      title: t("groupLegal"),
+      links: [
+        { label: t("linkPrivacyPolicy"), href: "/gizlilik-politikasi" },
+        { label: t("linkKvkk"), href: "/kvkk-aydinlatma" },
+        { label: t("linkTerms"), href: "/kullanim-kosullari" },
+        { label: t("linkRefundPolicy"), href: "/iade-politikasi" },
+        { label: t("linkCookiePolicy"), href: "/cerez-politikasi" },
+        { label: t("linkCookiePreferences"), href: "#cookie-preferences" },
+        { label: "Do Not Sell or Share (CCPA)", href: "/gizlilik-politikasi#ccpa" },
+      ],
+    },
+  ];
+
   return (
     <footer className="border-t border-gray-100 dark:border-dark-border bg-dark text-white">
       <Container className="py-12">
@@ -52,8 +55,7 @@ export function Footer() {
           <div>
             <LogoLarge />
             <p className="mt-3 text-sm text-gray-400 leading-relaxed">
-              AI ile işini büyüten profesyonellerin platformu. GROWT Method ile
-              kendi hızında ölçülebilir dönüşüm.
+              {t("brandTagline")}
             </p>
           </div>
 
@@ -110,9 +112,8 @@ export function Footer() {
             {COMPANY.companyNumber} · {COMPANY.address}
           </p>
           <p className="text-xs text-gray-500">
-            &copy; {new Date().getFullYear()} {COMPANY.legalName} — Tüm hakları
-            saklıdır. Growtify ve GROWT Method, {COMPANY.legalName}&apos;in
-            ticari marka adlarıdır.
+            &copy; {new Date().getFullYear()} {COMPANY.legalName} —{" "}
+            {t("rightsReserved", { legalName: COMPANY.legalName })}
           </p>
         </div>
       </Container>

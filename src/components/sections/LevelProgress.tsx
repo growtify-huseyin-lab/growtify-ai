@@ -1,22 +1,24 @@
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { GROWT_PHASES } from "@/lib/constants";
 import { ChevronRight } from "lucide-react";
 
-export function LevelProgress() {
+export async function LevelProgress() {
+  const t = await getTranslations("LevelProgressC");
+
   return (
     <section className="py-20 transition-colors">
       <Container>
         <div className="mx-auto max-w-4xl text-center mb-16">
           <Badge variant="primary" className="mb-4">
-            Kendi Hızında İlerleme
+            {t("badge")}
           </Badge>
           <h2 className="text-3xl font-bold text-dark dark:text-dark-text mb-4">
-            5 Seviye, Kendi Hızında Dönüşüm
+            {t("heading")}
           </h2>
           <p className="text-lg text-gray-600 dark:text-dark-muted">
-            Modülleri tamamla, sonraki seviyeyi aç. Minimum süre yok — hızlı
-            öğreniyorsan hızlı ilerle.
+            {t("subheading")}
           </p>
         </div>
 
@@ -36,7 +38,7 @@ export function LevelProgress() {
                       {phase.letter}
                     </div>
                     <span className="text-xs text-gray-400 dark:text-dark-muted mt-1">
-                      Seviye {phase.level}
+                      {t("levelLabel", { level: phase.level })}
                     </span>
                   </div>
 
@@ -54,7 +56,7 @@ export function LevelProgress() {
                       {phase.description}
                     </p>
                     <div className="flex items-center gap-4 mt-3 text-xs text-gray-400 dark:text-dark-muted">
-                      <span>{phase.moduleCount} adım</span>
+                      <span>{t("stepCount", { count: phase.moduleCount })}</span>
                     </div>
                   </div>
                 </div>

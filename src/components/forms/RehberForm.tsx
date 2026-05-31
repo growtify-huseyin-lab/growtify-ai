@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Loader2, CheckCircle2, AlertCircle, Download, Users } from "lucide-react";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
@@ -23,6 +24,7 @@ interface SuccessPayload {
  * Shows PDF download on success.
  */
 export function RehberForm({ sektor }: RehberFormProps) {
+  const t = useTranslations("RehberFormC");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [successData, setSuccessData] = useState<SuccessPayload | null>(null);
@@ -76,11 +78,11 @@ export function RehberForm({ sektor }: RehberFormProps) {
         form.reset();
       } else {
         setStatus("error");
-        setErrorMsg(json.error ?? "Bir hata oluştu.");
+        setErrorMsg(json.error ?? t("genericError"));
       }
     } catch {
       setStatus("error");
-      setErrorMsg("Bağlantı hatası. Lütfen tekrar dene.");
+      setErrorMsg(t("connectionError"));
     }
   }
 
@@ -92,10 +94,10 @@ export function RehberForm({ sektor }: RehberFormProps) {
           className="mx-auto text-green-500 dark:text-green-400"
         />
         <h4 className="mt-4 text-lg font-bold text-dark dark:text-white">
-          Rehberin hazır!
+          {t("successTitle")}
         </h4>
         <p className="mt-2 text-sm text-gray-600 dark:text-dark-muted">
-          Email'ine bir kopya gönderdik. Aşağıdan da hemen indirebilirsin.
+          {t("successDescription")}
         </p>
         <a
           href={successData.pdfUrl}
@@ -103,10 +105,10 @@ export function RehberForm({ sektor }: RehberFormProps) {
           className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-primary/90"
         >
           <Download size={18} />
-          PDF&apos;i İndir
+          {t("downloadPdf")}
         </a>
         <p className="mt-4 text-xs text-gray-500 dark:text-dark-muted">
-          5 günlük AI Mini Kurs email&apos;ine kayıtlı — her gün yeni bir değer gelecek.
+          {t("miniCourseNote")}
         </p>
 
         {/* Community CTA — secondary engagement step */}
@@ -114,15 +116,14 @@ export function RehberForm({ sektor }: RehberFormProps) {
           <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-dark-muted">
             <Users size={14} />
             <span className="text-xs font-semibold uppercase tracking-wider">
-              Sıradaki Adım
+              {t("nextStepLabel")}
             </span>
           </div>
           <h5 className="mt-3 text-base font-bold text-dark dark:text-white">
-            Tek başına ilerleme
+            {t("communityHeading")}
           </h5>
           <p className="mx-auto mt-2 max-w-sm text-sm text-gray-600 dark:text-dark-muted">
-            Aynı yolculuğa çıkmış profesyonellerle GROWT Topluluğu&apos;nda
-            ücretsiz buluş. Sorular, vakalar, haftalık ipuçları.
+            {t("communityDescription")}
           </p>
           <a
             href="https://panel.growtify.ai/communities/groups/growtify-ai/"
@@ -131,7 +132,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
             className="mt-5 inline-flex items-center gap-2 rounded-xl border-2 border-primary/20 bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-primary/40 hover:bg-primary/10"
           >
             <Users size={16} />
-            Topluluğa Ücretsiz Katıl
+            {t("communityJoinCta")}
             <ArrowRight size={14} />
           </a>
         </div>
@@ -149,7 +150,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
           htmlFor="firstName"
           className="mb-1 block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Ad Soyad <span className="text-red-500">*</span>
+          {t("fullNameLabel")} <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -157,7 +158,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
           name="firstName"
           required
           className={inputClass}
-          placeholder="Ad Soyad"
+          placeholder={t("fullNamePlaceholder")}
         />
       </div>
       <div>
@@ -165,7 +166,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
           htmlFor="email"
           className="mb-1 block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Email <span className="text-red-500">*</span>
+          {t("emailLabel")} <span className="text-red-500">*</span>
         </label>
         <input
           type="email"
@@ -173,7 +174,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
           name="email"
           required
           className={inputClass}
-          placeholder="ornek@email.com"
+          placeholder={t("emailPlaceholder")}
         />
       </div>
 
@@ -192,11 +193,11 @@ export function RehberForm({ sektor }: RehberFormProps) {
         {status === "loading" ? (
           <>
             <Loader2 size={18} className="animate-spin" />
-            Hazırlanıyor...
+            {t("loadingButton")}
           </>
         ) : (
           <>
-            Ücretsiz İndir
+            {t("submitButton")}
             <ArrowRight size={18} />
           </>
         )}

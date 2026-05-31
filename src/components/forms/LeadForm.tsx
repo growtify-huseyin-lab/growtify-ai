@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, FormEvent } from "react";
+import { useTranslations } from "next-intl";
 import {
   ArrowRight,
   Loader2,
@@ -28,6 +29,7 @@ export function LeadForm({
   assetDelivery,
   formatLabel,
 }: LeadFormProps) {
+  const t = useTranslations("LeadFormC");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [utmSource, setUtmSource] = useState("");
@@ -74,11 +76,11 @@ export function LeadForm({
         form.reset();
       } else {
         setStatus("error");
-        setErrorMsg(json.error || "Bir hata oluştu.");
+        setErrorMsg(json.error || t("genericError"));
       }
     } catch {
       setStatus("error");
-      setErrorMsg("Bağlantı hatası. Lütfen tekrar dene.");
+      setErrorMsg(t("connectionError"));
     }
   }
 
@@ -90,10 +92,10 @@ export function LeadForm({
           className="mx-auto text-green-500 dark:text-green-400"
         />
         <h3 className="mt-4 text-xl font-bold text-dark dark:text-white">
-          {formatLabel} hazır!
+          {t("successHeading", { formatLabel })}
         </h3>
         <p className="mt-2 text-sm text-gray-600 dark:text-dark-muted">
-          Ayrıca email adresine de gönderdik.
+          {t("successEmailNote")}
         </p>
 
         {assetDelivery === "download" ? (
@@ -118,7 +120,7 @@ export function LeadForm({
         )}
 
         <p className="mt-4 text-xs text-gray-400 dark:text-dark-muted">
-          Growtify AI bültenine de kaydoldun — istediğin zaman çıkabilirsin.
+          {t("newsletterNote")}
         </p>
 
         {/* Community CTA — secondary engagement step */}
@@ -126,15 +128,14 @@ export function LeadForm({
           <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-dark-muted">
             <Users size={14} />
             <span className="text-xs font-semibold uppercase tracking-wider">
-              Sıradaki Adım
+              {t("nextStepLabel")}
             </span>
           </div>
           <h5 className="mt-3 text-base font-bold text-dark dark:text-white">
-            Tek başına ilerleme
+            {t("communityHeading")}
           </h5>
           <p className="mx-auto mt-2 max-w-sm text-sm text-gray-600 dark:text-dark-muted">
-            Aynı yolculuğa çıkmış profesyonellerle GROWT Topluluğu&apos;nda
-            ücretsiz buluş. Sorular, vakalar, haftalık ipuçları.
+            {t("communityDescription")}
           </p>
           <a
             href="https://panel.growtify.ai/communities/groups/growtify-ai/"
@@ -143,7 +144,7 @@ export function LeadForm({
             className="mt-5 inline-flex items-center gap-2 rounded-xl border-2 border-primary/20 bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-primary/40 hover:bg-primary/10"
           >
             <Users size={16} />
-            Topluluğa Ücretsiz Katıl
+            {t("communityCta")}
             <ArrowRight size={14} />
           </a>
         </div>
@@ -161,7 +162,7 @@ export function LeadForm({
           htmlFor="firstName"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Ad Soyad <span className="text-red-500">*</span>
+          {t("nameLabel")} <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -169,7 +170,7 @@ export function LeadForm({
           name="firstName"
           required
           className={inputClass}
-          placeholder="Ad Soyad"
+          placeholder={t("namePlaceholder")}
         />
       </div>
       <div>
@@ -177,7 +178,7 @@ export function LeadForm({
           htmlFor="email"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          E-posta <span className="text-red-500">*</span>
+          {t("emailLabel")} <span className="text-red-500">*</span>
         </label>
         <input
           type="email"
@@ -204,7 +205,7 @@ export function LeadForm({
         {status === "loading" ? (
           <>
             <Loader2 size={18} className="animate-spin" />
-            Gönderiliyor...
+            {t("submitting")}
           </>
         ) : (
           <>

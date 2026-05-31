@@ -1,42 +1,47 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ArrowRight, Lightbulb, Target, Heart, Rocket } from "lucide-react";
 import { CTA } from "@/components/sections/CTA";
 
-export const metadata: Metadata = {
-  title: "Hakkımızda",
-  description:
-    "Growtify.ai — Bireysel profesyonellere ve KOBİ'lere AI dönüşümü sağlayan danışmanlık platformu.",
-  alternates: { canonical: "/hakkimizda" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("HakkimizdaPage");
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: { canonical: "/hakkimizda" },
+  };
+}
 
-const values = [
-  {
-    icon: Target,
-    title: "Sonuç Odaklı",
-    description: "Teori değil uygulama. Her adımda ölçülebilir sonuçlar hedefliyoruz.",
-  },
-  {
-    icon: Heart,
-    title: "Erişilebilir",
-    description: "Teknik jargon yok. Profesyonellerin dilinde, herkesin anlayacağı şekilde.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Sektöre Özel",
-    description: "Genel yapay zeka kursu değil. Mesleğine özel iş büyütme süreci.",
-  },
-  {
-    icon: Rocket,
-    title: "Bağımsızlık",
-    description: "Bize bağımlılık değil, kendi işini kendin büyütebilme gücü.",
-  },
-];
+export default async function HakkimizdaPage() {
+  const t = await getTranslations("HakkimizdaPage");
 
-export default function HakkimizdaPage() {
+  const values = [
+    {
+      icon: Target,
+      title: t("valueResultsTitle"),
+      description: t("valueResultsDescription"),
+    },
+    {
+      icon: Heart,
+      title: t("valueAccessibleTitle"),
+      description: t("valueAccessibleDescription"),
+    },
+    {
+      icon: Lightbulb,
+      title: t("valueIndustryTitle"),
+      description: t("valueIndustryDescription"),
+    },
+    {
+      icon: Rocket,
+      title: t("valueIndependenceTitle"),
+      description: t("valueIndependenceDescription"),
+    },
+  ];
+
   return (
     <>
       {/* 1. Hero */}
@@ -44,15 +49,13 @@ export default function HakkimizdaPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-extrabold tracking-tight text-dark dark:text-white sm:text-5xl">
-              AI araçlarını öğretmiyoruz —{" "}
+              {t("heroTitleLead")}{" "}
               <span className="text-primary">
-                işini AI ile büyütecek süreci öğretiyoruz
+                {t("heroTitleHighlight")}
               </span>
             </h1>
             <p className="mt-6 text-lg text-gray-600 dark:text-dark-muted leading-relaxed">
-              Growtify.ai, bireysel profesyonellere ve KOBİ&apos;lere GROWT
-              Method ile AI dönüşümü sağlıyor. 5 seviyeli, sektörüne özel,
-              yapılandırılmış iş büyütme programı. Kurs değil süreç, teori değil uygulama.
+              {t("heroSubtitle")}
             </p>
           </div>
         </Container>
@@ -63,39 +66,28 @@ export default function HakkimizdaPage() {
         <Container>
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <div>
-              <h2 className="text-3xl font-bold text-dark dark:text-white">Misyonumuz</h2>
+              <h2 className="text-3xl font-bold text-dark dark:text-white">{t("missionHeading")}</h2>
               <p className="mt-4 text-gray-600 dark:text-dark-muted leading-relaxed">
-                Türkiye&apos;deki işletmelerin{" "}
-                <strong>büyük çoğunluğu</strong> yapay zekayı operasyonlarına
-                henüz entegre etmedi. Sistemli kullananlar ise rakiplerine
-                göre <strong>belirgin bir verimlilik avantajı</strong> elde
-                ediyor. Hâlâ adım atamayanların büyük bölümünün ortak nedeni
-                aynı: &ldquo;Nasıl yapacağımı bilmiyorum.&rdquo; Bu uygulama
-                boşluğu, Growtify.ai&apos;nin tam olarak hedeflediği alandır.
+                {t.rich("missionParagraph1", {
+                  strong: (chunks) => <strong>{chunks}</strong>,
+                })}
               </p>
               <p className="mt-4 text-gray-600 dark:text-dark-muted leading-relaxed">
-                6 ay önce işini büyütmek için ajanslara on binlerce TL
-                vermeliydin. Şimdi yapay zeka ile aynısını kendin yapabilirsin — hem
-                de çok daha hızlı.
+                {t("missionParagraph2")}
               </p>
               <p className="mt-4 text-gray-600 dark:text-dark-muted leading-relaxed">
-                Yapay zeka kursu satmıyoruz. Sektörüne özel, yapılandırılmış
-                bir iş büyütme süreci sunuyoruz. Biz süreci veriyoruz — sonucu
-                belirleyen senin uygulamaların.
+                {t("missionParagraph3")}
               </p>
             </div>
             <div className="rounded-2xl bg-gradient-to-br from-primary to-primary-light p-10 text-white">
-              <h3 className="text-2xl font-bold">Vizyonumuz</h3>
+              <h3 className="text-2xl font-bold">{t("visionHeading")}</h3>
               <p className="mt-4 text-white/90 leading-relaxed">
-                Türkiye&apos;nin ve bölgenin lider AI dönüşüm danışmanlığı markası
-                olmak. Her profesyonelin yapay zeka ile işini büyüttüğü bir gelecek
-                yaratmak.
+                {t("visionParagraph")}
               </p>
               <div className="mt-8 border-t border-white/20 pt-6">
-                <p className="text-sm text-white/60">Farklılaşma</p>
+                <p className="text-sm text-white/60">{t("differentiationLabel")}</p>
                 <p className="mt-2 text-lg font-semibold">
-                  &ldquo;Kurs değil danışmanlık. Teori değil uygulama. Genel
-                  değil, mesleğine özel.&rdquo;
+                  {t("differentiationQuote")}
                 </p>
               </div>
             </div>
@@ -107,7 +99,7 @@ export default function HakkimizdaPage() {
       <section className="py-20 bg-light dark:bg-dark-bg/50 transition-colors">
         <Container>
           <h2 className="text-3xl font-bold text-dark dark:text-white text-center">
-            Değerlerimiz
+            {t("valuesHeading")}
           </h2>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v) => (
@@ -130,10 +122,10 @@ export default function HakkimizdaPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold text-dark dark:text-white">
-              <span className="text-primary">Growtify</span> Ekosistemi
+              <span className="text-primary">Growtify</span> {t("ecosystemHeadingSuffix")}
             </h2>
             <p className="mt-4 text-gray-600 dark:text-dark-muted">
-              Üç marka, tek hedef: Profesyonellerin ve işletmelerin dijital dönüşümü.
+              {t("ecosystemSubtitle")}
             </p>
           </div>
 
@@ -145,14 +137,13 @@ export default function HakkimizdaPage() {
                   Growtify.ai
                 </span>
                 <p className="mt-2 text-sm text-gray-500 dark:text-dark-muted">
-                  Bireysel profesyoneller
+                  {t("ecosystemAiAudience")}
                 </p>
                 <p className="mt-4 text-gray-600 dark:text-dark-muted">
-                  5 seviyeli AI dönüşüm programı. Kendi hızında, sektörüne özel,
-                  yapılandırılmış iş büyütme süreci. &ldquo;Kendin yap, yanında olalım.&rdquo;
+                  {t("ecosystemAiDescription")}
                 </p>
                 <span className="mt-6 inline-flex items-center text-sm font-semibold text-primary group-hover:underline">
-                  GROWT Method&apos;u İncele
+                  {t("ecosystemAiCta")}
                   <ArrowRight size={16} className="ml-1" />
                 </span>
               </Card>
@@ -166,21 +157,20 @@ export default function HakkimizdaPage() {
               >
                 <div className="absolute -top-3 right-4">
                   <Badge variant="accent" className="shadow-sm">
-                    Yeni
+                    {t("ecosystemBusinessBadge")}
                   </Badge>
                 </div>
                 <span className="text-2xl font-bold text-dark dark:text-white">
-                  Growtify İşletme Çözümleri
+                  {t("ecosystemBusinessName")}
                 </span>
                 <p className="mt-2 text-sm text-gray-500 dark:text-dark-muted">
-                  Ekipler &amp; kurumsallar
+                  {t("ecosystemBusinessAudience")}
                 </p>
                 <p className="mt-4 text-gray-600 dark:text-dark-muted">
-                  GROWT Method&apos;un kurumsal uyarlaması. Ekip eğitimi,
-                  danışmanlık ve AI otomasyon — büyüyen işletmeler için.
+                  {t("ecosystemBusinessDescription")}
                 </p>
                 <span className="mt-6 inline-flex items-center text-sm font-semibold text-primary group-hover:underline">
-                  İşletme Çözümlerini İncele
+                  {t("ecosystemBusinessCta")}
                   <ArrowRight size={16} className="ml-1" />
                 </span>
               </Card>
@@ -193,12 +183,10 @@ export default function HakkimizdaPage() {
                   Growtify.app
                 </span>
                 <p className="mt-2 text-sm text-gray-500 dark:text-dark-muted">
-                  Yapay Zeka Destekli İş Çözümleri
+                  {t("ecosystemAppAudience")}
                 </p>
                 <p className="mt-4 text-gray-600 dark:text-dark-muted">
-                  Yazılım ve hizmet modeli. İşletmeler için yapay zeka destekli
-                  dijital altyapı, otomasyon ve iş çözümleri.
-                  &ldquo;Biz yapalım, siz odaklanın.&rdquo;
+                  {t("ecosystemAppDescription")}
                 </p>
                 <span className="mt-6 inline-flex items-center text-sm font-semibold text-primary group-hover:underline">
                   growtify.app

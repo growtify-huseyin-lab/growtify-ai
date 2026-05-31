@@ -1,44 +1,33 @@
 import { Container } from "@/components/ui/Container";
 import { GROWT_PHASES } from "@/lib/constants";
 import { BarChart3, CheckCircle2, Users, MessageCircle } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
-const features = [
-  {
-    icon: BarChart3,
-    title: "İlerleme Takibi",
-    description:
-      "Hangi seviyedesin, hangi adımı tamamladın, önünde ne var — hepsi net ve görünür bir ilerleme haritasında.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Aşama Tamamlama",
-    description:
-      "Her seviyeyi bitirdiğinde bir dönüm noktası. Sıradaki aşama açılır, dönüşümün bir adım daha ileri gider.",
-  },
-  {
-    icon: Users,
-    title: "Topluluk Desteği",
-    description:
-      "Aynı yolculukta olan profesyonellerle soru-cevap, ilham ve karşılıklı motivasyon. Tek başına değilsin.",
-  },
-  {
-    icon: MessageCircle,
-    title: "WhatsApp Destek",
-    description:
-      "Takıldığın yerde anında destek. WhatsApp üzerinden sorularını sor, yönlendirme al — tek başına değilsin.",
-  },
+const featureIcons = [
+  { key: "progressTracking", icon: BarChart3 },
+  { key: "phaseCompletion", icon: CheckCircle2 },
+  { key: "communitySupport", icon: Users },
+  { key: "whatsappSupport", icon: MessageCircle },
 ];
 
-export function ProcessSupport() {
+export async function ProcessSupport() {
+  const t = await getTranslations("ProcessSupportC");
+
+  const features = featureIcons.map((f) => ({
+    icon: f.icon,
+    title: t(`${f.key}Title`),
+    description: t(`${f.key}Description`),
+  }));
+
   return (
     <section className="py-20 bg-white dark:bg-dark-bg transition-colors">
       <Container>
         <div className="mx-auto max-w-3xl text-center mb-16">
           <h2 className="text-3xl font-bold text-dark dark:text-white sm:text-4xl">
-            Sürecinde <span className="text-primary">Yanındayız</span>
+            {t("headingLead")} <span className="text-primary">{t("headingHighlight")}</span>
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-dark-muted">
-            Tek başına değilsin — her adımda destek var.
+            {t("subtitle")}
           </p>
         </div>
 
@@ -65,10 +54,10 @@ export function ProcessSupport() {
           <div className="p-6 rounded-xl bg-light dark:bg-dark-card border border-gray-100 dark:border-dark-border">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm font-medium text-dark dark:text-white">
-                Genel İlerleme
+                {t("overallProgress")}
               </span>
               <span className="text-sm text-gray-500 dark:text-dark-muted">
-                3 / 5 Seviye
+                {t("levelProgress", { current: 3, total: 5 })}
               </span>
             </div>
             <div className="w-full bg-gray-200 dark:bg-dark-border rounded-full h-3 mb-6">
@@ -95,7 +84,7 @@ export function ProcessSupport() {
                     {phase.letter}
                   </div>
                   <span className="text-xs text-gray-500 dark:text-dark-muted mt-1">
-                    Seviye {phase.level}
+                    {t("levelLabel", { level: phase.level })}
                   </span>
                 </div>
               ))}

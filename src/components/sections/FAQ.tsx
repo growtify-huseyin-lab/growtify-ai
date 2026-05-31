@@ -1,49 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { ChevronDown } from "lucide-react";
 
-const faqs = [
-  {
-    q: "Yapay zeka benim işim değil, çok teknik. Yapabilir miyim?",
-    a: "Teknik bilgi gerektirmiyor. Sana AI araçlarını öğretmiyoruz — işini AI ile nasıl büyüteceğini gösteriyoruz.",
-  },
-  {
-    q: "Haftada ne kadar zaman ayırmam gerekiyor?",
-    a: "Kendi hızında ilerlersin. Zaten amacımız sana zaman kazandırmak. Ama ne kadar zaman ayırırsan o kadar ilerleme gösterirsin.",
-  },
-  {
-    q: "YouTube'dan bedava öğrenemez miyim?",
-    a: "YouTube genel bilgi verir. Biz sana yapılandırılmış bir iş büyütme süreci veriyoruz. Ama sonucu belirleyen senin uygulamaların — en iyi süreç bile uygulanmazsa işe yaramaz.",
-  },
-  {
-    q: "Program ne kadar sürüyor?",
-    a: "4 hafta erişim. Kendi hızında ilerlersin. Biz süreci veriyoruz — hızı sen belirliyorsun.",
-  },
-  {
-    q: "Dijitalde hiç yokum — yine de katılabilir miyim?",
-    a: "Evet. Dijitalde olman gerekmez. Sıfırdan başla — ama ilerleme senin adımlarına bağlı. Biz yanındayız, yürüyen sensin.",
-  },
-  {
-    q: "Hangi sektörlere hitap ediyorsunuz?",
-    a: "Tüm sektörlere. Her sektöre özel örnekler ve uygulamalarla ilerlersin. Mantığı öğrenirsin, kendi sektörüne sen uygularsın.",
-  },
-  {
-    q: "4 hafta sonra ne olur?",
-    a: "Kafa yapısını kazanmış, ilk uygulamanı yapmış olursun. Devam etmek istersen genişletilmiş program seçenekleri var. Ama 4 haftada ne kadar ilerlediğin tamamen sana bağlı.",
-  },
-];
+const faqKeys = ["faq1", "faq2", "faq3", "faq4", "faq5", "faq6", "faq7"] as const;
 
 export function FAQ() {
+  const t = useTranslations("FAQC");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqs = faqKeys.map((key) => ({
+    q: t(`${key}Q`),
+    a: t(`${key}A`),
+  }));
 
   return (
     <section className="py-20 bg-light dark:bg-dark-bg/50 transition-colors">
       <Container>
         <div className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold text-dark dark:text-white text-center sm:text-4xl">
-            Sık sorulan <span className="text-primary">sorular</span>
+            {t("headingPrefix")} <span className="text-primary">{t("headingHighlight")}</span>
           </h2>
 
           <div className="mt-12 space-y-3">

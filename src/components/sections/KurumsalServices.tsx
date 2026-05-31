@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -22,7 +23,9 @@ const iconMap = {
   LayoutDashboard,
 } as const;
 
-export function KurumsalServices() {
+export async function KurumsalServices() {
+  const t = await getTranslations("KurumsalServicesC");
+
   const mentorGroup = KURUMSAL_SERVICES.filter(
     (s) => s.category === "Mentorlük"
   );
@@ -35,11 +38,11 @@ export function KurumsalServices() {
       <Container>
         <div className="mx-auto max-w-3xl text-center mb-16">
           <Badge variant="primary" className="mb-4">
-            Hizmetler
+            {t("servicesBadge")}
           </Badge>
           <h2 className="text-3xl font-bold text-dark dark:text-white sm:text-4xl">
-            İhtiyacınıza uygun{" "}
-            <span className="text-primary">AI dönüşüm hizmetleri</span>
+            {t("headingLead")}{" "}
+            <span className="text-primary">{t("headingHighlight")}</span>
           </h2>
         </div>
 
@@ -47,10 +50,10 @@ export function KurumsalServices() {
         <div className="mb-12">
           <div className="text-center mb-6">
             <h3 className="text-lg font-semibold text-dark dark:text-white uppercase tracking-wider">
-              Mentorlük
+              {t("mentorshipTitle")}
             </h3>
             <p className="mt-2 text-sm text-gray-500 dark:text-dark-muted max-w-xl mx-auto">
-              Biz öğretiyoruz, ekibiniz uyguluyor. Yapay zeka kursu değil — şirketinizi büyütmeniz için yapılandırılmış mentorlük süreci.
+              {t("mentorshipDescription")}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
@@ -70,7 +73,7 @@ export function KurumsalServices() {
               Growtify.app
             </h3>
             <p className="mt-2 text-sm text-gray-500 dark:text-dark-muted max-w-xl mx-auto">
-              Ekibiniz GROWT ile kafa yapısını kazandı. Şimdi öğrendiklerini Growtify.app ile hayata geçirin.
+              {t("appDescription")}
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">

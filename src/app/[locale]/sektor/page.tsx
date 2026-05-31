@@ -1,19 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { SECTOR_PAGES, getAllSectorSlugs } from "@/data/sectors";
+import { getAllSectorSlugs } from "@/data/sectors";
+import { sectorPagesFor } from "@/data/sectors-i18n";
 import { ArrowRight } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Sektörler",
-  description:
-    "Yapay zeka ile hangi sektörde nasıl büyürsün? Sağlık, hukuk, güzellik, emlak, e-ticaret ve daha fazlası.",
-  alternates: { canonical: "/sektor" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("SektorPage");
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: { canonical: "/sektor" },
+  };
+}
 
-export default function SektorIndexPage() {
+export default async function SektorIndexPage({ params }: { params: Promise<{ locale: string }> }) {
+  const t = await getTranslations("SektorPage");
+  const { locale } = await params;
+  const SECTOR_PAGES = sectorPagesFor(locale);
   const slugs = getAllSectorSlugs();
 
   return (
@@ -22,13 +29,13 @@ export default function SektorIndexPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="accent" className="mb-6">
-              12 Sektör
+              {t("sectorCountBadge")}
             </Badge>
             <h1 className="text-4xl font-extrabold tracking-tight text-dark dark:text-white sm:text-5xl">
-              Sektörüne Özel <span className="text-primary">Yapay Zeka Rehberi</span>
+              {t("heroTitleLead")} <span className="text-primary">{t("heroTitleHighlight")}</span>
             </h1>
             <p className="mt-6 text-lg text-gray-600 dark:text-dark-muted leading-relaxed">
-              Her sektörün kendine özgü zorlukları ve fırsatları var. Aşağıdan sektörünü seç, yapay zekanın senin mesleğinde nasıl fark yarattığını gör.
+              {t("heroSubtitle")}
             </p>
           </div>
         </Container>
@@ -51,7 +58,7 @@ export default function SektorIndexPage() {
                       </p>
                     </div>
                     <div className="mt-4 flex items-center text-sm font-medium text-primary">
-                      Detaylı rehberi gör
+                      {t("viewDetailedGuide")}
                       <ArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </Card>

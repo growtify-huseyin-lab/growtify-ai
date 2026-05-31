@@ -1,11 +1,13 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Loader2, CheckCircle2, AlertCircle, Users } from "lucide-react";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
 export function ContactForm() {
+  const t = useTranslations("ContactFormC");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -39,11 +41,11 @@ export function ContactForm() {
         form.reset();
       } else {
         setStatus("error");
-        setErrorMsg(json.error || "Bir hata oluştu.");
+        setErrorMsg(json.error || t("genericError"));
       }
     } catch {
       setStatus("error");
-      setErrorMsg("Bağlantı hatası. Lütfen tekrar dene.");
+      setErrorMsg(t("connectionError"));
     }
   }
 
@@ -55,20 +57,20 @@ export function ContactForm() {
           className="mx-auto text-green-500 dark:text-green-400"
         />
         <h3 className="mt-4 text-xl font-bold text-dark dark:text-white">
-          Mesajın bize ulaştı!
+          {t("successHeading")}
         </h3>
         <p className="mt-2 text-gray-600 dark:text-dark-muted">
-          En kısa sürede sana döneceğiz. Bu arada{" "}
+          {t("successIntro")}{" "}
           <a href="/test" className="text-primary underline font-medium">
-            AI Olgunluk Testini
+            {t("successTestLink")}
           </a>{" "}
-          çözebilirsin.
+          {t("successTestSuffix")}
         </p>
         <button
           onClick={() => setStatus("idle")}
           className="mt-6 text-sm text-primary underline"
         >
-          Yeni mesaj gönder
+          {t("newMessage")}
         </button>
 
         {/* Community CTA — secondary engagement step */}
@@ -76,12 +78,11 @@ export function ContactForm() {
           <div className="flex items-center justify-center gap-2 text-gray-500 dark:text-dark-muted">
             <Users size={14} />
             <span className="text-xs font-semibold uppercase tracking-wider">
-              Bu Arada
+              {t("communityEyebrow")}
             </span>
           </div>
           <p className="mx-auto mt-3 max-w-sm text-sm text-gray-600 dark:text-dark-muted">
-            Sorunu çözmeyi beklerken GROWT Topluluğu&apos;nda aynı yolculuktaki
-            profesyonellerle tanışabilirsin — ücretsiz.
+            {t("communityDescription")}
           </p>
           <a
             href="https://panel.growtify.ai/communities/groups/growtify-ai/"
@@ -90,7 +91,7 @@ export function ContactForm() {
             className="mt-4 inline-flex items-center gap-2 rounded-xl border-2 border-primary/20 bg-white/70 dark:bg-dark-card/70 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-primary/40 hover:bg-white dark:hover:bg-dark-card"
           >
             <Users size={16} />
-            Topluluğa Ücretsiz Katıl
+            {t("communityCta")}
             <ArrowRight size={14} />
           </a>
         </div>
@@ -108,7 +109,7 @@ export function ContactForm() {
           htmlFor="name"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Adın <span className="text-red-500">*</span>
+          {t("nameLabel")} <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -116,7 +117,7 @@ export function ContactForm() {
           name="name"
           required
           className={inputClass}
-          placeholder="Adın Soyadın"
+          placeholder={t("namePlaceholder")}
         />
       </div>
       <div>
@@ -124,7 +125,7 @@ export function ContactForm() {
           htmlFor="email"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          E-posta <span className="text-red-500">*</span>
+          {t("emailLabel")} <span className="text-red-500">*</span>
         </label>
         <input
           type="email"
@@ -132,7 +133,7 @@ export function ContactForm() {
           name="email"
           required
           className={inputClass}
-          placeholder="ornek@email.com"
+          placeholder={t("emailPlaceholder")}
         />
       </div>
       <div>
@@ -140,7 +141,7 @@ export function ContactForm() {
           htmlFor="phone"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Telefon <span className="text-red-500">*</span>
+          {t("phoneLabel")} <span className="text-red-500">*</span>
         </label>
         <input
           type="tel"
@@ -148,7 +149,7 @@ export function ContactForm() {
           name="phone"
           required
           className={inputClass}
-          placeholder="+90 5XX XXX XX XX"
+          placeholder={t("phonePlaceholder")}
         />
       </div>
       <div>
@@ -156,21 +157,21 @@ export function ContactForm() {
           htmlFor="sector"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Sektörün
+          {t("sectorLabel")}
         </label>
         <select id="sector" name="sector" className={inputClass}>
-          <option value="">Seçiniz</option>
-          <option value="saglik">Sağlık</option>
-          <option value="hukuk">Hukuk</option>
-          <option value="guzellik">Güzellik / Estetik</option>
-          <option value="emlak">Emlak</option>
-          <option value="e-ticaret">E-Ticaret</option>
-          <option value="dis">Diş Hekimliği</option>
-          <option value="muhasebe">Muhasebe</option>
-          <option value="egitim">Eğitim</option>
-          <option value="turizm">Turizm</option>
-          <option value="fitness">Fitness</option>
-          <option value="diger">Diğer</option>
+          <option value="">{t("selectPlaceholder")}</option>
+          <option value="saglik">{t("sectorHealth")}</option>
+          <option value="hukuk">{t("sectorLaw")}</option>
+          <option value="guzellik">{t("sectorBeauty")}</option>
+          <option value="emlak">{t("sectorRealEstate")}</option>
+          <option value="e-ticaret">{t("sectorEcommerce")}</option>
+          <option value="dis">{t("sectorDentistry")}</option>
+          <option value="muhasebe">{t("sectorAccounting")}</option>
+          <option value="egitim">{t("sectorEducation")}</option>
+          <option value="turizm">{t("sectorTourism")}</option>
+          <option value="fitness">{t("sectorFitness")}</option>
+          <option value="diger">{t("sectorOther")}</option>
         </select>
       </div>
       <div>
@@ -178,14 +179,14 @@ export function ContactForm() {
           htmlFor="interest"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Ne hakkında?
+          {t("interestLabel")}
         </label>
         <select id="interest" name="interest" className={inputClass}>
-          <option value="">Seçiniz</option>
-          <option value="bireysel">Bireysel program hakkında bilgi</option>
-          <option value="kurumsal">Kurumsal çözümler hakkında bilgi</option>
-          <option value="genel">Genel soru / öneri</option>
-          <option value="ortaklik">Ortaklık / iş birliği</option>
+          <option value="">{t("selectPlaceholder")}</option>
+          <option value="bireysel">{t("interestIndividual")}</option>
+          <option value="kurumsal">{t("interestCorporate")}</option>
+          <option value="genel">{t("interestGeneral")}</option>
+          <option value="ortaklik">{t("interestPartnership")}</option>
         </select>
       </div>
       <div>
@@ -193,14 +194,14 @@ export function ContactForm() {
           htmlFor="message"
           className="block text-sm font-medium text-gray-700 dark:text-dark-text"
         >
-          Mesajın
+          {t("messageLabel")}
         </label>
         <textarea
           id="message"
           name="message"
           rows={4}
           className={`${inputClass} resize-none`}
-          placeholder="Sana nasıl yardımcı olabiliriz?"
+          placeholder={t("messagePlaceholder")}
         />
       </div>
 
@@ -219,11 +220,11 @@ export function ContactForm() {
         {status === "loading" ? (
           <>
             <Loader2 size={18} className="animate-spin" />
-            Gönderiliyor...
+            {t("submitting")}
           </>
         ) : (
           <>
-            Gönder
+            {t("submit")}
             <ArrowRight size={18} />
           </>
         )}

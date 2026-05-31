@@ -2,18 +2,21 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { KURUMSAL_GROWT_PHASES } from "@/lib/kurumsal-constants";
 import { CheckCircle2 } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
-export function KurumsalGROWT() {
+export async function KurumsalGROWT() {
+  const t = await getTranslations("KurumsalGROWTC");
+
   return (
     <section className="py-20 bg-light dark:bg-dark-bg/50 transition-colors">
       <Container>
         <div className="mx-auto max-w-3xl text-center mb-16">
           <Badge variant="primary" className="mb-4">
-            Metodoloji
+            {t("badge")}
           </Badge>
           <h2 className="text-3xl font-bold text-dark dark:text-white sm:text-4xl">
             GROWT Method&trade; &mdash;{" "}
-            <span className="text-primary">Kurumsal AI Dönüşüm Programı</span>
+            <span className="text-primary">{t("heading")}</span>
           </h2>
         </div>
 

@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
@@ -12,6 +14,7 @@ import { useTheme } from "@/components/ThemeProvider";
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const t = useTranslations("HeaderC");
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-100 dark:border-dark-border bg-white/95 dark:bg-dark-bg/95 backdrop-blur-sm transition-colors">
@@ -33,15 +36,16 @@ export function Header() {
           </div>
 
           <div className="hidden lg:flex items-center gap-3">
+            <LocaleSwitcher />
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg text-text dark:text-dark-text hover:bg-primary/5 transition-colors"
-              aria-label="Tema değiştir"
+              aria-label={t("toggleTheme")}
             >
               {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <Button href="/test" variant="primary" size="sm">
-              Kişisel Planını Oluştur
+              {t("createYourPlan")}
             </Button>
           </div>
 
@@ -50,14 +54,14 @@ export function Header() {
             <button
               onClick={toggleTheme}
               className="p-2 text-text dark:text-dark-text"
-              aria-label="Tema değiştir"
+              aria-label={t("toggleTheme")}
             >
               {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
             </button>
             <button
               className="p-2 text-text dark:text-dark-text"
               onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label="Menu"
+              aria-label={t("menu")}
             >
               {mobileOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -80,7 +84,7 @@ export function Header() {
               ))}
               <div className="mt-3 px-4">
                 <Button href="/test" variant="primary" size="md" className="w-full">
-                  Kişisel Planını Oluştur
+                  {t("createYourPlan")}
                 </Button>
               </div>
             </div>

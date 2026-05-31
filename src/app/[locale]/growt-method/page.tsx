@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -19,56 +20,61 @@ import {
   BarChart3,
 } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "GROWT Method",
-  description:
-    "5 seviyeli yapılandırılmış AI dönüşüm programı. Kendi hızında, sektörüne özel, ölçülebilir sonuçlar.",
-  alternates: { canonical: "/growt-method" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("GrowtMethodPage");
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: { canonical: "/growt-method" },
+  };
+}
 
-const AUDIENCE = [
-  {
-    icon: UserCircle,
-    title: "Bireysel Profesyoneller",
-    description:
-      "Sağlık, hukuk, güzellik, emlak gibi alanlarda kendi işini yöneten uzman profesyoneller.",
-  },
-  {
-    icon: Briefcase,
-    title: "Freelancer ve Ajanslar",
-    description:
-      "Danışmanlar, freelancer'lar, koçlar, ajans sahipleri — bağımsız çalışan ve kendi markasını büyüten profesyoneller.",
-  },
-  {
-    icon: Building2,
-    title: "Mikro İşletmeler",
-    description:
-      "1-5 çalışanlı işletme sahipleri — ekibini büyütmeden yapay zeka ile kapasiteni katlamak isteyenler.",
-  },
-];
+export default async function GROWTMethodPage() {
+  const t = await getTranslations("GrowtMethodPage");
 
-const HOW_IT_WORKS = [
-  {
-    icon: PlayCircle,
-    title: "Kendi hızında ilerle",
-    description:
-      "Adımları istediğin zaman, istediğin yerden tamamla. Sabit bir takvim yok — hayatına uyum sağlar.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Danışman onaylı ilerleme",
-    description:
-      "Her adım sonunda görevini tamamla. Danışman onayı sonrası bir sonraki adım açılır — sağlam temel garantili.",
-  },
-  {
-    icon: BarChart3,
-    title: "İlerleme takibi",
-    description:
-      "İlerleme haritanı, tamamladığın aşamaları ve topluluk desteğini tek yerde gör. Her adımın görünür, motivasyonun sürekli.",
-  },
-];
+  const AUDIENCE = [
+    {
+      icon: UserCircle,
+      title: t("audience1Title"),
+      description: t("audience1Description"),
+    },
+    {
+      icon: Briefcase,
+      title: t("audience2Title"),
+      description: t("audience2Description"),
+    },
+    {
+      icon: Building2,
+      title: t("audience3Title"),
+      description: t("audience3Description"),
+    },
+  ];
 
-export default function GROWTMethodPage() {
+  const HOW_IT_WORKS = [
+    {
+      icon: PlayCircle,
+      title: t("howItWorks1Title"),
+      description: t("howItWorks1Description"),
+    },
+    {
+      icon: CheckCircle2,
+      title: t("howItWorks2Title"),
+      description: t("howItWorks2Description"),
+    },
+    {
+      icon: BarChart3,
+      title: t("howItWorks3Title"),
+      description: t("howItWorks3Description"),
+    },
+  ];
+
+  const STATS = [
+    { icon: Layers, label: t("stat1Label"), value: t("stat1Value") },
+    { icon: Clock, label: t("stat2Label"), value: t("stat2Value") },
+    { icon: BookOpen, label: t("stat3Label"), value: t("stat3Value") },
+    { icon: TrendingUp, label: t("stat4Label"), value: t("stat4Value") },
+  ];
+
   return (
     <>
       {/* 1. Hero */}
@@ -76,13 +82,13 @@ export default function GROWTMethodPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="accent" className="mb-6">
-              Yapay Zeka ile İşini Büyüt
+              {t("heroBadge")}
             </Badge>
             <h1 className="text-4xl font-extrabold tracking-tight text-dark dark:text-white sm:text-5xl">
-              <span className="text-primary">GROWT Method</span> ile AI Dönüşümü
+              <span className="text-primary">GROWT Method</span> {t("heroTitleSuffix")}
             </h1>
             <p className="mt-6 text-lg text-gray-600 dark:text-dark-muted leading-relaxed">
-              Yapay zeka kursu değil — işini büyütmen için yapılandırılmış bir süreç. GROWT Method ile 5 Seviyede Dönüşüm.
+              {t("heroDescription")}
             </p>
           </div>
         </Container>
@@ -92,12 +98,7 @@ export default function GROWTMethodPage() {
       <section className="py-12 bg-white dark:bg-dark-bg border-b border-gray-100 dark:border-dark-border transition-colors">
         <Container>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { icon: Layers, label: "Yapılandırılmış", value: "5 Seviye" },
-              { icon: Clock, label: "Esnek", value: "Kendi Hızında" },
-              { icon: BookOpen, label: "İçerik", value: "Kapsamlı İçerik" },
-              { icon: TrendingUp, label: "Sonuç", value: "Ölçülebilir Büyüme" },
-            ].map((item) => (
+            {STATS.map((item) => (
               <div key={item.label} className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20">
                   <item.icon size={24} className="text-primary" />
@@ -121,11 +122,10 @@ export default function GROWTMethodPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center mb-16">
             <h2 className="text-3xl font-bold text-dark dark:text-white">
-              5 Seviyede Yapılandırılmış Dönüşüm
+              {t("phasesHeading")}
             </h2>
             <p className="mt-4 text-gray-600 dark:text-dark-muted">
-              Her seviye bir öncekinin üzerine inşa edilir. Gap Analysis&apos;ten
-              Transform&apos;a kadar net bir yol.
+              {t("phasesSubheading")}
             </p>
           </div>
 
@@ -146,7 +146,7 @@ export default function GROWTMethodPage() {
                 </div>
                 <div className="lg:w-2/3">
                   <p className="text-sm font-semibold text-primary uppercase tracking-wider">
-                    Seviye {phase.level}
+                    {t("phaseLevelLabel", { level: phase.level })}
                   </p>
                   <h3 className="mt-2 text-3xl font-bold text-dark dark:text-white">
                     {phase.letter} — {phase.name}
@@ -180,14 +180,14 @@ export default function GROWTMethodPage() {
           {/* Mobile — compact journey visual (no content repeat) */}
           <div className="lg:hidden">
             <p className="text-center text-xs font-semibold text-gray-500 dark:text-dark-muted uppercase tracking-wider mb-6">
-              Yolculuğun özeti
+              {t("journeySummaryLabel")}
             </p>
             <div className="flex items-center justify-between gap-0 max-w-[300px] mx-auto">
               {GROWT_PHASES.map((phase, i) => (
                 <div key={phase.letter} className="flex items-center shrink-0">
                   <div
                     className={`flex h-11 w-11 items-center justify-center rounded-xl text-lg font-black text-white shadow-md ${phase.color}`}
-                    aria-label={`Seviye ${phase.level} — ${phase.name}`}
+                    aria-label={t("phaseAriaLabel", { level: phase.level, name: phase.name })}
                   >
                     {phase.letter}
                   </div>
@@ -231,10 +231,10 @@ export default function GROWTMethodPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center mb-12">
             <h2 className="text-3xl font-bold text-dark dark:text-white">
-              Kimler İçin?
+              {t("audienceHeading")}
             </h2>
             <p className="mt-4 text-gray-600 dark:text-dark-muted">
-              GROWT Method, işini kendi elleriyle büyüten profesyoneller için tasarlandı.
+              {t("audienceSubheading")}
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-3 max-w-4xl mx-auto">
@@ -260,10 +260,10 @@ export default function GROWTMethodPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center mb-12">
             <h2 className="text-3xl font-bold text-dark dark:text-white">
-              Nasıl Çalışır?
+              {t("howItWorksHeading")}
             </h2>
             <p className="mt-4 text-gray-600 dark:text-dark-muted">
-              Kendi hızında öğrenme ile danışman destekli ilerlemeyi birleştiren bir model.
+              {t("howItWorksSubheading")}
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-3 max-w-4xl mx-auto">
@@ -272,7 +272,7 @@ export default function GROWTMethodPage() {
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 dark:bg-primary/20 mb-4">
                   <step.icon size={28} className="text-primary" />
                 </div>
-                <span className="text-xs font-semibold text-primary uppercase">Adım {i + 1}</span>
+                <span className="text-xs font-semibold text-primary uppercase">{t("stepLabel", { step: i + 1 })}</span>
                 <h3 className="mt-2 text-lg font-semibold text-dark dark:text-white">
                   {step.title}
                 </h3>
@@ -290,10 +290,10 @@ export default function GROWTMethodPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center mb-12">
             <h2 className="text-3xl font-bold text-dark dark:text-white">
-              GROWT ile dönüşüme başla
+              {t("ctaHeading")}
             </h2>
             <p className="mt-4 text-gray-600 dark:text-dark-muted">
-              Sana en uygun yolu seç — bireysel program veya kurumsal çözümler.
+              {t("ctaSubheading")}
             </p>
           </div>
 
@@ -303,12 +303,12 @@ export default function GROWTMethodPage() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20">
                 <UserCircle size={24} className="text-primary" />
               </div>
-              <Badge variant="muted" className="mt-4 self-start">Bireysel misin?</Badge>
+              <Badge variant="muted" className="mt-4 self-start">{t("ctaIndividualBadge")}</Badge>
               <h3 className="mt-3 text-xl font-bold text-dark dark:text-white">
-                GROWT Programı
+                {t("ctaIndividualTitle")}
               </h3>
               <p className="mt-3 text-gray-600 dark:text-dark-muted flex-grow">
-                Tek seferlik ödeme, 4 hafta tam erişim, kendi hızında ilerleme. Kişisel fiyatını öğrenmek için teste başla.
+                {t("ctaIndividualDescription")}
               </p>
               <div className="mt-6">
                 <Button
@@ -316,7 +316,7 @@ export default function GROWTMethodPage() {
                   variant="primary"
                   size="md"
                 >
-                  Kişisel Planını Oluştur
+                  {t("ctaIndividualButton")}
                   <ArrowRight size={16} className="ml-2" />
                 </Button>
               </div>
@@ -327,16 +327,16 @@ export default function GROWTMethodPage() {
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent/20 dark:bg-accent/10">
                 <Building2 size={24} className="text-dark dark:text-accent" />
               </div>
-              <Badge variant="accent" className="mt-4 self-start">Ekibin için mi?</Badge>
+              <Badge variant="accent" className="mt-4 self-start">{t("ctaBusinessBadge")}</Badge>
               <h3 className="mt-3 text-xl font-bold text-dark dark:text-white">
-                İşletme Çözümleri
+                {t("ctaBusinessTitle")}
               </h3>
               <p className="mt-3 text-gray-600 dark:text-dark-muted flex-grow">
-                Ekip eğitimi, kurumsal danışmanlık, AI otomasyon ve GROWT Method&apos;un kurumsal uyarlaması. Büyüyen işletmeler için.
+                {t("ctaBusinessDescription")}
               </p>
               <div className="mt-6">
                 <Button href="/kurumsal" variant="secondary" size="md">
-                  İşletme Çözümlerini İncele
+                  {t("ctaBusinessButton")}
                   <ArrowRight size={16} className="ml-2" />
                 </Button>
               </div>

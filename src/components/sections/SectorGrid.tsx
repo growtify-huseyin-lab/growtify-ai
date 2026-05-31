@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import {
   Heart,
@@ -29,16 +30,17 @@ const sectorSlugMap: Record<string, string> = {
   egitim: "egitim", fitness: "fitness",
 };
 
-export function SectorGrid() {
+export async function SectorGrid() {
+  const t = await getTranslations('SectorGridC');
   return (
     <section className="py-20 bg-light dark:bg-dark-bg/50 transition-colors">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-dark dark:text-white sm:text-4xl">
-            <span className="text-primary">Sektörüne özel</span> yapay zeka ile iş büyütme
+            <span className="text-primary">{t('headingHighlight')}</span> {t('headingRest')}
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-dark-muted">
-            Her sektörün ihtiyacı farklı. GROWT Method sana özel şekilleniyor.
+            {t('subheading')}
           </p>
         </div>
 
@@ -61,7 +63,7 @@ export function SectorGrid() {
                 <p className="mt-1.5 text-xs text-gray-500 dark:text-dark-muted text-center leading-relaxed">{sector.hook}</p>
                 <div className="mt-3 flex justify-center">
                   <span className="text-xs text-primary font-medium opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                    İncele <ArrowRight size={12} />
+                    {t('exploreCta')} <ArrowRight size={12} />
                   </span>
                 </div>
               </Link>

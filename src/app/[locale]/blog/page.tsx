@@ -1,20 +1,24 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { CategoryTabs } from "@/components/blog/CategoryTabs";
 import { BlogPagination } from "@/components/blog/BlogPagination";
 import { getAllPosts } from "@/lib/blog";
 
-export const metadata: Metadata = {
-  title: "Blog",
-  description:
-    "Yapay zeka ile iş büyütme rehberleri, sektöre özel içerikler ve GROWT Method.",
-  alternates: {
-    canonical: "/blog",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("BlogPage");
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: {
+      canonical: "/blog",
+    },
+  };
+}
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const t = await getTranslations("BlogPage");
   const posts = getAllPosts();
   const featured = posts.find((p) => p.featured);
   const rest = posts.filter((p) => p !== featured);
@@ -26,11 +30,10 @@ export default function BlogPage() {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-extrabold tracking-tight text-dark dark:text-white sm:text-5xl">
-              <span className="text-primary">Blog</span>
+              <span className="text-primary">{t("heroTitle")}</span>
             </h1>
             <p className="mt-4 text-lg text-gray-600 dark:text-dark-muted">
-              Yapay zeka ile iş büyütme rehberleri, sektöre özel içerikler ve
-              GROWT Method.
+              {t("heroSubtitle")}
             </p>
           </div>
         </Container>
@@ -54,7 +57,7 @@ export default function BlogPage() {
           ) : posts.length === 0 ? (
             <div className="mt-12 text-center">
               <p className="text-gray-500 dark:text-dark-muted">
-                Blog içerikleri yakın zamanda yayınlanacaktır.
+                {t("emptyState")}
               </p>
             </div>
           ) : null}

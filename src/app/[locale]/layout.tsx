@@ -51,6 +51,11 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: BASE_URL,
+    languages: {
+      tr: BASE_URL,
+      en: `${BASE_URL}/en`,
+      "x-default": BASE_URL,
+    },
   },
   openGraph: {
     type: "website",
