@@ -1,4 +1,11 @@
 import { SECTOR_PAGES, type SectorPage } from "./sectors";
+import SEKTOR_EN_VALUES from "./sektor-en-values.json";
+
+// Creative-authored EN scenario before/after values (audit fix package — authoritative).
+const EN_VALUES = SEKTOR_EN_VALUES as Record<
+  string,
+  { category_label?: string; tag_label?: string; before_after?: { label: string; before: string; after: string }[] }
+>;
 
 // EN translations (translatable fields only); non-translatable fields (slug, icon,
 // relatedBlogSlugs) inherited from the TR source by index-merge.
@@ -492,13 +499,16 @@ export const SECTOR_PAGES_EN: Record<string, SectorPage> = Object.fromEntries(
           title: o.problems[i]?.title ?? pr.title,
           description: o.problems[i]?.description ?? pr.description,
         })),
-        scenarios: p.scenarios.map((sc, i) => ({
-          ...sc,
-          title: o.scenarios[i]?.title ?? sc.title,
-          description: o.scenarios[i]?.description ?? sc.description,
-          beforeTime: tl(sc.beforeTime),
-          afterTime: tl(sc.afterTime),
-        })),
+        scenarios: p.scenarios.map((sc, i) => {
+          const cv = EN_VALUES[slug]?.before_after?.[i];
+          return {
+            ...sc,
+            title: cv?.label ?? o.scenarios[i]?.title ?? sc.title,
+            description: o.scenarios[i]?.description ?? sc.description,
+            beforeTime: cv?.before ?? tl(sc.beforeTime),
+            afterTime: cv?.after ?? tl(sc.afterTime),
+          };
+        }),
       } as SectorPage,
     ];
   })
