@@ -6,7 +6,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { BlogCTA } from "@/components/blog/BlogCTA";
 import { BlogCard } from "@/components/blog/BlogCard";
-import { getAllPosts, getPostBySlug, BLOG_CATEGORIES } from "@/lib/blog";
+import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { getCategoryLabel } from "@/lib/blog-categories";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import {
   Clock,
@@ -21,7 +22,7 @@ import { Link } from "@/i18n/navigation";
 
 const BASE_URL = "https://growtify.ai";
 
-type Props = { params: Promise<{ slug: string }> };
+type Props = { params: Promise<{ slug: string; locale: string }> };
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -52,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
@@ -67,9 +68,7 @@ export default async function BlogPostPage({ params }: Props) {
     )
     .slice(0, 3);
 
-  const categoryLabel =
-    BLOG_CATEGORIES.find((c) => c.slug === post.category)?.label ||
-    post.category;
+  const categoryLabel = getCategoryLabel(post.category, locale);
 
   const shareUrl = `${BASE_URL}/blog/${post.slug}`;
   const shareText = encodeURIComponent(post.title);
@@ -306,7 +305,7 @@ export default async function BlogPostPage({ params }: Props) {
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p) => (
-                <BlogCard key={p.slug} post={p} />
+                <BlogCard key={p.slug} post={p} locale={locale} />
               ))}
             </div>
           </Container>

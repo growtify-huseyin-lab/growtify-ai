@@ -21,7 +21,12 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPage() {
+export default async function BlogPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const t = await getTranslations("BlogPage");
   const posts = getAllPosts();
   const featured = posts.find((p) => p.featured);
@@ -51,7 +56,7 @@ export default async function BlogPage() {
           {/* Featured post */}
           {featured && (
             <div className="mt-8">
-              <BlogCard post={featured} featured />
+              <BlogCard post={featured} featured locale={locale} />
             </div>
           )}
 

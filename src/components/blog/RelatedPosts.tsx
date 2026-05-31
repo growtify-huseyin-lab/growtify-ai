@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { BlogCard } from "./BlogCard";
 import type { BlogMeta } from "@/lib/blog-types";
 
@@ -6,6 +6,7 @@ export async function RelatedPosts({ posts }: { posts: BlogMeta[] }) {
   if (posts.length === 0) return null;
 
   const t = await getTranslations("RelatedPostsC");
+  const locale = await getLocale();
 
   return (
     <div>
@@ -14,7 +15,7 @@ export async function RelatedPosts({ posts }: { posts: BlogMeta[] }) {
       </h3>
       <div className="space-y-4">
         {posts.slice(0, 3).map((post) => (
-          <BlogCard key={post.slug} post={post} />
+          <BlogCard key={post.slug} post={post} locale={locale} />
         ))}
       </div>
     </div>

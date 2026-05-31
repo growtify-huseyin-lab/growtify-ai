@@ -298,7 +298,7 @@ export default async function SectorPage({ params }: Props) {
             </h2>
             <div className="grid gap-6 sm:grid-cols-3">
               {relatedPosts.slice(0, 3).map((post) => (
-                <BlogCard key={post.slug} post={post} />
+                <BlogCard key={post.slug} post={post} locale={locale} />
               ))}
             </div>
           </Container>

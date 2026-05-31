@@ -4,12 +4,26 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { COMPANY } from "@/lib/company-info";
 
-export const metadata: Metadata = {
-  title: "KVKK Aydınlatma Metni",
-  description:
-    "Growtify.ai — 6698 sayılı KVKK kapsamında kişisel verilerin işlenmesine ilişkin aydınlatma metni.",
-  alternates: { canonical: "/kvkk-aydinlatma" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const en = locale === "en";
+  // KVKK is Turkey-specific; the EN render reuses the UK-GDPR Privacy Policy, so the EN
+  // variant is a DUPLICATE of /en/gizlilik-politikasi → canonical there to consolidate.
+  return {
+    title: en ? "Privacy Notice (KVKK) — Growtify.ai" : "KVKK Aydınlatma Metni",
+    description: en
+      ? "Growtify.ai — how your personal data is processed under applicable data protection law (UK GDPR)."
+      : "Growtify.ai — 6698 sayılı KVKK kapsamında kişisel verilerin işlenmesine ilişkin aydınlatma metni.",
+    alternates: {
+      canonical: en ? "/en/gizlilik-politikasi" : "/kvkk-aydinlatma",
+    },
+    robots: en ? { index: false, follow: true } : undefined,
+  };
+}
 
 export default async function KVKKAydinlatmaPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

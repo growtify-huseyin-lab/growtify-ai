@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogCategoryPage({ params }: Props) {
-  const { kategori } = await params;
+  const { kategori, locale } = await params;
   const t = await getTranslations("BlogKategoriPage");
   const cat = BLOG_CATEGORIES.find((c) => c.slug === kategori);
   if (!cat) notFound();
@@ -52,7 +52,7 @@ export default async function BlogCategoryPage({ params }: Props) {
           {posts.length > 0 ? (
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {posts.map((post) => (
-                <BlogCard key={post.slug} post={post} />
+                <BlogCard key={post.slug} post={post} locale={locale} />
               ))}
             </div>
           ) : (

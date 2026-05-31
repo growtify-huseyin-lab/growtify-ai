@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { BlogCard } from "./BlogCard";
 import type { BlogMeta } from "@/lib/blog-types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -10,6 +10,7 @@ const POSTS_PER_PAGE = 9;
 
 export function BlogPagination({ posts }: { posts: BlogMeta[] }) {
   const t = useTranslations("BlogPaginationC");
+  const locale = useLocale();
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   const start = (page - 1) * POSTS_PER_PAGE;
@@ -25,7 +26,7 @@ export function BlogPagination({ posts }: { posts: BlogMeta[] }) {
       {/* Grid */}
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((post) => (
-          <BlogCard key={post.slug} post={post} />
+          <BlogCard key={post.slug} post={post} locale={locale} />
         ))}
       </div>
 

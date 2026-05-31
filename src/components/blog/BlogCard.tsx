@@ -2,7 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { Clock, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import type { BlogMeta } from "@/lib/blog-types";
-import { BLOG_CATEGORIES } from "@/lib/blog-categories";
+import { getCategoryLabel } from "@/lib/blog-categories";
 
 // Gradient pairs for cover image placeholders (until real images are added)
 const COVER_GRADIENTS = [
@@ -22,13 +22,13 @@ function getCoverGradient(slug: string): string {
 export function BlogCard({
   post,
   featured = false,
+  locale = "tr",
 }: {
   post: BlogMeta;
   featured?: boolean;
+  locale?: string;
 }) {
-  const categoryLabel =
-    BLOG_CATEGORIES.find((c) => c.slug === post.category)?.label ||
-    post.category;
+  const categoryLabel = getCategoryLabel(post.category, locale);
   const gradient = getCoverGradient(post.slug);
 
   if (featured) {

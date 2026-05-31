@@ -11,11 +11,17 @@ function parseStatValue(value: string): { prefix: string; number: number; suffix
 }
 
 function AnimatedStat({ value, label }: { value: string; label: string }) {
-  const [displayed, setDisplayed] = useState("0");
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
   const { prefix, number, suffix } = parseStatValue(value);
   const hasDecimal = value.includes(".");
+  // Initialize to the REAL value so SSR / no-JS / crawlers see "3.5x" not "0x"
+  // (was useState("0") → static/indexed render showed placeholder zeros). JS still
+  // re-animates from 0 on scroll-into-view.
+  const initial = hasDecimal
+    ? number.toFixed(1)
+    : Math.round(number).toLocaleString("tr-TR");
+  const [displayed, setDisplayed] = useState(initial);
+  const [hasAnimated, setHasAnimated] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const animate = useCallback(() => {
     if (hasAnimated) return;
