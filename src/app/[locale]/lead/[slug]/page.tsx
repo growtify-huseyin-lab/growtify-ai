@@ -8,10 +8,11 @@ import {
   getAllLeadMagnetSlugs,
   FORMAT_CONFIG,
 } from "@/content/lead-magnets";
+import { getLeadMagnet as getLeadMagnetEn } from "@/content/lead-magnets/index.en";
 import { CheckCircle2 } from "lucide-react";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }
 
 export async function generateStaticParams() {
@@ -21,8 +22,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const magnet = getLeadMagnet(slug);
+  const { slug, locale } = await params;
+  const magnet = (locale === "en" ? getLeadMagnetEn : getLeadMagnet)(slug);
   if (!magnet) return { title: "İçerik bulunamadı" };
 
   return {
@@ -39,8 +40,8 @@ export async function generateMetadata({
 }
 
 export default async function LeadMagnetPage({ params }: PageProps) {
-  const { slug } = await params;
-  const magnet = getLeadMagnet(slug);
+  const { slug, locale } = await params;
+  const magnet = (locale === "en" ? getLeadMagnetEn : getLeadMagnet)(slug);
   if (!magnet || !magnet.active) notFound();
 
   const fmt = FORMAT_CONFIG[magnet.format];

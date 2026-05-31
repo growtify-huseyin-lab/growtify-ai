@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { initialQuizState, type QuizState } from "./types";
 import { useQuizScreens, useTotalScreens } from "./content-runtime-hooks";
+import { useLocale } from "next-intl";
 import { computeResults, pickDiscount } from "./scoring";
 import {
   clearQuizSnapshot,
@@ -33,6 +34,7 @@ interface ResumeInfo {
 export function QuizProvider({ children }: { children: React.ReactNode }) {
   const SCREENS = useQuizScreens();
   const TOTAL_SCREENS = useTotalScreens();
+  const locale = useLocale();
   // Initial state ALWAYS matches server render (empty quiz, index 0, no
   // resume modal). We defer localStorage access to a useEffect below so
   // SSR/CSR outputs stay identical and hydration succeeds.
@@ -167,7 +169,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
       const res = await fetch("/test/api/submit-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(state),
+        body: JSON.stringify({ ...state, locale }),
       });
       if (!res.ok) {
         return { ok: false, error: `HTTP ${res.status}` };

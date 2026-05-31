@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "next-intl";
+
 import { useState, FormEvent, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Loader2, CheckCircle2, AlertCircle, Download, Users } from "lucide-react";
@@ -24,6 +26,7 @@ interface SuccessPayload {
  * Shows PDF download on success.
  */
 export function RehberForm({ sektor }: RehberFormProps) {
+  const locale = useLocale();
   const t = useTranslations("RehberFormC");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -54,6 +57,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
 
     const form = e.currentTarget;
     const payload = {
+      locale,
       sector: sektor,
       firstName: (form.elements.namedItem("firstName") as HTMLInputElement).value.trim(),
       email: (form.elements.namedItem("email") as HTMLInputElement).value.trim(),

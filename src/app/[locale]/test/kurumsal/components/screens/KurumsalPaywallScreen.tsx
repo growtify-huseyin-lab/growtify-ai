@@ -1,7 +1,8 @@
 "use client";
 
 import { useQuiz } from "../../lib/QuizContext-kurumsal";
-import { KURUMSAL_PAYWALL_COPY, KURUMSAL_PERSONA_SUMMARIES, interpolate } from "../../lib/content-kurumsal-runtime";
+import { interpolate } from "../../lib/content-kurumsal-runtime";
+import { useKPaywallCopy, useKPersonaSummaries } from "../../lib/content-kurumsal-runtime-hooks";
 import type { KurumsalScreenConfig, KurumsalQuizState } from "../../lib/types-kurumsal";
 
 function buildBookingUrl(baseUrl: string, firstName: string, email: string, phone: string): string {
@@ -15,6 +16,8 @@ function buildBookingUrl(baseUrl: string, firstName: string, email: string, phon
 }
 
 export function KurumsalPaywallScreen({ screen }: { screen: KurumsalScreenConfig }) {
+  const KURUMSAL_PAYWALL_COPY = useKPaywallCopy();
+  const KURUMSAL_PERSONA_SUMMARIES = useKPersonaSummaries();
   const { state } = useQuiz();
   const s = state as KurumsalQuizState;
   const isSecondary = screen.extra?.isSecondaryPaywall === true;

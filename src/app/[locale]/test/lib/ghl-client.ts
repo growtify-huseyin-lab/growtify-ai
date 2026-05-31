@@ -48,7 +48,7 @@ export interface UpsertResult {
  * Upsert a contact into GHL with quiz tags + custom fields.
  * Uses /contacts/upsert which creates or updates by email.
  */
-export async function upsertQuizContact(state: QuizState): Promise<UpsertResult> {
+export async function upsertQuizContact(state: QuizState, locale?: string): Promise<UpsertResult> {
   const config = readConfig();
   if (!config) {
     return {
@@ -65,7 +65,7 @@ export async function upsertQuizContact(state: QuizState): Promise<UpsertResult>
     phone: state.phone || undefined,
     country: "TR",
     source: "Growtify.ai quiz",
-    tags: buildGhlTags(state),
+    tags: locale === "en" ? [...buildGhlTags(state), "lang:eng"] : buildGhlTags(state),
     customFields: buildGhlCustomFields(state),
   };
 

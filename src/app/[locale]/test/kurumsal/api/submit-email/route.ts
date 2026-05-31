@@ -16,6 +16,7 @@ import {
 import { buildGhlCustomFields, buildGhlTags, buildContactNote } from "../../lib/ghl-mapping-kurumsal";
 import { computeKurumsalResults } from "../../lib/scoring-kurumsal";
 import { generateKurumsalPdfHtml } from "../../lib/pdf-html-template-kurumsal";
+import { generateKurumsalPdfHtml as generateKurumsalPdfHtmlEn } from "../../lib/pdf-html-template-kurumsal-en";
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
@@ -57,7 +58,8 @@ export async function POST(request: Request) {
   // ========== FAST PATH (blocking — ~3s) ==========
 
   // 1. Upsert contact — reuse bireysel ghl-client with kurumsal mapping
-  const tags = buildGhlTags(state);
+  const locale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
+  const tags = locale === "en" ? [...buildGhlTags(state), "lang:eng"] : buildGhlTags(state);
   const customFields = buildGhlCustomFields(state);
 
   // Build a minimal state-like object that bireysel ghl-client expects
@@ -189,8 +191,9 @@ async function backgroundPdfFlow(
   config: GhlConfig,
 ): Promise<void> {
   try {
-    // Generate PDF from kurumsal template
-    const html = generateKurumsalPdfHtml(state);
+    // Generate PDF from kurumsal template (locale-aware)
+    const bgLocale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
+    const html = (bgLocale === "en" ? generateKurumsalPdfHtmlEn : generateKurumsalPdfHtml)(state);
     const { generatePdfFromHtml } = await import("../../../lib/pdf-generate");
     const pdfBuffer = await generatePdfFromHtml(html);
     const filename = `growtify-kurumsal-rapor-${(state.firstName || "rapor").toLowerCase().replace(/\s+/g, "-")}.pdf`;

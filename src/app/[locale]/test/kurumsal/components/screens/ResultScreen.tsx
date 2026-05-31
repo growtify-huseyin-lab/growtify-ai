@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useQuiz } from "../../lib/QuizContext-kurumsal";
-import { KURUMSAL_PERSONA_SUMMARIES } from "../../lib/content-kurumsal-runtime";
+import { useKPersonaSummaries } from "../../lib/content-kurumsal-runtime-hooks";
 import { getDimensionBreakdown, getPainBreakdown } from "../../lib/scoring-kurumsal";
 import type { KurumsalScreenConfig, KurumsalQuizState } from "../../lib/types-kurumsal";
 
@@ -13,6 +13,7 @@ function barColor(pct: number): string {
 }
 
 export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
+  const KURUMSAL_PERSONA_SUMMARIES = useKPersonaSummaries();
   const { state, next, finalize } = useQuiz();
 
   // Compute results on mount (scoring + persona assignment)

@@ -3,6 +3,7 @@
 // Uses mock data so you can see the design without completing the quiz.
 
 import { generatePdfHtml } from "../../lib/pdf-html-template";
+import { generatePdfHtml as generatePdfHtmlEn } from "../../lib/pdf-html-template-en";
 import { computeResults, pickDiscount } from "../../lib/scoring";
 import type { QuizState } from "../../lib/types";
 import { initialQuizState } from "../../lib/types";
@@ -39,7 +40,8 @@ const MOCK_STATE: QuizState = {
 export async function GET() {
   const state = { ...MOCK_STATE, ...computeResults(MOCK_STATE) };
   // Preview uses a sample coupon so the block renders; real flow passes the generated code.
-  const html = generatePdfHtml(state, "GROWT9VHLEZ");
+  const pvLocale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
+  const html = (pvLocale === "en" ? generatePdfHtmlEn : generatePdfHtml)(state, "GROWT9VHLEZ");
   return new Response(html, {
     headers: { "Content-Type": "text/html; charset=utf-8" },
   });

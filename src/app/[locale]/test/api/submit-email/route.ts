@@ -39,6 +39,7 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, error: "invalid_json" }, { status: 400 });
   }
 
+  const locale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
   if (!state?.email || !/^\S+@\S+\.\S+$/.test(state.email)) {
     return Response.json({ ok: false, error: "invalid_email" }, { status: 400 });
   }
@@ -63,7 +64,7 @@ export async function POST(request: Request) {
   // ========== FAST PATH (blocking — ~3s) ==========
 
   // 1. Upsert contact
-  const upsertResult = await upsertQuizContact(state);
+  const upsertResult = await upsertQuizContact(state, locale);
   if (!upsertResult.ok) {
     console.error("[quiz/submit-email] GHL upsert failed:", upsertResult);
     return Response.json(
@@ -124,7 +125,8 @@ async function backgroundPdfFlow(
   couponCode: string | undefined,
 ): Promise<void> {
   try {
-    const pdfBuffer = await generateQuizPdf(state, couponCode);
+    const locale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
+    const pdfBuffer = await generateQuizPdf(state, couponCode, locale);
     const filename = getPdfFilename(state.firstName);
     console.log(`[quiz/bg] PDF generated — ${filename} (${pdfBuffer.length} bytes)`);
 

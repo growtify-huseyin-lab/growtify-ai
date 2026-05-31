@@ -8,7 +8,8 @@ import React, {
   useState,
 } from "react";
 import { initialKurumsalState, type KurumsalQuizState } from "./types-kurumsal";
-import { SCREENS, TOTAL_SCREENS } from "./content-kurumsal-runtime";
+import { useKScreens, useKTotalScreens } from "./content-kurumsal-runtime-hooks";
+import { useLocale } from "next-intl";
 import { computeKurumsalResults } from "./scoring-kurumsal";
 import {
   clearQuizSnapshot,
@@ -28,6 +29,9 @@ interface ResumeInfo {
 }
 
 export function KurumsalQuizProvider({ children }: { children: React.ReactNode }) {
+  const SCREENS = useKScreens();
+  const TOTAL_SCREENS = useKTotalScreens();
+  const locale = useLocale();
   const [state, setState] = useState<KurumsalQuizState>(initialKurumsalState);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [resumeInfo, setResumeInfo] = useState<ResumeInfo | null>(null);
@@ -145,7 +149,7 @@ export function KurumsalQuizProvider({ children }: { children: React.ReactNode }
       const res = await fetch("/test/kurumsal/api/submit-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(state),
+        body: JSON.stringify({ ...state, locale }),
       });
       if (!res.ok) {
         return { ok: false, error: `HTTP ${res.status}` };

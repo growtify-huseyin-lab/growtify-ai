@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale } from "next-intl";
+
 import { useState, useEffect, FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import {
@@ -29,6 +31,7 @@ export function LeadForm({
   assetDelivery,
   formatLabel,
 }: LeadFormProps) {
+  const locale = useLocale();
   const t = useTranslations("LeadFormC");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -53,6 +56,7 @@ export function LeadForm({
 
     const form = e.currentTarget;
     const data = {
+      locale,
       slug,
       firstName: (form.elements.namedItem("firstName") as HTMLInputElement)
         .value,

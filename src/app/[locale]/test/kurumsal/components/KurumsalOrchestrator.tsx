@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { AnimatePresence, LazyMotion, domAnimation, motion } from "motion/react";
 import { useQuiz } from "../lib/QuizContext-kurumsal";
-import { SCREENS } from "../lib/content-kurumsal-runtime";
+import { useKScreens } from "../lib/content-kurumsal-runtime-hooks";
 import { useHasMounted } from "../../lib/useHasMounted";
 import type { KurumsalScreenConfig, KurumsalScreenType } from "../lib/types-kurumsal";
 
@@ -39,6 +39,7 @@ const RENDERERS: Record<KurumsalScreenType, ScreenRenderer> = {
 };
 
 export function KurumsalOrchestrator() {
+  const SCREENS = useKScreens();
   const { currentIndex } = useQuiz();
   const hasMounted = useHasMounted();
   const screen = SCREENS[currentIndex];

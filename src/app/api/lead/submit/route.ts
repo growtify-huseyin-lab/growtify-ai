@@ -79,6 +79,7 @@ export async function POST(req: NextRequest) {
       utmMedium,
       utmCampaign,
       landingPage,
+      locale,
     } = await req.json();
 
     // Validation
@@ -119,6 +120,7 @@ export async function POST(req: NextRequest) {
     if (magnet.sectorRef) {
       tags.push(`gai_sector_${magnet.sectorRef}`);
     }
+    if (locale === "en") tags.push("lang:eng");
 
     // Split full name into firstName + lastName for GHL
     const nameParts = (firstName || "").trim().split(/\s+/);

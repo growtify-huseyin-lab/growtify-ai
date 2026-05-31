@@ -141,6 +141,7 @@ export async function POST(req: NextRequest) {
     rehber.ghlSectorTag,
     resolveSourceTag(body.utmSource, body.utmMedium),
   ];
+  if ((body as { locale?: string }).locale === "en") tags.push("lang:eng");
 
   // Build custom fields
   const now = new Date().toISOString();

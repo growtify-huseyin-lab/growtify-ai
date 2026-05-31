@@ -4,6 +4,7 @@
 import chromium from "@sparticuz/chromium";
 import puppeteerCore, { type Browser } from "puppeteer-core";
 import { generatePdfHtml } from "./pdf-html-template";
+import { generatePdfHtml as generatePdfHtmlEn } from "./pdf-html-template-en";
 import type { QuizState } from "./types";
 
 /* -------------------------------------------------------------------------- */
@@ -77,8 +78,8 @@ const PAGE_TIMEOUT = 60000;
  * Generate PDF with retry. If first attempt fails (timeout, crash),
  * kills browser and retries with a fresh instance.
  */
-export async function generateQuizPdf(state: QuizState, couponCode?: string): Promise<Buffer> {
-  const html = generatePdfHtml(state, couponCode);
+export async function generateQuizPdf(state: QuizState, couponCode?: string, locale?: string): Promise<Buffer> {
+  const html = (locale === "en" ? generatePdfHtmlEn : generatePdfHtml)(state, couponCode);
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {

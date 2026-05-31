@@ -28,7 +28,8 @@ const MOCK_STATE: QuizState = {
 
 export async function GET() {
   const state = { ...MOCK_STATE, ...computeResults(MOCK_STATE) };
-  const pdfBuffer = await generateQuizPdf(state);
+  const pdfLocale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
+  const pdfBuffer = await generateQuizPdf(state, undefined, pdfLocale);
   const filename = getPdfFilename(state.firstName);
 
   return new Response(pdfBuffer as unknown as BodyInit, {
