@@ -3,7 +3,18 @@
 // All field IDs verified live on sub-account e8ZRRmOybS08x5L6qgsS.
 
 import type { Persona, QuizState } from "./types";
-import { getPersonaDisplayName } from "./content-runtime-i18n";
+
+// Local persona EN display map — self-contained (no content-runtime import into the
+// submit-email serverless bundle). state.persona is the TR enum.
+const PERSONA_DISPLAY_EN_MAP: Record<string, string> = {
+  "Meraklı Gözlemci": "Curious Observer",
+  "Aktif Deneyici": "Active Experimenter",
+  Uygulamacı: "Practitioner",
+  "Dönüşüm Adayı": "Transformation Candidate",
+};
+function getPersonaDisplayName(persona: string): string {
+  return PERSONA_DISPLAY_EN_MAP[persona] ?? persona;
+}
 
 /**
  * GHL custom field IDs (provisioned 2026-04-05).
@@ -299,7 +310,7 @@ export function buildGhlCustomFieldsEn(state: QuizState): GhlCustomField[] {
   if (state.segment)
     pushEn(GHL_FIELD_IDS_EN.professionEn, state.segment === "bireysel" ? "Individual Professional" : state.segment === "isletme" ? "Business Owner" : state.segment);
   if (state.sector) pushEn(GHL_FIELD_IDS_EN.sectorEn, toLabel(state.sector, SECTOR_LABELS_EN));
-  pushEn(GHL_FIELD_IDS_EN.quizPersonaEn, getPersonaDisplayName(state.persona, "en"));
+  pushEn(GHL_FIELD_IDS_EN.quizPersonaEn, getPersonaDisplayName(state.persona));
   pushEn(GHL_FIELD_IDS_EN.quizPainLevelEn, toLabel(state.painLevel, PAIN_LEVEL_LABELS_EN));
   if (state.q_goal) pushEn(GHL_FIELD_IDS_EN.quizGoalEn, toLabel(state.q_goal, GOAL_LABELS_EN));
   if (state.q_areas?.length)

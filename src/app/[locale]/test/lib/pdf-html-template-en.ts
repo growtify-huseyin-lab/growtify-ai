@@ -2,7 +2,19 @@
 // 2 pages, premium design with infographics and visual elements.
 
 import type { QuizState, Persona } from "./types";
-import { getPersonaDisplayName } from "./content-runtime-i18n";
+
+// Local persona EN display map — self-contained so the PDF function bundle does NOT
+// pull the whole content-runtime chain (content-en/content/content-tr) into the
+// serverless function. state.persona is the TR enum; fallback to enum if unmapped.
+const PERSONA_DISPLAY_EN: Record<string, string> = {
+  "Meraklı Gözlemci": "Curious Observer",
+  "Aktif Deneyici": "Active Experimenter",
+  Uygulamacı: "Practitioner",
+  "Dönüşüm Adayı": "Transformation Candidate",
+};
+function getPersonaDisplayName(persona: string): string {
+  return PERSONA_DISPLAY_EN[persona] ?? persona;
+}
 
 const PRIMARY = "#5d47f0";
 const PRIMARY_LIGHT = "#9886fe";
@@ -160,7 +172,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   const top3 = [...painScores].sort((a, b) => b.pct - a.pct).slice(0, 3);
   const bottom3 = [...painScores].sort((a, b) => a.pct - b.pct).slice(0, 3);
   const persona = PERSONA_INFO[state.persona] ?? PERSONA_INFO["Meraklı Gözlemci"];
-  const personaName = getPersonaDisplayName(state.persona, "en");
+  const personaName = getPersonaDisplayName(state.persona);
   const painLevel = PAIN_LEVEL_TR[state.painLevel] ?? PAIN_LEVEL_TR.medium;
   // Max theoretical score ~136 (all max values with weights). Normalize to 0-100%.
   const maxScore = 5 * 6 + 10 * 8; // 30 + 80 = 110 (rough practical max)

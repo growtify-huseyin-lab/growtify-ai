@@ -3,7 +3,19 @@
 
 import type { QuizState } from "./types";
 import { buildGhlCustomFields, buildGhlTags, buildGhlTagsEn, buildGhlCustomFieldsEn } from "./ghl-mapping";
-import { getPersonaDisplayName } from "./content-runtime-i18n";
+
+// Local persona EN display map — keeps the submit-email serverless bundle free of the
+// content-runtime chain. TR locale returns the enum unchanged; EN maps to display label.
+const PERSONA_DISPLAY_EN_EMAIL: Record<string, string> = {
+  "Meraklı Gözlemci": "Curious Observer",
+  "Aktif Deneyici": "Active Experimenter",
+  Uygulamacı: "Practitioner",
+  "Dönüşüm Adayı": "Transformation Candidate",
+};
+function getPersonaDisplayName(persona: string, locale: string): string {
+  if (locale !== "en") return persona;
+  return PERSONA_DISPLAY_EN_EMAIL[persona] ?? persona;
+}
 
 interface GhlUpsertResponse {
   contact?: {
