@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo-alternates";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { BlogCard } from "@/components/blog/BlogCard";
@@ -6,14 +7,17 @@ import { CategoryTabs } from "@/components/blog/CategoryTabs";
 import { BlogPagination } from "@/components/blog/BlogPagination";
 import { getAllPosts } from "@/lib/blog";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("BlogPage");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "BlogPage" });
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: {
-      canonical: "/blog",
-    },
+    alternates: localeAlternates(locale, "/blog"),
   };
 }
 

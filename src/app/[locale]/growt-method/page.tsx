@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo-alternates";
 import { getTranslations, getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -20,12 +21,17 @@ import {
   BarChart3,
 } from "lucide-react";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("GrowtMethodPage");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "GrowtMethodPage" });
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: "/growt-method" },
+    alternates: localeAlternates(locale, "/growt-method"),
   };
 }
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo-alternates";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
@@ -7,12 +8,17 @@ import { Badge } from "@/components/ui/Badge";
 import { ArrowRight, Lightbulb, Target, Heart, Rocket } from "lucide-react";
 import { CTA } from "@/components/sections/CTA";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("HakkimizdaPage");
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "HakkimizdaPage" });
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: "/hakkimizda" },
+    alternates: localeAlternates(locale, "/hakkimizda"),
   };
 }
 

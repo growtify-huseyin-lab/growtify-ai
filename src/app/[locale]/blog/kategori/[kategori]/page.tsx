@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo-alternates";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
@@ -20,9 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("metaTitle", { label: cat.label }),
     description: t("metaDescription", { label: cat.label }),
-    alternates: {
-      canonical: `/blog/kategori/${kategori}`,
-    },
+    alternates: localeAlternates(locale, `/blog/kategori/${kategori}`),
   };
 }
 

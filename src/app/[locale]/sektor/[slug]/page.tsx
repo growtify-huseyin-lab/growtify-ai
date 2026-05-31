@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo-alternates";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -45,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const sector = sectorPagesFor(locale)[slug];
   const GROWT_PHASES = getGrowtPhases(locale);
   const content = sectorContentFor(locale)[slug];
-  if (!sector) return { title: "Sektör Bulunamadı" };
+  if (!sector) return { title: locale === "en" ? "Sector Not Found" : "Sektör Bulunamadı" };
 
   const faqSchema = content?.faq
     ? {
@@ -62,9 +63,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: sector.seoTitle,
     description: sector.seoDescription,
-    alternates: {
-      canonical: `/sektor/${slug}`,
-    },
+    alternates: localeAlternates(locale, `/sektor/${slug}`),
   };
 }
 
@@ -98,8 +97,8 @@ export default async function SectorPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Ana Sayfa", item: BASE_URL },
-      { "@type": "ListItem", position: 2, name: "Sektörler", item: `${BASE_URL}/sektor` },
+      { "@type": "ListItem", position: 1, name: en ? "Home" : "Ana Sayfa", item: BASE_URL },
+      { "@type": "ListItem", position: 2, name: en ? "Sectors" : "Sektörler", item: `${BASE_URL}/sektor` },
       { "@type": "ListItem", position: 3, name: sector.fullTitle },
     ],
   };
@@ -122,7 +121,7 @@ export default async function SectorPage({ params }: Props) {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <Badge variant="accent" className="mb-6">
-              {sector.fullTitle} İçin Yapay Zeka
+              {en ? `AI for ${sector.fullTitle}` : `${sector.fullTitle} İçin Yapay Zeka`}
             </Badge>
             <h1 className="text-4xl font-extrabold tracking-tight text-dark dark:text-white sm:text-5xl">
               {sector.h1}
@@ -184,7 +183,7 @@ export default async function SectorPage({ params }: Props) {
         <Container>
           <div className="mx-auto max-w-3xl text-center mb-12">
             <h2 className="text-3xl font-bold text-dark dark:text-white">
-              {sector.title} sektöründe <span className="text-primary">3 büyük engel</span>
+              {en ? <>3 big obstacles in <span className="text-primary">{sector.title}</span></> : <>{sector.title} sektöründe <span className="text-primary">3 büyük engel</span></>}
             </h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-3">
@@ -209,7 +208,7 @@ export default async function SectorPage({ params }: Props) {
         <Container>
           <div className="mx-auto max-w-3xl text-center mb-12">
             <h2 className="text-3xl font-bold text-dark dark:text-white">
-              Yapay zeka ile <span className="text-primary">nasıl değişir?</span>
+              {en ? <>How does it <span className="text-primary">change with AI?</span></> : <>Yapay zeka ile <span className="text-primary">nasıl değişir?</span></>}
             </h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-3">
@@ -220,12 +219,12 @@ export default async function SectorPage({ params }: Props) {
                 <p className="mt-2 text-sm text-gray-600 dark:text-dark-muted leading-relaxed">{s.description}</p>
                 <div className="mt-4 flex items-center gap-4 text-sm">
                   <div className="flex-1 rounded-lg bg-red-50 dark:bg-red-900/20 p-3 text-center">
-                    <p className="text-xs text-gray-500 dark:text-dark-muted">Önce</p>
+                    <p className="text-xs text-gray-500 dark:text-dark-muted">{en ? "Before" : "Önce"}</p>
                     <p className="font-semibold text-red-600 dark:text-red-400">{s.beforeTime}</p>
                   </div>
                   <ArrowRight size={16} className="text-gray-300 dark:text-dark-border shrink-0" />
                   <div className="flex-1 rounded-lg bg-green-50 dark:bg-green-900/20 p-3 text-center">
-                    <p className="text-xs text-gray-500 dark:text-dark-muted">Sonra</p>
+                    <p className="text-xs text-gray-500 dark:text-dark-muted">{en ? "After" : "Sonra"}</p>
                     <p className="font-semibold text-green-600 dark:text-green-400">{s.afterTime}</p>
                   </div>
                 </div>
@@ -240,7 +239,7 @@ export default async function SectorPage({ params }: Props) {
         <Container>
           <div className="mx-auto max-w-3xl text-center mb-12">
             <h2 className="text-3xl font-bold text-dark dark:text-white">
-              Bu sektörde <span className="text-primary">GROWT nasıl çalışır?</span>
+              {en ? <>How does <span className="text-primary">GROWT work in this sector?</span></> : <>Bu sektörde <span className="text-primary">GROWT nasıl çalışır?</span></>}
             </h2>
             <p className="mt-4 text-gray-600 dark:text-dark-muted">{sector.growtContext}</p>
           </div>
