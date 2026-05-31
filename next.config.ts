@@ -6,27 +6,27 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig: NextConfig = {
   serverExternalPackages: ["@sparticuz/chromium"],
   outputFileTracingIncludes: {
-    "/test/api/submit-email": [
+    "/[locale]/test/api/submit-email": [
       "./node_modules/@sparticuz/chromium/bin/**",
       "./node_modules/@sparticuz/chromium/build/**",
     ],
-    "/test/api/download-pdf": [
+    "/[locale]/test/api/download-pdf": [
       "./node_modules/@sparticuz/chromium/bin/**",
       "./node_modules/@sparticuz/chromium/build/**",
     ],
-    "/test/api/preview-pdf": [
+    "/[locale]/test/api/preview-pdf": [
       "./node_modules/@sparticuz/chromium/bin/**",
       "./node_modules/@sparticuz/chromium/build/**",
     ],
-    "/test/kurumsal/api/submit-email": [
+    "/[locale]/test/kurumsal/api/submit-email": [
       "./node_modules/@sparticuz/chromium/bin/**",
       "./node_modules/@sparticuz/chromium/build/**",
     ],
-    "/test/kurumsal/api/download-pdf": [
+    "/[locale]/test/kurumsal/api/download-pdf": [
       "./node_modules/@sparticuz/chromium/bin/**",
       "./node_modules/@sparticuz/chromium/build/**",
     ],
-    "/test/kurumsal/api/preview-pdf": [
+    "/[locale]/test/kurumsal/api/preview-pdf": [
       "./node_modules/@sparticuz/chromium/bin/**",
       "./node_modules/@sparticuz/chromium/build/**",
     ],
