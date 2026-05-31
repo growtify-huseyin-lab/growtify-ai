@@ -1,11 +1,13 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
-import { GROWT_PHASES } from "@/lib/constants";
+import { getGrowtPhases } from "@/lib/constants-i18n";
 import { ArrowRight, ArrowDown } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export async function GROWTSteps() {
+  const __locale = await getLocale();
+  const GROWT_PHASES = getGrowtPhases(__locale);
   const t = await getTranslations('GROWTStepsC');
   return (
     <section id="nasil-calisiyor" className="py-20 bg-light dark:bg-dark-bg/50 transition-colors">

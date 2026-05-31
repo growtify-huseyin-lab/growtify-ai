@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { BlogCard } from "@/components/blog/BlogCard";
-import { GROWT_PHASES } from "@/lib/constants";
+import { getGrowtPhases } from "@/lib/constants-i18n";
 import { getAllPosts } from "@/lib/blog";
 import { getAllSectorSlugs } from "@/data/sectors";
 import { sectorPagesFor, sectorContentFor } from "@/data/sectors-i18n";
@@ -43,6 +43,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params;
   const sector = sectorPagesFor(locale)[slug];
+  const GROWT_PHASES = getGrowtPhases(locale);
   const content = sectorContentFor(locale)[slug];
   if (!sector) return { title: "Sektör Bulunamadı" };
 
@@ -70,6 +71,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function SectorPage({ params }: Props) {
   const { slug, locale } = await params;
   const sector = sectorPagesFor(locale)[slug];
+  const GROWT_PHASES = getGrowtPhases(locale);
   if (!sector) notFound();
 
   const content = sectorContentFor(locale)[slug];

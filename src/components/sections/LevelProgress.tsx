@@ -1,10 +1,12 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
-import { GROWT_PHASES } from "@/lib/constants";
+import { getGrowtPhases } from "@/lib/constants-i18n";
 import { ChevronRight } from "lucide-react";
 
 export async function LevelProgress() {
+  const __locale = await getLocale();
+  const GROWT_PHASES = getGrowtPhases(__locale);
   const t = await getTranslations("LevelProgressC");
 
   return (

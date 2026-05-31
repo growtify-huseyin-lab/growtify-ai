@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Container } from "@/components/ui/Container";
-import { STATS } from "@/lib/constants";
+import { useStats } from "@/lib/constants-hooks";
 
 function parseStatValue(value: string): { prefix: string; number: number; suffix: string } {
   const match = value.match(/^([%]?)([0-9]+(?:\.[0-9]+)?)(.*)$/);
@@ -70,6 +70,7 @@ function AnimatedStat({ value, label, source }: { value: string; label: string; 
 }
 
 export function Stats() {
+  const STATS = useStats();
   return (
     <section className="relative py-20 overflow-hidden">
       {/* Gradient background */}

@@ -1,7 +1,7 @@
 import { Container } from "@/components/ui/Container";
-import { GROWT_PHASES } from "@/lib/constants";
+import { getGrowtPhases } from "@/lib/constants-i18n";
 import { BarChart3, CheckCircle2, Users, MessageCircle } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 
 const featureIcons = [
   { key: "progressTracking", icon: BarChart3 },
@@ -11,6 +11,8 @@ const featureIcons = [
 ];
 
 export async function ProcessSupport() {
+  const __locale = await getLocale();
+  const GROWT_PHASES = getGrowtPhases(__locale);
   const t = await getTranslations("ProcessSupportC");
 
   const features = featureIcons.map((f) => ({

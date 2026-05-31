@@ -8,10 +8,11 @@ import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
-import { NAV_LINKS } from "@/lib/constants";
+import { useNavLinks } from "@/lib/constants-hooks";
 import { useTheme } from "@/components/ThemeProvider";
 
 export function Header() {
+  const NAV_LINKS = useNavLinks();
   const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const t = useTranslations("HeaderC");

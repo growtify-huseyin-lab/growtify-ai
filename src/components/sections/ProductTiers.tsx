@@ -1,10 +1,12 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Check } from "lucide-react";
-import { PRODUCT } from "@/lib/constants";
-import { getTranslations } from "next-intl/server";
+import { getProduct } from "@/lib/constants-i18n";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export async function ProductTiers() {
+  const __locale = await getLocale();
+  const PRODUCT = getProduct(__locale);
   const t = await getTranslations("ProductTiersC");
 
   return (

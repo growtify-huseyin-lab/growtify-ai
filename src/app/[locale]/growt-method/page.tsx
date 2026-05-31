@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
-import { GROWT_PHASES } from "@/lib/constants";
+import { getGrowtPhases } from "@/lib/constants-i18n";
 import { ProcessSupport } from "@/components/sections/ProcessSupport";
 import {
   ArrowRight,
@@ -30,6 +30,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function GROWTMethodPage() {
+  const __locale = await getLocale();
+  const GROWT_PHASES = getGrowtPhases(__locale);
   const t = await getTranslations("GrowtMethodPage");
 
   const AUDIENCE = [

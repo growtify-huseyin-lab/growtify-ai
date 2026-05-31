@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import {
   Heart,
@@ -16,7 +16,7 @@ import {
   Dumbbell,
   ArrowRight,
 } from "lucide-react";
-import { SECTORS } from "@/lib/constants";
+import { getSectors } from "@/lib/constants-i18n";
 
 const iconMap: Record<string, React.ElementType> = {
   Heart, Scale, Sparkles, Home, ShoppingCart, Smile,
@@ -31,6 +31,8 @@ const sectorSlugMap: Record<string, string> = {
 };
 
 export async function SectorGrid() {
+  const __locale = await getLocale();
+  const SECTORS = getSectors(__locale);
   const t = await getTranslations('SectorGridC');
   return (
     <section className="py-20 bg-light dark:bg-dark-bg/50 transition-colors">
