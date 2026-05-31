@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PrivacyPolicyEN } from "@/components/legal/en/PrivacyPolicyEN";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { COMPANY } from "@/lib/company-info";
 

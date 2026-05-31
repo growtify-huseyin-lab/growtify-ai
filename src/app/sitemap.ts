@@ -45,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     bi("/growt-method", 0.9),
     bi("/kurumsal", 0.7),
     bi("/sektor", 0.8),
+    bi("/rehber", 0.7),
     bi("/test", 0.7),
     bi("/hakkimizda", 0.6),
     bi("/iletisim", 0.5),

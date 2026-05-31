@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { localeAlternates } from "@/lib/seo-alternates";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";

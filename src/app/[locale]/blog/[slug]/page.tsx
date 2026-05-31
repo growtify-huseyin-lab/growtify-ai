@@ -17,7 +17,7 @@ import {
   CalendarDays,
   User,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 const BASE_URL = "https://growtify.ai";
 

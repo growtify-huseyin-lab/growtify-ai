@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Clock, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import type { BlogMeta } from "@/lib/blog-types";
