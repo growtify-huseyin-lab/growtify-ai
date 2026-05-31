@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo-alternates";
 import { PrivacyPolicyEN } from "@/components/legal/en/PrivacyPolicyEN";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { COMPANY } from "@/lib/company-info";
 
-export const metadata: Metadata = {
-  title: "Gizlilik Politikası",
-  description:
-    "Growtify.ai gizlilik politikası — kişisel verilerinizin nasıl işlendiğini öğrenin.",
-  alternates: { canonical: "/gizlilik-politikasi" },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const en = locale === "en";
+  return {
+    title: en ? "Privacy Policy" : "Gizlilik Politikası",
+    description: en
+      ? "Growtify.ai Privacy Policy — how we process and protect your personal data under UK GDPR."
+      : "Growtify.ai gizlilik politikası — kişisel verilerinizin nasıl işlendiğini öğrenin.",
+    alternates: localeAlternates(locale, "/gizlilik-politikasi"),
+  };
+}
 
 export default async function GizlilikPolitikasiPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

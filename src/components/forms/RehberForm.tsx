@@ -101,16 +101,24 @@ export function RehberForm({ sektor }: RehberFormProps) {
           {t("successTitle")}
         </h4>
         <p className="mt-2 text-sm text-gray-600 dark:text-dark-muted">
-          {t("successDescription")}
+          {successData.pdfUrl ? t("successDescription") : t("successDescriptionEmail")}
         </p>
-        <a
-          href={successData.pdfUrl}
-          download
-          className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-primary/90"
-        >
-          <Download size={18} />
-          {t("downloadPdf")}
-        </a>
+        {successData.pdfUrl ? (
+          <a
+            href={successData.pdfUrl}
+            download
+            className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-primary/90"
+          >
+            <Download size={18} />
+            {t("downloadPdf")}
+          </a>
+        ) : (
+          // No direct PDF (e.g. EN guides pending fulfillment PDFs) → email-delivery framing.
+          <p className="mt-6 inline-flex items-center gap-2 rounded-xl bg-primary/5 px-6 py-3 text-base font-semibold text-primary">
+            <Download size={18} />
+            {t("emailDeliveryNote")}
+          </p>
+        )}
         <p className="mt-4 text-xs text-gray-500 dark:text-dark-muted">
           {t("miniCourseNote")}
         </p>

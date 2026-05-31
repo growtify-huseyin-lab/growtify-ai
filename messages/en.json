@@ -194,7 +194,9 @@
     "emailLabel": "Email",
     "emailPlaceholder": "you@example.com",
     "loadingButton": "Preparing...",
-    "submitButton": "Download Free"
+    "submitButton": "Download Free",
+    "emailDeliveryNote": "We've emailed you the guide — check your inbox shortly.",
+    "successDescriptionEmail": "We've sent your guide to your email — it should arrive in a few minutes."
   },
   "BlogCTAC": {
     "heading": "Ready to grow your business with AI?",

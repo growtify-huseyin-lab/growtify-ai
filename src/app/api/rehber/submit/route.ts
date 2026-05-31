@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getRehber } from "@/content/rehberler";
+import { getGuide } from "@/content/rehberler";
 
 const GHL_API_BASE = process.env.GHL_API_BASE ?? "https://services.leadconnectorhq.com";
 const GHL_API_TOKEN = process.env.GHL_API_TOKEN!;
@@ -62,7 +62,8 @@ function resolveSourceTag(utmSource: string | undefined, utmMedium: string | und
 }
 
 interface RehberSubmitPayload {
-  sector: string;        // URL slug
+  sector: string;        // URL slug (TR slug on /rehber, English slug on /en/guide)
+  locale?: string;       // "en" for /en/guide submissions, else TR
   firstName: string;
   email: string;
   phone?: string;
@@ -122,8 +123,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Resolve sector
-  const rehber = getRehber(body.sector);
+  // Resolve sector (locale-aware: TR slug on /rehber, English slug on /en/guide)
+  const isEn = body.locale === "en";
+  const rehber = getGuide(body.sector, isEn ? "en" : "tr");
   if (!rehber) {
     return NextResponse.json(
       { ok: false, error: `Unknown sector: ${body.sector}` },
@@ -132,26 +134,39 @@ export async function POST(req: NextRequest) {
   }
 
   // Build tags
-  // gai_lm_any_rehber → unified D-series indicator for E-series Goal Action.
+  // gai_lm_any_rehber / gai_en_lm_any_rehber → unified D-series indicator for E-series Goal Action.
   // Lets E-series workflow exit on "user entered D-series" without listing 12 sector tags.
+  // EN funnel is fully separate (gai_en_* tags + lang_eng), per CEO decision.
   const tags: string[] = [
     "gai_lifecycle_lead",
-    "gai_lm_any_rehber",
+    isEn ? "gai_en_lm_any_rehber" : "gai_lm_any_rehber",
     rehber.ghlLeadMagnetTag,
     rehber.ghlSectorTag,
     resolveSourceTag(body.utmSource, body.utmMedium),
   ];
-  if ((body as { locale?: string }).locale === "en") tags.push("lang_eng");
+  if (isEn) tags.push("lang_eng");
 
   // Build custom fields
   const now = new Date().toISOString();
   const customFields: Array<{ id: string; value: string }> = [
     { id: FIELD_SECTOR, value: body.sector },
-    { id: FIELD_LANDING_PAGE, value: body.landingPage ?? `/rehber/${body.sector}` },
+    {
+      id: FIELD_LANDING_PAGE,
+      value:
+        body.landingPage ??
+        (isEn ? `/en/guide/${body.sector}` : `/rehber/${body.sector}`),
+    },
     { id: FIELD_FIRST_CONTACT_DATE, value: now },
     { id: FIELD_ENTRY_POINT, value: "lead_magnet" },
-    { id: FIELD_REHBER_PDF_URL, value: `${PUBLIC_BASE_URL}${rehber.pdfUrl}` },
   ];
+  // PDF URL field only when a fulfillment PDF exists. EN lead-magnet PDFs are not yet
+  // produced (Creative dependency) → omit field; GHL email delivery handled by EN workflow.
+  if (rehber.pdfUrl) {
+    customFields.push({
+      id: FIELD_REHBER_PDF_URL,
+      value: `${PUBLIC_BASE_URL}${rehber.pdfUrl}`,
+    });
+  }
   if (body.utmSource) {
     customFields.push({ id: FIELD_FIRST_UTM_SOURCE, value: body.utmSource });
   }
@@ -172,7 +187,7 @@ export async function POST(req: NextRequest) {
     lastName: ghlLastName,
     name: body.firstName,
     phone: body.phone ?? undefined,
-    country: "TR",
+    country: isEn ? undefined : "TR",
     source: `Lead magnet: ${rehber.name}`,
     tags,
     customFields,

@@ -194,7 +194,9 @@
     "emailLabel": "Email",
     "emailPlaceholder": "ornek@email.com",
     "loadingButton": "Hazırlanıyor...",
-    "submitButton": "Ücretsiz İndir"
+    "submitButton": "Ücretsiz İndir",
+    "emailDeliveryNote": "Rehberini email ile gönderdik — birazdan gelen kutunda.",
+    "successDescriptionEmail": "Rehberini email'ine gönderdik — birkaç dakika içinde ulaşır."
   },
   "BlogCTAC": {
     "heading": "Yapay zeka ile işini büyütmeye hazır mısın?",

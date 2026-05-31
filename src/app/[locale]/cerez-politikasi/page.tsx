@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo-alternates";
 import { CookiePolicyEN } from "@/components/legal/en/CookiePolicyEN";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { COMPANY } from "@/lib/company-info";
 
-export const metadata: Metadata = {
-  title: "Çerez Politikası",
-  description:
-    "Growtify.ai çerez politikası — web sitemizde kullanılan çerezler hakkında bilgi.",
-  alternates: { canonical: "/cerez-politikasi" },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const en = locale === "en";
+  return {
+    title: en ? "Cookie Policy" : "Çerez Politikası",
+    description: en
+      ? "Growtify.ai Cookie Policy — information about the cookies used on our website."
+      : "Growtify.ai çerez politikası — web sitemizde kullanılan çerezler hakkında bilgi.",
+    alternates: localeAlternates(locale, "/cerez-politikasi"),
+  };
+}
 
 export default async function CerezPolitikasiPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

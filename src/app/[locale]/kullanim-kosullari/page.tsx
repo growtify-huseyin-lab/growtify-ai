@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo-alternates";
 import { TermsOfServiceEN } from "@/components/legal/en/TermsOfServiceEN";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { COMPANY } from "@/lib/company-info";
 
-export const metadata: Metadata = {
-  title: "Kullanım Koşulları",
-  description:
-    "Growtify.ai kullanım koşulları — hizmetlerimizi kullanırken geçerli olan şart ve koşullar.",
-  alternates: { canonical: "/kullanim-kosullari" },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const en = locale === "en";
+  return {
+    title: en ? "Terms of Service" : "Kullanım Koşulları",
+    description: en
+      ? "Growtify.ai Terms of Service — the terms that apply when you use our services."
+      : "Growtify.ai kullanım koşulları — hizmetlerimizi kullanırken geçerli olan şart ve koşullar.",
+    alternates: localeAlternates(locale, "/kullanim-kosullari"),
+  };
+}
 
 export default async function KullanimKosullariPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;

@@ -377,3 +377,22 @@ export const REHBER_SLUGS = Object.keys(REHBERLER) as Array<keyof typeof REHBERL
 export function getRehber(slug: string): RehberContent | null {
   return REHBERLER[slug] ?? null;
 }
+
+// EN guide fork — keyed by English slug. (en.ts type-only imports this file: no runtime cycle.)
+import { REHBERLER_EN, GUIDE_TR_TO_EN, GUIDE_EN_TO_TR } from "./en";
+
+/**
+ * Locale-aware guide resolver used by the EN /guide route and the lead API.
+ * - locale 'en' → resolve by ENGLISH slug (REHBERLER_EN); tolerate a TR slug via cross-map.
+ * - otherwise   → resolve by TR slug (REHBERLER); tolerate an EN slug via cross-map.
+ */
+export function getGuide(slug: string, locale: string): RehberContent | null {
+  if (locale === "en") {
+    if (REHBERLER_EN[slug]) return REHBERLER_EN[slug];
+    const en = GUIDE_TR_TO_EN[slug];
+    return en ? (REHBERLER_EN[en] ?? null) : null;
+  }
+  if (REHBERLER[slug]) return REHBERLER[slug];
+  const tr = GUIDE_EN_TO_TR[slug];
+  return tr ? (REHBERLER[tr] ?? null) : null;
+}

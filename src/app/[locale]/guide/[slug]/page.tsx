@@ -2,47 +2,49 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { RehberForm } from "@/components/forms/RehberForm";
-import { REHBERLER, REHBER_SLUGS, getRehber } from "@/content/rehberler";
-import { GUIDE_TR_TO_EN } from "@/content/rehberler/en";
+import { getGuideEn, GUIDE_SLUGS, GUIDE_EN_TO_TR } from "@/content/rehberler/en";
 import { CheckCircle2 } from "lucide-react";
 
 interface PageProps {
-  params: Promise<{ sektor: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
-export async function generateStaticParams() {
-  return REHBER_SLUGS.map((sektor) => ({ sektor }));
+// EN-only fork: /en/guide/{english-slug}. TR uses /rehber/{tr-slug}.
+export function generateStaticParams() {
+  return GUIDE_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { sektor } = await params;
-  const rehber = getRehber(sektor);
-  if (!rehber) return { title: "Rehber bulunamadı" };
+  const { locale, slug } = await params;
+  const guide = getGuideEn(slug);
+  if (locale !== "en" || !guide) return { title: "Guide not found" };
 
-  const enSlug = GUIDE_TR_TO_EN[sektor];
+  const trSlug = GUIDE_EN_TO_TR[slug];
   return {
-    title: rehber.seo.title,
-    description: rehber.seo.description,
+    title: guide.seo.title,
+    description: guide.seo.description,
     alternates: {
-      canonical: `/rehber/${sektor}`,
+      canonical: `/en/guide/${slug}`,
       languages: {
-        tr: `/rehber/${sektor}`,
-        ...(enSlug ? { en: `/en/guide/${enSlug}` } : {}),
-        "x-default": `/rehber/${sektor}`,
+        tr: `/rehber/${trSlug}`,
+        en: `/en/guide/${slug}`,
+        "x-default": `/rehber/${trSlug}`,
       },
     },
     openGraph: {
-      title: rehber.seo.title,
-      description: rehber.seo.description,
+      title: guide.seo.title,
+      description: guide.seo.description,
       type: "website",
     },
   };
 }
 
-export default async function RehberPage({ params }: PageProps) {
-  const { sektor } = await params;
-  const rehber = getRehber(sektor);
-  if (!rehber) notFound();
+export default async function GuidePage({ params }: PageProps) {
+  const { locale, slug } = await params;
+  // /guide is the English fork only; TR keeps /rehber.
+  if (locale !== "en") notFound();
+  const guide = getGuideEn(slug);
+  if (!guide) notFound();
 
   return (
     <>
@@ -51,16 +53,16 @@ export default async function RehberPage({ params }: PageProps) {
         <Container>
           <div className="mx-auto max-w-4xl">
             <div className="mb-4 text-center">
-              <span className="text-5xl">{rehber.icon}</span>
+              <span className="text-5xl">{guide.icon}</span>
             </div>
             <h1 className="text-center text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-dark dark:text-white">
-              {rehber.hero.title}
+              {guide.hero.title}
             </h1>
             <p className="mt-4 text-center text-lg text-gray-600 dark:text-dark-muted">
-              {rehber.hero.subtitle}
+              {guide.hero.subtitle}
             </p>
             <p className="mt-6 mx-auto max-w-2xl text-center text-base text-gray-700 dark:text-dark-text italic">
-              {rehber.hero.painHook}
+              {guide.hero.painHook}
             </p>
           </div>
         </Container>
@@ -73,13 +75,13 @@ export default async function RehberPage({ params }: PageProps) {
             {/* Left: what's inside */}
             <div>
               <h2 className="text-2xl font-bold text-dark dark:text-white">
-                Bu rehberde neler var?
+                What&apos;s inside this guide?
               </h2>
               <p className="mt-2 text-gray-600 dark:text-dark-muted">
-                Hedef kitle: <span className="font-medium">{rehber.targetProfile}</span>
+                Who it&apos;s for: <span className="font-medium">{guide.targetProfile}</span>
               </p>
               <ul className="mt-6 space-y-3">
-                {rehber.whatInside.map((item, i) => (
+                {guide.whatInside.map((item, i) => (
                   <li key={i} className="flex gap-3">
                     <CheckCircle2
                       size={20}
@@ -95,17 +97,17 @@ export default async function RehberPage({ params }: PageProps) {
             <div>
               <div className="rounded-2xl border border-gray-200 dark:border-dark-border bg-light dark:bg-dark-card p-6 lg:p-8">
                 <h3 className="text-xl font-bold text-dark dark:text-white">
-                  Rehberi ücretsiz indir
+                  Download the guide for free
                 </h3>
                 <p className="mt-2 text-sm text-gray-600 dark:text-dark-muted">
-                  Email adresini yaz, rehber anında email'ine gelsin.
+                  Enter your email and we&apos;ll send the guide straight to your inbox.
                 </p>
                 <div className="mt-6">
-                  <RehberForm sektor={rehber.slug} />
+                  <RehberForm sektor={guide.slug} />
                 </div>
                 <p className="mt-4 text-xs text-gray-500 dark:text-dark-muted">
-                  Email'ini spam için kullanmıyoruz. Growtify AI haftalık bülteni için
-                  istediğin zaman çıkabilirsin.
+                  We won&apos;t use your email for spam. You can unsubscribe from the
+                  Growtify AI weekly newsletter anytime.
                 </p>
               </div>
             </div>

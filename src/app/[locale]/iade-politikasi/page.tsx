@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
+import { localeAlternates } from "@/lib/seo-alternates";
 import { RefundPolicyEN } from "@/components/legal/en/RefundPolicyEN";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { COMPANY } from "@/lib/company-info";
 
-export const metadata: Metadata = {
-  title: "İade Politikası",
-  description:
-    "Growtify.ai iade politikası — dijital içerik hizmetlerimize ilişkin iade koşulları.",
-  alternates: { canonical: "/iade-politikasi" },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const en = locale === "en";
+  return {
+    title: en ? "Refund Policy" : "İade Politikası",
+    description: en
+      ? "Growtify.ai Refund Policy — refund terms for our digital content services."
+      : "Growtify.ai iade politikası — dijital içerik hizmetlerimize ilişkin iade koşulları.",
+    alternates: localeAlternates(locale, "/iade-politikasi"),
+  };
+}
 
 export default async function IadePolitikasiPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
