@@ -44,7 +44,8 @@ export async function GET(request: Request) {
     locale,
   } as unknown as QuizState;
 
-  const trace: Record<string, unknown> = { locale, email };
+  // Build/version marker — bump per deploy to confirm which code is live.
+  const trace: Record<string, unknown> = { build: "v3-chromium-min", locale, email };
 
   // 1. Upsert
   const up = await upsertQuizContact(state, locale);
