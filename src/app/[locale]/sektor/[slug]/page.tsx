@@ -75,9 +75,14 @@ export default async function SectorPage({ params }: Props) {
   if (!sector) notFound();
 
   const content = sectorContentFor(locale)[slug];
-  const relatedPosts = getAllPosts().filter(
-    (p) => p.sectorRef === slug || sector.relatedBlogSlugs.includes(p.slug)
-  );
+  // Blog is TR-only (39 posts, no locale field). Suppress related-posts on EN so EN
+  // sector pages don't render TR blog cards. Re-enable with a locale filter once
+  // EN blog content lands (REQ-development-seo-en-content-001).
+  const relatedPosts = en
+    ? []
+    : getAllPosts().filter(
+        (p) => p.sectorRef === slug || sector.relatedBlogSlugs.includes(p.slug),
+      );
 
   const BASE_URL = "https://growtify.ai";
 
