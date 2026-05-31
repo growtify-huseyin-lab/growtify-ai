@@ -1,9 +1,10 @@
 import { LegalDocEN } from "./LegalDocEN";
+import { COMPANY } from "@/lib/company-info";
 
-// PECR-aligned cookie policy. [TBC] confirmed before public launch.
+// PECR-aligned cookie policy.
 export function CookiePolicyEN() {
   return (
-    <LegalDocEN title="Cookie Policy" lastUpdated="[TBC]">
+    <LegalDocEN title="Cookie Policy" lastUpdated="9 April 2026">
       <p>
         This Cookie Policy explains how Humax Global Ltd (Growtify.ai) uses cookies and similar
         technologies, in line with the Privacy and Electronic Communications Regulations (PECR)
@@ -51,14 +52,13 @@ export function CookiePolicyEN() {
 
       <h2>5. Specific cookies</h2>
       <p>
-        A current list of the specific cookies we set, their purpose, and duration is maintained
-        at [TBC] and available on request.
+        A current list of the specific cookies we set, their purpose, and duration is available on request.
       </p>
 
       <h2>6. Changes &amp; contact</h2>
       <p>
         We may update this policy from time to time. For any question, contact{" "}
-        <a href="mailto:info@growtify.ai">info@growtify.ai</a>.
+        <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
       </p>
     </LegalDocEN>
   );

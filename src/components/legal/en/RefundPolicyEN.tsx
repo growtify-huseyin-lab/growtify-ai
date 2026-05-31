@@ -1,14 +1,15 @@
 import { LegalDocEN } from "./LegalDocEN";
+import { COMPANY } from "@/lib/company-info";
 
 // UK Consumer Contracts (Information, Cancellation and Additional Charges)
-// Regulations 2013 — distance selling. [TBC] confirmed before public launch.
+// Regulations 2013 — distance selling.
 export function RefundPolicyEN() {
   return (
-    <LegalDocEN title="Refund & Cancellation Policy" lastUpdated="[TBC]">
+    <LegalDocEN title="Refund & Cancellation Policy" lastUpdated="9 April 2026">
       <p>
         This policy explains your cancellation and refund rights when you purchase services
         from Humax Global Ltd (Growtify.ai), a company registered in England and Wales (company
-        number: [TBC]). It reflects your rights under the Consumer Contracts (Information,
+        number {COMPANY.companyNumber}). It reflects your rights under the Consumer Contracts (Information,
         Cancellation and Additional Charges) Regulations 2013.
       </p>
 
@@ -38,7 +39,7 @@ export function RefundPolicyEN() {
 
       <h2>3. How to cancel</h2>
       <p>
-        To cancel, contact us at <a href="mailto:info@growtify.ai">info@growtify.ai</a> with
+        To cancel, contact us at <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> with
         your name, order details, and a clear statement that you wish to cancel. You may use a
         clear written statement; a model cancellation form is available on request.
       </p>
@@ -60,7 +61,7 @@ export function RefundPolicyEN() {
       <h2>6. Contact</h2>
       <p>
         For any cancellation or refund query, contact{" "}
-        <a href="mailto:info@growtify.ai">info@growtify.ai</a>.
+        <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
       </p>
     </LegalDocEN>
   );

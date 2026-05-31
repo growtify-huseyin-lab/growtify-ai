@@ -1,8 +1,8 @@
 import { Container } from "@/components/ui/Container";
 
 // Shared shell for UK-law English legal documents (Humax Global Ltd).
-// Prepared to UK standards; company-specific registrable details marked [TBC]
-// are confirmed by the Privacy Officer before public launch.
+// Prepared to UK standards; entity facts
+
 export function LegalDocEN({
   title,
   lastUpdated,

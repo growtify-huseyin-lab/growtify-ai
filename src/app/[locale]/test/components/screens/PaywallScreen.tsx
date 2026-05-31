@@ -7,7 +7,7 @@ import { ScreenShell, PrimaryButton } from "../ScreenShell";
 // GHL payment link — hardcoded here because PRODUCT.ctaHref now points to /test (quiz entry)
 const PAYMENT_LINK = "https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062";
 import { interpolate } from "../../lib/content-runtime";
-import { usePaywallCopy } from "../../lib/content-runtime-hooks";
+import { usePaywallCopy, useQuizUi } from "../../lib/content-runtime-hooks";
 import {
   getOrStartPaywallExpiry,
   getPaywallSecondsLeft,
@@ -60,6 +60,7 @@ export function PaywallScreen({ screen }: { screen: ScreenConfig }) {
 
 function CountdownBlock() {
   const PAYWALL_COPY = usePaywallCopy();
+  const ui = useQuizUi();
   // Real cookie-based countdown. First mount stamps the cookie; subsequent
   // visits see the remaining time from the same stamp.
   const [secondsLeft, setSecondsLeft] = useState<number>(0);
@@ -93,7 +94,7 @@ function CountdownBlock() {
           expired ? "text-gray-500" : "text-red-700 dark:text-red-300"
         }`}
       >
-        {expired ? "Teklif süresi doldu" : PAYWALL_COPY.countdown.headline}
+        {expired ? ui.offerExpired : PAYWALL_COPY.countdown.headline}
       </div>
       <div
         className={`mt-1 font-mono text-3xl font-black ${

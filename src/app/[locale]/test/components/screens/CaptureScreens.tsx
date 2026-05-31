@@ -4,12 +4,13 @@ import { useState, useEffect } from "react";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig, QuizState } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
-import { useLegalTexts } from "../../lib/content-runtime-hooks";
+import { useLegalTexts, useQuizUi } from "../../lib/content-runtime-hooks";
 
 /* -------------------- Text Input (Ekran 25 name, 26 email) -------------------- */
 export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
   const { state, setField, next, submitEmail } = useQuiz();
   const LEGAL_TEXTS = useLegalTexts();
+  const ui = useQuizUi();
   const key = screen.stateKey;
   const current = key ? (state[key] as string) : "";
 
@@ -19,7 +20,10 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
   const isSubmitTrigger =
     screen.cta === "Planımı Hazırla" ||
     screen.cta === "Raporumu Oluştur" ||
-    screen.cta === "Raporumu Olustur";
+    screen.cta === "Raporumu Olustur" ||
+    screen.cta === "Prepare My Plan" ||
+    screen.cta === "Generate My Plan" ||
+    screen.cta === "Generate My Report";
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [kvkkConsent, setKvkkConsent] = useState(false);
@@ -49,7 +53,7 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
     setSubmitting(false);
     if (!res.ok) {
       setError(
-        "Planını kaydederken bir sorun oluştu, devam edebilirsin — tekrar deneyeceğiz.",
+        ui.saveError,
       );
     }
     next();
@@ -117,15 +121,11 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
   );
 }
 
-const PROCESSING_STEPS = [
-  "Cevapların kaydediliyor...",
-  "Kişisel raporun hazırlanıyor...",
-  "Profilin oluşturuluyor...",
-  "Neredeyse hazır...",
-  "Hazır! ✓",
-];
+// processing step labels are locale-aware via useQuizUi (see ProcessingOverlay)
 
 function ProcessingOverlay() {
+  const ui = useQuizUi();
+  const PROCESSING_STEPS = [ui.savingAnswers, ui.preparingReport, ui.buildingProfile, ui.almostReady, ui.ready];
   const [step, setStep] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
 

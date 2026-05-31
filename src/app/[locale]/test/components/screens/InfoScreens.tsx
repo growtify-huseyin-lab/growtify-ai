@@ -5,7 +5,7 @@ import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
 import { interpolate } from "../../lib/content-runtime";
-import { usePersonaResolver } from "../../lib/content-runtime-hooks";
+import { usePersonaResolver, useQuizUi } from "../../lib/content-runtime-hooks";
 
 /* -------------------- Social Proof (Ekran 3) -------------------- */
 export function SocialProofScreen({ screen }: { screen: ScreenConfig }) {
@@ -285,6 +285,7 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 /* -------------------- Projection Chart (Ekran 28) -------------------- */
 export function ProjectionScreen({ screen }: { screen: ScreenConfig }) {
+  const ui = useQuizUi();
   const { next, state } = useQuiz();
 
   return (
@@ -292,10 +293,10 @@ export function ProjectionScreen({ screen }: { screen: ScreenConfig }) {
       <div className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-dark-border dark:bg-dark-bg">
         {/* Placeholder chart — simple ASCII-ish bars */}
         <div className="space-y-4">
-          <ProjectionBar label="Bugün" value={25} color="bg-red-400" />
-          <ProjectionBar label="30 gün" value={55} color="bg-yellow-400" />
-          <ProjectionBar label="60 gün" value={75} color="bg-green-400" />
-          <ProjectionBar label="90 gün" value={92} color="bg-primary" />
+          <ProjectionBar label={ui.chartToday} value={25} color="bg-red-400" />
+          <ProjectionBar label={ui.chart30} value={55} color="bg-yellow-400" />
+          <ProjectionBar label={ui.chart60} value={75} color="bg-green-400" />
+          <ProjectionBar label={ui.chart90} value={92} color="bg-primary" />
         </div>
         <p className="mt-6 text-center text-xs text-gray-500 dark:text-dark-muted">
           Günde {state.commitment ?? 30} dakika · {state.persona} profili

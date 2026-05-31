@@ -1,11 +1,22 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Kurumsal AI Olgunluk Değerlendirmesi — Growtify.ai",
-  description:
-    "3 dakikada şirketinizin AI hazırlık seviyesini öğrenin. 5 boyutta değerlendirme, anında sonuç.",
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const en = locale === "en";
+  return {
+    title: en
+      ? "Corporate AI Maturity Assessment — Growtify.ai"
+      : "Kurumsal AI Olgunluk Değerlendirmesi — Growtify.ai",
+    description: en
+      ? "Discover your company's AI readiness in 3 minutes. 5-dimension assessment, instant results."
+      : "3 dakikada şirketinizin AI hazırlık seviyesini öğrenin. 5 boyutta değerlendirme, anında sonuç.",
+    robots: { index: false, follow: false },
+  };
+}
 
 export default function KurumsalQuizLayout({
   children,

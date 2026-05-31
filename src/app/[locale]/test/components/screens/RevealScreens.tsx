@@ -1,5 +1,7 @@
 "use client";
 
+import { useQuizUi } from "../../lib/content-runtime-hooks";
+
 import { useMemo, useRef, useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { useQuiz } from "../../lib/QuizContext";
@@ -34,6 +36,7 @@ export function PlanReadyScreen({ screen }: { screen: ScreenConfig }) {
 
 /* -------------------- Scratch Card (Ekran 35) -------------------- */
 export function ScratchCardScreen({ screen }: { screen: ScreenConfig }) {
+  const ui = useQuizUi();
   const { state, next, couponCode } = useQuiz();
   const [revealed, setRevealed] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -54,8 +57,8 @@ export function ScratchCardScreen({ screen }: { screen: ScreenConfig }) {
     ctx.font = "bold 22px sans-serif";
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
-    ctx.fillText("Kazı!", canvas.width / 2, canvas.height / 2);
-  }, []);
+    ctx.fillText(ui.scratch, canvas.width / 2, canvas.height / 2);
+  }, [ui.scratch]);
 
   const scratch = (x: number, y: number) => {
     const canvas = canvasRef.current;

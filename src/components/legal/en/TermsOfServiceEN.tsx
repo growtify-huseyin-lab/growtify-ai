@@ -1,13 +1,14 @@
 import { LegalDocEN } from "./LegalDocEN";
+import { COMPANY } from "@/lib/company-info";
 
-// English-law Terms of Service. [TBC] confirmed before public launch.
+// English-law Terms of Service.
 export function TermsOfServiceEN() {
   return (
-    <LegalDocEN title="Terms of Service" lastUpdated="[TBC]">
+    <LegalDocEN title="Terms of Service" lastUpdated="9 April 2026">
       <p>
         These Terms of Service (&quot;Terms&quot;) govern your use of the Growtify.ai website
         and services operated by Humax Global Ltd, a company registered in England and Wales
-        (company number: [TBC]) (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;). By accessing
+        (company number {COMPANY.companyNumber}) (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;). By accessing
         the website or enrolling on our programmes, you agree to these Terms.
       </p>
 
@@ -77,7 +78,7 @@ export function TermsOfServiceEN() {
       <h2>10. Changes &amp; contact</h2>
       <p>
         We may update these Terms; continued use after changes constitutes acceptance. Contact{" "}
-        <a href="mailto:info@growtify.ai">info@growtify.ai</a> with any question.
+        <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> with any question.
       </p>
     </LegalDocEN>
   );

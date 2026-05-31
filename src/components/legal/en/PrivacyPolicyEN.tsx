@@ -1,10 +1,11 @@
 import { LegalDocEN } from "./LegalDocEN";
+import { COMPANY } from "@/lib/company-info";
 
 // UK GDPR / Data Protection Act 2018 compliant privacy policy.
-// [TBC] = confirmed by Privacy Officer before public launch.
+// Entity facts sourced from @/lib/company-info (single source of truth).
 export function PrivacyPolicyEN() {
   return (
-    <LegalDocEN title="Privacy Policy" lastUpdated="[TBC]">
+    <LegalDocEN title="Privacy Policy" lastUpdated="9 April 2026">
       <p>
         This Privacy Policy explains how Humax Global Ltd (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;),
         the operator of Growtify.ai, collects, uses, and protects your personal data in
@@ -14,10 +15,9 @@ export function PrivacyPolicyEN() {
 
       <h2>1. Who we are (Data Controller)</h2>
       <p>
-        Humax Global Ltd is a company registered in England and Wales (company number:
-        [TBC]), with its registered office at [TBC]. We are the data controller responsible
-        for your personal data. Our ICO registration number is [TBC]. You can contact us at{" "}
-        <a href="mailto:info@growtify.ai">info@growtify.ai</a> for any data protection query.
+        Humax Global Ltd is a company registered in England and Wales (company number {COMPANY.companyNumber}), with its registered office at {COMPANY.address}. We are the data controller responsible
+        for your personal data. We are registered with the UK Information Commissioner's Office (ICO). You can contact us at{" "}
+        <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> for any data protection query.
       </p>
 
       <h2>2. What data we collect</h2>
@@ -74,7 +74,7 @@ export function PrivacyPolicyEN() {
       <h2>6. Data retention</h2>
       <p>
         We retain personal data only as long as necessary for the purposes set out above, or
-        as required by law. Enquiry data is retained for [TBC]; programme data for the duration
+        as required by law. Enquiry data is retained only as long as necessary for the purposes described; programme data for the duration
         of the relationship plus any statutory retention period.
       </p>
 
@@ -90,7 +90,7 @@ export function PrivacyPolicyEN() {
         <li>withdraw consent at any time.</li>
       </ul>
       <p>
-        To exercise any right, contact <a href="mailto:info@growtify.ai">info@growtify.ai</a>.
+        To exercise any right, contact <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
         You also have the right to lodge a complaint with the Information Commissioner&apos;s
         Office (ICO) at <a href="https://ico.org.uk">ico.org.uk</a>.
       </p>
@@ -111,7 +111,7 @@ export function PrivacyPolicyEN() {
       <p>
         We may update this policy from time to time; the &quot;last updated&quot; date reflects
         the latest version. For any question about this policy or your data, contact{" "}
-        <a href="mailto:info@growtify.ai">info@growtify.ai</a>.
+        <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>.
       </p>
     </LegalDocEN>
   );
