@@ -15,8 +15,8 @@ export async function generateMetadata({
   const en = locale === "en";
   return {
     title: en
-      ? "Sector-Specific AI Guides — Free Downloads | Growtify.ai"
-      : "Sektörel AI Rehberleri — Ücretsiz İndir | Growtify.ai",
+      ? "Sector-Specific AI Guides — Free Downloads"
+      : "Sektörel AI Rehberleri — Ücretsiz İndir",
     description: en
       ? "Free, sector-specific AI starter guides — healthcare, law, e-commerce, and more. Practical first steps with the GROWT Method."
       : "Sağlık, hukuk, e-ticaret ve daha fazlası için sektöre özel ücretsiz AI başlangıç rehberleri — GROWT Method ile pratik ilk adımlar.",

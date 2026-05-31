@@ -15,7 +15,7 @@ export async function generateMetadata({
   const { locale } = await params;
   if (locale !== "en") return { title: "Guides" };
   return {
-    title: "Sector-Specific AI Guides — Free Downloads | Growtify.ai",
+    title: "Sector-Specific AI Guides — Free Downloads",
     description:
       "Free, sector-specific AI starter guides — healthcare, law, e-commerce, and more. Practical first steps with the GROWT Method.",
     alternates: {
