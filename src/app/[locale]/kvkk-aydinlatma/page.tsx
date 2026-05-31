@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LegalPlaceholderEN } from "@/components/legal/LegalPlaceholderEN";
+import { PrivacyPolicyEN } from "@/components/legal/en/PrivacyPolicyEN";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { COMPANY } from "@/lib/company-info";
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default async function KVKKAydinlatmaPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  if (locale === "en") return <LegalPlaceholderEN docType="privacy" />;
+  if (locale === "en") return <PrivacyPolicyEN />;
   return (
     <section className="py-20 bg-white dark:bg-dark-bg transition-colors">
       <Container className="max-w-4xl">
