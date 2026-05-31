@@ -299,8 +299,13 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
     title: "This test was built on the findings of international AI research",
     subtitle: "Grounded in leading digital transformation reports and industry productivity studies.",
     cta: "Continue",
-    // extra.sources are fixed in the skeleton — the skeleton reads these values
-    // extra.note is fixed in the skeleton
+    extra: {
+      sources: [
+        "Leading AI research centers",
+        "International digital transformation reports",
+        "Industry productivity studies",
+      ],
+    },
   },
 
   22: {
