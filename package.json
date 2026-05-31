@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build --webpack",
+    "build": "next build",
     "generate-pdfs": "npx tsx scripts/generate-pdfs.ts",
     "start": "next start",
     "lint": "eslint"
@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-pdf/renderer": "^4.4.1",
     "@sparticuz/chromium": "^143.0.4",
+    "@sparticuz/chromium-min": "^143.0.4",
     "@tailwindcss/typography": "^0.5.19",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.7.0",

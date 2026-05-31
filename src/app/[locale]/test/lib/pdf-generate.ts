@@ -1,8 +1,17 @@
 // Growtify AI — PDF Generation via puppeteer-core + @sparticuz/chromium
 // Vercel serverless compatible. Singleton browser + retry.
 
-import chromium from "@sparticuz/chromium";
+import chromium from "@sparticuz/chromium-min";
 import puppeteerCore, { type Browser } from "puppeteer-core";
+
+// Remote brotli pack — chromium-min ships NO binary; it downloads + extracts this at
+// runtime (cached in /tmp per warm Lambda). This makes PDF generation INDEPENDENT of
+// Next/Vercel/Turbopack bundling+tracing (which silently dropped the bundled binary →
+// 'bin does not exist' → PDF fail → report email never sent).
+// Version MUST match puppeteer-core's Chrome (143). Self-host on R2/CDN for production
+// hardening (avoids GitHub release rate-limits at cold start).
+const CHROMIUM_PACK_URL =
+  "https://github.com/Sparticuz/chromium/releases/download/v143.0.4/chromium-v143.0.4-pack.x64.tar";
 import { generatePdfHtml } from "./pdf-html-template";
 import { generatePdfHtml as generatePdfHtmlEn } from "./pdf-html-template-en";
 import type { QuizState } from "./types";
@@ -35,7 +44,7 @@ async function getBrowser(): Promise<Browser> {
   try {
     // Disable WebGL to reduce binary size requirements
     chromium.setGraphicsMode = false;
-    const executablePath = await chromium.executablePath();
+    const executablePath = await chromium.executablePath(CHROMIUM_PACK_URL);
     console.log("[pdf] chromium executablePath:", executablePath);
 
     browserInstance = await puppeteerCore.launch({

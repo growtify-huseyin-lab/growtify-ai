@@ -4,37 +4,10 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["@sparticuz/chromium"],
-  outputFileTracingIncludes: {
-    "/[locale]/test/api/submit-email": [
-      "./node_modules/@sparticuz/chromium/bin/**",
-      "./node_modules/@sparticuz/chromium/build/**",
-    ],
-    "/[locale]/test/api/diag": [
-      "./node_modules/@sparticuz/chromium/bin/**",
-      "./node_modules/@sparticuz/chromium/build/**",
-    ],
-    "/[locale]/test/api/download-pdf": [
-      "./node_modules/@sparticuz/chromium/bin/**",
-      "./node_modules/@sparticuz/chromium/build/**",
-    ],
-    "/[locale]/test/api/preview-pdf": [
-      "./node_modules/@sparticuz/chromium/bin/**",
-      "./node_modules/@sparticuz/chromium/build/**",
-    ],
-    "/[locale]/test/kurumsal/api/submit-email": [
-      "./node_modules/@sparticuz/chromium/bin/**",
-      "./node_modules/@sparticuz/chromium/build/**",
-    ],
-    "/[locale]/test/kurumsal/api/download-pdf": [
-      "./node_modules/@sparticuz/chromium/bin/**",
-      "./node_modules/@sparticuz/chromium/build/**",
-    ],
-    "/[locale]/test/kurumsal/api/preview-pdf": [
-      "./node_modules/@sparticuz/chromium/bin/**",
-      "./node_modules/@sparticuz/chromium/build/**",
-    ],
-  },
+  // chromium-min ships no binary (downloaded from CHROMIUM_PACK_URL at runtime), so no
+  // outputFileTracingIncludes is needed — this makes PDF generation independent of the
+  // bundler (Turbopack did NOT honor outputFileTracingIncludes → binary never bundled).
+  serverExternalPackages: ["@sparticuz/chromium-min"],
   async redirects() {
     return [
       {
