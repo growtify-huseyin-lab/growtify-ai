@@ -1,7 +1,8 @@
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { MessageSquare, FileSearch, CheckCircle2, TrendingUp } from "lucide-react";
-import { KURUMSAL_PROCESS } from "@/lib/kurumsal-constants";
+import { getKProcess } from "@/lib/kurumsal-constants-i18n";
+import { getTranslations, getLocale } from "next-intl/server";
 
 const iconMap = {
   MessageSquare,
@@ -10,17 +11,21 @@ const iconMap = {
   TrendingUp,
 } as const;
 
-export function KurumsalProcess() {
+export async function KurumsalProcess() {
+  const locale = await getLocale();
+  const KURUMSAL_PROCESS = getKProcess(locale);
+  const t = await getTranslations("KurumsalProcessC");
+
   return (
     <section className="py-20 bg-light dark:bg-dark-bg/50 transition-colors">
       <Container>
         <div className="mx-auto max-w-3xl text-center mb-16">
           <Badge variant="primary" className="mb-4">
-            Nasıl Çalışır
+            {t("badge")}
           </Badge>
           <h2 className="text-3xl font-bold text-dark dark:text-white sm:text-4xl">
-            Başlamak{" "}
-            <span className="text-primary">4 adım</span> kadar kolay
+            {t("headingStart")}{" "}
+            <span className="text-primary">{t("headingHighlight")}</span> {t("headingEnd")}
           </h2>
         </div>
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Cookie, Settings2 } from "lucide-react";
+import { useTranslations } from "next-intl";
 import {
   DEFAULT_CONSENT,
   FULL_CONSENT,
@@ -12,6 +13,7 @@ import {
 import { CookiePreferencesModal } from "./CookiePreferencesModal";
 
 export function CookieBanner() {
+  const t = useTranslations("CookieBannerC");
   const [visible, setVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -64,7 +66,7 @@ export function CookieBanner() {
         <div
           role="dialog"
           aria-live="polite"
-          aria-label="Çerez kullanımı"
+          aria-label={t("ariaLabel")}
           className="fixed inset-x-0 bottom-0 z-50 border-t border-gray-200 dark:border-dark-border bg-white/95 dark:bg-dark-card/95 backdrop-blur-sm shadow-2xl animate-in slide-in-from-bottom duration-300"
         >
           <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 sm:py-5">
@@ -76,17 +78,15 @@ export function CookieBanner() {
                 </div>
                 <div className="flex-1 min-w-0 text-sm text-gray-700 dark:text-dark-muted leading-relaxed">
                   <p className="font-semibold text-dark dark:text-white mb-1">
-                    Çerezleri yönetelim
+                    {t("heading")}
                   </p>
                   <p>
-                    Bu site temel işlevler için zorunlu çerezler kullanır.
-                    Analitik ve pazarlama çerezleri ise sadece senin onayınla
-                    aktifleşir.{" "}
+                    {t("body")}{" "}
                     <a
                       href="/cerez-politikasi"
                       className="text-primary hover:underline font-medium"
                     >
-                      Çerez Politikası
+                      {t("policyLink")}
                     </a>
                     .
                   </p>
@@ -101,21 +101,21 @@ export function CookieBanner() {
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 dark:border-dark-border px-4 py-2.5 text-sm font-medium text-dark dark:text-white hover:bg-gray-50 dark:hover:bg-dark-bg transition"
                 >
                   <Settings2 size={16} />
-                  Tercihler
+                  {t("preferences")}
                 </button>
                 <button
                   type="button"
                   onClick={handleRejectAll}
                   className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-dark-muted hover:bg-gray-100 dark:hover:bg-dark-bg transition"
                 >
-                  Sadece Gerekli
+                  {t("rejectAll")}
                 </button>
                 <button
                   type="button"
                   onClick={handleAcceptAll}
                   className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary/90 transition"
                 >
-                  Hepsini Kabul Et
+                  {t("acceptAll")}
                 </button>
               </div>
             </div>

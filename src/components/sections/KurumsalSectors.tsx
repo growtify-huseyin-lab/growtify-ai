@@ -1,11 +1,13 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ArrowRight } from "lucide-react";
-import { KURUMSAL_SECTORS } from "@/lib/kurumsal-constants";
+import { getKSectors } from "@/lib/kurumsal-constants-i18n";
 
 export async function KurumsalSectors() {
+  const locale = await getLocale();
+  const KURUMSAL_SECTORS = getKSectors(locale);
   const t = await getTranslations("KurumsalSectorsC");
 
   return (

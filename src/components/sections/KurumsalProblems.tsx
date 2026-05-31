@@ -1,7 +1,8 @@
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Target, Zap, Users } from "lucide-react";
-import { KURUMSAL_PROBLEMS } from "@/lib/kurumsal-constants";
+import { getKProblems } from "@/lib/kurumsal-constants-i18n";
+import { getTranslations, getLocale } from "next-intl/server";
 
 const iconMap = {
   Target,
@@ -9,17 +10,21 @@ const iconMap = {
   Users,
 } as const;
 
-export function KurumsalProblems() {
+export async function KurumsalProblems() {
+  const locale = await getLocale();
+  const KURUMSAL_PROBLEMS = getKProblems(locale);
+  const t = await getTranslations("KurumsalProblemsC");
+
   return (
     <section className="py-20 bg-white dark:bg-dark-bg transition-colors">
       <Container>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-dark dark:text-white sm:text-4xl">
-            Sorun teknoloji değil,{" "}
-            <span className="text-primary">yaklaşım.</span>
+            {t("headingLead")}{" "}
+            <span className="text-primary">{t("headingEmphasis")}</span>
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-dark-muted">
-            Çoğu işletme AI dönüşümünü araçlarla başlatıyor. Oysa dönüşüm stratejik bir süreç.
+            {t("subheading")}
           </p>
         </div>
 

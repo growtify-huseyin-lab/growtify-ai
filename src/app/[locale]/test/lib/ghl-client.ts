@@ -3,6 +3,7 @@
 
 import type { QuizState } from "./types";
 import { buildGhlCustomFields, buildGhlTags } from "./ghl-mapping";
+import { getPersonaDisplayName } from "./content-runtime-i18n";
 
 interface GhlUpsertResponse {
   contact?: {
@@ -407,12 +408,17 @@ export async function sendQuizReportEmail(
   firstName: string,
   persona: string,
   pdfUrl: string,
+  locale: string = "tr",
 ): Promise<EmailResult> {
   const config = readConfig();
   if (!config) return { ok: false, error: "GHL credentials missing" };
 
-  const subject = `${firstName}, AI Dijital Olgunluk raporun hazır`;
-  const html = buildReportEmailHtml(firstName, persona, pdfUrl);
+  const personaName = getPersonaDisplayName(persona, locale);
+  const subject =
+    locale === "en"
+      ? `${firstName}, your AI Digital Maturity report is ready`
+      : `${firstName}, AI Dijital Olgunluk raporun hazır`;
+  const html = buildReportEmailHtml(firstName, personaName, pdfUrl, locale);
 
   try {
     const res = await fetch(`${config.apiBase}/conversations/messages`, {
@@ -546,6 +552,25 @@ function buildReportEmailHtml(
   firstName: string,
   persona: string,
   pdfUrl: string,
+  locale: string = "tr",
 ): string {
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0;padding:0;"><tr><td align="center" style="padding:0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:'Inter',Arial,sans-serif;color:#232323;width:100%;max-width:600px;"><tr><td style="background-color:#5d47f0;padding:24px 20px;color:white;text-align:center;"><h1 style="font-size:24px;margin:0 0 8px;color:white;">AI Dijital Olgunluk Raporun Hazır</h1><p style="font-size:14px;opacity:0.85;margin:0;color:white;">Merhaba ${firstName}, test sonuçlarına göre profilin: <b>${persona}</b></p></td></tr><tr><td style="padding:24px 20px;"><p style="font-size:14px;line-height:1.7;color:#475569;margin:0 0 24px;">Testi tamamladığın için teşekkürler. Kişisel AI Dijital Olgunluk raporun hazırlandı — içinde 14 alanda detaylı analiz, en güçlü ve en zorlandığın alanlar, ve sana özel öneriler bulacaksın.</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 24px;"><a href="${pdfUrl}" style="display:inline-block;background:#5d47f0;color:white;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;">Raporumu Görüntüle →</a></td></tr></table><p style="font-size:13px;color:#64748b;line-height:1.6;margin:0 0 24px;">Bu rapor kişisel değerlendirme sonuçlarına dayalı otomatik bir analiz içermektedir. Profesyonel danışmanlık yerine geçmez.</p><hr style="border:none;border-top:1px solid #e2e8f0;margin:0 0 16px;"><p style="font-size:11px;color:#94a3b8;text-align:center;margin:0;">Growtify.ai — GROWT Method ile AI dönüşümü<br>Bu e-posta AI Dijital Olgunluk Testi'ni tamamladığın için gönderilmiştir.</p></td></tr></table></td></tr></table></body></html>`;
+  const c =
+    locale === "en"
+      ? {
+          h1: "Your AI Digital Maturity Report Is Ready",
+          intro: `Hi ${firstName}, based on your assessment your profile is: <b>${persona}</b>`,
+          body: "Thanks for completing the assessment. Your personal AI Digital Maturity report is ready — inside you'll find a detailed analysis across 14 areas, your strongest and most challenging areas, and recommendations tailored to you.",
+          cta: "View My Report →",
+          disclaimer: "This report contains an automated analysis based on your self-assessment answers. It is not a substitute for professional advice.",
+          footer: "Growtify.ai — AI transformation with the GROWT Method<br>You received this email because you completed the AI Digital Maturity Assessment.",
+        }
+      : {
+          h1: "AI Dijital Olgunluk Raporun Hazır",
+          intro: `Merhaba ${firstName}, test sonuçlarına göre profilin: <b>${persona}</b>`,
+          body: "Testi tamamladığın için teşekkürler. Kişisel AI Dijital Olgunluk raporun hazırlandı — içinde 14 alanda detaylı analiz, en güçlü ve en zorlandığın alanlar, ve sana özel öneriler bulacaksın.",
+          cta: "Raporumu Görüntüle →",
+          disclaimer: "Bu rapor kişisel değerlendirme sonuçlarına dayalı otomatik bir analiz içermektedir. Profesyonel danışmanlık yerine geçmez.",
+          footer: "Growtify.ai — GROWT Method ile AI dönüşümü<br>Bu e-posta AI Dijital Olgunluk Testi'ni tamamladığın için gönderilmiştir.",
+        };
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0;padding:0;"><tr><td align="center" style="padding:0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:'Inter',Arial,sans-serif;color:#232323;width:100%;max-width:600px;"><tr><td style="background-color:#5d47f0;padding:24px 20px;color:white;text-align:center;"><h1 style="font-size:24px;margin:0 0 8px;color:white;">${c.h1}</h1><p style="font-size:14px;opacity:0.85;margin:0;color:white;">${c.intro}</p></td></tr><tr><td style="padding:24px 20px;"><p style="font-size:14px;line-height:1.7;color:#475569;margin:0 0 24px;">${c.body}</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 24px;"><a href="${pdfUrl}" style="display:inline-block;background:#5d47f0;color:white;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;">${c.cta}</a></td></tr></table><p style="font-size:13px;color:#64748b;line-height:1.6;margin:0 0 24px;">${c.disclaimer}</p><hr style="border:none;border-top:1px solid #e2e8f0;margin:0 0 16px;"><p style="font-size:11px;color:#94a3b8;text-align:center;margin:0;">${c.footer}</p></td></tr></table></td></tr></table></body></html>`;
 }

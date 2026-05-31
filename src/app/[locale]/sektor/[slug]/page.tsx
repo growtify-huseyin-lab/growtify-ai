@@ -70,6 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function SectorPage({ params }: Props) {
   const { slug, locale } = await params;
+  const en = locale === "en";
   const sector = sectorPagesFor(locale)[slug];
   const GROWT_PHASES = getGrowtPhases(locale);
   if (!sector) notFound();
@@ -131,10 +132,10 @@ export default async function SectorPage({ params }: Props) {
             </p>
             <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <Button href="/test" variant="primary" size="lg">
-                Kişisel Planını Oluştur <ArrowRight size={18} className="ml-2" />
+                {en ? "Create Your Personal Plan" : "Kişisel Planını Oluştur"} <ArrowRight size={18} className="ml-2" />
               </Button>
               <Button href="/growt-method" variant="ghost" size="lg" className="border border-gray-200 dark:border-dark-border">
-                GROWT Method&apos;u İncele
+                {en ? "Explore the GROWT Method" : <>GROWT Method&apos;u İncele</>}
               </Button>
             </div>
           </div>
@@ -263,7 +264,7 @@ export default async function SectorPage({ params }: Props) {
           <Container>
             <div className="mx-auto max-w-3xl">
               <h2 className="text-3xl font-bold text-dark dark:text-white text-center mb-12">
-                Sıkça Sorulan <span className="text-primary">Sorular</span>
+                {en ? "Frequently Asked " : "Sıkça Sorulan "}<span className="text-primary">{en ? "Questions" : "Sorular"}</span>
               </h2>
               <div className="space-y-4">
                 {content.faq.map((item, i) => (
@@ -294,7 +295,7 @@ export default async function SectorPage({ params }: Props) {
         <section className="py-20 bg-white dark:bg-dark-bg transition-colors">
           <Container>
             <h2 className="text-2xl font-bold text-dark dark:text-white mb-8">
-              Bu sektörde daha fazla
+              {en ? "More in this sector" : "Bu sektörde daha fazla"}
             </h2>
             <div className="grid gap-6 sm:grid-cols-3">
               {relatedPosts.slice(0, 3).map((post) => (
@@ -310,11 +311,13 @@ export default async function SectorPage({ params }: Props) {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Yapay zeka ile {sector.title.toLowerCase()} işini büyütmeye hazır mısın?
+              {en
+                ? `Ready to grow your ${sector.title.toLowerCase()} business with AI?`
+                : `Yapay zeka ile ${sector.title.toLowerCase()} işini büyütmeye hazır mısın?`}
             </h2>
             <div className="mt-8 flex justify-center">
               <Button href="/test" variant="accent" size="lg">
-                Kişisel Planını Oluştur <ArrowRight size={18} className="ml-2" />
+                {en ? "Create Your Personal Plan" : "Kişisel Planını Oluştur"} <ArrowRight size={18} className="ml-2" />
               </Button>
             </div>
           </div>

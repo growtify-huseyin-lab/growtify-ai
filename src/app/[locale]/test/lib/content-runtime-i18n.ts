@@ -21,5 +21,18 @@ export function getLegalTexts(locale: string) {
 export function getPersonaSummaryL(persona: string, locale: string) {
   return isEn(locale) ? EN.getPersonaSummary(persona) : TR.getPersonaSummary(persona);
 }
+
+// Persona DISPLAY-NAME map. state.persona is always the TR enum (scoring output);
+// on EN locale we render an English label. TR locale → enum unchanged (no leak risk).
+const PERSONA_DISPLAY_EN: Record<string, string> = {
+  "Meraklı Gözlemci": "Curious Observer",
+  "Aktif Deneyici": "Active Experimenter",
+  Uygulamacı: "Practitioner",
+  "Dönüşüm Adayı": "Transformation Candidate",
+};
+export function getPersonaDisplayName(persona: string, locale: string): string {
+  if (!isEn(locale)) return persona;
+  return PERSONA_DISPLAY_EN[persona] ?? persona;
+}
 // language-independent
 export const interpolate = TR.interpolate;

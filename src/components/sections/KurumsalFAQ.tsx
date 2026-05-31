@@ -1,11 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { ChevronDown } from "lucide-react";
-import { KURUMSAL_FAQ } from "@/lib/kurumsal-constants";
+import { useKFaq } from "@/lib/kurumsal-constants-hooks";
 
 export function KurumsalFAQ() {
+  const KURUMSAL_FAQ = useKFaq();
+  const t = useTranslations("KurumsalFaqC");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
@@ -13,7 +16,7 @@ export function KurumsalFAQ() {
       <Container>
         <div className="mx-auto max-w-3xl">
           <h2 className="text-3xl font-bold text-dark dark:text-white text-center sm:text-4xl">
-            Sık sorulan <span className="text-primary">sorular</span>
+            {t("headingLead")} <span className="text-primary">{t("headingHighlight")}</span>
           </h2>
 
           <div className="mt-12 space-y-3">

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useQuiz } from "../lib/QuizContext";
 
 interface ScreenShellProps {
@@ -23,6 +24,7 @@ export function ScreenShell({
   children,
   showBack = true,
 }: ScreenShellProps) {
+  const t = useTranslations("ScreenShellC");
   const { currentIndex, progress, totalScreens, prev } = useQuiz();
   const percent = Math.round(progress * 100);
 
@@ -72,7 +74,7 @@ export function ScreenShell({
             onClick={prev}
             className="text-sm text-gray-500 hover:text-primary dark:text-dark-muted"
           >
-            ← Geri
+            ← {t("back")}
           </button>
         ) : (
           <span />

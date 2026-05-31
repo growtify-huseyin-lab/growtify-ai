@@ -2,9 +2,13 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { KURUMSAL_HERO } from "@/lib/kurumsal-constants";
+import { getKHero } from "@/lib/kurumsal-constants-i18n";
+import { getTranslations, getLocale } from "next-intl/server";
 
-export function KurumsalHero() {
+export async function KurumsalHero() {
+  const locale = await getLocale();
+  const KURUMSAL_HERO = getKHero(locale);
+  const t = await getTranslations("KurumsalHeroC");
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white via-primary/5 to-white dark:from-dark-bg dark:via-primary/10 dark:to-dark-bg py-20 lg:py-32 transition-colors">
       {/* Dot grid pattern — subtle in light, visible in dark */}
@@ -27,11 +31,11 @@ export function KurumsalHero() {
           </Badge>
 
           <h1 className="text-4xl font-extrabold tracking-tight text-dark dark:text-white sm:text-5xl lg:text-6xl">
-            {KURUMSAL_HERO.title.split("AI Dönüşümü")[0]}
+            {t("headingPrefix")}
             <span className="bg-gradient-to-r from-primary via-primary-light to-primary dark:from-primary-light dark:via-accent dark:to-primary-light bg-clip-text text-transparent bg-[length:200%_auto] animate-shimmer">
-              AI Dönüşümü
+              {t("headingHighlight")}
             </span>
-            {" Burada Başlıyor"}
+            {t("headingSuffix")}
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-600 dark:text-gray-300 leading-relaxed sm:text-xl">

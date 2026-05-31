@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { X, Shield } from "lucide-react";
 import {
   CATEGORY_INFO,
@@ -20,6 +21,7 @@ type Props = {
 const TOGGLEABLE: ConsentCategory[] = ["analytics", "marketing", "functional"];
 
 export function CookiePreferencesModal({ open, onClose }: Props) {
+  const t = useTranslations("CookiePrefsC");
   const [state, setState] = useState<ConsentState>(DEFAULT_CONSENT);
 
   useEffect(() => {
@@ -67,17 +69,17 @@ export function CookiePreferencesModal({ open, onClose }: Props) {
             </div>
             <div>
               <h2 className="text-lg font-bold text-dark dark:text-white">
-                Çerez Tercihleri
+                {t("title")}
               </h2>
               <p className="text-xs text-gray-500 dark:text-dark-muted">
-                Hangi çerezlerin kullanılmasına izin verdiğini sen seç.
+                {t("subtitle")}
               </p>
             </div>
           </div>
           <button
             type="button"
             onClick={onClose}
-            aria-label="Kapat"
+            aria-label={t("closeAriaLabel")}
             className="rounded-lg p-1.5 text-gray-500 hover:bg-gray-100 dark:hover:bg-dark-bg transition"
           >
             <X size={18} />
@@ -105,15 +107,16 @@ export function CookiePreferencesModal({ open, onClose }: Props) {
           ))}
 
           <p className="text-xs text-gray-500 dark:text-dark-muted pt-2">
-            Tercihlerin yerel olarak (LocalStorage) saklanır ve istediğin
-            zaman bu modal&apos;dan değiştirilebilir. Detaylı bilgi için{" "}
-            <a
-              href="/cerez-politikasi"
-              className="text-primary hover:underline"
-            >
-              Çerez Politikası
-            </a>
-            &apos;na bakabilirsin.
+            {t.rich("storageNotice", {
+              link: (chunks) => (
+                <a
+                  href="/cerez-politikasi"
+                  className="text-primary hover:underline"
+                >
+                  {chunks}
+                </a>
+              ),
+            })}
           </p>
         </div>
 
@@ -124,21 +127,21 @@ export function CookiePreferencesModal({ open, onClose }: Props) {
             onClick={handleRejectAll}
             className="rounded-lg px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-dark-muted hover:bg-gray-100 dark:hover:bg-dark-card transition"
           >
-            Hepsini Reddet
+            {t("rejectAll")}
           </button>
           <button
             type="button"
             onClick={handleSave}
             className="rounded-lg border border-gray-300 dark:border-dark-border px-4 py-2.5 text-sm font-medium text-dark dark:text-white hover:bg-gray-50 dark:hover:bg-dark-card transition"
           >
-            Tercihlerimi Kaydet
+            {t("savePreferences")}
           </button>
           <button
             type="button"
             onClick={handleAcceptAll}
             className="rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-primary/90 transition"
           >
-            Hepsini Kabul Et
+            {t("acceptAll")}
           </button>
         </div>
       </div>
@@ -157,6 +160,7 @@ function CategoryRow({
   onToggle: () => void;
   disabled?: boolean;
 }) {
+  const t = useTranslations("CookiePrefsC");
   const info = CATEGORY_INFO[category];
   return (
     <div className="flex items-start justify-between gap-4 rounded-xl border border-gray-200 dark:border-dark-border p-4">
@@ -167,7 +171,7 @@ function CategoryRow({
           </h3>
           {info.required && (
             <span className="rounded-full bg-gray-100 dark:bg-dark-bg px-2 py-0.5 text-[10px] font-semibold text-gray-600 dark:text-dark-muted">
-              ZORUNLU
+              {t("requiredBadge")}
             </span>
           )}
         </div>
@@ -179,7 +183,7 @@ function CategoryRow({
         checked={checked}
         onChange={onToggle}
         disabled={disabled}
-        ariaLabel={`${info.label} çerezleri`}
+        ariaLabel={t("categoryToggleAriaLabel", { label: info.label })}
       />
     </div>
   );

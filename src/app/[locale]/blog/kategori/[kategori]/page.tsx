@@ -1,23 +1,25 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { CategoryTabs } from "@/components/blog/CategoryTabs";
 import { getPostsByCategory, BLOG_CATEGORIES } from "@/lib/blog";
 
-type Props = { params: Promise<{ kategori: string }> };
+type Props = { params: Promise<{ locale: string; kategori: string }> };
 
 export function generateStaticParams() {
   return BLOG_CATEGORIES.map((c) => ({ kategori: c.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { kategori } = await params;
+  const { locale, kategori } = await params;
+  const t = await getTranslations({ locale, namespace: "BlogKategoriPage" });
   const cat = BLOG_CATEGORIES.find((c) => c.slug === kategori);
-  if (!cat) return { title: "Kategori Bulunamadı" };
+  if (!cat) return { title: t("categoryNotFound") };
   return {
-    title: `${cat.label} — Blog`,
-    description: `${cat.label} kategorisindeki yazılar.`,
+    title: t("metaTitle", { label: cat.label }),
+    description: t("metaDescription", { label: cat.label }),
     alternates: {
       canonical: `/blog/kategori/${kategori}`,
     },
@@ -26,6 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogCategoryPage({ params }: Props) {
   const { kategori } = await params;
+  const t = await getTranslations("BlogKategoriPage");
   const cat = BLOG_CATEGORIES.find((c) => c.slug === kategori);
   if (!cat) notFound();
 
@@ -56,7 +59,7 @@ export default async function BlogCategoryPage({ params }: Props) {
           ) : (
             <div className="mt-12 text-center">
               <p className="text-gray-500 dark:text-dark-muted">
-                Bu kategoride henüz yazı yok.
+                {t("emptyCategory")}
               </p>
             </div>
           )}

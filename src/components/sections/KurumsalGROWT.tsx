@@ -1,10 +1,12 @@
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
-import { KURUMSAL_GROWT_PHASES } from "@/lib/kurumsal-constants";
+import { getKGrowtPhases } from "@/lib/kurumsal-constants-i18n";
 import { CheckCircle2 } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 
 export async function KurumsalGROWT() {
+  const locale = await getLocale();
+  const KURUMSAL_GROWT_PHASES = getKGrowtPhases(locale);
   const t = await getTranslations("KurumsalGROWTC");
 
   return (

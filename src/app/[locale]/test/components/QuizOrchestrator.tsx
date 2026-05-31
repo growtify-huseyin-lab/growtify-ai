@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { AnimatePresence, LazyMotion, domAnimation, motion } from "motion/react";
 import { useQuiz } from "../lib/QuizContext";
 import { useQuizScreens } from "../lib/content-runtime-hooks";
@@ -57,6 +58,7 @@ const RENDERERS: Record<ScreenType, ScreenRenderer> = {
 };
 
 export function QuizOrchestrator() {
+  const t = useTranslations('QuizOrchestratorC');
   const SCREENS = useQuizScreens();
   const { currentIndex } = useQuiz();
   const hasMounted = useHasMounted();
@@ -69,7 +71,7 @@ export function QuizOrchestrator() {
   if (!screen) {
     return (
       <div className="p-10 text-center text-sm text-gray-500">
-        Ekran bulunamadı (index {currentIndex}).
+        {t('screenNotFound', { index: currentIndex })}
       </div>
     );
   }
@@ -77,7 +79,7 @@ export function QuizOrchestrator() {
   if (!Renderer) {
     return (
       <div className="p-10 text-center text-sm text-red-500">
-        Renderer eksik: {screen.type}
+        {t('rendererMissing', { type: screen.type })}
       </div>
     );
   }

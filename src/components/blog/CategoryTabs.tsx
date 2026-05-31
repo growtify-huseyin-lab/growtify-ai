@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 
 export function CategoryTabs({ active }: { active?: string }) {
+  const t = useTranslations("CategoryTabsC");
   return (
     <div className="flex flex-wrap gap-2">
       <Link
@@ -14,7 +16,7 @@ export function CategoryTabs({ active }: { active?: string }) {
             : "bg-gray-100 dark:bg-dark-card text-gray-600 dark:text-dark-muted hover:bg-primary/10 hover:text-primary"
         }`}
       >
-        Tümü
+        {t("all")}
       </Link>
       {BLOG_CATEGORIES.map((cat) => (
         <Link

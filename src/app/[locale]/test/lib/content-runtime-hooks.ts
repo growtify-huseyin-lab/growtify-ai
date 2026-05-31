@@ -8,6 +8,7 @@ import {
   getPaywallCopy,
   getLegalTexts,
   getPersonaSummaryL,
+  getPersonaDisplayName,
 } from "./content-runtime-i18n";
 
 export function useQuizScreens() {
@@ -25,6 +26,11 @@ export function useLegalTexts() {
 export function usePersonaResolver() {
   const locale = useLocale();
   return (persona: string) => getPersonaSummaryL(persona, locale);
+}
+// Returns the locale-aware persona DISPLAY name (TR enum → EN label on /en).
+export function usePersonaName() {
+  const locale = useLocale();
+  return (persona: string) => getPersonaDisplayName(persona, locale);
 }
 
 // UI microcopy not in the screen content layer (loading states, chart labels, etc.)

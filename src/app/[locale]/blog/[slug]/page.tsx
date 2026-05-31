@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -30,7 +31,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return { title: "Yazı Bulunamadı" };
+  if (!post) {
+    const t = await getTranslations("BlogPostPage");
+    return { title: t("postNotFound") };
+  }
   return {
     title: post.seoTitle,
     description: post.seoDescription,
@@ -51,6 +55,8 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) notFound();
+
+  const t = await getTranslations("BlogPostPage");
 
   const allPosts = getAllPosts();
   const related = allPosts
@@ -106,7 +112,7 @@ export default async function BlogPostPage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 1,
-        name: "Ana Sayfa",
+        name: t("breadcrumbHome"),
         item: BASE_URL,
       },
       {
@@ -146,7 +152,7 @@ export default async function BlogPostPage({ params }: Props) {
               className="inline-flex items-center gap-1.5 text-sm text-gray-500 dark:text-dark-muted hover:text-primary transition-colors"
             >
               <ArrowLeft size={14} />
-              Blog&apos;a dön
+              {t("backToBlog")}
             </Link>
           </div>
 
@@ -180,7 +186,7 @@ export default async function BlogPostPage({ params }: Props) {
             {/* Share */}
             <div className="ml-auto flex items-center gap-2">
               <span className="text-xs text-gray-400 dark:text-dark-muted mr-1">
-                Paylaş
+                {t("share")}
               </span>
               <a
                 href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
@@ -219,7 +225,7 @@ export default async function BlogPostPage({ params }: Props) {
               {post.tags && post.tags.length > 0 && (
                 <div className="mt-8">
                   <h3 className="text-sm font-semibold text-gray-500 dark:text-dark-muted mb-3">
-                    Etiketler
+                    {t("tags")}
                   </h3>
                   <div className="flex flex-wrap gap-2">
                     {post.tags.map((tag) => (
@@ -242,7 +248,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {headings.length > 0 && (
                   <div className="rounded-2xl bg-white dark:bg-dark-card border border-gray-100 dark:border-dark-border p-5">
                     <h3 className="text-sm font-bold text-dark dark:text-white mb-3 uppercase tracking-wider">
-                      İçindekiler
+                      {t("tableOfContents")}
                     </h3>
                     <nav className="space-y-2">
                       {headings.map((heading, i) => (
@@ -264,7 +270,7 @@ export default async function BlogPostPage({ params }: Props) {
                 {/* Share box */}
                 <div className="rounded-2xl bg-white dark:bg-dark-card border border-gray-100 dark:border-dark-border p-5">
                   <h3 className="text-sm font-bold text-dark dark:text-white mb-3 uppercase tracking-wider">
-                    Paylaş
+                    {t("share")}
                   </h3>
                   <div className="flex gap-2">
                     <a
@@ -296,7 +302,7 @@ export default async function BlogPostPage({ params }: Props) {
         <section className="py-16 bg-white dark:bg-dark-bg border-t border-gray-100 dark:border-dark-border transition-colors">
           <Container>
             <h2 className="text-2xl font-bold text-dark dark:text-white mb-8">
-              Benzer Yazılar
+              {t("relatedPosts")}
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((p) => (

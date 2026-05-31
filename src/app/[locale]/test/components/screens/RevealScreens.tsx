@@ -1,19 +1,22 @@
 "use client";
 
-import { useQuizUi } from "../../lib/content-runtime-hooks";
+import { useQuizUi, usePersonaName } from "../../lib/content-runtime-hooks";
 
 import { useMemo, useRef, useState, useEffect } from "react";
 import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
 
 /* -------------------- Plan Ready (Ekran 34) -------------------- */
 export function PlanReadyScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations("RevealScreensC");
+  const personaName = usePersonaName();
   const { state, next } = useQuiz();
   const title = useMemo(
-    () => screen.title.replace("{firstName}", state.firstName || "sen"),
-    [screen.title, state.firstName],
+    () => screen.title.replace("{firstName}", state.firstName || t("planReadyNameFallback")),
+    [screen.title, state.firstName, t],
   );
 
   return (
@@ -21,14 +24,14 @@ export function PlanReadyScreen({ screen }: { screen: ScreenConfig }) {
       <div className="rounded-2xl border-2 border-primary/30 bg-gradient-to-br from-primary/5 to-accent/10 p-6 text-center dark:border-primary/40">
         <div className="text-5xl">🎯</div>
         <div className="mt-3 text-lg font-bold text-dark dark:text-white">
-          {state.persona} profili · 4 haftalık dönüşüm planın
+          {t("planReadyPersonaLine", { persona: personaName(state.persona) })}
         </div>
         <p className="mt-2 text-sm text-gray-600 dark:text-dark-muted">
-          Günde {state.commitment ?? 30} dk · Level 1-3 (G + R + O)
+          {t("planReadyCommitmentLine", { minutes: state.commitment ?? 30 })}
         </p>
       </div>
       <div className="mt-8">
-        <PrimaryButton onClick={next}>{screen.cta ?? "Devam"}</PrimaryButton>
+        <PrimaryButton onClick={next}>{screen.cta ?? t("continue")}</PrimaryButton>
       </div>
     </ScreenShell>
   );
@@ -36,6 +39,7 @@ export function PlanReadyScreen({ screen }: { screen: ScreenConfig }) {
 
 /* -------------------- Scratch Card (Ekran 35) -------------------- */
 export function ScratchCardScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations("RevealScreensC");
   const ui = useQuizUi();
   const { state, next, couponCode } = useQuiz();
   const [revealed, setRevealed] = useState(false);
@@ -95,13 +99,13 @@ export function ScratchCardScreen({ screen }: { screen: ScreenConfig }) {
       <div className="relative mx-auto h-56 w-full max-w-sm overflow-hidden rounded-2xl border-2 border-primary/30 bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-900 dark:to-amber-950">
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <div className="text-xs font-semibold uppercase tracking-wider text-amber-900 dark:text-amber-200">
-            Özel indirimin
+            {t("yourSpecialDiscount")}
           </div>
           <div className="mt-1 text-6xl font-black text-amber-900 dark:text-amber-200">
             %{state.discount}
           </div>
           <div className="mt-1 text-xs font-semibold text-amber-800 dark:text-amber-300">
-            GROWT Programı
+            {t("growtProgram")}
           </div>
         </div>
         <canvas
@@ -122,19 +126,19 @@ export function ScratchCardScreen({ screen }: { screen: ScreenConfig }) {
       {revealed && couponCode && (
         <div className="mt-4 rounded-xl border-2 border-dashed border-primary/40 bg-primary/5 p-4 text-center dark:bg-primary/10">
           <div className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-dark-muted">
-            Kupon kodun
+            {t("yourCouponCode")}
           </div>
           <CopyableCouponCode code={couponCode} />
           <div className="mt-2 text-[10px] text-gray-500 dark:text-dark-muted">
-            Tek kullanımlık · Kişiselleştirilmiş teklif · Devredilemez
+            {t("couponTerms")}
           </div>
         </div>
       )}
       <div className="mt-4">
         <PrimaryButton onClick={next} disabled={!revealed}>
           {revealed
-            ? (screen.cta ?? "Devam")
-            : `Kazımaya devam et (${Math.round(progress * 100)}%)`}
+            ? (screen.cta ?? t("continue"))
+            : t("keepScratching", { progress: Math.round(progress * 100) })}
         </PrimaryButton>
       </div>
     </ScreenShell>
@@ -143,10 +147,11 @@ export function ScratchCardScreen({ screen }: { screen: ScreenConfig }) {
 
 /* -------------------- Celebration (Ekran 36) -------------------- */
 export function CelebrationScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations("RevealScreensC");
   const { state, next, couponCode } = useQuiz();
   const title = useMemo(
-    () => screen.title.replace("{firstName}", state.firstName || "dostum"),
-    [screen.title, state.firstName],
+    () => screen.title.replace("{firstName}", state.firstName || t("celebrationNameFallback")),
+    [screen.title, state.firstName, t],
   );
 
   return (
@@ -166,7 +171,7 @@ export function CelebrationScreen({ screen }: { screen: ScreenConfig }) {
           🎉
         </motion.div>
         <div className="mt-4 text-3xl font-black text-green-700 dark:text-green-300">
-          %{state.discount} İNDİRİM
+          {t("discountHeadline", { discount: state.discount })}
         </div>
         {couponCode && (
           <div className="mt-3">
@@ -174,11 +179,11 @@ export function CelebrationScreen({ screen }: { screen: ScreenConfig }) {
           </div>
         )}
         <p className="mt-2 text-sm text-green-800 dark:text-green-400">
-          Ödeme sayfasında <b>Coupon Code</b> alanına yapıştır.
+          {t.rich("pasteAtCheckout", { b: (chunks) => <b>{chunks}</b> })}
         </p>
       </motion.div>
       <div className="mt-8">
-        <PrimaryButton onClick={next}>{screen.cta ?? "Devam"}</PrimaryButton>
+        <PrimaryButton onClick={next}>{screen.cta ?? t("continue")}</PrimaryButton>
       </div>
     </ScreenShell>
   );
@@ -192,6 +197,7 @@ function CopyableCouponCode({
   code: string;
   variant?: "default" | "celebration";
 }) {
+  const t = useTranslations("RevealScreensC");
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
@@ -222,7 +228,7 @@ function CopyableCouponCode({
     <button type="button" onClick={handleCopy} className={baseStyle}>
       <span>{code}</span>
       <span className="text-xs font-sans font-semibold opacity-80">
-        {copied ? "✓ Kopyalandı" : "📋 Kopyala"}
+        {copied ? t("copied") : t("copy")}
       </span>
     </button>
   );

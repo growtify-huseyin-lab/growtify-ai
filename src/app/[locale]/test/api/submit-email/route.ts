@@ -165,6 +165,7 @@ async function backgroundPdfFlow(
           state.firstName,
           state.persona,
           pdfUrl,
+          locale,
         ).then((r) =>
           console.log(`[quiz/bg] email=${r.ok} id=${r.messageId ?? r.error}`),
         ),

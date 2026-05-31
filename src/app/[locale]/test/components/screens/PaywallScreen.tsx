@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
 // GHL payment link — hardcoded here because PRODUCT.ctaHref now points to /test (quiz entry)
 const PAYMENT_LINK = "https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062";
 import { interpolate } from "../../lib/content-runtime";
-import { usePaywallCopy, useQuizUi } from "../../lib/content-runtime-hooks";
+import { usePaywallCopy, useQuizUi, usePersonaName } from "../../lib/content-runtime-hooks";
 import {
   getOrStartPaywallExpiry,
   getPaywallSecondsLeft,
@@ -21,6 +22,7 @@ import {
 export function PaywallScreen({ screen }: { screen: ScreenConfig }) {
   const { state } = useQuiz();
   const PAYWALL_COPY = usePaywallCopy();
+  const personaName = usePersonaName();
 
   const price = useMemo(() => {
     const base = PAYWALL_COPY.pricing.base;
@@ -37,7 +39,7 @@ export function PaywallScreen({ screen }: { screen: ScreenConfig }) {
     >
       <div className="space-y-6 pb-12">
         <CountdownBlock />
-        <HeroPromiseBlock firstName={state.firstName} persona={state.persona} />
+        <HeroPromiseBlock firstName={state.firstName} persona={personaName(state.persona)} />
         <BeforeAfterBlock />
         <StatsBlock />
         {/* <MediaFeaturesBlock /> — hidden until real press coverage */}
@@ -120,6 +122,7 @@ function HeroPromiseBlock({
   persona: string;
 }) {
   const PAYWALL_COPY = usePaywallCopy();
+  const t = useTranslations("PaywallScreenC2");
   // Split sentence around persona for visual emphasis
   const rawText = interpolate(PAYWALL_COPY.heroPromise.text, {
     firstName,
@@ -137,12 +140,12 @@ function HeroPromiseBlock({
       <div className="relative">
         <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/80 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary shadow-sm backdrop-blur dark:bg-dark-bg/80">
           <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-          Kişisel Plan
+          {t("personalPlan")}
         </div>
 
         <h2 className="text-[22px] font-bold leading-[1.4] tracking-tight text-dark dark:text-white sm:text-[24px]">
           <span className="mb-2 block text-3xl font-black tracking-tight text-primary sm:text-4xl">
-            {firstName || "Sen"},
+            {firstName || t("youFallback")},
           </span>
           <span className="block text-gray-700 dark:text-dark-muted">
             {(before.charAt(0).toUpperCase() + before.slice(1)).replace(/^[,\s]+/, "")}
@@ -213,11 +216,12 @@ function StatsBlock() {
 
 function MediaFeaturesBlock() {
   const PAYWALL_COPY = usePaywallCopy();
+  const t = useTranslations("PaywallScreenC2");
   if (!PAYWALL_COPY.mediaFeatures.comingSoon) return null;
   return (
     <section className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-5 text-center dark:border-dark-border dark:bg-dark-bg">
       <div className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-dark-muted">
-        Medya Yayınları
+        {t("mediaFeaturesHeadline")}
       </div>
       <p className="mt-2 text-xs text-gray-500 dark:text-dark-muted">
         {PAYWALL_COPY.mediaFeatures.note}
@@ -236,6 +240,7 @@ function PricingTableBlock({
   discounted: number;
 }) {
   const PAYWALL_COPY = usePaywallCopy();
+  const t = useTranslations("PaywallScreenC2");
   return (
     <section className="rounded-2xl border-2 border-primary bg-gradient-to-br from-primary/5 to-accent/10 p-6 dark:border-primary dark:from-primary/10 dark:to-accent/10">
       <div className="text-xs font-semibold uppercase tracking-wider text-primary">
@@ -250,7 +255,7 @@ function PricingTableBlock({
         </div>
       </div>
       <div className="mt-1 text-sm font-semibold text-green-600 dark:text-green-400">
-        %{discount} indirim aktif
+        {t("discountActive", { discount })}
       </div>
       <ul className="mt-4 space-y-1.5 text-sm text-gray-700 dark:text-dark-muted">
         {PAYWALL_COPY.pricing.features.map((f, i) => (
@@ -266,11 +271,12 @@ function PricingTableBlock({
 
 function TestimonialsBlock() {
   const PAYWALL_COPY = usePaywallCopy();
+  const t = useTranslations("PaywallScreenC2");
   if (PAYWALL_COPY.testimonials.strategy === "coming_soon") {
     return (
       <section className="rounded-2xl border border-dashed border-gray-300 bg-gray-50 p-5 dark:border-dark-border dark:bg-dark-bg">
         <div className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-dark-muted">
-          Kullanıcı Deneyimleri
+          {t("testimonialsHeadline")}
         </div>
         <p className="mt-2 text-xs leading-relaxed text-gray-600 dark:text-dark-muted">
           {PAYWALL_COPY.testimonials.comingSoonText}
@@ -283,10 +289,11 @@ function TestimonialsBlock() {
 
 function FaqBlock() {
   const PAYWALL_COPY = usePaywallCopy();
+  const t = useTranslations("PaywallScreenC2");
   return (
     <section className="rounded-2xl border border-gray-200 bg-white p-6 dark:border-dark-border dark:bg-dark-bg">
       <div className="text-xs font-semibold uppercase tracking-wider text-primary">
-        Sıkça Sorulan Sorular
+        {t("faqHeadline")}
       </div>
       <div className="mt-4 space-y-2">
         {PAYWALL_COPY.faq.map((f, i) => (
@@ -335,6 +342,7 @@ function DiscountDisclaimerBlock() {
 
 function FinalCtaBlock({ discounted }: { discounted: number }) {
   const PAYWALL_COPY = usePaywallCopy();
+  const t = useTranslations("PaywallScreenC2");
   const { couponCode, state } = useQuiz();
   const [copied, setCopied] = useState(false);
 
@@ -363,7 +371,7 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
   return (
     <section className="sticky bottom-4 space-y-3 rounded-2xl bg-primary p-4 shadow-2xl">
       <div className="text-center text-xs font-semibold uppercase tracking-wider text-white/70">
-        Şimdi başla
+        {t("startNow")}
       </div>
       <div className="text-center text-2xl font-black text-white">
         {discounted.toLocaleString("tr-TR")} TL
@@ -371,7 +379,7 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
       {couponCode && (
         <div className="rounded-xl bg-white/15 p-3">
           <div className="text-center text-[10px] font-semibold uppercase tracking-wider text-white/60">
-            İndirim Kodun
+            {t("yourDiscountCode")}
           </div>
           <button
             type="button"
@@ -380,11 +388,11 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
           >
             <span>{couponCode}</span>
             <span className="text-xs font-sans font-semibold">
-              {copied ? "✓ Kopyalandı" : "📋 Kopyala"}
+              {copied ? t("copied") : t("copy")}
             </span>
           </button>
           <div className="mt-2 text-center text-[10px] leading-relaxed text-white/70">
-            Ödeme sayfasında <b>Coupon Code</b> alanına yapıştır · Tek kullanımlık
+            {t.rich("couponInstruction", { b: (chunks) => <b>{chunks}</b> })}
           </div>
         </div>
       )}

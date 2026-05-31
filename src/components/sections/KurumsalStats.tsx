@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Container } from "@/components/ui/Container";
-import { KURUMSAL_STATS } from "@/lib/kurumsal-constants";
+import { useKStats } from "@/lib/kurumsal-constants-hooks";
 
 function parseStatValue(value: string): { prefix: string; number: number; suffix: string } {
   const match = value.match(/^([%]?)([0-9]+(?:\.[0-9]+)?)(.*)$/);
@@ -71,6 +71,7 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
 }
 
 export function KurumsalStats() {
+  const KURUMSAL_STATS = useKStats();
   return (
     <section className="py-16 bg-gradient-to-br from-primary via-primary-light to-primary">
       <Container>

@@ -1,14 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
 import { interpolate } from "../../lib/content-runtime";
-import { usePersonaResolver, useQuizUi } from "../../lib/content-runtime-hooks";
+import { usePersonaResolver, useQuizUi, usePersonaName } from "../../lib/content-runtime-hooks";
 
 /* -------------------- Social Proof (Ekran 3) -------------------- */
 export function SocialProofScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations("InfoScreensC2");
   const { next } = useQuiz();
   const metrics =
     ((screen.extra as { metrics?: { label: string; value: string }[] } | undefined)
@@ -33,7 +35,7 @@ export function SocialProofScreen({ screen }: { screen: ScreenConfig }) {
               </div>
             ))}
           </div>
-          <span className="text-sm font-semibold text-primary">+binlerce</span>
+          <span className="text-sm font-semibold text-primary">{t('plusThousands')}</span>
         </div>
         <div className="grid gap-3 sm:grid-cols-3">
           {metrics.map((m) => (
@@ -49,11 +51,11 @@ export function SocialProofScreen({ screen }: { screen: ScreenConfig }) {
           ))}
         </div>
         <p className="mt-4 text-center text-xs text-gray-500 dark:text-dark-muted">
-          Sağlıkçılar, avukatlar, e-ticaret satıcıları, güzellik uzmanları ve daha fazlası...
+          {t('professionsList')}
         </p>
       </div>
       <div className="mt-6">
-        <PrimaryButton onClick={next}>{screen.cta ?? "Devam"}</PrimaryButton>
+        <PrimaryButton onClick={next}>{screen.cta ?? t('continue')}</PrimaryButton>
       </div>
     </ScreenShell>
   );
@@ -61,6 +63,7 @@ export function SocialProofScreen({ screen }: { screen: ScreenConfig }) {
 
 /* -------------------- Authority (Ekran 21-23) -------------------- */
 export function AuthorityScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations("InfoScreensC2");
   const { next } = useQuiz();
   const sources =
     (screen.extra as { sources?: string[]; note?: string } | undefined)
@@ -96,7 +99,7 @@ export function AuthorityScreen({ screen }: { screen: ScreenConfig }) {
         </p>
       )}
       <div className="mt-8">
-        <PrimaryButton onClick={next}>{screen.cta ?? "Devam"}</PrimaryButton>
+        <PrimaryButton onClick={next}>{screen.cta ?? t('continue')}</PrimaryButton>
       </div>
     </ScreenShell>
   );
@@ -185,8 +188,11 @@ export function LoadingScreen({ screen }: { screen: ScreenConfig }) {
 
 /* -------------------- Profile Summary (Ekran 27) -------------------- */
 export function ProfileSummaryScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations("InfoScreensC2");
   const resolvePersona = usePersonaResolver();
+  const personaName = usePersonaName();
   const { state, next, finalize } = useQuiz();
+  const personaLabel = personaName(state.persona);
 
   // Kick off result computation as user reaches pre-reveal.
   useEffect(() => {
@@ -198,9 +204,9 @@ export function ProfileSummaryScreen({ screen }: { screen: ScreenConfig }) {
     () =>
       interpolate(screen.title, {
         firstName: state.firstName,
-        persona: state.persona,
+        persona: personaLabel,
       }),
-    [screen.title, state.firstName, state.persona],
+    [screen.title, state.firstName, personaLabel],
   );
 
   const personaData = resolvePersona(state.persona);
@@ -209,10 +215,10 @@ export function ProfileSummaryScreen({ screen }: { screen: ScreenConfig }) {
       personaData
         ? interpolate(personaData.summary, {
             firstName: state.firstName,
-            persona: state.persona,
+            persona: personaLabel,
           })
         : null,
-    [personaData, state.firstName, state.persona],
+    [personaData, state.firstName, personaLabel],
   );
 
   return (
@@ -220,10 +226,10 @@ export function ProfileSummaryScreen({ screen }: { screen: ScreenConfig }) {
       <div className="space-y-4">
         <div className="rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5 p-6 dark:border-primary/30 dark:from-primary/10 dark:to-accent/10">
           <div className="text-xs font-semibold uppercase tracking-wider text-primary">
-            Ön Profil
+            {t('preliminaryProfile')}
           </div>
           <div className="mt-2 text-2xl font-extrabold text-dark dark:text-white">
-            {state.persona}
+            {personaLabel}
           </div>
           {summaryText && (
             <p className="mt-3 text-sm leading-relaxed text-gray-700 dark:text-dark-muted">
@@ -235,7 +241,7 @@ export function ProfileSummaryScreen({ screen }: { screen: ScreenConfig }) {
         {personaData?.painIdentification?.length ? (
           <div className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-dark-border dark:bg-dark-bg">
             <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-dark-muted">
-              Senin söylediklerin
+              {t('whatYouSaid')}
             </div>
             <ul className="space-y-2">
               {personaData.painIdentification.map((line, i) => (
@@ -254,7 +260,7 @@ export function ProfileSummaryScreen({ screen }: { screen: ScreenConfig }) {
         {personaData?.projection ? (
           <div className="rounded-2xl border-2 border-green-200 bg-green-50 p-5 dark:border-green-900 dark:bg-green-950/30">
             <div className="text-xs font-semibold uppercase tracking-wider text-green-700 dark:text-green-300">
-              4 hafta sonra
+              {t('fourWeeksLater')}
             </div>
             <p className="mt-2 text-sm font-semibold text-green-900 dark:text-green-100">
               {personaData.projection}
@@ -264,7 +270,7 @@ export function ProfileSummaryScreen({ screen }: { screen: ScreenConfig }) {
 
       </div>
       <div className="mt-8">
-        <PrimaryButton onClick={next}>{screen.cta ?? "Devam"}</PrimaryButton>
+        <PrimaryButton onClick={next}>{screen.cta ?? t('continue')}</PrimaryButton>
       </div>
     </ScreenShell>
   );
@@ -285,7 +291,9 @@ function Stat({ label, value }: { label: string; value: string }) {
 
 /* -------------------- Projection Chart (Ekran 28) -------------------- */
 export function ProjectionScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations("InfoScreensC2");
   const ui = useQuizUi();
+  const personaName = usePersonaName();
   const { next, state } = useQuiz();
 
   return (
@@ -299,11 +307,11 @@ export function ProjectionScreen({ screen }: { screen: ScreenConfig }) {
           <ProjectionBar label={ui.chart90} value={92} color="bg-primary" />
         </div>
         <p className="mt-6 text-center text-xs text-gray-500 dark:text-dark-muted">
-          Günde {state.commitment ?? 30} dakika · {state.persona} profili
+          {t('dailyMinutesProfile', { minutes: state.commitment ?? 30, persona: personaName(state.persona) })}
         </p>
       </div>
       <div className="mt-8">
-        <PrimaryButton onClick={next}>{screen.cta ?? "Devam"}</PrimaryButton>
+        <PrimaryButton onClick={next}>{screen.cta ?? t('continue')}</PrimaryButton>
       </div>
     </ScreenShell>
   );

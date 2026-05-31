@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig, QuizState } from "../../lib/types";
 import { ScreenShell, PrimaryButton, OptionButton } from "../ScreenShell";
@@ -180,6 +181,7 @@ export function PainEmojiScreen({ screen }: { screen: ScreenConfig }) {
 
 /* -------------------- Likert 1-10 (Ekran 10-17) -------------------- */
 export function LikertScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations('ChoiceScreensC');
   const { state, setField, next } = useQuiz();
   const key = screen.stateKey;
   const current = key ? (state[key] as number) : 0;
@@ -219,7 +221,7 @@ export function LikertScreen({ screen }: { screen: ScreenConfig }) {
           })}
         </div>
         <PrimaryButton onClick={next} disabled={!current}>
-          Devam
+          {t('continue')}
         </PrimaryButton>
       </div>
     </ScreenShell>
@@ -228,6 +230,7 @@ export function LikertScreen({ screen }: { screen: ScreenConfig }) {
 
 /* -------------------- Multi Select (Ekran 19-20) -------------------- */
 export function MultiSelectScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations('ChoiceScreensC');
   const { state, setField, next } = useQuiz();
   const key = screen.stateKey;
   const current = key ? ((state[key] as string[]) ?? []) : [];
@@ -266,7 +269,7 @@ export function MultiSelectScreen({ screen }: { screen: ScreenConfig }) {
       </div>
       <div className="mt-6">
         <PrimaryButton onClick={next} disabled={current.length === 0}>
-          Devam ({current.length} seçili)
+          {t('continueSelected', { count: current.length })}
         </PrimaryButton>
       </div>
     </ScreenShell>

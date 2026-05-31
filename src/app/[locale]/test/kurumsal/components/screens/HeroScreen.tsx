@@ -1,10 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext-kurumsal";
 import type { KurumsalScreenConfig } from "../../lib/types-kurumsal";
 
 export function HeroScreen({ screen }: { screen: KurumsalScreenConfig }) {
   const { next } = useQuiz();
+  const t = useTranslations("KHeroScreenC");
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-2xl flex-col items-center justify-center px-4 py-12 text-center">
@@ -26,13 +28,13 @@ export function HeroScreen({ screen }: { screen: KurumsalScreenConfig }) {
 
       <div className="mt-4 flex items-center gap-6 text-sm text-gray-500">
         <span className="flex items-center gap-1.5">
-          <span className="text-lg">⏱️</span> ~3 dakika
+          <span className="text-lg">⏱️</span> {t("minutes", { count: 3 })}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="text-lg">📊</span> 21 soru
+          <span className="text-lg">📊</span> {t("questions", { count: 21 })}
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="text-lg">🔒</span> Ücretsiz
+          <span className="text-lg">🔒</span> {t("free")}
         </span>
       </div>
 
@@ -41,11 +43,11 @@ export function HeroScreen({ screen }: { screen: KurumsalScreenConfig }) {
         onClick={next}
         className="mt-8 rounded-xl bg-primary px-10 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl active:scale-[0.98]"
       >
-        {screen.cta || "Değerlendirmeyi Başlat"}
+        {screen.cta || t("ctaFallback")}
       </button>
 
       <p className="mt-6 text-xs text-gray-400 dark:text-dark-muted">
-        Kişisel verileriniz KVKK kapsamında korunmaktadır.
+        {t("kvkkNotice")}
       </p>
     </div>
   );

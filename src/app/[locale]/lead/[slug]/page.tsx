@@ -8,7 +8,7 @@ import {
   getAllLeadMagnetSlugs,
   FORMAT_CONFIG,
 } from "@/content/lead-magnets";
-import { getLeadMagnet as getLeadMagnetEn } from "@/content/lead-magnets/index.en";
+import { getLeadMagnet as getLeadMagnetEn, FORMAT_CONFIG as FORMAT_CONFIG_EN } from "@/content/lead-magnets/index.en";
 import { CheckCircle2 } from "lucide-react";
 
 interface PageProps {
@@ -41,10 +41,11 @@ export async function generateMetadata({
 
 export default async function LeadMagnetPage({ params }: PageProps) {
   const { slug, locale } = await params;
-  const magnet = (locale === "en" ? getLeadMagnetEn : getLeadMagnet)(slug);
+  const en = locale === "en";
+  const magnet = (en ? getLeadMagnetEn : getLeadMagnet)(slug);
   if (!magnet || !magnet.active) notFound();
 
-  const fmt = FORMAT_CONFIG[magnet.format];
+  const fmt = (en ? FORMAT_CONFIG_EN : FORMAT_CONFIG)[magnet.format];
 
   return (
     <>
@@ -105,11 +106,14 @@ export default async function LeadMagnetPage({ params }: PageProps) {
             <div>
               <div className="rounded-2xl border border-gray-200 dark:border-dark-border bg-light dark:bg-dark-card p-6 lg:p-8">
                 <h3 className="text-xl font-bold text-dark dark:text-white">
-                  Ücretsiz {magnet.formatLabel.toLowerCase()} al
+                  {en
+                    ? `Get your free ${magnet.formatLabel.toLowerCase()}`
+                    : `Ücretsiz ${magnet.formatLabel.toLowerCase()} al`}
                 </h3>
                 <p className="mt-2 text-sm text-gray-600 dark:text-dark-muted">
-                  Email adresini yaz, {magnet.formatLabel.toLowerCase()} anında
-                  sana ulaşsın.
+                  {en
+                    ? `Enter your email and your ${magnet.formatLabel.toLowerCase()} arrives instantly.`
+                    : `Email adresini yaz, ${magnet.formatLabel.toLowerCase()} anında sana ulaşsın.`}
                 </p>
                 <div className="mt-6">
                   <LeadForm
@@ -121,8 +125,11 @@ export default async function LeadMagnetPage({ params }: PageProps) {
                   />
                 </div>
                 <p className="mt-4 text-xs text-gray-500 dark:text-dark-muted">
-                  Email&apos;ini spam için kullanmıyoruz. İstediğin zaman
-                  çıkabilirsin.
+                  {en ? (
+                    "We don't use your email for spam. You can opt out anytime."
+                  ) : (
+                    <>Email&apos;ini spam için kullanmıyoruz. İstediğin zaman çıkabilirsin.</>
+                  )}
                 </p>
               </div>
             </div>

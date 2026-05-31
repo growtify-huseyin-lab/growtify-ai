@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { BlogCard } from "./BlogCard";
 import type { BlogMeta } from "@/lib/blog-types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -8,6 +9,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const POSTS_PER_PAGE = 9;
 
 export function BlogPagination({ posts }: { posts: BlogMeta[] }) {
+  const t = useTranslations("BlogPaginationC");
   const [page, setPage] = useState(1);
   const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
   const start = (page - 1) * POSTS_PER_PAGE;
@@ -64,7 +66,11 @@ export function BlogPagination({ posts }: { posts: BlogMeta[] }) {
 
       {/* Info */}
       <p className="mt-4 text-center text-sm text-gray-400 dark:text-dark-muted">
-        {posts.length} yazıdan {start + 1}-{Math.min(start + POSTS_PER_PAGE, posts.length)} arası gösteriliyor
+        {t("showingRange", {
+          from: start + 1,
+          to: Math.min(start + POSTS_PER_PAGE, posts.length),
+          total: posts.length,
+        })}
       </p>
     </>
   );

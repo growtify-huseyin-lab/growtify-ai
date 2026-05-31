@@ -2,6 +2,7 @@
 // 2 pages, premium design with infographics and visual elements.
 
 import type { QuizState, Persona } from "./types";
+import { getPersonaDisplayName } from "./content-runtime-i18n";
 
 const PRIMARY = "#5d47f0";
 const PRIMARY_LIGHT = "#9886fe";
@@ -159,6 +160,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   const top3 = [...painScores].sort((a, b) => b.pct - a.pct).slice(0, 3);
   const bottom3 = [...painScores].sort((a, b) => a.pct - b.pct).slice(0, 3);
   const persona = PERSONA_INFO[state.persona] ?? PERSONA_INFO["Meraklı Gözlemci"];
+  const personaName = getPersonaDisplayName(state.persona, "en");
   const painLevel = PAIN_LEVEL_TR[state.painLevel] ?? PAIN_LEVEL_TR.medium;
   // Max theoretical score ~136 (all max values with weights). Normalize to 0-100%.
   const maxScore = 5 * 6 + 10 * 8; // 30 + 80 = 110 (rough practical max)
@@ -297,14 +299,14 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
     <div style="display:flex; align-items:center; gap:14px; background:#F8F8F8; border-radius:16px; padding:16px 20px; margin-bottom:16px;">
       <div style="width:48px;height:48px;border-radius:12px;background:${persona.iconBg};display:flex;align-items:center;justify-content:center;flex-shrink:0;">${persona.icon}</div>
       <div>
-        <div style="font-size:18px; font-weight:800; color:${DARK};">${esc(state.persona)}</div>
+        <div style="font-size:18px; font-weight:800; color:${DARK};">${esc(personaName)}</div>
         <div style="font-size:11px; color:${GRAY}; margin-top:2px;">Your profile</div>
       </div>
     </div>
 
     <!-- Persona Card -->
     <div class="persona-card">
-      <div class="persona-name">${esc(state.persona)}</div>
+      <div class="persona-name">${esc(personaName)}</div>
       <div class="persona-sub">${esc(persona.subtitle)}</div>
       <div class="persona-desc">${esc(persona.desc)}</div>
     </div>

@@ -360,5 +360,170 @@
     "popularPages": "Popüler sayfalar:",
     "sectors": "Sektörler",
     "aiMaturityTest": "AI Olgunluk Testi"
+  },
+  "KurumsalCtaC": {
+    "heading": "İşletmenizin AI dönüşümünü planlayalım",
+    "subheading": "30 dakikalık ücretsiz strateji görüşmesi ile başlayın.",
+    "ctaButton": "Strateji Görüşmesi Planla"
+  },
+  "KurumsalFaqC": {
+    "headingLead": "Sık sorulan",
+    "headingHighlight": "sorular"
+  },
+  "KurumsalHeroC": {
+    "headingPrefix": "İşletmenizin ",
+    "headingHighlight": "AI Dönüşümü",
+    "headingSuffix": " Burada Başlıyor"
+  },
+  "KurumsalProblemsC": {
+    "headingLead": "Sorun teknoloji değil,",
+    "headingEmphasis": "yaklaşım.",
+    "subheading": "Çoğu işletme AI dönüşümünü araçlarla başlatıyor. Oysa dönüşüm stratejik bir süreç."
+  },
+  "KurumsalProcessC": {
+    "badge": "Nasıl Çalışır",
+    "headingStart": "Başlamak",
+    "headingHighlight": "4 adım",
+    "headingEnd": "kadar kolay"
+  },
+  "CookieBannerC": {
+    "ariaLabel": "Çerez kullanımı",
+    "heading": "Çerezleri yönetelim",
+    "body": "Bu site temel işlevler için zorunlu çerezler kullanır. Analitik ve pazarlama çerezleri ise sadece senin onayınla aktifleşir.",
+    "policyLink": "Çerez Politikası",
+    "preferences": "Tercihler",
+    "rejectAll": "Sadece Gerekli",
+    "acceptAll": "Hepsini Kabul Et"
+  },
+  "CookiePrefsC": {
+    "title": "Çerez Tercihleri",
+    "subtitle": "Hangi çerezlerin kullanılmasına izin verdiğini sen seç.",
+    "closeAriaLabel": "Kapat",
+    "storageNotice": "Tercihlerin yerel olarak (LocalStorage) saklanır ve istediğin zaman bu modal'dan değiştirilebilir. Detaylı bilgi için <link>Çerez Politikası</link>'na bakabilirsin.",
+    "rejectAll": "Hepsini Reddet",
+    "savePreferences": "Tercihlerimi Kaydet",
+    "acceptAll": "Hepsini Kabul Et",
+    "requiredBadge": "ZORUNLU",
+    "categoryToggleAriaLabel": "{label} çerezleri"
+  },
+  "BlogPaginationC": {
+    "showingRange": "{total} yazıdan {from}-{to} arası gösteriliyor"
+  },
+  "CategoryTabsC": {
+    "all": "Tümü"
+  },
+  "RelatedPostsC": {
+    "relatedPosts": "İlgili Yazılar"
+  },
+  "BlogKategoriPage": {
+    "categoryNotFound": "Kategori Bulunamadı",
+    "metaTitle": "{label} — Blog",
+    "metaDescription": "{label} kategorisindeki yazılar.",
+    "emptyCategory": "Bu kategoride henüz yazı yok."
+  },
+  "BlogPostPage": {
+    "postNotFound": "Yazı Bulunamadı",
+    "breadcrumbHome": "Ana Sayfa",
+    "backToBlog": "Blog'a dön",
+    "share": "Paylaş",
+    "tags": "Etiketler",
+    "tableOfContents": "İçindekiler",
+    "relatedPosts": "Benzer Yazılar"
+  },
+  "ResumeModalC": {
+    "timeJustNow": "az önce",
+    "timeMinutesAgo": "{minutes} dk önce",
+    "timeHoursAgo": "{hours} saat önce",
+    "timeDaysAgo": "{days} gün önce",
+    "timeWeeksAgo": "{weeks} hafta önce",
+    "resumeTitle": "Yarım kalan testini buldu",
+    "resumeScreenLabel": "Ekran",
+    "resumeSavedSuffix": "'de kalmıştın — {timeAgo} kaydedildi.",
+    "percentComplete": "%{percent} tamamlandı",
+    "continueWhereLeftOff": "Kaldığım yerden devam et",
+    "startOver": "Baştan başla",
+    "completedTitle": "Sonucun hazır!",
+    "completedProfileLabel": "Daha önce bu testi tamamladın. Profilin:",
+    "seeResultAndProgram": "Sonucumu ve programı gör",
+    "retakeQuiz": "Testi tekrar çöz"
+  },
+  "ChoiceScreensC": {
+    "continue": "Devam",
+    "continueSelected": "Devam ({count} seçili)"
+  },
+  "RevealScreensC": {
+    "planReadyNameFallback": "sen",
+    "planReadyPersonaLine": "{persona} profili · 4 haftalık dönüşüm planın",
+    "planReadyCommitmentLine": "Günde {minutes} dk · Level 1-3 (G + R + O)",
+    "continue": "Devam",
+    "yourSpecialDiscount": "Özel indirimin",
+    "growtProgram": "GROWT Programı",
+    "yourCouponCode": "Kupon kodun",
+    "couponTerms": "Tek kullanımlık · Kişiselleştirilmiş teklif · Devredilemez",
+    "keepScratching": "Kazımaya devam et (%{progress})",
+    "celebrationNameFallback": "dostum",
+    "discountHeadline": "%{discount} İNDİRİM",
+    "pasteAtCheckout": "Ödeme sayfasında <b>Coupon Code</b> alanına yapıştır.",
+    "copied": "✓ Kopyalandı",
+    "copy": "📋 Kopyala"
+  },
+  "PaywallScreenC2": {
+    "personalPlan": "Kişisel Plan",
+    "youFallback": "Sen",
+    "mediaFeaturesHeadline": "Medya Yayınları",
+    "discountActive": "%{discount} indirim aktif",
+    "testimonialsHeadline": "Kullanıcı Deneyimleri",
+    "faqHeadline": "Sıkça Sorulan Sorular",
+    "startNow": "Şimdi başla",
+    "yourDiscountCode": "İndirim Kodun",
+    "copied": "✓ Kopyalandı",
+    "copy": "📋 Kopyala",
+    "couponInstruction": "Ödeme sayfasında <b>Coupon Code</b> alanına yapıştır · Tek kullanımlık"
+  },
+  "InfoScreensC2": {
+    "plusThousands": "+binlerce",
+    "professionsList": "Sağlıkçılar, avukatlar, e-ticaret satıcıları, güzellik uzmanları ve daha fazlası...",
+    "continue": "Devam",
+    "preliminaryProfile": "Ön Profil",
+    "whatYouSaid": "Senin söylediklerin",
+    "fourWeeksLater": "4 hafta sonra",
+    "dailyMinutesProfile": "Günde {minutes} dakika · {persona} profili"
+  },
+  "CaptureScreensC2": {
+    "phonePlaceholder": "Telefon (opsiyonel)",
+    "privacyPolicy": "Gizlilik Politikası",
+    "continue": "Devam"
+  },
+  "ScreenShellC": {
+    "back": "Geri"
+  },
+  "QuizOrchestratorC": {
+    "screenNotFound": "Ekran bulunamadı (index {index}).",
+    "rendererMissing": "Renderer eksik: {type}"
+  },
+  "KPaywallC": {
+    "faqHeading": "Sık Sorulan Sorular",
+    "benefitsHeading": "Strateji Görüşmesinde Neler Konuşulur?",
+    "benefitAssessment": "Mevcut AI kullanımınızın değerlendirmesi",
+    "benefitUseCases": "Öncelikli kullanım senaryolarının belirlenmesi",
+    "benefitProgram": "Size uygun program önerisi",
+    "benefitRoi": "Beklenen ROI ve zaman çizelgesi",
+    "ctaPrimary": "Görüşme Planla",
+    "ctaMeta": "30 dakika · Ücretsiz · Bağlayıcı değil"
+  },
+  "KResultC": {
+    "averageMaturity": "Ortalama Olgunluk",
+    "maturityScore": "Olgunluk Skoru",
+    "aiMaturityFiveDimensions": "5 Boyutta AI Olgunluk",
+    "challengeAreas": "Zorluk Alanları",
+    "recommendations": "Öneriler",
+    "ctaFallback": "Ücretsiz Strateji Görüşmesi"
+  },
+  "KHeroScreenC": {
+    "minutes": "~{count} dakika",
+    "questions": "{count} soru",
+    "free": "Ücretsiz",
+    "ctaFallback": "Değerlendirmeyi Başlat",
+    "kvkkNotice": "Kişisel verileriniz KVKK kapsamında korunmaktadır."
   }
 }

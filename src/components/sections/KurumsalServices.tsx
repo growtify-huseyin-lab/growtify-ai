@@ -1,4 +1,4 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -12,7 +12,7 @@ import {
   LayoutDashboard,
   ArrowRight,
 } from "lucide-react";
-import { KURUMSAL_SERVICES } from "@/lib/kurumsal-constants";
+import { getKServices } from "@/lib/kurumsal-constants-i18n";
 
 const iconMap = {
   ClipboardCheck,
@@ -24,6 +24,8 @@ const iconMap = {
 } as const;
 
 export async function KurumsalServices() {
+  const locale = await getLocale();
+  const KURUMSAL_SERVICES = getKServices(locale);
   const t = await getTranslations("KurumsalServicesC");
 
   const mentorGroup = KURUMSAL_SERVICES.filter(
@@ -94,7 +96,7 @@ function ServiceCard({
   service,
   Icon,
 }: {
-  service: (typeof KURUMSAL_SERVICES)[number];
+  service: ReturnType<typeof getKServices>[number];
   Icon: React.ComponentType<{ size?: number; className?: string }>;
 }) {
   return (

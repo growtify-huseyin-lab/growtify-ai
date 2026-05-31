@@ -360,5 +360,170 @@
     "popularPages": "Popular pages:",
     "sectors": "Industries",
     "aiMaturityTest": "AI Maturity Test"
+  },
+  "KurumsalCtaC": {
+    "heading": "Let's map out your business's AI transformation",
+    "subheading": "Start with a free 30-minute strategy call.",
+    "ctaButton": "Book a Strategy Call"
+  },
+  "KurumsalFaqC": {
+    "headingLead": "Frequently asked",
+    "headingHighlight": "questions"
+  },
+  "KurumsalHeroC": {
+    "headingPrefix": "Your Business's ",
+    "headingHighlight": "AI Transformation",
+    "headingSuffix": " Starts Here"
+  },
+  "KurumsalProblemsC": {
+    "headingLead": "The problem isn't technology,",
+    "headingEmphasis": "it's the approach.",
+    "subheading": "Most businesses kick off their AI transformation with tools. But transformation is a strategic process."
+  },
+  "KurumsalProcessC": {
+    "badge": "How It Works",
+    "headingStart": "Getting started is as easy as",
+    "headingHighlight": "4 steps",
+    "headingEnd": ""
+  },
+  "CookieBannerC": {
+    "ariaLabel": "Cookie usage",
+    "heading": "Let's manage your cookies",
+    "body": "This site uses essential cookies for core functionality. Analytics and marketing cookies only activate once you give your consent.",
+    "policyLink": "Cookie Policy",
+    "preferences": "Preferences",
+    "rejectAll": "Essential Only",
+    "acceptAll": "Accept All"
+  },
+  "CookiePrefsC": {
+    "title": "Cookie Preferences",
+    "subtitle": "You decide which cookies you allow us to use.",
+    "closeAriaLabel": "Close",
+    "storageNotice": "Your preferences are stored locally (LocalStorage) and you can change them from this modal anytime. For details, take a look at our <link>Cookie Policy</link>.",
+    "rejectAll": "Reject All",
+    "savePreferences": "Save My Preferences",
+    "acceptAll": "Accept All",
+    "requiredBadge": "REQUIRED",
+    "categoryToggleAriaLabel": "{label} cookies"
+  },
+  "BlogPaginationC": {
+    "showingRange": "Showing {from}-{to} of {total} posts"
+  },
+  "CategoryTabsC": {
+    "all": "All"
+  },
+  "RelatedPostsC": {
+    "relatedPosts": "Related Posts"
+  },
+  "BlogKategoriPage": {
+    "categoryNotFound": "Category Not Found",
+    "metaTitle": "{label} — Blog",
+    "metaDescription": "Articles in the {label} category.",
+    "emptyCategory": "There are no articles in this category yet."
+  },
+  "BlogPostPage": {
+    "postNotFound": "Post Not Found",
+    "breadcrumbHome": "Home",
+    "backToBlog": "Back to Blog",
+    "share": "Share",
+    "tags": "Tags",
+    "tableOfContents": "Table of Contents",
+    "relatedPosts": "Related Posts"
+  },
+  "ResumeModalC": {
+    "timeJustNow": "just now",
+    "timeMinutesAgo": "{minutes} min ago",
+    "timeHoursAgo": "{hours} hr ago",
+    "timeDaysAgo": "{days} days ago",
+    "timeWeeksAgo": "{weeks} weeks ago",
+    "resumeTitle": "We found your unfinished assessment",
+    "resumeScreenLabel": "Screen",
+    "resumeSavedSuffix": " is where you left off — saved {timeAgo}.",
+    "percentComplete": "{percent}% complete",
+    "continueWhereLeftOff": "Continue where I left off",
+    "startOver": "Start over",
+    "completedTitle": "Your result is ready!",
+    "completedProfileLabel": "You've already completed this assessment. Your profile:",
+    "seeResultAndProgram": "See my result and the program",
+    "retakeQuiz": "Retake the assessment"
+  },
+  "ChoiceScreensC": {
+    "continue": "Continue",
+    "continueSelected": "Continue ({count} selected)"
+  },
+  "RevealScreensC": {
+    "planReadyNameFallback": "you",
+    "planReadyPersonaLine": "{persona} profile · your 4-week transformation plan",
+    "planReadyCommitmentLine": "{minutes} min a day · Levels 1-3 (G + R + O)",
+    "continue": "Continue",
+    "yourSpecialDiscount": "Your special discount",
+    "growtProgram": "GROWT Program",
+    "yourCouponCode": "Your coupon code",
+    "couponTerms": "Single use · Personalized offer · Non-transferable",
+    "keepScratching": "Keep scratching ({progress}%)",
+    "celebrationNameFallback": "friend",
+    "discountHeadline": "{discount}% OFF",
+    "pasteAtCheckout": "Paste it into the <b>Coupon Code</b> field at checkout.",
+    "copied": "✓ Copied",
+    "copy": "📋 Copy"
+  },
+  "PaywallScreenC2": {
+    "personalPlan": "Your Personal Plan",
+    "youFallback": "You",
+    "mediaFeaturesHeadline": "Featured In",
+    "discountActive": "{discount}% discount active",
+    "testimonialsHeadline": "What Members Say",
+    "faqHeadline": "Frequently Asked Questions",
+    "startNow": "Start now",
+    "yourDiscountCode": "Your Discount Code",
+    "copied": "✓ Copied",
+    "copy": "📋 Copy",
+    "couponInstruction": "Paste it into the <b>Coupon Code</b> field at checkout · Single use"
+  },
+  "InfoScreensC2": {
+    "plusThousands": "+thousands",
+    "professionsList": "Healthcare professionals, lawyers, e-commerce sellers, beauty specialists and many more...",
+    "continue": "Continue",
+    "preliminaryProfile": "Preliminary Profile",
+    "whatYouSaid": "What you told us",
+    "fourWeeksLater": "4 weeks from now",
+    "dailyMinutesProfile": "{minutes} minutes a day · {persona} profile"
+  },
+  "CaptureScreensC2": {
+    "phonePlaceholder": "Phone (optional)",
+    "privacyPolicy": "Privacy Policy",
+    "continue": "Continue"
+  },
+  "ScreenShellC": {
+    "back": "Back"
+  },
+  "QuizOrchestratorC": {
+    "screenNotFound": "Screen not found (index {index}).",
+    "rendererMissing": "Missing renderer: {type}"
+  },
+  "KPaywallC": {
+    "faqHeading": "Frequently Asked Questions",
+    "benefitsHeading": "What Will You Cover in the Strategy Call?",
+    "benefitAssessment": "An assessment of how you're currently using AI",
+    "benefitUseCases": "Identifying your highest-priority use cases",
+    "benefitProgram": "A program recommendation tailored to you",
+    "benefitRoi": "Expected ROI and timeline",
+    "ctaPrimary": "Book a Call",
+    "ctaMeta": "30 minutes · Free · No commitment"
+  },
+  "KResultC": {
+    "averageMaturity": "Average Maturity",
+    "maturityScore": "Maturity Score",
+    "aiMaturityFiveDimensions": "AI Maturity Across 5 Dimensions",
+    "challengeAreas": "Challenge Areas",
+    "recommendations": "Recommendations",
+    "ctaFallback": "Free Strategy Call"
+  },
+  "KHeroScreenC": {
+    "minutes": "~{count} min",
+    "questions": "{count} questions",
+    "free": "Free",
+    "ctaFallback": "Start the Assessment",
+    "kvkkNotice": "Your personal data is protected under applicable data protection law."
   }
 }

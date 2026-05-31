@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext-kurumsal";
 import { interpolate } from "../../lib/content-kurumsal-runtime";
 import { useKPaywallCopy, useKPersonaSummaries } from "../../lib/content-kurumsal-runtime-hooks";
@@ -16,6 +17,7 @@ function buildBookingUrl(baseUrl: string, firstName: string, email: string, phon
 }
 
 export function KurumsalPaywallScreen({ screen }: { screen: KurumsalScreenConfig }) {
+  const t = useTranslations('KPaywallC');
   const KURUMSAL_PAYWALL_COPY = useKPaywallCopy();
   const KURUMSAL_PERSONA_SUMMARIES = useKPersonaSummaries();
   const { state } = useQuiz();
@@ -59,7 +61,7 @@ export function KurumsalPaywallScreen({ screen }: { screen: KurumsalScreenConfig
         {/* FAQ */}
         <div className="mt-8">
           <h2 className="mb-4 text-lg font-bold text-dark dark:text-white">
-            Sık Sorulan Sorular
+            {t('faqHeading')}
           </h2>
           <div className="space-y-3">
             {KURUMSAL_PAYWALL_COPY.faq.map((item, i) => (
@@ -127,14 +129,14 @@ export function KurumsalPaywallScreen({ screen }: { screen: KurumsalScreenConfig
       {/* Strategy call benefits */}
       <div className="mt-8 rounded-2xl bg-gradient-to-br from-primary/5 to-primary/10 p-6">
         <h2 className="mb-4 text-lg font-bold text-dark dark:text-white">
-          Strateji Görüşmesinde Neler Konuşulur?
+          {t('benefitsHeading')}
         </h2>
         <div className="space-y-3">
           {[
-            { icon: "🔍", text: "Mevcut AI kullanımınızın değerlendirmesi" },
-            { icon: "🎯", text: "Öncelikli kullanım senaryolarının belirlenmesi" },
-            { icon: "📋", text: "Size uygun program önerisi" },
-            { icon: "📊", text: "Beklenen ROI ve zaman çizelgesi" },
+            { icon: "🔍", text: t('benefitAssessment') },
+            { icon: "🎯", text: t('benefitUseCases') },
+            { icon: "📋", text: t('benefitProgram') },
+            { icon: "📊", text: t('benefitRoi') },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-3">
               <span className="text-lg">{item.icon}</span>
@@ -179,10 +181,10 @@ export function KurumsalPaywallScreen({ screen }: { screen: KurumsalScreenConfig
           rel="noopener noreferrer"
           className="block w-full rounded-xl bg-primary px-6 py-4 text-center text-base font-bold text-white shadow-lg transition-all hover:bg-primary/90"
         >
-          {screen.cta || "Görüşme Planla"}
+          {screen.cta || t('ctaPrimary')}
         </a>
         <p className="text-center text-xs text-gray-400">
-          30 dakika · Ücretsiz · Bağlayıcı değil
+          {t('ctaMeta')}
         </p>
       </div>
     </div>

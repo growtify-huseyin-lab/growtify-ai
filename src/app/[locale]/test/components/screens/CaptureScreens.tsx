@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig, QuizState } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
@@ -8,6 +9,7 @@ import { useLegalTexts, useQuizUi } from "../../lib/content-runtime-hooks";
 
 /* -------------------- Text Input (Ekran 25 name, 26 email) -------------------- */
 export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
+  const t = useTranslations("CaptureScreensC2");
   const { state, setField, next, submitEmail } = useQuiz();
   const LEGAL_TEXTS = useLegalTexts();
   const ui = useQuizUi();
@@ -87,7 +89,7 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
             type="tel"
             value={(state.phone as string) ?? ""}
             onChange={(e) => setField("phone" as string, e.target.value)}
-            placeholder="Telefon (opsiyonel)"
+            placeholder={t('phonePlaceholder')}
             className="w-full rounded-xl border-2 border-gray-200 bg-white px-5 py-4 text-lg font-medium text-dark placeholder-gray-400 outline-none transition-colors focus:border-primary dark:border-dark-border dark:bg-dark-bg dark:text-white"
           />
         )}
@@ -105,7 +107,7 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
             <span className="text-[11px] leading-relaxed text-gray-500 dark:text-dark-muted">
               {LEGAL_TEXTS.kvkkShort}{" "}
               <a href="/gizlilik-politikasi" target="_blank" rel="noopener noreferrer" className="underline text-primary hover:text-primary-light">
-                Gizlilik Politikası
+                {t('privacyPolicy')}
               </a>
             </span>
           </label>
@@ -114,7 +116,7 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
           onClick={handleSubmit}
           disabled={!valid || submitting || (isSubmitTrigger && !kvkkConsent)}
         >
-          {screen.cta ?? "Devam"}
+          {screen.cta ?? t('continue')}
         </PrimaryButton>
       </div>
     </ScreenShell>

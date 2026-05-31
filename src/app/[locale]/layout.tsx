@@ -23,49 +23,68 @@ const playfair = Playfair_Display({
 
 const BASE_URL = "https://growtify.ai";
 
-export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
-  title: {
-    default: "Growtify.ai — AI ile İşini Büyüten Profesyonellerin Platformu",
-    template: "%s | Growtify.ai",
-  },
-  description:
-    "Bireysel profesyonellere ve mikro KOBİ'lere GROWT Method ile AI dönüşümü sağlıyoruz. 5 seviyeli, kendi hızında, sektörüne özel, ölçülebilir iş büyütme platformu.",
-  keywords: [
-    "AI danışmanlık",
-    "dijital dönüşüm",
-    "GROWT Method",
-    "AI eğitim",
-    "profesyonel gelişim",
-  ],
-  authors: [{ name: "Growtify.ai" }],
-  robots: {
-    index: false,
-    follow: false,
-    googleBot: { index: false, follow: false },
-  },
-  icons: {
-    icon: "/images/fav-ai.png",
-    shortcut: "/images/fav-ai.png",
-    apple: "/images/fav-ai.png",
-  },
-  alternates: {
-    canonical: BASE_URL,
-    languages: {
-      tr: BASE_URL,
-      en: `${BASE_URL}/en`,
-      "x-default": BASE_URL,
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const en = locale === "en";
+  return {
+    metadataBase: new URL(BASE_URL),
+    title: {
+      default: en
+        ? "Growtify.ai — The Platform for Professionals Growing Their Business with AI"
+        : "Growtify.ai — AI ile İşini Büyüten Profesyonellerin Platformu",
+      template: "%s | Growtify.ai",
     },
-  },
-  openGraph: {
-    type: "website",
-    siteName: "Growtify.ai",
-    url: BASE_URL,
-  },
-  twitter: {
-    card: "summary_large_image",
-  },
-};
+    description: en
+      ? "We help individual professionals and micro-SMEs transform with AI through the GROWT Method — a 5-level, self-paced, sector-specific, measurable business-growth platform."
+      : "Bireysel profesyonellere ve mikro KOBİ'lere GROWT Method ile AI dönüşümü sağlıyoruz. 5 seviyeli, kendi hızında, sektörüne özel, ölçülebilir iş büyütme platformu.",
+    keywords: en
+      ? [
+          "AI consulting",
+          "digital transformation",
+          "GROWT Method",
+          "AI training",
+          "professional growth",
+        ]
+      : [
+          "AI danışmanlık",
+          "dijital dönüşüm",
+          "GROWT Method",
+          "AI eğitim",
+          "profesyonel gelişim",
+        ],
+    authors: [{ name: "Growtify.ai" }],
+    robots: {
+      index: false,
+      follow: false,
+      googleBot: { index: false, follow: false },
+    },
+    icons: {
+      icon: "/images/fav-ai.png",
+      shortcut: "/images/fav-ai.png",
+      apple: "/images/fav-ai.png",
+    },
+    alternates: {
+      canonical: en ? `${BASE_URL}/en` : BASE_URL,
+      languages: {
+        tr: BASE_URL,
+        en: `${BASE_URL}/en`,
+        "x-default": BASE_URL,
+      },
+    },
+    openGraph: {
+      type: "website",
+      siteName: "Growtify.ai",
+      url: en ? `${BASE_URL}/en` : BASE_URL,
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

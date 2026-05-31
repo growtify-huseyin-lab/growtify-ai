@@ -1,8 +1,11 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 
-export function KurumsalCTA() {
+export async function KurumsalCTA() {
+  const t = await getTranslations("KurumsalCtaC");
+
   return (
     <section className="relative py-20 overflow-hidden">
       {/* Animated gradient border effect */}
@@ -23,10 +26,10 @@ export function KurumsalCTA() {
       <Container className="relative">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            İşletmenizin AI dönüşümünü planlayalım
+            {t("heading")}
           </h2>
           <p className="mt-4 text-lg text-white/80">
-            30 dakikalık ücretsiz strateji görüşmesi ile başlayın.
+            {t("subheading")}
           </p>
           <div className="mt-8 flex justify-center">
             <Button
@@ -35,7 +38,7 @@ export function KurumsalCTA() {
               size="lg"
               external
             >
-              Strateji Görüşmesi Planla
+              {t("ctaButton")}
               <ArrowRight size={18} className="ml-2" />
             </Button>
           </div>

@@ -216,7 +216,7 @@ async function backgroundPdfFlow(
         addNoteToContact(contactId, buildContactNote(state)).then((r) =>
           console.log(`[kurumsal/bg] note=${r.ok}`),
         ),
-        sendKurumsalReportEmail(contactId, state, pdfUrl, config).then((r) =>
+        sendKurumsalReportEmail(contactId, state, pdfUrl, config, bgLocale).then((r) =>
           console.log(`[kurumsal/bg] email=${r}`),
         ),
       ]);
@@ -231,9 +231,13 @@ async function sendKurumsalReportEmail(
   state: KurumsalQuizState,
   pdfUrl: string,
   config: GhlConfig,
+  locale: string = "tr",
 ): Promise<boolean> {
-  const subject = `${state.firstName}, Kurumsal AI Olgunluk Raporunuz hazır`;
-  const html = buildKurumsalEmailHtml(state.firstName, state.persona, pdfUrl);
+  const subject =
+    locale === "en"
+      ? `${state.firstName}, your Corporate AI Maturity report is ready`
+      : `${state.firstName}, Kurumsal AI Olgunluk Raporunuz hazır`;
+  const html = buildKurumsalEmailHtml(state.firstName, state.persona, pdfUrl, locale);
 
   try {
     const res = await fetch(`${config.apiBase}/conversations/messages`, {
@@ -263,14 +267,48 @@ function buildKurumsalEmailHtml(
   firstName: string,
   persona: string,
   pdfUrl: string,
+  locale: string = "tr",
 ): string {
-  const personaLabels: Record<string, string> = {
-    Baslangic: "Başlangıç (AI Farkındalık)",
-    Kesif: "Keşif (AI Deneyimleme)",
-    Uygulama: "Uygulama (AI Operasyonu)",
-    Lider: "Lider (AI Dönüşümü)",
+  const personaLabels: Record<string, Record<string, string>> = {
+    tr: {
+      Baslangic: "Başlangıç (AI Farkındalık)",
+      Kesif: "Keşif (AI Deneyimleme)",
+      Uygulama: "Uygulama (AI Operasyonu)",
+      Lider: "Lider (AI Dönüşümü)",
+    },
+    en: {
+      Baslangic: "Beginner (AI Awareness)",
+      Kesif: "Exploring (AI Experimentation)",
+      Uygulama: "Applying (AI Operations)",
+      Lider: "Leader (AI Transformation)",
+    },
   };
-  const label = personaLabels[persona] ?? persona;
+  const label = (personaLabels[locale] ?? personaLabels.tr)[persona] ?? persona;
 
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0;padding:0;"><tr><td align="center" style="padding:0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:'Inter',Arial,sans-serif;color:#232323;width:100%;max-width:600px;"><tr><td style="background-color:#2563EB;padding:24px 20px;color:white;text-align:center;"><h1 style="font-size:22px;margin:0 0 8px;color:white;">Kurumsal AI Olgunluk Raporunuz Hazır</h1><p style="font-size:14px;opacity:0.85;margin:0;color:white;">Merhaba ${firstName}, değerlendirme sonucunuz: <b>${label}</b></p></td></tr><tr><td style="padding:24px 20px;"><p style="font-size:14px;line-height:1.7;color:#475569;margin:0 0 24px;">Kurumsal AI Olgunluk Değerlendirmesini tamamladığınız için teşekkürler. Raporunuzda 5 boyutta detaylı analiz, zorluk alanları ve size özel öneriler bulacaksınız.</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 28px;"><a href="${pdfUrl}" style="display:inline-block;background:#2563EB;color:white;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;">Raporumu Görüntüle →</a></td></tr></table><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#f8fafc;border-radius:12px;padding:20px;"><p style="font-size:14px;font-weight:700;color:#1a1a2e;margin:0 0 8px;">Sonraki Adım</p><p style="font-size:13px;color:#475569;margin:0 0 16px;">30 dakikalık ücretsiz strateji görüşmesi ile AI dönüşüm yol haritanızı birlikte oluşturalım.</p><a href="https://app.growtify.app/widget/bookings/kurumsal-on-gorusme" style="display:inline-block;background:#2563EB;color:white;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;">Görüşme Planla →</a></td></tr></table><p style="font-size:13px;color:#64748b;line-height:1.6;margin:24px 0;">Bu rapor kurumsal değerlendirme sonuçlarınıza dayalı otomatik bir analiz içermektedir. Profesyonel danışmanlık yerine geçmez.</p><hr style="border:none;border-top:1px solid #e2e8f0;margin:0 0 16px;"><p style="font-size:11px;color:#94a3b8;text-align:center;margin:0;">Growtify.ai — GROWT Method ile kurumsal AI dönüşümü<br>Bu e-posta Kurumsal AI Olgunluk Değerlendirmesini tamamladığınız için gönderilmiştir.</p></td></tr></table></td></tr></table></body></html>`;
+  const c =
+    locale === "en"
+      ? {
+          h1: "Your Corporate AI Maturity Report Is Ready",
+          intro: `Hi ${firstName}, your assessment result: <b>${label}</b>`,
+          body: "Thanks for completing the Corporate AI Maturity Assessment. Your report includes a detailed analysis across 5 dimensions, challenge areas, and recommendations tailored to you.",
+          cta: "View My Report →",
+          nextStepTitle: "Next Step",
+          nextStepBody: "Let's build your AI transformation roadmap together in a free 30-minute strategy call.",
+          nextStepCta: "Book a Call →",
+          disclaimer: "This report contains an automated analysis based on your corporate assessment answers. It is not a substitute for professional advice.",
+          footer: "Growtify.ai — corporate AI transformation with the GROWT Method<br>You received this email because you completed the Corporate AI Maturity Assessment.",
+        }
+      : {
+          h1: "Kurumsal AI Olgunluk Raporunuz Hazır",
+          intro: `Merhaba ${firstName}, değerlendirme sonucunuz: <b>${label}</b>`,
+          body: "Kurumsal AI Olgunluk Değerlendirmesini tamamladığınız için teşekkürler. Raporunuzda 5 boyutta detaylı analiz, zorluk alanları ve size özel öneriler bulacaksınız.",
+          cta: "Raporumu Görüntüle →",
+          nextStepTitle: "Sonraki Adım",
+          nextStepBody: "30 dakikalık ücretsiz strateji görüşmesi ile AI dönüşüm yol haritanızı birlikte oluşturalım.",
+          nextStepCta: "Görüşme Planla →",
+          disclaimer: "Bu rapor kurumsal değerlendirme sonuçlarınıza dayalı otomatik bir analiz içermektedir. Profesyonel danışmanlık yerine geçmez.",
+          footer: "Growtify.ai — GROWT Method ile kurumsal AI dönüşümü<br>Bu e-posta Kurumsal AI Olgunluk Değerlendirmesini tamamladığınız için gönderilmiştir.",
+        };
+
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0;padding:0;"><tr><td align="center" style="padding:0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:'Inter',Arial,sans-serif;color:#232323;width:100%;max-width:600px;"><tr><td style="background-color:#2563EB;padding:24px 20px;color:white;text-align:center;"><h1 style="font-size:22px;margin:0 0 8px;color:white;">${c.h1}</h1><p style="font-size:14px;opacity:0.85;margin:0;color:white;">${c.intro}</p></td></tr><tr><td style="padding:24px 20px;"><p style="font-size:14px;line-height:1.7;color:#475569;margin:0 0 24px;">${c.body}</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 28px;"><a href="${pdfUrl}" style="display:inline-block;background:#2563EB;color:white;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;">${c.cta}</a></td></tr></table><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#f8fafc;border-radius:12px;padding:20px;"><p style="font-size:14px;font-weight:700;color:#1a1a2e;margin:0 0 8px;">${c.nextStepTitle}</p><p style="font-size:13px;color:#475569;margin:0 0 16px;">${c.nextStepBody}</p><a href="https://app.growtify.app/widget/bookings/kurumsal-on-gorusme" style="display:inline-block;background:#2563EB;color:white;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;">${c.nextStepCta}</a></td></tr></table><p style="font-size:13px;color:#64748b;line-height:1.6;margin:24px 0;">${c.disclaimer}</p><hr style="border:none;border-top:1px solid #e2e8f0;margin:0 0 16px;"><p style="font-size:11px;color:#94a3b8;text-align:center;margin:0;">${c.footer}</p></td></tr></table></td></tr></table></body></html>`;
 }

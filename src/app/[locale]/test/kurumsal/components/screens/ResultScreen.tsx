@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext-kurumsal";
 import { useKPersonaSummaries } from "../../lib/content-kurumsal-runtime-hooks";
 import { getDimensionBreakdown, getPainBreakdown } from "../../lib/scoring-kurumsal";
@@ -13,6 +14,7 @@ function barColor(pct: number): string {
 }
 
 export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
+  const t = useTranslations("KResultC");
   const KURUMSAL_PERSONA_SUMMARIES = useKPersonaSummaries();
   const { state, next, finalize } = useQuiz();
 
@@ -48,7 +50,7 @@ export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
         <div className="rounded-2xl bg-primary/10 px-6 py-3 text-center">
           <div className="text-2xl font-black text-primary">%{avgDimension}</div>
           <div className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-            Ortalama Olgunluk
+            {t("averageMaturity")}
           </div>
         </div>
         <div className="rounded-2xl bg-gray-100 px-6 py-3 text-center dark:bg-dark-border">
@@ -56,7 +58,7 @@ export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
             {70 - s.totalScore}/70
           </div>
           <div className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-            Olgunluk Skoru
+            {t("maturityScore")}
           </div>
         </div>
       </div>
@@ -64,7 +66,7 @@ export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
       {/* 5 Dimension Bars */}
       <div className="mb-6">
         <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-gray-500">
-          5 Boyutta AI Olgunluk
+          {t("aiMaturityFiveDimensions")}
         </h2>
         <div className="space-y-3">
           {dimensions.map((d) => {
@@ -94,7 +96,7 @@ export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
       {/* Pain Areas */}
       <div className="mb-6">
         <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-gray-500">
-          Zorluk Alanları
+          {t("challengeAreas")}
         </h2>
         <div className="grid grid-cols-2 gap-2">
           {pains.map((p) => (
@@ -114,7 +116,7 @@ export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
       {/* Recommendations */}
       <div className="mb-6">
         <h2 className="mb-3 text-sm font-bold uppercase tracking-wider text-gray-500">
-          Öneriler
+          {t("recommendations")}
         </h2>
         <div className="space-y-2">
           {persona.recommendations.map((rec, i) => (
@@ -138,7 +140,7 @@ export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
           onClick={next}
           className="w-full rounded-xl bg-primary px-6 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl active:scale-[0.98]"
         >
-          {screen.cta || "Ücretsiz Strateji Görüşmesi"}
+          {screen.cta || t("ctaFallback")}
         </button>
       </div>
     </div>
