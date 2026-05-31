@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
       "./node_modules/@sparticuz/chromium/bin/**",
       "./node_modules/@sparticuz/chromium/build/**",
     ],
+    "/[locale]/test/api/diag": [
+      "./node_modules/@sparticuz/chromium/bin/**",
+      "./node_modules/@sparticuz/chromium/build/**",
+    ],
     "/[locale]/test/api/download-pdf": [
       "./node_modules/@sparticuz/chromium/bin/**",
       "./node_modules/@sparticuz/chromium/build/**",

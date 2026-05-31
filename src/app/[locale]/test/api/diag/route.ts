@@ -51,24 +51,26 @@ export async function GET(request: Request) {
   trace.upsert = { ok: up.ok, contactId: up.contactId, isNew: up.isNew, error: up.error, statusCode: up.statusCode };
   if (!up.ok || !up.contactId) return Response.json(trace);
 
-  // 2. PDF
+  // 2. PDF (independent — capture error but keep going)
+  let pdfUrl: string | null = null;
   try {
     const pdf = await generateQuizPdf(state, "DIAGTEST9", locale);
     trace.pdf = { ok: true, bytes: pdf.length };
-
     // 3. Upload
     const upl = await uploadPdfToContact(up.contactId, pdf, "diag-report.pdf");
     trace.upload = { ok: upl.ok, url: upl.urls?.[0] ?? null, error: upl.error };
-
-    // 4. Email
-    if (upl.urls?.[0]) {
-      const em = await sendQuizReportEmail(up.contactId, firstName, state.persona, upl.urls[0], locale);
-      trace.email = { ok: em.ok, messageId: em.messageId ?? null, error: em.error ?? null };
-    } else {
-      trace.email = { skipped: "no pdf url from upload" };
-    }
+    pdfUrl = upl.urls?.[0] ?? null;
   } catch (err) {
-    trace.exception = String((err as Error)?.message ?? err);
+    trace.pdf = { ok: false, error: String((err as Error)?.message ?? err) };
+  }
+
+  // 4. Email — ALWAYS test (decoupled from PDF; use dummy URL if upload failed)
+  try {
+    const url = pdfUrl ?? "https://growtify.ai/en/test";
+    const em = await sendQuizReportEmail(up.contactId, firstName, state.persona, url, locale);
+    trace.email = { ok: em.ok, messageId: em.messageId ?? null, error: em.error ?? null, usedDummyUrl: !pdfUrl };
+  } catch (err) {
+    trace.email = { ok: false, exception: String((err as Error)?.message ?? err) };
   }
 
   return Response.json(trace);
