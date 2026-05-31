@@ -173,7 +173,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; color: ${DARK}; font-size: 12px; line-height: 1.5; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
-  .page { width: 210mm; position: relative; overflow: hidden; page-break-after: always; }
+  .page { width: 210mm; height: 296mm; position: relative; overflow: hidden; page-break-after: always; }
   .page:last-child { page-break-after: auto; }
 
   /* ===== PAGE 1 ===== */
@@ -223,16 +223,16 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   .p1-footer { position: absolute; bottom: 12px; left: 40px; right: 40px; font-size: 7px; color: #94a3b8; text-align: center; line-height: 1.5; }
 
   /* ===== PAGE 2 ===== */
-  .p2 { background: white; padding: 40px 50px; }
-  .p2-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 2px solid #f1f5f9; }
+  .p2 { background: white; padding: 22px 50px; }
+  .p2-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid #f1f5f9; }
   .p2-brand { font-size: 14px; font-weight: 800; color: ${PRIMARY}; }
   .p2-pagetitle { font-size: 10px; color: ${GRAY}; }
 
   .section-title { font-size: 18px; font-weight: 800; color: ${DARK}; margin-bottom: 4px; }
-  .section-sub { font-size: 11px; color: ${GRAY}; margin-bottom: 18px; }
+  .section-sub { font-size: 11px; color: ${GRAY}; margin-bottom: 9px; }
 
   /* Pain bars */
-  .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; margin-bottom: 24px; }
+  .pain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 24px; margin-bottom: 12px; }
   .pain-item { display: flex; align-items: center; gap: 8px; }
   .pain-label { width: 90px; font-size: 9px; font-weight: 600; color: #475569; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .pain-track { flex: 1; height: 10px; background: #f1f5f9; border-radius: 5px; overflow: hidden; }
@@ -240,21 +240,21 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   .pain-val { width: 32px; font-size: 10px; font-weight: 700; color: ${GRAY}; text-align: right; }
 
   /* Insight cards */
-  .insights-row { display: flex; gap: 12px; margin-bottom: 24px; }
-  .insight-card { flex: 1; border-radius: 14px; padding: 18px; }
+  .insights-row { display: flex; gap: 12px; margin-bottom: 12px; }
+  .insight-card { flex: 1; border-radius: 14px; padding: 12px; }
   .insight-red { background: #fef2f2; border: 1px solid #fecaca; }
   .insight-green { background: #f0fdf4; border: 1px solid #bbf7d0; }
   .insight-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
   .insight-title-red { color: ${RED}; }
   .insight-title-green { color: ${GREEN}; }
-  .insight-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .insight-item { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
   .insight-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .insight-text { font-size: 11px; font-weight: 600; color: #334155; }
   .insight-pct { font-size: 10px; color: ${GRAY}; }
 
   /* Recommendations */
-  .rec-section { margin-bottom: 20px; }
-  .rec-box { display: flex; gap: 14px; align-items: flex-start; background: #f8fafc; border-radius: 12px; padding: 16px; margin-bottom: 10px; }
+  .rec-section { margin-bottom: 10px; }
+  .rec-box { display: flex; gap: 14px; align-items: flex-start; background: #f8fafc; border-radius: 12px; padding: 11px 14px; margin-bottom: 7px; }
   .rec-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
   .rec-icon-purple { background: ${PRIMARY}15; }
   .rec-icon-green { background: ${GREEN}15; }
@@ -265,9 +265,9 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   /* CTA */
   .cta-bar {
     background: linear-gradient(135deg, ${PRIMARY}, ${PRIMARY_LIGHT});
-    border-radius: 16px; padding: 20px 24px;
+    border-radius: 16px; padding: 13px 24px;
     display: flex; justify-content: space-between; align-items: center; color: white;
-    margin-top: 16px; gap: 16px; flex-wrap: nowrap;
+    margin-top: 10px; gap: 16px; flex-wrap: nowrap;
   }
   .cta-left { flex-shrink: 1; min-width: 0; }
   .cta-name { font-size: 15px; font-weight: 800; }
@@ -427,7 +427,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
 
   ${couponCode ? `
   <!-- Personal Coupon Block -->
-  <div style="margin-top:16px; padding:14px 16px; border:2px dashed ${PRIMARY}; border-radius:12px; background:#F5F8FF; text-align:center;">
+  <div style="margin-top:10px; padding:10px 16px; border:2px dashed ${PRIMARY}; border-radius:12px; background:#F5F8FF; text-align:center;">
     <div style="font-size:9px; font-weight:700; color:${GRAY}; letter-spacing:1px; text-transform:uppercase;">Kişisel Kupon Kodun</div>
     <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin-top:6px;">
       <div style="font-size:20px; font-weight:900; color:${DARK}; font-family:'Courier New', monospace; letter-spacing:2px;">${esc(couponCode)}</div>
@@ -445,9 +445,9 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   </div>
 
   <!-- Community CTA — secondary / alternative engagement path -->
-  <div style="margin-top:12px; text-align:center;">
+  <div style="margin-top:8px; text-align:center;">
     <div style="font-size:9px; font-weight:700; color:${GRAY}; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">— veya —</div>
-    <div style="border:1.5px solid #E2E8F0; border-radius:12px; padding:12px 14px; background:white;">
+    <div style="border:1.5px solid #E2E8F0; border-radius:12px; padding:9px 14px; background:white;">
       <div style="font-size:11px; font-weight:700; color:${DARK};">Önce Ücretsiz Denemek İster misin?</div>
       <div style="font-size:10px; color:${GRAY}; margin-top:2px;">GROWT Topluluğu · Haftalık İpucu + Topluluk Desteği</div>
       <a href="https://panel.growtify.ai/communities/groups/growtify-ai/" style="display:inline-block; margin-top:8px; padding:6px 18px; border:1.5px solid ${PRIMARY}; border-radius:20px; font-size:11px; font-weight:700; color:${PRIMARY}; text-decoration:none; background:#F5F8FF;">Topluluğa Ücretsiz Katıl →</a>
