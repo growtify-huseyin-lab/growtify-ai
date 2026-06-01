@@ -1,13 +1,32 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { LogoLarge } from "@/components/ui/Logo";
 import { COMPANY } from "@/lib/company-info";
 
+// EN English-slug taxonomy (CEO 2026-06-01): map TR footer paths → English EN paths
+// so EN footer links go directly (no 308 hop). External + anchor hrefs pass through.
+const FOOTER_EN_PATHS: Record<string, string> = {
+  "/kurumsal": "/enterprise",
+  "/hakkimizda": "/about",
+  "/iletisim": "/contact",
+  "/sektor": "/sectors",
+  "/rehber": "/guide",
+  "/gizlilik-politikasi": "/privacy-policy",
+  "/kvkk-aydinlatma": "/privacy-policy",
+  "/kullanim-kosullari": "/terms-of-service",
+  "/iade-politikasi": "/refund-policy",
+  "/cerez-politikasi": "/cookie-policy",
+  "/gizlilik-politikasi#ccpa": "/privacy-policy#ccpa",
+};
+
 export function Footer() {
   const t = useTranslations("FooterC");
+  const locale = useLocale();
+  const locHref = (href: string) =>
+    locale === "en" && FOOTER_EN_PATHS[href] ? FOOTER_EN_PATHS[href] : href;
 
   const footerLinks = [
     {
@@ -84,7 +103,7 @@ export function Footer() {
                       </button>
                     ) : link.href.startsWith("http") ? (
                       <a
-                        href={link.href}
+                        href={locHref(link.href)}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-sm text-gray-300 transition-colors hover:text-accent"
@@ -93,7 +112,7 @@ export function Footer() {
                       </a>
                     ) : (
                       <Link
-                        href={link.href}
+                        href={locHref(link.href)}
                         className="text-sm text-gray-300 transition-colors hover:text-accent"
                       >
                         {link.label}

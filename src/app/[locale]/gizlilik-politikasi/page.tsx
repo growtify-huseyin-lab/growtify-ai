@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { localeAlternates } from "@/lib/seo-alternates";
+import { localeAltPair } from "@/lib/seo-alternates";
 import { PrivacyPolicyEN } from "@/components/legal/en/PrivacyPolicyEN";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: en
       ? "Growtify.ai Privacy Policy — how we process and protect your personal data under UK GDPR."
       : "Growtify.ai gizlilik politikası — kişisel verilerinizin nasıl işlendiğini öğrenin.",
-    alternates: localeAlternates(locale, "/gizlilik-politikasi"),
+    alternates: localeAltPair(locale, "/gizlilik-politikasi", "/privacy-policy"),
   };
 }
 

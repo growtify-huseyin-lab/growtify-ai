@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { localeAlternates } from "@/lib/seo-alternates";
+import { localeAltPair } from "@/lib/seo-alternates";
 import { CookiePolicyEN } from "@/components/legal/en/CookiePolicyEN";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: en
       ? "Growtify.ai Cookie Policy — information about the cookies used on our website."
       : "Growtify.ai çerez politikası — web sitemizde kullanılan çerezler hakkında bilgi.",
-    alternates: localeAlternates(locale, "/cerez-politikasi"),
+    alternates: localeAltPair(locale, "/cerez-politikasi", "/cookie-policy"),
   };
 }
 

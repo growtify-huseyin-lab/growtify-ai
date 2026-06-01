@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { localeAlternates } from "@/lib/seo-alternates";
+import { localeAltPair } from "@/lib/seo-alternates";
+import { SECTOR_TR_TO_EN } from "@/data/sectors.en";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -63,7 +64,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: sector.seoTitle,
     description: sector.seoDescription,
-    alternates: localeAlternates(locale, `/sektor/${slug}`),
+    alternates: localeAltPair(locale, `/sektor/${slug}`, `/sectors/${SECTOR_TR_TO_EN[slug] ?? slug}`),
   };
 }
 

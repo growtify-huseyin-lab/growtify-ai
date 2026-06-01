@@ -513,3 +513,23 @@ export const SECTOR_PAGES_EN: Record<string, SectorPage> = Object.fromEntries(
     ];
   })
 );
+
+// ── EN sector-slug taxonomy (CEO 2026-06-01: /en/sektor/{tr} → /en/sectors/{en}) ──
+// Sector slugs differ from the guide map (e-ticaret/dis-hekimligi, not eticaret/dis).
+export const SECTOR_TR_TO_EN: Record<string, string> = {
+  saglik: "healthcare",
+  hukuk: "legal",
+  guzellik: "beauty",
+  emlak: "real-estate",
+  "e-ticaret": "ecommerce",
+  "dis-hekimligi": "dental",
+  muhasebe: "accounting",
+  eczacilik: "pharmacy",
+  turizm: "tourism",
+  mimarlik: "architecture",
+  egitim: "education",
+  fitness: "fitness",
+};
+export const SECTOR_EN_TO_TR: Record<string, string> = Object.fromEntries(
+  Object.entries(SECTOR_TR_TO_EN).map(([tr, en]) => [en, tr]),
+);

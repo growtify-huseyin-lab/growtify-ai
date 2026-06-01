@@ -2,8 +2,10 @@ import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
 import { getAllSectorSlugs } from "@/data/sectors";
 import { getActiveLeadMagnetSlugs } from "@/content/lead-magnets";
+import { LEAD_TR_TO_EN } from "@/content/lead-magnets/index.en";
 import { REHBER_SLUGS } from "@/content/rehberler";
 import { GUIDE_TR_TO_EN } from "@/content/rehberler/en";
+import { SECTOR_TR_TO_EN } from "@/data/sectors.en";
 import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 
 const baseUrl = "https://growtify.ai";
@@ -61,21 +63,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const bilingual: MetadataRoute.Sitemap = [
     bi("", 1.0),
     bi("/growt-method", 0.9),
-    bi("/kurumsal", 0.7),
-    bi("/sektor", 0.8),
+    bi("/test", 0.7),
+    // EN English-slug taxonomy (CEO 2026-06-01): core + sektör + legal on English EN paths
+    biAlt("/kurumsal", "/en/enterprise", 0.7),
+    biAlt("/sektor", "/en/sectors", 0.8),
+    biAlt("/hakkimizda", "/en/about", 0.6),
+    biAlt("/iletisim", "/en/contact", 0.5),
+    biAlt("/gizlilik-politikasi", "/en/privacy-policy", 0.3),
+    biAlt("/kullanim-kosullari", "/en/terms-of-service", 0.3),
+    biAlt("/iade-politikasi", "/en/refund-policy", 0.3),
+    biAlt("/cerez-politikasi", "/en/cookie-policy", 0.3),
     // Guides: TR /rehber ↔ EN /en/guide (English-slug fork, CEO 2026-05-31)
     biAlt("/rehber", "/en/guide", 0.7),
-    bi("/test", 0.7),
-    bi("/hakkimizda", 0.6),
-    bi("/iletisim", 0.5),
-    bi("/gizlilik-politikasi", 0.3),
-    bi("/kullanim-kosullari", 0.3),
-    bi("/iade-politikasi", 0.3),
-    bi("/cerez-politikasi", 0.3),
-    // Layer 1 — Sector pages (EN data ready)
-    ...getAllSectorSlugs().map((slug) => bi(`/sektor/${slug}`, 0.8)),
-    // Lead magnets (EN data ready)
-    ...getActiveLeadMagnetSlugs().map((slug) => bi(`/lead/${slug}`, 0.6)),
+    // Layer 1 — Sector pages: TR /sektor/{tr} ↔ EN /en/sectors/{en}
+    ...getAllSectorSlugs().map((slug) =>
+      biAlt(`/sektor/${slug}`, `/en/sectors/${SECTOR_TR_TO_EN[slug] ?? slug}`, 0.8),
+    ),
+    // Lead magnets: TR /lead/{tr} ↔ EN /en/lead/{en}
+    ...getActiveLeadMagnetSlugs().map((slug) =>
+      biAlt(`/lead/${slug}`, `/en/lead/${LEAD_TR_TO_EN[slug] ?? slug}`, 0.6),
+    ),
     // Sector guides: TR /rehber/{tr} ↔ EN /en/guide/{en} (Creative EN guide content ready)
     ...REHBER_SLUGS.map((slug) =>
       biAlt(`/rehber/${slug}`, `/en/guide/${GUIDE_TR_TO_EN[slug]}`, 0.6),

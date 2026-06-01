@@ -8,7 +8,12 @@ import {
   getAllLeadMagnetSlugs,
   FORMAT_CONFIG,
 } from "@/content/lead-magnets";
-import { getLeadMagnet as getLeadMagnetEn, FORMAT_CONFIG as FORMAT_CONFIG_EN } from "@/content/lead-magnets/index.en";
+import {
+  getLeadMagnet as getLeadMagnetEn,
+  FORMAT_CONFIG as FORMAT_CONFIG_EN,
+  LEAD_TR_TO_EN,
+  LEAD_EN_TO_TR,
+} from "@/content/lead-magnets/index.en";
 import { CheckCircle2 } from "lucide-react";
 
 interface PageProps {
@@ -16,20 +21,34 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return getAllLeadMagnetSlugs().map((slug) => ({ slug }));
+  // Per-locale slugs: TR keeps the Turkish slug, EN uses the English slug (CEO 2026-06-01).
+  return getAllLeadMagnetSlugs().flatMap((slug) => [
+    { locale: "tr", slug },
+    { locale: "en", slug: LEAD_TR_TO_EN[slug] ?? slug },
+  ]);
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug, locale } = await params;
-  const magnet = (locale === "en" ? getLeadMagnetEn : getLeadMagnet)(slug);
+  const en = locale === "en";
+  const trSlug = en ? (LEAD_EN_TO_TR[slug] ?? slug) : slug;
+  const enSlug = LEAD_TR_TO_EN[trSlug] ?? trSlug;
+  const magnet = (en ? getLeadMagnetEn : getLeadMagnet)(trSlug);
   if (!magnet) return { title: "İçerik bulunamadı" };
 
   return {
     title: magnet.seo.title,
     description: magnet.seo.description,
-    alternates: { canonical: `/lead/${slug}` },
+    alternates: {
+      canonical: en ? `/en/lead/${enSlug}` : `/lead/${trSlug}`,
+      languages: {
+        tr: `/lead/${trSlug}`,
+        en: `/en/lead/${enSlug}`,
+        "x-default": `/lead/${trSlug}`,
+      },
+    },
     openGraph: {
       title: magnet.seo.title,
       description: magnet.seo.description,
@@ -42,7 +61,8 @@ export async function generateMetadata({
 export default async function LeadMagnetPage({ params }: PageProps) {
   const { slug, locale } = await params;
   const en = locale === "en";
-  const magnet = (en ? getLeadMagnetEn : getLeadMagnet)(slug);
+  const trSlug = en ? (LEAD_EN_TO_TR[slug] ?? slug) : slug;
+  const magnet = (en ? getLeadMagnetEn : getLeadMagnet)(trSlug);
   if (!magnet || !magnet.active) notFound();
 
   const fmt = (en ? FORMAT_CONFIG_EN : FORMAT_CONFIG)[magnet.format];

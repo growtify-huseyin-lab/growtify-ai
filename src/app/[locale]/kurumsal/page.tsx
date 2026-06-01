@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
+import { localeAltPair } from "@/lib/seo-alternates";
 import { KurumsalHero } from "@/components/sections/KurumsalHero";
 import { KurumsalProblems } from "@/components/sections/KurumsalProblems";
 import { KurumsalGROWT } from "@/components/sections/KurumsalGROWT";
@@ -24,7 +25,7 @@ export async function generateMetadata({
     description: en
       ? "Plan your business's AI transformation with the GROWT Method™ — from strategic assessment to full-scale transformation."
       : "GROWT Method™ ile işletmenizin AI dönüşümünü planlayın. Stratejik değerlendirmeden tam ölçekli dönüşüme.",
-    alternates: { canonical: en ? "/en/kurumsal" : "/kurumsal" },
+    alternates: localeAltPair(locale, "/kurumsal", "/enterprise"),
   };
 }
 

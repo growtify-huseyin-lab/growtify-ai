@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { localeAlternates } from "@/lib/seo-alternates";
+import { localeAltPair } from "@/lib/seo-alternates";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
@@ -28,7 +28,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: localeAlternates(locale, "/iletisim"),
+    alternates: localeAltPair(locale, "/iletisim", "/contact"),
   };
 }
 

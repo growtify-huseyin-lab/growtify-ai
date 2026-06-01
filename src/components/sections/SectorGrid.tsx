@@ -17,6 +17,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { getSectors } from "@/lib/constants-i18n";
+import { SECTOR_TR_TO_EN } from "@/data/sectors.en";
 
 const iconMap: Record<string, React.ElementType> = {
   Heart, Scale, Sparkles, Home, ShoppingCart, Smile,
@@ -50,10 +51,15 @@ export async function SectorGrid() {
           {SECTORS.map((sector) => {
             const Icon = iconMap[sector.icon] || Heart;
             const slug = sectorSlugMap[sector.id] || sector.id;
+            // EN links to the English-slug fork (/en/sectors/{en}); TR keeps /sektor/{tr}.
+            const href =
+              __locale === "en"
+                ? `/sectors/${SECTOR_TR_TO_EN[slug] ?? slug}`
+                : `/sektor/${slug}`;
             return (
               <Link
                 key={sector.id}
-                href={`/sektor/${slug}`}
+                href={href}
                 className="group rounded-2xl border border-gray-100 dark:border-dark-border bg-white dark:bg-dark-card p-5 transition-all duration-200 hover:shadow-lg hover:-translate-y-1 dark:hover:shadow-primary/5 hover:border-primary/30"
               >
                 <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20 group-hover:bg-primary/20 transition-colors">

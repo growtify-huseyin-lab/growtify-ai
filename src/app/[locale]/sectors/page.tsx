@@ -1,26 +1,44 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { getAllSectorSlugs } from "@/data/sectors";
 import { sectorPagesFor } from "@/data/sectors-i18n";
+import { SECTOR_TR_TO_EN } from "@/data/sectors.en";
 import { ArrowRight } from "lucide-react";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const t = await getTranslations("SektorPage");
+// EN sectors index (English-slug fork of /sektor). TR keeps /sektor; /en/sektor 301s here.
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (locale !== "en") return { title: "Sectors" };
+  const t = await getTranslations({ locale, namespace: "SektorPage" });
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: { canonical: "/sektor", languages: { tr: "/sektor", en: "/en/sectors", "x-default": "/sektor" } },
+    alternates: {
+      canonical: "/en/sectors",
+      languages: { tr: "/sektor", en: "/en/sectors", "x-default": "/sektor" },
+    },
   };
 }
 
-export default async function SektorIndexPage({ params }: { params: Promise<{ locale: string }> }) {
-  const t = await getTranslations("SektorPage");
+export default async function SectorsIndexAliasPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
-  const SECTOR_PAGES = sectorPagesFor(locale);
+  if (locale !== "en") notFound();
+  setRequestLocale(locale);
+  const t = await getTranslations("SektorPage");
+  const SECTOR_PAGES = sectorPagesFor("en");
   const slugs = getAllSectorSlugs();
 
   return (
@@ -46,8 +64,10 @@ export default async function SektorIndexPage({ params }: { params: Promise<{ lo
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {slugs.map((slug) => {
               const sector = SECTOR_PAGES[slug];
+              const enSlug = SECTOR_TR_TO_EN[slug];
+              if (!enSlug) return null;
               return (
-                <Link key={slug} href={`/sektor/${slug}`} className="group">
+                <Link key={slug} href={`/sectors/${enSlug}`} className="group">
                   <Card hover className="h-full flex flex-col justify-between">
                     <div>
                       <h2 className="text-xl font-bold text-dark dark:text-white group-hover:text-primary transition-colors">

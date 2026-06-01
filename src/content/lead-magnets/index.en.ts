@@ -144,3 +144,11 @@ export function getActiveLeadMagnetSlugs(): string[] {
     .filter((lm) => lm.active)
     .map((lm) => lm.slug);
 }
+
+// EN English-slug taxonomy (CEO 2026-06-01): /en/lead/{tr} → /en/lead/{en}.
+export const LEAD_TR_TO_EN: Record<string, string> = {
+  "ai-baslangic-rehberi": "ai-starter-guide",
+};
+export const LEAD_EN_TO_TR: Record<string, string> = Object.fromEntries(
+  Object.entries(LEAD_TR_TO_EN).map(([tr, en]) => [en, tr]),
+);

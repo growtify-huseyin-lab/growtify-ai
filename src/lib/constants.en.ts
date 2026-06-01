@@ -12,9 +12,9 @@ export const SITE_EN = {
 export const NAV_LINKS_EN = [
   { label: "Home", href: "/" },
   { label: "GROWT Method", href: "/growt-method" },
-  { label: "Sectors", href: "/sektor" },
+  { label: "Sectors", href: "/sectors" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/iletisim" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export const GROWT_PHASES_EN = [

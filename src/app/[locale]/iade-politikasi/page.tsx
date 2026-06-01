@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { localeAlternates } from "@/lib/seo-alternates";
+import { localeAltPair } from "@/lib/seo-alternates";
 import { RefundPolicyEN } from "@/components/legal/en/RefundPolicyEN";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: en
       ? "Growtify.ai Refund Policy — refund terms for our digital content services."
       : "Growtify.ai iade politikası — dijital içerik hizmetlerimize ilişkin iade koşulları.",
-    alternates: localeAlternates(locale, "/iade-politikasi"),
+    alternates: localeAltPair(locale, "/iade-politikasi", "/refund-policy"),
   };
 }
 

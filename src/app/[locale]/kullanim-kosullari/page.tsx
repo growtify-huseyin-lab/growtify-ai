@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { localeAlternates } from "@/lib/seo-alternates";
+import { localeAltPair } from "@/lib/seo-alternates";
 import { TermsOfServiceEN } from "@/components/legal/en/TermsOfServiceEN";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     description: en
       ? "Growtify.ai Terms of Service — the terms that apply when you use our services."
       : "Growtify.ai kullanım koşulları — hizmetlerimizi kullanırken geçerli olan şart ve koşullar.",
-    alternates: localeAlternates(locale, "/kullanim-kosullari"),
+    alternates: localeAltPair(locale, "/kullanim-kosullari", "/terms-of-service"),
   };
 }
 
