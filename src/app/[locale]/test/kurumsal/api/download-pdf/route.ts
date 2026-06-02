@@ -4,12 +4,14 @@
 export const maxDuration = 60;
 
 import { generateKurumsalPdfHtml } from "../../lib/pdf-html-template-kurumsal";
+import { generateKurumsalPdfHtml as generateKurumsalPdfHtmlEn } from "../../lib/pdf-html-template-kurumsal-en";
 import { generatePdfFromHtml } from "../../../lib/pdf-generate";
 import { initialKurumsalState } from "../../lib/types-kurumsal";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const name = url.searchParams.get("name") ?? "rapor";
+  const en = url.searchParams.get("locale") === "en"; // diagnostic: ?locale=en
 
   // In production this would come from stored state; for now use mock
   const mockState = {
@@ -32,16 +34,23 @@ export async function GET(request: Request) {
     totalScore: 42,
     painLevel: "medium" as const,
     persona: "Kesif" as const,
+    ...(en ? { locale: "en" } : {}),
   };
 
-  const html = generateKurumsalPdfHtml(mockState);
-  const pdfBuffer = await generatePdfFromHtml(html);
-  const filename = `growtify-kurumsal-rapor-${name.toLowerCase().replace(/\s+/g, "-")}.pdf`;
-
-  return new Response(new Uint8Array(pdfBuffer), {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": `inline; filename="${filename}"`,
-    },
-  });
+  try {
+    const html = (en ? generateKurumsalPdfHtmlEn : generateKurumsalPdfHtml)(mockState);
+    const pdfBuffer = await generatePdfFromHtml(html);
+    const filename = `growtify-kurumsal-rapor-${name.toLowerCase().replace(/\s+/g, "-")}.pdf`;
+    return new Response(new Uint8Array(pdfBuffer), {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `inline; filename="${filename}"`,
+      },
+    });
+  } catch (err) {
+    return Response.json(
+      { ok: false, locale: en ? "en" : "tr", error: (err as Error).message, stack: (err as Error).stack?.split("\n").slice(0, 8) },
+      { status: 500 },
+    );
+  }
 }
