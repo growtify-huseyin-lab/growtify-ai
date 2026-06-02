@@ -3,29 +3,35 @@ import path from "path";
 import matter from "gray-matter";
 import type { BlogPost, BlogMeta } from "./blog-types";
 
-const BLOG_DIR = path.join(process.cwd(), "content/blog");
+// TR posts live flat in content/blog/*.mdx; EN posts (EN-native, not translations)
+// live in content/blog/en/*.mdx. readdirSync on the TR dir ignores the `en` subdir
+// (it is not a .mdx file), so TR loading is unaffected.
+const BLOG_DIRS: Record<string, string> = {
+  tr: path.join(process.cwd(), "content/blog"),
+  en: path.join(process.cwd(), "content/blog/en"),
+};
 
 export type { BlogPost, BlogMeta } from "./blog-types";
 
-// In-memory cache — dosyaları bir kez oku, bellekte tut
-let _metaCache: BlogMeta[] | null = null;
-let _postCache: Map<string, BlogPost> | null = null;
+// Per-locale in-memory cache.
+const _cache: Record<string, { metas: BlogMeta[]; posts: Map<string, BlogPost> }> = {};
 
-function loadAllOnce(): { metas: BlogMeta[]; posts: Map<string, BlogPost> } {
-  if (_metaCache && _postCache) return { metas: _metaCache, posts: _postCache };
+function loadLocale(locale: string): { metas: BlogMeta[]; posts: Map<string, BlogPost> } {
+  const loc = locale === "en" ? "en" : "tr";
+  if (_cache[loc]) return _cache[loc];
 
-  if (!fs.existsSync(BLOG_DIR)) {
-    _metaCache = [];
-    _postCache = new Map();
-    return { metas: _metaCache, posts: _postCache };
+  const dir = BLOG_DIRS[loc];
+  if (!fs.existsSync(dir)) {
+    _cache[loc] = { metas: [], posts: new Map() };
+    return _cache[loc];
   }
 
-  const files = fs.readdirSync(BLOG_DIR).filter((f) => f.endsWith(".mdx"));
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
   const metas: BlogMeta[] = [];
   const posts = new Map<string, BlogPost>();
 
   for (const file of files) {
-    const raw = fs.readFileSync(path.join(BLOG_DIR, file), "utf-8");
+    const raw = fs.readFileSync(path.join(dir, file), "utf-8");
     const { data, content } = matter(raw);
     const slug = data.slug || file.replace(".mdx", "");
 
@@ -33,44 +39,42 @@ function loadAllOnce(): { metas: BlogMeta[]; posts: Map<string, BlogPost> } {
       slug,
       title: data.title || "",
       excerpt: data.excerpt || "",
-      category: data.category || "ai-donusum",
+      category: data.category || (loc === "en" ? "industry-guides" : "ai-donusum"),
       author: data.author || "Growtify AI",
       date: data.date || "",
-      readTime: data.readTime || "5 dk",
+      readTime: data.readTime || (loc === "en" ? "5 min read" : "5 dk"),
       seoTitle: data.seoTitle || data.title || "",
       seoDescription: data.seoDescription || data.excerpt || "",
       tags: data.tags || [],
       featured: data.featured || false,
       sectorRef: data.sectorRef || null,
+      locale: data.locale || loc,
     };
 
     metas.push(meta);
     posts.set(slug, { ...meta, content });
   }
 
-  metas.sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
-  );
+  metas.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  _metaCache = metas;
-  _postCache = posts;
-  return { metas, posts };
+  _cache[loc] = { metas, posts };
+  return _cache[loc];
 }
 
-export function getAllPosts(): BlogMeta[] {
-  return loadAllOnce().metas;
+export function getAllPosts(locale: string = "tr"): BlogMeta[] {
+  return loadLocale(locale).metas;
 }
 
-export function getPostBySlug(slug: string): BlogPost | null {
-  return loadAllOnce().posts.get(slug) ?? null;
+export function getPostBySlug(slug: string, locale: string = "tr"): BlogPost | null {
+  return loadLocale(locale).posts.get(slug) ?? null;
 }
 
-export function getPostsByCategory(category: string): BlogMeta[] {
-  return getAllPosts().filter((p) => p.category === category);
+export function getPostsByCategory(category: string, locale: string = "tr"): BlogMeta[] {
+  return getAllPosts(locale).filter((p) => p.category === category);
 }
 
-export function getPostsBySector(sectorRef: string): BlogMeta[] {
-  return getAllPosts().filter((p) => p.sectorRef === sectorRef);
+export function getPostsBySector(sectorRef: string, locale: string = "tr"): BlogMeta[] {
+  return getAllPosts(locale).filter((p) => p.sectorRef === sectorRef);
 }
 
 export { BLOG_CATEGORIES } from "./blog-categories";

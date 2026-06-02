@@ -25,13 +25,16 @@ const BASE_URL = "https://growtify.ai";
 type Props = { params: Promise<{ slug: string; locale: string }> };
 
 export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  // Per-locale: TR posts (Turkish slugs) + EN posts (EN-native, English slugs).
+  return [
+    ...getAllPosts("tr").map((post) => ({ locale: "tr", slug: post.slug })),
+    ...getAllPosts("en").map((post) => ({ locale: "en", slug: post.slug })),
+  ];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const { slug, locale } = await params;
+  const post = getPostBySlug(slug, locale);
   if (!post) {
     const t = await getTranslations("BlogPostPage");
     return { title: t("postNotFound") };
@@ -40,7 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: post.seoTitle,
     description: post.seoDescription,
     alternates: {
-      canonical: `/blog/${post.slug}`,
+      // EN posts are not translations of TR posts → standalone canonical, no hreflang pair.
+      canonical: locale === "en" ? `/en/blog/${post.slug}` : `/blog/${post.slug}`,
     },
     openGraph: {
       title: post.seoTitle,
@@ -54,12 +58,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug, locale } = await params;
-  const post = getPostBySlug(slug);
+  const post = getPostBySlug(slug, locale);
   if (!post) notFound();
 
   const t = await getTranslations("BlogPostPage");
 
-  const allPosts = getAllPosts();
+  const allPosts = getAllPosts(locale);
   const related = allPosts
     .filter(
       (p) =>

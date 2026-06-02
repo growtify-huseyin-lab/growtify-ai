@@ -11,6 +11,7 @@ export type BlogPost = {
   tags: string[];
   featured: boolean;
   sectorRef: string | null;
+  locale: string;
   content: string;
 };
 

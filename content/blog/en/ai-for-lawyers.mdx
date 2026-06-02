@@ -1,0 +1,189 @@
+---
+title: "AI for Lawyers: Brief Drafting, Case Research and Client Triage Workflows"
+slug: "ai-for-lawyers"
+excerpt: "Most articles about AI for lawyers stop at the headline. They tell you that ChatGPT exists, mention the Mata v. Avianca disaster, and either warn you off entire…"
+locale: "en"
+category: "industry-guides"
+author: "Growtify"
+date: "2026-06-01"
+readTime: "11 min read"
+seoTitle: "AI for Lawyers: Drafting, Research & Triage Workflows"
+seoDescription: "Three practical AI workflows for lawyers: brief drafting, case research, and client triage — with prompts, verification rules, and privilege-safe practices."
+tags: ["legal", "lawyers", "brief-drafting"]
+featured: false
+type: "blog"
+sectorRef: "hukuk"
+en_path: "/en/blog/ai-for-lawyers"
+source_tr: null
+identity_scope: "growtify_identity"
+growtLevel: "O"
+wordCount: 2192
+schema: ["Article", "HowTo", "FAQPage"]
+---
+
+
+# AI for Lawyers: Brief Drafting, Case Research and Client Triage Workflows
+
+Most articles about AI for lawyers stop at the headline. They tell you that ChatGPT exists, mention the Mata v. Avianca disaster, and either warn you off entirely or push you toward an enterprise legal-tech subscription that costs more than a paralegal.
+
+That is not useful.
+
+What you need is a concrete picture of which parts of your day AI can take over without putting your license at risk — and exactly how to wire it into the work you already do. This article walks through three workflows: brief drafting, case research, and client triage. For each one, you get the steps, the prompts, the verification rules, and the line you do not cross.
+
+This piece sits at the **Operationalize (O)** level of the GROWT Method. You have already done the Gap analysis (where is AI worth my time?) and the Roadmap (which use cases first?). Now you are wiring AI into your daily workflow — not as a novelty, but as a routine part of how briefs get drafted and clients get triaged.
+
+## Workflow 1: Brief Drafting
+
+Drafting a brief from scratch is one of the highest-leverage places to use AI, because the work splits cleanly into three stages — outline, first draft, citation check — and AI can carry the load on the first two while you stay firmly in control of the third.
+
+### Stage 1 — Outline
+
+Before you write a word of prose, give the AI the facts, the legal question, the jurisdiction, and the position you are arguing. Ask it for a structured outline.
+
+A working prompt looks like this:
+
+> "Act as a senior associate drafting a Motion to Dismiss in [jurisdiction]. The facts are: [redacted summary, no client identifiers]. The legal question is whether [X]. We represent the defendant. Produce a brief outline with: (1) procedural posture, (2) statement of facts, (3) legal standard, (4) argument sections with headings, (5) conclusion. For each argument section, identify the strongest authority type to support it (controlling case, statute, persuasive authority) without inventing case names."
+
+The instruction "without inventing case names" matters. You are using AI for structure and reasoning, not citations.
+
+### Stage 2 — First Draft
+
+Once the outline is approved, generate first-draft prose section by section. Feed back the outline plus one section at a time. This keeps the model focused and lets you intervene early when an argument is going in the wrong direction.
+
+Prompt example:
+
+> "Draft the 'Legal Standard' section for the Motion to Dismiss outlined above. Use a neutral, formal tone consistent with [jurisdiction] practice. Do not invent case citations — use bracketed placeholders such as [CITE: controlling case on Rule 12(b)(6) standard] where authority is required. Length: roughly 250 words."
+
+This produces clean prose with explicit citation placeholders. Your job becomes filling in the cite, not generating the argument from a blank page.
+
+### Stage 3 — Citation Check
+
+This is where lawyers get into trouble. Models hallucinate cases that sound real. They invent docket numbers. They merge two opinions into one fictional opinion. **Every single citation must be independently verified in Westlaw, Lexis, Bloomberg Law, or the equivalent authoritative database — no exceptions.**
+
+A reasonable internal rule: never accept a citation that AI produces. Treat the AI draft as if it contains zero authorities and you are adding them in for the first time.
+
+### Privilege-Safe Practices for Brief Drafting
+
+- **Strip client identifiers** before any prompt. Names, account numbers, specific dates, location details — all redacted or generalized.
+- **Use a sandboxed or enterprise tool** with a no-training data-use agreement. Public consumer ChatGPT without a data-control agreement is not appropriate for matter content.
+- **Log your prompts.** A simple spreadsheet capturing prompt, model, date, matter ID, and verification status protects you if questions arise later.
+
+## Workflow 2: Case Research
+
+Case research is where AI both shines and burns lawyers most often. The shine: it can issue-spot, summarize a long opinion, and suggest where to look next. The burn: it cannot reliably cite, and it cannot judge whether a case is still good law.
+
+The right model is to treat AI as a research associate at the bottom of the org chart — useful, fast, occasionally wrong, and always supervised.
+
+### Issue Spotting
+
+When a new matter arrives, paste a sanitized fact pattern and ask the AI to identify the legal issues.
+
+> "Given the following fact pattern (no client identifiers): [facts]. Identify the potential causes of action and defenses available under [jurisdiction] law. For each, briefly state the elements and what facts in the pattern would support or undermine the claim. Do not cite specific cases — focus on doctrine and elements."
+
+This gets you a working issue list in two minutes. You verify the doctrine against your own knowledge or treatises, then move to authority research.
+
+### Statute and Regulation Search
+
+AI is reasonably good at telling you which statute or regulation applies, especially for federal US law and well-mapped UK statutes. But it can confidently misstate effective dates, recent amendments, and jurisdictional variations.
+
+Verification rule: confirm every statute citation against the official source (legislation.gov.uk for UK, the relevant US Code or state code, the CFR for federal regulations). Treat AI as the index, never the text.
+
+### Precedent Comparison
+
+This is the most useful AI legal research task. Give the model two opinions and ask it to compare reasoning, distinguish facts, and identify which case is closer to your matter.
+
+> "Compare the reasoning in [Case A — you provide the full opinion text or summary] and [Case B — full opinion text or summary]. Identify: (1) the legal standard each court applied, (2) the key facts the court relied on, (3) how the courts treated [specific doctrine], (4) which case has facts closer to the following pattern: [your sanitized facts]."
+
+Because you are providing the source text, the model does not hallucinate. It synthesizes what you gave it. This is the safest research use of AI.
+
+[Build your personal AI plan →](/en/test)
+
+## Workflow 3: Client Triage
+
+Client triage is the workflow where solo practitioners and small firms see the most immediate ROI from AI. It also has the lowest professional-responsibility risk — you are not generating advice, you are organizing intake.
+
+### Intake Forms
+
+Use AI to generate intake-form questions tailored to the practice area. For a family law intake, the question set differs from immigration, which differs from IP. Build a library.
+
+Prompt example:
+
+> "Generate a structured client intake questionnaire for a [practice area] matter in [jurisdiction]. Include: (1) basic identification fields, (2) matter-specific facts the lawyer needs before the first call, (3) timeline questions, (4) opposing-party identification (for conflict checks), (5) prior-counsel question, (6) goals and constraints. Output in a format suitable for a web form."
+
+You will refine each generated form once. After that, it runs unchanged for every new intake of that type.
+
+### Conflict Checks (First-Pass Only)
+
+AI can do a useful first-pass conflict screen by comparing a prospective client's identified parties against your client list. **This is a first-pass tool only.** The lawyer makes the final conflict call. The AI just flags candidates for human review.
+
+A working setup: maintain a structured list of current and former client names plus key opposing parties. When a new prospect comes in, ask the AI to flag any name overlap, name-similarity, or affiliated-entity overlap. You review the flags and make the conflict determination.
+
+### Fit Assessment
+
+Not every matter is a fit for your practice. AI can compare a prospective matter against your stated practice criteria and produce a fit assessment.
+
+> "Our firm handles [practice area] matters with the following criteria: [criteria — geography, matter size, complexity, conflict considerations]. A prospective client has presented the following matter: [sanitized matter summary]. Assess fit on a 1–5 scale, list reasons for and against taking the matter, and identify any threshold issues (jurisdiction, statute of limitations, conflict potential) that the intake call should clarify."
+
+Result: when you take the prospective-client call, you walk in already knowing the questions and the likely answer on whether to engage.
+
+### Next-Step Communications
+
+After intake, you need to send the prospective client a follow-up: either an engagement letter, a referral, or a decline. AI drafts the first version in under a minute.
+
+> "Draft a [engagement / decline / referral] letter for the matter described above. Tone: professional, warm, plain English. Length: 250 words. Do not include legal advice or guarantees. Include placeholders for fee terms and signature."
+
+You review, adjust, and send. Twenty-minute task becomes a five-minute task.
+
+## Where to Never Use AI
+
+A short list, drawn from places where AI use has cost lawyers money, reputation, or licenses.
+
+- **Courtroom strategy decisions.** AI does not read the judge, the jury, or the room. It does not know which argument your opponent has telegraphed they will not contest. Strategy stays human.
+- **Final advice to a client.** AI can draft a memo. You sign the advice. The client is paying for your judgment, not the model's.
+- **Ethics calls.** Whether to withdraw, whether a conflict is waivable, whether a particular communication is privileged — these are professional-responsibility questions and the model is not on the hook for getting them wrong.
+- **Producing citations directly into a filing.** Every cite verified independently. No exceptions, even for the most "obvious" black-letter cases. The cost of one hallucinated citation in a filing is measured in sanctions and reputation, not hours saved.
+
+## What Operationalize Looks Like After 60 Days
+
+A solo practitioner who runs these three workflows for two months typically reports the following:
+
+- Brief drafting time per motion drops from roughly 8 hours to roughly 4 — the front-half (outline + first draft) compresses, the back-half (cite check + revision) stays roughly the same.
+- Research turnaround drops from "next morning" to "by end of afternoon" for common-issue matters.
+- Intake-to-engagement-letter time drops from 2–3 days to same-day for clear-fit matters.
+
+These are not magical numbers. They are what you get when you stop using AI as a novelty and start running it as a workflow.
+
+## FAQ
+
+**Q: Is using AI to draft a brief a breach of professional responsibility?**
+A: No, provided you supervise the output, verify all citations, protect client confidentiality, and own the final work product. The ABA Model Rules and most state bars treat AI as analogous to other research and drafting tools — competent use is expected, careless use is sanctionable. UK SRA guidance follows similar principles.
+
+**Q: What if a citation produced by AI turns out to be hallucinated and slips into a filing?**
+A: That is your problem, not the model's. Courts have sanctioned lawyers for hallucinated citations regardless of how the citation was produced. The rule is simple: verify every cite independently before filing.
+
+**Q: Can I use ChatGPT for matter work or do I need a legal-specific tool?**
+A: Either can work for non-confidential tasks (research summaries on public law, outline generation, general drafting). For matter content involving client identifiers or privileged information, use an enterprise or sandboxed tool with a confirmed data-use agreement. Public consumer ChatGPT without such an agreement is not appropriate for matter content.
+
+**Q: How do I bill for AI-assisted work?**
+A: Bill for the time you spent, not the time AI saved you. If a task that previously took 4 hours now takes 1 hour because AI did the first draft, you bill 1 hour. Billing the original 4 hours is fraud. This is consistent across UK SRA, ABA, and state-bar guidance.
+
+**Q: Will AI replace junior associates?**
+A: Not in any near horizon that matters for your planning. What it does is change what junior associates do — less brute-force first-draft work, more verification, more analysis, more client-facing time. Firms that invest in training juniors on AI workflows are reporting higher leverage from those juniors, not lower headcount.
+
+**Q: How do I keep my prompts privileged?**
+A: Treat them like attorney work product. Store them in your matter management system. Do not paste matter content into tools without a data-use agreement. When in doubt, redact first and prompt second.
+
+**Q: What is the single biggest mistake lawyers make adopting AI?**
+A: Skipping the verification step on citations. Every other risk — privilege, ethics, billing — has a clear protocol. Citation hallucination is the one that ruins careers fastest, and it is also the easiest to prevent: never trust a cite the model produces, always verify in an authoritative database.
+
+## Disclaimer
+
+This article is general guidance, not legal advice. AI use in legal practice carries jurisdictional and professional-responsibility implications — consult your bar association rules.
+
+## Build Your AI Plan
+
+You have the workflows. The next step is figuring out which one to operationalize first in your own practice — and that depends on where you spend your time, what your matter mix looks like, and where the highest-ROI hour is hiding in your week.
+
+[Build Your Personal AI Plan →](/en/test)
+
+Or explore the [GROWT Method](/en/growt-method) to see how Operationalize fits into the broader framework — from Gap analysis through Transform.

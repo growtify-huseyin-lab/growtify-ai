@@ -28,7 +28,7 @@ export default async function BlogPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations("BlogPage");
-  const posts = getAllPosts();
+  const posts = getAllPosts(locale);
   const featured = posts.find((p) => p.featured);
   const rest = posts.filter((p) => p !== featured);
 

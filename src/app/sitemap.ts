@@ -6,7 +6,7 @@ import { LEAD_TR_TO_EN } from "@/content/lead-magnets/index.en";
 import { REHBER_SLUGS } from "@/content/rehberler";
 import { GUIDE_TR_TO_EN } from "@/content/rehberler/en";
 import { SECTOR_TR_TO_EN } from "@/data/sectors.en";
-import { BLOG_CATEGORIES } from "@/lib/blog-categories";
+import { BLOG_CATEGORIES, BLOG_CATEGORIES_EN } from "@/lib/blog-categories";
 
 const baseUrl = "https://growtify.ai";
 
@@ -89,16 +89,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ),
   ];
 
-  // ---- TR-only (no EN version) ----
-  const trContent: MetadataRoute.Sitemap = [
-    // KVKK is TR-only (UK GDPR covers EN); /en/kvkk-aydinlatma 301s to /en/gizlilik-politikasi
-    trOnly("/kvkk-aydinlatma", 0.3),
-    trOnly("/blog", 0.8),
-    ...getAllPosts().map((post) =>
+  // ---- Blog ----
+  const blog: MetadataRoute.Sitemap = [
+    // Blog index is bilingual (TR + EN-native posts both exist)
+    bi("/blog", 0.8),
+    // TR posts (Turkish slugs) — EN-only standalone, no hreflang pair
+    ...getAllPosts("tr").map((post) =>
       trOnly(`/blog/${post.slug}`, 0.7, new Date(post.date)),
     ),
     ...BLOG_CATEGORIES.map((c) => trOnly(`/blog/kategori/${c.slug}`, 0.5)),
+    // EN-native posts (English slugs) at /en/blog/{en-slug}
+    ...getAllPosts("en").map((post) =>
+      trOnly(`/en/blog/${post.slug}`, 0.7, new Date(post.date)),
+    ),
+    ...BLOG_CATEGORIES_EN.map((c) => trOnly(`/en/blog/kategori/${c.slug}`, 0.5)),
   ];
 
-  return [...bilingual, ...trContent];
+  // ---- TR-only ----
+  const trContent: MetadataRoute.Sitemap = [
+    // KVKK is TR-only (UK GDPR covers EN); /en/kvkk-aydinlatma 301s to /en/privacy-policy
+    trOnly("/kvkk-aydinlatma", 0.3),
+  ];
+
+  return [...bilingual, ...blog, ...trContent];
 }

@@ -1,37 +1,53 @@
 import type { Metadata } from "next";
-import { localeAlternates } from "@/lib/seo-alternates";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { BlogCard } from "@/components/blog/BlogCard";
 import { CategoryTabs } from "@/components/blog/CategoryTabs";
-import { getPostsByCategory, BLOG_CATEGORIES } from "@/lib/blog";
+import { getPostsByCategory } from "@/lib/blog";
+import {
+  BLOG_CATEGORIES,
+  BLOG_CATEGORIES_EN,
+  getBlogCategories,
+  getCategoryLabel,
+} from "@/lib/blog-categories";
 
 type Props = { params: Promise<{ locale: string; kategori: string }> };
 
 export function generateStaticParams() {
-  return BLOG_CATEGORIES.map((c) => ({ kategori: c.slug }));
+  // Per-locale categories: TR taxonomy for TR, EN taxonomy for EN.
+  return [
+    ...BLOG_CATEGORIES.map((c) => ({ locale: "tr", kategori: c.slug })),
+    ...BLOG_CATEGORIES_EN.map((c) => ({ locale: "en", kategori: c.slug })),
+  ];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, kategori } = await params;
   const t = await getTranslations({ locale, namespace: "BlogKategoriPage" });
-  const cat = BLOG_CATEGORIES.find((c) => c.slug === kategori);
+  const cat = getBlogCategories(locale).find((c) => c.slug === kategori);
   if (!cat) return { title: t("categoryNotFound") };
+  const label = getCategoryLabel(kategori, locale);
   return {
-    title: t("metaTitle", { label: cat.label }),
-    description: t("metaDescription", { label: cat.label }),
-    alternates: localeAlternates(locale, `/blog/kategori/${kategori}`),
+    title: t("metaTitle", { label }),
+    description: t("metaDescription", { label }),
+    alternates: {
+      canonical:
+        locale === "en"
+          ? `/en/blog/kategori/${kategori}`
+          : `/blog/kategori/${kategori}`,
+    },
   };
 }
 
 export default async function BlogCategoryPage({ params }: Props) {
   const { kategori, locale } = await params;
   const t = await getTranslations("BlogKategoriPage");
-  const cat = BLOG_CATEGORIES.find((c) => c.slug === kategori);
+  const cat = getBlogCategories(locale).find((c) => c.slug === kategori);
   if (!cat) notFound();
 
-  const posts = getPostsByCategory(kategori);
+  const posts = getPostsByCategory(kategori, locale);
+  const label = getCategoryLabel(kategori, locale);
 
   return (
     <>
@@ -39,7 +55,7 @@ export default async function BlogCategoryPage({ params }: Props) {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-extrabold tracking-tight text-dark dark:text-white sm:text-5xl">
-              <span className="text-primary">{cat.label}</span>
+              <span className="text-primary">{label}</span>
             </h1>
           </div>
         </Container>

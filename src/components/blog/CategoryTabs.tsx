@@ -2,7 +2,7 @@
 
 import { Link } from "@/i18n/navigation";
 import { useTranslations, useLocale } from "next-intl";
-import { BLOG_CATEGORIES, getCategoryLabel } from "@/lib/blog-categories";
+import { getBlogCategories, getCategoryLabel } from "@/lib/blog-categories";
 
 export function CategoryTabs({ active }: { active?: string }) {
   const t = useTranslations("CategoryTabsC");
@@ -19,7 +19,7 @@ export function CategoryTabs({ active }: { active?: string }) {
       >
         {t("all")}
       </Link>
-      {BLOG_CATEGORIES.map((cat) => (
+      {getBlogCategories(locale).map((cat) => (
         <Link
           key={cat.slug}
           href={`/blog/kategori/${cat.slug}`}
