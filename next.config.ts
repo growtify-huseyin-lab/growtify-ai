@@ -8,6 +8,18 @@ const nextConfig: NextConfig = {
   // outputFileTracingIncludes is needed — this makes PDF generation independent of the
   // bundler (Turbopack did NOT honor outputFileTracingIncludes → binary never bundled).
   serverExternalPackages: ["@sparticuz/chromium-min"],
+  async headers() {
+    // Portal community i18n script: short cache so translation edits propagate
+    // within ~60s without ever touching the GHL custom-JS loader (?v=1 stays fixed).
+    return [
+      {
+        source: "/portal/community-i18n.js",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=60, s-maxage=60, must-revalidate" },
+        ],
+      },
+    ];
+  },
   async redirects() {
     // EN guide fork (CEO 2026-05-31): /en/rehber/{tr} → /en/guide/{en} (English slugs),
     // /en/rehber → /en/guide, and KVKK removed on EN → /en/gizlilik-politikasi.
