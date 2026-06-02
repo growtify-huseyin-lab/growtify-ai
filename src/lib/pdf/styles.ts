@@ -47,8 +47,8 @@ export const styles = StyleSheet.create({
     fontSize: 10,
     color: COLORS.text,
     backgroundColor: COLORS.white,
-    paddingTop: 50,
-    paddingBottom: 60,
+    paddingTop: 40,
+    paddingBottom: 46,
     paddingHorizontal: 50,
   },
 
@@ -152,18 +152,26 @@ export const styles = StyleSheet.create({
     color: COLORS.text,
   },
 
-  // Numbered list
+  // Numbered list — circle is a flex container; the number/letter lives in a centered Text.
   numberCircle: {
     width: 22,
     height: 22,
     borderRadius: 11,
     backgroundColor: COLORS.primary,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 10,
+  },
+  numberCircleText: {
     color: COLORS.white,
     fontSize: 10,
     fontWeight: 700,
     textAlign: "center",
-    lineHeight: 22,
-    marginRight: 10,
+    lineHeight: 1,
+  },
+  coverLogo: {
+    width: 200,
+    marginBottom: 36,
   },
 
   // Cards / Boxes
@@ -237,8 +245,8 @@ export const styles = StyleSheet.create({
   promptBox: {
     backgroundColor: "#1E1B2E",
     borderRadius: 8,
-    padding: 14,
-    marginBottom: 12,
+    padding: 12,
+    marginBottom: 8,
   },
   promptLabel: {
     fontSize: 8,
@@ -249,7 +257,7 @@ export const styles = StyleSheet.create({
   },
   promptText: {
     fontSize: 9,
-    lineHeight: 1.6,
+    lineHeight: 1.5,
     color: "#E0E0E8",
   },
 

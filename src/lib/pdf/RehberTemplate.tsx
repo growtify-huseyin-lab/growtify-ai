@@ -1,7 +1,11 @@
 import React from "react";
-import { Document, Page, Text, View, Link } from "@react-pdf/renderer";
+import path from "path";
+import { Document, Page, Text, View, Link, Image } from "@react-pdf/renderer";
 import { styles, COLORS } from "./styles";
 import type { PdfSectorContent } from "@/content/rehberler/pdf-content";
+
+// growtify-dark.png = the WHITE logo (for dark backgrounds); the dark cover needs it.
+const LOGO = path.resolve(process.cwd(), "public/images/growtify-dark.png");
 
 // ─── Locale-aware chrome labels ───────────────────────────
 type Chrome = {
@@ -104,15 +108,16 @@ const CHROME: Record<string, Chrome> = {
 
 // ─── Helper Components ────────────────────────────────────
 
-function Footer({ pageNum, c }: { pageNum?: number; c: Chrome }) {
+// Fixed footer with a DYNAMIC page number (render prop). Manual page numbers broke when
+// react-pdf auto-paginated overflowing pages (duplicate "Page 8" etc.).
+function Footer({ c }: { c: Chrome }) {
   return (
     <View style={styles.footer} fixed>
       <Text style={styles.footerBrand}>growtify.ai</Text>
-      {pageNum && (
-        <Text style={styles.footerPage}>
-          {c.page} {pageNum}
-        </Text>
-      )}
+      <Text
+        style={styles.footerPage}
+        render={({ pageNumber }) => `${c.page} ${pageNumber}`}
+      />
     </View>
   );
 }
@@ -125,7 +130,7 @@ function BulletList({ items }: { items: string[] }) {
   return (
     <View>
       {items.map((item, i) => (
-        <View key={i} style={styles.listItem}>
+        <View key={i} style={styles.listItem} wrap={false}>
           <Text style={styles.bullet}>•</Text>
           <Text style={styles.listText}>{item}</Text>
         </View>
@@ -134,10 +139,21 @@ function BulletList({ items }: { items: string[] }) {
   );
 }
 
+function NumberCircle({ label }: { label: string }) {
+  return (
+    <View style={styles.numberCircle}>
+      <Text style={styles.numberCircleText}>{label}</Text>
+    </View>
+  );
+}
+
 function NumberedStep({ num, text }: { num: number; text: string }) {
   return (
-    <View style={[styles.listItem, { alignItems: "center", marginBottom: 8 }]}>
-      <Text style={styles.numberCircle}>{num}</Text>
+    <View
+      style={[styles.listItem, { alignItems: "center", marginBottom: 5 }]}
+      wrap={false}
+    >
+      <NumberCircle label={String(num)} />
       <Text style={styles.listText}>{text}</Text>
     </View>
   );
@@ -148,11 +164,11 @@ function NumberedStep({ num, text }: { num: number; text: string }) {
 function CoverPage({ data }: { data: PdfSectorContent }) {
   return (
     <Page size="A4" style={styles.coverPage}>
-      <Text style={styles.coverIcon}>{data.sectorIcon}</Text>
+      <Image src={LOGO} style={styles.coverLogo} />
       <View style={styles.coverAccent} />
       <Text style={styles.coverTitle}>{data.coverTitle}</Text>
       <Text style={styles.coverSubtitle}>{data.coverSubtitle}</Text>
-      <Text style={styles.coverBrand}>growtify.ai — GROWT Method</Text>
+      <Text style={styles.coverBrand}>GROWT Method</Text>
     </Page>
   );
 }
@@ -170,11 +186,11 @@ function IntroPage({ data, c }: { data: PdfSectorContent; c: Chrome }) {
 
       <Divider />
 
-      <View style={styles.highlightBox}>
+      <View style={styles.highlightBox} wrap={false}>
         <Text style={styles.italic}>{data.intro.painHook}</Text>
       </View>
 
-      <Footer pageNum={2} c={c} />
+      <Footer c={c} />
     </Page>
   );
 }
@@ -193,7 +209,7 @@ function ContextPage({ data, c }: { data: PdfSectorContent; c: Chrome }) {
 
       <Text style={styles.sectionSubtitle}>{c.numbers}</Text>
       {data.sectorContext.stats.map((stat, i) => (
-        <View key={i} style={styles.card}>
+        <View key={i} style={styles.card} wrap={false}>
           <Text style={[styles.cardTitle, { color: COLORS.primary }]}>
             {stat.value}
           </Text>
@@ -206,7 +222,7 @@ function ContextPage({ data, c }: { data: PdfSectorContent; c: Chrome }) {
 
       <Divider />
 
-      <View style={styles.beforeAfterRow}>
+      <View style={styles.beforeAfterRow} wrap={false}>
         <View style={styles.beforeBox}>
           <Text style={styles.beforeLabel}>{c.withoutAi}</Text>
           {data.sectorContext.comparison.without.map((item, i) => (
@@ -225,7 +241,7 @@ function ContextPage({ data, c }: { data: PdfSectorContent; c: Chrome }) {
         </View>
       </View>
 
-      <Footer pageNum={3} c={c} />
+      <Footer c={c} />
     </Page>
   );
 }
@@ -233,12 +249,10 @@ function ContextPage({ data, c }: { data: PdfSectorContent; c: Chrome }) {
 function ScenarioPage({
   scenario,
   index,
-  pageNum,
   c,
 }: {
   scenario: PdfSectorContent["scenarios"][0];
   index: number;
-  pageNum: number;
   c: Chrome;
 }) {
   return (
@@ -255,12 +269,12 @@ function ScenarioPage({
         <NumberedStep key={i} num={i + 1} text={step} />
       ))}
 
-      <View style={styles.promptBox}>
+      <View style={styles.promptBox} wrap={false}>
         <Text style={styles.promptLabel}>{c.examplePrompt}</Text>
         <Text style={styles.promptText}>{scenario.promptExample}</Text>
       </View>
 
-      <View style={styles.beforeAfterRow}>
+      <View style={styles.beforeAfterRow} wrap={false}>
         <View style={styles.beforeBox}>
           <Text style={styles.beforeLabel}>{c.before}</Text>
           <Text style={styles.timeText}>{scenario.before}</Text>
@@ -271,18 +285,16 @@ function ScenarioPage({
         </View>
       </View>
 
-      <Footer pageNum={pageNum} c={c} />
+      <Footer c={c} />
     </Page>
   );
 }
 
 function ToolsPage({
   tools,
-  pageNum,
   c,
 }: {
   tools: PdfSectorContent["tools"];
-  pageNum: number;
   c: Chrome;
 }) {
   return (
@@ -290,7 +302,7 @@ function ToolsPage({
       <Text style={styles.sectionTitle}>{c.tools}</Text>
 
       {tools.map((tool, i) => (
-        <View key={i} style={styles.card}>
+        <View key={i} style={styles.card} wrap={false}>
           <View
             style={{
               flexDirection: "row",
@@ -321,18 +333,16 @@ function ToolsPage({
         </View>
       ))}
 
-      <Footer pageNum={pageNum} c={c} />
+      <Footer c={c} />
     </Page>
   );
 }
 
 function PromptsPage({
   prompts,
-  pageNum,
   c,
 }: {
   prompts: PdfSectorContent["prompts"];
-  pageNum: number;
   c: Chrome;
 }) {
   return (
@@ -340,7 +350,7 @@ function PromptsPage({
       <Text style={styles.sectionTitle}>{c.promptsTitle}</Text>
 
       {prompts.map((p, i) => (
-        <View key={i} style={{ marginBottom: 12 }}>
+        <View key={i} style={{ marginBottom: 12 }} wrap={false}>
           <Text style={styles.sectionSubtitle}>
             {i + 1}. {p.title}
           </Text>
@@ -353,18 +363,16 @@ function PromptsPage({
         </View>
       ))}
 
-      <Footer pageNum={pageNum} c={c} />
+      <Footer c={c} />
     </Page>
   );
 }
 
 function ChecklistPage({
   checklist,
-  pageNum,
   c,
 }: {
   checklist: PdfSectorContent["checklist"];
-  pageNum: number;
   c: Chrome;
 }) {
   return (
@@ -373,7 +381,7 @@ function ChecklistPage({
       <Text style={styles.paragraph}>{c.checklistIntro}</Text>
 
       {checklist.map((item, i) => (
-        <View key={i} style={styles.checkItem}>
+        <View key={i} style={styles.checkItem} wrap={false}>
           <View style={styles.checkBox} />
           <View style={{ flex: 1 }}>
             <Text style={[styles.checkText, { fontWeight: 700 }]}>
@@ -388,18 +396,16 @@ function ChecklistPage({
         </View>
       ))}
 
-      <Footer pageNum={pageNum} c={c} />
+      <Footer c={c} />
     </Page>
   );
 }
 
 function GROWTPage({
   growtTeaser,
-  pageNum,
   c,
 }: {
   growtTeaser: string;
-  pageNum: number;
   c: Chrome;
 }) {
   return (
@@ -419,20 +425,21 @@ function GROWTPage({
         <View
           key={i}
           style={[styles.listItem, { alignItems: "center", marginBottom: 10 }]}
+          wrap={false}
         >
-          <Text style={styles.numberCircle}>{phase[0]}</Text>
+          <NumberCircle label={phase[0]} />
           <Text style={[styles.listText, { fontWeight: 600 }]}>{phase}</Text>
         </View>
       ))}
 
-      <View style={[styles.highlightBox, { marginTop: 16 }]}>
+      <View style={[styles.highlightBox, { marginTop: 16 }]} wrap={false}>
         <Text style={styles.paragraph}>{c.growtClosing}</Text>
         <Text style={[styles.paragraphBold, { color: COLORS.primary }]}>
           {c.growtCta}
         </Text>
       </View>
 
-      <Footer pageNum={pageNum} c={c} />
+      <Footer c={c} />
     </Page>
   );
 }
@@ -460,7 +467,6 @@ export function RehberDocument({
   locale?: string;
 }) {
   const c = CHROME[locale] ?? CHROME.tr;
-  let pageNum = 4; // cover=1, intro=2, context=3, scenarios start at 4
 
   return (
     <Document
@@ -474,19 +480,13 @@ export function RehberDocument({
       <ContextPage data={data} c={c} />
 
       {data.scenarios.map((scenario, i) => (
-        <ScenarioPage
-          key={i}
-          scenario={scenario}
-          index={i}
-          pageNum={pageNum++}
-          c={c}
-        />
+        <ScenarioPage key={i} scenario={scenario} index={i} c={c} />
       ))}
 
-      <ToolsPage tools={data.tools} pageNum={pageNum++} c={c} />
-      <PromptsPage prompts={data.prompts} pageNum={pageNum++} c={c} />
-      <ChecklistPage checklist={data.checklist} pageNum={pageNum++} c={c} />
-      <GROWTPage growtTeaser={data.growtTeaser} pageNum={pageNum++} c={c} />
+      <ToolsPage tools={data.tools} c={c} />
+      <PromptsPage prompts={data.prompts} c={c} />
+      <ChecklistPage checklist={data.checklist} c={c} />
+      <GROWTPage growtTeaser={data.growtTeaser} c={c} />
       <CTAPage data={data} c={c} />
     </Document>
   );
