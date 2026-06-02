@@ -17,7 +17,6 @@ import { buildGhlCustomFields, buildGhlTags, buildGhlTagsEn, buildContactNote } 
 import { computeKurumsalResults } from "../../lib/scoring-kurumsal";
 import { generateKurumsalPdfHtml } from "../../lib/pdf-html-template-kurumsal";
 import { generateKurumsalPdfHtml as generateKurumsalPdfHtmlEn } from "../../lib/pdf-html-template-kurumsal-en";
-import { initialKurumsalState } from "../../lib/types-kurumsal";
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
@@ -312,86 +311,4 @@ function buildKurumsalEmailHtml(
         };
 
   return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head><body style="margin:0;padding:0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:0;padding:0;"><tr><td align="center" style="padding:0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" style="font-family:'Inter',Arial,sans-serif;color:#232323;width:100%;max-width:600px;"><tr><td style="background-color:#2563EB;padding:24px 20px;color:white;text-align:center;"><h1 style="font-size:22px;margin:0 0 8px;color:white;">${c.h1}</h1><p style="font-size:14px;opacity:0.85;margin:0;color:white;">${c.intro}</p></td></tr><tr><td style="padding:24px 20px;"><p style="font-size:14px;line-height:1.7;color:#475569;margin:0 0 24px;">${c.body}</p><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="padding:0 0 28px;"><a href="${pdfUrl}" style="display:inline-block;background:#2563EB;color:white;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;">${c.cta}</a></td></tr></table><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="background:#f8fafc;border-radius:12px;padding:20px;"><p style="font-size:14px;font-weight:700;color:#1a1a2e;margin:0 0 8px;">${c.nextStepTitle}</p><p style="font-size:13px;color:#475569;margin:0 0 16px;">${c.nextStepBody}</p><a href="https://app.growtify.app/widget/bookings/kurumsal-on-gorusme" style="display:inline-block;background:#2563EB;color:white;padding:10px 24px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;">${c.nextStepCta}</a></td></tr></table><p style="font-size:13px;color:#64748b;line-height:1.6;margin:24px 0;">${c.disclaimer}</p><hr style="border:none;border-top:1px solid #e2e8f0;margin:0 0 16px;"><p style="font-size:11px;color:#94a3b8;text-align:center;margin:0;">${c.footer}</p></td></tr></table></td></tr></table></body></html>`;
-}
-
-// ── DIAGNOSTIC (CEO-approved 2026-06-02): run the FULL EN kurumsal email flow
-//    (upsert → PDF → upload → send) synchronously and return each step's outcome.
-//    Sends ONE test email to kurumsal-diag@growtify.ai. Remove after debugging. ──
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  if (url.searchParams.get("diag") !== "1") {
-    return Response.json({ ok: false, error: "append ?diag=1" }, { status: 404 });
-  }
-  const to = url.searchParams.get("to") || "kurumsal-diag@growtify.ai";
-  const steps: Record<string, unknown> = {};
-  const config = readConfig();
-  if (!config) return Response.json({ ok: false, step: "config", error: "GHL creds missing" });
-
-  let state = {
-    ...initialKurumsalState,
-    sector: "saas",
-    d_strategy: 4, d_team: 6, d_process: 3, d_data: 5, d_culture: 7,
-    p_pilot: 4, p_roi: 3, p_resistance: 4, p_resources: 3,
-    q_goal: "verimlilik",
-    q_priority_depts: ["pazarlama", "satis", "it"],
-    companySize: "51-200",
-    firstName: "DiagFlow",
-    email: to,
-    locale: "en",
-  } as unknown as KurumsalQuizState;
-  state = { ...state, ...computeKurumsalResults(state), locale: "en" } as unknown as KurumsalQuizState;
-
-  // 1. upsert
-  let contactId = "";
-  try {
-    const res = await fetch(`${config.apiBase}/contacts/upsert`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${config.apiToken}`, Version: config.apiVersion, Accept: "application/json", "Content-Type": "application/json" },
-      body: JSON.stringify({
-        locationId: config.locationId,
-        email: state.email,
-        firstName: state.firstName,
-        source: "Growtify.ai kurumsal quiz DIAG",
-        tags: buildGhlTagsEn(state),
-        customFields: buildGhlCustomFields(state),
-      }),
-      signal: AbortSignal.timeout(15000),
-    });
-    const body = (await res.json().catch(() => ({}))) as Record<string, unknown>;
-    contactId = ((body.contact as Record<string, unknown>)?.id as string) ?? "";
-    steps.upsert = { status: res.status, ok: res.ok, contactId, error: res.ok ? null : body };
-    if (!res.ok || !contactId) return Response.json({ ok: false, steps });
-  } catch (e) {
-    steps.upsert = { ok: false, error: (e as Error).message };
-    return Response.json({ ok: false, steps });
-  }
-
-  // 2+3. PDF + upload
-  let pdfUrl = "";
-  try {
-    const t = Date.now();
-    const html = generateKurumsalPdfHtmlEn(state);
-    const { generatePdfFromHtml } = await import("../../../lib/pdf-generate");
-    const pdfBuffer = await generatePdfFromHtml(html);
-    steps.pdf = { ok: true, bytes: pdfBuffer.length, ms: Date.now() - t };
-    const t2 = Date.now();
-    const up = await uploadPdfToContact(contactId, pdfBuffer, "growtify-kurumsal-diag.pdf");
-    pdfUrl = up.urls?.[0] ?? "";
-    steps.upload = { ok: up.ok, url: pdfUrl, ms: Date.now() - t2, error: up.ok ? null : up.error };
-  } catch (e) {
-    steps.pdf_or_upload = { ok: false, error: (e as Error).message };
-    return Response.json({ ok: false, steps });
-  }
-  if (!pdfUrl) return Response.json({ ok: false, steps, note: "no pdfUrl → email is gated/skipped here" });
-
-  // 4. send (the actual email)
-  try {
-    const t = Date.now();
-    const sent = await sendKurumsalReportEmail(contactId, state, pdfUrl, config, "en");
-    steps.email_send = { sent, ms: Date.now() - t };
-  } catch (e) {
-    steps.email_send = { sent: false, error: (e as Error).message };
-  }
-
-  return Response.json({ ok: true, steps });
 }
