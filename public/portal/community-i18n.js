@@ -203,9 +203,27 @@
       "Check your email": "E-postanı kontrol et",
       "Reset Password": "Şifre Sıfırla",
       "Full name": "Ad soyad",
+      // — added 2026-06-02 (canlı portal taraması): eksik UI string'leri —
+      "Add Channel": "Kanal Ekle",
+      "Go Live": "Yayına Geç",
+      "Settings": "Ayarlar",
+      "SETTINGS": "AYARLAR",
+      "Update": "Güncelle",
+      "Member": "Üye",
+      "Create Post": "Gönderi Oluştur",
+      "Like content": "İçeriği Beğen",
+      "Post Actions": "Gönderi Seçenekleri",
+      "Post Avatar": "Gönderi Avatarı",
+      "Chats": "Sohbetler",
+      "App Switcher": "Uygulamalar",
+      "Tab Switcher": "Sekmeler",
+      "User Avatar": "Kullanıcı Avatarı",
     };
 
     const phrases = [
+      // — added 2026-06-02: kelime sırası / kısmi çeviri düzeltmeleri (dict'ten önce) —
+      { pattern: /Search member/gi, replacement: "Üye Ara" },
+      { pattern: /Notifications List/gi, replacement: "Bildirim Listesi" },
       // VALIDATION (dict "Password→Şifre" yemeden önce yakala)
       {
         pattern: /Password field is required/gi,
