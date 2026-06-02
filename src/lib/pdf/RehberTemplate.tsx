@@ -3,13 +3,116 @@ import { Document, Page, Text, View, Link } from "@react-pdf/renderer";
 import { styles, COLORS } from "./styles";
 import type { PdfSectorContent } from "@/content/rehberler/pdf-content";
 
+// ─── Locale-aware chrome labels ───────────────────────────
+type Chrome = {
+  page: string;
+  forWho: string;
+  whatInside: string;
+  whyAi: string;
+  numbers: string;
+  withoutAi: string;
+  withAi: string;
+  scenario: string;
+  problem: string;
+  stepByStep: string;
+  examplePrompt: string;
+  before: string;
+  after: string;
+  tools: string;
+  free: string;
+  paid: string;
+  bestFor: string;
+  promptsTitle: string;
+  expectedOutput: string;
+  checklistTitle: string;
+  checklistIntro: string;
+  day: string;
+  tool: string;
+  duration: string;
+  growtTitle: string;
+  growtClosing: string;
+  growtCta: string;
+  ctaButton: string;
+};
+
+const CHROME: Record<string, Chrome> = {
+  tr: {
+    page: "Sayfa",
+    forWho: "Bu Rehber Kimin İçin?",
+    whatInside: "Bu rehberde neler var?",
+    whyAi: "Yapay Zeka Neden Önemli?",
+    numbers: "Rakamlar",
+    withoutAi: "AI Olmadan",
+    withAi: "AI İle",
+    scenario: "Senaryo",
+    problem: "Problem:",
+    stepByStep: "Adım Adım Uygulama",
+    examplePrompt: "Prompt Örneği",
+    before: "Önce",
+    after: "Sonra",
+    tools: "Önerilen AI Araçları",
+    free: "Ücretsiz",
+    paid: "Ücretli",
+    bestFor: "En iyi:",
+    promptsTitle: "Kopyala-Yapıştır Prompt Paketi",
+    expectedOutput: "Beklenen çıktı:",
+    checklistTitle: "İlk 7 Gün Checklist",
+    checklistIntro:
+      "Her gün bir adım. 7 gün sonunda ilk sonuçlarını görmüş olacaksın.",
+    day: "Gün",
+    tool: "Araç:",
+    duration: "Süre:",
+    growtTitle: "GROWT Method ile Dönüşüm",
+    growtClosing:
+      "Bu rehber sana bir başlangıç verdi. GROWT Method ile yapılandırılmış bir süreçle 5 seviyede tam dönüşümü tamamla.",
+    growtCta: "growtify.ai/test → Kişisel planını oluştur",
+    ctaButton: "Kişisel Planını Oluştur →",
+  },
+  en: {
+    page: "Page",
+    forWho: "Who Is This Guide For?",
+    whatInside: "What's Inside This Guide?",
+    whyAi: "Why AI Matters",
+    numbers: "The Numbers",
+    withoutAi: "Without AI",
+    withAi: "With AI",
+    scenario: "Scenario",
+    problem: "Problem:",
+    stepByStep: "Step-by-Step",
+    examplePrompt: "Example Prompt",
+    before: "Before",
+    after: "After",
+    tools: "Recommended AI Tools",
+    free: "Free",
+    paid: "Paid",
+    bestFor: "Best for:",
+    promptsTitle: "Copy-Paste Prompt Pack",
+    expectedOutput: "Expected output:",
+    checklistTitle: "Your First 7 Days",
+    checklistIntro:
+      "One step a day. By the end of the week, you'll have seen your first results.",
+    day: "Day",
+    tool: "Tool:",
+    duration: "Duration:",
+    growtTitle: "Transform with the GROWT Method",
+    growtClosing:
+      "This guide gave you a starting point. With the GROWT Method's structured process, complete the full transformation across 5 levels.",
+    growtCta: "growtify.ai/test → Build your plan",
+    ctaButton: "Build Your Plan →",
+  },
+};
+
 // ─── Helper Components ────────────────────────────────────
 
-function Footer({ pageNum }: { pageNum?: number }) {
+function Footer({ pageNum, c }: { pageNum?: number; c: Chrome }) {
   return (
     <View style={styles.footer} fixed>
       <Text style={styles.footerBrand}>growtify.ai</Text>
-      {pageNum && <Text style={styles.footerPage}>Sayfa {pageNum}</Text>}
+      {pageNum && (
+        <Text style={styles.footerPage}>
+          {c.page} {pageNum}
+        </Text>
+      )}
     </View>
   );
 }
@@ -31,13 +134,7 @@ function BulletList({ items }: { items: string[] }) {
   );
 }
 
-function NumberedStep({
-  num,
-  text,
-}: {
-  num: number;
-  text: string;
-}) {
+function NumberedStep({ num, text }: { num: number; text: string }) {
   return (
     <View style={[styles.listItem, { alignItems: "center", marginBottom: 8 }]}>
       <Text style={styles.numberCircle}>{num}</Text>
@@ -60,15 +157,15 @@ function CoverPage({ data }: { data: PdfSectorContent }) {
   );
 }
 
-function IntroPage({ data }: { data: PdfSectorContent }) {
+function IntroPage({ data, c }: { data: PdfSectorContent; c: Chrome }) {
   return (
     <Page size="A4" style={styles.page}>
-      <Text style={styles.sectionTitle}>Bu Rehber Kimin İçin?</Text>
+      <Text style={styles.sectionTitle}>{c.forWho}</Text>
       <Text style={styles.paragraph}>{data.intro.forWho}</Text>
 
       <Divider />
 
-      <Text style={styles.sectionSubtitle}>Bu rehberde neler var?</Text>
+      <Text style={styles.sectionSubtitle}>{c.whatInside}</Text>
       <BulletList items={data.intro.whatYouGet} />
 
       <Divider />
@@ -77,17 +174,15 @@ function IntroPage({ data }: { data: PdfSectorContent }) {
         <Text style={styles.italic}>{data.intro.painHook}</Text>
       </View>
 
-      <Footer pageNum={2} />
+      <Footer pageNum={2} c={c} />
     </Page>
   );
 }
 
-function ContextPage({ data }: { data: PdfSectorContent }) {
+function ContextPage({ data, c }: { data: PdfSectorContent; c: Chrome }) {
   return (
     <Page size="A4" style={styles.page}>
-      <Text style={styles.sectionTitle}>
-        Yapay Zeka Neden Önemli?
-      </Text>
+      <Text style={styles.sectionTitle}>{c.whyAi}</Text>
       {data.sectorContext.whyAiMatters.split("\n\n").map((p, i) => (
         <Text key={i} style={styles.paragraph}>
           {p}
@@ -96,7 +191,7 @@ function ContextPage({ data }: { data: PdfSectorContent }) {
 
       <Divider />
 
-      <Text style={styles.sectionSubtitle}>Rakamlar</Text>
+      <Text style={styles.sectionSubtitle}>{c.numbers}</Text>
       {data.sectorContext.stats.map((stat, i) => (
         <View key={i} style={styles.card}>
           <Text style={[styles.cardTitle, { color: COLORS.primary }]}>
@@ -113,7 +208,7 @@ function ContextPage({ data }: { data: PdfSectorContent }) {
 
       <View style={styles.beforeAfterRow}>
         <View style={styles.beforeBox}>
-          <Text style={styles.beforeLabel}>AI Olmadan</Text>
+          <Text style={styles.beforeLabel}>{c.withoutAi}</Text>
           {data.sectorContext.comparison.without.map((item, i) => (
             <Text key={i} style={[styles.cardText, { marginBottom: 4 }]}>
               • {item}
@@ -121,7 +216,7 @@ function ContextPage({ data }: { data: PdfSectorContent }) {
           ))}
         </View>
         <View style={styles.afterBox}>
-          <Text style={styles.afterLabel}>AI İle</Text>
+          <Text style={styles.afterLabel}>{c.withAi}</Text>
           {data.sectorContext.comparison.with.map((item, i) => (
             <Text key={i} style={[styles.cardText, { marginBottom: 4 }]}>
               • {item}
@@ -130,7 +225,7 @@ function ContextPage({ data }: { data: PdfSectorContent }) {
         </View>
       </View>
 
-      <Footer pageNum={3} />
+      <Footer pageNum={3} c={c} />
     </Page>
   );
 }
@@ -139,42 +234,44 @@ function ScenarioPage({
   scenario,
   index,
   pageNum,
+  c,
 }: {
   scenario: PdfSectorContent["scenarios"][0];
   index: number;
   pageNum: number;
+  c: Chrome;
 }) {
   return (
     <Page size="A4" style={styles.page}>
       <Text style={styles.sectionTitle}>
-        Senaryo {index + 1}: {scenario.title}
+        {c.scenario} {index + 1}: {scenario.title}
       </Text>
 
-      <Text style={styles.paragraphBold}>Problem:</Text>
+      <Text style={styles.paragraphBold}>{c.problem}</Text>
       <Text style={styles.paragraph}>{scenario.problem}</Text>
 
-      <Text style={styles.sectionSubtitle}>Adım Adım Uygulama</Text>
+      <Text style={styles.sectionSubtitle}>{c.stepByStep}</Text>
       {scenario.steps.map((step, i) => (
         <NumberedStep key={i} num={i + 1} text={step} />
       ))}
 
       <View style={styles.promptBox}>
-        <Text style={styles.promptLabel}>Prompt Örneği</Text>
+        <Text style={styles.promptLabel}>{c.examplePrompt}</Text>
         <Text style={styles.promptText}>{scenario.promptExample}</Text>
       </View>
 
       <View style={styles.beforeAfterRow}>
         <View style={styles.beforeBox}>
-          <Text style={styles.beforeLabel}>Önce</Text>
+          <Text style={styles.beforeLabel}>{c.before}</Text>
           <Text style={styles.timeText}>{scenario.before}</Text>
         </View>
         <View style={styles.afterBox}>
-          <Text style={styles.afterLabel}>Sonra</Text>
+          <Text style={styles.afterLabel}>{c.after}</Text>
           <Text style={styles.timeText}>{scenario.after}</Text>
         </View>
       </View>
 
-      <Footer pageNum={pageNum} />
+      <Footer pageNum={pageNum} c={c} />
     </Page>
   );
 }
@@ -182,13 +279,15 @@ function ScenarioPage({
 function ToolsPage({
   tools,
   pageNum,
+  c,
 }: {
   tools: PdfSectorContent["tools"];
   pageNum: number;
+  c: Chrome;
 }) {
   return (
     <Page size="A4" style={styles.page}>
-      <Text style={styles.sectionTitle}>Önerilen AI Araçları</Text>
+      <Text style={styles.sectionTitle}>{c.tools}</Text>
 
       {tools.map((tool, i) => (
         <View key={i} style={styles.card}>
@@ -207,7 +306,7 @@ function ToolsPage({
                 fontWeight: 600,
               }}
             >
-              {tool.free ? "Ücretsiz" : "Ücretli"}
+              {tool.free ? c.free : c.paid}
             </Text>
           </View>
           <Text style={styles.cardText}>{tool.description}</Text>
@@ -217,12 +316,12 @@ function ToolsPage({
               { fontSize: 9, color: COLORS.primary, marginTop: 4 },
             ]}
           >
-            En iyi: {tool.bestFor}
+            {c.bestFor} {tool.bestFor}
           </Text>
         </View>
       ))}
 
-      <Footer pageNum={pageNum} />
+      <Footer pageNum={pageNum} c={c} />
     </Page>
   );
 }
@@ -230,13 +329,15 @@ function ToolsPage({
 function PromptsPage({
   prompts,
   pageNum,
+  c,
 }: {
   prompts: PdfSectorContent["prompts"];
   pageNum: number;
+  c: Chrome;
 }) {
   return (
     <Page size="A4" style={styles.page}>
-      <Text style={styles.sectionTitle}>Kopyala-Yapıştır Prompt Paketi</Text>
+      <Text style={styles.sectionTitle}>{c.promptsTitle}</Text>
 
       {prompts.map((p, i) => (
         <View key={i} style={{ marginBottom: 12 }}>
@@ -247,12 +348,12 @@ function PromptsPage({
             <Text style={styles.promptText}>{p.prompt}</Text>
           </View>
           <Text style={[styles.italic, { fontSize: 9 }]}>
-            Beklenen çıktı: {p.expectedOutput}
+            {c.expectedOutput} {p.expectedOutput}
           </Text>
         </View>
       ))}
 
-      <Footer pageNum={pageNum} />
+      <Footer pageNum={pageNum} c={c} />
     </Page>
   );
 }
@@ -260,34 +361,34 @@ function PromptsPage({
 function ChecklistPage({
   checklist,
   pageNum,
+  c,
 }: {
   checklist: PdfSectorContent["checklist"];
   pageNum: number;
+  c: Chrome;
 }) {
   return (
     <Page size="A4" style={styles.page}>
-      <Text style={styles.sectionTitle}>İlk 7 Gün Checklist</Text>
-      <Text style={styles.paragraph}>
-        Her gün bir adım. 7 gün sonunda ilk sonuçlarını görmüş olacaksın.
-      </Text>
+      <Text style={styles.sectionTitle}>{c.checklistTitle}</Text>
+      <Text style={styles.paragraph}>{c.checklistIntro}</Text>
 
       {checklist.map((item, i) => (
         <View key={i} style={styles.checkItem}>
           <View style={styles.checkBox} />
           <View style={{ flex: 1 }}>
             <Text style={[styles.checkText, { fontWeight: 700 }]}>
-              Gün {item.day}: {item.task}
+              {c.day} {item.day}: {item.task}
             </Text>
             <Text
               style={[styles.checkText, { fontSize: 9, color: COLORS.gray }]}
             >
-              Araç: {item.tool} · Süre: {item.duration}
+              {c.tool} {item.tool} · {c.duration} {item.duration}
             </Text>
           </View>
         </View>
       ))}
 
-      <Footer pageNum={pageNum} />
+      <Footer pageNum={pageNum} c={c} />
     </Page>
   );
 }
@@ -295,54 +396,54 @@ function ChecklistPage({
 function GROWTPage({
   growtTeaser,
   pageNum,
+  c,
 }: {
   growtTeaser: string;
   pageNum: number;
+  c: Chrome;
 }) {
   return (
     <Page size="A4" style={styles.page}>
-      <Text style={styles.sectionTitle}>GROWT Method ile Dönüşüm</Text>
+      <Text style={styles.sectionTitle}>{c.growtTitle}</Text>
       <Text style={styles.paragraph}>{growtTeaser}</Text>
 
       <Divider />
 
-      {["G — Gap Analysis", "R — Roadmap", "O — Operationalize", "W — Win", "T — Transform"].map(
-        (phase, i) => (
-          <View
-            key={i}
-            style={[
-              styles.listItem,
-              { alignItems: "center", marginBottom: 10 },
-            ]}
-          >
-            <Text style={styles.numberCircle}>{phase[0]}</Text>
-            <Text style={[styles.listText, { fontWeight: 600 }]}>{phase}</Text>
-          </View>
-        )
-      )}
+      {[
+        "G — Gap Analysis",
+        "R — Roadmap",
+        "O — Operationalize",
+        "W — Win",
+        "T — Transform",
+      ].map((phase, i) => (
+        <View
+          key={i}
+          style={[styles.listItem, { alignItems: "center", marginBottom: 10 }]}
+        >
+          <Text style={styles.numberCircle}>{phase[0]}</Text>
+          <Text style={[styles.listText, { fontWeight: 600 }]}>{phase}</Text>
+        </View>
+      ))}
 
       <View style={[styles.highlightBox, { marginTop: 16 }]}>
-        <Text style={styles.paragraph}>
-          Bu rehber sana bir başlangıç verdi. GROWT Method ile yapılandırılmış
-          bir süreçle 5 seviyede tam dönüşümü tamamla.
-        </Text>
+        <Text style={styles.paragraph}>{c.growtClosing}</Text>
         <Text style={[styles.paragraphBold, { color: COLORS.primary }]}>
-          growtify.ai/test → Kişisel planını oluştur
+          {c.growtCta}
         </Text>
       </View>
 
-      <Footer pageNum={pageNum} />
+      <Footer pageNum={pageNum} c={c} />
     </Page>
   );
 }
 
-function CTAPage({ data }: { data: PdfSectorContent }) {
+function CTAPage({ data, c }: { data: PdfSectorContent; c: Chrome }) {
   return (
     <Page size="A4" style={styles.ctaPage}>
       <Text style={styles.ctaTitle}>{data.ctaHeadline}</Text>
       <Text style={styles.ctaText}>{data.ctaBody}</Text>
       <Link src="https://growtify.ai/test">
-        <Text style={styles.ctaButton}>Kişisel Planını Oluştur →</Text>
+        <Text style={styles.ctaButton}>{c.ctaButton}</Text>
       </Link>
       <Text style={styles.ctaUrl}>growtify.ai/test</Text>
     </Page>
@@ -351,7 +452,14 @@ function CTAPage({ data }: { data: PdfSectorContent }) {
 
 // ─── Main Document ────────────────────────────────────────
 
-export function RehberDocument({ data }: { data: PdfSectorContent }) {
+export function RehberDocument({
+  data,
+  locale = "tr",
+}: {
+  data: PdfSectorContent;
+  locale?: string;
+}) {
+  const c = CHROME[locale] ?? CHROME.tr;
   let pageNum = 4; // cover=1, intro=2, context=3, scenarios start at 4
 
   return (
@@ -362,8 +470,8 @@ export function RehberDocument({ data }: { data: PdfSectorContent }) {
       creator="growtify.ai"
     >
       <CoverPage data={data} />
-      <IntroPage data={data} />
-      <ContextPage data={data} />
+      <IntroPage data={data} c={c} />
+      <ContextPage data={data} c={c} />
 
       {data.scenarios.map((scenario, i) => (
         <ScenarioPage
@@ -371,14 +479,15 @@ export function RehberDocument({ data }: { data: PdfSectorContent }) {
           scenario={scenario}
           index={i}
           pageNum={pageNum++}
+          c={c}
         />
       ))}
 
-      <ToolsPage tools={data.tools} pageNum={pageNum++} />
-      <PromptsPage prompts={data.prompts} pageNum={pageNum++} />
-      <ChecklistPage checklist={data.checklist} pageNum={pageNum++} />
-      <GROWTPage growtTeaser={data.growtTeaser} pageNum={pageNum++} />
-      <CTAPage data={data} />
+      <ToolsPage tools={data.tools} pageNum={pageNum++} c={c} />
+      <PromptsPage prompts={data.prompts} pageNum={pageNum++} c={c} />
+      <ChecklistPage checklist={data.checklist} pageNum={pageNum++} c={c} />
+      <GROWTPage growtTeaser={data.growtTeaser} pageNum={pageNum++} c={c} />
+      <CTAPage data={data} c={c} />
     </Document>
   );
 }
