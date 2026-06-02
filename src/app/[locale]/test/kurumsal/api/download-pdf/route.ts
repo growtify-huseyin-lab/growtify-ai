@@ -66,6 +66,32 @@ export async function GET(request: Request) {
     return Response.json({ ok: r.ok, status: r.status, locale: en ? "en" : "tr", error: r.ok ? null : body, tags, customFields });
   }
 
+  // ?test=recent → read-only: list the 15 most recently-added contacts (POST /contacts/search),
+  // so we can see whether the user's just-now manual test actually created a contact (POST fired).
+  if (url.searchParams.get("test") === "recent") {
+    const apiBase = process.env.GHL_API_BASE ?? "https://services.leadconnectorhq.com";
+    const apiVersion = process.env.GHL_API_VERSION ?? "2021-07-28";
+    const locationId = process.env.GHL_LOCATION_ID;
+    const r = await fetch(`${apiBase}/contacts/search`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${process.env.GHL_API_TOKEN}`, Version: apiVersion, Accept: "application/json", "Content-Type": "application/json" },
+      body: JSON.stringify({ locationId, pageLimit: 15, sort: [{ field: "dateAdded", direction: "desc" }] }),
+    });
+    const b = (await r.json().catch(() => ({}))) as Record<string, unknown>;
+    if (!r.ok) return Response.json({ ok: false, status: r.status, error: b });
+    const contacts = (b.contacts as Array<Record<string, unknown>>) ?? [];
+    return Response.json({
+      ok: true,
+      total: b.total ?? null,
+      recent: contacts.map((c) => ({
+        id: c.id,
+        email: c.email,
+        dateAdded: c.dateAdded,
+        tags: (c.tags as string[])?.filter((t) => /kurumsal|gai_/.test(t)) ?? c.tags,
+      })),
+    });
+  }
+
   // ?test=contact&email=... → read-only: look up a contact by email + its tags + recent notes.
   // Tells us whether the user's manual test (a) created a contact (POST reached server) and
   // (b) got a kurumsal note added by backgroundPdfFlow (after() ran → email should have sent).
