@@ -37,6 +37,8 @@ type Chrome = {
   growtClosing: string;
   growtCta: string;
   ctaButton: string;
+  testUrl: string;
+  testHref: string;
 };
 
 const CHROME: Record<string, Chrome> = {
@@ -71,6 +73,8 @@ const CHROME: Record<string, Chrome> = {
       "Bu rehber sana bir başlangıç verdi. GROWT Method ile yapılandırılmış bir süreçle 5 seviyede tam dönüşümü tamamla.",
     growtCta: "growtify.ai/test → Kişisel planını oluştur",
     ctaButton: "Kişisel Planını Oluştur →",
+    testUrl: "growtify.ai/test",
+    testHref: "https://growtify.ai/test",
   },
   en: {
     page: "Page",
@@ -101,8 +105,10 @@ const CHROME: Record<string, Chrome> = {
     growtTitle: "Transform with the GROWT Method",
     growtClosing:
       "This guide gave you a starting point. With the GROWT Method's structured process, complete the full transformation across 5 levels.",
-    growtCta: "growtify.ai/test → Build your plan",
+    growtCta: "growtify.ai/en/test → Build your plan",
     ctaButton: "Build Your Plan →",
+    testUrl: "growtify.ai/en/test",
+    testHref: "https://growtify.ai/en/test",
   },
 };
 
@@ -449,10 +455,10 @@ function CTAPage({ data, c }: { data: PdfSectorContent; c: Chrome }) {
     <Page size="A4" style={styles.ctaPage}>
       <Text style={styles.ctaTitle}>{data.ctaHeadline}</Text>
       <Text style={styles.ctaText}>{data.ctaBody}</Text>
-      <Link src="https://growtify.ai/test">
+      <Link src={c.testHref}>
         <Text style={styles.ctaButton}>{c.ctaButton}</Text>
       </Link>
-      <Text style={styles.ctaUrl}>growtify.ai/test</Text>
+      <Text style={styles.ctaUrl}>{c.testUrl}</Text>
     </Page>
   );
 }

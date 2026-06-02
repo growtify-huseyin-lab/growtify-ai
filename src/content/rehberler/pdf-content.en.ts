@@ -342,7 +342,7 @@ All text in English, professional but accessible.`,
 
     ctaHeadline: "Next step: Get the AI Roadmap for Your Practice",
     ctaBody:
-      "Every legal practice has different priorities. Where's the fastest win for yours? Which tools should you set up first? To find out, take the free AI Digital Maturity Test at growtify.ai/test. The 5-minute quiz produces a personal roadmap for your firm and your practice.",
+      "Every legal practice has different priorities. Where's the fastest win for yours? Which tools should you set up first? To find out, take the free AI Digital Maturity Test at growtify.ai/en/test. The 5-minute quiz produces a personal roadmap for your firm and your practice.",
   },
 
   "healthcare": {
@@ -656,7 +656,7 @@ Output: daily calories + macros, a 7-day meal plan, a weekly shopping list, 3 co
 
     ctaHeadline: "Next step: Build Your Personal AI Plan",
     ctaBody:
-      "You've seen how much time the 3 scenarios in this guide can save you. But where's the single biggest AI opportunity for your practice? Which tools should you set up, and in what order? To find out, take the free AI Digital Maturity Test at growtify.ai/test. The 5-minute quiz produces a roadmap tailored to your field and your current situation.",
+      "You've seen how much time the 3 scenarios in this guide can save you. But where's the single biggest AI opportunity for your practice? Which tools should you set up, and in what order? To find out, take the free AI Digital Maturity Test at growtify.ai/en/test. The 5-minute quiz produces a roadmap tailored to your field and your current situation.",
   },
 
   "beauty": {
@@ -961,11 +961,11 @@ All messages for WhatsApp: short, warm, with emojis — 50-80 words. Use a frien
     ],
 
     growtTeaser:
-      "In this guide you've laid the groundwork for Instagram content automation — that's the first step of the GROWT Method. But content creation alone isn't enough: how do clients discover you, how do they book, how do they come back, and how do they recommend you to others? To build that whole loop, you need a plan of your own. Get your salon's personal AI transformation roadmap at growtify.ai/test.",
+      "In this guide you've laid the groundwork for Instagram content automation — that's the first step of the GROWT Method. But content creation alone isn't enough: how do clients discover you, how do they book, how do they come back, and how do they recommend you to others? To build that whole loop, you need a plan of your own. Get your salon's personal AI transformation roadmap at growtify.ai/en/test.",
 
     ctaHeadline: "Next step: Build the AI Plan for Your Salon",
     ctaBody:
-      "Once you've set up the system in this guide, you'll start winning back time from Instagram. But how do clients find you, how do they book, how do they pay, and why do they come back? To automate that entire flow with AI, take the free AI Digital Maturity Test at growtify.ai/test. You'll get a personal roadmap built around your salon and where you are right now — 5 minutes.",
+      "Once you've set up the system in this guide, you'll start winning back time from Instagram. But how do clients find you, how do they book, how do they pay, and why do they come back? To automate that entire flow with AI, take the free AI Digital Maturity Test at growtify.ai/en/test. You'll get a personal roadmap built around your salon and where you are right now — 5 minutes.",
   },
 
   "real-estate": {
@@ -1294,11 +1294,11 @@ Keep the report professional, objective, and in English. Avoid speculative claim
     ],
 
     growtTeaser:
-      "In this guide you've laid the foundation for automating listing production, buyer matching, and market reporting. But real growth in real estate comes from building a client-acquisition system — social media, an email list, a referral network, and digital reputation. With the GROWT Method, you build these steps in order and see yourself progressing with concrete metrics at every stage. To build your personal plan, head to growtify.ai/test.",
+      "In this guide you've laid the foundation for automating listing production, buyer matching, and market reporting. But real growth in real estate comes from building a client-acquisition system — social media, an email list, a referral network, and digital reputation. With the GROWT Method, you build these steps in order and see yourself progressing with concrete metrics at every stage. To build your personal plan, head to growtify.ai/en/test.",
 
     ctaHeadline: "Next step: Build the AI Plan for Your Real Estate Practice",
     ctaBody:
-      "The hours you win back from writing listings are just the start. How do clients find you, how does your portfolio grow, how does your referral system run on autopilot? To set up the whole flow, take the free AI Digital Maturity Test at growtify.ai/test — a sector-specific roadmap in 5 minutes.",
+      "The hours you win back from writing listings are just the start. How do clients find you, how does your portfolio grow, how does your referral system run on autopilot? To set up the whole flow, take the free AI Digital Maturity Test at growtify.ai/en/test — a sector-specific roadmap in 5 minutes.",
   },
 
   "ecommerce": {
@@ -1620,11 +1620,11 @@ For each angle, also suggest 1 CTA.`,
     ],
 
     growtTeaser:
-      "You've systematized your product content and customer communication — that's the start. The real growth comes from lowering your customer acquisition cost, raising your repeat-purchase rate, and opening new channels. With the GROWT Method, you build every component of your e-commerce growth engine, step by step. Take the quiz at growtify.ai/test for your personal plan.",
+      "You've systematized your product content and customer communication — that's the start. The real growth comes from lowering your customer acquisition cost, raising your repeat-purchase rate, and opening new channels. With the GROWT Method, you build every component of your e-commerce growth engine, step by step. Take the quiz at growtify.ai/en/test for your personal plan.",
 
     ctaHeadline: "Next step: An AI Growth Plan Built for Your E-Commerce Store",
     ctaBody:
-      "You've sped up content production. Next comes lowering your customer acquisition cost, shortening the repeat-purchase cycle, and building an operation that scales. Take the free AI Digital Maturity Test at growtify.ai/test — a personal roadmap based on your store and where it stands today.",
+      "You've sped up content production. Next comes lowering your customer acquisition cost, shortening the repeat-purchase cycle, and building an operation that scales. Take the free AI Digital Maturity Test at growtify.ai/en/test — a personal roadmap based on your store and where it stands today.",
   },
 
   "dental": {
@@ -1935,11 +1935,11 @@ Reply: max 150 words, professional but warm.`,
     ],
 
     growtTeaser:
-      "You've systematized patient communication and reputation management. The real growth comes from automating new patient acquisition and building a loyalty system — across social media, SEO, referral networks, and dental tourism channels. The GROWT Method helps you build the whole growth engine, step by step. For your personal plan, head to growtify.ai/test.",
+      "You've systematized patient communication and reputation management. The real growth comes from automating new patient acquisition and building a loyalty system — across social media, SEO, referral networks, and dental tourism channels. The GROWT Method helps you build the whole growth engine, step by step. For your personal plan, head to growtify.ai/en/test.",
 
     ctaHeadline: "Next step: An AI Growth Plan Built for Your Clinic",
     ctaBody:
-      "You've set up your communication and reputation system. Next comes automating your new-patient flow, opening a dental tourism channel, and lifting your return-visit rate. Take the free AI Digital Maturity Test at growtify.ai/test — a roadmap built for your clinic, in 5 minutes.",
+      "You've set up your communication and reputation system. Next comes automating your new-patient flow, opening a dental tourism channel, and lifting your return-visit rate. Take the free AI Digital Maturity Test at growtify.ai/en/test — a roadmap built for your clinic, in 5 minutes.",
   },
 
   "accounting": {
@@ -2260,11 +2260,11 @@ In plain language the client will understand, with minimal accounting jargon.`,
     ],
 
     growtTeaser:
-      "You've handed the bulk of the repetitive work to AI and systematized your client reporting. The real opportunity now is to deepen your advisory work and grow your firm's capacity. The GROWT Method helps you manage that shift step by step — from technical processes to strategic advisory. Take the quiz at growtify.ai/test for your personal plan.",
+      "You've handed the bulk of the repetitive work to AI and systematized your client reporting. The real opportunity now is to deepen your advisory work and grow your firm's capacity. The GROWT Method helps you manage that shift step by step — from technical processes to strategic advisory. Take the quiz at growtify.ai/en/test for your personal plan.",
 
     ctaHeadline: "Next step: An AI Transformation Plan Built for Your Firm",
     ctaBody:
-      "You've sped up document processing and reporting. Next comes growing your client portfolio, increasing advisory revenue, and scaling your firm's operations. Take the free AI Digital Maturity Test at growtify.ai/test — a roadmap built for your firm, in 5 minutes.",
+      "You've sped up document processing and reporting. Next comes growing your client portfolio, increasing advisory revenue, and scaling your firm's operations. Take the free AI Digital Maturity Test at growtify.ai/en/test — a roadmap built for your firm, in 5 minutes.",
   },
 
   "pharmacy": {
@@ -2568,11 +2568,11 @@ NOTE: Add the disclaimer "Consult your doctor before changing any medication" in
     ],
 
     growtTeaser:
-      "You've made inventory management data-driven, systematized chronic-patient communication, and started producing e-pharmacy content. The real growth opportunity is connecting your digital channels (Instagram, Google, e-pharmacy) into one fully integrated system and increasing customer lifetime value. Plan those steps with the GROWT Method. For your personal plan, take the quiz at growtify.ai/test.",
+      "You've made inventory management data-driven, systematized chronic-patient communication, and started producing e-pharmacy content. The real growth opportunity is connecting your digital channels (Instagram, Google, e-pharmacy) into one fully integrated system and increasing customer lifetime value. Plan those steps with the GROWT Method. For your personal plan, take the quiz at growtify.ai/en/test.",
 
     ctaHeadline: "Next step: An AI Growth Plan Built for Your Pharmacy",
     ctaBody:
-      "You've sped up inventory, patient communication, and content production. Next comes integrating your digital channels, accelerating e-pharmacy growth, and scaling customer loyalty. Complete the free AI Digital Maturity Test at growtify.ai/test — your pharmacy's tailored roadmap, in 5 minutes.",
+      "You've sped up inventory, patient communication, and content production. Next comes integrating your digital channels, accelerating e-pharmacy growth, and scaling customer loyalty. Complete the free AI Digital Maturity Test at growtify.ai/en/test — your pharmacy's tailored roadmap, in 5 minutes.",
   },
 
   "tourism": {
@@ -2880,11 +2880,11 @@ Important: don't be defensive, don't sound templated, and let the business's val
     ],
 
     growtTeaser:
-      "You've stood up multilingual 24/7 communication, lifted booking conversion with personalized itineraries, and systematized your review management. The real growth opportunity lies in turning this system into a scalable brand experience — not seasonal spikes, but sustainable year-round growth. Plan that transition with the GROWT Method. Take the quiz for your personal plan at growtify.ai/test.",
+      "You've stood up multilingual 24/7 communication, lifted booking conversion with personalized itineraries, and systematized your review management. The real growth opportunity lies in turning this system into a scalable brand experience — not seasonal spikes, but sustainable year-round growth. Plan that transition with the GROWT Method. Take the quiz for your personal plan at growtify.ai/en/test.",
 
     ctaHeadline: "Next step: An AI Tourism Growth Plan Built for Your Business",
     ctaBody:
-      "Multilingual service, personalized experiences, and review management are running faster now. Next comes growing off-season demand, raising average customer value, and building a sustainable repeat-booking system. Take the free AI Digital Maturity Test at growtify.ai/test — your business's tailored roadmap in 5 minutes.",
+      "Multilingual service, personalized experiences, and review management are running faster now. Next comes growing off-season demand, raising average customer value, and building a sustainable repeat-booking system. Take the free AI Digital Maturity Test at growtify.ai/en/test — your business's tailored roadmap in 5 minutes.",
   },
 
   "architecture": {
@@ -3201,11 +3201,11 @@ Tone: professional, solution-focused, never rushed.`,
     ],
 
     growtTeaser:
-      "You've sped up the concept stage with AI, professionalized your presentations, and systematized client communication. The real growth opportunity is turning that speed into studio capacity — 2x the project throughput with the same team. Build your growth plan with the GROWT Method. For your personal plan, take the quiz at growtify.ai/test.",
+      "You've sped up the concept stage with AI, professionalized your presentations, and systematized client communication. The real growth opportunity is turning that speed into studio capacity — 2x the project throughput with the same team. Build your growth plan with the GROWT Method. For your personal plan, take the quiz at growtify.ai/en/test.",
 
     ctaHeadline: "Next step: an AI Transformation Plan built for your studio",
     ctaBody:
-      "You've accelerated concept work, presentations, and client communication. Next comes growing your studio's capacity, focusing on high-value projects, and building recurring revenue channels. Take the free AI Digital Maturity Test at growtify.ai/test — a roadmap built for your studio in 5 minutes.",
+      "You've accelerated concept work, presentations, and client communication. Next comes growing your studio's capacity, focusing on high-value projects, and building recurring revenue channels. Take the free AI Digital Maturity Test at growtify.ai/en/test — a roadmap built for your studio in 5 minutes.",
   },
 
   "education": {
@@ -3530,11 +3530,11 @@ NOTE: if the grade is low, use "not there yet" rather than "failed." If it's hig
     ],
 
     growtTeaser:
-      "You've cut your material-creation load to a fifth, built a personalized feedback system, and drafted an online course skeleton. The real growth opportunity is turning a one-person teaching operation into a scalable education business. Use the GROWT Method to plan that transition. For your personal plan, take the quiz at growtify.ai/test.",
+      "You've cut your material-creation load to a fifth, built a personalized feedback system, and drafted an online course skeleton. The real growth opportunity is turning a one-person teaching operation into a scalable education business. Use the GROWT Method to plan that transition. For your personal plan, take the quiz at growtify.ai/en/test.",
 
     ctaHeadline: "Next step: An AI Growth Plan Built for Your Teaching Career",
     ctaBody:
-      "You've sped up your material creation and feedback. Next comes launching your online course, scaling your student count, and building passive income channels. Take the free AI Digital Maturity Test at growtify.ai/test — a roadmap tailored to your teaching career, in 5 minutes.",
+      "You've sped up your material creation and feedback. Next comes launching your online course, scaling your student count, and building passive income channels. Take the free AI Digital Maturity Test at growtify.ai/en/test — a roadmap tailored to your teaching career, in 5 minutes.",
   },
 
   "fitness": {
@@ -3866,10 +3866,10 @@ WARNING: No judgmental language about body shape. Put the process and how they f
     ],
 
     growtTeaser:
-      "You've systematized program generation, nutrition planning, and motivation follow-up. The real growth opportunity is turning that system into capacity growth and online service — from 10 clients to 50, from the studio to online. Plan that transition with the GROWT Method. For your personal plan, head to growtify.ai/test.",
+      "You've systematized program generation, nutrition planning, and motivation follow-up. The real growth opportunity is turning that system into capacity growth and online service — from 10 clients to 50, from the studio to online. Plan that transition with the GROWT Method. For your personal plan, head to growtify.ai/en/test.",
 
     ctaHeadline: "Next step: Get the AI Growth Plan for Your PT Practice / Studio",
     ctaBody:
-      "You've sped up your programming, nutrition, and follow-up processes. Next comes growing your capacity, building an online revenue stream, and growing as a brand. Take the free AI Digital Maturity Test at growtify.ai/test — your business-specific roadmap in 5 minutes.",
+      "You've sped up your programming, nutrition, and follow-up processes. Next comes growing your capacity, building an online revenue stream, and growing as a brand. Take the free AI Digital Maturity Test at growtify.ai/en/test — your business-specific roadmap in 5 minutes.",
   },
 };
