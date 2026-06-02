@@ -25,7 +25,8 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
     screen.cta === "Raporumu Olustur" ||
     screen.cta === "Prepare My Plan" ||
     screen.cta === "Generate My Plan" ||
-    screen.cta === "Generate My Report";
+    screen.cta === "Generate My Report" ||
+    screen.cta === "Create My Report"; // EN kurumsal submit screen (screen 17) — was missing → EN POST never fired
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [kvkkConsent, setKvkkConsent] = useState(false);
