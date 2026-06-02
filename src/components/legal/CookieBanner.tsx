@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Cookie, Settings2 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   DEFAULT_CONSENT,
   FULL_CONSENT,
@@ -14,6 +14,7 @@ import { CookiePreferencesModal } from "./CookiePreferencesModal";
 
 export function CookieBanner() {
   const t = useTranslations("CookieBannerC");
+  const locale = useLocale();
   const [visible, setVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -83,7 +84,7 @@ export function CookieBanner() {
                   <p>
                     {t("body")}{" "}
                     <a
-                      href="/cerez-politikasi"
+                      href={locale === "en" ? "/en/cookie-policy" : "/cerez-politikasi"}
                       className="text-primary hover:underline font-medium"
                     >
                       {t("policyLink")}

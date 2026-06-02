@@ -406,7 +406,15 @@
     "savePreferences": "Save My Preferences",
     "acceptAll": "Accept All",
     "requiredBadge": "REQUIRED",
-    "categoryToggleAriaLabel": "{label} cookies"
+    "categoryToggleAriaLabel": "{label} cookies",
+    "cat_necessary_label": "Necessary",
+    "cat_necessary_desc": "Cookies required for the site's core functions (session, security, CSRF protection). These cannot be declined.",
+    "cat_analytics_label": "Analytics",
+    "cat_analytics_desc": "Cookies that anonymously measure site usage (page views, traffic source). They help us improve the service.",
+    "cat_marketing_label": "Marketing",
+    "cat_marketing_desc": "Cookies used for ad targeting and remarketing (Meta Pixel, Google Ads). If you turn these off, you may see less relevant ads.",
+    "cat_functional_label": "Functional",
+    "cat_functional_desc": "Preference and personalization cookies (language choice, theme). They let the site tailor itself to you."
   },
   "BlogPaginationC": {
     "showingRange": "Showing {from}-{to} of {total} posts"

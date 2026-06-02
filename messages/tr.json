@@ -406,7 +406,15 @@
     "savePreferences": "Tercihlerimi Kaydet",
     "acceptAll": "Hepsini Kabul Et",
     "requiredBadge": "ZORUNLU",
-    "categoryToggleAriaLabel": "{label} çerezleri"
+    "categoryToggleAriaLabel": "{label} çerezleri",
+    "cat_necessary_label": "Gerekli",
+    "cat_necessary_desc": "Sitenin temel çalışması için zorunlu çerezler (oturum, güvenlik, CSRF koruması). Bu çerezler reddedilemez.",
+    "cat_analytics_label": "Analitik",
+    "cat_analytics_desc": "Site kullanım istatistiklerini anonim olarak ölçen çerezler (sayfa görüntüleme, trafik kaynağı). Hizmeti iyileştirmemize yardımcı olur.",
+    "cat_marketing_label": "Pazarlama",
+    "cat_marketing_desc": "Reklam hedefleme ve yeniden pazarlama için kullanılan çerezler (Meta Pixel, Google Ads). Kapatırsan ilgisiz reklamlar görebilirsin.",
+    "cat_functional_label": "Fonksiyonel",
+    "cat_functional_desc": "Tercih ve kişiselleştirme çerezleri (dil seçimi, tema). Sitenin sana özel davranmasını sağlar."
   },
   "BlogPaginationC": {
     "showingRange": "{total} yazıdan {from}-{to} arası gösteriliyor"

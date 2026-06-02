@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { X, Shield } from "lucide-react";
 import {
   CATEGORY_INFO,
@@ -22,6 +22,7 @@ const TOGGLEABLE: ConsentCategory[] = ["analytics", "marketing", "functional"];
 
 export function CookiePreferencesModal({ open, onClose }: Props) {
   const t = useTranslations("CookiePrefsC");
+  const locale = useLocale();
   const [state, setState] = useState<ConsentState>(DEFAULT_CONSENT);
 
   useEffect(() => {
@@ -110,7 +111,7 @@ export function CookiePreferencesModal({ open, onClose }: Props) {
             {t.rich("storageNotice", {
               link: (chunks) => (
                 <a
-                  href="/cerez-politikasi"
+                  href={locale === "en" ? "/en/cookie-policy" : "/cerez-politikasi"}
                   className="text-primary hover:underline"
                 >
                   {chunks}
@@ -167,7 +168,7 @@ function CategoryRow({
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
           <h3 className="font-semibold text-dark dark:text-white">
-            {info.label}
+            {t(`cat_${category}_label`)}
           </h3>
           {info.required && (
             <span className="rounded-full bg-gray-100 dark:bg-dark-bg px-2 py-0.5 text-[10px] font-semibold text-gray-600 dark:text-dark-muted">
@@ -176,14 +177,14 @@ function CategoryRow({
           )}
         </div>
         <p className="mt-1 text-xs text-gray-600 dark:text-dark-muted leading-relaxed">
-          {info.description}
+          {t(`cat_${category}_desc`)}
         </p>
       </div>
       <Toggle
         checked={checked}
         onChange={onToggle}
         disabled={disabled}
-        ariaLabel={t("categoryToggleAriaLabel", { label: info.label })}
+        ariaLabel={t("categoryToggleAriaLabel", { label: t(`cat_${category}_label`) })}
       />
     </div>
   );
