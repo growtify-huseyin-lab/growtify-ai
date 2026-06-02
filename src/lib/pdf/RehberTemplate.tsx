@@ -4,8 +4,8 @@ import { Document, Page, Text, View, Link, Image } from "@react-pdf/renderer";
 import { styles, COLORS } from "./styles";
 import type { PdfSectorContent } from "@/content/rehberler/pdf-content";
 
-// growtify-dark.png = the WHITE logo (for dark backgrounds); the dark cover needs it.
-const LOGO = path.resolve(process.cwd(), "public/images/growtify-dark.png");
+// White cover → growtify-light.png is the DARK logo (for light backgrounds).
+const LOGO = path.resolve(process.cwd(), "public/images/growtify-light.png");
 
 // ─── Locale-aware chrome labels ───────────────────────────
 type Chrome = {

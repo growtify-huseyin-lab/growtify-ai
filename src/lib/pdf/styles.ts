@@ -52,11 +52,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 50,
   },
 
-  // Cover page
+  // Cover page — white background + dark logo (matches the TR designed covers)
   coverPage: {
     fontFamily: "Inter",
-    backgroundColor: COLORS.dark,
-    color: COLORS.white,
+    backgroundColor: COLORS.white,
+    color: COLORS.text,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -71,14 +71,14 @@ export const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 800,
     textAlign: "center",
-    color: COLORS.white,
+    color: COLORS.dark,
     lineHeight: 1.3,
     marginBottom: 16,
   },
   coverSubtitle: {
     fontSize: 14,
     textAlign: "center",
-    color: COLORS.primaryLight,
+    color: COLORS.primary,
     lineHeight: 1.5,
     marginBottom: 30,
     maxWidth: 400,
