@@ -318,9 +318,11 @@ function buildKurumsalEmailHtml(
 //    (upsert → PDF → upload → send) synchronously and return each step's outcome.
 //    Sends ONE test email to kurumsal-diag@growtify.ai. Remove after debugging. ──
 export async function GET(request: Request) {
-  if (new URL(request.url).searchParams.get("diag") !== "1") {
+  const url = new URL(request.url);
+  if (url.searchParams.get("diag") !== "1") {
     return Response.json({ ok: false, error: "append ?diag=1" }, { status: 404 });
   }
+  const to = url.searchParams.get("to") || "kurumsal-diag@growtify.ai";
   const steps: Record<string, unknown> = {};
   const config = readConfig();
   if (!config) return Response.json({ ok: false, step: "config", error: "GHL creds missing" });
@@ -334,7 +336,7 @@ export async function GET(request: Request) {
     q_priority_depts: ["pazarlama", "satis", "it"],
     companySize: "51-200",
     firstName: "DiagFlow",
-    email: "kurumsal-diag@growtify.ai",
+    email: to,
     locale: "en",
   } as unknown as KurumsalQuizState;
   state = { ...state, ...computeKurumsalResults(state), locale: "en" } as unknown as KurumsalQuizState;
