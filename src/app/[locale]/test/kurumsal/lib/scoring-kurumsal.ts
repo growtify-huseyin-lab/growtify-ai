@@ -48,26 +48,44 @@ export function determinePersona(score: number): KurumsalPersona {
   return "Lider";                        // Least pain = highest maturity
 }
 
+/* Locale-aware labels for dimensions + challenge areas (result screen + PDF). */
+const DIMENSION_LABELS: Record<string, { tr: string; en: string }> = {
+  d_strategy: { tr: "Strateji & Vizyon", en: "Strategy & Vision" },
+  d_team: { tr: "Ekip & Yetkinlik", en: "Team & Capability" },
+  d_process: { tr: "Süreç & Entegrasyon", en: "Process & Integration" },
+  d_data: { tr: "Veri & Altyapı", en: "Data & Infrastructure" },
+  d_culture: { tr: "Kültür & Benimseme", en: "Culture & Adoption" },
+};
+
+const PAIN_LABELS: Record<string, { tr: string; en: string }> = {
+  p_pilot: { tr: "Pilot Ölçekleme", en: "Pilot Scaling" },
+  p_roi: { tr: "ROI Ölçümü", en: "ROI Measurement" },
+  p_resistance: { tr: "Ekip Direnci", en: "Team Resistance" },
+  p_resources: { tr: "Kaynak Yetersizliği", en: "Resource Constraints" },
+};
+
 /**
- * Get dimension breakdown for PDF/result screen.
+ * Get dimension breakdown for PDF/result screen (locale-aware labels).
  * Returns individual dimension scores (0-10, where 10 = best).
  */
-export function getDimensionBreakdown(state: KurumsalQuizState) {
+export function getDimensionBreakdown(state: KurumsalQuizState, locale: string = "tr") {
+  const L = locale === "en" ? "en" : "tr";
   return [
-    { key: "d_strategy", label: "Strateji & Vizyon", score: state.d_strategy, max: 10 },
-    { key: "d_team", label: "Ekip & Yetkinlik", score: state.d_team, max: 10 },
-    { key: "d_process", label: "Süreç & Entegrasyon", score: state.d_process, max: 10 },
-    { key: "d_data", label: "Veri & Altyapı", score: state.d_data, max: 10 },
-    { key: "d_culture", label: "Kültür & Benimseme", score: 10 - state.d_culture, max: 10 },
+    { key: "d_strategy", label: DIMENSION_LABELS.d_strategy[L], score: state.d_strategy, max: 10 },
+    { key: "d_team", label: DIMENSION_LABELS.d_team[L], score: state.d_team, max: 10 },
+    { key: "d_process", label: DIMENSION_LABELS.d_process[L], score: state.d_process, max: 10 },
+    { key: "d_data", label: DIMENSION_LABELS.d_data[L], score: state.d_data, max: 10 },
+    { key: "d_culture", label: DIMENSION_LABELS.d_culture[L], score: 10 - state.d_culture, max: 10 },
   ];
 }
 
-export function getPainBreakdown(state: KurumsalQuizState) {
+export function getPainBreakdown(state: KurumsalQuizState, locale: string = "tr") {
+  const L = locale === "en" ? "en" : "tr";
   return [
-    { key: "p_pilot", label: "Pilot Ölçekleme", score: state.p_pilot, max: 5 },
-    { key: "p_roi", label: "ROI Ölçümü", score: state.p_roi, max: 5 },
-    { key: "p_resistance", label: "Ekip Direnci", score: state.p_resistance, max: 5 },
-    { key: "p_resources", label: "Kaynak Yetersizliği", score: state.p_resources, max: 5 },
+    { key: "p_pilot", label: PAIN_LABELS.p_pilot[L], score: state.p_pilot, max: 5 },
+    { key: "p_roi", label: PAIN_LABELS.p_roi[L], score: state.p_roi, max: 5 },
+    { key: "p_resistance", label: PAIN_LABELS.p_resistance[L], score: state.p_resistance, max: 5 },
+    { key: "p_resources", label: PAIN_LABELS.p_resources[L], score: state.p_resources, max: 5 },
   ];
 }
 

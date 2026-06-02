@@ -88,8 +88,8 @@ function esc(str: string): string {
 
 export function generateKurumsalPdfHtml(state: KurumsalQuizState): string {
   const now = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-  const dimensions = getDimensionBreakdown(state);
-  const pains = getPainBreakdown(state);
+  const dimensions = getDimensionBreakdown(state, "en");
+  const pains = getPainBreakdown(state, "en");
   const persona = PERSONA_INFO[state.persona] ?? PERSONA_INFO.Baslangic;
   const painLevel = PAIN_LEVEL_TR[state.painLevel] ?? PAIN_LEVEL_TR.medium;
   const avgDimension = Math.round(dimensions.reduce((sum, d) => sum + d.score, 0) / dimensions.length * 10);

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext-kurumsal";
 import { useKPersonaSummaries } from "../../lib/content-kurumsal-runtime-hooks";
 import { getDimensionBreakdown, getPainBreakdown } from "../../lib/scoring-kurumsal";
@@ -15,6 +15,7 @@ function barColor(pct: number): string {
 
 export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
   const t = useTranslations("KResultC");
+  const locale = useLocale();
   const KURUMSAL_PERSONA_SUMMARIES = useKPersonaSummaries();
   const { state, next, finalize } = useQuiz();
 
@@ -25,8 +26,8 @@ export function ResultScreen({ screen }: { screen: KurumsalScreenConfig }) {
   }, []);
   const s = state as KurumsalQuizState;
   const persona = KURUMSAL_PERSONA_SUMMARIES[s.persona] ?? KURUMSAL_PERSONA_SUMMARIES.Baslangic;
-  const dimensions = getDimensionBreakdown(s);
-  const pains = getPainBreakdown(s);
+  const dimensions = getDimensionBreakdown(s, locale);
+  const pains = getPainBreakdown(s, locale);
   const avgDimension = Math.round(
     (dimensions.reduce((sum, d) => sum + d.score, 0) / dimensions.length) * 10,
   );
