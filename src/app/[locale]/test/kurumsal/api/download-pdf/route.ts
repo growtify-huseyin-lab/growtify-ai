@@ -7,6 +7,7 @@ import { generateKurumsalPdfHtml } from "../../lib/pdf-html-template-kurumsal";
 import { generateKurumsalPdfHtml as generateKurumsalPdfHtmlEn } from "../../lib/pdf-html-template-kurumsal-en";
 import { generatePdfFromHtml } from "../../../lib/pdf-generate";
 import { initialKurumsalState } from "../../lib/types-kurumsal";
+import { buildGhlTags, buildGhlTagsEn, buildGhlCustomFields } from "../../lib/ghl-mapping-kurumsal";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -36,6 +37,34 @@ export async function GET(request: Request) {
     persona: "Kesif" as const,
     ...(en ? { locale: "en" } : {}),
   };
+
+  // ?test=upsert → isolate the kurumsal GHL upsert (the email-gating fast path). No email sent.
+  if (url.searchParams.get("test") === "upsert") {
+    const tags = en ? buildGhlTagsEn(mockState) : buildGhlTags(mockState);
+    const customFields = buildGhlCustomFields(mockState);
+    const apiBase = process.env.GHL_API_BASE ?? "https://services.leadconnectorhq.com";
+    const apiVersion = process.env.GHL_API_VERSION ?? "2021-07-28";
+    const r = await fetch(`${apiBase}/contacts/upsert`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.GHL_API_TOKEN}`,
+        Version: apiVersion,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        locationId: process.env.GHL_LOCATION_ID,
+        email: "kurumsal-diag@growtify.ai",
+        firstName: "Diag",
+        country: en ? undefined : "TR",
+        source: "Growtify.ai kurumsal quiz",
+        tags,
+        customFields,
+      }),
+    });
+    const body = await r.json().catch(() => ({}));
+    return Response.json({ ok: r.ok, status: r.status, locale: en ? "en" : "tr", error: r.ok ? null : body, tags, customFields });
+  }
 
   try {
     const html = (en ? generateKurumsalPdfHtmlEn : generateKurumsalPdfHtml)(mockState);
