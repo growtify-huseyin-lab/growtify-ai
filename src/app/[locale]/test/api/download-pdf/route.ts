@@ -26,17 +26,33 @@ const MOCK_STATE: QuizState = {
   discount: pickDiscount(),
 };
 
-export async function GET() {
-  const state = { ...MOCK_STATE, ...computeResults(MOCK_STATE) };
-  const pdfLocale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
-  const pdfBuffer = await generateQuizPdf(state, undefined, pdfLocale);
-  const filename = getPdfFilename(state.firstName);
+export async function GET(req: Request) {
+  // Diagnostic query overrides (no email/contact side effects): ?locale=en&sector=hukuk
+  const url = new URL(req.url);
+  const qLocale = url.searchParams.get("locale");
+  const qSector = url.searchParams.get("sector");
+  const mock = { ...MOCK_STATE } as QuizState & { locale?: string };
+  if (qLocale === "en") mock.locale = "en";
+  if (qSector) mock.sector = qSector as QuizState["sector"];
 
-  return new Response(pdfBuffer as unknown as BodyInit, {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": `inline; filename="${filename}"`,
-      "Content-Length": String(pdfBuffer.length),
-    },
-  });
+  const state = { ...mock, ...computeResults(mock) };
+  const pdfLocale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
+
+  try {
+    const pdfBuffer = await generateQuizPdf(state, undefined, pdfLocale);
+    const filename = getPdfFilename(state.firstName);
+    return new Response(pdfBuffer as unknown as BodyInit, {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `inline; filename="${filename}"`,
+        "Content-Length": String(pdfBuffer.length),
+      },
+    });
+  } catch (err) {
+    // Surface the PDF-gen error for diagnostics (the real flow gates the email behind this).
+    return Response.json(
+      { ok: false, locale: pdfLocale, sector: state.sector, error: (err as Error).message, stack: (err as Error).stack?.split("\n").slice(0, 6) },
+      { status: 500 },
+    );
+  }
 }
