@@ -66,6 +66,47 @@ export async function GET(request: Request) {
     return Response.json({ ok: r.ok, status: r.status, locale: en ? "en" : "tr", error: r.ok ? null : body, tags, customFields });
   }
 
+  // ?test=fielddefs → dump GHL OPTION field definitions (read-only, no email/contact).
+  // Compares each SINGLE/MULTIPLE_OPTIONS field's allowed picklist against the labels
+  // buildGhlCustomFields can emit, to surface invalid-option upsert (HTTP 400) causes.
+  if (url.searchParams.get("test") === "fielddefs") {
+    const apiBase = process.env.GHL_API_BASE ?? "https://services.leadconnectorhq.com";
+    const apiVersion = process.env.GHL_API_VERSION ?? "2021-07-28";
+    const locationId = process.env.GHL_LOCATION_ID;
+    const WATCH: Record<string, string> = {
+      sector: "kWk6Jx9WGCpER8FjF1Oh",
+      quizPersona: "QAkd2vjnWIHDwHDtWeAy",
+      quizPainLevel: "m5ImybTUeJg4T7gmEmaM",
+      quizGoal: "EJQnFrHk5Dqo5tQpkkDe",
+      companySize: "gAuTk4Hn7xuJvhZcuhx8",
+      priorityDepartments: "yxaOZ02OrBuSW3KwEWQm",
+    };
+    // labels buildGhlCustomFields can emit per field
+    const EMITTABLE: Record<string, string[]> = {
+      sector: ["SaaS & Teknoloji","E-Ticaret & Perakende","Finans & Bankacılık","Sağlık & İlaç","Hukuk & Danışmanlık","Üretim & Lojistik","Eğitim","Medya & Reklam","İnşaat & Gayrimenkul","Turizm & Konaklama","Otomotiv","Enerji & Altyapı","Diğer"],
+      quizPersona: ["Başlangıç (AI Farkındalık)","Keşif (AI Deneyimleme)","Uygulama (AI Operasyonu)","Lider (AI Dönüşümü)"],
+      quizPainLevel: ["Düşük","Orta","Yüksek"],
+      quizGoal: ["Operasyonel verimlilik","Gelir artışı","Maliyet düşürme","Müşteri deneyimi","Rekabet avantajı"],
+      companySize: ["1-10 kişi","11-50 kişi","51-200 kişi","200+ kişi"],
+      priorityDepartments: ["Pazarlama","Satış","Müşteri Hizmetleri","Finans","Operasyon","İnsan Kaynakları","IT","Ar-Ge"],
+    };
+    const r = await fetch(`${apiBase}/locations/${locationId}/customFields`, {
+      headers: { Authorization: `Bearer ${process.env.GHL_API_TOKEN}`, Version: apiVersion, Accept: "application/json" },
+    });
+    const body = await r.json().catch(() => ({})) as Record<string, unknown>;
+    if (!r.ok) return Response.json({ ok: false, status: r.status, error: body });
+    const all = (body.customFields as Array<Record<string, unknown>>) ?? [];
+    const out: Record<string, unknown> = {};
+    for (const [name, id] of Object.entries(WATCH)) {
+      const f = all.find((x) => x.id === id);
+      const opts: string[] = ((f?.picklistOptions as string[]) ?? (f?.options as Array<{value?:string}>)?.map(o=>o.value??String(o)) ?? []) as string[];
+      const emit = EMITTABLE[name] ?? [];
+      const missing = emit.filter((e) => !opts.includes(e));
+      out[name] = { id, dataType: f?.dataType ?? "NOT_FOUND", ghl_options: opts, emittable: emit, MISSING_FROM_GHL: missing };
+    }
+    return Response.json({ ok: true, fields: out });
+  }
+
   try {
     const html = (en ? generateKurumsalPdfHtmlEn : generateKurumsalPdfHtml)(mockState);
     const pdfBuffer = await generatePdfFromHtml(html);
