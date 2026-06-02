@@ -48,14 +48,17 @@ export const GHL_FIELD_IDS = {
  * Fields that are language-agnostic (leadSource, landingPage, dailyCommitmentMinutes,
  * quizCompletedAt, coupon, pdf_url) REUSE the TR ids above — no EN duplicate needed.
  */
+// 7 EN custom field IDs provisioned by the GHL/email agent (REQ-development-email_marketing-en-001,
+// delivered via GHL_FIELD_IDS_EN.json 2026-05-31). All TEXT type — the app sends English display
+// labels (toLabel/getPersonaDisplayName), so TEXT avoids picklist-drop. Location e8ZRRmOybS08x5L6qgsS.
 export const GHL_FIELD_IDS_EN: Record<string, string | null> = {
-  professionEn: null,
-  sectorEn: null,
-  quizPersonaEn: null,
-  quizPainLevelEn: null,
-  quizGoalEn: null,
-  quizPainAreasEn: null, // MULTIPLE_OPTIONS
-  quizHabitsToQuitEn: null, // MULTIPLE_OPTIONS
+  professionEn: "AGw5jcPHiSFsAvZVXPYi",
+  sectorEn: "Nz7eWAMgU8EZVJAU6CcK",
+  quizPersonaEn: "bufOdoaiHL1qELzjNMwZ",
+  quizPainLevelEn: "GYrtTKJs7IgXCS8Vff0P",
+  quizGoalEn: "EROwVzU8qfl5ngxq9ljx",
+  quizPainAreasEn: "DypBVG3fWWUA9i2HxfEg", // TEXT (comma-joined EN labels)
+  quizHabitsToQuitEn: "v72Am7oLaYMW7vI6VwdF", // TEXT (comma-joined EN labels)
 };
 
 /* -------------------- Tag mapping -------------------- */
