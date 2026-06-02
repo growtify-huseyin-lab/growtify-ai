@@ -59,6 +59,9 @@ const nextConfig: NextConfig = {
       { source: "/en/hakkimizda", destination: "/en/about", permanent: true },
       { source: "/en/iletisim", destination: "/en/contact", permanent: true },
       { source: "/en/kurumsal", destination: "/en/enterprise", permanent: true },
+      // EN corporate-quiz English slug: /en/test/kurumsal → /en/test/enterprise.
+      // Served by the thin re-export route at app/[locale]/test/enterprise/ (TR /test/kurumsal stays).
+      { source: "/en/test/kurumsal", destination: "/en/test/enterprise", permanent: true },
       { source: "/en/gizlilik-politikasi", destination: "/en/privacy-policy", permanent: true },
       { source: "/en/kullanim-kosullari", destination: "/en/terms-of-service", permanent: true },
       { source: "/en/cerez-politikasi", destination: "/en/cookie-policy", permanent: true },

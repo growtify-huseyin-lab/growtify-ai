@@ -9,7 +9,7 @@ export const KURUMSAL_HERO_EN = {
   primaryCta: "Book a Strategy Call",
   primaryCtaHref: "https://app.growtify.app/widget/bookings/kurumsal-on-gorusme",
   secondaryCta: "Take the AI Readiness Test",
-  secondaryCtaHref: "/test/kurumsal",
+  secondaryCtaHref: "/test/enterprise",
 } as const;
 
 export const KURUMSAL_PROBLEMS_EN = [
@@ -44,7 +44,7 @@ export const KURUMSAL_SERVICES_EN = [
       "Find out your corporate AI maturity score in 5 minutes. Discover your priority areas with a free online assessment.",
     highlights: ["5 minutes", "Free", "Instant result"],
     cta: "Start the Assessment",
-    ctaHref: "/test/kurumsal",
+    ctaHref: "/test/enterprise",
   },
   {
     id: "strateji",

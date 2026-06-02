@@ -170,7 +170,11 @@ export function buildGhlCustomFields(state: KurumsalQuizState): GhlCustomField[]
   // User-facing maturity score (0-70 scale, inverted — matches ResultScreen display)
   fields.push({ id: GHL_FIELD_IDS.quizScore, value: 70 - state.totalScore });
   fields.push({ id: GHL_FIELD_IDS.leadSource, value: "kurumsal_quiz" });
-  fields.push({ id: GHL_FIELD_IDS.landingPage, value: "https://growtify.ai/test/kurumsal" });
+  const isEnLead = (state as { locale?: string }).locale === "en";
+  fields.push({
+    id: GHL_FIELD_IDS.landingPage,
+    value: isEnLead ? "https://growtify.ai/en/test/enterprise" : "https://growtify.ai/test/kurumsal",
+  });
 
   // Turkish labels for GHL workflow email templates
   if (state.sector) fields.push({ id: GHL_FIELD_IDS.sector, value: toLabel(state.sector, SECTOR_LABELS) });
