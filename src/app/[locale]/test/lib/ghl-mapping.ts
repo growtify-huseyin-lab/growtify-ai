@@ -316,10 +316,13 @@ export function buildGhlCustomFieldsEn(state: QuizState): GhlCustomField[] {
   pushEn(GHL_FIELD_IDS_EN.quizPersonaEn, getPersonaDisplayName(state.persona));
   pushEn(GHL_FIELD_IDS_EN.quizPainLevelEn, toLabel(state.painLevel, PAIN_LEVEL_LABELS_EN));
   if (state.q_goal) pushEn(GHL_FIELD_IDS_EN.quizGoalEn, toLabel(state.q_goal, GOAL_LABELS_EN));
+  // EN pain-areas / habits fields are TEXT (not MULTIPLE_OPTIONS) → send a comma-joined
+  // string, NOT an array. Sending an array makes GHL reject the whole upsert (HTTP 400
+  // "Invalid Custom Field Value") → form 500 → background email never runs.
   if (state.q_areas?.length)
-    pushEn(GHL_FIELD_IDS_EN.quizPainAreasEn, toLabels(state.q_areas, AREA_LABELS_EN));
+    pushEn(GHL_FIELD_IDS_EN.quizPainAreasEn, toLabels(state.q_areas, AREA_LABELS_EN).join(", "));
   if (state.q_habits?.length)
-    pushEn(GHL_FIELD_IDS_EN.quizHabitsToQuitEn, toLabels(state.q_habits, HABIT_LABELS_EN));
+    pushEn(GHL_FIELD_IDS_EN.quizHabitsToQuitEn, toLabels(state.q_habits, HABIT_LABELS_EN).join(", "));
 
   return fields;
 }
