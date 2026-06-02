@@ -7,6 +7,8 @@ import { generateQuizPdf, getPdfFilename } from "../../lib/pdf-generate";
 import { computeResults, pickDiscount } from "../../lib/scoring";
 import type { QuizState } from "../../lib/types";
 import { initialQuizState } from "../../lib/types";
+import { upsertQuizContact } from "../../lib/ghl-client";
+import { buildGhlCustomFieldsEn } from "../../lib/ghl-mapping";
 
 const MOCK_STATE: QuizState = {
   ...initialQuizState,
@@ -37,6 +39,20 @@ export async function GET(req: Request) {
 
   const state = { ...mock, ...computeResults(mock) };
   const pdfLocale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
+
+  // ?test=upsert → isolate the GHL upsert (the email-gating fast path). No email is sent here.
+  if (url.searchParams.get("test") === "upsert") {
+    const fields = buildGhlCustomFieldsEn(state);
+    const r = await upsertQuizContact({ ...state, email: "pdf-diag@growtify.ai" } as QuizState, pdfLocale);
+    return Response.json({
+      locale: pdfLocale,
+      sector: state.sector,
+      upsert: r,
+      en_custom_fields: fields,
+      field_count: fields.length,
+      empty_value_fields: fields.filter((f) => f.value === undefined || f.value === null || f.value === "").map((f) => f.id),
+    });
+  }
 
   try {
     const pdfBuffer = await generateQuizPdf(state, undefined, pdfLocale);
