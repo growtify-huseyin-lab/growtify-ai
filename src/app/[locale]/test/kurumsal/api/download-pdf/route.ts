@@ -66,6 +66,42 @@ export async function GET(request: Request) {
     return Response.json({ ok: r.ok, status: r.status, locale: en ? "en" : "tr", error: r.ok ? null : body, tags, customFields });
   }
 
+  // ?test=contact&email=... → read-only: look up a contact by email + its tags + recent notes.
+  // Tells us whether the user's manual test (a) created a contact (POST reached server) and
+  // (b) got a kurumsal note added by backgroundPdfFlow (after() ran → email should have sent).
+  if (url.searchParams.get("test") === "contact") {
+    const apiBase = process.env.GHL_API_BASE ?? "https://services.leadconnectorhq.com";
+    const apiVersion = process.env.GHL_API_VERSION ?? "2021-07-28";
+    const locationId = process.env.GHL_LOCATION_ID;
+    const email = url.searchParams.get("email") ?? "";
+    const hdr = { Authorization: `Bearer ${process.env.GHL_API_TOKEN}`, Version: apiVersion, Accept: "application/json" };
+    const lookup = await fetch(`${apiBase}/contacts/?locationId=${locationId}&query=${encodeURIComponent(email)}`, { headers: hdr });
+    const lb = (await lookup.json().catch(() => ({}))) as Record<string, unknown>;
+    const contacts = (lb.contacts as Array<Record<string, unknown>>) ?? [];
+    const c = contacts.find((x) => (x.email as string)?.toLowerCase() === email.toLowerCase()) ?? contacts[0];
+    if (!c) return Response.json({ ok: true, found: false, query: email, raw_count: contacts.length });
+    const cid = c.id as string;
+    // notes (did backgroundPdfFlow / after() add the kurumsal note?)
+    const notesRes = await fetch(`${apiBase}/contacts/${cid}/notes`, { headers: hdr });
+    const nb = (await notesRes.json().catch(() => ({}))) as Record<string, unknown>;
+    const notes = (nb.notes as Array<Record<string, unknown>>) ?? [];
+    const noteBodies = notes.map((n) => String(n.body ?? "").slice(0, 80));
+    return Response.json({
+      ok: true,
+      found: true,
+      contactId: cid,
+      email: c.email,
+      dateAdded: c.dateAdded,
+      dateUpdated: c.dateUpdated,
+      tags: c.tags,
+      dnd: c.dnd ?? null,
+      dndSettings: c.dndSettings ?? null,
+      notes_count: notes.length,
+      has_kurumsal_note: noteBodies.some((b) => /Olgunluk|Maturity|Kurumsal AI/i.test(b)),
+      note_previews: noteBodies.slice(0, 4),
+    });
+  }
+
   // ?test=fielddefs → dump GHL OPTION field definitions (read-only, no email/contact).
   // Compares each SINGLE/MULTIPLE_OPTIONS field's allowed picklist against the labels
   // buildGhlCustomFields can emit, to surface invalid-option upsert (HTTP 400) causes.
