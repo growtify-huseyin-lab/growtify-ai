@@ -67,6 +67,9 @@ const nextConfig: NextConfig = {
       permanent: true,
     }));
     const enTaxonomyRedirects = [
+      // EN guide lead-magnet PDFs moved to English path (/rehberler/ was Turkish).
+      // Redirect old asset URLs (already in any sent GHL email) → new /guides/en/.
+      { source: "/rehberler/en/:file*", destination: "/guides/en/:file*", permanent: true },
       { source: "/en/sektor", destination: "/en/sectors", permanent: true },
       { source: "/en/hakkimizda", destination: "/en/about", permanent: true },
       { source: "/en/iletisim", destination: "/en/contact", permanent: true },

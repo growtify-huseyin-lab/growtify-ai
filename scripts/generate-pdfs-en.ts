@@ -5,7 +5,7 @@
  *
  * Reads EN sector content from src/content/rehberler/pdf-content.en.ts (keyed by
  * English slug), renders each as a branded PDF (locale="en") using RehberTemplate,
- * and writes to public/rehberler/en/growtify-{english-slug}-guide.pdf
+ * and writes to public/guides/en/growtify-{english-slug}-guide.pdf
  */
 import fs from "fs";
 import path from "path";
@@ -20,7 +20,7 @@ async function main() {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { RehberDocument } = require(templatePath);
 
-  const outDir = path.resolve(__dirname, "../public/rehberler/en");
+  const outDir = path.resolve(__dirname, "../public/guides/en");
   if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
   const slugs = Object.keys(PDF_CONTENT_EN);

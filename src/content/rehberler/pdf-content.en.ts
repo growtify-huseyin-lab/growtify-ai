@@ -8,7 +8,7 @@
  * - International stat sources (McKinsey, HubSpot, Thomson Reuters, etc.) kept.
  * - "Not legal/medical advice" style disclaimers preserved.
  *
- * Rendered via scripts/generate-pdfs-en.ts → public/rehberler/en/growtify-{en-slug}-guide.pdf
+ * Rendered via scripts/generate-pdfs-en.ts → public/guides/en/growtify-{en-slug}-guide.pdf
  */
 import type { PdfSectorContent } from "./pdf-content";
 

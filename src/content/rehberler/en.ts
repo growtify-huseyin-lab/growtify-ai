@@ -58,7 +58,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "A tool comparison — which to use when, and what's free vs. paid",
     ],
     targetProfile: "Dietitians, psychologists, physiotherapists, and health coaches",
-    pdfUrl: "/rehberler/en/growtify-healthcare-guide.pdf",
+    pdfUrl: "/guides/en/growtify-healthcare-guide.pdf",
     ghlSectorTag: "gai_en_sector_healthcare",
     ghlLeadMagnetTag: "gai_en_lm_healthcare",
     seo: {
@@ -86,7 +86,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "5 AI tools compared — which one to reach for, and when, in legal work",
     ],
     targetProfile: "Independent lawyers, legal consultants, mediators, and law-firm managers",
-    pdfUrl: "/rehberler/en/growtify-legal-guide.pdf",
+    pdfUrl: "/guides/en/growtify-legal-guide.pdf",
     ghlSectorTag: "gai_en_sector_legal",
     ghlLeadMagnetTag: "gai_en_lm_legal",
     seo: {
@@ -114,7 +114,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "A client loyalty message series — from post-appointment follow-ups to birthday automation",
     ],
     targetProfile: "Salon owners, aestheticians, clinic managers, and hairdressers",
-    pdfUrl: "/rehberler/en/growtify-beauty-guide.pdf",
+    pdfUrl: "/guides/en/growtify-beauty-guide.pdf",
     ghlSectorTag: "gai_en_sector_beauty",
     ghlLeadMagnetTag: "gai_en_lm_beauty",
     seo: {
@@ -142,7 +142,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "A then vs. now comparison — with concrete time-savings figures",
     ],
     targetProfile: "Real estate agents, property consultants, and land specialists",
-    pdfUrl: "/rehberler/en/growtify-real-estate-guide.pdf",
+    pdfUrl: "/guides/en/growtify-real-estate-guide.pdf",
     ghlSectorTag: "gai_en_sector_real_estate",
     ghlLeadMagnetTag: "gai_en_lm_real_estate",
     seo: {
@@ -170,7 +170,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "A before vs. after comparison — showing gains in both time and conversion",
     ],
     targetProfile: "E-commerce sellers, brand owners, dropshippers, and boutique businesses",
-    pdfUrl: "/rehberler/en/growtify-ecommerce-guide.pdf",
+    pdfUrl: "/guides/en/growtify-ecommerce-guide.pdf",
     ghlSectorTag: "gai_en_sector_ecommerce",
     ghlLeadMagnetTag: "gai_en_lm_ecommerce",
     seo: {
@@ -198,7 +198,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "A presentation template built for dental tourism — ready to put to work",
     ],
     targetProfile: "Dentists, orthodontists, and dental clinic managers",
-    pdfUrl: "/rehberler/en/growtify-dental-guide.pdf",
+    pdfUrl: "/guides/en/growtify-dental-guide.pdf",
     ghlSectorTag: "gai_en_sector_dental",
     ghlLeadMagnetTag: "gai_en_lm_dental",
     seo: {
@@ -226,7 +226,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "A before → after comparison — the concrete time you save on month-end close",
     ],
     targetProfile: "Tax advisors, accountants, accounting-firm owners, and financial consultants",
-    pdfUrl: "/rehberler/en/growtify-accounting-guide.pdf",
+    pdfUrl: "/guides/en/growtify-accounting-guide.pdf",
     ghlSectorTag: "gai_en_sector_accounting",
     ghlLeadMagnetTag: "gai_en_lm_accounting",
     seo: {
@@ -254,7 +254,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "Mandatory-warning templates — automate the required disclaimers on medication content",
     ],
     targetProfile: "Independent pharmacists, pharmacy owners, and pharmacy-chain managers",
-    pdfUrl: "/rehberler/en/growtify-pharmacy-guide.pdf",
+    pdfUrl: "/guides/en/growtify-pharmacy-guide.pdf",
     ghlSectorTag: "gai_en_sector_pharmacy",
     ghlLeadMagnetTag: "gai_en_lm_pharmacy",
     seo: {
@@ -282,7 +282,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "Templates in 5 languages — ready-made messages for TR, EN, AR, DE, and RU",
     ],
     targetProfile: "Tour operators, guides, boutique hotel owners, and travel agencies",
-    pdfUrl: "/rehberler/en/growtify-tourism-guide.pdf",
+    pdfUrl: "/guides/en/growtify-tourism-guide.pdf",
     ghlSectorTag: "gai_en_sector_tourism",
     ghlLeadMagnetTag: "gai_en_lm_tourism",
     seo: {
@@ -310,7 +310,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "A client pitch deck template — from concept all the way to delivery plan",
     ],
     targetProfile: "Architects, interior designers, landscape architects, and design studios",
-    pdfUrl: "/rehberler/en/growtify-architecture-guide.pdf",
+    pdfUrl: "/guides/en/growtify-architecture-guide.pdf",
     ghlSectorTag: "gai_en_sector_architecture",
     ghlLeadMagnetTag: "gai_en_lm_architecture",
     seo: {
@@ -338,7 +338,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "A personalized feedback template — individual comments for 30 students in 30 minutes",
     ],
     targetProfile: "Educators, academics, private tutors, and online course creators",
-    pdfUrl: "/rehberler/en/growtify-education-guide.pdf",
+    pdfUrl: "/guides/en/growtify-education-guide.pdf",
     ghlSectorTag: "gai_en_sector_education",
     ghlLeadMagnetTag: "gai_en_lm_education",
     seo: {
@@ -366,7 +366,7 @@ export const REHBERLER_EN: Record<string, RehberContent> = {
       "A motivation message template pack — ready to go for every day of the week",
     ],
     targetProfile: "Personal trainers, fitness studio owners, and nutrition coaches",
-    pdfUrl: "/rehberler/en/growtify-fitness-guide.pdf",
+    pdfUrl: "/guides/en/growtify-fitness-guide.pdf",
     ghlSectorTag: "gai_en_sector_fitness",
     ghlLeadMagnetTag: "gai_en_lm_fitness",
     seo: {
