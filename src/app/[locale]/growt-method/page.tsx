@@ -7,6 +7,8 @@ import { Badge } from "@/components/ui/Badge";
 import { Card } from "@/components/ui/Card";
 import { getGrowtPhases } from "@/lib/constants-i18n";
 import { ProcessSupport } from "@/components/sections/ProcessSupport";
+import { getPillarBySlug } from "@/lib/pillars";
+import { PillarArticle } from "@/components/pillar/PillarArticle";
 import {
   ArrowRight,
   Layers,
@@ -27,6 +29,19 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+
+  // EN: use the pillar's SEO copy (keep the existing bilingual alternates).
+  if (locale === "en") {
+    const pillar = getPillarBySlug("growt-method");
+    if (pillar) {
+      return {
+        title: pillar.seoTitle,
+        description: pillar.seoDescription,
+        alternates: localeAlternates(locale, "/growt-method"),
+      };
+    }
+  }
+
   const t = await getTranslations({ locale, namespace: "GrowtMethodPage" });
   return {
     title: t("metaTitle"),
@@ -37,6 +52,14 @@ export async function generateMetadata({
 
 export default async function GROWTMethodPage() {
   const __locale = await getLocale();
+
+  // EN: render the pillar MDX. Falls through to the designed TR page below if
+  // the pillar is missing, so TR rendering is never affected.
+  if (__locale === "en") {
+    const pillar = getPillarBySlug("growt-method");
+    if (pillar) return <PillarArticle pillar={pillar} />;
+  }
+
   const GROWT_PHASES = getGrowtPhases(__locale);
   const t = await getTranslations("GrowtMethodPage");
 

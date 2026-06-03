@@ -105,11 +105,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...BLOG_CATEGORIES_EN.map((c) => trOnly(`/en/blog/kategori/${c.slug}`, 0.5)),
   ];
 
+  // ---- EN-only pillar pages ----
+  // EN-native standalone pillars at top-level EN routes (no hreflang pair).
+  // /en/growt-method is already emitted via bi("/growt-method") above, so only
+  // the two standalone pillars are added here to avoid a duplicate.
+  const pillars: MetadataRoute.Sitemap = [
+    trOnly("/en/freelancer-consultant-agency-ai", 0.8),
+    trOnly("/en/government-funding-ai-adoption", 0.8),
+  ];
+
   // ---- TR-only ----
   const trContent: MetadataRoute.Sitemap = [
     // KVKK is TR-only (UK GDPR covers EN); /en/kvkk-aydinlatma 301s to /en/privacy-policy
     trOnly("/kvkk-aydinlatma", 0.3),
   ];
 
-  return [...bilingual, ...blog, ...trContent];
+  return [...bilingual, ...blog, ...pillars, ...trContent];
 }
