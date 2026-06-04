@@ -29,7 +29,7 @@ export async function KurumsalServices() {
   const t = await getTranslations("KurumsalServicesC");
 
   const mentorGroup = KURUMSAL_SERVICES.filter(
-    (s) => s.category === "Mentorlük"
+    (s) => s.category === "Mentorlük" || s.category === "Mentorship"
   );
   const appGroup = KURUMSAL_SERVICES.filter(
     (s) => s.category === "Growtify.app"

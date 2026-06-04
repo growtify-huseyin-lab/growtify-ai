@@ -1,26 +1,27 @@
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getLocale } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Quote } from "lucide-react";
 
 export async function Testimonials() {
   const t = await getTranslations("TestimonialsC");
+  const en = (await getLocale()) === "en";
 
   const testimonials = [
     {
-      name: "Ayşe K.",
+      name: en ? "Sarah M." : "Ayşe K.",
       role: t("testimonial1Role"),
       text: t("testimonial1Text"),
       metric: t("testimonial1Metric"),
     },
     {
-      name: "Mehmet D.",
+      name: en ? "James K." : "Mehmet D.",
       role: t("testimonial2Role"),
       text: t("testimonial2Text"),
       metric: t("testimonial2Metric"),
     },
     {
-      name: "Zeynep T.",
+      name: en ? "Emily R." : "Zeynep T.",
       role: t("testimonial3Role"),
       text: t("testimonial3Text"),
       metric: t("testimonial3Metric"),

@@ -122,9 +122,9 @@ export const SECTORS_EN = [
 ] as const;
 
 export const STATS_EN = [
-  { value: "92.5%", label: "92.5% of businesses in Türkiye don't use AI — early adopters win", source: "TÜİK 2025" },
+  { value: "9 in 10", label: "9 in 10 small businesses still don't use AI in their operations — early adopters win", source: "Industry research 2025" },
   { value: "3.7x", label: "AI users achieve 3.7x more returns than their competitors", source: "Accenture/McKinsey 2026" },
-  { value: "74.2%", label: "Why don't they start? 74% say the same thing: \"I don't know how\"", source: "TÜİK 2025" },
+  { value: "#1", label: "Why don't they start? The #1 reason: \"I don't know where to start.\"", source: "Industry research 2025" },
 ] as const;
 
 export const PRODUCT_EN = {

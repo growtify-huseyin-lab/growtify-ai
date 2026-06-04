@@ -39,7 +39,7 @@ export const KURUMSAL_SERVICES_EN = [
     id: "degerlendirme",
     icon: "ClipboardCheck",
     title: "AI Readiness Assessment",
-    category: "Mentorlük",
+    category: "Mentorship",
     description:
       "Find out your corporate AI maturity score in 5 minutes. Discover your priority areas with a free online assessment.",
     highlights: ["5 minutes", "Free", "Instant result"],
@@ -50,7 +50,7 @@ export const KURUMSAL_SERVICES_EN = [
     id: "strateji",
     icon: "FileSearch",
     title: "AI Strategy & Roadmap",
-    category: "Mentorlük",
+    category: "Mentorship",
     description:
       "A joint assessment — stakeholder interviews, technology review, and a 90-day implementation roadmap. Together we see where your team is and where it can go.",
     highlights: ["2-3 weeks", "Joint assessment", "90-day roadmap"],
@@ -61,7 +61,7 @@ export const KURUMSAL_SERVICES_EN = [
     id: "ekip-programi",
     icon: "GraduationCap",
     title: "GROWT Team Program",
-    category: "Mentorlük",
+    category: "Mentorship",
     description:
       "12 weeks of live mentorship. Weekly live sessions + monthly company-specific 1:1 strategy calls. Your team gains the AI mindset and ships the first application themselves. Min. 5 people.",
     highlights: ["12 weeks", "Weekly live", "Monthly 1:1", "Min. 5 people"],
@@ -72,7 +72,7 @@ export const KURUMSAL_SERVICES_EN = [
     id: "donusum-mentorlugu",
     icon: "Building2",
     title: "GROWT Transformation Mentorship",
-    category: "Mentorlük",
+    category: "Mentorship",
     description:
       "6-12 months of live mentorship. Weekly live sessions + monthly company-specific strategy calls. Full GROWT Levels 1-5, multi-department support.",
     highlights: ["6-12 months", "Weekly live mentorship", "Full 5 levels", "Multi-department"],
