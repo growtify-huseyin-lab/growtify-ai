@@ -97,14 +97,14 @@ export default async function LeadMagnetPage({ params }: PageProps) {
             {/* Left: what's inside */}
             <div>
               <h2 className="text-2xl font-bold text-dark dark:text-white">
-                {magnet.format === "pdf" && "Bu rehberde neler var?"}
-                {magnet.format === "checklist" && "Bu checklist'te neler var?"}
-                {magnet.format === "template" && "Bu pakette neler var?"}
-                {magnet.format === "video" && "Bu videoda neler var?"}
-                {magnet.format === "prompt-pack" && "Bu pakette neler var?"}
+                {magnet.format === "pdf" && (en ? "What's in this guide?" : "Bu rehberde neler var?")}
+                {magnet.format === "checklist" && (en ? "What's in this checklist?" : "Bu checklist'te neler var?")}
+                {magnet.format === "template" && (en ? "What's in this pack?" : "Bu pakette neler var?")}
+                {magnet.format === "video" && (en ? "What's in this video?" : "Bu videoda neler var?")}
+                {magnet.format === "prompt-pack" && (en ? "What's in this pack?" : "Bu pakette neler var?")}
               </h2>
               <p className="mt-2 text-gray-600 dark:text-dark-muted">
-                Hedef kitle:{" "}
+                {en ? "Target audience:" : "Hedef kitle:"}{" "}
                 <span className="font-medium">{magnet.targetProfile}</span>
               </p>
               <ul className="mt-6 space-y-3">
