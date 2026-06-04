@@ -4,11 +4,18 @@ import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
 import { Globe } from "lucide-react";
 
+// TR-only soft launch (CEO 2026-06-03): hide the language switcher so visitors
+// stay on Turkish. EN pages remain deployed + reachable by direct URL for QA.
+// When all EN controls/prep are complete → flip to true to re-enable bilingual.
+const SHOW_LOCALE_SWITCHER: boolean = false;
+
 export function LocaleSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
   const other = locale === "en" ? "tr" : "en";
+
+  if (!SHOW_LOCALE_SWITCHER) return null;
 
   return (
     <button
