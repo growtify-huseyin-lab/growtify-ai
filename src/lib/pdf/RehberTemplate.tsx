@@ -263,9 +263,7 @@ function ScenarioPage({
 }) {
   return (
     <Page size="A4" style={styles.page}>
-      <Text style={styles.sectionTitle}>
-        {c.scenario} {index + 1}: {scenario.title}
-      </Text>
+      <Text style={styles.sectionTitle}>{scenario.title}</Text>
 
       <Text style={styles.paragraphBold}>{c.problem}</Text>
       <Text style={styles.paragraph}>{scenario.problem}</Text>
@@ -357,9 +355,7 @@ function PromptsPage({
 
       {prompts.map((p, i) => (
         <View key={i} style={{ marginBottom: 12 }} wrap={false}>
-          <Text style={styles.sectionSubtitle}>
-            {i + 1}. {p.title}
-          </Text>
+          <Text style={styles.sectionSubtitle}>{p.title}</Text>
           <View style={styles.promptBox}>
             <Text style={styles.promptText}>{p.prompt}</Text>
           </View>

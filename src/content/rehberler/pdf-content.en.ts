@@ -75,7 +75,7 @@ export const PDF_CONTENT_EN: Record<string, PdfSectorContent> = {
 
     scenarios: [
       {
-        title: "Case-Law Research Assistant",
+        title: "Scenario 1: Case-Law Research Assistant",
         problem:
           "A new matter lands. You need to analyze the issue, scan relevant precedents, appellate decisions, and current statutes. That's normally a 2-4 hour job requiring deep focus. When several matters stack up, that time becomes critical.",
         steps: [
@@ -107,7 +107,7 @@ Note: this research draft will be verified by the lawyer. Not legal advice — a
         after: "Research map: 20 minutes, verifying the key authorities: 30-40 minutes",
       },
       {
-        title: "Contract Risk Analysis & Redlining",
+        title: "Scenario 2: Contract Risk Analysis & Redlining",
         problem:
           "A client brings a new contract — the risks need analyzing before signing. Reading clause by clause takes time. Spotting risky clauses, proposing alternative wording, explaining it to the client in plain language — each is its own task.",
         steps: [
@@ -135,7 +135,7 @@ Note: this analysis will be reviewed by the lawyer. Not legal advice — a preli
         after: "AI pre-analysis: 15-20 minutes, lawyer review and redline: 30-40 minutes",
       },
       {
-        title: "Client Communication Automation",
+        title: "Scenario 3: Client Communication Automation",
         problem:
           "A hearing date is set and the client needs to know. You want to send a status update. You need to prepare a document checklist. Writing each from scratch eats time and produces inconsistent results — the same information explained differently to different clients.",
         steps: [
@@ -211,82 +211,82 @@ All text in English, professional but accessible.`,
 
     prompts: [
       {
-        title: "Case-Law Research Map",
+        title: "1. Case-Law Research Map",
         prompt: `Map out the precedents and statutes to research for this matter. Area of law: [area]. Core dispute: [issue]. I want: statutory provisions to research (at least 5), appellate decision themes (5-7 topics), an argument framework for both sides. Note: a preliminary draft to be verified by the lawyer.`,
         expectedOutput: "A structured research map, statute list, and theme list",
       },
       {
-        title: "Document Draft",
+        title: "2. Document Draft",
         prompt: `Draft a [document type] from the details below. Claimant: [info]. Respondent: [info]. Relief sought: [relief]. Core arguments: [arguments]. Evidence to attach: [list]. Use formal language appropriate to my jurisdiction. Final review is the lawyer's.`,
         expectedOutput: "A draft in standard document format",
       },
       {
-        title: "Contract Risk Analysis",
+        title: "3. Contract Risk Analysis",
         prompt: `Review this contract for risks against my client: [text]. List risky clauses, propose alternative wording for each, give an overall risk profile (Low/Medium/High), and write a 5-point plain-language summary for the client.`,
         expectedOutput: "Risky-clause list, alternative wordings, client summary",
       },
       {
-        title: "Client Update Email",
+        title: "4. Client Update Email",
         prompt: `Write a client update email to [Name] about their matter. Matter: [subject]. Latest development: [development]. Next step: [step]. Date: [date]. Tone: professional, clear, warm. Minimal jargon. In English.`,
         expectedOutput: "A ready-to-send client update email",
       },
       {
-        title: "Hearing Prep Notes",
+        title: "5. Hearing Prep Notes",
         prompt: `Prepare a hearing-prep summary for a [matter type]. Matter summary: [summary]. Strategy: [strategy]. Expected counter-arguments: [list]. Please give: core arguments (itemized), ready answers to likely questions, the order to present evidence, and a timing suggestion.`,
         expectedOutput: "A structured hearing-prep note",
       },
       {
-        title: "Statute Summary",
+        title: "6. Statute Summary",
         prompt: `Write a short, clear summary of [statute name / section number]. Include: the gist (2-3 sentences), who it affects, what it means in practice, and any recent updates or changes (if you know them). Plain language a client could read.`,
         expectedOutput: "A client-readable statute summary",
       },
       {
-        title: "Legal Risk Report",
+        title: "7. Legal Risk Report",
         prompt: `Write a short legal risk report for [client name] on [subject]. Include: current-situation assessment, legal risks (high/medium/low), recommended measures, and time-sensitive items. One page, itemized.`,
         expectedOutput: "A one-page legal risk summary report",
       },
       {
-        title: "Client FAQ Document",
+        title: "8. Client FAQ Document",
         prompt: `Prepare the 10 most common client questions and answers about [matter type]. Tone: clear, calm, reassuring. Explain any technical terms in parentheses. I'll put this on my website or send it to clients.`,
         expectedOutput: "A 10-question client FAQ, ready for website or email",
       },
       {
-        title: "Matter Summary Note",
+        title: "9. Matter Summary Note",
         prompt: `Build a structured matter-summary note from these raw details: [details]. The summary should include: parties and their relationship, the core dispute, what's been done so far, pending steps, and critical dates/deadlines. Short and clear.`,
         expectedOutput: "A structured matter-summary note, ready for the file",
       },
       {
-        title: "Engagement Scope Letter",
+        title: "10. Engagement Scope Letter",
         prompt: `Write a formal engagement / scope letter to [Name] about [subject]. The letter should include: a summary of the matter, its legal posture, the proposed action plan, the client's responsibilities, and my contact details. Formal format, in English, starting with "Dear [Name]".`,
         expectedOutput: "A formal client engagement letter",
       },
       {
-        title: "Hearing Reminder",
+        title: "11. Hearing Reminder",
         prompt: `Write a hearing reminder for client [Name]. Date: [date]. Time: [time]. Court/place: [place]. What to bring: [list]. For WhatsApp: short, clear, friendly but professional. Max 100 words.`,
         expectedOutput: "A WhatsApp-ready hearing reminder",
       },
       {
-        title: "Authority / Mandate Scope Check",
+        title: "12. Authority / Mandate Scope Check",
         prompt: `Review the engagement / authority text below and assess: is the scope sufficient?, are any powers missing?, are there limits for special situations?, are additional authority clauses needed? [Authority text: text]`,
         expectedOutput: "A scope assessment and missing-authority list",
       },
       {
-        title: "Deadline Tracker Summary",
+        title: "13. Deadline Tracker Summary",
         prompt: `List the critical limitation periods and deadlines for a [matter type]. For each: how long it runs, how the start date is calculated, and any exceptions. Practical reminder: these must be verified against the statute by the lawyer.`,
         expectedOutput: "A critical-deadline list with a calculation guide",
       },
       {
-        title: "Demand Letter Draft",
+        title: "14. Demand Letter Draft",
         prompt: `Draft a demand letter for this situation. Sender: [info]. Recipient: [info]. Subject of demand: [subject]. What's demanded: [demand]. Deadline: [days]. Use formal legal language in English. A draft for lawyer approval.`,
         expectedOutput: "A formal demand-letter draft",
       },
       {
-        title: "Settlement Prep Summary",
+        title: "15. Settlement Prep Summary",
         prompt: `Prepare a summary for a settlement negotiation. Matter: [info]. Client position: [position]. Likely counter-offer: [estimate]. Please give: acceptable minimum terms, a negotiation framework, the upsides and risks of settling, and next steps if rejected.`,
         expectedOutput: "A settlement-negotiation strategy summary",
       },
       {
-        title: "Client Information Letter",
+        title: "16. Client Information Letter",
         prompt: `Write a formal information letter to [Name] about [subject]. Include: a summary of the issue, its legal status, the recommended action plan, the client's responsibilities, and my contact information. Formal format, starting with "Dear [Name]".`,
         expectedOutput: "A formal client information letter",
       },
@@ -338,7 +338,7 @@ All text in English, professional but accessible.`,
     ],
 
     growtTeaser:
-      "Applying what you've seen in this guide is the G stage of the GROWT Method — recognizing your current processes and seeing where AI can make a difference. In the next stage (Roadmap), we plan the AI setup specific to your practice: which processes return the most when automated first, and how to strengthen your digital presence to win new clients. Take the quiz to see your personal plan.",
+      "This guide is the first step of the GROWT Method — the G (Gap Analysis) stage, where you spot your current processes and see where AI will make the fastest difference. From there the method gets far more systematic: you map the AI roadmap for your field (Roadmap), make it operational in daily work (Operationalize), turn that into measurable results (Win), and lock in the full transformation while tracking and optimizing it (Transform). What you've seen here is just the beginning — build your personal plan for the full transformation.",
 
     ctaHeadline: "Next step: Get the AI Roadmap for Your Practice",
     ctaBody:
@@ -652,7 +652,7 @@ Output: daily calories + macros, a 7-day meal plan, a weekly shopping list, 3 co
     ],
 
     growtTeaser:
-      "This guide is the first step of the GROWT Method — the G stage (Gözlem / Observe). You spot your current processes and see where AI will make the fastest difference. With the GROWT Method, the next steps get far more systematic: building the AI infrastructure specific to your field (Roadmap), learning the right tools (Learn), implementing full automation (Apply), and tracking results to optimize (Track). What you've seen here is just the beginning — build your personal plan for the full transformation.",
+      "This guide is the first step of the GROWT Method — the G (Gap Analysis) stage, where you spot your current processes and see where AI will make the fastest difference. From there the method gets far more systematic: you map the AI roadmap for your field (Roadmap), make it operational in daily work (Operationalize), turn that into measurable results (Win), and lock in the full transformation while tracking and optimizing it (Transform). What you've seen here is just the beginning — build your personal plan for the full transformation.",
 
     ctaHeadline: "Next step: Build Your Personal AI Plan",
     ctaBody:
