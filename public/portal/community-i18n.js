@@ -438,6 +438,10 @@
       },
       { pattern: /Welcome back/gi, replacement: "Tekrar hoş geldin" },
       { pattern: /Welcome to\b/g, replacement: "Hoş geldin" },
+
+      // ACCOUNT / PROFILE MENU (sağ-üst avatar menüsü)
+      { pattern: /Manage your account/gi, replacement: "Hesabını yönet" },
+      { pattern: /Log\s?out/gi, replacement: "Çıkış yap" },
       {
         pattern: /When you get notifications, they/g,
         replacement: "Bildirim aldığında",
