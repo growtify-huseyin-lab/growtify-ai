@@ -57,7 +57,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_saglik",
     ghlLeadMagnetTag: "gai_lm_saglik",
     seo: {
-      title: "Sağlık Profesyonelleri için AI Başlangıç Rehberi | Growtify AI",
+      title: "Sağlık Profesyonelleri için AI Başlangıç Rehberi",
       description:
         "Diyetisyen, psikolog, fizyoterapist için ücretsiz AI rehberi. 5 araç, 3 senaryo, 10 prompt. İndirmek için email ver.",
     },
@@ -85,7 +85,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_hukuk",
     ghlLeadMagnetTag: "gai_lm_hukuk",
     seo: {
-      title: "Avukatlar için AI Rehberi — 10 Dakikada 5 İş | Growtify AI",
+      title: "Avukatlar için AI Rehberi — 10 Dakikada 5 İş",
       description:
         "Avukatlar için ücretsiz AI rehberi. İçtihat, dilekçe, müvekkil iletişimi. 15 prompt + 5 araç karşılaştırması.",
     },
@@ -113,7 +113,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_guzellik",
     ghlLeadMagnetTag: "gai_lm_guzellik",
     seo: {
-      title: "Salon & Klinik için AI İçerik Rehberi | Growtify AI",
+      title: "Salon & Klinik için AI İçerik Rehberi",
       description:
         "30 günlük Instagram plan + 50+ Canva prompt + hashtag stratejisi + 5 Reels şablonu. Güzellik ve estetik için ücretsiz.",
     },
@@ -141,7 +141,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_emlak",
     ghlLeadMagnetTag: "gai_lm_emlak",
     seo: {
-      title: "Emlak Profesyonelleri için AI Rehberi | Growtify AI",
+      title: "Emlak Profesyonelleri için AI Rehberi",
       description:
         "İlan üretim hattı, müşteri eşleştirme, piyasa raporu. 15 prompt + 5 araç + 7 gün checklist. Emlakçılar için ücretsiz.",
     },
@@ -169,7 +169,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_eticaret",
     ghlLeadMagnetTag: "gai_lm_eticaret",
     seo: {
-      title: "E-Ticaret için AI İçerik ve Büyüme Rehberi | Growtify AI",
+      title: "E-Ticaret için AI İçerik ve Büyüme Rehberi",
       description:
         "Ürün içerik fabrikası + müşteri hizmetleri + reklam optimizasyonu. 12 prompt + 5 araç. Trendyol, Shopify satıcıları için ücretsiz.",
     },
@@ -197,7 +197,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_dis",
     ghlLeadMagnetTag: "gai_lm_dis",
     seo: {
-      title: "Dental Klinikler için AI İletişim ve Pazarlama Rehberi | Growtify AI",
+      title: "Dental Klinikler için AI İletişim ve Pazarlama Rehberi",
       description:
         "Çok dilli hasta iletişimi + tedavi bilgilendirme + itibar yönetimi + dental turizm şablonu. Diş hekimleri için ücretsiz.",
     },
@@ -225,7 +225,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_muhasebe",
     ghlLeadMagnetTag: "gai_lm_muhasebe",
     seo: {
-      title: "Mali Müşavirler için AI Otomasyon Rehberi | Growtify AI",
+      title: "Mali Müşavirler için AI Otomasyon Rehberi",
       description:
         "Belge işleme + mevzuat takibi + aylık müşteri raporu otomasyonu. 12 prompt + 5 araç. SMMM'ler için ücretsiz.",
     },
@@ -253,7 +253,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_eczacilik",
     ghlLeadMagnetTag: "gai_lm_eczacilik",
     seo: {
-      title: "Eczacılar için AI Stok, Müşteri ve İçerik Rehberi | Growtify AI",
+      title: "Eczacılar için AI Stok, Müşteri ve İçerik Rehberi",
       description:
         "Stok tahmini + kronik hasta takibi + e-eczane içeriği. 10 prompt + 5 araç + yasal uyarı şablonları. Eczacılar için ücretsiz.",
     },
@@ -281,7 +281,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_turizm",
     ghlLeadMagnetTag: "gai_lm_turizm",
     seo: {
-      title: "Turizm Profesyonelleri için AI Rehberi | Growtify AI",
+      title: "Turizm Profesyonelleri için AI Rehberi",
       description:
         "Çok dilli chatbot + kişisel tur planı + yorum yönetimi. 5 dil şablonu + 10 prompt + 5 araç. Tur operatörleri için ücretsiz.",
     },
@@ -309,7 +309,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_mimarlik",
     ghlLeadMagnetTag: "gai_lm_mimarlik",
     seo: {
-      title: "Mimarlar için AI Render ve Sunum Rehberi | Growtify AI",
+      title: "Mimarlar için AI Render ve Sunum Rehberi",
       description:
         "2 dakikada 3 konsept render + pitch deck şablonu + proje akışı. 10 prompt + 5 araç. Mimarlar için ücretsiz.",
     },
@@ -337,7 +337,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_egitim",
     ghlLeadMagnetTag: "gai_lm_egitim",
     seo: {
-      title: "Eğitmenler için AI Materyal Üretim Rehberi | Growtify AI",
+      title: "Eğitmenler için AI Materyal Üretim Rehberi",
       description:
         "Soru bankası + sunum + kişisel geri bildirim. 10 prompt + 5 araç + 7 gün checklist. Eğitmenler için ücretsiz rehber.",
     },
@@ -365,7 +365,7 @@ export const REHBERLER: Record<string, RehberContent> = {
     ghlSectorTag: "gai_sector_fitness",
     ghlLeadMagnetTag: "gai_lm_fitness",
     seo: {
-      title: "Fitness Profesyonelleri için AI Program Rehberi | Growtify AI",
+      title: "Fitness Profesyonelleri için AI Program Rehberi",
       description:
         "Kişisel antrenman + beslenme planı + motivasyon takibi. 10 prompt + 5 araç + 7 gün şablon paketi. PT'ler için ücretsiz.",
     },

@@ -9,8 +9,8 @@ export async function generateMetadata({
   const en = locale === "en";
   return {
     title: en
-      ? "Corporate AI Maturity Assessment — Growtify.ai"
-      : "Kurumsal AI Olgunluk Değerlendirmesi — Growtify.ai",
+      ? "Corporate AI Maturity Assessment"
+      : "Kurumsal AI Olgunluk Değerlendirmesi",
     description: en
       ? "Discover your company's AI readiness in 3 minutes. 5-dimension assessment, instant results."
       : "3 dakikada şirketinizin AI hazırlık seviyesini öğrenin. 5 boyutta değerlendirme, anında sonuç.",
