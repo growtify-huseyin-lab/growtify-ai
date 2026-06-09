@@ -30,7 +30,7 @@ export const SECTOR_PAGES: Record<string, SectorPage> = {
       "Danışan kazanımından takibe, içerik üretiminden otomasyon kurmaya — yapay zeka ile kliniğini büyüt.",
     problems: [
       {
-        title: "Hasta planları saatler alıyor",
+        title: "Danışan planları saatler alıyor",
         description:
           "Her danışana özel beslenme/tedavi planı hazırlamak günde 3-4 saatini yiyor. Bu zaman yeni danışan almaktan çalınıyor.",
         icon: "Clock",
@@ -38,7 +38,7 @@ export const SECTOR_PAGES: Record<string, SectorPage> = {
       {
         title: "İçerik üretmeye vakit yok",
         description:
-          "Instagram'a düzenli paylaşım yapman gerektiğini biliyorsun ama vakit bulamıyorsun. Profil ölü, yeni danışanlar gelmiyor.",
+          "Sosyal medyaya düzenli paylaşım yapman gerektiğini biliyorsun ama vakit bulamıyorsun. Profil ölü, yeni danışanlar gelmiyor.",
         icon: "FileText",
       },
       {
@@ -52,14 +52,14 @@ export const SECTOR_PAGES: Record<string, SectorPage> = {
       {
         title: "Danışan Onboarding Sistemi",
         description:
-          "Danışanın formu dolduruyor → AI plan + alışveriş listesi + takip mesajları + randevu çıkarıyor. Sen onaylıyorsun.",
+          "Danışanın formu dolduruyor → AI plan + takip mesajları + randevu çıkarıyor. Sen onaylıyorsun.",
         beforeTime: "2-3 saat",
         afterTime: "15 dakika",
       },
       {
         title: "Haftalık İçerik Sistemi",
         description:
-          "AI her hafta 5 Instagram postu + 2 story + 1 blog taslağı + danışanlara bilgilendirme mesajları hazırlıyor.",
+          "AI her hafta 5 sosyal medya gönderisi + 2 story + 1 blog taslağı + danışanlara bilgilendirme mesajları hazırlıyor.",
         beforeTime: "Haftada 6 saat",
         afterTime: "30 dakika",
       },

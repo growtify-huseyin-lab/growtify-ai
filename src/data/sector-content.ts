@@ -12,13 +12,13 @@ export const SECTOR_CONTENT: Record<string, SectorExtendedContent> = {
       { value: "%74", label: "Sağlık profesyonellerinin AI kullanmama oranı" },
       { value: "15 saat", label: "Haftada tekrarlayan işlere harcanan ortalama süre" },
       { value: "3x", label: "AI kullanan kliniklerin danışan artış oranı" },
-      { value: "Kişisel", label: "Quiz ile sana özel fiyat — GROWT Programı" },
+      { value: "Kişisel", label: "Quiz ile tamamen senin ihtiyaçlarına özel — GROWT Programı" },
     ],
     faq: [
       {
         question: "Diyetisyen olarak yapay zekayı nasıl kullanabilirim?",
         answer:
-          "Yapay zeka ile kişiselleştirilmiş beslenme planları oluşturabilir, alışveriş listeleri hazırlayabilir, danışan takip mesajlarını otomatikleştirebilir ve Instagram içeriklerinizi planlayabilirsiniz. GROWT Method ile kurulumu adım adım öğretiyoruz; uygulayan sen olursun.",
+          "Yapay zeka ile kişiselleştirilmiş beslenme planları oluşturabilir, alışveriş listeleri hazırlayabilir, danışan takip mesajlarını otomatikleştirebilir ve sosyal medya içeriklerinizi planlayabilirsiniz. GROWT Method ile kurulumu adım adım öğretiyoruz; uygulayan sen olursun.",
       },
       {
         question: "Psikolog olarak AI kullanmak etik mi?",
