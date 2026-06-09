@@ -143,6 +143,8 @@
       // COMMUNITY / PROFILE
       Public: "Herkese Açık",
       Products: "Kurslar",
+      Communities: "Topluluklar",
+      Community: "Topluluk",
       Notifications: "Bildirimler",
       Read: "Okundu",
       Unread: "Okunmadı",
@@ -265,6 +267,10 @@
       // GROUP
       { pattern: /JOIN GROUP/g, replacement: "GRUBA KATIL" },
       { pattern: /Join Group/g, replacement: "Gruba Katıl" },
+      { pattern: /JOIN A GROUP/g, replacement: "GRUBA KATIL" },
+      { pattern: /Join a Group/g, replacement: "Gruba Katıl" },
+      { pattern: /View all groups/gi, replacement: "Tüm grupları görüntüle" },
+      { pattern: /Recently opened/gi, replacement: "Son açılanlar" },
       {
         pattern: /You need to be part of this group to view the courses\.?/gi,
         replacement: "Kursları görüntülemek için bu gruba katılman gerekiyor.",
