@@ -424,6 +424,14 @@
         pattern: /Retake Assignment/gi,
         replacement: "Ödevi Tekrar Al",
       },
+
+      // GREETING / WELCOME (portal karşılama — isim dinamik, lookahead ile korunur)
+      {
+        pattern: /Hi,\s+(?=[A-ZÇĞİÖŞÜ])/g,
+        replacement: "Merhaba, ",
+      },
+      { pattern: /Welcome back/gi, replacement: "Tekrar hoş geldin" },
+      { pattern: /Welcome to\b/g, replacement: "Hoş geldin" },
       {
         pattern: /When you get notifications, they/g,
         replacement: "Bildirim aldığında",
