@@ -128,6 +128,11 @@
       "Upload Assignment": "Ödev Yükle",
       Upload: "Yükle",
       Submit: "Gönder",
+      Submitted: "Gönderilen",
+      Completed: "Tamamlandı",
+      Assessment: "Değerlendirme",
+      Assignment: "Ödev",
+      Instructor: "Eğitmen",
       "Back to lesson": "Derse Dön",
       "Next lesson": "Sonraki Ders",
       "Mark as Complete": "Tamamlandı Olarak İşaretle",
@@ -137,7 +142,7 @@
 
       // COMMUNITY / PROFILE
       Public: "Herkese Açık",
-      Products: "Ürünler",
+      Products: "Kurslar",
       Notifications: "Bildirimler",
       Read: "Okundu",
       Unread: "Okunmadı",
@@ -389,6 +394,35 @@
         pattern:
           /To gain access to this (?:lesson|Lesson|Ders), please complete (?:lesson|Lesson|Ders):/g,
         replacement: "Bu derse erişim için önce şu dersi tamamla:",
+      },
+      {
+        pattern:
+          /To gain access to this (?:lesson|Lesson|Ders), please complete (?:category|Category):/g,
+        replacement: "Bu içeriğe erişim için önce şu kategoriyi tamamla:",
+      },
+
+      // ASSIGNMENT / ASSESSMENT (quiz & ödev akışı)
+      {
+        pattern: /Good job!?\s*Keep going!?/gi,
+        replacement: "Harika! Böyle devam!",
+      },
+      {
+        pattern: /Assessment under review/gi,
+        replacement: "Değerlendirme inceleniyor",
+      },
+      {
+        pattern:
+          /Your assignment is currently under review by the instructor\.?\s*We appreciate your patience during this process\.?\s*You will receive feedback and your final grade once the review is complete\.?/gi,
+        replacement:
+          "Ödevin şu anda eğitmen tarafından inceleniyor. Bu süreçteki sabrın için teşekkürler. İnceleme tamamlandığında geri bildirim ve nihai notunu alacaksın.",
+      },
+      {
+        pattern: /Submitted Answer/gi,
+        replacement: "Gönderilen Cevap",
+      },
+      {
+        pattern: /Retake Assignment/gi,
+        replacement: "Ödevi Tekrar Al",
       },
       {
         pattern: /When you get notifications, they/g,
