@@ -145,6 +145,8 @@
       Products: "Kurslar",
       Communities: "Topluluklar",
       Community: "Topluluk",
+      Conversations: "Sohbetler",
+      Conversation: "Sohbet",
       Notifications: "Bildirimler",
       Read: "Okundu",
       Unread: "Okunmadı",
@@ -447,6 +449,21 @@
       // THEME / DARK MODE
       { pattern: /Switch to light mode/gi, replacement: "Açık moda geç" },
       { pattern: /Switch to dark mode/gi, replacement: "Koyu moda geç" },
+
+      // CHAT / CONVERSATIONS (boş durum + başlat)
+      {
+        pattern: /No conversations found/gi,
+        replacement: "Sohbet bulunamadı",
+      },
+      {
+        pattern: /Looks like you haven'?t chatted with anyone yet\.?/gi,
+        replacement: "Görünüşe göre henüz kimseyle sohbet etmemişsin.",
+      },
+      {
+        pattern: /Search a contact and take the first step!?/gi,
+        replacement: "Bir kişi ara ve ilk adımı at!",
+      },
+      { pattern: /Start Chatting/gi, replacement: "Sohbete Başla" },
       {
         pattern: /When you get notifications, they/g,
         replacement: "Bildirim aldığında",
