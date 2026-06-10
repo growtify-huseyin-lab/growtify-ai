@@ -442,6 +442,10 @@
       // ACCOUNT / PROFILE MENU (sağ-üst avatar menüsü)
       { pattern: /Manage your account/gi, replacement: "Hesabını yönet" },
       { pattern: /Log\s?out/gi, replacement: "Çıkış yap" },
+
+      // THEME / DARK MODE
+      { pattern: /Switch to light mode/gi, replacement: "Açık moda geç" },
+      { pattern: /Switch to dark mode/gi, replacement: "Koyu moda geç" },
       {
         pattern: /When you get notifications, they/g,
         replacement: "Bildirim aldığında",
