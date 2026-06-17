@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "purpose": "G1 sonuç ekranı yorum matrisi — her boyut × her seviye için 'bu skor ne demek (means)' + 'sıradaki adım (next)'. Sektör-agnostik (evrensel); sektörel renk ayrı Sektörel AI Vitrini içeriğinden gelir.",
+    "usage": "Web Gap tool, kullanıcının her boyuttaki skorunu yuvarlayıp (1-5) bu metni gösterir. En zayıf boyut öne çıkarılır. Sentez/gap-cümlesi bu metinleri + nicel cevapları birleştirir.",
+    "voice": "samimi otorite, korkutmadan, sonuç odaklı, sen-li",
+    "version": "draft-1 (2026-06-17, creative)"
+  },
+
+  "d_adoption": {
+    "label": "Benimseme & Tutum",
+    "1": {"level": "Kıyıda", "means": "Yapay zekâya henüz mesafelisin ya da hiç dokunmadın. Kötü bir şey değil — ama mesleğin sen farkında olmadan değişiyor.", "next": "İlk adım: korkmadan, en sevdiğin küçük bir işte AI'ı bir kez dene."},
+    "2": {"level": "Meraklı", "means": "Merakın var, belki bir-iki kez denedin — ama henüz bir alışkanlık değil.", "next": "Şimdi gereken: haftada birkaç kez tekrarlayan küçük bir kullanım ritmi kur."},
+    "3": {"level": "Uygulayıcı", "means": "AI'ı faydalı bir yardımcı olarak görüyor, ara sıra kullanıyorsun.", "next": "Sıçraman için: onu 'ara sıra'dan 'her gün işimin parçası'na taşı."},
+    "4": {"level": "Entegre", "means": "AI'ı düzenli kullanıyor, işine yediriyorsun — güçlü bir yerdesin.", "next": "Sıradaki: 'bunu da AI ile nasıl yaparım' refleksini işinin her alanına yay."},
+    "5": {"level": "Dönüştüren", "means": "AI senin için bir refleks; her işe onunla bakıyorsun.", "next": "Buradaki rol artık öğrenmek değil — sistemleştirmek ve başkalarına örnek olmak."}
+  },
+
+  "d_depth": {
+    "label": "Araç & Kullanım Derinliği",
+    "1": {"level": "Kıyıda", "means": "İşinde AI henüz yok. İyi haber: en büyük fırsatın tam burada.", "next": "İlk adım: en çok zamanını yiyen tek işi seç ve oraya AI sok."},
+    "2": {"level": "Meraklı", "means": "Tek bir işte (genelde içerik/sosyal medya) AI kullanıyorsun. Ama asıl kazanç başka yerde.", "next": "Asıl hizmet üretimini — para kazandıran işini — AI ile denemeye başla."},
+    "3": {"level": "Uygulayıcı", "means": "Birkaç işte düzenli kullanıyorsun.", "next": "Şimdi: AI'ı işinin kalbine, asıl ürettiğin işe taşı."},
+    "4": {"level": "Entegre", "means": "AI günlük işinin çoğunda; ciddi zaman kazanıyorsun.", "next": "Sıradaki: dağınık kullanımı tek bir tekrarlanabilir sisteme bağla."},
+    "5": {"level": "Dönüştüren", "means": "İşini AI etrafında yeniden kurmuşsun.", "next": "Buradaki oyun: ölçeklemek ve yeni gelir modelleri (grup programı, dijital ürün) açmak."}
+  },
+
+  "d_integration": {
+    "label": "İş Akışına Entegrasyon",
+    "1": {"level": "Kıyıda", "means": "AI'ı kullanmadığın için entegrasyon da yok.", "next": "Önce bir işte AI'ı dene; düzeni sonra kurarız."},
+    "2": {"level": "Meraklı", "means": "AI'a her seferinde sıfırdan girip çıkıyorsun — kazancın çoğunu burada kaybediyorsun.", "next": "İlk adım: en sık yaptığın işin promptunu bir kez yaz ve kaydet."},
+    "3": {"level": "Uygulayıcı", "means": "İşe yarayan birkaç şablonun/promptun var.", "next": "Şimdi: bunları her iş için hazır, tekrarlanabilir bir sete dönüştür."},
+    "4": {"level": "Entegre", "means": "Tekrarlanabilir bir setin var, dakikalar içinde iş çıkarıyorsun.", "next": "Sıradaki: araçları birbirine bağlayıp yarı-otomatik hale getir."},
+    "5": {"level": "Dönüştüren", "means": "Tetiklemeli, yarı-otomatik bir akışın var; sistem işin büyük kısmını kendisi yapıyor.", "next": "Buradaki rol: sistemi izlemek, genişletmek ve sağlamlaştırmak."}
+  },
+
+  "d_data": {
+    "label": "Veri & Bilgi Düzeni",
+    "1": {"level": "Kıyıda", "means": "Bilgin çoğunlukla kafanda/dağınık — AI sana genel cevaplar veriyor çünkü besleyecek düzenli bilgin yok.", "next": "İlk adım: en çok kullandığın 3 şablonu/bilgiyi tek bir yerde topla."},
+    "2": {"level": "Meraklı", "means": "Farklı yerlerde dağınık notların var.", "next": "Şimdi: bunları düzenli, AI'a verilebilir bir forma sok."},
+    "3": {"level": "Uygulayıcı", "means": "Temel şablon ve dosyaların düzenli.", "next": "Sıradaki: AI'a iş yaptırırken bu bilgini bağlam olarak vermeye başla."},
+    "4": {"level": "Entegre", "means": "Yapılandırılmış bir bilgi tabanın var.", "next": "Şimdi: AI'ı bununla besleyip kişiselleştirilmiş, sana özel çıktı al."},
+    "5": {"level": "Dönüştüren", "means": "AI'ı sürekli kendi bilginle besliyorsun; çıktılar senin sesin/yöntemin gibi.", "next": "Buradaki rol: bilgi tabanını canlı ve güncel tutmak."}
+  },
+
+  "d_measure": {
+    "label": "Sonuç & Ölçüm",
+    "1": {"level": "Kıyıda", "means": "AI'dan sonuç almıyor ya da aldığını bilmiyorsun. Bu en kritik boyut olabilir — çünkü ölçmediğini büyütemezsin.", "next": "İlk adım: bir işte 'AI öncesi / sonrası kaç saat' diye basitçe ölç."},
+    "2": {"level": "Meraklı", "means": "'Galiba zaman kazandırıyor' diyorsun ama ölçmüyorsun.", "next": "Şimdi: tek bir işte net zaman kazancını yaz."},
+    "3": {"level": "Uygulayıcı", "means": "Belirli bir işte net kazanç görüyorsun.", "next": "Sıradaki: bunu zaman/müşteri/gelir gibi somut bir metriğe bağla."},
+    "4": {"level": "Entegre", "means": "Somut metrik takip ediyorsun — güçlü.", "next": "Şimdi: ölçümü bir döngüye çevir (ölç → iyileştir → tekrar ölç)."},
+    "5": {"level": "Dönüştüren", "means": "AI yatırımını iş sonucuna bağlamış, sürekli optimize ediyorsun.", "next": "Buradaki rol: kazandığın yöntemi yeni alanlara taşımak."}
+  },
+
+  "d_trust": {
+    "label": "Güven & Sınırlar",
+    "1": {"level": "Kıyıda", "means": "Ya körü körüne güveniyor ya da hiç kullanmıyorsun — ikisi de riskli, özellikle senin sorumluluk taşıyan mesleğinde.", "next": "İlk adım: önemli AI çıktılarını kendin doğrulama alışkanlığı edin."},
+    "2": {"level": "Meraklı", "means": "Risklerin farkındasın ama sistemli bir kontrolün yok.", "next": "Şimdi: 'neyi doğrularım, neyi AI'a paylaşmam' diye basit bir kural koy."},
+    "3": {"level": "Uygulayıcı", "means": "Önemli çıktıları kendin doğruluyorsun.", "next": "Sıradaki: bunu net bir rutine + müşteri gizliliği kuralına bağla."},
+    "4": {"level": "Entegre", "means": "Net bir doğrulama rutinin var.", "next": "Şimdi: gizlilik ve etik sınırları yazılı bir çerçeveye dök."},
+    "5": {"level": "Dönüştüren", "means": "Doğrulama, gizlilik ve etik çerçeven yerleşik.", "next": "Buradaki rol: bu güveni müşterine bir değer olarak sun (rekabet avantajı)."}
+  }
+}

@@ -101,3 +101,32 @@ export interface G1Result {
   quant: Record<string, number | string>; // raw quantitative answers (synthesis/cost — next)
   completedAt: string;
 }
+
+/* ----------------------------- synthesis (result copy) -------------------- */
+// Built by synthesis.ts from g1-interpretations.json + g1-result-ux.json: the
+// per-dimension "means/next" texts, the personal gap paragraph, and the
+// cost-of-inaction lines.
+
+export type G1BenchState = "ahead" | "ontrack" | "behind";
+
+export interface G1SynthDimension {
+  id: string;
+  label: string;
+  score: number;
+  levelLabel: string;
+  benchmark: number;
+  delta: number;
+  benchState: G1BenchState;
+  means: string;
+  next: string;
+}
+
+export interface G1Synthesis {
+  levelLabel: string;
+  overall: number;
+  sectorOverallBenchmark: number;
+  dimensions: G1SynthDimension[];
+  weakest: { id: string; label: string; score: number; means: string; next: string };
+  gapParagraph: string;
+  cost: { intro: string; lines: string[]; closing: string } | null;
+}

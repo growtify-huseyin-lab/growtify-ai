@@ -9,6 +9,7 @@ import { verifyG1Token } from "@/lib/g1/token";
 import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
 import { loadG1Config } from "@/lib/g1/config";
 import { scoreG1 } from "@/lib/g1/scoring";
+import { buildG1Synthesis } from "@/lib/g1/synthesis";
 import { saveG1ResultToContact } from "@/lib/g1/ghl-g1";
 import type { G1Answers } from "@/lib/g1/types";
 
@@ -18,6 +19,7 @@ interface SubmitBody {
   answers?: G1Answers;
   sector?: string;
   locale?: string;
+  name?: string;
 }
 
 export async function POST(request: Request) {
@@ -58,6 +60,7 @@ export async function POST(request: Request) {
 
   const config = loadG1Config(body.sector, body.locale);
   const result = scoreG1(config, body.answers);
+  const synthesis = buildG1Synthesis(config, result, body.answers, body.name ?? "");
 
   // Writeback is best-effort: never block the user's result on a GHL hiccup.
   const wb = await saveG1ResultToContact(contactId, result).catch(
@@ -67,6 +70,7 @@ export async function POST(request: Request) {
   return Response.json({
     ok: true,
     result,
+    synthesis,
     contactId,
     ghl: { ok: wb.ok, wrote: wb.wrote, error: wb.error ?? null },
   });

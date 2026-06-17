@@ -1,0 +1,115 @@
+{
+  "_meta": {
+    "purpose": "G1 sonuç ekranı sentezi + hareketsizlik maliyeti formülü + tüm UX mikrocopy. g1-content-config + g1-interpretations ile birlikte G1'in TAM içerik paketi.",
+    "version": "draft-1 (2026-06-17, creative)",
+    "voice": "samimi otorite, korkutmadan, sonuç odaklı, sen-li",
+    "note": "Engine değerleri hesaplar; bu dosya şablon + kural + metin sağlar. {slot} = engine doldurur."
+  },
+
+  "synthesis": {
+    "description": "Sonuç ekranının kişisel gap paragrafı. Engine sırayla: (1) arketip seç (ilk eşleşen kural), (2) en zayıf boyutu bul, (3) şablonu skor + nicel cevaplarla doldur.",
+    "assembly_order": ["archetype_opening", "weakest_callout", "quant_gap", "first_move", "tagline"],
+    "archetypes": [
+      {"id": "istekli_sistemsiz", "condition": "d_adoption >= 4 AND avg(d_depth, d_integration) <= 2", "opening": "{ad}, profilin net bir çelişki gösteriyor: AI'a açıksın, isteğin sektörünün üstünde — ama bu istek henüz işine girmemiş."},
+      {"id": "kiyida", "condition": "overall <= 1.6", "opening": "{ad}, henüz kıyıdasın. Kulağa kötü gelebilir ama tam tersi: en büyük fırsatın hiç dokunulmamış olarak seni bekliyor."},
+      {"id": "olcmeyen", "condition": "weakest == d_measure AND d_measure <= 1.5 AND overall >= 2", "opening": "{ad}, ilerliyorsun ama biraz körlemesine — kazandığını ölçmediğin için ne kazandığını da göremiyorsun."},
+      {"id": "daginik", "condition": "d_depth >= 3 AND d_integration <= 2", "opening": "{ad}, AI'ı kullanıyorsun ama dağınık ve tekil — her seferinde sıfırdan. Sistemleştiğinde asıl sıçramayı yaşayacaksın."},
+      {"id": "dengeli", "condition": "min(all_dims) >= 2.5", "opening": "{ad}, sağlam bir temelin var. Artık mesele başlamak değil — derinleşmek ve ölçmek."},
+      {"id": "default", "condition": "true", "opening": "{ad}, profilin AI yolculuğunun başında olduğunu gösteriyor — ama net bir başlangıç noktan var."}
+    ],
+    "weakest_callout_template": "En zayıf halkan: {weakest_label} ({weakest_score}/5). {weakest_means}",
+    "quant_gap_template": "Üstelik {n_top_task} işine haftada ~{n_hours_task} saat veriyorsun — tam da AI'ın en güçlü olduğu yer.",
+    "first_move_template": "İlk hamlen belli: {weakest_next} Özellikle {n_top_task} işinden başla.",
+    "tagline_template": "Sektöründe ortalama {sector_overall_benchmark}/5 iken sen {overall}/5'tesin. Bu boşluğu kapatmak tamamen senin elinde.",
+    "rules": {
+      "ad": "kullanıcının adı (prefill/identity'den); yoksa 'Merhaba' atla, doğrudan cümle",
+      "weakest": "en düşük boyut skoru; eşitlikte sıra: d_measure > d_integration > d_data > d_depth > d_trust > d_adoption (darboğaz önceliği)",
+      "weakest_means/next": "g1-interpretations.json[weakest][round(weakest_score)] içinden",
+      "n_top_task": "sector.top_tasks içinden kullanıcının N1 seçimi",
+      "fallback": "nicel cevap yoksa quant_gap atlanır; paragraf yine anlamlı kalır"
+    }
+  },
+
+  "cost_model": {
+    "description": "Hareketsizlik Maliyeti — nicel cevaplardan (N1-N8) hesaplanır. Korkutmadan, 'masada duran para' çerçevesi.",
+    "midpoints": {
+      "n_missed": {"0": 0, "1-5": 3, "6-15": 10, "15+": 18},
+      "n_income": {"<1000": 750, "1000-3000": 2000, "3000-7000": 5000, "7000+": 9000},
+      "n_capacity": {"0": 0, "1-3": 2, "4-10": 7, "10+": 12}
+    },
+    "assumptions": {
+      "ai_saving_ratio": "0.7 — AI'ın tekrarlayan asıl işin ~%70'ini devraldığı varsayımı (muhafazakâr; ayarlanabilir)",
+      "avg_retention_months": "6 — kaçan müşterinin ortalama getiri süresi varsayımı",
+      "note": "Varsayımlar muhafazakâr ve etiketli; canlı veriyle kalibre edilebilir."
+    },
+    "formulas": {
+      "saved_hours_week": "round(n_hours_task * 0.7)",
+      "saved_hours_year": "saved_hours_week * 52",
+      "lost_revenue_year": "midpoint(n_missed) * midpoint(n_income) * 6",
+      "open_capacity_revenue_month": "midpoint(n_capacity) * midpoint(n_income)"
+    },
+    "result_copy_template": "İşinin bugünkü tablosu, kendi rakamlarınla:\n• {n_top_task} işine haftada ~{n_hours_task} saat veriyorsun. AI bunun büyük kısmını devralabilir → yılda ~{saved_hours_year} saat sana geri döner.\n{if lost_revenue_year>0}• Son 1 yılda zaman/kapasite yüzünden ~{n_missed_mid} müşteri kaçırmışsın — kabaca {lost_revenue_year}₺.\n{if open_capacity_revenue_month>0}• Hâlâ {n_capacity_mid} müşterilik boş kapasiten var (ayda ~{open_capacity_revenue_month}₺).\n\nUnutma: bu, harcayacağın para değil — masada zaten duran, senin almadığın para.",
+    "display_note": "Rakamlar 'yaklaşık/~' ile gösterilir; kesinmiş gibi sunulmaz. 0 çıkan satır gizlenir."
+  },
+
+  "ux_microcopy": {
+    "intro": {
+      "eyebrow": "GROWT · Gap Analizi · Adım 1",
+      "title": "AI Olgunluk Profilin",
+      "greeting_with_name": "Merhaba {ad} 👋",
+      "body": "5 dakikada kendi işine net bir AI röntgeni çekeceğiz. Sonunda nerede durduğunu, en zayıf halkanı ve ilk hamleni göreceksin.",
+      "prefill_note": "Teste başlarken /test cevaplarından devam ediyoruz — sıfırdan değil, derinleşiyoruz.",
+      "honesty_nudge": "Tek kuralımız: kendine dürüst ol. Çıkan skor bir not değil, bir harita. Tek kazanan sensin.",
+      "cta": "Profilimi Çıkar",
+      "meta": "~5 dakika · 20 soru · sektörel karşılaştırma dahil"
+    },
+    "question_ui": {
+      "progress": "{current} / {total}",
+      "progress_label": "%{percent} tamamlandı",
+      "dimension_tag": "{dimension_label}",
+      "back": "Geri",
+      "next": "Devam",
+      "save_exit": "Kaydet & Çık",
+      "quant_section_intro": "Son birkaç soru — işinin bugünkü tablosunu çıkaralım.",
+      "number_placeholder": "Bir sayı yaz",
+      "select_hint": "Sana en yakın olanı seç"
+    },
+    "resume": {
+      "title": "Yarım kalan profilin var",
+      "body": "{screen} / {total}'de kalmıştın.",
+      "continue": "Kaldığım yerden devam et",
+      "restart": "Baştan başla"
+    },
+    "loading": {
+      "title": "Profilin hazırlanıyor...",
+      "steps": ["Cevapların işleniyor", "Sektör ortalamasıyla karşılaştırılıyor", "En zayıf halkan bulunuyor", "İlk hamlen hazırlanıyor"]
+    },
+    "result_ui": {
+      "title": "AI Olgunluk Profilin",
+      "level_badge": "Seviye: {level_label}",
+      "level_sub": "{overall}/5 · sektör ort. {sector_overall_benchmark}/5",
+      "radar_title": "6 Boyutta Profilin",
+      "benchmark_legend": "Sen vs sektör ortalaması",
+      "benchmark_states": {"ahead": "Önde", "ontrack": "Seviyede", "behind": "Geride"},
+      "weakest_title": "En Zayıf Halkan — Buradan Başla",
+      "synthesis_title": "Senin Gap'in",
+      "cost_title": "Hareketsizliğin Bedeli",
+      "firstmove_title": "İlk Hamlen",
+      "dimension_detail_toggle": "Tüm boyutları gör"
+    },
+    "completion_cta": {
+      "title": "Haritanı çıkardın 🎯",
+      "body": "Artık nerede olduğunu biliyorsun. Sıradaki adımda sektörünün nereye gittiğini ve ilk fırsatlarını göreceğiz.",
+      "primary": "Yol haritama devam et →",
+      "primary_target": "GHL course — sonraki ders (Sektörün Nereye Gidiyor / R)",
+      "secondary": "Profilimi indir (PDF)"
+    },
+    "system": {
+      "privacy": "Verilerin KVKK kapsamında korunur; profilin sana özeldir.",
+      "save_toast": "Profilin kaydedildi.",
+      "error_generic": "Bir şeyler ters gitti — birazdan tekrar dene.",
+      "identity_fallback_prompt": "Devam etmek için katıldığın e-posta adresini gir:",
+      "identity_fallback_note": "Seni doğru profile bağlamak için."
+    }
+  }
+}
