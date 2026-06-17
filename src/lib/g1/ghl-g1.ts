@@ -1,7 +1,7 @@
 // G1 / DeepGap — push result back to the GHL contact (server-only).
 // We already know contactId from the verified token, so we PUT custom fields
 // directly (no upsert-by-email). Mirrors the pattern in test/lib/ghl-client.ts.
-import type { G1Result, G1Synthesis } from "./types";
+import type { G1PriorResult, G1Result, G1Synthesis } from "./types";
 
 // Real GHL custom field IDs — created by ghl-specialist 2026-06-17 in location
 // e8ZRRmOybS08x5L6qgsS. The entry field g1_token (id i1XhsXamXfpwdRPFoOjB) is
@@ -32,6 +32,11 @@ const DIM_TO_FIELD: Record<string, string> = {
   d_trust: "governance",
 };
 
+// Reverse: GHL field-key -> Creative dimId (to read a stored result back).
+const FIELD_TO_DIM: Record<string, string> = Object.fromEntries(
+  Object.entries(DIM_TO_FIELD).map(([dim, field]) => [field, dim]),
+);
+
 const G1_COMPLETED_TAG = "g1_completed";
 
 interface GhlConfig {
@@ -55,7 +60,46 @@ export interface G1ContactLookup {
   firstName?: string;
   fullName?: string;
   email?: string;
+  prior?: G1PriorResult; // present if the contact has a stored G1 result
   error?: string;
+}
+
+// Parse a GHL contact's customFields into the prior G1 result (if any).
+// GHL v2 returns customFields as [{id, value}] (value occasionally as field_value).
+function parsePriorResult(
+  customFields: Array<{ id?: string; value?: unknown; field_value?: unknown }> | undefined,
+): G1PriorResult | undefined {
+  if (!customFields || customFields.length === 0) return undefined;
+  const byId = new Map<string, unknown>();
+  for (const cf of customFields) {
+    if (cf?.id) byId.set(cf.id, cf.value ?? cf.field_value);
+  }
+  const num = (key: string): number => {
+    const v = byId.get(G1_FIELD_IDS[key]);
+    const n = typeof v === "number" ? v : parseFloat(String(v ?? ""));
+    return Number.isFinite(n) ? n : NaN;
+  };
+  const str = (key: string): string => {
+    const v = byId.get(G1_FIELD_IDS[key]);
+    return v == null ? "" : String(v);
+  };
+  const overall = num("overall");
+  if (!Number.isFinite(overall)) return undefined; // never completed
+
+  const dims: { id: string; score: number }[] = [];
+  for (const [fieldKey, dimId] of Object.entries(FIELD_TO_DIM)) {
+    const s = num(fieldKey);
+    if (Number.isFinite(s)) dims.push({ id: dimId, score: s });
+  }
+  const attemptRaw = num("attempt");
+  return {
+    overall,
+    attempt: Number.isFinite(attemptRaw) && attemptRaw > 0 ? attemptRaw : 1,
+    completedAt: str("completedAt"),
+    archetype: str("archetype"),
+    gapSummary: str("gapSummary"),
+    dims,
+  };
 }
 
 /**
@@ -79,12 +123,24 @@ export async function getG1Contact(contactId: string): Promise<G1ContactLookup> 
     if (res.status === 404) return { found: false, error: "not_found" };
     if (!res.ok) return { found: false, error: `HTTP ${res.status}` };
     const body = (await res.json().catch(() => ({}))) as {
-      contact?: { firstName?: string; lastName?: string; name?: string; email?: string };
+      contact?: {
+        firstName?: string;
+        lastName?: string;
+        name?: string;
+        email?: string;
+        customFields?: Array<{ id?: string; value?: unknown; field_value?: unknown }>;
+      };
     };
     const c = body.contact;
     if (!c) return { found: false, error: "no_contact" };
     const fullName = c.name || [c.firstName, c.lastName].filter(Boolean).join(" ");
-    return { found: true, firstName: c.firstName, fullName, email: c.email };
+    return {
+      found: true,
+      firstName: c.firstName,
+      fullName,
+      email: c.email,
+      prior: parsePriorResult(c.customFields),
+    };
   } catch (err) {
     return { found: false, error: (err as Error).message };
   }
@@ -104,6 +160,7 @@ function buildGapSummary(result: G1Result): string {
 
 function buildCustomFields(
   result: G1Result,
+  attempt?: number,
 ): Array<{ id: string; value: string | number }> {
   const fields: Array<{ id: string; value: string | number }> = [];
   const push = (key: string, value: string | number) => {
@@ -114,6 +171,7 @@ function buildCustomFields(
   push("archetype", result.levelLabel);
   push("gapSummary", buildGapSummary(result));
   push("completedAt", result.completedAt);
+  if (typeof attempt === "number" && attempt > 0) push("attempt", attempt);
   for (const d of result.dimensions) {
     const fieldKey = DIM_TO_FIELD[d.id];
     if (fieldKey) push(fieldKey, d.score);
@@ -130,11 +188,12 @@ export interface G1WritebackResult {
 export async function saveG1ResultToContact(
   contactId: string,
   result: G1Result,
+  attempt?: number,
 ): Promise<G1WritebackResult> {
   const cfg = readConfig();
   if (!cfg) return { ok: false, wrote: 0, error: "GHL credentials missing" };
 
-  const customFields = buildCustomFields(result);
+  const customFields = buildCustomFields(result, attempt);
   if (customFields.length === 0) {
     // Field ids not configured yet — don't error, just signal nothing written.
     return { ok: true, wrote: 0, error: "g1_field_ids_not_configured" };

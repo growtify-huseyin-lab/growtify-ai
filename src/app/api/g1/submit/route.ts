@@ -11,8 +11,35 @@ import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
 import { loadG1Config } from "@/lib/g1/config";
 import { scoreG1 } from "@/lib/g1/scoring";
 import { buildG1Synthesis } from "@/lib/g1/synthesis";
-import { saveG1ResultToContact, sendG1ResultEmail } from "@/lib/g1/ghl-g1";
-import type { G1Answers } from "@/lib/g1/types";
+import { saveG1ResultToContact, sendG1ResultEmail, getG1Contact } from "@/lib/g1/ghl-g1";
+import type { G1Answers, G1BeforeAfter, G1PriorResult, G1Result } from "@/lib/g1/types";
+
+// G→T (Gap→Transformation): the stored result is the baseline; this attempt is
+// the "after". Build the per-dimension before/after delta for the result screen.
+function buildBeforeAfter(
+  prior: G1PriorResult,
+  result: G1Result,
+  attempt: number,
+): G1BeforeAfter {
+  const priorById = new Map(prior.dims.map((d) => [d.id, d.score]));
+  const round1 = (n: number) => Math.round(n * 10) / 10;
+  return {
+    before: prior.overall,
+    after: result.overall,
+    delta: round1(result.overall - prior.overall),
+    attempt,
+    dims: result.dimensions.map((d) => {
+      const before = priorById.get(d.id) ?? d.score;
+      return {
+        id: d.id,
+        label: d.label,
+        before,
+        after: d.score,
+        delta: round1(d.score - before),
+      };
+    }),
+  };
+}
 
 interface SubmitBody {
   token?: string;
@@ -63,8 +90,15 @@ export async function POST(request: Request) {
   const result = scoreG1(config, body.answers);
   const synthesis = buildG1Synthesis(config, result, body.answers, body.name ?? "");
 
+  // Read the stored result BEFORE overwriting — it is the G (baseline) for the
+  // G→T before/after. A 404/empty contact just means first attempt (no delta).
+  const lookup = await getG1Contact(contactId).catch(() => ({ found: false }) as Awaited<ReturnType<typeof getG1Contact>>);
+  const prior = lookup.found ? lookup.prior : undefined;
+  const attempt = (prior?.attempt ?? 0) + 1;
+  const beforeAfter = prior ? buildBeforeAfter(prior, result, attempt) : null;
+
   // Writeback is best-effort: never block the user's result on a GHL hiccup.
-  const wb = await saveG1ResultToContact(contactId, result).catch(
+  const wb = await saveG1ResultToContact(contactId, result, attempt).catch(
     (e: unknown) => ({ ok: false, wrote: 0, error: (e as Error).message }),
   );
 
@@ -85,6 +119,8 @@ export async function POST(request: Request) {
     ok: true,
     result,
     synthesis,
+    beforeAfter,
+    attempt,
     contactId,
     ghl: { ok: wb.ok, wrote: wb.wrote, error: wb.error ?? null },
   });

@@ -130,3 +130,26 @@ export interface G1Synthesis {
   gapParagraph: string;
   cost: { intro: string; lines: string[]; closing: string } | null;
 }
+
+/* ----------------------------- re-access / retake ------------------------- */
+// A member can re-open /g1 from the lesson at any time. If they already have a
+// result on their GHL contact, we show it back (read-only) + offer a re-take.
+// The re-take is the G→T (Gap→Transformation) before/after: the stored result IS
+// the baseline, so submit reads it before overwriting and returns the delta.
+
+export interface G1PriorResult {
+  overall: number; // last stored overall (1..5)
+  attempt: number; // how many times completed so far
+  completedAt: string; // ISO of last completion
+  archetype: string; // stored level/archetype label
+  gapSummary: string; // short stored summary (built at writeback)
+  dims: { id: string; score: number }[]; // Creative dimId -> score
+}
+
+export interface G1BeforeAfter {
+  before: number; // baseline overall (prior attempt)
+  after: number; // this attempt overall
+  delta: number; // after - before
+  attempt: number; // this attempt index (2 = first retake)
+  dims: { id: string; label: string; before: number; after: number; delta: number }[];
+}
