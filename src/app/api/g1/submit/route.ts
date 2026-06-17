@@ -12,6 +12,9 @@ import { loadG1Config } from "@/lib/g1/config";
 import { scoreG1 } from "@/lib/g1/scoring";
 import { buildG1Synthesis } from "@/lib/g1/synthesis";
 import { saveG1ResultToContact, sendG1ResultEmail, getG1Contact } from "@/lib/g1/ghl-g1";
+import { generateG1PdfHtml } from "@/lib/g1/g1-pdf-template";
+import { generatePdfFromHtml, getPdfFilename } from "@/app/[locale]/test/lib/pdf-generate";
+import { uploadPdfToContact } from "@/app/[locale]/test/lib/ghl-client";
 import type { G1Answers, G1BeforeAfter, G1PriorResult, G1Result } from "@/lib/g1/types";
 
 // G→T (Gap→Transformation): the stored result is the baseline; this attempt is
@@ -102,13 +105,26 @@ export async function POST(request: Request) {
     (e: unknown) => ({ ok: false, wrote: 0, error: (e as Error).message }),
   );
 
-  // Result email (like /test): send the profile + gap + first move to the
-  // member's GHL email, after the response — never blocks the on-screen result.
+  // Result PDF + email (full /test parity): after the response, render a branded
+  // A4 PDF, upload it to the GHL contact, then send the branded report email with
+  // the PDF link. PDF failure is non-fatal — the email still goes (CTA → /g1).
   const fid = contactId;
   const fname = body.name ?? "";
   const synth = synthesis;
+  const sectorLabel = config.sector.label;
+  const ba = beforeAfter;
   after(async () => {
-    const r = await sendG1ResultEmail(fid, fname, synth).catch((e: unknown) => ({
+    let pdfUrl: string | undefined;
+    try {
+      const html = generateG1PdfHtml({ name: fname, sectorLabel, synth, beforeAfter: ba });
+      const buf = await generatePdfFromHtml(html);
+      const up = await uploadPdfToContact(fid, buf, getPdfFilename(fname));
+      pdfUrl = up.ok ? (up as { urls?: string[] }).urls?.[0] : undefined;
+      console.log(`[g1/submit] pdf ok=${up.ok} url=${pdfUrl ?? ("error" in up ? up.error : "")}`);
+    } catch (e) {
+      console.error("[g1/submit] pdf flow error:", (e as Error).message);
+    }
+    const r = await sendG1ResultEmail(fid, fname, synth, pdfUrl).catch((e: unknown) => ({
       ok: false,
       error: (e as Error).message,
     }));
