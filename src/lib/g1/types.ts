@@ -153,3 +153,16 @@ export interface G1BeforeAfter {
   attempt: number; // this attempt index (2 = first retake)
   dims: { id: string; label: string; before: number; after: number; delta: number }[];
 }
+
+// Interpreted comparison of this attempt vs the previous one — the "transformation"
+// narrative. Every retake IS a transformation snapshot (no separate module): each
+// reading is read against the last, so the member sees movement, not just numbers.
+export interface G1Comparison {
+  attempt: number;
+  direction: "up" | "flat" | "down";
+  levelChanged: boolean;
+  headline: string; // short movement summary (level → level, or +Δ)
+  paragraph: string; // 2-4 sentence interpretation
+  topGain: { label: string; delta: number } | null; // most-improved dimension
+  lagging: { label: string; delta: number } | null; // regressed / flat dimension = next focus
+}
