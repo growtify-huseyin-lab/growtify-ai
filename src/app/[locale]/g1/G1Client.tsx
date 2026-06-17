@@ -14,6 +14,7 @@ export default function G1Client({
   sector,
   ret,
   name,
+  email,
   locale,
 }: {
   config: G1Config;
@@ -22,6 +23,7 @@ export default function G1Client({
   sector: string | null;
   ret: string | null;
   name: string;
+  email: string;
   locale: string;
 }) {
   const [phase, setPhase] = useState<Phase>("intro");
@@ -88,7 +90,14 @@ export default function G1Client({
             {name ? `Merhaba ${name}! ` : "Merhaba! "}
             {config.meta.subtitle}
           </p>
-          <p className="mt-2 text-sm text-gray-400">
+          {(name || email) && (
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-gray-50 px-3 py-1.5 text-xs text-gray-500">
+              <span style={{ color: PRIMARY }}>●</span>
+              Doğrulanan kimlik: <b className="text-gray-700">{name || "—"}</b>
+              {email ? <span className="text-gray-400">· {email}</span> : null}
+            </div>
+          )}
+          <p className="mt-3 text-sm text-gray-400">
             {total} soru · 5-10 dakika
           </p>
           <button
