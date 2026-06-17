@@ -1,7 +1,7 @@
 // G1 / DeepGap — push result back to the GHL contact (server-only).
 // We already know contactId from the verified token, so we PUT custom fields
 // directly (no upsert-by-email). Mirrors the pattern in test/lib/ghl-client.ts.
-import type { G1Config, G1Result } from "./types";
+import type { G1Result } from "./types";
 
 // Real GHL custom field IDs — created by ghl-specialist 2026-06-17 in location
 // e8ZRRmOybS08x5L6qgsS. The entry field g1_token (id i1XhsXamXfpwdRPFoOjB) is
@@ -19,6 +19,17 @@ export const G1_FIELD_IDS: Record<string, string> = {
   gapSummary: "B7sVkI189pAkLb3YcgX3",
   completedAt: "liaSle4fkrw2TUV1KqJ1",
   attempt: "5Ue1jUHNys3n7cj501un",
+};
+
+// Creative's 6 dimensions -> the 6 existing GHL field slots (labels are legacy;
+// values are the correct dimension scores). Rename the GHL fields later for clarity.
+const DIM_TO_FIELD: Record<string, string> = {
+  d_depth: "deployment",
+  d_integration: "systems",
+  d_data: "data",
+  d_measure: "outcomes",
+  d_adoption: "people",
+  d_trust: "governance",
 };
 
 const G1_COMPLETED_TAG = "g1_completed";
@@ -79,22 +90,19 @@ export async function getG1Contact(contactId: string): Promise<G1ContactLookup> 
   }
 }
 
-function buildGapSummary(config: G1Config, result: G1Result): string {
-  const label = (k: string) =>
-    config.dimensions.find((d) => d.key === k)?.label ?? k;
-  const weak = result.dimensions.find((d) => d.key === result.weakest);
-  const strong = result.dimensions.find((d) => d.key === result.strongest);
+function buildGapSummary(result: G1Result): string {
+  const weak = result.dimensions.find((d) => d.id === result.weakest);
+  const strong = result.dimensions.find((d) => d.id === result.strongest);
   return [
-    `Profil: ${result.archetypeLabel} (genel ${result.overall}/5).`,
-    strong ? `En güçlü: ${label(strong.key)} ${strong.score}/5.` : "",
-    weak ? `En zayıf: ${label(weak.key)} ${weak.score}/5.` : "",
+    `Profil: ${result.levelLabel} (genel ${result.overall}/5).`,
+    strong ? `En güçlü: ${strong.label} ${strong.score}/5.` : "",
+    weak ? `En zayıf: ${weak.label} ${weak.score}/5.` : "",
   ]
     .filter(Boolean)
     .join(" ");
 }
 
 function buildCustomFields(
-  config: G1Config,
   result: G1Result,
 ): Array<{ id: string; value: string | number }> {
   const fields: Array<{ id: string; value: string | number }> = [];
@@ -103,10 +111,13 @@ function buildCustomFields(
     if (id && !id.startsWith("REPLACE_")) fields.push({ id, value });
   };
   push("overall", result.overall);
-  push("archetype", result.archetypeLabel);
-  push("gapSummary", buildGapSummary(config, result));
+  push("archetype", result.levelLabel);
+  push("gapSummary", buildGapSummary(result));
   push("completedAt", result.completedAt);
-  for (const d of result.dimensions) push(d.key, d.score);
+  for (const d of result.dimensions) {
+    const fieldKey = DIM_TO_FIELD[d.id];
+    if (fieldKey) push(fieldKey, d.score);
+  }
   return fields;
 }
 
@@ -119,12 +130,11 @@ export interface G1WritebackResult {
 export async function saveG1ResultToContact(
   contactId: string,
   result: G1Result,
-  config: G1Config,
 ): Promise<G1WritebackResult> {
   const cfg = readConfig();
   if (!cfg) return { ok: false, wrote: 0, error: "GHL credentials missing" };
 
-  const customFields = buildCustomFields(config, result);
+  const customFields = buildCustomFields(result);
   if (customFields.length === 0) {
     // Field ids not configured yet — don't error, just signal nothing written.
     return { ok: true, wrote: 0, error: "g1_field_ids_not_configured" };

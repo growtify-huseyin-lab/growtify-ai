@@ -1,9 +1,12 @@
-// G1 / DeepGap — pure scoring from config + answers. No I/O, fully testable.
+// G1 / DeepGap — pure scoring. dimension = avg of its 2 likert questions;
+// overall = avg of dimension scores; level = round(overall) -> levels[];
+// weakest = lowest dimension. Quantitative answers are collected raw (they feed
+// the synthesis + cost-of-inaction copy — formula is the next Creative/dev step).
 import type {
   G1Answers,
-  G1Band,
-  G1Config,
   G1DimensionResult,
+  G1Level,
+  G1ResolvedConfig,
   G1Result,
 } from "./types";
 
@@ -11,78 +14,55 @@ function round1(n: number): number {
   return Math.round(n * 10) / 10;
 }
 
-function bandFor(config: G1Config, score: number): G1Band {
-  // bands declared high->low by `min`; first whose min <= score wins
-  const sorted = [...config.bands].sort((a, b) => b.min - a.min);
-  return (
-    sorted.find((b) => score >= b.min) ??
-    sorted[sorted.length - 1] ?? { min: 0, key: "unknown", label: "—" }
-  );
+function levelLabel(levels: G1Level[], score: number): string {
+  const idx = Math.min(5, Math.max(1, Math.round(score))); // 1..5
+  return levels.find((l) => l.score === idx)?.label ?? "—";
 }
 
-function recFor(config: G1Config, dimKey: string, score: number): string {
-  const r = config.recommendations[dimKey];
-  if (!r) return "";
-  if (score < 2.5) return r.low;
-  if (score < 3.5) return r.mid;
-  return r.high;
-}
-
-function archetypeFor(config: G1Config, overall: number) {
-  const sorted = [...config.archetypes].sort((a, b) => a.maxOverall - b.maxOverall);
-  return (
-    sorted.find((a) => overall <= a.maxOverall) ??
-    sorted[sorted.length - 1] ?? {
-      key: "unknown",
-      label: "—",
-      narrative: "",
-      maxOverall: 5,
-    }
-  );
-}
-
-export function scoreG1(config: G1Config, answers: G1Answers): G1Result {
-  const byDim: Record<string, number[]> = {};
-  for (const q of config.questions) {
-    const s = answers[q.id];
-    if (typeof s === "number" && !Number.isNaN(s)) {
-      (byDim[q.dimension] ??= []).push(s);
-    }
-  }
-
+export function scoreG1(config: G1ResolvedConfig, answers: G1Answers): G1Result {
   const dimensions: G1DimensionResult[] = config.dimensions.map((d) => {
-    const arr = byDim[d.key] ?? [];
-    const score = arr.length
-      ? round1(arr.reduce((a, b) => a + b, 0) / arr.length)
+    const scores = d.questions
+      .map((qid) => answers[qid])
+      .filter((v): v is number => typeof v === "number" && !Number.isNaN(v));
+    const score = scores.length
+      ? round1(scores.reduce((a, b) => a + b, 0) / scores.length)
       : 0;
-    const band = bandFor(config, score);
-    const benchmark = config.benchmark[d.key] ?? 0;
+    const benchmark = config.benchmark[d.id] ?? 0;
     return {
-      key: d.key,
+      id: d.id,
       label: d.label,
       score,
-      band: band.key,
-      bandLabel: band.label,
+      levelLabel: levelLabel(config.levels, score),
       benchmark,
       delta: round1(score - benchmark),
-      recommendation: recFor(config, d.key, score),
     };
   });
 
-  const overall = dimensions.length
-    ? round1(dimensions.reduce((a, b) => a + b.score, 0) / dimensions.length)
+  const scored = dimensions.filter((d) => d.score > 0);
+  const overall = scored.length
+    ? round1(scored.reduce((a, b) => a + b.score, 0) / scored.length)
     : 0;
-  const arch = archetypeFor(config, overall);
-  const ranked = [...dimensions].sort((a, b) => b.score - a.score);
+  const levelScore = Math.min(5, Math.max(1, Math.round(overall)));
+
+  const ranked = [...scored].sort((a, b) => a.score - b.score);
+
+  // Collect the quantitative answers (non-dimension questions) for synthesis/cost.
+  const dimQuestionIds = new Set(config.dimensions.flatMap((d) => d.questions));
+  const quant: Record<string, number | string> = {};
+  for (const q of config.questions) {
+    if (q.type !== "likert5" && !dimQuestionIds.has(q.id) && answers[q.id] !== undefined) {
+      quant[q.id] = answers[q.id];
+    }
+  }
 
   return {
     overall,
-    archetypeKey: arch.key,
-    archetypeLabel: arch.label,
-    narrative: arch.narrative,
+    levelScore,
+    levelLabel: levelLabel(config.levels, overall),
     dimensions,
-    strongest: ranked[0]?.key ?? "",
-    weakest: ranked[ranked.length - 1]?.key ?? "",
+    weakest: ranked[0]?.id ?? "",
+    strongest: ranked[ranked.length - 1]?.id ?? "",
+    quant,
     completedAt: new Date().toISOString(),
   };
 }

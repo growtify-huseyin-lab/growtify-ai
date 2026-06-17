@@ -96,7 +96,6 @@ export default async function G1Page({
       config={config}
       authToken={authToken}
       authMode={authMode}
-      sector={sector ?? null}
       ret={ret || null}
       name={name}
       email={email}
