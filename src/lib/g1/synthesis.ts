@@ -75,6 +75,15 @@ function fill(s: string, slots: Record<string, string | number>): string {
   return s.replace(/\{(\w+)\}/g, (_, k) => String(slots[k] ?? ""));
 }
 
+// Each interpretation `next` carries its own action prefix ("İlk adım:",
+// "Şimdi gereken:", "Sıradaki:" …). When embedded under a title that already
+// says "İlk hamlen", the prefix double-stacks ("İlk hamlen belli: Sıradaki: …").
+// Strip a leading short "önek: " for those framed uses; lines without an early
+// colon (level-5 "Buradaki rol artık …") pass through untouched.
+function stripLeadPrefix(s: string): string {
+  return s.replace(/^[^:]{1,25}:\s+/, "");
+}
+
 function tl(n: number): string {
   return `${Math.round(n).toLocaleString("tr-TR")}₺`;
 }
@@ -195,7 +204,7 @@ export function buildG1Synthesis(
       ? fill(UX.synthesis.quant_gap_template, { n_top_task: topTask, n_hours_task: hours })
       : "";
   const firstMove = fill(UX.synthesis.first_move_template, {
-    weakest_next: weakestDim.next,
+    weakest_next: stripLeadPrefix(weakestDim.next),
     n_top_task: topTask,
   });
   const tagline = fill(UX.synthesis.tagline_template, {
@@ -217,7 +226,7 @@ export function buildG1Synthesis(
       label: weakestDim.label,
       score: weakestDim.score,
       means: weakestDim.means,
-      next: weakestDim.next,
+      next: stripLeadPrefix(weakestDim.next),
     },
     gapParagraph,
     cost: buildCost(config, answers),

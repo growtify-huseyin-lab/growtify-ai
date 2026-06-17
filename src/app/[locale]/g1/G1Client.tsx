@@ -316,9 +316,7 @@ export default function G1Client({
                   </div>
                   {d.means && <p className="mt-2 text-sm text-gray-600">{d.means}</p>}
                   {d.next && (
-                    <p className="mt-1 text-sm text-[#232323]">
-                      <b>Sıradaki:</b> {d.next}
-                    </p>
+                    <p className="mt-1 text-sm text-[#232323]">{d.next}</p>
                   )}
                 </div>
               ))}
