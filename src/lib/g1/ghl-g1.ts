@@ -47,6 +47,7 @@ async function getBaselineFieldId(cfg: GhlConfig): Promise<string | null> {
       return k.includes("baseline") || n.includes("baseline");
     });
     cachedBaselineFieldId = f?.id ?? null; // only the hit sticks; null is retried
+    console.log(`[g1] baseline field resolve → ${cachedBaselineFieldId ?? "NOT FOUND"}`);
     return cachedBaselineFieldId;
   } catch {
     return null;
