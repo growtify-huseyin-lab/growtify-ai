@@ -3,6 +3,8 @@
 import { useMemo, useState } from "react";
 import type {
   G1Answers,
+  G1BeforeAfter,
+  G1PriorResult,
   G1ResolvedConfig,
   G1Result,
   G1Synthesis,
@@ -46,7 +48,7 @@ const UX = (
   }
 ).ux_microcopy;
 
-type Phase = "intro" | "quiz" | "submitting" | "result" | "error";
+type Phase = "intro" | "quiz" | "submitting" | "result" | "error" | "past";
 
 export default function G1Client({
   config,
@@ -56,6 +58,7 @@ export default function G1Client({
   name,
   email,
   locale,
+  prior,
 }: {
   config: G1ResolvedConfig;
   authToken: string;
@@ -64,6 +67,7 @@ export default function G1Client({
   name: string;
   email: string;
   locale: string;
+  prior?: G1PriorResult | null;
 }) {
   const [phase, setPhase] = useState<Phase>("intro");
   const [idx, setIdx] = useState(0);
@@ -71,6 +75,7 @@ export default function G1Client({
   const [numDraft, setNumDraft] = useState("");
   const [result, setResult] = useState<G1Result | null>(null);
   const [synth, setSynth] = useState<G1Synthesis | null>(null);
+  const [beforeAfter, setBeforeAfter] = useState<G1BeforeAfter | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [error, setError] = useState<string>("");
 
@@ -106,6 +111,7 @@ export default function G1Client({
         ok: boolean;
         result?: G1Result;
         synthesis?: G1Synthesis;
+        beforeAfter?: G1BeforeAfter | null;
         error?: string;
       };
       if (!data.ok || !data.result) {
@@ -115,6 +121,7 @@ export default function G1Client({
       }
       setResult(data.result);
       setSynth(data.synthesis ?? null);
+      setBeforeAfter(data.beforeAfter ?? null);
       setPhase("result");
     } catch (e) {
       setError((e as Error).message);
@@ -134,6 +141,26 @@ export default function G1Client({
     if (idx > 0) {
       setIdx(idx - 1);
       setNumDraft("");
+    }
+  }
+
+  function startQuiz() {
+    setIdx(0);
+    setAnswers({});
+    setNumDraft("");
+    setPhase("quiz");
+  }
+
+  function fmtDate(iso: string): string {
+    if (!iso) return "";
+    try {
+      return new Date(iso).toLocaleDateString("tr-TR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      });
+    } catch {
+      return "";
     }
   }
 
@@ -163,14 +190,113 @@ export default function G1Client({
             </div>
           )}
           <p className="mt-4 text-sm text-gray-500 italic">{UX.intro.honesty_nudge}</p>
-          <button
-            onClick={() => setPhase("quiz")}
-            className="mt-7 inline-flex items-center justify-center rounded-xl px-8 py-3.5 text-white font-semibold shadow-sm hover:opacity-90 transition"
-            style={{ backgroundColor: PRIMARY }}
-          >
-            {UX.intro.cta}
-          </button>
+
+          {prior ? (
+            <div className="mt-7">
+              <div className="mx-auto max-w-md rounded-2xl border border-gray-200 bg-gray-50 px-5 py-4 text-left">
+                <p className="text-sm text-gray-600">
+                  Bu değerlendirmeyi
+                  {prior.completedAt ? ` ${fmtDate(prior.completedAt)} tarihinde` : " daha önce"} tamamlamıştın.
+                </p>
+                <p className="mt-1 font-semibold text-[#232323]">
+                  {prior.archetype || "Profilin"} · {prior.overall}/5
+                </p>
+                <p className="mt-1 text-xs text-gray-500">
+                  Yeniden çözersen, önceki sonucunla karşılaştırmalı bir “önce → sonra”
+                  görürsün.
+                </p>
+              </div>
+              <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+                <button
+                  onClick={() => setPhase("past")}
+                  className="rounded-xl border-2 px-6 py-3 font-semibold transition hover:bg-gray-50"
+                  style={{ borderColor: PRIMARY, color: PRIMARY }}
+                >
+                  Önceki sonucu gör
+                </button>
+                <button
+                  onClick={startQuiz}
+                  className="rounded-xl px-7 py-3 text-white font-semibold shadow-sm transition hover:opacity-90"
+                  style={{ backgroundColor: PRIMARY }}
+                >
+                  Yeniden çöz →
+                </button>
+              </div>
+            </div>
+          ) : (
+            <button
+              onClick={startQuiz}
+              className="mt-7 inline-flex items-center justify-center rounded-xl px-8 py-3.5 text-white font-semibold shadow-sm hover:opacity-90 transition"
+              style={{ backgroundColor: PRIMARY }}
+            >
+              {UX.intro.cta}
+            </button>
+          )}
           <p className="mt-3 text-xs text-gray-400">{UX.intro.meta}</p>
+        </div>
+      </Shell>
+    );
+  }
+
+  /* ----------------------------------------------------------------- past */
+  // Read-only recall of the member's last stored result (from GHL fields).
+  if (phase === "past" && prior) {
+    return (
+      <Shell wide>
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center">
+            <p className="text-sm font-semibold tracking-wide" style={{ color: PRIMARY }}>
+              Önceki Sonucun
+            </p>
+            <h1 className="mt-2 text-3xl font-bold text-[#232323]">
+              {prior.archetype || "Profilin"}
+            </h1>
+            <p className="mt-1 text-gray-500">
+              {prior.overall}/5 · {config.sector.label}
+              {prior.completedAt ? ` · ${fmtDate(prior.completedAt)}` : ""}
+            </p>
+          </div>
+
+          {prior.gapSummary && (
+            <p className="mt-6 text-[#232323] leading-relaxed text-center">
+              {prior.gapSummary}
+            </p>
+          )}
+
+          {prior.dims.length > 0 && (
+            <div className="mt-6 grid gap-2 sm:grid-cols-2">
+              {prior.dims.map((d) => (
+                <div
+                  key={d.id}
+                  className="flex items-center justify-between rounded-xl border border-gray-200 px-4 py-2.5"
+                >
+                  <span className="text-sm text-[#232323]">{dimLabel[d.id] ?? d.id}</span>
+                  <span className="font-semibold" style={{ color: PRIMARY }}>
+                    {d.score}/5
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <button
+              onClick={startQuiz}
+              className="rounded-xl px-7 py-3 text-white font-semibold shadow-sm transition hover:opacity-90"
+              style={{ backgroundColor: PRIMARY }}
+            >
+              Yeniden çöz (önce → sonra) →
+            </button>
+            {ret && (
+              <a
+                href={ret}
+                className="rounded-xl border-2 px-6 py-3 font-semibold transition hover:bg-gray-50"
+                style={{ borderColor: PRIMARY, color: PRIMARY }}
+              >
+                Derse Dön
+              </a>
+            )}
+          </div>
         </div>
       </Shell>
     );
@@ -227,6 +353,44 @@ export default function G1Client({
               {config.sector.label}
             </p>
           </div>
+
+          {/* Before → After (G→T) — only on a retake */}
+          {beforeAfter && (
+            <section
+              className="mt-8 rounded-2xl border p-5"
+              style={{ borderColor: PRIMARY, backgroundColor: "#f6f5ff" }}
+            >
+              <h2 className="text-sm font-semibold uppercase tracking-wide" style={{ color: PRIMARY }}>
+                Önce → Sonra · {beforeAfter.attempt}. ölçüm
+              </h2>
+              <div className="mt-3 flex items-center justify-center gap-4">
+                <div className="text-center">
+                  <div className="text-xs text-gray-400">Önce</div>
+                  <div className="text-2xl font-bold text-gray-400">{beforeAfter.before}/5</div>
+                </div>
+                <div className="text-2xl text-gray-300">→</div>
+                <div className="text-center">
+                  <div className="text-xs" style={{ color: PRIMARY }}>Sonra</div>
+                  <div className="text-2xl font-bold text-[#232323]">{beforeAfter.after}/5</div>
+                </div>
+                <DeltaBadge value={beforeAfter.delta} big />
+              </div>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                {beforeAfter.dims.map((d) => (
+                  <div
+                    key={d.id}
+                    className="flex items-center justify-between rounded-xl bg-white/70 px-4 py-2 text-sm"
+                  >
+                    <span className="text-[#232323]">{d.label}</span>
+                    <span className="flex items-center gap-2 text-gray-500">
+                      {d.before} → <b className="text-[#232323]">{d.after}</b>
+                      <DeltaBadge value={d.delta} />
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
 
           {/* Synthesis / gap paragraph */}
           <section className="mt-8 rounded-2xl border border-gray-100 bg-gray-50/60 p-5">
@@ -452,5 +616,23 @@ function Shell({ children, wide }: { children: React.ReactNode; wide?: boolean }
     <main className="min-h-screen bg-white flex items-center justify-center px-5 py-12">
       <div className={wide ? "w-full" : "w-full max-w-xl"}>{children}</div>
     </main>
+  );
+}
+
+// Colored delta chip for the before/after view: ↑ green gain, → gray flat, ↓ red drop.
+function DeltaBadge({ value, big }: { value: number; big?: boolean }) {
+  const up = value > 0;
+  const down = value < 0;
+  const color = up ? "#16a34a" : down ? "#dc2626" : "#9ca3af";
+  const arrow = up ? "↑" : down ? "↓" : "→";
+  const sign = value > 0 ? "+" : "";
+  return (
+    <span
+      className={`inline-flex items-center gap-0.5 font-bold ${big ? "text-lg px-2.5 py-1 rounded-lg" : "text-xs px-1.5 py-0.5 rounded"}`}
+      style={{ color, backgroundColor: big ? `${color}1a` : "transparent" }}
+    >
+      {arrow} {sign}
+      {value}
+    </span>
   );
 }

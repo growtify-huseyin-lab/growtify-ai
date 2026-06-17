@@ -9,6 +9,7 @@ import { verifyG1Token } from "@/lib/g1/token";
 import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
 import { getG1Contact } from "@/lib/g1/ghl-g1";
 import { loadG1Config } from "@/lib/g1/config";
+import type { G1PriorResult } from "@/lib/g1/types";
 import G1Client from "./G1Client";
 
 export const dynamic = "force-dynamic"; // identity lives in the query string
@@ -63,6 +64,7 @@ export default async function G1Page({
   let ret = "";
   let name = "";
   let email = "";
+  let prior: G1PriorResult | null = null;
 
   if (ft) {
     // Firebase path — verify the portal member token; pass it through so submit
@@ -77,6 +79,7 @@ export default async function G1Page({
     const c = await getG1Contact(fb.uid as string);
     name = c.firstName || fb.name || nameParam || (fb.email ? fb.email.split("@")[0] : "");
     email = c.email || fb.email || "";
+    prior = c.prior ?? null; // past result (if they've completed before)
   } else if (t) {
     // HMAC path — trusted signed deep link; pass through.
     const v = verifyG1Token(t);
@@ -100,6 +103,7 @@ export default async function G1Page({
       name={name}
       email={email}
       locale={locale}
+      prior={prior}
     />
   );
 }
