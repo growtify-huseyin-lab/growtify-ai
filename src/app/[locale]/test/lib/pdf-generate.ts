@@ -153,6 +153,60 @@ export async function generatePdfFromHtml(html: string): Promise<Buffer> {
 }
 
 /**
+ * Generate a SINGLE-PAGE PDF from raw HTML — the page height is set to the actual
+ * rendered content height, so everything lands on one page with no overflow and no
+ * cutoff regardless of how much content there is. Used by /g1 (one-page report).
+ */
+export async function generateSinglePagePdfFromHtml(html: string): Promise<Buffer> {
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await renderSinglePagePdf(html);
+    } catch (err) {
+      console.error(
+        `[pdf] single-page attempt ${attempt}/${MAX_RETRIES} failed:`,
+        (err as Error).message,
+      );
+      await killBrowser();
+      if (attempt === MAX_RETRIES) throw err;
+      await new Promise((r) => setTimeout(r, 500));
+    }
+  }
+  throw new Error("Single-page PDF generation failed after retries");
+}
+
+async function renderSinglePagePdf(html: string): Promise<Buffer> {
+  const browser = await getBrowser();
+  const page = await browser.newPage();
+  page.setDefaultTimeout(PAGE_TIMEOUT);
+  try {
+    // A4 width at 96dpi = 794px; lay the content out at that width.
+    await page.setViewport({ width: 794, height: 1123 });
+    await page.setContent(html, { waitUntil: "domcontentloaded" });
+    await new Promise((r) => setTimeout(r, 200));
+    // Measure the real content height and make the page exactly that tall.
+    const heightPx = await page.evaluate(() =>
+      Math.ceil(
+        Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight,
+        ),
+      ),
+    );
+    const pdfBuffer = await page.pdf({
+      width: "794px",
+      height: `${Math.max(400, heightPx)}px`,
+      printBackground: true,
+      margin: { top: "0", right: "0", bottom: "0", left: "0" },
+      pageRanges: "1",
+      timeout: PAGE_TIMEOUT,
+    });
+    return Buffer.from(pdfBuffer);
+  } finally {
+    await page.close().catch(() => {});
+  }
+}
+
+/**
  * Generate a filename for the PDF.
  */
 export function getPdfFilename(firstName: string): string {

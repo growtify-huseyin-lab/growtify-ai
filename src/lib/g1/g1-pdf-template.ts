@@ -100,7 +100,7 @@ export function generateG1PdfHtml({
   return `<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif; color:${DARK}; font-size:12px; line-height:1.5; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
-  .page { width:100%; min-height:1123px; background:white; position:relative; }
+  .page { width:100%; background:white; position:relative; }
   .header { background:linear-gradient(135deg,${PRIMARY} 0%,${PRIMARY_LIGHT} 60%,#7c6cf0 100%); color:white; padding:40px 50px 32px; position:relative; overflow:hidden; }
   .header::before { content:''; position:absolute; top:-60px; right:-60px; width:200px; height:200px; border-radius:50%; background:rgba(255,255,255,.06); }
   .badge { display:inline-block; background:rgba(255,255,255,.15); border-radius:50px; padding:5px 18px; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px; }
@@ -109,7 +109,7 @@ export function generateG1PdfHtml({
   .name-row { margin-top:18px; display:flex; justify-content:space-between; align-items:flex-end; }
   .name { font-size:16px; font-weight:700; }
   .date { font-size:11px; opacity:.8; }
-  .body { padding:26px 50px 70px; }
+  .body { padding:24px 50px 16px; }
   .cards { display:flex; gap:12px; margin-bottom:22px; }
   .card { flex:1; border-radius:16px; padding:16px; text-align:center; }
   .card-primary { background:linear-gradient(135deg,${PRIMARY}12,${PRIMARY}08); border:1.5px solid ${PRIMARY}25; }
@@ -121,7 +121,7 @@ export function generateG1PdfHtml({
   .gap { font-size:12px; color:#334155; line-height:1.8; }
   .weak { margin-top:8px; padding:14px 16px; background:#f7f7fb; border-radius:12px; }
   .weak-k { font-size:9px; text-transform:uppercase; letter-spacing:.5px; color:#94a3b8; }
-  .footer { position:absolute; bottom:18px; left:50px; right:50px; font-size:8px; color:#94a3b8; text-align:center; line-height:1.6; border-top:1px solid #eef0f5; padding-top:10px; }
+  .footer { margin:6px 50px 22px; font-size:8px; color:#94a3b8; text-align:center; line-height:1.6; border-top:1px solid #eef0f5; padding-top:10px; }
 </style></head><body>
 <div class="page">
   <div class="header">
