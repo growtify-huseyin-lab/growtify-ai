@@ -39,6 +39,46 @@ function readConfig(): GhlConfig | null {
   return { apiToken, locationId, apiBase, apiVersion };
 }
 
+export interface G1ContactLookup {
+  found: boolean;
+  firstName?: string;
+  fullName?: string;
+  email?: string;
+  error?: string;
+}
+
+/**
+ * Resolve a contact by id (the verified Firebase `sub`). Used by /g1 to show the
+ * member their own name/email (so they can see the test opened as them) and to
+ * confirm `sub === GHL contactId` — if the contact is found, the identity binding
+ * is correct; a 404 means `sub` is not a contactId and we'd need an email mapping.
+ */
+export async function getG1Contact(contactId: string): Promise<G1ContactLookup> {
+  const cfg = readConfig();
+  if (!cfg) return { found: false, error: "ghl_credentials_missing" };
+  try {
+    const res = await fetch(`${cfg.apiBase}/contacts/${contactId}`, {
+      headers: {
+        Authorization: `Bearer ${cfg.apiToken}`,
+        Version: cfg.apiVersion,
+        Accept: "application/json",
+      },
+      signal: AbortSignal.timeout(8000),
+    });
+    if (res.status === 404) return { found: false, error: "not_found" };
+    if (!res.ok) return { found: false, error: `HTTP ${res.status}` };
+    const body = (await res.json().catch(() => ({}))) as {
+      contact?: { firstName?: string; lastName?: string; name?: string; email?: string };
+    };
+    const c = body.contact;
+    if (!c) return { found: false, error: "no_contact" };
+    const fullName = c.name || [c.firstName, c.lastName].filter(Boolean).join(" ");
+    return { found: true, firstName: c.firstName, fullName, email: c.email };
+  } catch (err) {
+    return { found: false, error: (err as Error).message };
+  }
+}
+
 function buildGapSummary(config: G1Config, result: G1Result): string {
   const label = (k: string) =>
     config.dimensions.find((d) => d.key === k)?.label ?? k;

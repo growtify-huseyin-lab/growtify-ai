@@ -7,6 +7,7 @@
 // auth, valid for the whole ~5-10 min sitting; HMAC for the fallback path).
 import { verifyG1Token } from "@/lib/g1/token";
 import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
+import { getG1Contact } from "@/lib/g1/ghl-g1";
 import { loadG1Config } from "@/lib/g1/config";
 import G1Client from "./G1Client";
 
@@ -61,6 +62,7 @@ export default async function G1Page({
   let authMode: "firebase" | "hmac" = "firebase";
   let ret = "";
   let name = "";
+  let email = "";
 
   if (ft) {
     // Firebase path — verify the portal member token; pass it through so submit
@@ -70,7 +72,11 @@ export default async function G1Page({
     authToken = ft;
     authMode = "firebase";
     ret = safeRet(retParam);
-    name = fb.name || nameParam || (fb.email ? fb.email.split("@")[0] : "");
+    // Resolve the GHL contact so the member sees their own name/email (the test
+    // opened as them) and we confirm sub === contactId (found = binding correct).
+    const c = await getG1Contact(fb.uid as string);
+    name = c.firstName || fb.name || nameParam || (fb.email ? fb.email.split("@")[0] : "");
+    email = c.email || fb.email || "";
   } else if (t) {
     // HMAC path — trusted signed deep link; pass through.
     const v = verifyG1Token(t);
@@ -79,6 +85,7 @@ export default async function G1Page({
     authMode = "hmac";
     ret = v.payload.ret ?? "";
     name = v.payload.name ?? "";
+    email = v.payload.email ?? "";
   } else {
     return <ErrorView reason="no_token" />;
   }
@@ -92,6 +99,7 @@ export default async function G1Page({
       sector={sector ?? null}
       ret={ret || null}
       name={name}
+      email={email}
       locale={locale}
     />
   );
