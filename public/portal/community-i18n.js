@@ -604,3 +604,14 @@
     console.error("[Panel TR] ERROR:", e);
   }
 })();
+
+/* G1 DeepGap link enricher — load the portal-side token bridge (no separate GHL
+   Header Code edit needed; this script is already injected into the portal). */
+(function () {
+  if (document.getElementById("__gai_g1_link")) return;
+  var s = document.createElement("script");
+  s.id = "__gai_g1_link";
+  s.src = "https://growtify.ai/portal/g1-link.js?v=1";
+  s.async = true;
+  document.head.appendChild(s);
+})();
