@@ -60,7 +60,7 @@ export async function POST(request: Request) {
   const result = scoreG1(config, body.answers);
 
   // Writeback is best-effort: never block the user's result on a GHL hiccup.
-  const wb = await saveG1ResultToContact(contactId, result, config).catch(
+  const wb = await saveG1ResultToContact(contactId, result).catch(
     (e: unknown) => ({ ok: false, wrote: 0, error: (e as Error).message }),
   );
 
