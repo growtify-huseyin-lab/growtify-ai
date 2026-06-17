@@ -11,6 +11,7 @@ import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
 import { loadG1Config } from "@/lib/g1/config";
 import { scoreG1 } from "@/lib/g1/scoring";
 import { buildG1Synthesis } from "@/lib/g1/synthesis";
+import { buildG1Comparison } from "@/lib/g1/compare";
 import { saveG1ResultToContact, sendG1ResultEmail, getG1Contact } from "@/lib/g1/ghl-g1";
 import { generateG1PdfHtml } from "@/lib/g1/g1-pdf-template";
 import { generatePdfFromHtml, getPdfFilename } from "@/app/[locale]/test/lib/pdf-generate";
@@ -99,6 +100,11 @@ export async function POST(request: Request) {
   const prior = lookup.found ? lookup.prior : undefined;
   const attempt = (prior?.attempt ?? 0) + 1;
   const beforeAfter = prior ? buildBeforeAfter(prior, result, attempt) : null;
+  // The interpreted "transformation" comparison (only on a retake).
+  const comparison =
+    beforeAfter && prior
+      ? buildG1Comparison(beforeAfter, synthesis.levelLabel, prior.archetype)
+      : null;
 
   // Writeback is best-effort: never block the user's result on a GHL hiccup.
   const wb = await saveG1ResultToContact(contactId, result, attempt).catch(
@@ -113,10 +119,11 @@ export async function POST(request: Request) {
   const synth = synthesis;
   const sectorLabel = config.sector.label;
   const ba = beforeAfter;
+  const cmp = comparison;
   after(async () => {
     let pdfUrl: string | undefined;
     try {
-      const html = generateG1PdfHtml({ name: fname, sectorLabel, synth, beforeAfter: ba });
+      const html = generateG1PdfHtml({ name: fname, sectorLabel, synth, beforeAfter: ba, comparison: cmp });
       const buf = await generatePdfFromHtml(html);
       const up = await uploadPdfToContact(fid, buf, getPdfFilename(fname));
       pdfUrl = up.ok ? (up as { urls?: string[] }).urls?.[0] : undefined;
@@ -124,7 +131,7 @@ export async function POST(request: Request) {
     } catch (e) {
       console.error("[g1/submit] pdf flow error:", (e as Error).message);
     }
-    const r = await sendG1ResultEmail(fid, fname, synth, pdfUrl).catch((e: unknown) => ({
+    const r = await sendG1ResultEmail(fid, fname, synth, pdfUrl, cmp).catch((e: unknown) => ({
       ok: false,
       error: (e as Error).message,
     }));
@@ -136,6 +143,7 @@ export async function POST(request: Request) {
     result,
     synthesis,
     beforeAfter,
+    comparison,
     attempt,
     contactId,
     ghl: { ok: wb.ok, wrote: wb.wrote, error: wb.error ?? null },

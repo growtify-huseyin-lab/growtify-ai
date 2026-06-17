@@ -1,7 +1,7 @@
 // G1 / DeepGap — push result back to the GHL contact (server-only).
 // We already know contactId from the verified token, so we PUT custom fields
 // directly (no upsert-by-email). Mirrors the pattern in test/lib/ghl-client.ts.
-import type { G1PriorResult, G1Result, G1Synthesis } from "./types";
+import type { G1Comparison, G1PriorResult, G1Result, G1Synthesis } from "./types";
 
 // Real GHL custom field IDs — created by ghl-specialist 2026-06-17 in location
 // e8ZRRmOybS08x5L6qgsS. The entry field g1_token (id i1XhsXamXfpwdRPFoOjB) is
@@ -240,14 +240,23 @@ function esc(s: string): string {
 // Mirrors test/lib/ghl-client.ts buildReportEmailHtml exactly: table-based,
 // email-client-safe, #5d47f0 header, body + CTA + disclaimer + brand footer.
 // CTA points to the PDF report when one was generated, else to /g1 (view online).
-function buildG1EmailHtml(firstName: string, synth: G1Synthesis, pdfUrl?: string): string {
+function buildG1EmailHtml(
+  firstName: string,
+  synth: G1Synthesis,
+  pdfUrl?: string,
+  comparison?: G1Comparison | null,
+): string {
   const ad = firstName ? esc(firstName) : "Profesyonel";
   const ctaUrl = pdfUrl || G1_VIEW_URL;
   const ctaText = pdfUrl ? "Raporumu Görüntüle →" : "Sonucumu Görüntüle →";
-  const h1 = "AI Olgunluk Profilin Hazır";
-  const intro = `Merhaba ${ad}, değerlendirmene göre profilin: <b>${esc(synth.levelLabel)}</b> · ${synth.overall}/5`;
-  const body =
-    "Testi tamamladığın için teşekkürler. Kişisel AI Olgunluk raporun hazırlandı — içinde 6 boyutta detaylı analizini, en güçlü ve en zayıf halkanı, ilk somut hamleni ve hareketsizliğin bedelini bulacaksın.";
+  // On a retake the email leads with the transformation (progress), not the profile.
+  const h1 = comparison ? "Dönüşümün İlerliyor" : "AI Olgunluk Profilin Hazır";
+  const intro = comparison
+    ? `Merhaba ${ad}, son ölçümünden bu yana: <b>${esc(comparison.headline)}</b>`
+    : `Merhaba ${ad}, değerlendirmene göre profilin: <b>${esc(synth.levelLabel)}</b> · ${synth.overall}/5`;
+  const body = comparison
+    ? esc(comparison.paragraph)
+    : "Testi tamamladığın için teşekkürler. Kişisel AI Olgunluk raporun hazırlandı — içinde 6 boyutta detaylı analizini, en güçlü ve en zayıf halkanı, ilk somut hamleni ve hareketsizliğin bedelini bulacaksın.";
   const disclaimer =
     "Bu rapor kişisel değerlendirme cevaplarına dayalı otomatik bir analiz içermektedir. Profesyonel danışmanlık yerine geçmez.";
   const footer =
@@ -267,14 +276,19 @@ export async function sendG1ResultEmail(
   firstName: string,
   synth: G1Synthesis,
   pdfUrl?: string,
+  comparison?: G1Comparison | null,
 ): Promise<G1EmailResult> {
   const cfg = readConfig();
   if (!cfg) return { ok: false, error: "ghl_credentials_missing" };
 
-  const subject = firstName
-    ? `${firstName}, AI Olgunluk profilin hazır`
-    : "AI Olgunluk profilin hazır";
-  const html = buildG1EmailHtml(firstName, synth, pdfUrl);
+  const subject = comparison
+    ? firstName
+      ? `${firstName}, dönüşümün ilerliyor (${comparison.attempt}. ölçüm)`
+      : `Dönüşümün ilerliyor (${comparison.attempt}. ölçüm)`
+    : firstName
+      ? `${firstName}, AI Olgunluk profilin hazır`
+      : "AI Olgunluk profilin hazır";
+  const html = buildG1EmailHtml(firstName, synth, pdfUrl, comparison);
   const payload: Record<string, unknown> = { type: "Email", contactId, subject, html };
   if (pdfUrl) payload.attachments = [pdfUrl];
 

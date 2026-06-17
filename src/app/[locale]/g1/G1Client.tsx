@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import type {
   G1Answers,
   G1BeforeAfter,
+  G1Comparison,
   G1PriorResult,
   G1ResolvedConfig,
   G1Result,
@@ -76,6 +77,7 @@ export default function G1Client({
   const [result, setResult] = useState<G1Result | null>(null);
   const [synth, setSynth] = useState<G1Synthesis | null>(null);
   const [beforeAfter, setBeforeAfter] = useState<G1BeforeAfter | null>(null);
+  const [comparison, setComparison] = useState<G1Comparison | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [error, setError] = useState<string>("");
 
@@ -112,6 +114,7 @@ export default function G1Client({
         result?: G1Result;
         synthesis?: G1Synthesis;
         beforeAfter?: G1BeforeAfter | null;
+        comparison?: G1Comparison | null;
         error?: string;
       };
       if (!data.ok || !data.result) {
@@ -122,6 +125,7 @@ export default function G1Client({
       setResult(data.result);
       setSynth(data.synthesis ?? null);
       setBeforeAfter(data.beforeAfter ?? null);
+      setComparison(data.comparison ?? null);
       setPhase("result");
     } catch (e) {
       setError((e as Error).message);
@@ -361,7 +365,8 @@ export default function G1Client({
               style={{ borderColor: PRIMARY, backgroundColor: "#f6f5ff" }}
             >
               <h2 className="text-sm font-semibold uppercase tracking-wide" style={{ color: PRIMARY }}>
-                Önce → Sonra · {beforeAfter.attempt}. ölçüm
+                Dönüşümün · {beforeAfter.attempt}. ölçüm
+                {comparison ? ` · ${comparison.headline}` : ""}
               </h2>
               <div className="mt-3 flex items-center justify-center gap-4">
                 <div className="text-center">
@@ -375,6 +380,11 @@ export default function G1Client({
                 </div>
                 <DeltaBadge value={beforeAfter.delta} big />
               </div>
+              {comparison && (
+                <p className="mt-3 text-sm text-[#232323] leading-relaxed">
+                  {comparison.paragraph}
+                </p>
+              )}
               <div className="mt-4 grid gap-2 sm:grid-cols-2">
                 {beforeAfter.dims.map((d) => (
                   <div

@@ -3,7 +3,7 @@
 // palette (#5d47f0 indigo + #C9FF85 accent), gradient header, score cards, brand
 // footer. Content is the G1 synthesis: profile, gap, per-dimension bars, weakest +
 // first move, cost-of-inaction, and the G→T before/after on a retake.
-import type { G1BeforeAfter, G1Synthesis } from "./types";
+import type { G1BeforeAfter, G1Comparison, G1Synthesis } from "./types";
 
 const PRIMARY = "#5d47f0";
 const PRIMARY_LIGHT = "#9886fe";
@@ -48,9 +48,16 @@ export interface G1PdfData {
   sectorLabel: string;
   synth: G1Synthesis;
   beforeAfter?: G1BeforeAfter | null;
+  comparison?: G1Comparison | null;
 }
 
-export function generateG1PdfHtml({ name, sectorLabel, synth, beforeAfter }: G1PdfData): string {
+export function generateG1PdfHtml({
+  name,
+  sectorLabel,
+  synth,
+  beforeAfter,
+  comparison,
+}: G1PdfData): string {
   const now = new Date().toLocaleDateString("tr-TR", {
     year: "numeric",
     month: "long",
@@ -71,12 +78,21 @@ export function generateG1PdfHtml({ name, sectorLabel, synth, beforeAfter }: G1P
 
   const beforeAfterBlock = beforeAfter
     ? `<div style="margin-top:16px;padding:14px 16px;background:${PRIMARY}0d;border:1.5px solid ${PRIMARY}33;border-radius:12px">
-        <div style="font-weight:800;color:${PRIMARY};font-size:12px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Önce → Sonra · ${beforeAfter.attempt}. ölçüm</div>
+        <div style="font-weight:800;color:${PRIMARY};font-size:12px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px">Dönüşümün · ${beforeAfter.attempt}. ölçüm${comparison ? ` · ${esc(comparison.headline)}` : ""}</div>
         <div style="display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:8px">
           <div style="text-align:center"><div style="font-size:9px;color:${GRAY}">Önce</div><div style="font-size:20px;font-weight:800;color:${GRAY}">${beforeAfter.before}/5</div></div>
           <div style="font-size:18px;color:#cbd5e1">→</div>
           <div style="text-align:center"><div style="font-size:9px;color:${PRIMARY}">Sonra</div><div style="font-size:20px;font-weight:800;color:${DARK}">${beforeAfter.after}/5</div></div>
           <div style="font-size:14px">${deltaChip(beforeAfter.delta)}</div>
+        </div>
+        ${comparison ? `<p style="font-size:11px;color:#334155;line-height:1.7;margin-top:4px">${esc(comparison.paragraph)}</p>` : ""}
+        <div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:6px">
+          ${beforeAfter.dims
+            .map(
+              (d) =>
+                `<span style="font-size:10px;color:${GRAY};background:white;border-radius:6px;padding:3px 8px">${esc(d.label)} ${d.before}→<b style="color:${DARK}">${d.after}</b> ${deltaChip(d.delta)}</span>`,
+            )
+            .join("")}
         </div>
       </div>`
     : "";
