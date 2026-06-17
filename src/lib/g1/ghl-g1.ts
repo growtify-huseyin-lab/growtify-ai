@@ -3,20 +3,22 @@
 // directly (no upsert-by-email). Mirrors the pattern in test/lib/ghl-client.ts.
 import type { G1Config, G1Result } from "./types";
 
-// GHL custom field IDs — TODO(ghl-specialist): create these fields in GHL and
-// replace the REPLACE_* placeholders with the real field ids. Until then the
-// writeback no-ops gracefully (see saveG1ResultToContact).
+// Real GHL custom field IDs — created by ghl-specialist 2026-06-17 in location
+// e8ZRRmOybS08x5L6qgsS. The entry field g1_token (id i1XhsXamXfpwdRPFoOjB) is
+// written by the GHL mint workflow, not here. `attempt` is reserved for the
+// G-start vs T-end retake/before-after (wired once attempt tracking lands).
 export const G1_FIELD_IDS: Record<string, string> = {
-  overall: "REPLACE_G1_OVERALL",
-  deployment: "REPLACE_G1_DEPLOYMENT",
-  systems: "REPLACE_G1_SYSTEMS",
-  data: "REPLACE_G1_DATA",
-  outcomes: "REPLACE_G1_OUTCOMES",
-  people: "REPLACE_G1_PEOPLE",
-  governance: "REPLACE_G1_GOVERNANCE",
-  archetype: "REPLACE_G1_ARCHETYPE",
-  gapSummary: "REPLACE_G1_GAP_SUMMARY",
-  completedAt: "REPLACE_G1_COMPLETED_AT",
+  overall: "ajExQLuHZZymYZjioycd",
+  deployment: "KLNO7RDJqofZ1jGDbJtf",
+  systems: "N9WCpugkDASJD3WTj979",
+  data: "V7Q6mfKLyx9XszMLJRQp",
+  outcomes: "HAoPIXdmIJIAzPZ5ZaGJ",
+  people: "Cr9rhYnlbUYY86tezhty",
+  governance: "pTXt2TLfXZ3S05d4xD7X",
+  archetype: "azehwJGTC6cnVnRh6M9P",
+  gapSummary: "B7sVkI189pAkLb3YcgX3",
+  completedAt: "liaSle4fkrw2TUV1KqJ1",
+  attempt: "5Ue1jUHNys3n7cj501un",
 };
 
 const G1_COMPLETED_TAG = "g1_completed";

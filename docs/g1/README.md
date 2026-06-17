@@ -82,13 +82,22 @@ to refine questions/benchmarks/narratives). Per-sector overrides merge over defa
 line; fully zero-dev runtime loading from `public/g1/{sector}.json` is the planned
 follow-up.
 
+## GHL setup status (ghl-specialist, 2026-06-17)
+
+- ✅ **12 custom fields created** in location e8ZRRmOybS08x5L6qgsS; real ids wired into `ghl-g1.ts`. (Note: GHL doubles underscores in merge keys → `{{contact.g1__token}}`.)
+- ⏳ **Workflows specced + WMR-registered** (`WG1-Mint`, `WG1-Complete`) — GHL has no workflow-create API, so they're built in the UI from the spec.
+- 🔴 **Merge-field render = FAIL.** The GHL lesson player does NOT render contact custom field merge tags, so `?t={{contact.g1__token}}` placed in lesson content renders literally. **Secure launch path = deliver the link by email** (the GHL email builder DOES render the tag; the token stays HMAC-signed). A redirect-by-raw-`{{contact.id}}` endpoint was considered but is **spoofable for writeback** → rejected. Lesson shows static "e-postanı kontrol et" text.
+- Locked decisions (CEO 2026-06-17): `returnUrl` = the G-lesson URL; **retake = yes** (G-start + T-end before/after → needs D1 attempt history + delta UI); **TR+EN** bilingual; future `/test` kurumsal integration.
+
 ## Open items before go-live
 
-- [ ] **Dimension framework lock** (besuper-mirror vs GROWT-native) — CMO/CSO/Strategy.
-- [ ] **Questions/benchmarks/narratives** content lock — Creative/Strategy.
-- [ ] **GHL fields created + ids wired** — ghl-specialist.
-- [ ] **GHL mint + completion workflows built** — ghl-specialist.
-- [ ] **Env secrets set in Vercel** — env-cto.
-- [ ] **Confirm GHL lesson renders `{{contact.g1_token}}`** merge field (fallback: opaque-nonce or redirect page).
-- [ ] Result UI polish (radar chart, EN locale, retake/idempotency in D1).
-- [ ] ADR published to cto-briefs/decisions (Class B sign-off).
+- [ ] **Content lock** (questions/benchmarks/narratives, TR+EN) — Creative.
+- [x] GHL fields created + ids wired — ghl-specialist + dev.
+- [ ] **GHL mint + completion workflows built in UI** (from spec) — ghl-specialist.
+- [ ] **Email-delivery link element** added to WG1-Mint (secure path) + lesson "check email" copy — ghl-specialist + CEO copy.
+- [ ] **Env secrets** — env-cto: Vercel `G1_TOKEN_SECRET` + `G1_MINT_SECRET`, and a matching GHL Custom Value `g1_mint_secret`.
+- [ ] **CEO inputs**: G-lesson `returnUrl`, confirm G = GROWT L1, approve email delivery + TR copy, WG1-Complete opp stage.
+- [ ] **Retake before/after**: D1 attempt history + G→T delta on result UI — dev.
+- [ ] **EN locale** config + loader wiring (when Creative delivers `default.en.json`) — dev.
+- [ ] Result UI polish (radar chart) — dev.
+- [ ] ADR published to cto-briefs/decisions (Class B sign-off) — dev/CTO.
