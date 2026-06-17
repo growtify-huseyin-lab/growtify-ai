@@ -1,0 +1,204 @@
+{
+  "version": "1.0.0-draft",
+  "locale": "tr",
+  "meta": {
+    "id": "g1-deepgap",
+    "title": "DeepGap — AI Olgunluk Profili",
+    "subtitle": "İşinin AI olgunluğunu 6 boyutta ölç, kişisel gap profilini gör.",
+    "questionCount": 18
+  },
+  "dimensions": [
+    { "key": "deployment", "label": "Kullanım Derinliği", "desc": "AI işine ne kadar derin gömülü — yüzeysel mi, uçtan uca mı." },
+    { "key": "systems", "label": "Sistemler & Entegrasyon", "desc": "AI araçların diğer araçlarınla ne kadar bağlı." },
+    { "key": "data", "label": "Veri & Bağlam", "desc": "AI'ın işine özel doğru veriye erişimi var mı." },
+    { "key": "outcomes", "label": "Sonuç & Ölçüm", "desc": "AI'ın iş etkisini ne kadar net ölçüyorsun." },
+    { "key": "people", "label": "Beceri & Sahiplik", "desc": "Sen ve ekibin AI'a ne kadar hazır." },
+    { "key": "governance", "label": "Düzen & Güven", "desc": "AI kullanımında kalite, marka ve risk kontrolü." }
+  ],
+  "questions": [
+    { "id": "q1", "dimension": "deployment", "stem": "İşinde AI'ı içerik üretmenin ötesinde nerede kullanıyorsun?", "options": [
+      { "score": 1, "label": "İşimde AI kullanmıyorum" },
+      { "score": 2, "label": "Sadece içerik üretimi (metin, sosyal medya, e-posta taslağı)" },
+      { "score": 3, "label": "İçerik + bir alan daha (analiz, planlama veya müşteri iletişimi)" },
+      { "score": 4, "label": "İçerik, planlama, müşteri yönetimi ve analizde yaygın kullanım" },
+      { "score": 5, "label": "AI iş akışımı uçtan uca yürütüyor — planlamadan teslimata" }
+    ] },
+    { "id": "q2", "dimension": "deployment", "stem": "AI kullanımının ne kadarı içerik üretimi, ne kadarı diğer işler?", "options": [
+      { "score": 1, "label": "AI kullanmıyorum" },
+      { "score": 2, "label": "%90+ içerik üretimi" },
+      { "score": 3, "label": "Yaklaşık %70-80 içerik" },
+      { "score": 4, "label": "Aşağı yukarı yarı yarıya" },
+      { "score": 5, "label": "İçerik azınlıkta — çoğu analiz, otomasyon ve karar desteği" }
+    ] },
+    { "id": "q3", "dimension": "deployment", "stem": "Tekrar eden işlerini AI ile ne kadar otomatikleştirdin?", "options": [
+      { "score": 1, "label": "Hiç — her şeyi elle yapıyorum" },
+      { "score": 2, "label": "Bir-iki görevde AI'a danışıyorum, uygulamayı ben yapıyorum" },
+      { "score": 3, "label": "AI öneriyor, ben onaylayıp uyguluyorum" },
+      { "score": 4, "label": "Belirli işler AI ile yarı-otomatik akıyor" },
+      { "score": 5, "label": "AI rutin işleri uçtan uca, gözetimli şekilde yürütüyor" }
+    ] },
+
+    { "id": "q4", "dimension": "systems", "stem": "Kullandığın AI araçları diğer araçlarınla (CRM, e-posta, takvim, site) ne kadar bağlı?", "options": [
+      { "score": 1, "label": "Hiç bağlı değil" },
+      { "score": 2, "label": "Araçlar ayrı — çıktıyı elle taşıyorum" },
+      { "score": 3, "label": "1-2 araçla kısmi bağlantı" },
+      { "score": 4, "label": "Ana araçlarım bağlı — çıktılar akışa giriyor" },
+      { "score": 5, "label": "Tek bir entegre, AI-öncelikli akış" }
+    ] },
+    { "id": "q5", "dimension": "systems", "stem": "AI bir çıktı (içerik/öneri) ürettiğinde sonra ne oluyor?", "options": [
+      { "score": 1, "label": "Kopyala-yapıştır başka araçlara" },
+      { "score": 2, "label": "Dışa/içe aktarım ile taşıyorum" },
+      { "score": 3, "label": "Yarı-otomatik aktarım" },
+      { "score": 4, "label": "AI aracından doğrudan yayın/aktarım" },
+      { "score": 5, "label": "AI çıktısı otomatik olarak sonraki adımları tetikliyor" }
+    ] },
+    { "id": "q6", "dimension": "systems", "stem": "Müşteri/iş verin AI'a ne kadar bağlı?", "options": [
+      { "score": 1, "label": "Bağlı değil — AI genel komutlarla çalışıyor" },
+      { "score": 2, "label": "Tek bir kaynağa temel bağlantı (örn. e-posta listesi)" },
+      { "score": 3, "label": "CRM/müşteri kayıtlarına bağlı, segmentler mevcut" },
+      { "score": 4, "label": "Geçmiş performans + davranış verisi AI'ı besliyor" },
+      { "score": 5, "label": "Tüm temas noktalarından gerçek-zamanlı veri AI'a akıyor" }
+    ] },
+
+    { "id": "q7", "dimension": "data", "stem": "AI'ın işine özel hangi bilgilere erişimi var?", "options": [
+      { "score": 1, "label": "Hiç — genel komutlarla çalışıyor, işime özel bilgi yok" },
+      { "score": 2, "label": "Temel marka/hizmet açıklamaları" },
+      { "score": 3, "label": "Marka sesi, hizmet bilgisi ve bir miktar geçmiş" },
+      { "score": 4, "label": "Geçmiş işler, müşteri segmentleri, marka sesi ve konumlandırma" },
+      { "score": 5, "label": "Bunların hepsi + gerçek-zamanlı sinyaller ve tahmine dayalı modeller" }
+    ] },
+    { "id": "q8", "dimension": "data", "stem": "Müşteri/iş bilgini ne kadar düzenli ve tek yerde tutuyorsun?", "options": [
+      { "score": 1, "label": "Dağınık — tek bir görünüm yok" },
+      { "score": 2, "label": "Sistemler arası parçalı" },
+      { "score": 3, "label": "Kısmen toparlandı" },
+      { "score": 4, "label": "Tek bir düzenli kayıt/CRM mevcut" },
+      { "score": 5, "label": "Gerçek-zamanlı birleşik profil, kişiselleştirmeyi besliyor" }
+    ] },
+    { "id": "q9", "dimension": "data", "stem": "Verin, AI'ın iş etkisini ölçmeyi ne kadar destekliyor?", "options": [
+      { "score": 1, "label": "Ölçüm altyapısı yok" },
+      { "score": 2, "label": "Veri var ama AI'dan kopuk" },
+      { "score": 3, "label": "Bazı çıktıları ölçebiliyorum (hacim, zaman) ama iş etkisini değil" },
+      { "score": 4, "label": "AI etkinliğini performans metriklerine bağlayabiliyorum" },
+      { "score": 5, "label": "Tam atıf: AI etkinliği gelir/değer ile bağlı" }
+    ] },
+
+    { "id": "q10", "dimension": "outcomes", "stem": "AI'ın işine etkisini nasıl ölçüyorsun?", "options": [
+      { "score": 1, "label": "Ölçüm yok" },
+      { "score": 2, "label": "Üretilen içerik hacmi ve kazanılan zamanı izliyorum" },
+      { "score": 3, "label": "İş düzeyinde metrikler + bir miktar atıf" },
+      { "score": 4, "label": "Dönüşüm, maliyet ve gelire bağlı kapsamlı atıf" },
+      { "score": 5, "label": "İleri test + AI yatırımını sürekli iş sonucuna göre optimize etme" }
+    ] },
+    { "id": "q11", "dimension": "outcomes", "stem": "AI kullanımın arttıkça getirisine olan güvenin nasıl değişti?", "options": [
+      { "score": 1, "label": "Ölçmüyorum / bilmiyorum" },
+      { "score": 2, "label": "Daha çok AI'a rağmen güven azaldı" },
+      { "score": 3, "label": "Sabit — daha çok AI ama faydası belirsiz" },
+      { "score": 4, "label": "Arttı — AI'ın katkısını görebiliyorum" },
+      { "score": 5, "label": "Güçlü güven — ölçüm düzenimi adapte ettim, net getiri görüyorum" }
+    ] },
+    { "id": "q12", "dimension": "outcomes", "stem": "AI'dan bildirdiğin birincil fayda ne?", "options": [
+      { "score": 1, "label": "Net bir fayda yok" },
+      { "score": 2, "label": "Daha hızlı içerik üretimi" },
+      { "score": 3, "label": "İçerik/üretim maliyetinde tasarruf" },
+      { "score": 4, "label": "Performansta ölçülebilir iyileşme (dönüşüm, etkileşim, erişim)" },
+      { "score": 5, "label": "Stratejik avantaj — AI olmadan mümkün olmayan yaklaşımlar" }
+    ] },
+
+    { "id": "q13", "dimension": "people", "stem": "AI becerini nasıl tanımlarsın?", "options": [
+      { "score": 1, "label": "AI becerisi yok — kullanmıyorum" },
+      { "score": 2, "label": "Tek tük deniyorum, kendi başıma" },
+      { "score": 3, "label": "İçerik üretiminde rahatım, ötesinde sınırlı" },
+      { "score": 4, "label": "İçerik, analiz ve iş yönetiminde AI araçlarına hakimim" },
+      { "score": 5, "label": "Derin beceri — AI okuryazarlığı işimin/işe alımın parçası" }
+    ] },
+    { "id": "q14", "dimension": "people", "stem": "İşinde AI için tanımlı bir sorumluluk/rol var mı?", "options": [
+      { "score": 1, "label": "Tanımlı rol yok" },
+      { "score": 2, "label": "İlgilenenin gönüllü yan işi" },
+      { "score": 3, "label": "Belirlenmiş bir AI sorumlusu/koordinatör" },
+      { "score": 4, "label": "AI strateji ve operasyonu için net sorumluluklar" },
+      { "score": 5, "label": "Çapraz-fonksiyonel, gömülü bir AI çalışma düzeni" }
+    ] },
+    { "id": "q15", "dimension": "people", "stem": "AI'ın işindeki rolüne yaklaşımın nasıl?", "options": [
+      { "score": 1, "label": "Öncelik değil / şüpheci" },
+      { "score": 2, "label": "İlgili ama aktif sürüklemiyorum" },
+      { "score": 3, "label": "Destekleyici — denemeyi teşvik ediyorum" },
+      { "score": 4, "label": "Aktif savunucu — strateji ve yatırımı yönlendiriyorum" },
+      { "score": 5, "label": "AI-öncelikli zihniyet — strateji AI yetkinliği üzerine kurulu" }
+    ] },
+
+    { "id": "q16", "dimension": "governance", "stem": "AI ile üretilen içeriği nasıl denetliyorsun?", "options": [
+      { "score": 1, "label": "Denetim yok" },
+      { "score": 2, "label": "Gayri resmi — eldeki kişi bakar" },
+      { "score": 3, "label": "Yayın öncesi temel onay akışı" },
+      { "score": 4, "label": "Marka kılavuzu + uyum kontrolü + net onay zinciri" },
+      { "score": 5, "label": "Otomatik marka/uyum kontrolü + hassas içerikte insan incelemesi" }
+    ] },
+    { "id": "q17", "dimension": "governance", "stem": "AI içerikle ilgili bir sorun (marka/yanlışlık/uyum) yaşadın mı?", "options": [
+      { "score": 1, "label": "Bilmiyorum / izlemiyorum" },
+      { "score": 2, "label": "Evet, oldu — resmi bir yanıt süreci yok" },
+      { "score": 3, "label": "Evet, geçici çözümler geliştirdim" },
+      { "score": 4, "label": "Evet, tanımlı bir olay-yanıt sürecim var" },
+      { "score": 5, "label": "Yayından önce sorunları yakalayan proaktif izleme + yanıt süreci" }
+    ] },
+    { "id": "q18", "dimension": "governance", "stem": "AI içerikte marka tutarlılığını nasıl sağlıyorsun?", "options": [
+      { "score": 1, "label": "Kontrol yok" },
+      { "score": 2, "label": "Sadece elle inceleme — kişisel yargıya bağlı" },
+      { "score": 3, "label": "Ekiple paylaşılan marka kılavuzu" },
+      { "score": 4, "label": "AI araçları marka sesi/stil/kurallarıyla yapılandırılmış" },
+      { "score": 5, "label": "Otomatik marka uyumu, AI içerik akışına gömülü + sürekli izleme" }
+    ] }
+  ],
+  "bands": [
+    { "min": 4.5, "key": "sig_ahead", "label": "Çok İleride" },
+    { "min": 3.5, "key": "ahead", "label": "İleride" },
+    { "min": 2.5, "key": "on_track", "label": "Yolunda" },
+    { "min": 1.5, "key": "behind", "label": "Geride" },
+    { "min": 0, "key": "sig_behind", "label": "Çok Geride" }
+  ],
+  "benchmark": {
+    "deployment": 2.0,
+    "systems": 1.8,
+    "data": 1.6,
+    "outcomes": 1.6,
+    "people": 2.0,
+    "governance": 1.7
+  },
+  "archetypes": [
+    { "maxOverall": 1.8, "key": "observer", "label": "Meraklı Gözlemci", "narrative": "AI'ı henüz kıyısından deniyorsun. Doğru başlangıçla en çok kazanacak profildesin — temel kullanım ve veri düzeniyle hızlı sıçrarsın." },
+    { "maxOverall": 2.6, "key": "experimenter", "label": "Aktif Deneyici", "narrative": "AI'ı içerikte kullanıyorsun ama derinlik ve ölçüm eksik. Bir sonraki adım: kullanımı içeriğin ötesine taşımak ve etkiyi ölçmeye başlamak." },
+    { "maxOverall": 3.4, "key": "practitioner", "label": "Uygulamacı", "narrative": "AI işine birçok noktada giriyor. Şimdi sistemleri bağlamak, veriyi zenginleştirmek ve sonucu işe bağlamak seni öne taşır." },
+    { "maxOverall": 5, "key": "transformer", "label": "Dönüşüm Adayı", "narrative": "AI işinin merkezinde. Odak: orkestrasyon, atıf ve yönetişimi olgunlaştırarak avantajı kalıcı kılmak." }
+  ],
+  "recommendations": {
+    "deployment": {
+      "low": "AI'ı içerik dışında bir alana taşı: planlama, müşteri iletişimi veya analiz.",
+      "mid": "Tekrar eden 1-2 işi yarı-otomatik akışa al; uygulamayı AI'a devret, onayı sende tut.",
+      "high": "Uçtan uca bir iş akışını AI orkestrasyonuna geçir; insan-gözetimli otomasyon kur."
+    },
+    "systems": {
+      "low": "AI aracını en az bir ana aracınla (e-posta/CRM/site) bağla; elle taşımayı azalt.",
+      "mid": "Çıktıların yürütmeye doğrudan aktığı 1-2 entegrasyon ekle.",
+      "high": "Tek, AI-öncelikli entegre akış hedefle; tetikleyicilerle zincirle."
+    },
+    "data": {
+      "low": "AI'a işine özel bağlam ver: marka sesi, hizmet bilgisi, sık sorulanlar.",
+      "mid": "Geçmiş iş ve müşteri segmentlerini AI'ın erişimine aç.",
+      "high": "Gerçek-zamanlı sinyalleri ve birleşik profili AI'a besle."
+    },
+    "outcomes": {
+      "low": "Önce hacim/zaman değil, bir iş metriği seç ve AI etkinliğini ona bağla.",
+      "mid": "Dönüşüm/maliyet atıfı kur; AI katkısını net göster.",
+      "high": "İleri test + sürekli optimizasyonla yatırımı sonuca göre yönet."
+    },
+    "people": {
+      "low": "Temel AI becerine yatırım yap; haftalık küçük bir uygulama hedefi koy.",
+      "mid": "AI sorumluluğunu netleştir; bir koordinatör/rutin belirle.",
+      "high": "AI okuryazarlığını işe alım ve değerlendirmenin parçası yap."
+    },
+    "governance": {
+      "low": "Yayın öncesi temel bir onay/kontrol adımı ekle.",
+      "mid": "Marka kılavuzu + uyum kontrolünü akışa yerleştir.",
+      "high": "Otomatik marka/uyum kontrolü + hassas içerikte insan incelemesi kur."
+    }
+  }
+}
