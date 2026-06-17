@@ -1,7 +1,7 @@
 // G1 / DeepGap — push result back to the GHL contact (server-only).
 // We already know contactId from the verified token, so we PUT custom fields
 // directly (no upsert-by-email). Mirrors the pattern in test/lib/ghl-client.ts.
-import type { G1Result } from "./types";
+import type { G1Result, G1Synthesis } from "./types";
 
 // Real GHL custom field IDs — created by ghl-specialist 2026-06-17 in location
 // e8ZRRmOybS08x5L6qgsS. The entry field g1_token (id i1XhsXamXfpwdRPFoOjB) is
@@ -160,6 +160,118 @@ export async function saveG1ResultToContact(
     return { ok: true, wrote: customFields.length };
   } catch (err) {
     return { ok: false, wrote: 0, error: (err as Error).message };
+  }
+}
+
+/* --------------------------- result email (like /test) -------------------- */
+// Mirrors test/lib/ghl-client.ts sendQuizReportEmail: app sends a rich HTML
+// result email via GHL conversations/messages (type:"Email"). No PDF — the body
+// IS the result (profile + gap + weakest + first move + cost) with a link back
+// to /g1 to re-open. Best-effort; never blocks the user's on-screen result.
+const G1_VIEW_URL = "https://growtify.ai/g1";
+const PRIMARY = "#5d47f0";
+
+function esc(s: string): string {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function buildG1EmailHtml(firstName: string, synth: G1Synthesis): string {
+  const ad = firstName ? esc(firstName) : "Merhaba";
+  const w = synth.weakest;
+  const costBlock = synth.cost
+    ? `<div style="margin:22px 0;padding:16px 18px;background:#fff7ed;border-radius:12px;border:1px solid #fed7aa">
+         <div style="font-weight:700;color:#9a3412;margin-bottom:8px">Hareketsizliğin Bedeli</div>
+         <div style="color:#7c2d12;font-size:14px;margin-bottom:8px">${esc(synth.cost.intro)}</div>
+         <ul style="margin:0;padding-left:18px;color:#7c2d12;font-size:14px;line-height:1.6">
+           ${synth.cost.lines.map((l) => `<li>${esc(l)}</li>`).join("")}
+         </ul>
+         <div style="color:#9a3412;font-size:13px;margin-top:8px;font-style:italic">${esc(synth.cost.closing)}</div>
+       </div>`
+    : "";
+
+  return `<!doctype html><html lang="tr"><body style="margin:0;background:#f4f4f7;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif">
+    <div style="max-width:600px;margin:0 auto;padding:24px">
+      <div style="background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)">
+        <div style="background:${PRIMARY};padding:22px 28px">
+          <div style="color:#fff;font-weight:800;font-size:18px;letter-spacing:.2px">Growtify · AI Olgunluk Profili</div>
+        </div>
+        <div style="padding:28px">
+          <p style="margin:0 0 6px;font-size:16px;color:#232323">Merhaba ${ad},</p>
+          <p style="margin:0 0 18px;font-size:15px;color:#555;line-height:1.6">İşte AI Olgunluk profilin — kendi cevaplarından çıkardığımız harita.</p>
+
+          <div style="display:inline-block;padding:10px 16px;background:#eef0fe;border-radius:999px;font-weight:700;color:${PRIMARY};font-size:15px">
+            ${esc(synth.levelLabel)} · ${synth.overall}/5
+          </div>
+          <div style="font-size:13px;color:#888;margin-top:6px">Sektör ortalaması: ${synth.sectorOverallBenchmark}/5</div>
+
+          <h3 style="margin:24px 0 6px;font-size:15px;color:${PRIMARY}">Senin Gap'in</h3>
+          <p style="margin:0;font-size:14px;color:#232323;line-height:1.7">${esc(synth.gapParagraph)}</p>
+
+          <div style="margin:22px 0;padding:16px 18px;background:#f7f7fb;border-radius:12px">
+            <div style="font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#999">En Zayıf Halkan</div>
+            <div style="font-weight:700;color:#232323;margin-top:2px">${esc(w.label)} · ${w.score}/5</div>
+            <div style="font-size:14px;color:#666;margin-top:4px;line-height:1.6">${esc(w.means)}</div>
+            <div style="font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#999;margin-top:12px">İlk Hamlen</div>
+            <div style="font-size:14px;color:#232323;margin-top:2px;line-height:1.6">${esc(w.next)}</div>
+          </div>
+
+          ${costBlock}
+
+          <a href="${G1_VIEW_URL}" style="display:inline-block;margin-top:8px;padding:13px 22px;background:${PRIMARY};color:#fff;text-decoration:none;border-radius:10px;font-weight:700;font-size:15px">Sonucu tekrar gör →</a>
+
+          <p style="margin:24px 0 0;font-size:12px;color:#aaa;line-height:1.6">Bu e-postayı AI Olgunluk testini tamamladığın için aldın. Growtify · growtify.ai</p>
+        </div>
+      </div>
+    </div>
+  </body></html>`;
+}
+
+export interface G1EmailResult {
+  ok: boolean;
+  messageId?: string;
+  error?: string;
+}
+
+export async function sendG1ResultEmail(
+  contactId: string,
+  firstName: string,
+  synth: G1Synthesis,
+): Promise<G1EmailResult> {
+  const cfg = readConfig();
+  if (!cfg) return { ok: false, error: "ghl_credentials_missing" };
+
+  const subject = firstName
+    ? `${firstName}, AI Olgunluk profilin hazır`
+    : "AI Olgunluk profilin hazır";
+  const html = buildG1EmailHtml(firstName, synth);
+
+  try {
+    const res = await fetch(`${cfg.apiBase}/conversations/messages`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${cfg.apiToken}`,
+        Version: cfg.apiVersion,
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ type: "Email", contactId, subject, html }),
+      signal: AbortSignal.timeout(15000),
+    });
+    const json = (await res.json().catch(() => ({}))) as {
+      messageId?: string;
+      message?: string;
+      error?: string;
+      msg?: { id?: string };
+    };
+    if (!res.ok) {
+      return { ok: false, error: json.message ?? json.error ?? `HTTP ${res.status}` };
+    }
+    return { ok: true, messageId: json.msg?.id ?? json.messageId };
+  } catch (err) {
+    return { ok: false, error: (err as Error).message };
   }
 }
 
