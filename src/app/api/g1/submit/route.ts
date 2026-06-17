@@ -14,7 +14,7 @@ import { buildG1Synthesis } from "@/lib/g1/synthesis";
 import { buildG1Comparison } from "@/lib/g1/compare";
 import { saveG1ResultToContact, sendG1ResultEmail, getG1Contact } from "@/lib/g1/ghl-g1";
 import { generateG1PdfHtml } from "@/lib/g1/g1-pdf-template";
-import { generatePdfFromHtml, getPdfFilename } from "@/app/[locale]/test/lib/pdf-generate";
+import { generateSinglePagePdfFromHtml, getPdfFilename } from "@/app/[locale]/test/lib/pdf-generate";
 import { uploadPdfToContact } from "@/app/[locale]/test/lib/ghl-client";
 import type { G1Answers, G1BeforeAfter, G1PriorResult, G1Result } from "@/lib/g1/types";
 
@@ -124,7 +124,7 @@ export async function POST(request: Request) {
     let pdfUrl: string | undefined;
     try {
       const html = generateG1PdfHtml({ name: fname, sectorLabel, synth, beforeAfter: ba, comparison: cmp });
-      const buf = await generatePdfFromHtml(html);
+      const buf = await generateSinglePagePdfFromHtml(html);
       const up = await uploadPdfToContact(fid, buf, getPdfFilename(fname));
       pdfUrl = up.ok ? (up as { urls?: string[] }).urls?.[0] : undefined;
       console.log(`[g1/submit] pdf ok=${up.ok} url=${pdfUrl ?? ("error" in up ? up.error : "")}`);
