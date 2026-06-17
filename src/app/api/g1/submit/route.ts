@@ -97,17 +97,20 @@ export async function POST(request: Request) {
   // Read the stored result BEFORE overwriting — it is the G (baseline) for the
   // G→T before/after. A 404/empty contact just means first attempt (no delta).
   const lookup = await getG1Contact(contactId).catch(() => ({ found: false }) as Awaited<ReturnType<typeof getG1Contact>>);
-  const prior = lookup.found ? lookup.prior : undefined;
+  const prior = lookup.found ? lookup.prior : undefined; // latest (attempt count)
+  const baseline = lookup.found ? lookup.baseline : undefined; // FIRST assessment (G)
   const attempt = (prior?.attempt ?? 0) + 1;
-  const beforeAfter = prior ? buildBeforeAfter(prior, result, attempt) : null;
-  // The interpreted "transformation" comparison (only on a retake).
+  // G→T: every retake is compared against the FIRST assessment, not the previous
+  // one. No baseline yet → this attempt IS the baseline (freeze it, no comparison).
+  const beforeAfter = baseline ? buildBeforeAfter(baseline, result, attempt) : null;
   const comparison =
-    beforeAfter && prior
-      ? buildG1Comparison(beforeAfter, synthesis.levelLabel, prior.archetype)
+    beforeAfter && baseline
+      ? buildG1Comparison(beforeAfter, synthesis.levelLabel, baseline.archetype)
       : null;
+  const writeBaseline = !baseline; // freeze the G baseline on first completion
 
   // Writeback is best-effort: never block the user's result on a GHL hiccup.
-  const wb = await saveG1ResultToContact(contactId, result, attempt).catch(
+  const wb = await saveG1ResultToContact(contactId, result, attempt, writeBaseline).catch(
     (e: unknown) => ({ ok: false, wrote: 0, error: (e as Error).message }),
   );
 

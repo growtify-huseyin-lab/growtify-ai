@@ -21,6 +21,39 @@ export const G1_FIELD_IDS: Record<string, string> = {
   attempt: "5Ue1jUHNys3n7cj501un",
 };
 
+// The g1_baseline field (write-once snapshot of the FIRST assessment) is resolved
+// by KEY at runtime — not hardcoded — so it activates the moment the field exists
+// in GHL (created via the UI), with no id to copy and no token handled here.
+let cachedBaselineFieldId: string | null = null;
+
+async function getBaselineFieldId(cfg: GhlConfig): Promise<string | null> {
+  if (cachedBaselineFieldId) return cachedBaselineFieldId;
+  try {
+    const res = await fetch(`${cfg.apiBase}/locations/${cfg.locationId}/customFields`, {
+      headers: {
+        Authorization: `Bearer ${cfg.apiToken}`,
+        Version: cfg.apiVersion,
+        Accept: "application/json",
+      },
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!res.ok) return null;
+    const body = (await res.json().catch(() => ({}))) as {
+      customFields?: Array<{ id?: string; fieldKey?: string; name?: string }>;
+    };
+    const f = (body.customFields ?? []).find((x) => {
+      const k = (x.fieldKey ?? "").toLowerCase();
+      const n = (x.name ?? "").toLowerCase();
+      return k.includes("baseline") || n.includes("baseline");
+    });
+    cachedBaselineFieldId = f?.id ?? null; // only the hit sticks; null is retried
+    console.log(`[g1] baseline field resolve → ${cachedBaselineFieldId ?? "NOT FOUND"}`);
+    return cachedBaselineFieldId;
+  } catch {
+    return null;
+  }
+}
+
 // Creative's 6 dimensions -> the 6 existing GHL field slots (labels are legacy;
 // values are the correct dimension scores). Rename the GHL fields later for clarity.
 const DIM_TO_FIELD: Record<string, string> = {
@@ -60,8 +93,48 @@ export interface G1ContactLookup {
   firstName?: string;
   fullName?: string;
   email?: string;
-  prior?: G1PriorResult; // present if the contact has a stored G1 result
+  prior?: G1PriorResult; // latest stored result (g1_* fields)
+  baseline?: G1PriorResult; // write-once FIRST result (g1_baseline) — the G baseline
   error?: string;
+}
+
+// Compact JSON snapshot of the first assessment, stored write-once in g1_baseline.
+function buildBaselineJson(result: G1Result): string {
+  const d: Record<string, number> = {};
+  for (const dim of result.dimensions) d[dim.id] = dim.score;
+  return JSON.stringify({ o: result.overall, a: result.levelLabel, t: result.completedAt, d });
+}
+
+function parseBaseline(
+  customFields: Array<{ id?: string; value?: unknown; field_value?: unknown }> | undefined,
+  baselineFieldId: string | null,
+): G1PriorResult | undefined {
+  if (!customFields || !baselineFieldId) return undefined;
+  const cf = customFields.find((c) => c?.id === baselineFieldId);
+  const raw = cf ? (cf.value ?? cf.field_value) : undefined;
+  if (typeof raw !== "string" || !raw.trim()) return undefined;
+  try {
+    const j = JSON.parse(raw) as {
+      o?: number;
+      a?: string;
+      t?: string;
+      d?: Record<string, number>;
+    };
+    if (typeof j.o !== "number") return undefined;
+    const dims = j.d
+      ? Object.entries(j.d).map(([k, v]) => ({ id: k, score: Number(v) }))
+      : [];
+    return {
+      overall: j.o,
+      attempt: 1,
+      completedAt: j.t ?? "",
+      archetype: j.a ?? "",
+      gapSummary: "",
+      dims,
+    };
+  } catch {
+    return undefined;
+  }
 }
 
 // Parse a GHL contact's customFields into the prior G1 result (if any).
@@ -134,12 +207,14 @@ export async function getG1Contact(contactId: string): Promise<G1ContactLookup> 
     const c = body.contact;
     if (!c) return { found: false, error: "no_contact" };
     const fullName = c.name || [c.firstName, c.lastName].filter(Boolean).join(" ");
+    const baselineFieldId = await getBaselineFieldId(cfg);
     return {
       found: true,
       firstName: c.firstName,
       fullName,
       email: c.email,
       prior: parsePriorResult(c.customFields),
+      baseline: parseBaseline(c.customFields, baselineFieldId),
     };
   } catch (err) {
     return { found: false, error: (err as Error).message };
@@ -189,11 +264,20 @@ export async function saveG1ResultToContact(
   contactId: string,
   result: G1Result,
   attempt?: number,
+  writeBaseline?: boolean,
 ): Promise<G1WritebackResult> {
   const cfg = readConfig();
   if (!cfg) return { ok: false, wrote: 0, error: "GHL credentials missing" };
 
   const customFields = buildCustomFields(result, attempt);
+  // First completion → freeze the G baseline (resolved by key; no-op until the
+  // g1_baseline field exists in GHL).
+  if (writeBaseline) {
+    const baselineFieldId = await getBaselineFieldId(cfg);
+    if (baselineFieldId) {
+      customFields.push({ id: baselineFieldId, value: buildBaselineJson(result) });
+    }
+  }
   if (customFields.length === 0) {
     // Field ids not configured yet — don't error, just signal nothing written.
     return { ok: true, wrote: 0, error: "g1_field_ids_not_configured" };
