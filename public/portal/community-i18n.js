@@ -450,6 +450,11 @@
       { pattern: /Switch to light mode/gi, replacement: "Açık moda geç" },
       { pattern: /Switch to dark mode/gi, replacement: "Koyu moda geç" },
 
+      // "About this Lesson/Course" — tam phrase (yarım çeviri "Hakkında this Ders" fix;
+      // hem ham hem dict'in kısmen çevirdiği hali yakalar, doğru TR sırasıyla)
+      { pattern: /(About|Hakkında) this (Lesson|Ders)/gi, replacement: "Bu Ders Hakkında" },
+      { pattern: /(About|Hakkında) this (Course|Kurs)/gi, replacement: "Bu Kurs Hakkında" },
+
       // CHAT / CONVERSATIONS (boş durum + başlat)
       {
         pattern: /No conversations found/gi,
