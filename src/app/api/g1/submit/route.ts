@@ -4,13 +4,14 @@
 // Google's keys, or our HMAC fallback) — no separate session secret needed.
 export const maxDuration = 60;
 
+import { after } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { verifyG1Token } from "@/lib/g1/token";
 import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
 import { loadG1Config } from "@/lib/g1/config";
 import { scoreG1 } from "@/lib/g1/scoring";
 import { buildG1Synthesis } from "@/lib/g1/synthesis";
-import { saveG1ResultToContact } from "@/lib/g1/ghl-g1";
+import { saveG1ResultToContact, sendG1ResultEmail } from "@/lib/g1/ghl-g1";
 import type { G1Answers } from "@/lib/g1/types";
 
 interface SubmitBody {
@@ -66,6 +67,19 @@ export async function POST(request: Request) {
   const wb = await saveG1ResultToContact(contactId, result).catch(
     (e: unknown) => ({ ok: false, wrote: 0, error: (e as Error).message }),
   );
+
+  // Result email (like /test): send the profile + gap + first move to the
+  // member's GHL email, after the response — never blocks the on-screen result.
+  const fid = contactId;
+  const fname = body.name ?? "";
+  const synth = synthesis;
+  after(async () => {
+    const r = await sendG1ResultEmail(fid, fname, synth).catch((e: unknown) => ({
+      ok: false,
+      error: (e as Error).message,
+    }));
+    console.log("[g1/submit] result email →", JSON.stringify(r));
+  });
 
   return Response.json({
     ok: true,
