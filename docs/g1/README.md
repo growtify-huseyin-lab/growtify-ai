@@ -90,10 +90,14 @@ Plus the entry field: `g1_token` (text) — holds the minted token.
 
 | var | purpose |
 |---|---|
-| `G1_TOKEN_SECRET` | HMAC secret for our own session token sign/verify (server-only) |
-| `G1_MINT_SECRET` | shared secret guarding `/api/g1/mint` (HMAC fallback path only) |
+| `GHL_API_TOKEN`, `GHL_LOCATION_ID` | already set — reused for writeback (the only env the Firebase launch path needs) |
 | `GHL_FIREBASE_PROJECT` | optional — Firebase project for portal token verify (default `highlevel-backend`) |
-| `GHL_API_TOKEN`, `GHL_LOCATION_ID` | already set — reused for writeback |
+| `G1_TOKEN_SECRET` | **OPTIONAL** — only for the HMAC fallback (`?t=` / mint). Firebase path does NOT use it. |
+| `G1_MINT_SECRET` | **OPTIONAL** — only guards `/api/g1/mint` (HMAC fallback). |
+
+**The primary (Firebase portal) flow needs NO new secret** — the member's Google-signed
+Firebase token is verified directly on both `/g1` and `/api/g1/submit`. Deploy = `git`
+push (GitHub→Vercel); writeback uses the GHL token already in Vercel.
 
 ## Endpoints
 

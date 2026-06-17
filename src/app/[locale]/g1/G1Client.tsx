@@ -9,14 +9,16 @@ type Phase = "intro" | "quiz" | "submitting" | "result" | "error";
 
 export default function G1Client({
   config,
-  token,
+  authToken,
+  authMode,
   sector,
   ret,
   name,
   locale,
 }: {
   config: G1Config;
-  token: string;
+  authToken: string;
+  authMode: "firebase" | "hmac";
   sector: string | null;
   ret: string | null;
   name: string;
@@ -45,7 +47,7 @@ export default function G1Client({
       const res = await fetch("/api/g1/submit", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, answers: finalAnswers, sector, locale }),
+        body: JSON.stringify({ token: authToken, mode: authMode, answers: finalAnswers, sector, locale }),
       });
       const data = (await res.json()) as { ok: boolean; result?: G1Result; error?: string };
       if (!data.ok || !data.result) {

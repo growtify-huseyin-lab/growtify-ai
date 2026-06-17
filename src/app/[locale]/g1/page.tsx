@@ -2,9 +2,10 @@
 //   ?ft=<firebase id token>  — from the GHL portal (g1-link.js injects the member's
 //                              live Firebase token; verified against Google's keys).
 //   ?t=<hmac token>          — from a GHL-workflow-minted signed deep link (fallback).
-// Either path yields a trusted contactId; we then issue our own short-lived HMAC
-// session token that the client uses for /api/g1/submit.
-import { verifyG1Token, signG1Token } from "@/lib/g1/token";
+// Either path carries a trusted identity; the same token is re-verified by
+// /api/g1/submit (no separate session secret needed — the Firebase token IS the
+// auth, valid for the whole ~5-10 min sitting; HMAC for the fallback path).
+import { verifyG1Token } from "@/lib/g1/token";
 import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
 import { loadG1Config } from "@/lib/g1/config";
 import G1Client from "./G1Client";
@@ -56,25 +57,28 @@ export default async function G1Page({
   const retParam = typeof sp.ret === "string" ? sp.ret : "";
   const nameParam = typeof sp.name === "string" ? sp.name : "";
 
-  let sessionToken = "";
+  let authToken = "";
+  let authMode: "firebase" | "hmac" = "firebase";
   let ret = "";
   let name = "";
 
   if (ft) {
-    // Firebase path — verify the portal member token, then mint our own session token.
+    // Firebase path — verify the portal member token; pass it through so submit
+    // re-verifies it (no intermediate secret needed).
     const fb = await verifyFirebaseIdToken(ft);
     if (!fb.ok) return <ErrorView reason={fb.reason} />;
-    const contactId = fb.uid as string;
+    authToken = ft;
+    authMode = "firebase";
     ret = safeRet(retParam);
     name = fb.name || nameParam || (fb.email ? fb.email.split("@")[0] : "");
-    sessionToken = signG1Token({ sub: contactId, email: fb.email, name, ret }, 60 * 60 * 6);
   } else if (t) {
-    // HMAC path — already a trusted signed token; pass through.
+    // HMAC path — trusted signed deep link; pass through.
     const v = verifyG1Token(t);
     if (!v.ok) return <ErrorView reason={v.reason} />;
+    authToken = t;
+    authMode = "hmac";
     ret = v.payload.ret ?? "";
     name = v.payload.name ?? "";
-    sessionToken = t;
   } else {
     return <ErrorView reason="no_token" />;
   }
@@ -83,7 +87,8 @@ export default async function G1Page({
   return (
     <G1Client
       config={config}
-      token={sessionToken}
+      authToken={authToken}
+      authMode={authMode}
       sector={sector ?? null}
       ret={ret || null}
       name={name}
