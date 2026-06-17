@@ -30,6 +30,7 @@ export default function G1Client({
   const [answers, setAnswers] = useState<G1Answers>({});
   const [numDraft, setNumDraft] = useState("");
   const [result, setResult] = useState<G1Result | null>(null);
+  const [ghl, setGhl] = useState<{ ok: boolean; wrote: number } | null>(null);
   const [error, setError] = useState<string>("");
 
   const questions = config.questions;
@@ -57,13 +58,19 @@ export default function G1Client({
           locale,
         }),
       });
-      const data = (await res.json()) as { ok: boolean; result?: G1Result; error?: string };
+      const data = (await res.json()) as {
+        ok: boolean;
+        result?: G1Result;
+        error?: string;
+        ghl?: { ok: boolean; wrote: number };
+      };
       if (!data.ok || !data.result) {
         setError(data.error ?? "submit_failed");
         setPhase("error");
         return;
       }
       setResult(data.result);
+      setGhl(data.ghl ?? null);
       setPhase("result");
     } catch (e) {
       setError((e as Error).message);
@@ -208,6 +215,14 @@ export default function G1Client({
               );
             })}
           </div>
+
+          {ghl && (
+            <p className="mt-6 text-center text-xs text-gray-400">
+              {ghl.ok && ghl.wrote > 0
+                ? `✓ Sonuçların kaydedildi (${ghl.wrote} alan GHL'e yazıldı)`
+                : "Sonuçların kaydedildi."}
+            </p>
+          )}
 
           <div className="mt-8 text-center">
             {ret ? (
