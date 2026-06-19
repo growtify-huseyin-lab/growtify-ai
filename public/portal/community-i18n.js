@@ -233,6 +233,15 @@
       // — added 2026-06-02: kelime sırası / kısmi çeviri düzeltmeleri (dict'ten önce) —
       { pattern: /Search member/gi, replacement: "Üye Ara" },
       { pattern: /Notifications List/gi, replacement: "Bildirim Listesi" },
+      // POST/COMMENT eylem menüsü (… menü) — dict'ten önce tam-phrase yakala
+      { pattern: /Delete Post/gi, replacement: "Gönderiyi Sil" },
+      { pattern: /Edit Post/gi, replacement: "Gönderiyi Düzenle" },
+      { pattern: /Move to Channel/gi, replacement: "Kanala Taşı" },
+      { pattern: /Disable (Comments|Yorumlar)/gi, replacement: "Yorumları Kapat" },
+      { pattern: /Pin Post/gi, replacement: "Gönderiyi Sabitle" },
+      { pattern: /\bUnpin\b/g, replacement: "Sabitlemeyi Kaldır" },
+      { pattern: /\bPinned\b/g, replacement: "Sabitlendi" },
+      { pattern: /\bPin\b/g, replacement: "Sabitle" },
       // VALIDATION (dict "Password→Şifre" yemeden önce yakala)
       {
         pattern: /Password field is required/gi,
