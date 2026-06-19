@@ -246,6 +246,17 @@
       { pattern: /\bLanguage\b/g, replacement: "Dil" },
       { pattern: /\bSort by\b/gi, replacement: "Sırala" },
       { pattern: /\bSort\b/g, replacement: "Sırala" },
+      // Dil filtresi seçenekleri — tam-node eşleşme (yaygın kelime güvenliği)
+      { pattern: /^All$/, replacement: "Tümü" },
+      { pattern: /^Turkish$/, replacement: "Türkçe" },
+      { pattern: /^English$/, replacement: "İngilizce" },
+      // Sort seçenekleri
+      { pattern: /Title A-Z/gi, replacement: "Başlık A-Z" },
+      { pattern: /Title Z-A/gi, replacement: "Başlık Z-A" },
+      { pattern: /Library Order \(Low to High\)/gi, replacement: "Kütüphane Sırası (Düşükten Yükseğe)" },
+      { pattern: /Library Order \(High to Low\)/gi, replacement: "Kütüphane Sırası (Yüksekten Düşüğe)" },
+      { pattern: /Most (?:Lessons|Dersler)/gi, replacement: "En Çok Ders" },
+      { pattern: /Least (?:Lessons|Dersler)/gi, replacement: "En Az Ders" },
       // VALIDATION (dict "Password→Şifre" yemeden önce yakala)
       {
         pattern: /Password field is required/gi,
