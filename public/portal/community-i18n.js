@@ -505,7 +505,23 @@
       { pattern: /just now/gi, replacement: "az önce" },
       { pattern: /(\d+)d ago/g, replacement: "$1g önce" },
       { pattern: /(\d+)h ago/g, replacement: "$1s önce" },
+      // abbreviated time eksikleri (mo, m, w, y, s) — "mo" mutlaka "m"den ÖNCE
+      { pattern: /(\d+)mo ago/g, replacement: "$1ay önce" },
+      { pattern: /(\d+)m ago/g, replacement: "$1dk önce" },
+      { pattern: /(\d+)w ago/g, replacement: "$1hf önce" },
+      { pattern: /(\d+)y ago/g, replacement: "$1y önce" },
+      { pattern: /(\d+)s ago/g, replacement: "$1sn önce" },
       { pattern: /New comment/g, replacement: "Yeni yorum" },
+      // BİLDİRİM paneli
+      { pattern: /\bBadge\b/g, replacement: "Rozet" },
+      {
+        pattern: /A new course (.+?) is now available within the group (.+)/gi,
+        replacement: "$1 adlı yeni kurs $2 grubunda yayınlandı",
+      },
+      { pattern: /\bLevel\s+(\d+)/gi, replacement: "Seviye $1" },
+      { pattern: /(Active|Aktif) (?:long ago|a long time ago)/gi, replacement: "Uzun süre önce aktifti" },
+      { pattern: /\blong ago\b/gi, replacement: "uzun süre önce" },
+      { pattern: /\bin\s+(#\S+)/g, replacement: "$1 kanalında" },
     ];
 
     function translateString(text) {
