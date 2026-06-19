@@ -418,6 +418,18 @@
           /To gain access to this (?:lesson|Lesson|Ders), please complete (?:category|Category):/g,
         replacement: "Bu içeriğe erişim için önce şu kategoriyi tamamla:",
       },
+      // KATEGORİ kilidi (erişilen = kategori) — mevcut sadece "to this lesson" idi
+      { pattern: /This (?:Category|Kategori) is locked/gi, replacement: "Bu kategori kilitli" },
+      {
+        pattern:
+          /To gain access to this (?:category|Category|Kategori), please complete (?:lesson|Lesson|Ders):/g,
+        replacement: "Bu kategoriye erişmek için önce şu dersi tamamla:",
+      },
+      {
+        pattern:
+          /To gain access to this (?:category|Category|Kategori), please complete (?:category|Category):/g,
+        replacement: "Bu kategoriye erişmek için önce şu kategoriyi tamamla:",
+      },
 
       // ASSIGNMENT / ASSESSMENT (quiz & ödev akışı)
       {
