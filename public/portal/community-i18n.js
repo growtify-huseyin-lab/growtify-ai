@@ -242,6 +242,10 @@
       { pattern: /\bUnpin\b/g, replacement: "Sabitlemeyi Kaldır" },
       { pattern: /\bPinned\b/g, replacement: "Sabitlendi" },
       { pattern: /\bPin\b/g, replacement: "Sabitle" },
+      // UI label'ları
+      { pattern: /\bLanguage\b/g, replacement: "Dil" },
+      { pattern: /\bSort by\b/gi, replacement: "Sırala" },
+      { pattern: /\bSort\b/g, replacement: "Sırala" },
       // VALIDATION (dict "Password→Şifre" yemeden önce yakala)
       {
         pattern: /Password field is required/gi,
