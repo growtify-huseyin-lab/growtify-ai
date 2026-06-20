@@ -469,6 +469,13 @@
         pattern: /Retake Assignment/gi,
         replacement: "Ödevi Tekrar Al",
       },
+      // QUIZ aksiyonları (dict "View→Görüntüle" yemeden önce tam-phrase)
+      { pattern: /Retake Quiz/gi, replacement: "Quizi Tekrar Çöz" },
+      { pattern: /(?:View|Görüntüle) Result/gi, replacement: "Sonucu Görüntüle" },
+      { pattern: /Start Quiz/gi, replacement: "Quize Başla" },
+      { pattern: /Submit Quiz/gi, replacement: "Quizi Gönder" },
+      { pattern: /Quiz Passed/gi, replacement: "Quiz Geçildi" },
+      { pattern: /Quiz Failed/gi, replacement: "Quiz Geçilemedi" },
 
       // GREETING / WELCOME (portal karşılama — isim dinamik, lookahead ile korunur)
       {
