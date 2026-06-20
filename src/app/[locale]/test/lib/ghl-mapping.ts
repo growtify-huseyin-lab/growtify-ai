@@ -114,12 +114,15 @@ const PERSONA_FIELD_MAP: Record<Persona, string> = {
 export function buildGhlTags(state: QuizState): string[] {
   const sectorKey = state.sector ? (SECTOR_TAG_MAP[state.sector] ?? "other") : "other";
   const personaKey = PERSONA_TAG_MAP[state.persona] ?? "bilmiyorum";
-  return [
+  const tags = [
     "gai_lifecycle_lead",
     "gai_lm_quiz",
     `gai_sector_${sectorKey}`,
     `gai_persona_${personaKey}`,
   ];
+  // WhatsApp açık rıza → workflow bu tag'i tetikler (welcome + topluluk daveti).
+  if (state.whatsappOptin) tags.push("gai_whatsapp_optin");
+  return tags;
 }
 
 /**
@@ -132,13 +135,15 @@ export function buildGhlTags(state: QuizState): string[] {
 export function buildGhlTagsEn(state: QuizState): string[] {
   const sectorKey = state.sector ? (SECTOR_TAG_MAP[state.sector] ?? "other") : "other";
   const personaKey = PERSONA_TAG_MAP[state.persona] ?? "bilmiyorum";
-  return [
+  const tags = [
     "gai_en_lifecycle_lead",
     "gai_en_quiz",
     `gai_en_sector_${sectorKey}`,
     `gai_en_persona_${personaKey}`,
     "lang_eng",
   ];
+  if (state.whatsappOptin) tags.push("gai_en_whatsapp_optin");
+  return tags;
 }
 
 /* -------------------- Custom field mapping -------------------- */

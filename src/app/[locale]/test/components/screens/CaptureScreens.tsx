@@ -37,6 +37,12 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
       ? current.replace(/\s/g, "").length >= 10
       : current.trim().length >= 2;
 
+  // Email submit screen also collects a phone — now REQUIRED (WhatsApp follow-up).
+  const phoneShown = isEmail && (Boolean(state.segment) || isSubmitTrigger);
+  const phoneValid =
+    String((state.phone as string) ?? "").replace(/\s/g, "").length >= 10;
+  const [waConsent, setWaConsent] = useState<boolean>(Boolean(state.whatsappOptin));
+
   const handleSubmit = async () => {
     if (!valid) return;
     if (!isSubmitTrigger) {
@@ -85,9 +91,10 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
           autoFocus
           className="w-full rounded-xl border-2 border-gray-200 bg-white px-5 py-4 text-lg font-medium text-dark placeholder-gray-400 outline-none transition-colors focus:border-primary dark:border-dark-border dark:bg-dark-bg dark:text-white"
         />
-        {isEmail && state.segment && (
+        {phoneShown && (
           <input
             type="tel"
+            inputMode="tel"
             value={(state.phone as string) ?? ""}
             onChange={(e) => setField("phone" as string, e.target.value)}
             placeholder={t('phonePlaceholder')}
@@ -113,9 +120,30 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
             </span>
           </label>
         )}
+        {isSubmitTrigger && (
+          <label className="flex items-start gap-3 cursor-pointer rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-dark-border dark:bg-dark-bg">
+            <input
+              type="checkbox"
+              checked={waConsent}
+              onChange={(e) => {
+                setWaConsent(e.target.checked);
+                setField("whatsappOptin", e.target.checked);
+              }}
+              className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-primary accent-primary"
+            />
+            <span className="text-[11px] leading-relaxed text-gray-500 dark:text-dark-muted">
+              {LEGAL_TEXTS.whatsappOptin}
+            </span>
+          </label>
+        )}
         <PrimaryButton
           onClick={handleSubmit}
-          disabled={!valid || submitting || (isSubmitTrigger && !kvkkConsent)}
+          disabled={
+            !valid ||
+            (phoneShown && !phoneValid) ||
+            submitting ||
+            (isSubmitTrigger && !kvkkConsent)
+          }
         >
           {screen.cta ?? t('continue')}
         </PrimaryButton>
