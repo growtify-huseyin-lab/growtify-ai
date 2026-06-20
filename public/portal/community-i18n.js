@@ -612,7 +612,7 @@
       { pattern: /^Profile$/, replacement: "Profil" },
       { pattern: /^Notifications$/, replacement: "Bildirimler" },
       // Üye davet modalı
-      { pattern: /Invite (?:Member|Üye)/gi, replacement: "Üye Davet Et" },
+      { pattern: /Invite (?:Members?|Üye)/gi, replacement: "Üye Davet Et" },
       { pattern: /Build your community by inviting a new member/gi, replacement: "Yeni bir üye davet ederek topluluğunu büyüt" },
       { pattern: /Share your group link/gi, replacement: "Grup bağlantını paylaş" },
       { pattern: /Invite via (?:Email|E-posta)/gi, replacement: "E-posta ile davet et" },
