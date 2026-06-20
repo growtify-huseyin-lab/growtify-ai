@@ -488,6 +488,14 @@
       { pattern: /\bScore\b/g, replacement: "Puan" },
       { pattern: /\bIncorrect\b/g, replacement: "Yanlış" },
       { pattern: /\bCorrect\b/g, replacement: "Doğru" },
+      // QUIZ geç/kal mesajları + nav
+      { pattern: /You have failed to reach the minimum score of this quiz\.?/gi, replacement: "Bu quizin geçme puanına ulaşamadın." },
+      { pattern: /You have reached the minimum score of this quiz\.?/gi, replacement: "Bu quizin geçme puanına ulaştın." },
+      { pattern: /Please try again\.?/gi, replacement: "Lütfen tekrar dene." },
+      { pattern: /Questions answered correctly/gi, replacement: "soru doğru cevaplandı" },
+      { pattern: /Next Question/gi, replacement: "Sonraki Soru" },
+      { pattern: /Finish Quiz/gi, replacement: "Quizi Bitir" },
+      { pattern: /Review Answers/gi, replacement: "Cevapları Gözden Geçir" },
 
       // GREETING / WELCOME (portal karşılama — isim dinamik, lookahead ile korunur)
       {
