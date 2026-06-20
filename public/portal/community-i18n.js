@@ -563,7 +563,10 @@
       { pattern: /No users blocked/gi, replacement: "Engellenen kullanıcı yok" },
       { pattern: /Control Groups/gi, replacement: "Grupları Yönet" },
       // Dil ayarları
-      { pattern: /(?:Language|Dil) (?:Settings|Ayarlar)\b/gi, replacement: "Dil Ayarları" },
+      // NOT: \b kullanma — Türkçe "ı" JS regex'te kelime-dışı sayıldığından
+      // "Ayarları" içindeki "Ayarlar"ı tekrar eşleştirip sonsuz "ı" ekliyordu.
+      // "Ayarları" alternatifi başta → kendi çıktısını tam yakalar, idempotent.
+      { pattern: /(?:Language|Dil) (?:Settings|Ayarları|Ayarlar)/gi, replacement: "Dil Ayarları" },
       { pattern: /(?:Update|Güncelle) language settings here/gi, replacement: "Dil ayarlarını buradan güncelle" },
       { pattern: /Choose your preferred language/gi, replacement: "Tercih ettiğin dili seç" },
       // Bildirim tercihleri
