@@ -623,6 +623,13 @@
       { pattern: /Allow this member to perform all administrative actions/gi, replacement: "Bu üyenin tüm yönetici işlemlerini yapmasına izin ver" },
       { pattern: /Send Invite/gi, replacement: "Davet Gönder" },
       { pattern: /^Name$/, replacement: "Ad" },
+      // Grup/üye yönetim menüsü
+      { pattern: /Group Cover/gi, replacement: "Grup Kapağı" },
+      { pattern: /Change Role/gi, replacement: "Rolü Değiştir" },
+      { pattern: /(?:View|Görüntüle) Membership Answers/gi, replacement: "Üyelik Yanıtlarını Görüntüle" },
+      { pattern: /Ban from group/gi, replacement: "Gruptan Yasakla" },
+      { pattern: /Manage (?:Courses|Kurslar)/gi, replacement: "Kursları Yönet" },
+      { pattern: /Remove from group/gi, replacement: "Gruptan Çıkar" },
       {
         pattern: /Looks like you haven'?t chatted with anyone yet\.?/gi,
         replacement: "Görünüşe göre henüz kimseyle sohbet etmemişsin.",
