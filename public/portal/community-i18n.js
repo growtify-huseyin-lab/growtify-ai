@@ -523,6 +523,10 @@
         pattern: /No conversations found/gi,
         replacement: "Sohbet bulunamadı",
       },
+      // Kanal empty-state + izin
+      { pattern: /Only community admins can post in this channel\.?/gi, replacement: "Bu kanalda yalnızca topluluk yöneticileri gönderi paylaşabilir." },
+      { pattern: /No posts found/gi, replacement: "Gönderi bulunamadı" },
+      { pattern: /No posts yet/gi, replacement: "Henüz gönderi yok" },
       {
         pattern: /Looks like you haven'?t chatted with anyone yet\.?/gi,
         replacement: "Görünüşe göre henüz kimseyle sohbet etmemişsin.",
