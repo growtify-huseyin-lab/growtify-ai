@@ -631,6 +631,10 @@
       { pattern: /Manage (?:Courses|Kurslar)/gi, replacement: "Kursları Yönet" },
       { pattern: /Remove from group/gi, replacement: "Gruptan Çıkar" },
       { pattern: /I understand that my answers will be saved and visible to group administrators\.?/gi, replacement: "Yanıtlarımın kaydedileceğini ve grup yöneticileri tarafından görülebileceğini anlıyorum." },
+      // Topluluk empty-state
+      { pattern: /No Communities Found/gi, replacement: "Topluluk Bulunamadı" },
+      { pattern: /Start creating your own communities and engage with your audience!?/gi, replacement: "Kendi topluluklarını oluşturmaya başla ve kitlenle etkileşime geç!" },
+      { pattern: /Go to Homepage/gi, replacement: "Ana Sayfaya Git" },
       {
         pattern: /Looks like you haven'?t chatted with anyone yet\.?/gi,
         replacement: "Görünüşe göre henüz kimseyle sohbet etmemişsin.",
