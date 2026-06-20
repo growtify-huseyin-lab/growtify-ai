@@ -630,6 +630,7 @@
       { pattern: /Ban from group/gi, replacement: "Gruptan Yasakla" },
       { pattern: /Manage (?:Courses|Kurslar)/gi, replacement: "Kursları Yönet" },
       { pattern: /Remove from group/gi, replacement: "Gruptan Çıkar" },
+      { pattern: /I understand that my answers will be saved and visible to group administrators\.?/gi, replacement: "Yanıtlarımın kaydedileceğini ve grup yöneticileri tarafından görülebileceğini anlıyorum." },
       {
         pattern: /Looks like you haven'?t chatted with anyone yet\.?/gi,
         replacement: "Görünüşe göre henüz kimseyle sohbet etmemişsin.",
