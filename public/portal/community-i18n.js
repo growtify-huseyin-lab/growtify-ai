@@ -476,6 +476,18 @@
       { pattern: /Submit Quiz/gi, replacement: "Quizi Gönder" },
       { pattern: /Quiz Passed/gi, replacement: "Quiz Geçildi" },
       { pattern: /Quiz Failed/gi, replacement: "Quiz Geçilemedi" },
+      // QUIZ sonuç ekranı
+      { pattern: /You failed the quiz\.?/gi, replacement: "Quizi geçemedin." },
+      { pattern: /You passed the quiz\.?/gi, replacement: "Quizi geçtin." },
+      { pattern: /Question (\d+) of (\d+)/gi, replacement: "Soru $1 / $2" },
+      { pattern: /Single Choice/gi, replacement: "Tek Seçim" },
+      { pattern: /Multiple Choice/gi, replacement: "Çoklu Seçim" },
+      { pattern: /The answer is incorrect/gi, replacement: "Cevap yanlış" },
+      { pattern: /The answer is correct/gi, replacement: "Cevap doğru" },
+      { pattern: /\bAttempted\b/g, replacement: "Cevaplanan" },
+      { pattern: /\bScore\b/g, replacement: "Puan" },
+      { pattern: /\bIncorrect\b/g, replacement: "Yanlış" },
+      { pattern: /\bCorrect\b/g, replacement: "Doğru" },
 
       // GREETING / WELCOME (portal karşılama — isim dinamik, lookahead ile korunur)
       {
