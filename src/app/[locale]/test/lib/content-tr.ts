@@ -686,6 +686,10 @@ export const LEGAL_TEXTS = {
   kvkkShort:
     "Kişisel verilerin Growtify AI tarafından KVKK kapsamında işlenir ve üçüncü taraflarla paylaşılmaz. Detaylar için gizlilik politikamızı inceleyebilirsin.",
 
+  // WhatsApp açık rıza (AYRI + OPSİYONEL — pazarlama onayı hizmet şartı yapılamaz)
+  whatsappOptin:
+    "WhatsApp'tan kişiselleştirilmiş önerilerimi ve ücretsiz topluluğumuzun davetini almak istiyorum. (İstediğin an çıkabilirsin.)",
+
   // KVKK aydınlatma metni — tam versiyon (modal veya ayrı sayfa için)
   kvkkLong:
     "Growtify AI (Growtify Ltd, Birleşik Krallık) olarak, test sürecinde topladığımız ad ve e-posta bilgileriniz, 6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında; kişiselleştirilmiş rapor ve önerilerinizin iletilmesi, program bilgilendirme iletişimi ve hizmet kalitesinin artırılması amaçlarıyla işlenmektedir. Verileriniz yurt dışına aktarılabilir (UK sunucularında barındırılmaktadır). Açık rızanızı geri çekme, verilerinize erişim, düzeltme veya silme taleplerini info@growtify.app adresine iletebilirsiniz. Veri işleme faaliyetimiz hakkında tam bilgi için gizlilik politikamızı inceleyiniz.",

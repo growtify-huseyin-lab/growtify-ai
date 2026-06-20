@@ -691,6 +691,10 @@ export const LEGAL_TEXTS = {
   kvkkShort:
     "Your personal data is processed by Growtify AI under applicable data protection law and is not shared with third parties. See our privacy policy for details.",
 
+  // WhatsApp opt-in (SEPARATE + OPTIONAL — marketing consent can't be a service condition)
+  whatsappOptin:
+    "I'd like to receive my personalized recommendations and a free community invite via WhatsApp. (You can opt out anytime.)",
+
   // Data privacy notice — full version (for a modal or separate page)
   kvkkLong:
     "At Growtify AI (Growtify Ltd, United Kingdom), the name and email information we collect during the test is processed under applicable data protection law for the purposes of delivering your personalized report and recommendations, program-related communications, and improving service quality. Your data may be transferred abroad (it is hosted on UK servers). You can submit requests to withdraw your consent, access, correct, or delete your data to info@growtify.app. For full information about our data processing activities, please review our privacy policy.",

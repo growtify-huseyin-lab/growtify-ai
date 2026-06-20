@@ -46,6 +46,7 @@ export interface QuizState {
   firstName: string;
   email: string;
   phone: string;
+  whatsappOptin: boolean; // WhatsApp pazarlama/topluluk daveti açık rızası (opsiyonel)
 
   // Bonus
   bonus_q1: boolean | null;
@@ -82,6 +83,7 @@ export const initialQuizState: QuizState = {
   firstName: "",
   email: "",
   phone: "",
+  whatsappOptin: false,
   bonus_q1: null,
   bonus_q2: null,
   totalScore: 0,
