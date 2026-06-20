@@ -231,7 +231,7 @@
 
     const phrases = [
       // — added 2026-06-02: kelime sırası / kısmi çeviri düzeltmeleri (dict'ten önce) —
-      { pattern: /Search member/gi, replacement: "Üye Ara" },
+      { pattern: /Search members?/gi, replacement: "Üye Ara" },
       { pattern: /Notifications List/gi, replacement: "Bildirim Listesi" },
       // POST/COMMENT eylem menüsü (… menü) — dict'ten önce tam-phrase yakala
       { pattern: /Delete Post/gi, replacement: "Gönderiyi Sil" },
