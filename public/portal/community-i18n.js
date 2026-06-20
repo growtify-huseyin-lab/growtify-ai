@@ -605,6 +605,12 @@
       { pattern: /^Bio$/, replacement: "Hakkında" },
       { pattern: /^Location$/, replacement: "Konum" },
       { pattern: /^Visibility$/, replacement: "Görünürlük" },
+      // Ayar sekmesi label'ları (tam-node)
+      { pattern: /^Account$/, replacement: "Hesap" },
+      { pattern: /^Certificates$/, replacement: "Sertifikalar" },
+      { pattern: /^Badges$/, replacement: "Rozetler" },
+      { pattern: /^Profile$/, replacement: "Profil" },
+      { pattern: /^Notifications$/, replacement: "Bildirimler" },
       {
         pattern: /Looks like you haven'?t chatted with anyone yet\.?/gi,
         replacement: "Görünüşe göre henüz kimseyle sohbet etmemişsin.",
