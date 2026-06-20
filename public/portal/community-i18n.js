@@ -588,6 +588,13 @@
       { pattern: /New event created/gi, replacement: "Yeni etkinlik oluşturuldu" },
       { pattern: /Newsletter/gi, replacement: "Bülten" },
       { pattern: /Certificate issued/gi, replacement: "Sertifika verildi" },
+      // Bildirim ayarları — ek başlıklar/aksiyonlar
+      { pattern: /Notification type/gi, replacement: "Bildirim Türü" },
+      { pattern: /Social and engagement/gi, replacement: "Sosyal ve etkileşim" },
+      { pattern: /(?:Posts|Gönderiler) and comments activity/gi, replacement: "Gönderi ve yorum etkinliği" },
+      { pattern: /(?:Community|Topluluk) and group management/gi, replacement: "Topluluk ve grup yönetimi" },
+      { pattern: /Allow notifications/gi, replacement: "Bildirimlere izin ver" },
+      { pattern: /Save and copy to/gi, replacement: "Kaydet ve şuraya kopyala" },
       // tekil label'lar (tam-node, yaygın kelime güvenliği)
       { pattern: /^Type$/, replacement: "Tür" },
       { pattern: /^Action$/, replacement: "İşlem" },
