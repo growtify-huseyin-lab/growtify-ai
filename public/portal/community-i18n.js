@@ -611,6 +611,18 @@
       { pattern: /^Badges$/, replacement: "Rozetler" },
       { pattern: /^Profile$/, replacement: "Profil" },
       { pattern: /^Notifications$/, replacement: "Bildirimler" },
+      // Üye davet modalı
+      { pattern: /Invite (?:Member|Üye)/gi, replacement: "Üye Davet Et" },
+      { pattern: /Build your community by inviting a new member/gi, replacement: "Yeni bir üye davet ederek topluluğunu büyüt" },
+      { pattern: /Share your group link/gi, replacement: "Grup bağlantını paylaş" },
+      { pattern: /Invite via (?:Email|E-posta)/gi, replacement: "E-posta ile davet et" },
+      { pattern: /Invited (?:member|üye) will be auto approved to join group/gi, replacement: "Davet edilen üye gruba katılmak için otomatik onaylanır" },
+      { pattern: /Enter Name/gi, replacement: "Adı gir" },
+      { pattern: /Enter (?:Email|E-posta)/gi, replacement: "E-posta gir" },
+      { pattern: /Give Administrative Privileges/gi, replacement: "Yönetici Yetkileri Ver" },
+      { pattern: /Allow this member to perform all administrative actions/gi, replacement: "Bu üyenin tüm yönetici işlemlerini yapmasına izin ver" },
+      { pattern: /Send Invite/gi, replacement: "Davet Gönder" },
+      { pattern: /^Name$/, replacement: "Ad" },
       {
         pattern: /Looks like you haven'?t chatted with anyone yet\.?/gi,
         replacement: "Görünüşe göre henüz kimseyle sohbet etmemişsin.",
