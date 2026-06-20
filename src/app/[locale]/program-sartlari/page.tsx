@@ -134,7 +134,7 @@ export default async function ProgramSartlariPage() {
             <H2 n={4}>Üçüncü Taraf Araçlar</H2>
             <p className="mt-3">
               Eğitimlerimizde ChatGPT, Claude ve Gemini gibi üçüncü taraf yapay
-              zekâ araçlarının kullanımını öğretiriz. Bu araçlar bize ait
+              zekâ araçlarının kullanımlarına değiniriz. Bu araçlar bize ait
               değildir. Ücretlendirmeleri, kullanım koşulları, erişilebilirliği,
               gizlilik politikaları ve performansı ilgili sağlayıcıların
               sorumluluğundadır ve zaman içinde değişebilir. Growtify.ai bu
