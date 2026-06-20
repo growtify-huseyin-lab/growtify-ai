@@ -19,8 +19,8 @@ export async function generateMetadata({
   return {
     title: en ? "Program Terms" : "Program Şartları, Koşullar ve Haklar",
     description: en
-      ? "Growtify-AI program participation terms — clear and fair for both sides."
-      : "Growtify-AI program şartları — bu ilişkiyi iki taraf için de açık ve adil tutmak için.",
+      ? "Growtify.ai program participation terms — clear and fair for both sides."
+      : "Growtify.ai program şartları — bu ilişkiyi iki taraf için de açık ve adil tutmak için.",
   };
 }
 
@@ -38,7 +38,7 @@ export default async function ProgramSartlariPage() {
       <Container className="max-w-4xl">
         {/* Başlık + sıcak giriş */}
         <p className="text-sm font-semibold tracking-wide text-primary">
-          GROWTIFY-AI
+          GROWTIFY.AI
         </p>
         <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-dark dark:text-white">
           Kullanım Şartları, Koşullar ve Haklar
@@ -47,7 +47,7 @@ export default async function ProgramSartlariPage() {
           Son güncelleme: {LAST_UPDATED}
         </p>
         <p className="mt-6 text-lg text-gray-600 dark:text-dark-muted leading-relaxed">
-          Growtify-AI programlarına katılarak veya herhangi bir ürünümüzü satın
+          Growtify.ai programlarına katılarak veya herhangi bir ürünümüzü satın
           alarak; bu şartları okuduğunuzu, anladığınızı ve kabul ettiğinizi beyan
           etmiş olursunuz. Katılmadan önce lütfen tümünü dikkatlice okuyunuz.
         </p>
@@ -91,7 +91,7 @@ export default async function ProgramSartlariPage() {
           <div>
             <H2 n={1}>Taraflar</H2>
             <p className="mt-3">
-              Growtify-AI; <strong>{COMPANY.legalName}</strong> tarafından
+              Growtify.ai; <strong>{COMPANY.legalName}</strong> tarafından
               işletilen bir eğitim, koçluk ve mentorluk markasıdır. Solo
               profesyonellere, işlerini yapay zekâyla dönüştürmeleri için dijital
               eğitim, topluluk ve destek hizmetleri sunarız. Programlarımıza
@@ -125,7 +125,7 @@ export default async function ProgramSartlariPage() {
               sorumluluklar — örneğin sağlık, hukuk, finans veya danışmanlık
               alanlarındaki kurallar — her durumda size aittir. Yapay zekâ
               kullanmanız bu sorumluluğu ortadan kaldırmaz veya hafifletmez.
-              Growtify-AI; ürettiğiniz çıktılardan ya da bunların kullanımından
+              Growtify.ai; ürettiğiniz çıktılardan ya da bunların kullanımından
               doğabilecek sonuçlardan sorumlu tutulamaz.
             </p>
           </div>
@@ -137,7 +137,7 @@ export default async function ProgramSartlariPage() {
               zekâ araçlarının kullanımını öğretiriz. Bu araçlar bize ait
               değildir. Ücretlendirmeleri, kullanım koşulları, erişilebilirliği,
               gizlilik politikaları ve performansı ilgili sağlayıcıların
-              sorumluluğundadır ve zaman içinde değişebilir. Growtify-AI bu
+              sorumluluğundadır ve zaman içinde değişebilir. Growtify.ai bu
               hizmetleri denetlemez ve garanti etmez. Bu araçlara yüklediğiniz
               veriler, özellikle hassas müşteri bilgileri, ilgili sağlayıcının
               koşullarına tabidir.
@@ -179,7 +179,7 @@ export default async function ProgramSartlariPage() {
             <p className="mt-3">
               Program kapsamındaki tüm içerikler — videolar, şablonlar, rehberler,
               komut setleri, yapay zekâ sistemleri, GROWT yöntemi ve adlandırmaları
-              ile koçluk materyalleri — Growtify-AI&apos;a aittir. Size; bu
+              ile koçluk materyalleri — Growtify.ai&apos;a aittir. Size; bu
               içerikleri yalnızca kişisel ve ticari gelişiminiz için
               kullanabileceğiniz, tek kullanıcıya özel ve devredilemez bir lisans
               tanınır. İçerikleri paylaşamaz, çoğaltamaz veya dağıtamaz; araç ve
