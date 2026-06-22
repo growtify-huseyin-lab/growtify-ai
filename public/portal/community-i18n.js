@@ -629,6 +629,7 @@
       { pattern: /(?:View|Görüntüle) Membership Answers/gi, replacement: "Üyelik Yanıtlarını Görüntüle" },
       { pattern: /Ban from group/gi, replacement: "Gruptan Yasakla" },
       { pattern: /Manage (?:Courses|Kurslar)/gi, replacement: "Kursları Yönet" },
+      { pattern: /Resume (?:Course|Kurs)/gi, replacement: "Kursa Devam Et" },
       { pattern: /Remove from group/gi, replacement: "Gruptan Çıkar" },
       { pattern: /I understand that my answers will be saved and visible to group administrators\.?/gi, replacement: "Yanıtlarımın kaydedileceğini ve grup yöneticileri tarafından görülebileceğini anlıyorum." },
       // Topluluk empty-state
