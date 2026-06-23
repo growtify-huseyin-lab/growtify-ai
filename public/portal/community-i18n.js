@@ -238,6 +238,7 @@
       { pattern: /Edit Post/gi, replacement: "Gönderiyi Düzenle" },
       { pattern: /Move to Channel/gi, replacement: "Kanala Taşı" },
       { pattern: /Disable (Comments|Yorumlar)/gi, replacement: "Yorumları Kapat" },
+      { pattern: /(?:Comments|Yorumlar) are disabled for this post\.?/gi, replacement: "Bu gönderide yorumlar kapalı." },
       { pattern: /Pin Post/gi, replacement: "Gönderiyi Sabitle" },
       { pattern: /\bUnpin\b/g, replacement: "Sabitlemeyi Kaldır" },
       { pattern: /\bPinned\b/g, replacement: "Sabitlendi" },
