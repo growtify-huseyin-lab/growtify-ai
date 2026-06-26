@@ -106,11 +106,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...BLOG_CATEGORIES_EN.map((c) => trOnly(`/en/blog/kategori/${c.slug}`, 0.5)),
   ];
 
-  // ---- Gelişmeler (daily updates, TR-first) ----
+  // ---- Gelişmeler (daily updates — separate TR + EN content) ----
   const gelismeler: MetadataRoute.Sitemap = [
-    trOnly("/gelismeler", 0.6),
-    ...getAllUpdates().map((u) =>
+    // Index is bilingual (TR + EN-native updates both exist)
+    bi("/gelismeler", 0.6),
+    // TR updates (Turkish slugs) — standalone, no hreflang pair
+    ...getAllUpdates("tr").map((u) =>
       trOnly(`/gelismeler/${u.slug}`, 0.5, new Date(u.date)),
+    ),
+    // EN-native updates (English slugs) at /en/gelismeler/{slug}
+    ...getAllUpdates("en").map((u) =>
+      trOnly(`/en/gelismeler/${u.slug}`, 0.5, new Date(u.date)),
     ),
   ];
 

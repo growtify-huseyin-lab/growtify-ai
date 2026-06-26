@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getLocale } from "next-intl/server";
 import { localeAlternates } from "@/lib/seo-alternates";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -8,19 +7,20 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllUpdates, getUpdateBySlug } from "@/lib/gelismeler";
 import { ArrowLeft } from "lucide-react";
 
+type Props = { params: Promise<{ slug: string; locale: string }> };
+
 export function generateStaticParams() {
-  return getAllUpdates().map((u) => ({ slug: u.slug }));
+  // Per-locale: separate TR + EN content (different slugs).
+  return [
+    ...getAllUpdates("tr").map((u) => ({ locale: "tr", slug: u.slug })),
+    ...getAllUpdates("en").map((u) => ({ locale: "en", slug: u.slug })),
+  ];
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
-  const { slug } = await params;
-  const u = getUpdateBySlug(slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = await params;
+  const u = getUpdateBySlug(slug, locale);
   if (!u) return {};
-  const locale = await getLocale();
   return {
     title: u.title,
     description: u.summary,
@@ -38,16 +38,11 @@ function formatDate(date: string, en: boolean): string {
   });
 }
 
-export default async function GelismeDetailPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const u = getUpdateBySlug(slug);
+export default async function GelismeDetailPage({ params }: Props) {
+  const { slug, locale } = await params;
+  const u = getUpdateBySlug(slug, locale);
   if (!u) notFound();
 
-  const locale = await getLocale();
   const en = locale === "en";
 
   return (

@@ -2,10 +2,11 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 
-// Daily updates ("Gelişmeler") hub. Content lives in content/gelismeler/*.mdx
-// (TR-first). Authored by rephrasing CEO-provided raw notes into brand voice,
-// then published via deploy — no admin/DB needed (publisher = deploy pipeline).
-// Mirrors the blog loader pattern (gray-matter frontmatter + MDX body).
+// Daily updates ("Gelişmeler") hub. SEPARATE TR + EN content (not translations),
+// mirroring the blog loader: TR lives in content/gelismeler/*.mdx, EN-native in
+// content/gelismeler/en/*.mdx. readdir on the TR dir ignores the `en` subdir
+// (it is a directory, not a .mdx file). Authored by rephrasing CEO-provided raw
+// notes into brand voice per locale, then published via deploy (no admin/DB).
 
 export type UpdateMeta = {
   slug: string;
@@ -13,28 +14,41 @@ export type UpdateMeta = {
   summary: string;
   date: string;
   tags: string[];
+  locale: string;
 };
 
 export type Update = UpdateMeta & { content: string };
 
-const DIR = path.join(process.cwd(), "content/gelismeler");
+const GELISMELER_DIRS: Record<string, string> = {
+  tr: path.join(process.cwd(), "content/gelismeler"),
+  en: path.join(process.cwd(), "content/gelismeler/en"),
+};
 
-let _cache: { metas: UpdateMeta[]; map: Map<string, Update> } | null = null;
+// Per-locale in-memory cache.
+const _cache: Record<
+  string,
+  { metas: UpdateMeta[]; map: Map<string, Update> }
+> = {};
 
-function load(): { metas: UpdateMeta[]; map: Map<string, Update> } {
-  if (_cache) return _cache;
+function loadLocale(locale: string): {
+  metas: UpdateMeta[];
+  map: Map<string, Update>;
+} {
+  const loc = locale === "en" ? "en" : "tr";
+  if (_cache[loc]) return _cache[loc];
 
-  if (!fs.existsSync(DIR)) {
-    _cache = { metas: [], map: new Map() };
-    return _cache;
+  const dir = GELISMELER_DIRS[loc];
+  if (!fs.existsSync(dir)) {
+    _cache[loc] = { metas: [], map: new Map() };
+    return _cache[loc];
   }
 
-  const files = fs.readdirSync(DIR).filter((f) => f.endsWith(".mdx"));
+  const files = fs.readdirSync(dir).filter((f) => f.endsWith(".mdx"));
   const metas: UpdateMeta[] = [];
   const map = new Map<string, Update>();
 
   for (const file of files) {
-    const raw = fs.readFileSync(path.join(DIR, file), "utf-8");
+    const raw = fs.readFileSync(path.join(dir, file), "utf-8");
     const { data, content } = matter(raw);
     const slug = data.slug || file.replace(/\.mdx$/, "");
 
@@ -44,6 +58,7 @@ function load(): { metas: UpdateMeta[]; map: Map<string, Update> } {
       summary: data.summary || "",
       date: String(data.date || ""),
       tags: Array.isArray(data.tags) ? data.tags : [],
+      locale: loc,
     };
 
     metas.push(meta);
@@ -52,14 +67,17 @@ function load(): { metas: UpdateMeta[]; map: Map<string, Update> } {
 
   metas.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  _cache = { metas, map };
-  return _cache;
+  _cache[loc] = { metas, map };
+  return _cache[loc];
 }
 
-export function getAllUpdates(): UpdateMeta[] {
-  return load().metas;
+export function getAllUpdates(locale: string = "tr"): UpdateMeta[] {
+  return loadLocale(locale).metas;
 }
 
-export function getUpdateBySlug(slug: string): Update | null {
-  return load().map.get(slug) ?? null;
+export function getUpdateBySlug(
+  slug: string,
+  locale: string = "tr",
+): Update | null {
+  return loadLocale(locale).map.get(slug) ?? null;
 }
