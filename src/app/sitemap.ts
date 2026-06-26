@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { getAllUpdates } from "@/lib/gelismeler";
 import { getAllSectorSlugs } from "@/data/sectors";
 import { getActiveLeadMagnetSlugs } from "@/content/lead-magnets";
 import { LEAD_TR_TO_EN } from "@/content/lead-magnets/index.en";
@@ -105,6 +106,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...BLOG_CATEGORIES_EN.map((c) => trOnly(`/en/blog/kategori/${c.slug}`, 0.5)),
   ];
 
+  // ---- Gelişmeler (daily updates, TR-first) ----
+  const gelismeler: MetadataRoute.Sitemap = [
+    trOnly("/gelismeler", 0.6),
+    ...getAllUpdates().map((u) =>
+      trOnly(`/gelismeler/${u.slug}`, 0.5, new Date(u.date)),
+    ),
+  ];
+
   // ---- EN-only pillar pages ----
   // EN-native standalone pillars at top-level EN routes (no hreflang pair).
   // /en/growt-method is already emitted via bi("/growt-method") above, so only
@@ -120,5 +129,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     trOnly("/kvkk-aydinlatma", 0.3),
   ];
 
-  return [...bilingual, ...blog, ...pillars, ...trContent];
+  return [...bilingual, ...blog, ...gelismeler, ...pillars, ...trContent];
 }
