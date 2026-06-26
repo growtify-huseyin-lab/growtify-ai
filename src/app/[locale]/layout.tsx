@@ -33,6 +33,9 @@ export async function generateMetadata({
   const en = locale === "en";
   return {
     metadataBase: new URL(BASE_URL),
+    verification: {
+      google: "8smAMXEz52tyZGYO7kyK3FeGbotMay6DE2htaABrGWA",
+    },
     title: {
       default: en
         ? "Growtify.ai — The Platform for Professionals Growing Their Business with AI"
