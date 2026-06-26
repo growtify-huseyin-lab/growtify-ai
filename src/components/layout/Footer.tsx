@@ -10,6 +10,7 @@ import { COMPANY } from "@/lib/company-info";
 // so EN footer links go directly (no 308 hop). External + anchor hrefs pass through.
 const FOOTER_EN_PATHS: Record<string, string> = {
   "/kurumsal": "/enterprise",
+  "/gelismeler": "/news",
   "/hakkimizda": "/about",
   "/iletisim": "/contact",
   "/sektor": "/sectors",
@@ -36,7 +37,7 @@ export function Footer() {
         { label: "GROWT Method", href: "/growt-method" },
         { label: t("linkBusinessSolutions"), href: "/kurumsal" },
         { label: "Blog", href: "/blog" },
-        { label: locale === "en" ? "Updates" : "Gelişmeler", href: "/gelismeler" },
+        { label: locale === "en" ? "News" : "Gelişmeler", href: "/gelismeler" },
       ],
     },
     {

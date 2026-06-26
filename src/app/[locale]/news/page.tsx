@@ -6,15 +6,19 @@ import { Card } from "@/components/ui/Card";
 import { getAllUpdates } from "@/lib/gelismeler";
 import { ArrowRight } from "lucide-react";
 
+// EN-slug fork of /gelismeler: TR canonical is /gelismeler, EN canonical is
+// /en/news (next.config 301s /en/gelismeler → /en/news and /news → /gelismeler).
+// Same locale-aware loader; /news only ever serves the EN locale.
+
 type Props = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const en = locale === "en";
   return {
-    title: en ? "Updates" : "Gelişmeler",
+    title: en ? "News" : "Gelişmeler",
     description: en
-      ? "The latest developments, releases, and behind-the-scenes from Growtify.ai."
+      ? "The latest news, developments, and behind-the-scenes from Growtify.ai."
       : "Growtify.ai'dan en güncel gelişmeler, yenilikler ve perde arkası.",
     alternates: localeAltPair(locale, "/gelismeler", "/news"),
   };
@@ -30,7 +34,7 @@ function formatDate(date: string, en: boolean): string {
   });
 }
 
-export default async function GelismelerPage({ params }: Props) {
+export default async function NewsPage({ params }: Props) {
   const { locale } = await params;
   const en = locale === "en";
   const updates = getAllUpdates(locale);
@@ -41,11 +45,11 @@ export default async function GelismelerPage({ params }: Props) {
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <h1 className="text-4xl font-extrabold tracking-tight text-dark dark:text-white sm:text-5xl">
-              {en ? "Updates" : "Gelişmeler"}
+              {en ? "News" : "Gelişmeler"}
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-gray-600 dark:text-dark-muted">
               {en
-                ? "The latest developments, releases, and behind-the-scenes from Growtify.ai — follow it all here."
+                ? "The latest news, developments, and behind-the-scenes from Growtify.ai — follow it all here."
                 : "Growtify.ai'dan en güncel gelişmeler, yenilikler ve perde arkası — hepsini buradan takip et."}
             </p>
           </div>
@@ -58,17 +62,13 @@ export default async function GelismelerPage({ params }: Props) {
             {updates.length === 0 ? (
               <p className="text-center text-gray-500 dark:text-dark-muted">
                 {en
-                  ? "No updates yet — check back soon."
+                  ? "No news yet — check back soon."
                   : "Henüz gelişme yok — yakında burada."}
               </p>
             ) : (
               <div className="flex flex-col gap-6">
                 {updates.map((u) => (
-                  <Link
-                    key={u.slug}
-                    href={`/gelismeler/${u.slug}`}
-                    className="group"
-                  >
+                  <Link key={u.slug} href={`/news/${u.slug}`} className="group">
                     <Card hover>
                       <div className="flex flex-wrap items-center gap-2 text-xs font-medium text-primary">
                         <time dateTime={u.date}>{formatDate(u.date, en)}</time>
