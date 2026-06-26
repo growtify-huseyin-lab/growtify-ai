@@ -6,7 +6,6 @@ import { SectorGrid } from "@/components/sections/SectorGrid";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { FAQ } from "@/components/sections/FAQ";
 import { CTA } from "@/components/sections/CTA";
-import { CommunityCTA } from "@/components/CommunityCTA";
 
 export default function Home() {
   return (
@@ -17,7 +16,6 @@ export default function Home() {
       <Stats />
       <SectorGrid />
       <Testimonials />
-      <CommunityCTA source="homepage" />
       <FAQ />
       <CTA />
     </>

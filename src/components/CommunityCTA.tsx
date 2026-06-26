@@ -31,14 +31,14 @@ export function CommunityCTA({
   return (
     <section className="py-16 bg-white dark:bg-dark-bg transition-colors">
       <div className="mx-auto max-w-4xl px-5">
-        <div className="rounded-3xl bg-dark dark:bg-dark-card px-6 py-12 sm:px-12 text-center">
-          <p className="text-sm font-semibold tracking-wide text-primary-light">
+        <div className="rounded-3xl bg-gradient-to-br from-primary/10 via-accent/5 to-primary/5 dark:from-primary/15 dark:via-dark-card dark:to-accent/10 ring-1 ring-primary/15 dark:ring-primary/20 px-6 py-12 sm:px-12 text-center">
+          <p className="text-sm font-semibold tracking-wide text-primary">
             ÜCRETSİZ TOPLULUK
           </p>
-          <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-white">
+          <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold text-dark dark:text-white">
             AI ile işini büyütenlerin topluluğuna katıl
           </h2>
-          <p className="mt-4 text-lg text-gray-300 leading-relaxed">
+          <p className="mt-4 text-lg text-gray-600 dark:text-dark-muted leading-relaxed">
             Güncel AI gelişmeleri, gerçek uygulama örnekleri ve seninle aynı yolda
             yürüyen profesyonellerle bağlan. Katılım ücretsiz.
           </p>
