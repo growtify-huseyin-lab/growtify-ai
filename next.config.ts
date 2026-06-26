@@ -82,6 +82,11 @@ const nextConfig: NextConfig = {
       { source: "/en/cerez-politikasi", destination: "/en/cookie-policy", permanent: true },
       { source: "/en/iade-politikasi", destination: "/en/refund-policy", permanent: true },
       { source: "/en/lead/ai-baslangic-rehberi", destination: "/en/lead/ai-starter-guide", permanent: true },
+      // Gelişmeler EN-slug fork: TR /gelismeler ↔ EN /en/news
+      { source: "/en/gelismeler", destination: "/en/news", permanent: true },
+      { source: "/en/gelismeler/:slug", destination: "/en/news/:slug", permanent: true },
+      { source: "/news", destination: "/gelismeler", permanent: true },
+      { source: "/news/:slug", destination: "/gelismeler/:slug", permanent: true },
     ];
 
     return [

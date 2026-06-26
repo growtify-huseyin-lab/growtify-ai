@@ -6,11 +6,14 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllUpdates, getUpdateBySlug } from "@/lib/gelismeler";
 import { ArrowLeft } from "lucide-react";
 
+// EN-slug fork of /gelismeler/[slug]: EN canonical /en/news/{slug}. TR/EN slugs
+// differ (separate content), so no cross-locale hreflang pair on detail pages —
+// canonical-only. A TR↔EN slug map could be added later if pairing is needed.
+
 type Props = { params: Promise<{ slug: string; locale: string }> };
 
 export function generateStaticParams() {
-  // TR only — EN is served at /en/news (English-slug fork).
-  return getAllUpdates("tr").map((u) => ({ locale: "tr", slug: u.slug }));
+  return getAllUpdates("en").map((u) => ({ locale: "en", slug: u.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -20,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: u.title,
     description: u.summary,
-    alternates: { canonical: `/gelismeler/${slug}` },
+    alternates: { canonical: `/en/news/${slug}` },
   };
 }
 
@@ -34,7 +37,7 @@ function formatDate(date: string, en: boolean): string {
   });
 }
 
-export default async function GelismeDetailPage({ params }: Props) {
+export default async function NewsDetailPage({ params }: Props) {
   const { slug, locale } = await params;
   const u = getUpdateBySlug(slug, locale);
   if (!u) notFound();
@@ -46,11 +49,11 @@ export default async function GelismeDetailPage({ params }: Props) {
       <Container>
         <div className="mx-auto max-w-2xl">
           <Link
-            href="/gelismeler"
+            href="/news"
             className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
           >
             <ArrowLeft size={15} />
-            {en ? "All updates" : "Tüm gelişmeler"}
+            {en ? "All news" : "Tüm gelişmeler"}
           </Link>
 
           <div className="mt-6 flex flex-wrap items-center gap-2 text-xs font-medium text-primary">
