@@ -270,16 +270,24 @@ export default async function GROWTMethodPage() {
           </div>
           <div className="grid gap-6 sm:grid-cols-3 max-w-4xl mx-auto">
             {AUDIENCE.map((a) => (
-              <Card key={a.title} hover>
+              <Card key={a.title} hover className="flex flex-col">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 dark:bg-primary/20">
                   <a.icon size={24} className="text-primary" />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold text-dark dark:text-white">
                   {a.title}
                 </h3>
-                <p className="mt-2 text-sm text-gray-600 dark:text-dark-muted leading-relaxed">
+                <p className="mt-2 text-sm text-gray-600 dark:text-dark-muted leading-relaxed flex-grow">
                   {a.description}
                 </p>
+                <Button
+                  href="/test"
+                  variant="outline"
+                  size="sm"
+                  className="mt-5 w-full"
+                >
+                  {t("audienceQuizCta")}
+                </Button>
               </Card>
             ))}
           </div>
