@@ -83,7 +83,7 @@ export default async function HakkimizdaPage() {
       description: t("ecosystemOpsDescription"),
       href: "https://growtify-ops.com/",
       external: true,
-      cta: t("ecosystemOpsCta"),
+      cta: "growtify-ops.com",
     },
     {
       name: t("ecosystemBusinessName"),
