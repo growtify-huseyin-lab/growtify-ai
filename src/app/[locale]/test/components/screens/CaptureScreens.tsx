@@ -55,7 +55,7 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
     setError(null);
     const startTime = Date.now();
     const res = await submitEmail();
-    if (res.ok) trackEvent("generate_lead", { method: "quiz" });
+    if (res.ok) trackEvent("lead_quiz", { method: "quiz" });
     // Ensure processing overlay shows for at least 5 seconds
     const elapsed = Date.now() - startTime;
     if (elapsed < 5000) {

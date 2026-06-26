@@ -39,7 +39,7 @@ export function ContactForm() {
 
       if (json.success) {
         setStatus("success");
-        trackEvent("generate_lead", { method: "contact_form" });
+        trackEvent("lead_contact", { method: "contact_form" });
         form.reset();
       } else {
         setStatus("error");
