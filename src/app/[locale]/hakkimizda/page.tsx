@@ -101,6 +101,14 @@ export default async function HakkimizdaPage() {
       external: true,
       cta: t("ecosystemCommunityCta"),
     },
+    {
+      name: t("ecosystemMentorshipName"),
+      category: t("ecosystemMentorshipCategory"),
+      description: t("ecosystemMentorshipDescription"),
+      href: "/iletisim",
+      external: false,
+      cta: t("ecosystemMentorshipCta"),
+    },
   ];
 
   return (
