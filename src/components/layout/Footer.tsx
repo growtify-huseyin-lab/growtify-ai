@@ -5,6 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { Container } from "@/components/ui/Container";
 import { LogoLarge } from "@/components/ui/Logo";
 import { COMPANY } from "@/lib/company-info";
+import { CommunityCTA } from "@/components/CommunityCTA";
 
 // EN English-slug taxonomy (CEO 2026-06-01): map TR footer paths → English EN paths
 // so EN footer links go directly (no 308 hop). External + anchor hrefs pass through.
@@ -78,6 +79,9 @@ export function Footer() {
             <p className="mt-3 text-sm text-gray-400 leading-relaxed">
               {t("brandTagline")}
             </p>
+            <div className="mt-4">
+              <CommunityCTA variant="compact" source="footer" />
+            </div>
           </div>
 
           {/* Link groups */}

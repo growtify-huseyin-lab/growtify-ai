@@ -4,6 +4,7 @@ import { useLocale } from "next-intl";
 
 import { useState, useEffect, FormEvent } from "react";
 import { useTranslations } from "next-intl";
+import { trackEvent } from "@/lib/gtag";
 import {
   ArrowRight,
   Loader2,
@@ -77,6 +78,7 @@ export function LeadForm({
 
       if (json.ok) {
         setStatus("success");
+        trackEvent("generate_lead", { method: "lead_form" });
         form.reset();
       } else {
         setStatus("error");

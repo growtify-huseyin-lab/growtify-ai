@@ -3,6 +3,7 @@
 import { useState, FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Loader2, CheckCircle2, AlertCircle, Users } from "lucide-react";
+import { trackEvent } from "@/lib/gtag";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -38,6 +39,7 @@ export function ContactForm() {
 
       if (json.success) {
         setStatus("success");
+        trackEvent("generate_lead", { method: "contact_form" });
         form.reset();
       } else {
         setStatus("error");
