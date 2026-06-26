@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { getLocale } from "next-intl/server";
 import { localeAlternates } from "@/lib/seo-alternates";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -7,8 +6,10 @@ import { Card } from "@/components/ui/Card";
 import { getAllUpdates } from "@/lib/gelismeler";
 import { ArrowRight } from "lucide-react";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
   const en = locale === "en";
   return {
     title: en ? "Updates" : "Gelişmeler",
@@ -29,10 +30,10 @@ function formatDate(date: string, en: boolean): string {
   });
 }
 
-export default async function GelismelerPage() {
-  const locale = await getLocale();
+export default async function GelismelerPage({ params }: Props) {
+  const { locale } = await params;
   const en = locale === "en";
-  const updates = getAllUpdates();
+  const updates = getAllUpdates(locale);
 
   return (
     <>
