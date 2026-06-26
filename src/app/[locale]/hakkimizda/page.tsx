@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ArrowRight, Lightbulb, Target, Heart, Rocket } from "lucide-react";
 import { CTA } from "@/components/sections/CTA";
+import { COMMUNITY_URL } from "@/lib/gtag";
 
 export async function generateMetadata({
   params,
@@ -45,6 +46,60 @@ export default async function HakkimizdaPage() {
       icon: Rocket,
       title: t("valueIndependenceTitle"),
       description: t("valueIndependenceDescription"),
+    },
+  ];
+
+  const ecosystem: {
+    name: string;
+    category: string;
+    description: string;
+    href: string;
+    external: boolean;
+    cta: string;
+    featured?: boolean;
+    badge?: string;
+  }[] = [
+    {
+      name: "Growtify.ai",
+      category: t("ecosystemAiCategory"),
+      description: t("ecosystemAiDescription"),
+      href: "/growt-method",
+      external: false,
+      cta: t("ecosystemAiCta"),
+    },
+    {
+      name: "Growtify.app",
+      category: t("ecosystemAppCategory"),
+      description: t("ecosystemAppDescription"),
+      href: "https://growtify.app",
+      external: true,
+      cta: "growtify.app",
+    },
+    {
+      name: t("ecosystemOpsName"),
+      category: t("ecosystemOpsCategory"),
+      description: t("ecosystemOpsDescription"),
+      href: "/iletisim",
+      external: false,
+      cta: t("ecosystemOpsCta"),
+    },
+    {
+      name: t("ecosystemBusinessName"),
+      category: t("ecosystemBusinessCategory"),
+      description: t("ecosystemBusinessDescription"),
+      href: "/kurumsal",
+      external: false,
+      cta: t("ecosystemBusinessCta"),
+      featured: true,
+      badge: t("ecosystemBusinessBadge"),
+    },
+    {
+      name: t("ecosystemCommunityName"),
+      category: t("ecosystemCommunityCategory"),
+      description: t("ecosystemCommunityDescription"),
+      href: COMMUNITY_URL,
+      external: true,
+      cta: t("ecosystemCommunityCta"),
     },
   ];
 
@@ -135,71 +190,55 @@ export default async function HakkimizdaPage() {
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-3 lg:max-w-6xl lg:mx-auto">
-            {/* Growtify.ai */}
-            <Link href="/growt-method" className="group">
-              <Card hover className="border-primary/20 dark:border-primary/30 h-full">
-                <span className="text-2xl font-bold text-primary">
-                  Growtify.ai
-                </span>
-                <p className="mt-2 text-sm text-gray-500 dark:text-dark-muted">
-                  {t("ecosystemAiAudience")}
-                </p>
-                <p className="mt-4 text-gray-600 dark:text-dark-muted">
-                  {t("ecosystemAiDescription")}
-                </p>
-                <span className="mt-6 inline-flex items-center text-sm font-semibold text-primary group-hover:underline">
-                  {t("ecosystemAiCta")}
-                  <ArrowRight size={16} className="ml-1" />
-                </span>
-              </Card>
-            </Link>
-
-            {/* Growtify İşletme Çözümleri */}
-            <Link href="/kurumsal" className="group">
-              <Card
-                hover
-                className="border-2 border-accent dark:border-accent h-full relative bg-gradient-to-br from-accent/10 via-white to-primary/5 dark:from-accent/5 dark:via-dark-card dark:to-primary/10"
-              >
-                <div className="absolute -top-3 right-4">
-                  <Badge variant="accent" className="shadow-sm">
-                    {t("ecosystemBusinessBadge")}
-                  </Badge>
-                </div>
-                <span className="text-2xl font-bold text-dark dark:text-white">
-                  {t("ecosystemBusinessName")}
-                </span>
-                <p className="mt-2 text-sm text-gray-500 dark:text-dark-muted">
-                  {t("ecosystemBusinessAudience")}
-                </p>
-                <p className="mt-4 text-gray-600 dark:text-dark-muted">
-                  {t("ecosystemBusinessDescription")}
-                </p>
-                <span className="mt-6 inline-flex items-center text-sm font-semibold text-primary group-hover:underline">
-                  {t("ecosystemBusinessCta")}
-                  <ArrowRight size={16} className="ml-1" />
-                </span>
-              </Card>
-            </Link>
-
-            {/* Growtify.app */}
-            <a href="https://growtify.app" target="_blank" rel="noopener noreferrer" className="group">
-              <Card hover className="h-full">
-                <span className="text-2xl font-bold text-dark dark:text-white">
-                  Growtify.app
-                </span>
-                <p className="mt-2 text-sm text-gray-500 dark:text-dark-muted">
-                  {t("ecosystemAppAudience")}
-                </p>
-                <p className="mt-4 text-gray-600 dark:text-dark-muted">
-                  {t("ecosystemAppDescription")}
-                </p>
-                <span className="mt-6 inline-flex items-center text-sm font-semibold text-primary group-hover:underline">
-                  growtify.app
-                  <ArrowRight size={16} className="ml-1" />
-                </span>
-              </Card>
-            </a>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:max-w-6xl lg:mx-auto">
+            {ecosystem.map((item) => {
+              const inner = (
+                <Card
+                  hover
+                  className={`relative h-full ${
+                    item.featured
+                      ? "border-2 border-accent dark:border-accent bg-gradient-to-br from-accent/10 via-white to-primary/5 dark:from-accent/5 dark:via-dark-card dark:to-primary/10"
+                      : "border-primary/20 dark:border-primary/30"
+                  }`}
+                >
+                  {item.badge && (
+                    <div className="absolute -top-3 right-4">
+                      <Badge variant="accent" className="shadow-sm">
+                        {item.badge}
+                      </Badge>
+                    </div>
+                  )}
+                  <span className="text-xs font-semibold uppercase tracking-wider text-primary">
+                    {item.category}
+                  </span>
+                  <span className="mt-1 block text-2xl font-bold text-dark dark:text-white">
+                    {item.name}
+                  </span>
+                  <p className="mt-3 text-gray-600 dark:text-dark-muted">
+                    {item.description}
+                  </p>
+                  <span className="mt-6 inline-flex items-center text-sm font-semibold text-primary group-hover:underline">
+                    {item.cta}
+                    <ArrowRight size={16} className="ml-1" />
+                  </span>
+                </Card>
+              );
+              return item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group"
+                >
+                  {inner}
+                </a>
+              ) : (
+                <Link key={item.name} href={item.href} className="group">
+                  {inner}
+                </Link>
+              );
+            })}
           </div>
         </Container>
       </section>

@@ -6,6 +6,7 @@ import { setRequestLocale } from "next-intl/server";
 import "../globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { CommunityCTA } from "@/components/CommunityCTA";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CookieBanner } from "@/components/legal/CookieBanner";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
@@ -153,6 +154,7 @@ export default async function LocaleLayout({
           <NextIntlClientProvider>
             <Header />
             <main className="flex-1">{children}</main>
+            <CommunityCTA source="site-wide" />
             <Footer />
             <CookieBanner />
             <GoogleAnalytics />
