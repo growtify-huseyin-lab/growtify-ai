@@ -260,7 +260,7 @@
     "ecosystemAppDescription": "Yazılım ve hizmet modeli. İşletmeler için yapay zeka destekli dijital altyapı, otomasyon ve iş çözümleri. “Biz yapalım, siz odaklanın.”",
     "ecosystemOpsCategory": "Danışmanlık",
     "ecosystemOpsName": "Growtify-ops",
-    "ecosystemOpsDescription": "İşletmeler için operasyonel AI danışmanlığı ve altyapı kurulumu. Süreçlerini uçtan uca planlayıp hayata geçiriyoruz.",
+    "ecosystemOpsDescription": "Markanıza özel tasarlanmış ve eğitilmiş yapay zeka ekipleriyle; SEO ve içerik üretiminden sosyal medya yönetimine, paralı reklam yönetiminden (Meta, Google, TikTok Ads) e-posta ve SMS pazarlamasına, yazılım desteğine kadar — büyüme döngünüz için gereken tüm pazarlama süreçlerini uçtan uca tasarlıyor ve yönetiyoruz.",
     "ecosystemOpsCta": "İletişime Geç",
     "ecosystemBusinessBadge": "Yeni",
     "ecosystemBusinessCategory": "Danışmanlık",
@@ -271,7 +271,11 @@
     "ecosystemCommunityCategory": "Topluluk",
     "ecosystemCommunityName": "Growtify Topluluk",
     "ecosystemCommunityDescription": "AI ile işini büyütenlerin ücretsiz topluluğu. Güncel gelişmeler, gerçek örnekler ve aynı yolda yürüyen profesyoneller — herkese açık.",
-    "ecosystemCommunityCta": "Topluluğa Katıl"
+    "ecosystemCommunityCta": "Topluluğa Katıl",
+    "ecosystemMentorshipCategory": "Mentörlük",
+    "ecosystemMentorshipName": "Growtify Mentörlük",
+    "ecosystemMentorshipDescription": "Hüseyin Şanlıtürk ile birebir (1:1) görüşme ve çalışma. İşini büyütürken doğrudan onunla strateji kurar, yol haritanı netleştirir, adım adım birlikte ilerlersiniz.",
+    "ecosystemMentorshipCta": "Görüşme Planla"
   },
   "GrowtMethodPage": {
     "metaTitle": "GROWT Method",

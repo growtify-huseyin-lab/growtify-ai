@@ -260,7 +260,7 @@
     "ecosystemAppDescription": "A software and service model. AI-powered digital infrastructure, automation, and business solutions for companies. “We build it, you stay focused.”",
     "ecosystemOpsCategory": "Consulting",
     "ecosystemOpsName": "Growtify-ops",
-    "ecosystemOpsDescription": "Operational AI consulting and infrastructure setup for businesses. We plan and implement your processes end-to-end.",
+    "ecosystemOpsDescription": "With AI teams custom-designed and trained for your brand, we design and manage — end-to-end — every marketing process your growth loop needs: from SEO and content production to social media management, from paid ads (Meta, Google, TikTok Ads) to email and SMS marketing, plus software support.",
     "ecosystemOpsCta": "Get in Touch",
     "ecosystemBusinessBadge": "New",
     "ecosystemBusinessCategory": "Consulting",
@@ -271,7 +271,11 @@
     "ecosystemCommunityCategory": "Community",
     "ecosystemCommunityName": "Growtify Community",
     "ecosystemCommunityDescription": "The free community of professionals growing their business with AI. Current developments, real examples, and peers on the same path — open to all.",
-    "ecosystemCommunityCta": "Join the Community"
+    "ecosystemCommunityCta": "Join the Community",
+    "ecosystemMentorshipCategory": "Mentorship",
+    "ecosystemMentorshipName": "Growtify Mentorship",
+    "ecosystemMentorshipDescription": "One-on-one (1:1) sessions and hands-on work with Hüseyin Şanlıtürk. Build strategy directly with him, clarify your roadmap, and move forward together, step by step.",
+    "ecosystemMentorshipCta": "Book a Session"
   },
   "GrowtMethodPage": {
     "metaTitle": "GROWT Method",
