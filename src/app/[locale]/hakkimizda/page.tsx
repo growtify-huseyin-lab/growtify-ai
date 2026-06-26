@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ArrowRight, Lightbulb, Target, Heart, Rocket } from "lucide-react";
 import { CTA } from "@/components/sections/CTA";
 import { COMMUNITY_URL } from "@/lib/gtag";
+import { BookingModal } from "@/components/BookingModal";
 
 export async function generateMetadata({
   params,
@@ -58,6 +59,7 @@ export default async function HakkimizdaPage() {
     cta: string;
     featured?: boolean;
     badge?: string;
+    booking?: boolean;
   }[] = [
     {
       name: "Growtify.ai",
@@ -79,8 +81,8 @@ export default async function HakkimizdaPage() {
       name: t("ecosystemOpsName"),
       category: t("ecosystemOpsCategory"),
       description: t("ecosystemOpsDescription"),
-      href: "/iletisim",
-      external: false,
+      href: "https://growtify-ops.com/",
+      external: true,
       cta: t("ecosystemOpsCta"),
     },
     {
@@ -105,9 +107,10 @@ export default async function HakkimizdaPage() {
       name: t("ecosystemMentorshipName"),
       category: t("ecosystemMentorshipCategory"),
       description: t("ecosystemMentorshipDescription"),
-      href: "/iletisim",
+      href: "/mentorluk",
       external: false,
       cta: t("ecosystemMentorshipCta"),
+      booking: true,
     },
   ];
 
@@ -231,7 +234,9 @@ export default async function HakkimizdaPage() {
                   </span>
                 </Card>
               );
-              return item.external ? (
+              return item.booking ? (
+                <BookingModal key={item.name}>{inner}</BookingModal>
+              ) : item.external ? (
                 <a
                   key={item.name}
                   href={item.href}
