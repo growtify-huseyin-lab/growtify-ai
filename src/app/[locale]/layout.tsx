@@ -62,9 +62,9 @@ export async function generateMetadata({
         ],
     authors: [{ name: "Growtify.ai" }],
     robots: {
-      index: false,
-      follow: false,
-      googleBot: { index: false, follow: false },
+      index: true,
+      follow: true,
+      googleBot: { index: true, follow: true },
     },
     icons: {
       icon: "/images/fav-ai.png",

@@ -1,3 +1,5 @@
-# NOINDEX — Site henüz public değil. İçerik kontrolü tamamlandığında açılacak.
+# Growtify.ai — public. Funnel/lead sayfaları (/test, /lead) sayfa-içi noindex ile korunur.
 User-agent: *
-Disallow: /
+Allow: /
+
+Sitemap: https://growtify.ai/sitemap.xml
