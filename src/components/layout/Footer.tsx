@@ -36,6 +36,7 @@ export function Footer() {
         { label: "GROWT Method", href: "/growt-method" },
         { label: t("linkBusinessSolutions"), href: "/kurumsal" },
         { label: "Blog", href: "/blog" },
+        { label: locale === "en" ? "Updates" : "Gelişmeler", href: "/gelismeler" },
       ],
     },
     {
