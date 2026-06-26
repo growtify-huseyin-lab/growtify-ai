@@ -10,6 +10,9 @@ export function trackEvent(name: string, params?: GtagParams): void {
   }
 }
 
-// TR community group — used by the site-wide "Topluluğa Katıl" CTAs.
+// Community groups — used by the site-wide "Topluluğa Katıl" / "Join the
+// Community" CTAs. TR → growtify-ai group, EN → en-growtify-ai group.
 export const COMMUNITY_URL =
   "https://panel.growtify.ai/communities/groups/growtify-ai/";
+export const EN_COMMUNITY_URL =
+  "https://panel.growtify.ai/communities/groups/en-growtify-ai/";
