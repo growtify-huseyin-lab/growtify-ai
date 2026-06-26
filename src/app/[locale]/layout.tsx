@@ -8,6 +8,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CookieBanner } from "@/components/legal/CookieBanner";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { routing } from "@/i18n/routing";
 
 const inter = Inter({
@@ -151,6 +152,7 @@ export default async function LocaleLayout({
             <main className="flex-1">{children}</main>
             <Footer />
             <CookieBanner />
+            <GoogleAnalytics />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
