@@ -78,7 +78,7 @@ export function LeadForm({
 
       if (json.ok) {
         setStatus("success");
-        trackEvent("generate_lead", { method: "lead_form" });
+        trackEvent("lead_form", { method: "lead_form" });
         form.reset();
       } else {
         setStatus("error");

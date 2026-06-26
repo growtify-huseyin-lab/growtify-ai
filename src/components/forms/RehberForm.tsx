@@ -80,7 +80,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
       if (json.ok) {
         setSuccessData({ pdfUrl: json.pdfUrl, sectorName: json.sectorName });
         setStatus("success");
-        trackEvent("generate_lead", { method: "guide" });
+        trackEvent("lead_guide", { method: "guide" });
         form.reset();
       } else {
         setStatus("error");
