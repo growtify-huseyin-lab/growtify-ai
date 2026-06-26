@@ -10,8 +10,8 @@ import { BLOG_CATEGORIES, BLOG_CATEGORIES_EN } from "@/lib/blog-categories";
 
 const baseUrl = "https://growtify.ai";
 
-// NOTE: the site is currently globally noindex (layout robots:false). This sitemap is
-// launch-ready infrastructure; it has no effect until indexing is enabled.
+// Site is PUBLIC (launched) — layout robots index:true, robots.txt allows crawl.
+// Funnel/lead pages (/test, /lead) keep their own page-level noindex.
 
 // Bilingual entry — TR loc + tr/en/x-default hreflang. Use ONLY for pages that have real
 // EN content (Layer-1 sector pages, lead magnets, static/legal — all fully translated).
