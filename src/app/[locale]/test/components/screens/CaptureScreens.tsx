@@ -6,6 +6,7 @@ import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig, QuizState } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
 import { useLegalTexts, useQuizUi } from "../../lib/content-runtime-hooks";
+import { trackEvent } from "@/lib/gtag";
 
 /* -------------------- Text Input (Ekran 25 name, 26 email) -------------------- */
 export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
@@ -54,6 +55,7 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
     setError(null);
     const startTime = Date.now();
     const res = await submitEmail();
+    if (res.ok) trackEvent("generate_lead", { method: "quiz" });
     // Ensure processing overlay shows for at least 5 seconds
     const elapsed = Date.now() - startTime;
     if (elapsed < 5000) {

@@ -5,6 +5,7 @@ import { useLocale } from "next-intl";
 import { useState, FormEvent, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Loader2, CheckCircle2, AlertCircle, Download, Users } from "lucide-react";
+import { trackEvent } from "@/lib/gtag";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -79,6 +80,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
       if (json.ok) {
         setSuccessData({ pdfUrl: json.pdfUrl, sectorName: json.sectorName });
         setStatus("success");
+        trackEvent("generate_lead", { method: "guide" });
         form.reset();
       } else {
         setStatus("error");
