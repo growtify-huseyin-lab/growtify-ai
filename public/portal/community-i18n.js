@@ -265,6 +265,8 @@
       { pattern: /View Group/gi, replacement: "Grubu Görüntüle" },
       { pattern: /New Comment/gi, replacement: "Yeni Yorum" },
       { pattern: /New Member Request to Join Group/gi, replacement: "Yeni Gruba Katılma İsteği" },
+      { pattern: /Profile Picture/gi, replacement: "Profil Fotoğrafı" },
+      { pattern: /Profile Cover/gi, replacement: "Profil Kapağı" },
       // Ayarlar açıklamaları
       { pattern: /Manage your group details here/gi, replacement: "Grup detaylarını burada yönet" },
       { pattern: /Choose chat settings for your groups & contacts/gi, replacement: "Grupların ve kişilerin için sohbet ayarlarını seç" },
