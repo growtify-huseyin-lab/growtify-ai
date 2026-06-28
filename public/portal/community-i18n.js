@@ -230,6 +230,68 @@
     };
 
     const phrases = [
+      // — added 2026-06-28 (CEO mobil portal taraması): eksik portal/ayarlar/bildirim string'leri.
+      //   phrases dict'ten ÖNCE çalışır → İngilizce orijinali yakala, kelime-dict mangle'ını pre-empt et.
+      //   NOT: /courses/ kurs-oynatıcı string'leri loader o sayfaya enjekte olmadığı için HENÜZ
+      //   çevrilmez (GHL admin gerek); buradaki entry'ler loader gelince otomatik çalışır.
+      // Portal home / app switcher
+      { pattern: /^Select Your App$/i, replacement: "Uygulamanı Seç" },
+      { pattern: /Engage in community/gi, replacement: "Toplulukta etkileşime geç" },
+      { pattern: /Explore available courses/gi, replacement: "Mevcut kursları keşfet" },
+      { pattern: /Explore Here/gi, replacement: "Buradan Keşfet" },
+      { pattern: /^Hello$/i, replacement: "Merhaba" },
+      { pattern: /^All courses$/i, replacement: "Tüm Kurslar" },
+      // Kurs oynatıcı (/courses/ loader gelince çalışır)
+      { pattern: /^Overview$/i, replacement: "Genel Bakış" },
+      { pattern: /^Start Learning$/i, replacement: "Öğrenmeye Başla" },
+      { pattern: /^Resume Learning$/i, replacement: "Öğrenmeye Devam Et" },
+      { pattern: /^Syllabus$/i, replacement: "Müfredat" },
+      { pattern: /^Curriculum$/i, replacement: "Ders İçeriği" },
+      { pattern: /Expand All Sections/gi, replacement: "Tüm Bölümleri Genişlet" },
+      { pattern: /Collapse All Sections/gi, replacement: "Tüm Bölümleri Daralt" },
+      { pattern: /Lesson (\d+) of (\d+)/gi, replacement: "Ders $1 / $2" },
+      // Genel kısa etiketler (whole-node anchor — kısmi eşleşme mangle'ı yok)
+      { pattern: /^More$/i, replacement: "Daha Fazla" },
+      { pattern: /^Details$/i, replacement: "Detaylar" },
+      { pattern: /^Save$/i, replacement: "Kaydet" },
+      { pattern: /^Add$/i, replacement: "Ekle" },
+      { pattern: /^Edit$/i, replacement: "Düzenle" },
+      { pattern: /^Edit [Pp]rofile$/i, replacement: "Profili Düzenle" },
+      { pattern: /^Timezone$/i, replacement: "Saat Dilimi" },
+      { pattern: /No recent changes/gi, replacement: "Son değişiklik yok" },
+      // Kısmi-çeviri düzeltmeleri (İngilizce orijinali yakala → mangle'ı önle)
+      { pattern: /Push Notifications/gi, replacement: "Push Bildirimleri" },
+      { pattern: /Email Notifications/gi, replacement: "E-posta Bildirimleri" },
+      { pattern: /View Group/gi, replacement: "Grubu Görüntüle" },
+      { pattern: /New Comment/gi, replacement: "Yeni Yorum" },
+      { pattern: /New Member Request to Join Group/gi, replacement: "Yeni Gruba Katılma İsteği" },
+      // Ayarlar açıklamaları
+      { pattern: /Manage your group details here/gi, replacement: "Grup detaylarını burada yönet" },
+      { pattern: /Choose chat settings for your groups & contacts/gi, replacement: "Grupların ve kişilerin için sohbet ayarlarını seç" },
+      { pattern: /Manage when and what you get notified for/gi, replacement: "Ne zaman ve ne için bildirim alacağını yönet" },
+      { pattern: /Download & share certificates you have earned\.?/gi, replacement: "Kazandığın sertifikaları indir ve paylaş." },
+      { pattern: /You have not earned any certificates yet\.?/gi, replacement: "Henüz sertifika kazanmadın." },
+      { pattern: /Control which group users can contact you by toggling your chat availability on or off below\.?/gi, replacement: "Aşağıdan sohbet uygunluğunu açıp kapatarak hangi grup kullanıcılarının sana ulaşabileceğini belirle." },
+      { pattern: /You can receive messages only from members of the group you are part of\.?/gi, replacement: "Yalnızca parçası olduğun grubun üyelerinden mesaj alabilirsin." },
+      { pattern: /Control which users you don['’]?t want to chat with\.?/gi, replacement: "Sohbet etmek istemediğin kullanıcıları belirle." },
+      { pattern: /Select your preferred language for viewing Customer Portal items, community content, courses,? and affiliate information\.?/gi, replacement: "Müşteri Portalı öğelerini, topluluk içeriğini, kursları ve iş ortağı bilgilerini görüntülemek için tercih ettiğin dili seç." },
+      { pattern: /This setting allows you to see content in the language you['’]?re most comfortable with\.?/gi, replacement: "Bu ayar, içeriği en rahat olduğun dilde görmeni sağlar." },
+      // Bildirim tercihleri
+      { pattern: /Turn on\/off all push notifications/gi, replacement: "Tüm push bildirimlerini aç/kapat" },
+      { pattern: /Turn on\/off all email notifications/gi, replacement: "Tüm e-posta bildirimlerini aç/kapat" },
+      { pattern: /When someone likes your post/gi, replacement: "Biri gönderini beğendiğinde" },
+      { pattern: /Get notified when someone you follow creates a new post\.?/gi, replacement: "Takip ettiğin biri yeni gönderi paylaştığında bildirim al." },
+      { pattern: /When someone posts @mention/gi, replacement: "Biri @bahsetme ile paylaşım yaptığında" },
+      { pattern: /When someone posts @everyone tagged/gi, replacement: "Biri @herkes etiketleyerek paylaşım yaptığında" },
+      { pattern: /When someone comments on your post/gi, replacement: "Biri gönderine yorum yaptığında" },
+      { pattern: /When someone likes your comment/gi, replacement: "Biri yorumunu beğendiğinde" },
+      { pattern: /When someone comments @mention/gi, replacement: "Biri @bahsetme ile yorum yaptığında" },
+      { pattern: /When someone comments @everyone tagged/gi, replacement: "Biri @herkes etiketleyerek yorum yaptığında" },
+      { pattern: /When someone requests to join your group/gi, replacement: "Biri grubuna katılmak istediğinde" },
+      { pattern: /When someone['’]?s group joining request is approved/gi, replacement: "Birinin grup katılım isteği onaylandığında" },
+      { pattern: /When someone['’]?s group joining request is rejected/gi, replacement: "Birinin grup katılım isteği reddedildiğinde" },
+      { pattern: /When someone['’]?s role is updated in a private channel/gi, replacement: "Birinin özel kanaldaki rolü güncellendiğinde" },
+      { pattern: /When a new course is available/gi, replacement: "Yeni bir kurs eklendiğinde" },
       // — added 2026-06-02: kelime sırası / kısmi çeviri düzeltmeleri (dict'ten önce) —
       { pattern: /Search members?/gi, replacement: "Üye Ara" },
       { pattern: /Notifications List/gi, replacement: "Bildirim Listesi" },
