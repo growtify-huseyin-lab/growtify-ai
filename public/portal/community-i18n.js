@@ -247,6 +247,9 @@
       { pattern: /^Resume Learning$/i, replacement: "Öğrenmeye Devam Et" },
       { pattern: /^Syllabus$/i, replacement: "Müfredat" },
       { pattern: /^Curriculum$/i, replacement: "Ders İçeriği" },
+      // Kurs genel-bakış sayfası (mobil /categories) — bölüm başlığı İngilizce kalıyordu
+      { pattern: /^Categories$/i, replacement: "Kategoriler" },
+      { pattern: /^Category$/i, replacement: "Kategori" },
       { pattern: /Expand All Sections/gi, replacement: "Tüm Bölümleri Genişlet" },
       { pattern: /Collapse All Sections/gi, replacement: "Tüm Bölümleri Daralt" },
       { pattern: /Lesson (\d+) of (\d+)/gi, replacement: "Ders $1 / $2" },
