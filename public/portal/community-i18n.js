@@ -38,6 +38,11 @@
 .ProseMirror p[data-placeholder="Type your answer"]::before {
   content: "Cevabını yaz" !important;
 }
+.ProseMirror p[data-placeholder="Write here..."]::before,
+.ProseMirror p[data-placeholder="Write here.."]::before,
+.ProseMirror p[data-placeholder="Write here"]::before {
+  content: "Buraya yaz..." !important;
+}
 `;
       document.head.appendChild(__style);
     }
@@ -801,6 +806,8 @@
       // Sohbet/destek widget'ı (LeadConnector)
       { pattern: /Hi there! Have a question\??/gi, replacement: "Merhaba! Bir sorun mu var?" },
       { pattern: /Chat with us here\.?/gi, replacement: "Buradan bizimle sohbet et." },
+      // About bölümü editör placeholder'ı (text node varyantı)
+      { pattern: /Write here\.{0,3}/gi, replacement: "Buraya yaz..." },
     ];
 
     function translateString(text) {
