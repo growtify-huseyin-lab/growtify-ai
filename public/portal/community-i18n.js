@@ -770,6 +770,37 @@
       { pattern: /(Active|Aktif) (?:long ago|a long time ago)/gi, replacement: "Uzun süre önce aktifti" },
       { pattern: /\blong ago\b/gi, replacement: "uzun süre önce" },
       { pattern: /\bin\s+(#\S+)/g, replacement: "$1 kanalında" },
+      // — added 2026-06-30 (CEO mobil tam-tarama; edge-proxy sonrası loader her sayfada erken çalışıyor) —
+      // Kurs lesson player: "Next Lesson" word-dict "Lesson→Ders" yapıp "Next Ders" bırakıyordu
+      { pattern: /Next Lesson/gi, replacement: "Sonraki Ders" },
+      { pattern: /Previous Lesson/gi, replacement: "Önceki Ders" },
+      { pattern: /Next Ders/g, replacement: "Sonraki Ders" },
+      { pattern: /Previous Ders/g, replacement: "Önceki Ders" },
+      // Ayarlar: Meeting sekmesi (yeni GHL özelliği — tamamen İngilizceydi)
+      { pattern: /^Meeting$/i, replacement: "Toplantı" },
+      { pattern: /Generate and manage your meeting URL/gi, replacement: "Toplantı bağlantını oluştur ve yönet" },
+      { pattern: /No meeting link yet/gi, replacement: "Henüz toplantı bağlantın yok" },
+      { pattern: /Create your personal booking link to schedule events and sessions directly from your communities\.?/gi, replacement: "Topluluklarından doğrudan etkinlik ve oturum planlamak için kişisel rezervasyon bağlantını oluştur." },
+      { pattern: /Why this matters:?/gi, replacement: "Neden önemli:" },
+      { pattern: /Use your link to create and manage community events/gi, replacement: "Bağlantını topluluk etkinlikleri oluşturmak ve yönetmek için kullan" },
+      { pattern: /Use it for 1:1 sessions,? calls,? or community events/gi, replacement: "1:1 oturumlar, görüşmeler veya topluluk etkinlikleri için kullan" },
+      { pattern: /Personalize your booking link anytime/gi, replacement: "Rezervasyon bağlantını istediğin zaman kişiselleştir" },
+      { pattern: /Customize your URL anytime/gi, replacement: "URL'ini istediğin zaman özelleştir" },
+      { pattern: /Works seamlessly on mobile and desktop/gi, replacement: "Mobil ve masaüstünde sorunsuz çalışır" },
+      { pattern: /Generate meeting link/gi, replacement: "Toplantı bağlantısı oluştur" },
+      // Ayarlar > Hesap: şifre değiştirme (etiket + placeholder). "Re-type new" ÖNCE → "New" mangle'ını önle
+      { pattern: /Re-?type new password/gi, replacement: "Yeni Şifreyi Tekrar Gir" },
+      { pattern: /Current password/gi, replacement: "Mevcut Şifre" },
+      { pattern: /New password/gi, replacement: "Yeni Şifre" },
+      { pattern: /Hide password change/gi, replacement: "Şifre değişikliğini gizle" },
+      { pattern: /Change password/gi, replacement: "Şifre Değiştir" },
+      // Bildirimler: "Push" kolon başlığı (E-posta çevrildi, bu kalmıştı)
+      { pattern: /^Push$/, replacement: "Anlık" },
+      // Kanal erişim uyarısı
+      { pattern: /You don'?t have access to this channel\.?/gi, replacement: "Bu kanala erişimin yok" },
+      // Sohbet/destek widget'ı (LeadConnector)
+      { pattern: /Hi there! Have a question\??/gi, replacement: "Merhaba! Bir sorun mu var?" },
+      { pattern: /Chat with us here\.?/gi, replacement: "Buradan bizimle sohbet et." },
     ];
 
     function translateString(text) {
