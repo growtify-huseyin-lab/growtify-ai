@@ -76,6 +76,13 @@ export async function POST(req: NextRequest) {
   const productName = body.product_name ? String(body.product_name) : "GROWT Program";
   const productId = body.product_id ? String(body.product_id) : (body.tier ? String(body.tier) : "growt");
   const clientId = body.ga_client_id ? String(body.ga_client_id) : synthClientId(transactionId);
+  // session_id is REQUIRED for GA4 to attribute MP events to a session (else they don't show
+  // in Realtime / session-scoped reports). Use the captured one if present, else a stable
+  // synthetic per transaction.
+  const sessionId = body.session_id ? String(body.session_id) : synthClientId(transactionId + ":sess");
+  // Opt-in debug: routes to GA4's validation endpoint and returns validationMessages instead
+  // of recording — used for end-to-end verification without polluting production data.
+  const isDebug = body.debug === true;
 
   const mpPayload = {
     client_id: clientId,
@@ -89,6 +96,7 @@ export async function POST(req: NextRequest) {
           currency,
           // Mark server-origin so it can be segmented / deduped against the client-side event.
           source: "ghl_server",
+          session_id: sessionId,
           engagement_time_msec: 100,
           items: [
             {
@@ -103,17 +111,25 @@ export async function POST(req: NextRequest) {
     ],
   };
 
+  const endpoint = isDebug
+    ? "https://www.google-analytics.com/debug/mp/collect"
+    : MP_ENDPOINT;
+
+  let validation: unknown = null;
   try {
     const res = await fetch(
-      `${MP_ENDPOINT}?measurement_id=${GA4_MEASUREMENT_ID}&api_secret=${apiSecret}`,
+      `${endpoint}?measurement_id=${GA4_MEASUREMENT_ID}&api_secret=${apiSecret}`,
       {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(mpPayload),
       },
     );
-    // MP /collect returns 204 with no body on success.
-    if (res.status !== 204 && res.status !== 200) {
+    if (isDebug) {
+      // Validation endpoint returns 200 + { validationMessages: [...] } (empty = valid).
+      validation = await res.json().catch(() => null);
+    } else if (res.status !== 204 && res.status !== 200) {
+      // MP /collect returns 204 with no body on success.
       return NextResponse.json(
         { ok: false, error: "mp_error", status: res.status },
         { status: 502 },
@@ -128,7 +144,9 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({
     ok: true,
+    mode: isDebug ? "debug_validation" : "collect",
     sent: { transaction_id: transactionId, value, currency, client_id_kind: body.ga_client_id ? "real" : "synthetic" },
+    ...(isDebug ? { validation } : {}),
   });
 }
 
