@@ -825,6 +825,13 @@
       { pattern: /Gönder Ödev/g, replacement: "Ödevi Gönder" },
       { pattern: /Please fill the worksheet\(s\) and upload your assignment\.?/gi, replacement: "Lütfen çalışma sayfalarını doldur ve ödevini yükle." },
       { pattern: /Your answers/gi, replacement: "Cevapların" },
+      // — added 2026-06-30 (CEO 2. tur, ekran 2): dosya yükleme alanı + kilitli ders —
+      { pattern: /Click to upload or drag and drop/gi, replacement: "Yüklemek için tıkla veya sürükle bırak" },
+      { pattern: /Click to upload/gi, replacement: "Yüklemek için tıkla" },
+      { pattern: /or drag and drop/gi, replacement: "veya sürükle bırak" },
+      { pattern: /\bare supported\.?/gi, replacement: "destekleniyor." },
+      { pattern: /This lesson Is Locked/gi, replacement: "Bu Ders Kilitli" },
+      { pattern: /To gain access to this lesson,?\s*please complete/gi, replacement: "Bu derse erişmek için şunu tamamla:" },
     ];
 
     function translateString(text) {
