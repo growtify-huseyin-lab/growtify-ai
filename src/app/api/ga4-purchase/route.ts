@@ -73,6 +73,20 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  // Safety net: if a GHL merge field didn't resolve (e.g. wrong token name), it arrives as the
+  // literal "{{order.id}}". Recording that would collapse ALL purchases onto one transaction_id
+  // (GA4 dedupe) → silent revenue undercount. Fail loudly instead so it shows in GHL exec logs.
+  if (transactionId.includes("{{") || transactionId.includes("}}")) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: "unresolved_merge_field",
+        detail: `transaction_id still contains GHL merge syntax ("${transactionId}") — the merge field did not resolve. Fix the order-id token in the GHL webhook action.`,
+      },
+      { status: 400 },
+    );
+  }
+
   const productName = body.product_name ? String(body.product_name) : "GROWT Program";
   const productId = body.product_id ? String(body.product_id) : (body.tier ? String(body.tier) : "growt");
   const clientId = body.ga_client_id ? String(body.ga_client_id) : synthClientId(transactionId);
