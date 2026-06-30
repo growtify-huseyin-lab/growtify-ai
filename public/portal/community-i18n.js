@@ -808,6 +808,23 @@
       { pattern: /Chat with us here\.?/gi, replacement: "Buradan bizimle sohbet et." },
       // About bölümü editör placeholder'ı (text node varyantı)
       { pattern: /Write here\.{0,3}/gi, replacement: "Buraya yaz..." },
+      // — added 2026-06-30 (CEO 2. tur tarama): ödev dersi + aktivite akışı + arama + modül sayısı —
+      { pattern: /No Recent Searches/gi, replacement: "Son Arama Yok" },
+      { pattern: /(\d+)\s+Modules?\b/gi, replacement: "$1 Modül" },
+      { pattern: /(\d+)\s+Lessons?\b/gi, replacement: "$1 Ders" },
+      // Aktivite akışı / bildirim (kullanıcı adı + bu metin)
+      { pattern: /Just shared a new post!?/gi, replacement: "yeni bir gönderi paylaştı!" },
+      { pattern: /Just unlocked the (.+?) course by joining the private channel/gi, replacement: "özel kanala katılarak $1 kursunu açtı" },
+      { pattern: /Added you to private channel as a member in/gi, replacement: "seni özel kanala üye olarak ekledi:" },
+      // Ödev (assignment) dersi — "Start/Submit Assignment" dict'te "Başla Ödev/Gönder Ödev"e mangle oluyordu
+      { pattern: /\bASSIGNMENT\b/g, replacement: "ÖDEV" },
+      { pattern: /\bLESSON\b/g, replacement: "DERS" },
+      { pattern: /Start Assignment/gi, replacement: "Ödeve Başla" },
+      { pattern: /Submit Assignment/gi, replacement: "Ödevi Gönder" },
+      { pattern: /Başla Ödev/g, replacement: "Ödeve Başla" },
+      { pattern: /Gönder Ödev/g, replacement: "Ödevi Gönder" },
+      { pattern: /Please fill the worksheet\(s\) and upload your assignment\.?/gi, replacement: "Lütfen çalışma sayfalarını doldur ve ödevini yükle." },
+      { pattern: /Your answers/gi, replacement: "Cevapların" },
     ];
 
     function translateString(text) {
