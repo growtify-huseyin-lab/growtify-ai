@@ -814,11 +814,17 @@
       { pattern: /(\d+)\s+Lessons?\b/gi, replacement: "$1 Ders" },
       // Aktivite akışı / bildirim (kullanıcı adı + bu metin)
       { pattern: /Just shared a new post!?/gi, replacement: "yeni bir gönderi paylaştı!" },
-      { pattern: /(?:You['’]ve )?(?:just )?unlocked the (.+?) course by joining the private channel/gi, replacement: "özel kanala katılarak $1 kursunu açtın" },
-      { pattern: /Added you to private channel as a member in/gi, replacement: "seni özel kanala üye olarak ekledi:" },
-      // Bildirim split-node varyantı: bold "member" node'u böldüğü için tam phrase tutmuyor —
-      // parça parça çevir (added you... as a) + bold "member" node'unu ayrı yakala.
-      { pattern: /added you to private channel as a\b\s*/gi, replacement: "seni özel kanala " },
+      // Kurs açma bildirimi — sonda sarkan kanal adını (".*") aynı node içindeyse tüket.
+      { pattern: /(?:You['’]ve )?(?:just )?unlocked the (.+?) course by joining the private channel.*/gi, replacement: "özel kanala katılarak $1 kursunu açtın" },
+      // "{actor} added you to private channel {kanal} as a member in {workspace}"
+      // GHL bu metni bold entity node'larına böler (actor / kanal adı / member / workspace).
+      // Aralardaki düz bağlaç parçaları ayrı text node olur; kanal-adı node'u araya girince
+      // tek-phrase pattern tutmaz. Önce tam-phrase (tek node, kanal yoksa), sonra split-node
+      // bağlaç parçaları whole-node ($-anchored) çevrilir.
+      { pattern: /added you to private channel\s+as a\s+member\s+in/gi, replacement: "seni özel kanala üye olarak ekledi —" },
+      { pattern: /added you to private channel\b/gi, replacement: "seni özel kanala ekledi:" },
+      { pattern: /^\s*as a\s*$/i, replacement: "·" },
+      { pattern: /^\s*in\s*$/i, replacement: "·" },
       { pattern: /^\s*member\s*$/i, replacement: "üye" },
       // Ödev (assignment) dersi — "Start/Submit Assignment" dict'te "Başla Ödev/Gönder Ödev"e mangle oluyordu
       { pattern: /\bASSIGNMENT\b/g, replacement: "ÖDEV" },
