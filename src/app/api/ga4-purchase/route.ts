@@ -72,18 +72,43 @@ export async function POST(req: NextRequest) {
     }
     return "";
   };
-  const transactionId = firstVal(
-    "transaction_id", "order_id", "orderId", "transactionId", "id", "payment_id", "paymentId",
-  );
-  const rawValue = firstVal(
-    "value", "amount", "total", "total_price", "totalPrice", "order_total", "amount_paid", "amountPaid",
-  );
+  // GHL bundles the full order in "standard data" → body.order. The custom-data merge tokens
+  // ({{order.total_price}} etc.) resolve EMPTY for this trigger, so read order details directly
+  // from body.order (always present on a real order). Verified via received_shape diagnostic.
+  const asObj = (v: unknown): Record<string, unknown> =>
+    v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : {};
+  const order = asObj((body as Record<string, unknown>).order);
+  const meta = asObj(order.meta);
+  const fromObj = (o: Record<string, unknown>, ...keys: string[]): string => {
+    for (const k of keys) {
+      const v = o[k];
+      if (v !== undefined && v !== null && String(v).trim() !== "") return String(v).trim();
+    }
+    return "";
+  };
+  const contactId = firstVal("contact_id", "contactId");
+
+  // transaction_id: explicit custom field → real order/payment id from order.meta → composite
+  // (contact + order timestamp). The order object has no plain `id`; the composite is
+  // unique-per-order AND stable across GHL webhook retries, so GA4 dedupe stays correct.
+  const orderTs = fromObj(order, "created_on", "created_at");
+  const transactionId =
+    firstVal("transaction_id", "order_id", "orderId", "transactionId", "payment_id", "paymentId") ||
+    fromObj(meta, "transaction_id", "transactionId", "id", "_id", "orderId", "paymentId", "chargeId", "paymentIntentId") ||
+    (contactId || orderTs ? `ghl-${contactId || "x"}-${orderTs || "x"}` : "");
+
+  const rawValue =
+    firstVal("value", "amount", "total", "total_price", "totalPrice", "order_total", "amount_paid", "amountPaid") ||
+    fromObj(order, "total_price", "total_cart_price");
   const value = Number(rawValue || 0);
-  const currency = String(body.currency ?? body.currency_code ?? "TRY").toUpperCase();
+
+  const currency = String(
+    body.currency || fromObj(order, "currency_code") || body.currency_code || "TRY",
+  ).toUpperCase();
 
   if (!transactionId || !Number.isFinite(value) || value <= 0) {
-    // Diagnostic: echo the payload SHAPE (top-level keys + nested object keys, no PII values)
-    // so the GHL execution log reveals exactly which fields GHL sent → pick the right tokens.
+    // Diagnostic: echo payload shape + the order values read, so a still-failing test reveals
+    // exactly what GHL sent → refine mapping.
     const shape: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(body)) {
       shape[k] = v && typeof v === "object" && !Array.isArray(v) ? Object.keys(v as object) : typeof v;
@@ -94,6 +119,14 @@ export async function POST(req: NextRequest) {
         error: "missing_fields",
         detail: "transaction_id + positive value required",
         got: { transaction_id: transactionId, value: rawValue, currency },
+        order_sample: {
+          total_price: order.total_price ?? null,
+          total_cart_price: order.total_cart_price ?? null,
+          currency_code: order.currency_code ?? null,
+          source_id: order.source_id ?? null,
+          created_on: order.created_on ?? null,
+          meta_keys: Object.keys(meta),
+        },
         received_shape: shape,
       },
       { status: 400 },
