@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: en
       ? "Workflow-first AI use cases by profession and goal — client acquisition and scaling, mapped to the GROWT Method."
       : "Mesleğe ve hedefe göre iş-akışı odaklı yapay zeka senaryoları — müşteri edinme ve ölçekleme, GROWT Metodu'na bağlı.",
-    alternates: { canonical: en ? "/en/use-case" : "/use-case" },
+    alternates: { canonical: en ? "/en/use-case" : "/kullanim-alani" },
     robots: anyIndexable ? undefined : { index: false, follow: true },
   };
 }
@@ -61,7 +61,7 @@ export default async function UseCaseIndexPage({ params }: Props) {
                 </h2>
                 <div className="flex flex-col gap-4">
                   {items.map((u) => (
-                    <Link key={u.slug} href={`/use-case/${u.slug}`} className="group">
+                    <Link key={u.slug} href={`/${en ? "use-case" : "kullanim-alani"}/${u.slug}`} className="group">
                       <div className="rounded-2xl bg-light dark:bg-dark-card border border-gray-100 dark:border-dark-border p-6 transition hover:border-primary/40">
                         <h3 className="text-lg font-bold text-dark dark:text-white group-hover:text-primary transition-colors">
                           {u.title}

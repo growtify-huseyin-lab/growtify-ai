@@ -153,10 +153,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     if (en) {
       pairedEnSlugs.add(en.slug);
       useCases.push(
-        biAlt(`/use-case/${tr.slug}`, `/en/use-case/${en.slug}`, 0.6, new Date(tr.date)),
+        biAlt(`/kullanim-alani/${tr.slug}`, `/en/use-case/${en.slug}`, 0.6, new Date(tr.date)),
       );
     } else {
-      useCases.push(trOnly(`/use-case/${tr.slug}`, 0.6, new Date(tr.date)));
+      useCases.push(trOnly(`/kullanim-alani/${tr.slug}`, 0.6, new Date(tr.date)));
     }
   }
   for (const en of enUseCases) {

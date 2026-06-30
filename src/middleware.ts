@@ -24,6 +24,8 @@ const EN_FIX: Record<string, string> = {
   "cerez-politikasi": "cookie-policy",
   // KVKK is TR-only (UK GDPR covers EN) → fold the EN request into privacy-policy.
   "kvkk-aydinlatma": "privacy-policy",
+  // EN has no Turkish use-case segment → fold /en/kullanim-alani into /en/use-case.
+  "kullanim-alani": "use-case",
 };
 // TR side (root, default locale, no /en prefix): an English first-segment → Turkish.
 const TR_FIX: Record<string, string> = {
@@ -37,6 +39,8 @@ const TR_FIX: Record<string, string> = {
   "terms-of-service": "kullanim-kosullari",
   "refund-policy": "iade-politikasi",
   "cookie-policy": "cerez-politikasi",
+  // pSEO use-case pages use the Turkish /kullanim-alani segment on TR.
+  "use-case": "kullanim-alani",
 };
 
 export default function middleware(req: NextRequest) {

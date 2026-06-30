@@ -11,11 +11,10 @@ const BASE_URL = "https://growtify.ai";
 
 type Props = { params: Promise<{ slug: string; locale: string }> };
 
+// EN-only here: TR pSEO pages serve from the localized /kullanim-alani route (same component,
+// re-exported). Old /use-case (TR) 301s to /kullanim-alani in middleware.
 export async function generateStaticParams() {
-  return [
-    ...getAllUseCases("tr").map((u) => ({ locale: "tr", slug: u.slug })),
-    ...getAllUseCases("en").map((u) => ({ locale: "en", slug: u.slug })),
-  ];
+  return getAllUseCases("en").map((u) => ({ locale: "en", slug: u.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -24,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!uc) return { title: locale === "en" ? "Use case not found" : "Senaryo bulunamadı" };
 
   const canonical =
-    locale === "en" ? `/en/use-case/${uc.slug}` : `/use-case/${uc.slug}`;
+    locale === "en" ? `/en/use-case/${uc.slug}` : `/kullanim-alani/${uc.slug}`;
 
   return {
     title: uc.seoTitle,
@@ -48,7 +47,9 @@ export default async function UseCasePage({ params }: Props) {
   if (!uc) notFound();
 
   const en = locale === "en";
-  const indexBase = en ? "/use-case" : "/use-case"; // locale-aware Link adds /en prefix
+  // Locale-aware URL segment: EN keeps /use-case, TR uses Turkish /kullanim-alani.
+  const seg = en ? "use-case" : "kullanim-alani";
+  const indexBase = `/${seg}`;
   const testHref = "/test";
   const growtHref = "/growt-method";
 
@@ -68,7 +69,7 @@ export default async function UseCasePage({ params }: Props) {
     publisher: { "@type": "Organization", name: "Growtify.ai", url: BASE_URL },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `${BASE_URL}${en ? "/en" : ""}/use-case/${uc.slug}`,
+      "@id": `${BASE_URL}${en ? "/en" : ""}/${seg}/${uc.slug}`,
     },
   };
 
@@ -81,7 +82,7 @@ export default async function UseCasePage({ params }: Props) {
         "@type": "ListItem",
         position: 2,
         name: en ? "Use Cases" : "Kullanım Senaryoları",
-        item: `${BASE_URL}${en ? "/en" : ""}/use-case`,
+        item: `${BASE_URL}${en ? "/en" : ""}/${seg}`,
       },
       { "@type": "ListItem", position: 3, name: uc.title },
     ],
@@ -191,7 +192,7 @@ export default async function UseCasePage({ params }: Props) {
               </h2>
               <div className="flex flex-col gap-4">
                 {related.map((u) => (
-                  <Link key={u.slug} href={`/use-case/${u.slug}`} className="group">
+                  <Link key={u.slug} href={`/${seg}/${u.slug}`} className="group">
                     <div className="rounded-2xl bg-light dark:bg-dark-card border border-gray-100 dark:border-dark-border p-6 transition hover:border-primary/40">
                       <h3 className="text-lg font-bold text-dark dark:text-white group-hover:text-primary transition-colors">
                         {u.title}
