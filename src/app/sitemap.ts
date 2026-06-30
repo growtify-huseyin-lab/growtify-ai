@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllPosts } from "@/lib/blog";
+import { getIndexableUseCases } from "@/lib/use-cases";
 import { getAllUpdates } from "@/lib/gelismeler";
 import { getAllSectorSlugs } from "@/data/sectors";
 import { getActiveLeadMagnetSlugs } from "@/content/lead-magnets";
@@ -129,11 +130,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     trOnly("/en/government-funding-ai-adoption", 0.8),
   ];
 
+  // ---- pSEO use-cases (quality-gated) ----
+  // Only indexable pages (frontmatter noindex:false) are emitted. Phase-1 launch ships
+  // noindex → this is empty until SEO flips the gate per page; then they auto-appear.
+  const useCases: MetadataRoute.Sitemap = [
+    ...getIndexableUseCases("tr").map((u) =>
+      trOnly(`/use-case/${u.slug}`, 0.6, new Date(u.date)),
+    ),
+    ...getIndexableUseCases("en").map((u) =>
+      trOnly(`/en/use-case/${u.slug}`, 0.6, new Date(u.date)),
+    ),
+  ];
+
   // ---- TR-only ----
   const trContent: MetadataRoute.Sitemap = [
     // KVKK is TR-only (UK GDPR covers EN); /en/kvkk-aydinlatma 301s to /en/privacy-policy
     trOnly("/kvkk-aydinlatma", 0.3),
   ];
 
-  return [...bilingual, ...blog, ...gelismeler, ...pillars, ...trContent];
+  return [...bilingual, ...blog, ...gelismeler, ...pillars, ...useCases, ...trContent];
 }
