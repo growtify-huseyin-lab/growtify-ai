@@ -814,8 +814,12 @@
       { pattern: /(\d+)\s+Lessons?\b/gi, replacement: "$1 Ders" },
       // Aktivite akışı / bildirim (kullanıcı adı + bu metin)
       { pattern: /Just shared a new post!?/gi, replacement: "yeni bir gönderi paylaştı!" },
-      { pattern: /Just unlocked the (.+?) course by joining the private channel/gi, replacement: "özel kanala katılarak $1 kursunu açtı" },
+      { pattern: /(?:You['’]ve )?(?:just )?unlocked the (.+?) course by joining the private channel/gi, replacement: "özel kanala katılarak $1 kursunu açtın" },
       { pattern: /Added you to private channel as a member in/gi, replacement: "seni özel kanala üye olarak ekledi:" },
+      // Bildirim split-node varyantı: bold "member" node'u böldüğü için tam phrase tutmuyor —
+      // parça parça çevir (added you... as a) + bold "member" node'unu ayrı yakala.
+      { pattern: /added you to private channel as a\b\s*/gi, replacement: "seni özel kanala " },
+      { pattern: /^\s*member\s*$/i, replacement: "üye" },
       // Ödev (assignment) dersi — "Start/Submit Assignment" dict'te "Başla Ödev/Gönder Ödev"e mangle oluyordu
       { pattern: /\bASSIGNMENT\b/g, replacement: "ÖDEV" },
       { pattern: /\bLESSON\b/g, replacement: "DERS" },
@@ -975,9 +979,40 @@
       });
     }
 
+    // CEO isteği (şimdilik): mobil kurs müfredatındaki LESSON/ASSIGNMENT tip-label'ları
+    // çevrilemiyor (muhtemelen ulaşılamayan render) → gizle. Reachable ise gizler; kapalı
+    // shadow ise bu da ulaşamaz. courses rotalarına scope'lu, exact-leaf eşleşmesi.
+    function hideTypeLabels() {
+      if (location.pathname.indexOf("courses") === -1) return;
+      function scan(root) {
+        var els;
+        try {
+          els = root.querySelectorAll("*");
+        } catch (e) {
+          return;
+        }
+        els.forEach(function (el) {
+          if (
+            el.children.length === 0 &&
+            /^(LESSON|ASSIGNMENT|DERS|ÖDEV)$/i.test(
+              (el.textContent || "").trim(),
+            )
+          ) {
+            el.style.setProperty("display", "none", "important");
+          }
+          if (el.shadowRoot) scan(el.shadowRoot);
+        });
+      }
+      try {
+        scan(document.body);
+      } catch (e) {}
+    }
+
     translate();
     fixCroppedCovers();
+    hideTypeLabels();
     setInterval(translate, 500);
+    setInterval(hideTypeLabels, 800);
     // React hızlı yeniden basınca 500ms interval kaçırabiliyor (ör. mobil kurs
     // müfredatı LESSON/ASSIGNMENT label'ları İngilizce kalıyordu). DOM değişince
     // ~120ms debounce ile yeniden çevir. translate() idempotent → döngü oluşmaz.
@@ -989,6 +1024,7 @@
           _trT = null;
           try {
             translate();
+            hideTypeLabels();
           } catch (e) {}
         }, 120);
       });
