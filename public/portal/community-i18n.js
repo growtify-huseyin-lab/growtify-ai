@@ -876,6 +876,22 @@
             if (tr !== v) el.setAttribute(attr, tr);
           });
         });
+      // Shadow DOM (web component) içindeki metin — ana TreeWalker shadow root'a girmez.
+      // Mobil kurs müfredatındaki LESSON/ASSIGNMENT gibi shadow-render text node'ları yakala.
+      // Additive + try/catch: mevcut akışı değiştirmez, bozulursa sessiz geçer.
+      try {
+        document.querySelectorAll("*").forEach(function (host) {
+          var sr = host.shadowRoot;
+          if (!sr) return;
+          var sw = document.createTreeWalker(sr, NodeFilter.SHOW_TEXT);
+          var sn;
+          while ((sn = sw.nextNode())) {
+            var so = sn.textContent;
+            var stt = translateString(so);
+            if (stt !== so) sn.textContent = stt;
+          }
+        });
+      } catch (e) {}
       // Login secure code button (Naive UI)
       const secBtn = document.getElementById("sec-log-btn-login-page");
       if (secBtn) {
@@ -962,6 +978,26 @@
     translate();
     fixCroppedCovers();
     setInterval(translate, 500);
+    // React hızlı yeniden basınca 500ms interval kaçırabiliyor (ör. mobil kurs
+    // müfredatı LESSON/ASSIGNMENT label'ları İngilizce kalıyordu). DOM değişince
+    // ~120ms debounce ile yeniden çevir. translate() idempotent → döngü oluşmaz.
+    try {
+      var _trT = null;
+      var _obs = new MutationObserver(function () {
+        if (_trT) return;
+        _trT = setTimeout(function () {
+          _trT = null;
+          try {
+            translate();
+          } catch (e) {}
+        }, 120);
+      });
+      _obs.observe(document.body, {
+        childList: true,
+        subtree: true,
+        characterData: true,
+      });
+    } catch (e) {}
     setInterval(fixCroppedCovers, 800);
     console.log(
       "[Panel TR] Active + Login + OTP + Password + Library + Group + CSS Placeholder + EN-guard"
