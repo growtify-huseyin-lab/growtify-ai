@@ -130,17 +130,40 @@ export default function sitemap(): MetadataRoute.Sitemap {
     trOnly("/en/government-funding-ai-adoption", 0.8),
   ];
 
-  // ---- pSEO use-cases (quality-gated) ----
-  // Only indexable pages (frontmatter noindex:false) are emitted. Phase-1 launch ships
-  // noindex → this is empty until SEO flips the gate per page; then they auto-appear.
-  const useCases: MetadataRoute.Sitemap = [
-    ...getIndexableUseCases("tr").map((u) =>
-      trOnly(`/use-case/${u.slug}`, 0.6, new Date(u.date)),
-    ),
-    ...getIndexableUseCases("en").map((u) =>
-      trOnly(`/en/use-case/${u.slug}`, 0.6, new Date(u.date)),
-    ),
-  ];
+  // ---- pSEO use-cases (quality-gated, hreflang-paired) ----
+  // Indexable pages only (frontmatter noindex:false). TR↔EN are translation pairs matched
+  // by (sector, normalized problem) → emitted as bilingual entries with tr/en/x-default
+  // hreflang. Any unpaired page falls back to a standalone entry. Phase-1 ships noindex →
+  // empty until SEO flips the gate; once flipped, pairs auto-appear with hreflang.
+  const ucKey = (sector: string, problem: string): string => {
+    const p =
+      problem === "musteri-edinme" || problem === "client-acquisition"
+        ? "acquisition"
+        : problem === "olcekleme" || problem === "scaling"
+          ? "scaling"
+          : problem;
+    return `${sector}::${p}`;
+  };
+  const enUseCases = getIndexableUseCases("en");
+  const enByKey = new Map(enUseCases.map((u) => [ucKey(u.sector, u.problem), u]));
+  const pairedEnSlugs = new Set<string>();
+  const useCases: MetadataRoute.Sitemap = [];
+  for (const tr of getIndexableUseCases("tr")) {
+    const en = enByKey.get(ucKey(tr.sector, tr.problem));
+    if (en) {
+      pairedEnSlugs.add(en.slug);
+      useCases.push(
+        biAlt(`/use-case/${tr.slug}`, `/en/use-case/${en.slug}`, 0.6, new Date(tr.date)),
+      );
+    } else {
+      useCases.push(trOnly(`/use-case/${tr.slug}`, 0.6, new Date(tr.date)));
+    }
+  }
+  for (const en of enUseCases) {
+    if (!pairedEnSlugs.has(en.slug)) {
+      useCases.push(trOnly(`/en/use-case/${en.slug}`, 0.6, new Date(en.date)));
+    }
+  }
 
   // ---- TR-only ----
   const trContent: MetadataRoute.Sitemap = [
