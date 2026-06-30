@@ -935,8 +935,34 @@
       });
     }
 
+    // — added 2026-06-30: Kurs kütüphanesi cover fix —
+    // Mobil "Tüm Kurslar"da GHL, 16:9 cover'ı 16:9-olmayan (daha dar/yüksek) kutuda
+    // object-fit:cover ile merkezden kırpıyor → köşedeki logo kesiliyor. Class ismine
+    // bağlı kalmadan: kırpılan 16:9 cover'ı tespit edip kapsayıcısını 16:9'a zorla
+    // (kırpma yok, letterbox yok). Eşleşen kapsayıcılar (desktop/Öğrenme) zaten 16:9
+    // olduğu için dokunulmaz. Idempotent: düzeltilince aspect eşit olur, tekrar girmez.
+    function fixCroppedCovers() {
+      if (location.pathname.indexOf("courses") === -1) return;
+      document.querySelectorAll("img").forEach(function (img) {
+        if (img.naturalWidth < 600) return;
+        var ar = img.naturalWidth / img.naturalHeight;
+        if (ar < 1.6 || ar > 2.05) return; // sadece ~16:9 cover
+        if (getComputedStyle(img).objectFit !== "cover") return;
+        var p = img.parentElement;
+        if (!p) return;
+        var pr = p.getBoundingClientRect();
+        if (pr.width < 80 || pr.height < 40) return;
+        if (Math.abs(pr.width / pr.height - ar) > 0.12) {
+          p.style.setProperty("aspect-ratio", "16 / 9", "important");
+          p.style.setProperty("height", "auto", "important");
+        }
+      });
+    }
+
     translate();
+    fixCroppedCovers();
     setInterval(translate, 500);
+    setInterval(fixCroppedCovers, 800);
     console.log(
       "[Panel TR] Active + Login + OTP + Password + Library + Group + CSS Placeholder + EN-guard"
     );
