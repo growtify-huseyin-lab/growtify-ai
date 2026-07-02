@@ -1,0 +1,118 @@
+---
+title: "Diş Kliniği İçin Yapay Zeka ile Hasta Edinme: Koltuğu Kovalamadan Doldur"
+slug: "dis-klinigi-musteri-edinme"
+excerpt: "İyi bir klinik işletiyorsun. Gelen hasta kalıyor, birkaçı ailesini gönderiyor, klinik işin kendini anlatıyor. Ama yeni hasta sayısı hâlâ aydan aya inip çıkıyor…"
+locale: "tr"
+category: "use-case"
+type: "use-case"
+author: "Growtify"
+date: "2026-06-30"
+readTime: "8 dk okuma"
+seoTitle: "Diş Kliniği Hasta Edinme: Yapay Zeka | Growtify"
+seoDescription: "Hasta kovalamadan daha fazla hasta edin. Yapay zeka destekli geri kazanım, yorum toplama ve her aramayı randevuya çeviren bir sistemle koltuğunu dolu tut."
+sector: "dental"
+problem: "musteri-edinme"
+growtLevel: "W"
+featured: false
+en_path: "/use-case/dis-klinigi-musteri-edinme"
+identity_scope: "growtify_identity"
+wordCount: 1560
+schema: ["Article", "HowTo", "FAQPage"]
+internalLinks: ["/test", "/growt-method", "/sektor/dis", "/blog/dis-hekimleri-icin-yapay-zeka"]
+---
+
+
+# Diş Kliniği İçin Yapay Zeka ile Hasta Edinme
+
+İyi bir klinik işletiyorsun. Gelen hasta kalıyor, birkaçı ailesini gönderiyor, klinik işin kendini anlatıyor. Ama yeni hasta sayısı hâlâ aydan aya inip çıkıyor ve bunun nedenini tam olarak söyleyemiyorsun. Denediğin pazarlama — bir reklamlı paylaşım, bir rehber kaydı — hiçbir zaman düzenli bir akışa dönüşmedi. Bu sırada iki sokak öteki yeni klinik dolup taşıyor gibi görünüyor ve onların hekimliğinin seninkinden iyi olmadığından da eminsin.
+
+Bu sayfa daha çok paylaşım yapmakla ya da yeni bir araç öğrenmekle ilgili değil. Tekrarlanabilir bir hasta edinme kurgusu kurmakla ilgili; öyle bir kurgu ki yapay zekayla desteklenince yeni hastalar şansa değil, öngörülebilir bir ritme bağlı şekilde geliyor.
+
+Yapay zeka araçlarını öğretmiyoruz — işini yapay zeka ile nasıl büyüteceğini gösteriyoruz.
+
+## Diş klinikleri hasta edinmede neden zorlanır
+
+Sorun neredeyse hiçbir zaman hekimliğinin kalitesiyle ilgili değil. Yapısal ve birkaç belirgin yerden kaynaklanıyor.
+
+Birincisi, eğitimin klinikti, ticari değil. Yıllarını anatomiye, restoratif tekniğe, klinik beceriye verdin — talep yaratmak ya da takip sistemi kurmak için aşağı yukarı sıfır saat harcadın. O yüzden randevu defteri boşaldığında bildiğin tek hamle "telefon çalsın diye ummak" oluyor.
+
+İkincisi, klinik ön büroya bağlı ve ön büro zaten çok yüklü. Kaçan yeni hastaların çoğu rakibe gitmiyor — dönülmeyen bir sesli mesajda, ertesi sabaha kadar yanıtsız kalan bir internet mesajında, bir kez söylenip bir daha üstüne gidilmeyen bir tedavi planında kayboluyor. Talep oradaydı. Onu yakalayacak sistem yoktu.
+
+Üçüncüsü, hastalar kararı yavaş ve sessizce veriyor. Kimse anlık bir dürtüyle implant için görüşme almıyor. Önce araştırıyor, yorumları karşılaştırıyor, maliyete kafa yoruyor ve diş gerçekten ağrıyana kadar bekliyor. Bu sessiz dönemde görünür ve güvenilir değilsen — ve yorumların ne kadar iyi olduğunu yansıtmıyorsa — karar anı geldiğinde listede bile yoksun.
+
+Dördüncüsü, en iyi büyüme kaynağın zaten hasta kayıtlarında ve hiç kullanılmıyor. Bir kez gelip kaybolan hastalar, kontrol zamanı geçmiş olanlar, tedavi planının yarısını kabul edip bırakanlar — hepsi el değmeden duran sıcak talep. Çoğu klinik bununla sistematik hiçbir şey yapmıyor, en güçlü kanalını tamamen şansa bırakıyor.
+
+Yapay zeka bunların hiçbirini tek başına çözmüyor. Yaptığı şey, ön büronun takibe hiç sıra bulamamasına neden olan zaman vergisini ortadan kaldırmak — böylece kurgu, hasta bakımından saat çalmadan çalışabiliyor.
+
+## Hasta edinmeye GROWT Metodu yaklaşımı
+
+Bu bir yapay zeka kursu değil. GROWT Metodu, hasta edinmeyi tahmin oyunundan bir inşaya çeviren, kurgu odaklı bir sıralama. Her aşamanın koltuklarını doldurmaya nasıl doğrudan uygulandığına bakalım.
+
+### G — Boşluk Analizi
+
+Hastaların klinikten tam olarak nerede kaçtığını bularak başla. Son 30 aramayı ve mesajı çıkar: her biri nereden geldi, kaçı bir saat içinde yanıtlandı, kaçı randevuya döndü, geri kalanlar nerede sustu? Sonra kayıtlarında kaybolmuş ve kontrolü gecikmiş hastalara bak. Çoğu klinik asıl sorunun "yeterince başvuru yok" olmadığını görüyor — başvuruların önemli bir kısmı yavaş yanıt aldığı ya da hiç yanıt alamadığı için, yüzlerce eski hastaya ise bir daha hiç ulaşılmadığı için kayıp yaşanıyor. Ölçmediğin şeyi düzeltemezsin. Boşluk, başlangıç haritan.
+
+### R — Yol Haritası
+
+Şimdi çözümü sıraya koy. Her şeyi aynı anda kurmuyorsun — en ucuz ama en yüksek getirili parçayı ilk kuruyorsun. Çoğu klinik için bu, uykudaki hasta kaydına yönelik bir geri kazanım kampanyası (en hızlı yeni gelir buradadır); ardından güveni güçlendiren bir yorum toplama sistemi; sonra ön büroda sıkılaştırılmış bir başvuru yanıt süreci. Yol haritan sırayı, haftalık zaman bütçeni ve önce izleyeceğin tek rakamı belirler: genelde haftalık alınan yeni randevu sayısı.
+
+### O — Operasyona Dök
+
+Yapay zeka asıl yerini burada kazanıyor. Yol haritasındaki her maddeyi ön büronun dakikalar içinde çalıştırabileceği sabit bir kurguya çeviriyorsun. Geri kazanım kampanyası, hastanın neden kaybolduğuna göre bölümlenmiş, önceden yazılmış ve hasta açısından güvenli mesajlara dönüşüyor. Yorum isteği, randevudan sonra doğru anda gönderilen şablonlu bir mesaja dönüşüyor. Başvuru karşılama, bir senaryoya ve hızlı, markaya uygun yanıt taslaklarına dönüşüyor; böylece kimse bir sesli mesajda geceyi geçirmiyor. Amaç, hiçbir şeyin birinin "hatırlamasına" bağlı olmaması — sadece "oynat" dediğin bir kurguya bağlı olması.
+
+### W — Kazan
+
+W, bu sayfanın yaşadığı seviye — ilgiyi ve sıcak talebi randevuya girmiş, ödeyen hastaya çevirmek. Sistemler dönerken yapay zekayı dönüşüm kenarına odaklıyorsun: kaybolan hastayı yeniden randevuya döndüren geri kazanım mesajını yazmak, fiyat sorusunu bir görüşmeye çeviren telefon senaryosunu hazırlamak, tedavi planı takiplerini değerin net ve bir sonraki adımın bariz olduğu şekilde biçimlendirmek. Koltuklar asıl burada doluyor. Dönüşüm sistemi olmayan ilgi sadece gürültüdür; Kazan aşaması kapanışın kendisidir.
+
+### T — Dönüştür
+
+Son olarak kurguyu kalıcı kılıyorsun. Hasta edinme güvenilir şekilde randevu üretmeye başlayınca, onu yoğun bir çeyrekte, bir personel değişiminde ya da bir tatilde bile ayakta kalacak kendi oyun kitabın olarak belgeliyorsun. Dönüştür, kliniğin büyümek için artık kimsenin motive hissetmesine ihtiyaç duymaması demek — sistem onu büyütüyor. Tek iyi bir resepsiyonistin sırtına yaslanan bir klinik ile rayında dönen bir klinik arasındaki fark budur.
+
+## Bugün kullanabileceğin kurgular
+
+Bunlar kopyala-yapıştır başlangıç noktaları. Kliniğine göre uyarla ve gerçek hasta kayıtlarını ya da tanımlayıcı sağlık bilgilerini asla halka açık bir yapay zeka aracına yapıştırma — her promptu genel ya da tamamen anonim tut (SSS'de daha fazlası var). Yapay zeka mesajı yazar; asla teşhis koymaz ya da klinik iddiada bulunmaz.
+
+> **Kaybolan hastayı geri kazanma.** "Bir diş kliniği için hasta iletişimi uzmanı gibi davran. 18 aydan uzun süredir gelmemiş hastalar için 3 kısa, sıcak geri kazanım mesajı yaz. Biri SMS, biri e-posta, biri sesli mesaj senaryosu. Her biri kişisel ve içten hissettirsin — satış gibi değil — kontrolünün geciktiğini nazikçe hatırlatsın ve yeniden randevu almayı tek kolay adım haline getirsin. Her biri 60 kelimenin altında. Sağlık iddiası yok, baskı yok."
+
+> **Yorum isteme dizisi.** "Olumlu bir randevudan sonra göndereceğim 2 adımlık bir yorum isteği yaz. 1. mesaj, aynı gün: Google'a yorum bırakmayı kolay ve hızlı hissettiren sıcak bir teşekkür, net bir bağlantı yer tutucusuyla. 2. mesaj, üç gün sonra yorum gelmediyse: hafif, baskısız bir hatırlatma. Samimi, profesyonel bir tona uy. Yorum karşılığında asla bir teşvik ima etme."
+
+> **Ön büro başvuru yanıtları.** "İşte yeni bir hasta başvurusu: [anonim — ör. 'diş beyazlatma fiyatını soruyor, ilk kez geliyor, bizi Google'da bulmuş']. Sıcak yanıtlayan, doğru beklentiyi kuran ve mesajda kesin bir fiyat vermek yerine hastayı görüşme almaya yönlendiren hızlı, samimi bir yanıt hazırla. 2 versiyon ver: biri e-posta, biri telefon açılışı."
+
+> **Tedavi planı takibi.** "Tedavi planı sunulan ama randevu almamış bir hasta için 3 mesajlık bir takip dizisi yaz. [Maliyet / zaman / tedirginlik] konusunda tereddütlü görünüyordu. 2 haftaya yay. Her mesaj gerçek bir güven ya da yararlı bir bilgi versin ve sohbeti nazikçe yeniden açsın — örneğin ödeme seçeneklerini açıklamayı ya da sorularını yanıtlamayı teklif ederek. İlgili bir klinik gibi imzala, asla çaresiz değil."
+
+## Ne beklemeli
+
+Gerçekçi ol. Bu bir hack değil, bir inşa ve ilk ay çoğunlukla kurulum.
+
+**1-2. haftalarda** Boşluk Analizi'ni yapıyor ve yol haritasını kuruyorsun. Muhtemelen biraz açıkta hissedeceksin — ölçüm işini yapıyor demektir. Bir-iki şaşırtıcı kayıp noktası keşfetmeyi bekle; yavaş başvuru yanıtı ve hiç ulaşılmamış yüzlerce eski hasta en yaygınları.
+
+**3-6. haftalarda** geri kazanım ve yorum sistemleri operasyonelleşiyor. Geri kazanım genelde önce hareketleniyor çünkü talep zaten sıcak — çoğu klinik ilk yeni randevuların doğrudan uykudaki hastalardan, ilk birkaç hafta içinde geldiğini görüyor. Yorum sayısı istikrarlı şekilde yükseliyor ve bu, gelecekteki her başvuruyu sessizce iyileştiriyor.
+
+**2-3. aylarda** tam sırayı uygulayan klinikler yeni hasta randevularının öngörülemez iniş çıkışlar yerine daha dengeli bir ritme oturduğunu görüyor — yaygın bir tablo, durgun bir kontrol listesini bir yeniden randevu akışına çevirmek ve yorum sayısını kliniğin internette görünüşünü değiştirecek kadar yükseltmek. Net rakamlar liste büyüklüğüne, konuma ve tedavi çeşidine bağlı, ama yön hep aynı: daha az şans, daha çok ritim.
+
+Asıl çıktı tek bir rakam değil. Sakin bir haftanın artık bir endişe olmaktan çıkıp, nasıl yanıt vereceğini tam olarak bildiğin bir sinyale dönüşmesi.
+
+## Sıkça Sorulan Sorular
+
+**Hasta bilgisiyle yapay zeka kullanmak güvenli mi?**
+Hasta kayıtlarını, isimleri ya da tanımlayıcı klinik detayları asla halka açık bir yapay zeka aracına yapıştırma — bu KVKK ve gizlilik ihlali riski taşır. Buradaki hasta edinme kurguları genel ya da anonim girdilerle çalışacak şekilde kurulu (bir hastanın neden kaybolduğu, isim eklenmemiş bir beyazlatma sorusu). Gerçek kayıtlara dokunan her şey için yalnızca klinik onaylı, uyumlu bir sistem kullan ve klinik olan her şeyde bir hekimi devrede tut.
+
+**Yapay zekanın yazdığı mesajlar hastaya soğuk gelmez mi?**
+Sadece izin verirsen. Yukarıdaki her kurgu kliniğinin gerçek sesine demir atıyor ve gitmeden önce düzenleniyor — tonunu yapıştırıyorsun, model onu taklit ediyor. Yapay zeka boş sayfa sorununu ve hacmi çözüyor; yargın onu sıcak ve tartışmasız senin kılıyor. Soğuk çıktı bir prompt hatasıdır, doğal bir sınır değil.
+
+**Yapay zeka hastaya klinik ya da teşhis niteliğinde tavsiye verebilir mi?**
+Hayır, veremez ve vermemeli. Buradaki yapay zeka yalnızca iletişim ve büro işini yürütür — hatırlatmalar, yanıtlar, takipler. Asla teşhis koymaz, tedavi önermez, sağlık iddiasında bulunmaz. Her klinik karar hekimde kalır. Promptlar, mesajları genel tutacak ve klinik olan her şeyi bir uzmana yönlendirecek şekilde yazılmıştır.
+
+**Küçük bir klinik ve yoğun bir ön büromuz var. Nereden başlarız?**
+Geri kazanımdan başla — en hızlı kazanç bu ve en az yeni trafik onun için gerekiyor. Uykudaki hasta kaydın, ulaşması hiçbir şeye mal olmayan sıcak talep. Bir kişi, yukarıdaki promptla bir öğleden sonrada ilk geri kazanım grubunu çalıştırabilir ve ilk randevular genelde harcanan emeği fazlasıyla karşılar.
+
+**Bu bir diş pazarlama ajansı tutmaktan nasıl farklı?**
+Ajans sistemi senin yerine çalıştırır ve aylık fatura keser. Bu ise sistemi kliniğine gömüyor, sahibi sen oluyorsun — ve ajansın ücretlendireceği ağır işi yapay zeka yapıyor. Çoğu klinik bunu ajans ücretlerini karşılayabilmeden önce büyümek için kullanıyor, ya da sonradan bir ajansa akıllıca brief vermek için.
+
+## Kişisel Planını Oluştur
+
+Başka bir kursa ihtiyacın yok. Hasta edinme sürecinde nerede kayıp yaşadığını ve önce hangi kurguyu kuracağını gösteren net bir haritaya ihtiyacın var.
+
+Ücretsiz değerlendirmeyi yap ve kliniğin için kişiselleştirilmiş bir başlangıç noktası al: [**Planını oluştur →**](/test)
+
+Bağlanmadan önce metodun tamamını görmek ister misin? [GROWT Metodu'nun](/growt-method) sakin bir randevu defterini nasıl öngörülebilir bir sisteme çevirdiğini oku, [diş sektöründeki](/sektor/dis) çalışmalarımızı incele ya da [diş hekimleri için yapay zeka](/blog/dis-hekimleri-icin-yapay-zeka) yazısına göz at.
