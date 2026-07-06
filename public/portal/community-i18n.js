@@ -976,6 +976,10 @@
         if (getComputedStyle(img).objectFit !== "cover") return;
         var p = img.parentElement;
         if (!p) return;
+        // FIX: lesson-row thumbnail'larini atla — bunlar grid hucresi, parent = satir grid'i
+        // (cover wrapper degil). 16:9'u satira basmak dev bosluk yaratiyordu.
+        if (getComputedStyle(p).display === "grid") return;
+        if (/(^|\s)col-span-/.test(img.className || "")) return;
         var pr = p.getBoundingClientRect();
         if (pr.width < 80 || pr.height < 40) return;
         if (Math.abs(pr.width / pr.height - ar) > 0.12) {
