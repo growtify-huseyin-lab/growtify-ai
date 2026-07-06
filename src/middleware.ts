@@ -4,6 +4,17 @@ import { routing } from "./i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
 
+// G1 assessment variant: locale detection OFF. The course lesson link encodes the
+// intended locale (TR link "growtify.ai/g1" = Turkish assessment). next-intl's
+// default locale detection was 307-redirecting /g1 -> /en/g1 for any visitor whose
+// NEXT_LOCALE cookie / Accept-Language was English, so TR-course members with an
+// English browser got the English assessment + English result. For G1 we honor the
+// URL locale and never auto-redirect based on the visitor's preference.
+const intlG1 = createMiddleware({ ...routing, localeDetection: false });
+
+// Matches /g1, /g1/..., /en/g1, /en/g1/... (but NOT /g1foo).
+const G1_PATH = /^\/(en\/)?g1(\/.*)?$/;
+
 // Off-locale segment canonicalization (SEO-S2-BILINGUAL-ALIGNMENT-AUDIT-001).
 // Each bilingual route exists as two physical dirs (e.g. /sektor + /sectors), so the
 // wrong-locale variant resolves and creates duplicate content. We 301 it to the correct
@@ -45,6 +56,11 @@ const TR_FIX: Record<string, string> = {
 
 export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // G1 assessment — honor the URL locale, skip locale-detection redirect.
+  if (G1_PATH.test(pathname)) {
+    return intlG1(req);
+  }
 
   // EN: /en/{seg}/...
   const en = pathname.match(/^\/en\/([^/]+)(\/.*)?$/);
