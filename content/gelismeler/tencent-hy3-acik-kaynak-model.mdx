@@ -1,0 +1,22 @@
+---
+slug: tencent-hy3-acik-kaynak-model
+date: "2026-07-08"
+title: "Tencent, Açık Kaynak Modeli Hy3'ü Çıkardı: Küçük Boyut, Büyük İddia"
+summary: "Tencent, açık kaynak (Apache 2.0) yeni modeli Hy3'ü yayınladı. Şirkete göre Hy3, kendinden 2-5 kat büyük amiral açık kaynak modellerle yarışıyor; kodlama, ofis ve arayüz tasarımı gibi işlerde güçlü ve API fiyatı çok düşük."
+tags: ["yapay zeka", "modeller"]
+---
+
+Tencent, yapay zeka modeli Hy3'ü açık kaynak olarak yayınladı — hem de oldukça uygun bir fiyata. Şirketin anlattığına göre Hy3, boyutça küçük olmasına rağmen kendinden 2-5 kat daha büyük amiral açık kaynak modellerle yarışıyor. Nisandaki önizlemenin ardından 50'den fazla üründen gelen geri bildirimle eğitimi güçlendirilmiş.
+
+## Kısaca
+
+- **Ne çıktı:** Hy3, Tencent'in yeni büyük dil modeli; Apache 2.0 lisansıyla GitHub, Hugging Face ve ModelScope'ta açık kaynak.
+- **İddia:** Tencent'e göre Hy3, kendinden 2-5 kat büyük modellerle yarışıyor. 270 uzmanla yapılan kör değerlendirmede, uzmanların kendi işlerinden görevlerde 2,67/4 alarak GLM-5.1'i (2,51) geçmiş; en güçlü olduğu alanlar frontend, veri ve CI/CD.
+- **Somut iyileşmeler:** İç testlerde halüsinasyon oranı %12,5'ten %5,4'e, çok-turlu diyalogda sorun oranı %17,4'ten %7,9'a düşmüş. Bir iç üründe (WorkBuddy) görev başarısı %72'den %90'a çıkmış, süre %34 kısalmış.
+- **Fiyat:** 1M token için ~1 RMB girdi / 4 RMB çıktı — yani çok ucuz. Açık kaynak olduğu için kendi altyapında da çalıştırabilirsin.
+
+## Bizim yorumumuz
+
+Senin için değer net: masaya ucuz ve açık kaynak bir seçenek daha geldi. Hy3'ün iddiası "en akıllı model" olmak değil; küçük ve ucuz olmasına rağmen gündelik iş yükünü —kod, ofis, sunum, arayüz— düzgün kaldırması. Tencent'in paylaştığı bir rakam dikkat çekici: benzer bir işte GLM-5.2'ye göre neredeyse yarı yarıya az token harcamış; yani aynı işi daha ucuza. Bu sayılar büyük ölçüde Tencent'in kendi testlerinden, körlemesine güvenme — ama şablon işlerin (rapor, sunum, basit kod) varsa denemeye değer ucuz bir aday. Üstelik açık kaynak olduğu için veriyi dışarı çıkarmadan kendi ortamında da çalıştırabilirsin.
+
+Kaynak: [Tencent Hunyuan](https://hy.tencent.com/research/hy3)
