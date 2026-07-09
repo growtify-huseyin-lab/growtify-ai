@@ -235,6 +235,17 @@
     };
 
     const phrases = [
+      // — added 2026-07-07 (CEO: DM/mesajlaşma + hesap-seçim ekranı string'leri). En başta →
+      //   kelime-fragmanlamadan önce yakalar ("View Profile"→"Görüntüle Profil" partial'ını önler).
+      { pattern: /Select which account you want to (?:log\s*in|Giriş)/gi, replacement: "Giriş yapmak istediğin hesabı seç" },
+      { pattern: /Set your secure password/gi, replacement: "Güvenli şifreni belirle" },
+      { pattern: /^\s*Media\s*$/i, replacement: "Medya" },
+      { pattern: /^\s*Files\s*$/i, replacement: "Dosyalar" },
+      { pattern: /^\s*View Profile\s*$/i, replacement: "Profili Görüntüle" },
+      { pattern: /^\s*Delete Chat\s*$/i, replacement: "Sohbeti Sil" },
+      { pattern: /^\s*Block User\s*$/i, replacement: "Kullanıcıyı Engelle" },
+      { pattern: /You and (.+?) know each other/gi, replacement: "Sen ve $1 birbirinizi tanıyorsunuz" },
+      { pattern: /(?:Start|Başla) a conversation by sending\s*["'“”‘’]?\s*Hi\s*["'“”‘’]?/gi, replacement: "Bir sohbet başlatmak için 'Merhaba' gönder" },
       // — added 2026-06-28 (CEO mobil portal taraması): eksik portal/ayarlar/bildirim string'leri.
       //   phrases dict'ten ÖNCE çalışır → İngilizce orijinali yakala, kelime-dict mangle'ını pre-empt et.
       //   NOT: /courses/ kurs-oynatıcı string'leri loader o sayfaya enjekte olmadığı için HENÜZ
