@@ -246,6 +246,15 @@
       { pattern: /^\s*Block User\s*$/i, replacement: "Kullanıcıyı Engelle" },
       { pattern: /You and (.+?) know each other/gi, replacement: "Sen ve $1 birbirinizi tanıyorsunuz" },
       { pattern: /(?:Start|Başla) a conversation by sending\s*["'“”‘’]?\s*Hi\s*["'“”‘’]?/gi, replacement: "Bir sohbet başlatmak için 'Merhaba' gönder" },
+      // — added 2026-07-07b (CEO: bildirim ayarları + profil ekranı; bazıları partial → alt ile de eşleş)
+      { pattern: /^\s*please input\s*$/i, replacement: "Lütfen gir" },
+      { pattern: /select\s*time\s?zone/gi, replacement: "Saat dilimi seç" },
+      { pattern: /publicly visible/gi, replacement: "Herkese açık" },
+      { pattern: /^\s*edit details\s*$/i, replacement: "Detayları düzenle" },
+      { pattern: /turn on\/off all push (?:notifications|bildirimleri)/gi, replacement: "Tüm Push bildirimlerini aç/kapat" },
+      { pattern: /when a new event is created/gi, replacement: "Yeni bir etkinlik oluşturulduğunda" },
+      { pattern: /manage (?:email|e-posta) (?:notifications|bildirimleri)/gi, replacement: "E-posta bildirimlerini yönet" },
+      { pattern: /no (?:blocked users|engellenen kullanıcılar)/gi, replacement: "Engellenen kullanıcı yok" },
       // — added 2026-06-28 (CEO mobil portal taraması): eksik portal/ayarlar/bildirim string'leri.
       //   phrases dict'ten ÖNCE çalışır → İngilizce orijinali yakala, kelime-dict mangle'ını pre-empt et.
       //   NOT: /courses/ kurs-oynatıcı string'leri loader o sayfaya enjekte olmadığı için HENÜZ
