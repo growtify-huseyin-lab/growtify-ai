@@ -1,0 +1,22 @@
+---
+slug: poolside-laguna-s-2-1
+date: "2026-07-23"
+title: "Poolside's Laguna S 2.1: A Small, Cheap, Open Coding Model"
+summary: "Poolside released Laguna S 2.1, an open coding model: 118B parameters (8B active), small but strong for its weight class. It trails the frontier models (Fable 5, Kimi K3), but it's very cheap, free to try, and can run on your own machine. Poolside also makes an interesting case: 'not more intelligence, but better behaviors.'"
+tags: ["AI", "models"]
+---
+
+Poolside has released its new coding model, Laguna S 2.1, as open source. It's small — 118 billion parameters, only 8 billion active — and Poolside calls it "the most capable agentic coding model in its weight class." In other words, it competes with similar-sized models, not the giants. The interesting part is the company's thesis: their goal wasn't to add "more intelligence" but to make the model more careful — to verify, not declare victory early, and be persistent.
+
+## In brief
+
+- **What launched:** Laguna S 2.1, Poolside's coding-focused open model. 118B/8B-active (MoE), 1M-token context. Weights open on Hugging Face.
+- **Where it stands:** good for its size class but behind the frontier — e.g. 70.2% on Terminal-Bench 2.1 vs Kimi K3's 88.3% and Fable 5's 88.0%. Poolside publishes those gaps openly on its own page.
+- **The draw — price and access:** on OpenRouter, $0.10 input / $0.20 output per 1M tokens (very cheap); free to try with no login at chat.poolside.ai; and it runs locally via Ollama and vLLM.
+- **What's different — candor:** Poolside makes all its evaluation trajectories public (trajectories.poolside.ai) and lists the model's shortcomings itself (overthinking, JSON-escaping issues).
+
+## Our take
+
+If you code or build something, this is a genuinely usable option for you: try it free with no login, run it on the API for what's practically pennies, or run it on your own machine. But set expectations — it doesn't beat the frontier models and doesn't try to; it's a cheap tool that does a lot for its small size. The real value is beyond price: Poolside says it made the model "not smarter, but more careful" — a model that doesn't call "done" too early and checks its work is often more useful in coding than raw intelligence — and it publishes all its test records, including its flaws. When picking a model, that second part is far more reassuring than a shiny score.
+
+Kaynak: [Poolside](https://poolside.ai/blog/introducing-laguna-s-2-1)
