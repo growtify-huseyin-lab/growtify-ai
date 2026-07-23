@@ -1,0 +1,22 @@
+---
+slug: poolside-laguna-s-2-1-acik-kodlama
+date: "2026-07-23"
+title: "Poolside'dan Laguna S 2.1: Küçük ve Ucuz Bir Açık Kodlama Modeli"
+summary: "Poolside, kodlamaya odaklı açık modeli Laguna S 2.1'i çıkardı: 118 milyar parametreli (8 milyarı aktif) küçük bir model, ama kendi ağırlık sınıfında iddialı. Sınır modellerin (Fable 5, Kimi K3) gerisinde kalıyor; buna karşılık çok ucuz, denemesi ücretsiz ve kendi makinende çalıştırılabiliyor. Poolside ilginç bir tez de savunuyor: 'daha fazla zeka değil, daha iyi davranışlar.'"
+tags: ["yapay zeka", "modeller"]
+---
+
+Poolside, yeni kodlama modeli Laguna S 2.1'i açık kaynak olarak çıkardı. Model boyutça küçük —118 milyar parametrenin yalnızca 8 milyarı aktif— ve Poolside onu "kendi ağırlık sınıfının en yetenekli ajansal kodlama modeli" diye tanıtıyor. Yani devlerle değil, benzer boyuttaki modellerle yarışıyor. İlginç olan şirketin tezi: amaçları modele "daha fazla zeka" katmak değil, onu daha titiz davranmaya —doğrulamaya, erken zafer ilan etmemeye, ısrarcı olmaya— alıştırmak.
+
+## Kısaca
+
+- **Ne çıktı:** Laguna S 2.1, Poolside'ın kodlamaya odaklı açık modeli. 118B/8B-aktif (MoE), 1 milyon token bağlam. Ağırlıkları Hugging Face'te açık.
+- **Nerede duruyor:** Kendi boyut sınıfında iyi ama sınır modellerin gerisinde — örneğin Terminal-Bench 2.1'de %70,2; Kimi K3 %88,3, Fable 5 %88,0. Poolside bu farkları kendi sayfasında açıkça yayımlıyor.
+- **En cazip yanı fiyat + erişim:** OpenRouter'da 1M token için 0,10$ girdi / 0,20$ çıktı (çok ucuz); chat.poolside.ai'da girişsiz ücretsiz denenebiliyor; Ollama ve vLLM ile kendi makinende de çalışıyor.
+- **Farklı tarafı — dürüstlük:** Poolside tüm değerlendirme kayıtlarını herkese açıyor (trajectories.poolside.ai) ve modelin eksiklerini (aşırı düşünme, JSON kaçış sorunları) kendisi listeliyor.
+
+## Bizim yorumumuz
+
+Kod yazıyor ya da bir şey geliştiriyorsan bu senin için gerçekten kullanılabilir bir seçenek: girişsiz ücretsiz deneyebilir, tutarsan API'de neredeyse bedava sayılacak bir fiyata koşturabilir, hatta kendi makinende çalıştırabilirsin. Ama beklentini doğru kur — model sınır modelleri geçmiyor, geçmeye de çalışmıyor; küçük boyutuna göre çok iş çıkaran ucuz bir alet. Asıl kıymetli yanı fiyatın ötesinde: Poolside "modeli daha zeki değil, daha titiz yaptık" diyor —erken "oldu" demeyen, işini kontrol eden bir model kod tarafında çoğu zaman ham zekadan daha işe yarar— ve tüm test kayıtlarını, hatta eksiklerini herkese açıyor. Model seçerken bu ikinci taraf, parlak bir skordan çok daha güven verici.
+
+Kaynak: [Poolside](https://poolside.ai/blog/introducing-laguna-s-2-1)
