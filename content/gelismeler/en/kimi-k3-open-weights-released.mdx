@@ -1,0 +1,22 @@
+---
+slug: kimi-k3-open-weights-released
+date: "2026-07-27"
+title: "Kimi K3's Open Weights Are Out: Now Multimodal and Downloadable"
+summary: "Moonshot released the open weights for Kimi K3 — the model it announced on July 17 — on Hugging Face. It now handles images (multimodal) and is free to download; its card shows strong benchmark scores, but these are the company's own measurements."
+tags: ["AI", "models"]
+---
+
+We covered Kimi K3 [when it was announced](/en/news/moonshot-kimi-k3); back then there were no weights and Moonshot said the model was "behind the leaders." Now the open weights are actually out — with two new wrinkles: the model has gone multimodal, and its card carries some bold numbers.
+
+## In brief
+
+- **Weights are downloadable:** Kimi K3 is now on Hugging Face under its own "Kimi K3 License." 2.8 trillion total / 104 billion active parameters (16 of 896 experts selected), 1 million token context. It's had ~99K downloads in a month.
+- **New: it handles images.** A vision encoder called MoonViT-V2 (401M) was added — the announcement was mostly text-focused. It runs on engines like vLLM and SGLang, with weights in a compressed (MXFP4) format.
+- **Card scores (Moonshot's own measurements):** GPQA Diamond 93.5; Terminal-Bench 2.1 88.3; BrowseComp 91.2; DeepSWE 67.5.
+- **Note:** There's a tension between the company calling it "behind" at announcement and the strong numbers on the card — independent tests will settle it.
+
+## Our take
+
+This is a 2.8-trillion-parameter model; running it on your own machine isn't practical for a regular user, so there's no "install it and go" win here. What matters is the direction: the open weights of a model claiming near-frontier performance are now out under an open license — and it handles images too. That has an indirect but real upside — open weights mean providers can host it cheaply and you aren't locked to a single vendor, which can lower your costs on coding or agent work down the line. Just treat the card numbers with caution: they're the company's own tests, not independent. For now the honest line is: open, ambitious, and now multimodal — but wait for independent comparisons before calling it "the best."
+
+Kaynak: [Moonshot AI — Hugging Face](https://huggingface.co/moonshotai/Kimi-K3)
