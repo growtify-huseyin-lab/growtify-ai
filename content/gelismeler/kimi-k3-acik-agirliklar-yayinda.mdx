@@ -1,0 +1,22 @@
+---
+slug: kimi-k3-acik-agirliklar-yayinda
+date: "2026-07-27"
+title: "Kimi K3'ün Açık Ağırlıkları Yayında: Artık Çok-Modlu ve İndirilebilir"
+summary: "Moonshot, 17 Temmuz'da duyurduğu Kimi K3'ün açık ağırlıklarını Hugging Face'te yayınladı. Model artık görüntü de işliyor (çok-modlu) ve ücretsiz indirilebiliyor; kartında güçlü benchmark rakamları var, ancak bunlar şirketin kendi ölçümleri."
+tags: ["yapay zeka", "modeller"]
+---
+
+Kimi K3'ü [duyurulduğu gün](/gelismeler/moonshot-kimi-k3-acik-model) yazmıştık; o zaman ortada ağırlık yoktu ve Moonshot modelin "liderlerin gerisinde" olduğunu söylüyordu. Şimdi açık ağırlıklar gerçekten yayında — üstelik iki yeni haberle: model çok-modlu olmuş ve kartında iddialı rakamlar duruyor.
+
+## Kısaca
+
+- **Ağırlıklar indirilebilir:** Kimi K3 artık Hugging Face'te, kendi "Kimi K3 Lisansı" ile açık. 2,8 trilyon toplam / 104 milyar aktif parametre (896 uzmandan 16'sı seçiliyor), 1 milyon token bağlam. Ayda ~99 bin indirme almış.
+- **Yeni: görüntü de işliyor.** Modele MoonViT-V2 (401M) adında bir görüntü işleyici eklenmiş — duyuruda çoğunlukla metin öne çıkıyordu. vLLM ve SGLang gibi motorlarla çalıştırılıyor, ağırlıklar sıkıştırılmış (MXFP4) biçimde.
+- **Kart rakamları (Moonshot'ın kendi ölçümleri):** GPQA Diamond 93,5; Terminal-Bench 2.1 88,3; BrowseComp 91,2; DeepSWE 67,5.
+- **Not:** Duyuruda şirketin "geride" demesiyle karttaki güçlü rakamlar arasında bir gerilim var; bunu bağımsız testler çözecek.
+
+## Bizim yorumumuz
+
+Bu 2,8 trilyon parametrelik dev bir model; kendi bilgisayarında çalıştırmak sıradan bir kullanıcı için pratik değil, o yüzden "hemen kur, kullan" türü bir kazanım yok. Asıl önemli olan yön: sınır seviyesine yakın iddia eden bir modelin ağırlıklarının açık lisansla, üstelik görüntü işleyerek gelmesi. Bunun dolaylı ama gerçek bir faydası var — açık ağırlık demek, sağlayıcıların bu modeli ucuza barındırabilmesi ve senin tek bir firmaya bağlı kalmaman demek; kodlama veya ajan işlerinde ilerde maliyet düşürebilir. Yalnız karttaki rakamlara temkinli bakmak lazım: bunlar şirketin kendi testleri, bağımsız değil. Şimdilik doğru cümle şu: açık, iddialı ve artık çok-modlu — ama "en iyisi" demeden önce bağımsız kıyasları bekleyelim.
+
+Kaynak: [Moonshot AI — Hugging Face](https://huggingface.co/moonshotai/Kimi-K3)
