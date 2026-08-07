@@ -1,0 +1,22 @@
+---
+slug: meta-muse-code-muse-spark-1-2
+date: "2026-08-07"
+title: "Meta Introduces Muse Code, a Terminal Coding Agent, and the Muse Spark 1.2 Model"
+summary: "Meta AI Research announced Muse Code — a terminal coding agent that plans, writes, and validates code across large codebases — and Muse Spark 1.2, the model powering it. The two were co-trained; Muse Code is in beta, available via a Muse Code install and the Meta Model API."
+tags: ["AI", "models"]
+---
+
+Meta AI Research announced two coding-focused products at once: Muse Code, a terminal agent that works across large software projects, and Muse Spark 1.2, the model powering it. The two were trained against each other — in Meta's words, "co-trained" for the best pairing.
+
+## In brief
+
+- **Muse Code (beta):** a coding agent that runs in the terminal. It takes on complex work across large codebases: planning changes, writing code, and validating the result. It offers async background agents, a replay-exact / restart-safe local event-log runtime, and bundled skills (`/plan`, `/grill`, `/goal`).
+- **Muse Spark 1.2:** the model powering Muse Code; a coding-focused update to the previous Muse Spark 1.1. It claims improvements in code generation, complex debugging, codebase understanding, and end-to-end developer workflows.
+- **Case study:** on KDA and MLA kernels for NVIDIA Hopper GPUs, it ran for 1,000+ tool calls and up to 24 hours, reportedly achieving "substantial improvements" over the provided baseline.
+- **Access and unknowns:** Muse Code installs on macOS/Linux and is also offered through the Meta Model API with "expanded global access." No pricing was disclosed, no open weights were shared, and no context window or parameter count was given. Results on tests like Terminal-Bench 2.1 and DeepSWE 1.1 were shared — but the numbers are in charts, not the text.
+
+## Our take
+
+This is a developer tool; if you don't write code, it won't change your day tomorrow. If you do — or you have a software team — it means there's another notable option in "agentic coding": after Cursor and Claude Code, Meta is now at the table too. For our broader audience the meaning is indirect: as this space gets crowded, the tools you use tend to get better and cheaper. Just keep some caution — Meta gave neither pricing nor benchmark numbers (scores are only in charts), and the weights aren't open, so we don't yet have hard data to call it "the best." In short: a candidate worth trying if you code, and a signal that this race is speeding up for the rest of us.
+
+Kaynak: [Meta AI Research](https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2)
