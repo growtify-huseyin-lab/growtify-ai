@@ -1,0 +1,22 @@
+---
+slug: meta-muse-code-muse-spark-1-2
+date: "2026-08-07"
+title: "Meta, Terminal Tabanlı Kodlama Ajanı Muse Code'u ve Muse Spark 1.2 Modelini Tanıttı"
+summary: "Meta AI Research, büyük kod tabanlarında planlama–kod yazma–doğrulama yapan terminal kodlama ajanı Muse Code'u ve onu güçlendiren Muse Spark 1.2 modelini duyurdu. İkisi birlikte eğitilmiş; Muse Code beta, erişim Muse Code kurulumu ve Meta Model API üzerinden."
+tags: ["yapay zeka", "modeller"]
+---
+
+Meta AI Research, kodlamaya odaklı iki yeni ürünü aynı anda duyurdu: büyük yazılım projelerinde çalışan bir terminal ajanı olan Muse Code ve onu güçlendiren Muse Spark 1.2 modeli. İkisi birbirine göre eğitilmiş — Meta'nın deyişiyle "en iyi uyum için birlikte."
+
+## Kısaca
+
+- **Muse Code (beta):** Terminalde çalışan bir kodlama ajanı. Büyük kod tabanlarında karmaşık işleri üstleniyor: değişiklikleri planlama, kod yazma ve sonucu doğrulama. Arka planda asenkron çalışan ajanlar, yeniden oynatılabilir/çökmeye dayanıklı bir yerel olay-kaydı çalışma ortamı ve hazır beceriler (`/plan`, `/grill`, `/goal`) sunuyor.
+- **Muse Spark 1.2:** Muse Code'u güçlendiren model; bir önceki sürüm Muse Spark 1.1'in kodlama odaklı güncellemesi. Kod üretimi, karmaşık hata ayıklama, kod tabanını anlama ve uçtan uca geliştirici akışlarında iyileştirme iddiasında.
+- **Örnek çalışma:** NVIDIA Hopper GPU'ları için KDA ve MLA çekirdekleri üzerinde, 1.000'den fazla araç çağrısı ve 24 saate varan süreyle çalışıp verilen temel uygulamaya göre "belirgin iyileştirme" sağladığı belirtiliyor.
+- **Erişim ve belirsizler:** Muse Code macOS/Linux'a kuruluyor; ayrıca "genişletilmiş küresel erişimle" Meta Model API üzerinden sunuluyor. Fiyat açıklanmadı, açık ağırlık paylaşılmadı; bağlam penceresi ve parametre sayısı verilmedi. Terminal-Bench 2.1 ve DeepSWE 1.1 gibi testlerde sonuçlar paylaşıldı — ancak sayılar metinde değil, grafiklerde.
+
+## Bizim yorumumuz
+
+Bu bir geliştirici aracı; kod yazmıyorsan yarın hayatını değiştirmez. Yazıyorsan ya da bir yazılım ekibin varsa, "ajansal kodlama" alanında dikkate değer bir seçenek daha var demektir — Cursor, Claude Code derken şimdi Meta da bu masaya oturdu. Bizim geniş kitlemiz için asıl anlamı dolaylı: bu alan kalabalıklaştıkça, kullandığın araçların kalitesi genelde artar, fiyatlar aşağı iner. Yalnız temkinli olmakta fayda var — Meta ne fiyat ne benchmark sayısı verdi (skorlar sadece grafiklerde), ağırlıklar da açık değil; yani "en iyisi mi" diye kıyaslamak için elimizde henüz somut veri yok. Kısacası: kodlayanlar için denenmeye değer bir aday, geri kalanımız için "bu yarış hızlanıyor" diyen bir işaret.
+
+Kaynak: [Meta AI Research](https://research.meta.ai/blog/introducing-muse-code-and-muse-spark-1-2)
