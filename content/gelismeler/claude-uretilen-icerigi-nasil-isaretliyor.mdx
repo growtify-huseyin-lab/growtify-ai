@@ -1,0 +1,22 @@
+---
+slug: claude-uretilen-icerigi-nasil-isaretliyor
+date: "2026-08-13"
+title: "Anthropic, Claude'un Ürettiği İçeriği Nasıl İşaretlediğini Açıkladı: Metne Görünmez Filigran ve C2PA Kaynak Bilgisi"
+summary: "Anthropic, 2 Ağustos 2026'dan sonra çıkan Claude modellerinin ürettikleri içeriği doğuştan işaretleyeceğini duyurdu: metne gömülü görünmez bir filigran ve C2PA açık standardına uygun imzalı kaynak (provenance) metaverisi. Dayanak, AB Yapay Zeka Yasası'nın şeffaflık kuralları."
+tags: ["yapay zeka", "şeffaflık"]
+---
+
+Anthropic, Claude'un ürettiği içeriği nasıl işaretlediğini anlatan bir destek belgesi yayınladı. Özü şu: yapay zekanın ürettiği metin ve görseller artık, çıplak gözle görülmeyen ama tespit edilebilen izler taşıyacak.
+
+## Kısaca
+
+- **Ne değişiyor:** 2 Ağustos 2026'dan sonra çıkan Claude modelleri, ürettikleri içeriği doğuştan işaretleyecek; daha eski modeller için çalışma sürüyor. Dayanak, AB Yapay Zeka Yasası'nın Madde 50(2) şeffaflık uygulama kuralları; uygulama dünya geneli.
+- **İki yöntem:** (1) **Metinde görünmez filigran** — metnin içine gömülüyor, kopyala-yapıştır ve bir miktar düzenlemeye dayanıyor; tüm üretilen metne uygulanıyor. (2) **İmzalı kaynak metaverisi** — Coalition for Content Provenance and Authenticity (C2PA) açık standardına uygun; görsellerde .svg, .png ve .jpg dosyalarını kapsıyor.
+- **Nerede geçerli:** Claude Platform (API), Claude, Claude Code, Claude Cowork ve Claude Tag; ayrıca AWS, Google Cloud ve Microsoft Foundry (bazı sınırlamalarla).
+- **Sınırlar (Anthropic'in kendi belirttiği):** İşaret, içeriğin "Claude tarafından işlenmiş olabileceğini" gösterir — kesin, tam kanıt değil. Ağır düzenleme, başka kelimelerle yeniden yazma veya format dönüşümünde kaybolabilir; çok kısa metinler güvenilir tespit için yetersiz kalabilir. Anthropic, kullanıcıların ve üçüncü tarafların bu işaretleri tespit edebilmesini sağlayacağını, teknik dokümanı sonra yayınlayacağını söylüyor.
+
+## Bizim yorumumuz
+
+Bu, düzenlemenin (AB Yapay Zeka Yasası) hızına yetişmeye çalışan bir "şeffaflık altyapısı" — ve bizim kitlemizi doğrudan ilgilendiriyor, çünkü çoğumuz içerik üretirken yapay zekadan yararlanıyoruz. Pratik ders iki yönlü: birincisi, "AI ile üretilen içerik nasılsa anlaşılmaz" varsayımı artık geçerli değil; metin ve görseller giderek görünmez izler ve kaynak bilgisi taşıyor. İkincisi, bu iz kusursuz değil — ağır düzenlemeyle silinebiliyor, kesin kanıt sayılmıyor ve tespit araçları henüz kamuya açık değil. Büyük resim şu: içeriğin kaynağını belgelemek yavaşça standart hâline geliyor. İşin AI ile insanın karıştığı yerlerde, hem güven hem de (AB gibi kuralların geçerli olduğu yerlerde) uyum açısından, kendi etiketleme ve şeffaflık alışkanlığın giderek daha çok önem kazanacak. Kaçınılması gereken bir şey değil bu; olağanlaşan bir kural.
+
+Kaynak: [Anthropic Support](https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content)

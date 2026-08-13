@@ -1,0 +1,22 @@
+---
+slug: how-claude-marks-ai-generated-content
+date: "2026-08-13"
+title: "Anthropic Details How Claude Marks AI-Generated Content: Invisible Text Watermarks and C2PA Provenance"
+summary: "Anthropic announced that Claude models released on or after August 2, 2026 will mark the content they generate: an imperceptible watermark embedded in text, and signed provenance metadata following the open C2PA standard. The basis is the EU AI Act's transparency rules."
+tags: ["AI", "transparency"]
+---
+
+Anthropic published a support document explaining how Claude marks the content it generates. The gist: AI-generated text and images will now carry traces that are invisible to the eye but detectable.
+
+## In brief
+
+- **What's changing:** Claude models released on or after August 2, 2026 will mark their generated content at launch; work is in progress for older models. The basis is the EU AI Act's Article 50(2) Code of Practice on transparency, applied worldwide.
+- **Two methods:** (1) **an invisible watermark in text** — embedded into the text itself, surviving copy-paste and some editing; it applies to all generated text. (2) **signed provenance metadata** — following the Coalition for Content Provenance and Authenticity (C2PA) open standard; for images it covers .svg, .png, and .jpg files.
+- **Where it applies:** Claude Platform (API), Claude, Claude Code, Claude Cowork, and Claude Tag; also AWS, Google Cloud, and Microsoft Foundry (with some limitations).
+- **Limitations (as Anthropic itself notes):** a detected mark indicates content "may have been processed by Claude" — it's not full, conclusive proof. Marks may not survive heavy editing, paraphrasing, or format conversion; very short text may be too minimal to detect reliably. Anthropic says it will let users and third parties detect these marks, with technical documentation to come.
+
+## Our take
+
+This is "transparency infrastructure" trying to keep pace with regulation (the EU AI Act) — and it's directly relevant to our audience, since most of us use AI when producing content. The practical lesson runs two ways: first, the assumption that "AI-made content is undetectable" no longer holds; text and images increasingly carry invisible marks and provenance. Second, the mark isn't perfect — heavy editing can strip it, it isn't conclusive proof, and the detection tools aren't public yet. The bigger picture: documenting where content comes from is slowly becoming standard. Wherever AI and human work mix, your own labeling and transparency habits will matter more — both for trust and, where rules like the EU's apply, for compliance. This isn't something to dodge; it's a norm settling into place.
+
+Kaynak: [Anthropic Support](https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content)
