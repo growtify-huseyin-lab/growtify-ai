@@ -75,6 +75,8 @@ export async function POST(req: NextRequest) {
       slug,
       firstName,
       email,
+      phone,
+      whatsappOptin,
       utmSource,
       utmMedium,
       utmCampaign,
@@ -93,6 +95,34 @@ export async function POST(req: NextRequest) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
         { ok: false, error: "Geçerli bir email adresi gir." },
+        { status: 400 }
+      );
+    }
+
+    // Phone is optional; it becomes required once the visitor opts in to WhatsApp.
+    // Same length rule as the quiz capture screen (>= 10 chars without spaces).
+    const isEn = locale === "en";
+    const phoneTrim = typeof phone === "string" ? phone.trim() : "";
+    const waOptin = whatsappOptin === true;
+    if (waOptin && !phoneTrim) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: isEn
+            ? "A phone number is required for WhatsApp."
+            : "WhatsApp için telefon numarası gerekli.",
+        },
+        { status: 400 }
+      );
+    }
+    if (phoneTrim && phoneTrim.replace(/\s/g, "").length < 10) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: isEn
+            ? "Please enter a valid phone number."
+            : "Geçerli bir telefon numarası gir.",
+        },
         { status: 400 }
       );
     }
@@ -120,7 +150,10 @@ export async function POST(req: NextRequest) {
     if (magnet.sectorRef) {
       tags.push(`gai_sector_${magnet.sectorRef}`);
     }
-    if (locale === "en") tags.push("lang_eng");
+    if (isEn) tags.push("lang_eng");
+    // WhatsApp opt-in (separate, optional consent). Same tags as the quiz (PR #35),
+    // so the existing GHL WhatsApp workflow picks LeadForm leads up as well.
+    if (waOptin) tags.push(isEn ? "gai_en_whatsapp_optin" : "gai_whatsapp_optin");
 
     // Split full name into firstName + lastName for GHL
     const nameParts = (firstName || "").trim().split(/\s+/);
@@ -133,6 +166,7 @@ export async function POST(req: NextRequest) {
       lastName: ghlLastName,
       name: firstName,
       email,
+      ...(phoneTrim ? { phone: phoneTrim } : {}),
       locationId: GHL_LOCATION_ID,
       source: `Lead magnet: ${magnet.title}`,
       assignedTo: ASSIGNED_USER,
