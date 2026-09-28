@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { trackEvent } from "@/lib/gtag";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
@@ -343,8 +344,34 @@ function DiscountDisclaimerBlock() {
 function FinalCtaBlock({ discounted }: { discounted: number }) {
   const PAYWALL_COPY = usePaywallCopy();
   const t = useTranslations("PaywallScreenC2");
-  const { couponCode, state } = useQuiz();
+  const locale = useLocale();
+  const { couponCode, contactId, state } = useQuiz();
   const [copied, setCopied] = useState(false);
+
+  // dev-008: attribute the checkout click. GA4 begin_checkout (consent-gated via
+  // trackEvent) + a fire-and-forget request that tags the GHL contact, so GHL can
+  // follow up on clicks that never turn into an order. The link opens a new tab,
+  // so this page stays alive; keepalive covers the edge cases anyway.
+  const handleCheckoutClick = () => {
+    trackEvent("begin_checkout", {
+      currency: "TRY",
+      value: discounted,
+      ...(couponCode ? { coupon: couponCode } : {}),
+    });
+    if (!contactId) return;
+    fetch("/test/api/submit-purchase", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contactId,
+        couponCode,
+        discount: state.discount,
+        value: discounted,
+        locale,
+      }),
+      keepalive: true,
+    }).catch(() => {});
+  };
 
   // Client Club course offer checkout does not support URL prefill params
   const paymentUrl = PAYMENT_LINK;
@@ -400,6 +427,7 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
         href={paymentUrl}
         target="_blank"
         rel="noopener noreferrer"
+        onClick={handleCheckoutClick}
         className="block w-full rounded-xl bg-white px-6 py-3 text-center text-base font-bold text-primary shadow-lg active:scale-[0.98]"
       >
         {PAYWALL_COPY.finalCta.label} →

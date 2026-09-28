@@ -17,6 +17,8 @@ interface StoredSnapshot {
   completed?: boolean;
   /** Coupon code from GHL (persisted for returning users). */
   couponCode?: string;
+  /** GHL contact id from submit-email (used to attribute the checkout click). */
+  contactId?: string;
 }
 
 function isBrowser(): boolean {
@@ -69,6 +71,7 @@ export function saveQuizSnapshot(
       state,
       completed: completed ?? parsed?.completed ?? false,
       couponCode: parsed?.couponCode,
+      contactId: parsed?.contactId,
     };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
   } catch {
@@ -113,6 +116,26 @@ export function saveCouponToSnapshot(code: string): void {
 export function loadCouponFromSnapshot(): string | null {
   const snap = loadQuizSnapshot();
   return snap?.couponCode ?? null;
+}
+
+/** Save the GHL contact id to the snapshot (checkout-click attribution). */
+export function saveContactIdToSnapshot(id: string): void {
+  if (!isBrowser()) return;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const snap = JSON.parse(raw) as StoredSnapshot;
+    snap.contactId = id;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(snap));
+  } catch {
+    // ignore
+  }
+}
+
+/** Get the GHL contact id from snapshot. */
+export function loadContactIdFromSnapshot(): string | null {
+  const snap = loadQuizSnapshot();
+  return snap?.contactId ?? null;
 }
 
 /** Mark the current snapshot as completed (quiz reached paywall). */
