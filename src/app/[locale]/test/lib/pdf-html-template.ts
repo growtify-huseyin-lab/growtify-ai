@@ -454,7 +454,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
     </div>
   </div>
 
-  <div class="p2-footer">Bu rapor Growtify.ai AI Dijital Olgunluk Testi'ne verilen cevaplara dayalı otomatik bir değerlendirmedir. Profesyonel, hukuki, mali veya tıbbi danışmanlık niteliği taşımaz ve yerine geçmez. Sonuçlar bireysel algıya dayalıdır, nesnel bir ölçüm değildir. İstatistikler ve oranlar test cevaplarından hesaplanmıştır. Kişisel verileriniz 6698 sayılı KVKK kapsamında işlenmekte olup üçüncü taraflarla paylaşılmamaktadır. © ${new Date().getFullYear()} Growtify — growtify.ai</div>
+  <div class="p2-footer">Bu rapor Growtify.ai AI Dijital Olgunluk Testi'ne verilen cevaplara dayalı otomatik bir değerlendirmedir. Profesyonel, hukuki, mali veya tıbbi danışmanlık niteliği taşımaz ve yerine geçmez. Sonuçlar bireysel algıya dayalıdır, nesnel bir ölçüm değildir. İstatistikler ve oranlar test cevaplarından hesaplanmıştır. Kişisel verileriniz 6698 sayılı KVKK kapsamında işlenmektedir. © ${new Date().getFullYear()} Growtify — growtify.ai</div>
 </div>
 
 </body>

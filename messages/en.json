@@ -163,6 +163,10 @@
     "submitting": "Sending...",
     "submit": "Send"
   },
+  "FormPrivacyC": {
+    "notice": "We process your personal data as described in our <link>Privacy Policy</link>.",
+    "href": "/en/privacy-policy"
+  },
   "LeadFormC": {
     "successHeading": "Your {formatLabel} is ready!",
     "successEmailNote": "We've also sent it to your email.",

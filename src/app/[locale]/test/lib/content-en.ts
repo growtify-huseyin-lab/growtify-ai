@@ -689,7 +689,7 @@ export const LEGAL_TEXTS = {
   // Short text shown within Screen 26 — informal "you" address for UI consistency.
   // The full privacy text (kvkkLong) uses a formal tone in a modal/separate page.
   kvkkShort:
-    "Your personal data is processed by Growtify AI under applicable data protection law and is not shared with third parties. See our privacy policy for details.",
+    "Your personal data is processed by Growtify AI under applicable data protection law. See our privacy policy for details.",
 
   // WhatsApp opt-in (SEPARATE + OPTIONAL — marketing consent can't be a service condition)
   whatsappOptin:
@@ -697,7 +697,7 @@ export const LEGAL_TEXTS = {
 
   // Data privacy notice — full version (for a modal or separate page)
   kvkkLong:
-    "At Growtify AI (Growtify Ltd, United Kingdom), the name and email information we collect during the test is processed under applicable data protection law for the purposes of delivering your personalized report and recommendations, program-related communications, and improving service quality. Your data may be transferred abroad (it is hosted on UK servers). You can submit requests to withdraw your consent, access, correct, or delete your data to info@growtify.app. For full information about our data processing activities, please review our privacy policy.",
+    "At Growtify AI (Humax Global LTD, United Kingdom), the name and email information we collect during the test is processed under applicable data protection law for the purposes of delivering your personalized report and recommendations, program-related communications, and improving service quality. Your data may be transferred abroad (it is hosted on UK servers). You can submit requests to withdraw your consent, access, correct, or delete your data to info@growtify.app. For full information about our data processing activities, please review our privacy policy.",
 
   termsLink: "/hukuki/kullanim-kosullari",
   privacyLink: "/hukuki/gizlilik",

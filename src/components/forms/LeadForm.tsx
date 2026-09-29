@@ -14,6 +14,7 @@ import {
   ExternalLink,
   Users,
 } from "lucide-react";
+import { PrivacyNotice } from "./PrivacyNotice";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -220,6 +221,7 @@ export function LeadForm({
           </>
         )}
       </button>
+      <PrivacyNotice />
     </form>
   );
 }
