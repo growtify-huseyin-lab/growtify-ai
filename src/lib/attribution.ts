@@ -95,6 +95,11 @@ export function sourceTag(attr?: Attribution): string {
   return UTM_ORGANIC[s] ?? "gai_src_direct";
 }
 
+/** Paid traffic = the lead gets a gai_src_paid_* tag. */
+export function isPaidTraffic(attr?: Attribution): boolean {
+  return sourceTag(attr).startsWith("gai_src_paid_");
+}
+
 /** UTM custom fields, only for values that exist (never blanks an existing value). */
 export function utmCustomFields(attr?: Attribution): { id: string; value: string }[] {
   return [

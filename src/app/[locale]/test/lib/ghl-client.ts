@@ -2,8 +2,15 @@
 // Used by /test/api/submit-email route. Do NOT import from client components.
 
 import type { QuizState } from "./types";
-import { buildGhlCustomFields, buildGhlTags, buildGhlTagsEn, buildGhlCustomFieldsEn } from "./ghl-mapping";
-import { sourceTag, utmCustomFields, type Attribution } from "@/lib/attribution";
+import {
+  buildGhlCustomFields,
+  buildGhlTags,
+  buildGhlTagsEn,
+  buildGhlCustomFieldsEn,
+  GHL_FIELD_IDS,
+  type GhlCustomField,
+} from "./ghl-mapping";
+import { isPaidTraffic, sourceTag, utmCustomFields, type Attribution } from "@/lib/attribution";
 
 // Local persona EN display map — keeps the submit-email serverless bundle free of the
 // content-runtime chain. TR locale returns the enum unchanged; EN maps to display label.
@@ -58,6 +65,28 @@ export interface UpsertResult {
   traceId?: string;
 }
 
+/** Quiz contact tags: mapping tags + the gai_src_* attribution tag. */
+export function quizTags(state: QuizState, locale?: string, attribution?: Attribution): string[] {
+  return [...(locale === "en" ? buildGhlTagsEn(state) : buildGhlTags(state)), sourceTag(attribution)];
+}
+
+/**
+ * Quiz contact custom fields + UTM fields. Paid traffic (gai_src_paid_* tag)
+ * gets leadSource "quiz_paid" instead of "quiz_organic" (GHL, 2026-09-29).
+ */
+export function quizCustomFields(
+  state: QuizState,
+  locale?: string,
+  attribution?: Attribution,
+): GhlCustomField[] {
+  const paid = isPaidTraffic(attribution);
+  const base = locale === "en" ? buildGhlCustomFieldsEn(state) : buildGhlCustomFields(state);
+  return [
+    ...base.map((f) => (paid && f.id === GHL_FIELD_IDS.leadSource ? { ...f, value: "quiz_paid" } : f)),
+    ...utmCustomFields(attribution),
+  ];
+}
+
 /**
  * Upsert a contact into GHL with quiz tags + custom fields.
  * Uses /contacts/upsert which creates or updates by email.
@@ -83,14 +112,8 @@ export async function upsertQuizContact(
     phone: state.phone || undefined,
     country: locale === "en" ? undefined : "TR",
     source: "Growtify.ai quiz",
-    tags: [
-      ...(locale === "en" ? buildGhlTagsEn(state) : buildGhlTags(state)),
-      sourceTag(attribution),
-    ],
-    customFields: [
-      ...(locale === "en" ? buildGhlCustomFieldsEn(state) : buildGhlCustomFields(state)),
-      ...utmCustomFields(attribution),
-    ],
+    tags: quizTags(state, locale, attribution),
+    customFields: quizCustomFields(state, locale, attribution),
   };
 
   try {
