@@ -407,7 +407,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   34: {
     caption: "",
     title: "{firstName}, your plan is ready!",
-    subtitle: "Here's where you could be in 4 weeks.",
+    subtitle: "Here's the path you'll follow over the next 4 weeks.",
     // The skeleton's "Claim My Reward" → gamification language — replaced with the below
     cta: "See My Result",
   },
@@ -433,7 +433,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   37: {
     caption: "",
     title: "GROWT Program — Your personal AI transformation plan",
-    subtitle: "4 weeks · 5 levels · 26 modules",
+    subtitle: "28 days · 5 stages · lessons that unlock step by step",
     cta: "Join the Program",
   },
 };
@@ -453,7 +453,7 @@ export const PERSONA_SUMMARIES = {
       "Maybe I just haven't realized I need it yet.",
     ],
     projection:
-      "In 4 weeks you'll clearly see what AI can do in your work and take your first step.",
+      "When you finish the first stage, you'll clearly see what AI can take on in your work and have chosen your first step.",
     recommendedLevel: "",
   },
 
@@ -467,7 +467,7 @@ export const PERSONA_SUMMARIES = {
       "I can't find the time, but the feeling of falling behind keeps growing.",
     ],
     projection:
-      "In 4 weeks you'll have identified your obstacles, chosen the right tools, and set up your first AI routine.",
+      "When you finish G and R, you'll have named your obstacles, picked your priority and planned your first AI routine.",
     recommendedLevel: "",
   },
 
@@ -481,7 +481,7 @@ export const PERSONA_SUMMARIES = {
       "I don't want to waste time trying it all on my own.",
     ],
     projection:
-      "In 4 weeks you'll have cleared your obstacles, integrated AI into your daily workflow, and started seeing concrete results.",
+      "In the O stage you'll learn to plug AI into a real workflow — and measure the time it saves from your own calendar.",
     recommendedLevel: "",
   },
 
@@ -495,7 +495,7 @@ export const PERSONA_SUMMARIES = {
       "I'm out of time to keep putting it off.",
     ],
     projection:
-      "In 4 weeks you'll have put AI at the center of your workflow and you'll be seeing concrete, measurable results.",
+      "By the end you'll have your own plan that puts AI at the center of your workflow, and a Field Sheet tracking your own numbers.",
     recommendedLevel: "",
   },
 };
@@ -551,7 +551,7 @@ export const PAYWALL_COPY = {
   // Block 2 — Hero Promise
   // {firstName} and {persona} are replaced at runtime
   heroPromise: {
-    text: "your test results show that you're in the {persona} profile. If you follow this plan for 4 weeks — you'll free yourself from repetitive work, set up your first AI workflow, and feel real progress in your profession. Not a course — a transformation tailored to your work.",
+    text: "your results place you in the {persona} profile. Follow this plan for 4 weeks and you'll see your repetitive work clearly, pick your priority and start building your first AI workflow in your own business. Not a course you just watch: every stage leaves you with something from your own work.",
   },
 
   // Block 3 — Before / After
@@ -564,13 +564,13 @@ export const PAYWALL_COPY = {
       "Your time goes to keeping up with time, not to the work itself",
       "There's no system — you start from scratch every day",
     ],
-    afterTitle: "AFTER 4 WEEKS",
+    afterTitle: "WHAT YOU'LL HAVE AFTER 4 WEEKS",
     after: [
-      "Most of your repetitive work runs automatically",
-      "You confidently use the AI tools specific to your profession",
-      "Your digital presence is growing, new customers are coming in",
-      "You've won back at least 5-10 hours a week",
-      "There's a clear system — you know where you're headed every day",
+      "Your AI Maturity Profile and Opportunity Map — you know where to start",
+      "Your Roadmap File — identity, offer, customer journey and pricing, in writing",
+      "A brain file that makes AI work like you",
+      "Your Field Sheet — one page tracking your own numbers",
+      "A clear order — you know where you're going each day",
     ],
   },
 
@@ -580,11 +580,11 @@ export const PAYWALL_COPY = {
   stats: [
     {
       label: "Structured program",
-      value: "5 levels · 26 modules",
+      value: "5 stages · G-R-O-W-T",
     },
     {
       label: "Daily investment",
-      value: "15-60 minutes",
+      value: "15-45 minutes",
     },
     {
       label: "Program duration",
@@ -604,12 +604,12 @@ export const PAYWALL_COPY = {
     headline: "Special discounted price",
     base: 9999,
     features: [
-      "Full access to all 5 GROWT levels (G + R + O + W + T)",
-      "26 modules — new ones unlock as you complete them",
-      "AI tool library and templates specific to your profession",
-      "Community access — Q&A, networking",
-      "WhatsApp support line (throughout the 4 weeks)",
-      "Full platform access for 4 weeks",
+      "Access to all 5 GROWT stages (G + R + O + W + T), unlocking as you progress",
+      "Starter module + Start Here + hands-on lessons in every stage",
+      "Ready-to-adapt prompts and working files for your profession",
+      "Community: Q&A with people on the same path",
+      // {SUPPORT} awaiting CEO decision. A = this list. B = add "WhatsApp support line (for 28 days)" here.
+      "28 days of access to the full program",
     ],
   },
 
@@ -618,14 +618,14 @@ export const PAYWALL_COPY = {
   testimonials: {
     strategy: "coming_soon" as const,
     comingSoonText:
-      "The experiences of the first 50 people to complete the program will appear here. Right now, early participants are in the middle of their transformation — we'll update this section once results come in.",
+      "The program is just starting. We'll share our first participants' experiences here, with their permission.",
   },
 
   // Block 8 — FAQ
   faq: [
     {
       q: "How long does the program last?",
-      a: "4 weeks of full access. You can go at your own pace — modules unlock in sequence. If you're in a busy period, you can come back to it within your access window.",
+      a: "You have 28 days of access. With 15-45 minutes a day you'll complete all five stages: week one the starter module, Start Here and G; week two R; week three O; week four W and T. Stages unlock as you progress.",
     },
     {
       q: "How much time do I need to set aside per day?",
@@ -637,11 +637,11 @@ export const PAYWALL_COPY = {
     },
     {
       q: "Will it be specific to my industry?",
-      a: "The GROWT Method applies to all industries. Within the program, examples and AI tool recommendations are provided based on your profession — not general theory, but practical steps you'll apply to your own work.",
+      a: "The GROWT Method applies to all industries. Within the program, examples and ready-made prompts are provided based on your profession — not general theory, but practical steps you'll apply to your own work.",
     },
     {
       q: "I don't have technical knowledge, can I do this?",
-      a: "Yes. The program requires no technical knowledge — there are different levels both for complete beginners and for advanced users. The only requirement to start is your willingness.",
+      a: "Yes. No technical background needed — not a single line of code. The test in the G stage shows you where to start. All you need is the will to begin.",
     },
     {
       // LEGAL NOTE: This answer is written with the UK Consumer Rights Act's
@@ -654,7 +654,8 @@ export const PAYWALL_COPY = {
     },
     {
       q: "What happens when the 4 weeks are over?",
-      a: "When your access period ends, the knowledge you've gained, the workflows you've built, and the templates you've created stay with you. We'll share separate information about community access.",
+      // {COMMUNITY-AFTER} awaiting CEO decision; added after the first sentence: A "Your access to the community ends too." · B "You can keep taking part in the community."
+      a: "Your access to the lessons ends. The working files you created (Opportunity Map, Roadmap File, brain file, Field Sheet) stay with you. If you want to keep going, you can move to the Full Package: 3 more months in the program, your own growtify.app account, and our support while you build your system.",
     },
   ],
 
@@ -664,7 +665,8 @@ export const PAYWALL_COPY = {
   // LEGAL REVIEW IS MANDATORY before going live.
   guarantee: {
     headline: "You're covered",
-    text: "After purchase, your account is set up shortly and your platform access begins — with all the content, the AI tool library, and the community by your side for 4 weeks. If anything goes wrong, our support team is here for you. You focus on completing the journey, we'll handle the rest.",
+    // {SUPPORT} awaiting CEO decision. A = this text. B = last sentence becomes "When you get stuck, message us on the WhatsApp support line."
+    text: "Once your payment goes through, your access opens: 28 days of lessons, working files and the community. When you get stuck, ask in the community and we'll work it out together.",
     legalNote:
       "// LEGAL REVIEW REQUIRED — UK Consumer Rights Act 2015 Section 42. Sign-off must be obtained before going live.",
   },

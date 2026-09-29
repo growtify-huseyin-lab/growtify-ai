@@ -402,7 +402,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   34: {
     caption: "",
     title: "{firstName}, planın hazır!",
-    subtitle: "İşte 4 hafta içinde olabileceğin yer.",
+    subtitle: "İşte 4 hafta boyunca izleyeceğin yol.",
     // Skeleton'daki "Ödülümü Al" → gamification dili — aşağıyla değiştiriliyor
     cta: "Sonucumu Gör",
   },
@@ -428,7 +428,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   37: {
     caption: "",
     title: "GROWT Programı — Kişisel AI dönüşüm planın",
-    subtitle: "4 hafta · 5 seviye · 26 modül",
+    subtitle: "28 gün · 5 aşama · adım adım açılan dersler",
     cta: "Programa Katıl",
   },
 };
@@ -448,7 +448,7 @@ export const PERSONA_SUMMARIES = {
       "Belki de ihtiyacım olduğunu henüz fark etmedim.",
     ],
     projection:
-      "4 hafta sonra AI'ın senin işinde ne yapabileceğini net görmüş ve ilk adımını atmış olacaksın.",
+      "İlk aşamayı bitirdiğinde AI'ın senin işinde neyi alabileceğini net görmüş ve ilk adımını seçmiş olacaksın.",
     recommendedLevel: "",
   },
 
@@ -462,7 +462,7 @@ export const PERSONA_SUMMARIES = {
       "Zaman bulamıyorum ama geride kalma hissi artıyor.",
     ],
     projection:
-      "4 hafta sonra engellerini tanımlamış, doğru araçları seçmiş ve ilk AI rutinini kurmuş olacaksın.",
+      "G ve R'yi bitirdiğinde engellerini tanımlamış, önceliğini seçmiş ve ilk AI rutininin planını yapmış olacaksın.",
     recommendedLevel: "",
   },
 
@@ -476,7 +476,7 @@ export const PERSONA_SUMMARIES = {
       "Tek başıma deneyip zaman kaybetmek istemiyorum.",
     ],
     projection:
-      "4 hafta sonra engelleri aşmış, AI'ı günlük iş akışına entegre etmiş ve somut sonuçlar görmeye başlamış olacaksın.",
+      "O aşamasında AI'ı gerçek bir iş akışına bağlamayı öğrenmiş olacaksın; ne kadar zaman kazandığını kendi takviminden ölçeceksin.",
     recommendedLevel: "",
   },
 
@@ -490,7 +490,7 @@ export const PERSONA_SUMMARIES = {
       "Artık erteleyecek zamanım kalmadı.",
     ],
     projection:
-      "4 hafta sonra AI'ı iş akışının merkezine koymuş, somut ve ölçülebilir sonuçlar görüyor olacaksın.",
+      "Programın sonunda AI'ı iş akışının merkezine koyan kendi planın ve rakamlarını izleyen Saha Tablon elinde olacak.",
     recommendedLevel: "",
   },
 };
@@ -546,7 +546,7 @@ export const PAYWALL_COPY = {
   // Blok 2 — Hero Promise
   // {firstName} ve {persona} runtime'da değiştirilecek
   heroPromise: {
-    text: "test sonuçların gösteriyor ki {persona} profilindesin. Bu planı 4 hafta boyunca takip edersen — tekrarlayan işlerden kurtulacak, ilk AI iş akışını kuracak ve mesleğinde net bir ilerleme hissedeceksin. Kurs değil, mesleğine özel dönüşüm.",
+    text: "test sonuçların gösteriyor ki {persona} profilindesin. Bu planı 4 hafta boyunca takip edersen tekrarlayan işlerini tek tek görecek, önceliğini seçecek ve ilk AI iş akışını kendi işinde kurmaya başlayacaksın. İzleyip geçtiğin bir kurs değil: her aşamada kendi işinden bir çıktı.",
   },
 
   // Blok 3 — Before / After
@@ -559,13 +559,13 @@ export const PAYWALL_COPY = {
       "Zamanın işe değil, zamana yetişmeye gidiyor",
       "Bir sistem yok — her gün sıfırdan başlıyorsun",
     ],
-    afterTitle: "4 HAFTA SONRA",
+    afterTitle: "4 HAFTANIN SONUNDA ELİNDE OLACAKLAR",
     after: [
-      "Tekrarlayan işlerin büyük kısmı otomatik çalışıyor",
-      "Mesleğine özel AI araçlarını güvenle kullanıyorsun",
-      "Dijital varlığın büyüyor, yeni müşteriler geliyor",
-      "Haftada en az 5-10 saat geri kazandın",
-      "Net bir sistem var — her gün nereye gittiğini biliyorsun",
+      "AI Olgunluk Profilin ve Fırsat Haritan: nereden başlayacağın belli",
+      "Rota Dosyan: kimliğin, teklifin, müşteri yolculuğun ve fiyatın yazılı",
+      "AI'ın senin gibi çalıştığı beyin dosyan",
+      "Saha Tablon: kendi rakamlarını izlediğin tek sayfa",
+      "Net bir sıra: her gün nereye gittiğini biliyorsun",
     ],
   },
 
@@ -575,11 +575,11 @@ export const PAYWALL_COPY = {
   stats: [
     {
       label: "Yapılandırılmış program",
-      value: "5 seviye · 26 modül",
+      value: "5 aşama · G-R-O-W-T",
     },
     {
       label: "Günlük yatırım",
-      value: "15-60 dakika",
+      value: "15-45 dakika",
     },
     {
       label: "Program süresi",
@@ -599,12 +599,12 @@ export const PAYWALL_COPY = {
     headline: "Özel indirimli fiyat",
     base: 9999,
     features: [
-      "5 GROWT seviyesine tam erişim (G + R + O + W + T)",
-      "26 modül — tamamladıkça yeni modüller açılıyor",
-      "AI araç kütüphanesi ve mesleğine özel şablonlar",
-      "Topluluk erişimi — soru-cevap, networking",
-      "WhatsApp destek hattı (4 hafta boyunca)",
-      "4 hafta boyunca tam platform erişimi",
+      "GROWT'un 5 aşamasına erişim (G + R + O + W + T), sen ilerledikçe açılır",
+      "Başlangıç modülü + Buradan Başla + her aşamada uygulamalı dersler",
+      "Mesleğine uyarlanabilir hazır promptlar ve çalışma dosyaları",
+      "Topluluk: aynı yoldan geçenlerle soru-cevap",
+      // {DESTEK} CEO kararı bekliyor. A = bu liste. B = buraya "WhatsApp destek hattı (28 gün boyunca)" eklenir.
+      "28 gün boyunca programın tamamına erişim",
     ],
   },
 
@@ -613,14 +613,14 @@ export const PAYWALL_COPY = {
   testimonials: {
     strategy: "coming_soon" as const,
     comingSoonText:
-      "Programı tamamlayan ilk 50 kişinin deneyimleri burada yer alacak. Şu an erken katılımcılar dönüşüm sürecinde — sonuçlar geldiğinde bu alanı güncelleyeceğiz.",
+      "Program yeni başlıyor. İlk katılımcıların deneyimlerini, izin verdikleri ölçüde burada paylaşacağız.",
   },
 
   // Blok 8 — FAQ
   faq: [
     {
       q: "Program ne kadar sürüyor?",
-      a: "4 hafta tam erişim. Kendi hızında ilerleyebilirsin — modüller sırayla açılıyor. Yoğun bir dönemdeysen, erişim süren içinde geri dönebilirsin.",
+      a: "Erişimin 28 gün. Günde 15-45 dakika ayırırsan beş aşamayı bu sürede tamamlarsın: ilk hafta başlangıç, Buradan Başla ve G; ikinci hafta R; üçüncü hafta O; dördüncü hafta W ve T. Aşamalar sen ilerledikçe açılır.",
     },
     {
       q: "Günde ne kadar zaman ayırmam gerekiyor?",
@@ -632,11 +632,11 @@ export const PAYWALL_COPY = {
     },
     {
       q: "Sektörüme özel mi olacak?",
-      a: "GROWT Method tüm sektörlere uygulanabilir. Program içinde mesleğine göre örnekler ve AI araç önerileri sunuluyor — genel teorik içerik değil, kendi işine uygulayacağın pratik adımlar.",
+      a: "GROWT Method tüm sektörlere uygulanabilir. Program içinde mesleğine göre örnekler ve hazır promptlar sunuluyor — genel teorik içerik değil, kendi işine uygulayacağın pratik adımlar.",
     },
     {
       q: "Teknik bilgim yok, yapabilir miyim?",
-      a: "Evet. Program teknik bilgi gerektirmiyor — sıfırdan başlayanlar için de ileri düzey kullananlar için de farklı seviyeler var. Başlamak için tek şart isteğin.",
+      a: "Evet. Program teknik bilgi gerektirmiyor; tek satır kod yok. Nereden başlayacağını G aşamasındaki test senin için belirliyor. Başlamak için tek şart isteğin.",
     },
     {
       // HUKUK NOTU: Bu yanıt UK Consumer Rights Act'in dijital içerik istisnası
@@ -649,7 +649,8 @@ export const PAYWALL_COPY = {
     },
     {
       q: "4 hafta bitince ne oluyor?",
-      a: "Erişim süresi sonunda kazandığın bilgi, kurduğun iş akışları ve oluşturduğun şablonlar seninle kalıyor. Topluluk erişimi hakkında ayrıca bilgi verilecek.",
+      // {TOPLULUK-SONRASI} CEO kararı bekliyor; ilk cümleden sonra eklenir: A "Topluluk erişimin de sona erer." · B "Topluluğa katılmaya devam edebilirsin."
+      a: "Derslere erişimin sona erer. Programda oluşturduğun çalışma dosyaları (Fırsat Haritan, Rota Dosyan, beyin dosyan, Saha Tablon) seninle kalır. Devam etmek istersen Tam Paket'e geçebilirsin: 3 ay daha programdasın, kendi growtify.app hesabın açılır ve sistemini kurarken yanında oluruz.",
     },
   ],
 
@@ -659,7 +660,8 @@ export const PAYWALL_COPY = {
   // Canlıya almadan önce avukat incelemesi ZORUNLUDUR.
   guarantee: {
     headline: "Güvendesin",
-    text: "Satın alma sonrasında hesabın kısa süre içinde hazırlanır ve platforma erişimin başlar — 4 hafta boyunca tüm içerik, AI araç kütüphanesi ve topluluk yanında. Herhangi bir sorunda destek ekibimiz senin yanında. Sen yolu tamamlamaya odaklan, gerisi bizde.",
+    // {DESTEK} CEO kararı bekliyor. A = bu metin. B = son cümle "Takıldığın yerde WhatsApp destek hattından bize yazabilirsin." olur.
+    text: "Ödemen tamamlandığında erişimin açılır: 28 gün boyunca dersler, çalışma dosyaları ve topluluk. Takıldığın yerde toplulukta sorarsın, birlikte çözeriz.",
     legalNote:
       "// AVUKAT İNCELEMESİ GEREKLİDİR — UK Consumer Rights Act 2015 Section 42. Canlıya almadan önce onay alınmalıdır.",
   },
