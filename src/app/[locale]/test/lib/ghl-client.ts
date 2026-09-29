@@ -3,6 +3,7 @@
 
 import type { QuizState } from "./types";
 import { buildGhlCustomFields, buildGhlTags, buildGhlTagsEn, buildGhlCustomFieldsEn } from "./ghl-mapping";
+import { sourceTag, utmCustomFields, type Attribution } from "@/lib/attribution";
 
 // Local persona EN display map — keeps the submit-email serverless bundle free of the
 // content-runtime chain. TR locale returns the enum unchanged; EN maps to display label.
@@ -61,7 +62,11 @@ export interface UpsertResult {
  * Upsert a contact into GHL with quiz tags + custom fields.
  * Uses /contacts/upsert which creates or updates by email.
  */
-export async function upsertQuizContact(state: QuizState, locale?: string): Promise<UpsertResult> {
+export async function upsertQuizContact(
+  state: QuizState,
+  locale?: string,
+  attribution?: Attribution,
+): Promise<UpsertResult> {
   const config = readConfig();
   if (!config) {
     return {
@@ -78,8 +83,14 @@ export async function upsertQuizContact(state: QuizState, locale?: string): Prom
     phone: state.phone || undefined,
     country: locale === "en" ? undefined : "TR",
     source: "Growtify.ai quiz",
-    tags: locale === "en" ? buildGhlTagsEn(state) : buildGhlTags(state),
-    customFields: locale === "en" ? buildGhlCustomFieldsEn(state) : buildGhlCustomFields(state),
+    tags: [
+      ...(locale === "en" ? buildGhlTagsEn(state) : buildGhlTags(state)),
+      sourceTag(attribution),
+    ],
+    customFields: [
+      ...(locale === "en" ? buildGhlCustomFieldsEn(state) : buildGhlCustomFields(state)),
+      ...utmCustomFields(attribution),
+    ],
   };
 
   try {

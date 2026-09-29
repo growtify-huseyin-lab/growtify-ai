@@ -10,6 +10,7 @@ import React, {
 import { initialQuizState, type QuizState } from "./types";
 import { useQuizScreens, useTotalScreens } from "./content-runtime-hooks";
 import { useLocale } from "next-intl";
+import { getAttribution } from "@/lib/attribution";
 import { computeResults, pickDiscount } from "./scoring";
 import {
   clearQuizSnapshot,
@@ -169,7 +170,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
       const res = await fetch("/test/api/submit-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...state, locale }),
+        body: JSON.stringify({ ...state, locale, attribution: getAttribution() }),
       });
       if (!res.ok) {
         return { ok: false, error: `HTTP ${res.status}` };
