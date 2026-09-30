@@ -488,6 +488,17 @@
       },
       { pattern: /Confirm New Password/g, replacement: "Yeni Şifreyi Onayla" },
       { pattern: /Onayla New Password/g, replacement: "Yeni Şifreyi Onayla" },
+      // Şifre belirleme formu (davet sonrası). Sözlükteki "Password→Şifre" ve
+      // "Confirm→Onayla" kelime değişiminden ÖNCE yakala; yarım çevrilmiş halleri
+      // ("Şifre is required", "Onayla password") de düzelt. Kısa etiketler tam
+      // metne sabit: "Password must be at least 8 characters" bozulmasın.
+      { pattern: /(?:Confirm|Onayla) password is required/gi, replacement: "Şifre tekrarı zorunludur" },
+      { pattern: /(?:Password|Şifre) is required/gi, replacement: "Şifre zorunludur" },
+      { pattern: /(?:Passwords|Şifreler) (?:do not|don'?t) match/gi, replacement: "Şifreler eşleşmiyor" },
+      { pattern: /^\s*(?:Confirm|Onayla) (?:password|Şifre)\s*$/i, replacement: "Şifreyi Onayla" },
+      { pattern: /^\s*Re-?enter your password\.?\s*$/i, replacement: "Şifreni tekrar gir" },
+      { pattern: /^\s*At least 8 characters\.?\s*$/i, replacement: "En az 8 karakter" },
+      { pattern: /^\s*Set password\s*$/i, replacement: "Şifreyi Belirle" },
 
       // COMMUNITY
       {
