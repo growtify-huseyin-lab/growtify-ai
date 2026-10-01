@@ -166,7 +166,19 @@ function esc(str: string): string {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-export function generatePdfHtml(state: QuizState, couponCode?: string): string {
+/** Satın alma linki parametreleri: kişiye özel kupon + kuponun gerçek bitişi (panel katmanı kuponu
+ *  uygular ve geri sayımı gösterir). EN: lang=en — GHL'in İngilizce sayfası. */
+function offerLinkQuery(couponCode?: string, couponExpiresAt?: string): string {
+  const params = new URLSearchParams();
+  params.set("lang", "en");
+  if (couponCode) params.set("coupon", couponCode);
+  const exp = couponExpiresAt ? Math.floor(Date.parse(couponExpiresAt) / 1000) : NaN;
+  if (couponCode && Number.isFinite(exp)) params.set("exp", String(exp));
+  const q = params.toString();
+  return q ? `?${q}` : "";
+}
+
+export function generatePdfHtml(state: QuizState, couponCode?: string, couponExpiresAt?: string): string {
   const now = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   const painScores = getPainScores(state);
   const top3 = [...painScores].sort((a, b) => b.pct - a.pct).slice(0, 3);
@@ -455,7 +467,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   <div class="cta-bar" style="flex-direction:column; text-align:center;">
     <div class="cta-name">GROWT Program</div>
     <div class="cta-sub">5 levels · 26 modules · Go at your own pace</div>
-    <a href="https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062" style="background:white; color:${PRIMARY}; font-size:13px; font-weight:800; border-radius:24px; padding:10px 32px; margin-top:12px; display:inline-block; text-decoration:none;">Get Started Now &rarr;</a>
+    <a href="https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062${offerLinkQuery(couponCode, couponExpiresAt)}" style="background:white; color:${PRIMARY}; font-size:13px; font-weight:800; border-radius:24px; padding:10px 32px; margin-top:12px; display:inline-block; text-decoration:none;">Get Started Now &rarr;</a>
   </div>
 
   <!-- Community CTA — secondary / alternative engagement path -->

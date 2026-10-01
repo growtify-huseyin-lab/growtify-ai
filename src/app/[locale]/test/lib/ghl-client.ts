@@ -221,6 +221,8 @@ export interface CouponResult {
   ok: boolean;
   code?: string;
   couponId?: string;
+  /** Kuponun GHL'deki gerçek bitişi (endDate, ISO) — satın alma sayfasındaki geri sayımın tek kaynağı. */
+  expiresAt?: string;
   error?: string;
 }
 
@@ -286,7 +288,7 @@ export async function createQuizCoupon(
       };
 
       if (res.ok) {
-        return { ok: true, code: json.code ?? code, couponId: json._id };
+        return { ok: true, code: json.code ?? code, couponId: json._id, expiresAt: endDate };
       }
 
       lastError = Array.isArray(json.message)

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useQuiz } from "../../lib/QuizContext";
 import type { ScreenConfig } from "../../lib/types";
 import { ScreenShell, PrimaryButton } from "../ScreenShell";
@@ -343,11 +343,22 @@ function DiscountDisclaimerBlock() {
 function FinalCtaBlock({ discounted }: { discounted: number }) {
   const PAYWALL_COPY = usePaywallCopy();
   const t = useTranslations("PaywallScreenC2");
-  const { couponCode, state } = useQuiz();
+  const { couponCode, couponExpiresAt, state } = useQuiz();
   const [copied, setCopied] = useState(false);
 
-  // Client Club course offer checkout does not support URL prefill params
-  const paymentUrl = PAYMENT_LINK;
+  const locale = useLocale();
+  // TR: panel.growtify.ai teklif sayfasındaki Türkçe katman ?coupon= ile kuponu otomatik uygular
+  // (workers/panel). EN: ?lang=en ile GHL'in İngilizce sayfası açılır, kupon elle girilir.
+  const paymentUrl = (() => {
+    const params = new URLSearchParams();
+    if (couponCode) params.set("coupon", couponCode);
+    // Kuponun gerçek bitişi: satın alma sayfası fiyatın altında buna kalan süreyi gösterir.
+    const exp = couponExpiresAt ? Math.floor(Date.parse(couponExpiresAt) / 1000) : NaN;
+    if (couponCode && Number.isFinite(exp)) params.set("exp", String(exp));
+    if (locale === "en") params.set("lang", "en");
+    const q = params.toString();
+    return q ? `${PAYMENT_LINK}?${q}` : PAYMENT_LINK;
+  })();
 
   const handleCopy = async (e: React.MouseEvent) => {
     e.preventDefault();

@@ -17,6 +17,8 @@ interface StoredSnapshot {
   completed?: boolean;
   /** Coupon code from GHL (persisted for returning users). */
   couponCode?: string;
+  /** Kuponun gerçek bitişi (ISO, GHL endDate). */
+  couponExpiresAt?: string;
 }
 
 function isBrowser(): boolean {
@@ -69,6 +71,7 @@ export function saveQuizSnapshot(
       state,
       completed: completed ?? parsed?.completed ?? false,
       couponCode: parsed?.couponCode,
+      couponExpiresAt: parsed?.couponExpiresAt,
     };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(snapshot));
   } catch {
@@ -96,13 +99,14 @@ export function hasResumableSnapshot(): boolean {
 }
 
 /** Save coupon code to the snapshot. */
-export function saveCouponToSnapshot(code: string): void {
+export function saveCouponToSnapshot(code: string, expiresAt?: string): void {
   if (!isBrowser()) return;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return;
     const snap = JSON.parse(raw) as StoredSnapshot;
     snap.couponCode = code;
+    if (expiresAt) snap.couponExpiresAt = expiresAt;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(snap));
   } catch {
     // ignore
@@ -113,6 +117,12 @@ export function saveCouponToSnapshot(code: string): void {
 export function loadCouponFromSnapshot(): string | null {
   const snap = loadQuizSnapshot();
   return snap?.couponCode ?? null;
+}
+
+/** Get the coupon's real expiry (ISO) from snapshot. */
+export function loadCouponExpiresFromSnapshot(): string | null {
+  const snap = loadQuizSnapshot();
+  return snap?.couponExpiresAt ?? null;
 }
 
 /** Mark the current snapshot as completed (quiz reached paywall). */

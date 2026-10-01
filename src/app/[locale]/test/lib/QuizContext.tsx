@@ -15,6 +15,7 @@ import {
   clearQuizSnapshot,
   loadQuizSnapshot,
   loadCouponFromSnapshot,
+  loadCouponExpiresFromSnapshot,
   markQuizCompleted,
   saveCouponToSnapshot,
   saveQuizSnapshot,
@@ -43,6 +44,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
   const [resumeInfo, setResumeInfo] = useState<ResumeInfo | null>(null);
   const [hasCompletedResult, setHasCompletedResult] = useState(false);
   const [couponCode, setCouponCode] = useState<string | null>(null);
+  const [couponExpiresAt, setCouponExpiresAt] = useState<string | null>(null);
   const [hydrated, setHydrated] = useState(false);
   const pendingSnapshotRef = useRef<{
     state: QuizState;
@@ -61,6 +63,8 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
       // Restore coupon code from storage
       const savedCoupon = loadCouponFromSnapshot();
       if (savedCoupon) setCouponCode(savedCoupon);
+      const savedExpiry = loadCouponExpiresFromSnapshot();
+      if (savedExpiry) setCouponExpiresAt(savedExpiry);
     } else if (
       snap &&
       snap.currentIndex > 0 &&
@@ -177,7 +181,8 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
       const json = await res.json();
       if (json.couponCode) {
         setCouponCode(json.couponCode);
-        saveCouponToSnapshot(json.couponCode);
+        if (json.couponExpiresAt) setCouponExpiresAt(json.couponExpiresAt);
+        saveCouponToSnapshot(json.couponCode, json.couponExpiresAt);
       }
       return { ok: true, couponCode: json.couponCode };
     } catch (err) {
@@ -206,6 +211,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
       showCompletedResult,
       retakeQuiz,
       couponCode,
+      couponExpiresAt,
     }),
     [
       state,
@@ -224,6 +230,7 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
       showCompletedResult,
       retakeQuiz,
       couponCode,
+      couponExpiresAt,
     ],
   );
 

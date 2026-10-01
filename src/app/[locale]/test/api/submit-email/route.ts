@@ -82,14 +82,17 @@ export async function POST(request: Request) {
   ]);
 
   const couponCode = couponResult.ok ? couponResult.code : undefined;
+  // Kuponun gerçek bitişi (GHL endDate) — iletişim alanına, PDF linkine ve istemciye aynı değer gider.
+  const couponExpiresAt = couponResult.ok
+    ? couponResult.expiresAt ?? new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString()
+    : undefined;
   console.log(`[quiz/submit-email] opp=${oppResult.ok} coupon=${couponCode ?? "FAILED"}`);
 
   // 3. Save coupon code to contact custom field (for nurture email merge tags)
   if (couponCode) {
     // Backend expiry 60 days (matches ghl-client.ts), UX urgency 14 days.
     // Free funnel re-engagement (post-GATE-decline) uses Day 14-60 window.
-    const expiresAt = new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString();
-    const saveResult = await saveCouponToContact(contactId, couponCode, expiresAt);
+    const saveResult = await saveCouponToContact(contactId, couponCode, couponExpiresAt!);
     if (!saveResult.ok) {
       console.warn("[quiz/submit-email] coupon field save failed:", saveResult.error);
     }
@@ -101,7 +104,7 @@ export async function POST(request: Request) {
   // Schedule background PDF flow via Next.js after() — runs after response on Vercel
   after(async () => {
     try {
-      await backgroundPdfFlow(contactId, state, couponCode);
+      await backgroundPdfFlow(contactId, state, couponCode, couponExpiresAt);
     } catch (err) {
       console.error("[quiz/submit-email] Background PDF flow error:", err);
     }
@@ -112,6 +115,7 @@ export async function POST(request: Request) {
     contactId,
     isNew: upsertResult.isNew,
     couponCode,
+    couponExpiresAt,
   });
 }
 
@@ -123,10 +127,11 @@ async function backgroundPdfFlow(
   contactId: string,
   state: QuizState,
   couponCode: string | undefined,
+  couponExpiresAt?: string,
 ): Promise<void> {
   try {
     const locale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
-    const pdfBuffer = await generateQuizPdf(state, couponCode, locale);
+    const pdfBuffer = await generateQuizPdf(state, couponCode, locale, couponExpiresAt);
     const filename = getPdfFilename(state.firstName);
     console.log(`[quiz/bg] PDF generated — ${filename} (${pdfBuffer.length} bytes)`);
 

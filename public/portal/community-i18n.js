@@ -6,6 +6,8 @@
       var p = location.pathname;
       var m = p.match(/\/communities\/groups\/([^\/?#]+)/);
       if (m && EN_GROUP_SLUGS.indexOf(m[1]) !== -1) return true;
+      // İngilizce quizden gelen kurs satın alma sayfası (?lang=en) İngilizce kalır.
+      if (/^\/courses\/offers\//.test(p) && /[?&]lang=en(?:&|$)/.test(location.search)) return true;
       var r = location.href.match(/[?&]redirectUrl=([^&]+)/);
       if (r) {
         try {
