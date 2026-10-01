@@ -113,7 +113,8 @@ export default {
         .on("head", new HeadInjector())
         .on('link[rel="icon"]', new IconFixer())
         .on('link[rel="shortcut icon"]', new IconFixer());
-      if (OFFER_PATH.test(url.pathname) && resp.status === 200) {
+      // İngilizce quizden gelen (?lang=en) teklif sayfası eskisi gibi GHL'in İngilizcesiyle kalır.
+      if (OFFER_PATH.test(url.pathname) && resp.status === 200 && url.searchParams.get("lang") !== "en") {
         const year = new Date().getUTCFullYear();
         rw = rw
           .on("html", { element: (el) => el.setAttribute("lang", "tr") })
