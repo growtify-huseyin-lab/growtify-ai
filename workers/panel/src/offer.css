@@ -149,17 +149,33 @@ html.gai-ready .gai-pay-loader {
   font-family: var(--g-font) !important;
 }
 
-/* ---------- Sol sütun: şimdilik yalnız görsel (CEO 2026-10-01: sol taraf metinleri ve markası sonra
-   değişecek). Başlık ve açıklama GHL'de duruyor, burada gizli; geri açmak için bu iki kuralı kaldırmak yeter. */
-#offer-title,
-#offer-checkout-copy {
+/* ---------- Sol sütun (CEO 2026-10-01): Growtify panel kapağı + açıklamadan tek paragraf.
+   Başlık gizli; açıklamada yalnız offer.client.js'in işaretlediği paragraf (.gai-lead) görünür —
+   bulunamazsa açıklama tamamen gizli kalır. Görseli offer.client.js değiştirir. */
+#offer-title {
   display: none !important;
+}
+#offer-checkout-copy p:not(.gai-lead),
+#offer-checkout-copy div,
+#offer-checkout-copy :is(ul, ol, h1, h2, h3, h4, h5, h6, img, figure, blockquote, table, hr) {
+  display: none !important;
+}
+#offer-checkout-copy .gai-lead {
+  display: block !important;
+  font-family: var(--g-font) !important;
+  margin: 24px 0 0 !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-size: 19px !important;
+  line-height: 1.6 !important;
+  font-weight: 400;
 }
 #remote-membership-preview-mount .offer-content {
   padding-top: 18px;
 }
 #offer-poster-image {
   border-radius: 20px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   box-shadow: 0 30px 70px -28px rgba(0, 0, 0, 0.75);
 }
 
@@ -313,6 +329,10 @@ html body #remote-membership-preview-mount #checkout-card #coupon-apply * {
   }
   #checkout-form-container {
     margin-top: 8px;
+  }
+  #offer-checkout-copy .gai-lead {
+    font-size: 17px !important;
+    margin-top: 18px !important;
   }
   .gai-pay-footer {
     padding: 14px 16px 28px;

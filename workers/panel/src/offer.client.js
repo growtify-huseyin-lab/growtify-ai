@@ -222,8 +222,18 @@
     "Coupon not found": "Kupon bulunamadı",
     "Coupon expired": "Kuponun süresi dolmuş",
     "Coupon has expired": "Kuponun süresi dolmuş",
+    "Coupon code is expired": "Kuponun süresi dolmuş",
+    "Coupon code has expired": "Kuponun süresi dolmuş",
+    "Coupon code not found": "Kupon kodu bulunamadı",
+    "Coupon code is not applicable": "Bu kupon bu ürün için geçerli değil",
+    "Coupon is not applicable": "Bu kupon bu ürün için geçerli değil",
+    "Coupon code is already used": "Bu kupon daha önce kullanılmış",
+    "Coupon limit reached": "Kuponun kullanım sınırı dolmuş",
     "Test Mode": "Test Modu",
   };
+  // GHL'den gelen, listede olmayan diğer kupon hataları İngilizce kalmasın.
+  var COUPON_FALLBACK_RE = /^Coupon\b[^.]{0,80}\b(?:expired|invalid|not|limit|used|exceed\w*|applicable|found|already|reached|maximum)\b[^.]{0,40}\.?$/i;
+  var COUPON_FALLBACK_TR = "Bu kupon kodu kullanılamıyor";
 
   // Sayfadaki Vue uygulamalarının vue-i18n örnekleri (Vue 3 bağlama noktasına data-v-app koyar).
   function findI18nGlobals() {
@@ -302,6 +312,10 @@
           n.nodeValue = v.replace(key, HARD[key]);
           continue;
         }
+        if (COUPON_FALLBACK_RE.test(key)) {
+          n.nodeValue = v.replace(key, COUPON_FALLBACK_TR);
+          continue;
+        }
         if (v.indexOf("TL") >= 0) {
           var nv = v.replace(AMOUNT_RE, trAmount);
           if (nv !== v) n.nodeValue = nv;
@@ -356,6 +370,76 @@
     } catch (e) {}
   }
 
+  // ---------------------------------------------------------------------------
+  // Sol taraf (CEO 2026-10-01): teklif görseli yerine Growtify panel kapağı + açıklamadan tek paragraf.
+  // Kapak: panel topluluğunun kapağı ("Yapay Zekayla Büyüyenlerin Topluluğu"). Paragraf GHL'deki
+  // açıklamadan metin eşleşmesiyle seçilir; bulunamazsa açıklama tamamen gizli kalır (offer.css).
+  // ---------------------------------------------------------------------------
+  var COVER_URL =
+    "https://assetsdrm.clientclub.net/images/client-portal/gcs_revex-client-portal-production/e8ZRRmOybS08x5L6qgsS/users/8bf2eeca-f81a-41ed-b776-d7096886d11b?fmt=webp&qlt=90&wdt=1280&rsz=fill";
+  var COVER_ALT = "Growtify — Yapay Zekayla Büyüyenlerin Topluluğu";
+  var LEAD_START = "Yapay zeka kursu satmıyoruz";
+  function fixLeftSide() {
+    try {
+      var img = document.getElementById("offer-poster-image");
+      if (img && img.getAttribute("src") !== COVER_URL) {
+        img.removeAttribute("srcset");
+        img.setAttribute("src", COVER_URL);
+        img.setAttribute("alt", COVER_ALT);
+      }
+      var copy = document.getElementById("offer-checkout-copy");
+      if (copy && !copy.querySelector(".gai-lead")) {
+        var ps = copy.querySelectorAll("p");
+        for (var i = 0; i < ps.length; i++) {
+          if ((ps[i].textContent || "").trim().indexOf(LEAD_START) === 0) {
+            ps[i].classList.add("gai-lead");
+            break;
+          }
+        }
+      }
+    } catch (e) {}
+  }
+
+  // ---------------------------------------------------------------------------
+  // Kupon linkle gelir: quizdeki buton ?coupon=KOD ekler (KOD kişiye özel, tek kullanımlık GHL kuponu).
+  // Alan doldurulup "Uygula"ya basılır — kullanıcının yapacağının aynısı. Bir kez; kullanıcı kuponu
+  // kaldırırsa tekrar uygulanmaz. Telefonun TR'ye geçmesiyle başlayan yeniden hesap bitsin diye kısa beklenir.
+  // ---------------------------------------------------------------------------
+  var COUPON = (function () {
+    try {
+      var q = new URLSearchParams(location.search);
+      var c = (q.get("coupon") || q.get("kupon") || "").trim().toUpperCase();
+      return /^[A-Z0-9]{4,24}$/.test(c) ? c : "";
+    } catch (e) {
+      return "";
+    }
+  })();
+  var couponState = COUPON ? "waiting" : "none"; // waiting → filled → clicked
+  var couponReadyAt = 0;
+  function applyCouponFromUrl() {
+    if (couponState === "none" || couponState === "clicked") return;
+    try {
+      var wrap = document.getElementById("coupon-code");
+      var input = wrap && wrap.querySelector("input");
+      var btn = document.getElementById("coupon-apply");
+      if (!input || !btn) return;
+      if (!couponReadyAt) couponReadyAt = Date.now() + 1200;
+      if (Date.now() < couponReadyAt) return;
+      if (couponState === "waiting") {
+        var setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
+        setter.call(input, COUPON);
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+        couponState = "filled";
+        return; // Vue butonu bir sonraki turda etkinleştirir
+      }
+      if (couponState === "filled" && !btn.disabled && btn.className.indexOf("n-button--disabled") < 0) {
+        couponState = "clicked";
+        btn.click();
+      }
+    } catch (e) {}
+  }
+
   // 6) Şartlar linki: GHL ayarında eski vercel adresi kayıtlı.
   function fixLegalLinks() {
     try {
@@ -385,7 +469,9 @@
       if (tp) fixTextNodes(tp);
       setPhoneTR();
       fixLegalLinks();
+      fixLeftSide();
       markReady();
+      applyCouponFromUrl();
     }
     try {
       if (document.documentElement.lang !== "tr") document.documentElement.lang = "tr";
