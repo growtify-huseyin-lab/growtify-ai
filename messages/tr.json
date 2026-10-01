@@ -505,7 +505,7 @@
     "yourDiscountCode": "İndirim Kodun",
     "copied": "✓ Kopyalandı",
     "copy": "📋 Kopyala",
-    "couponInstruction": "Ödeme sayfasında <b>Coupon Code</b> alanına yapıştır · Tek kullanımlık"
+    "couponInstruction": "Ödeme sayfasında kuponun <b>otomatik uygulanır</b> · Tek kullanımlık"
   },
   "InfoScreensC2": {
     "plusThousands": "+binlerce",

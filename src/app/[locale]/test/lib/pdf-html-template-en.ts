@@ -455,7 +455,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string): string {
   <div class="cta-bar" style="flex-direction:column; text-align:center;">
     <div class="cta-name">GROWT Program</div>
     <div class="cta-sub">5 levels · 26 modules · Go at your own pace</div>
-    <a href="https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062" style="background:white; color:${PRIMARY}; font-size:13px; font-weight:800; border-radius:24px; padding:10px 32px; margin-top:12px; display:inline-block; text-decoration:none;">Get Started Now &rarr;</a>
+    <a href="https://panel.growtify.ai/courses/offers/fe222f5b-ae94-4d62-894f-04a31859b062?lang=en${couponCode ? `&coupon=${encodeURIComponent(couponCode)}` : ''}" style="background:white; color:${PRIMARY}; font-size:13px; font-weight:800; border-radius:24px; padding:10px 32px; margin-top:12px; display:inline-block; text-decoration:none;">Get Started Now &rarr;</a>
   </div>
 
   <!-- Community CTA — secondary / alternative engagement path -->
