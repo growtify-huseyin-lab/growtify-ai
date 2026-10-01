@@ -1,0 +1,401 @@
+/* panel.growtify.ai/courses/offers/* — Growtify marka katmanı (odeme.growtify.app ile aynı görünüm).
+   GHL'in teklif uygulamasının sabit kimliklerini hedefler (#preview, #offer-title, #checkout-card,
+   #optin-submit …). GHL değiştirirse stil sessizce düşer, satın alma çalışmaya devam eder.
+   Teklifin GHL'deki eski özel CSS'i (alan sırası, mavi buton) burada karşılandı; o CSS kaldırılabilir. */
+
+:root {
+  --g-dark: #232323;
+  --g-purple: #5d47f0;
+  --g-purple-soft: #efecff;
+  --g-lime: #c9ff85;
+  --g-muted: rgba(255, 255, 255, 0.62);
+  --g-font: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --g-display: "Urbanist", "Outfit", ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--g-dark) !important;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--g-font) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 38% at 10% 6%, rgba(93, 71, 240, 0.42), transparent 70%),
+    radial-gradient(38% 42% at 94% 96%, rgba(54, 4, 137, 0.6), transparent 70%),
+    radial-gradient(22% 22% at 88% 8%, rgba(201, 255, 133, 0.08), transparent 70%);
+}
+.gai-pay-header,
+.gai-pay-footer,
+#__nuxt {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Başlık ---------- */
+.gai-pay-header__inner {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 22px 20px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-sizing: border-box;
+}
+.gai-pay-header__logo {
+  display: block;
+  height: 34px;
+  width: auto;
+}
+.gai-pay-header__secure {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font: 500 13px/1 var(--g-font);
+  letter-spacing: 0.01em;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.gai-pay-header__secure svg {
+  width: 14px;
+  height: 14px;
+  color: var(--g-lime);
+}
+
+/* ---------- Türkçe oturana kadar bekleme (Stripe bu aşamada yok; ödeme penceresi sonra açılır) ---------- */
+#remote-membership-preview-mount {
+  transition: opacity 0.25s ease;
+}
+html:not(.gai-ready) #remote-membership-preview-mount {
+  opacity: 0;
+  animation: gai-reveal 0s linear 3.5s forwards;
+}
+@keyframes gai-reveal {
+  to {
+    opacity: 1;
+  }
+}
+.gai-pay-loader {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 45vh;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  font: 500 14px/1.4 var(--g-font);
+  pointer-events: none;
+  animation: gai-hide 0s linear 3.5s forwards;
+}
+@keyframes gai-hide {
+  to {
+    visibility: hidden;
+  }
+}
+html.gai-ready .gai-pay-loader {
+  display: none;
+}
+.gai-pay-loader__spin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--g-lime);
+  animation: gai-spin 0.8s linear infinite;
+}
+@keyframes gai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- Kaydırma: GHL sayfayı kendi kutusunda kaydırıyor; belge kaysın (başlık + alt bilgi için) ---------- */
+#remote-membership-preview-surface,
+#remote-membership-preview-mount,
+#remote-membership-preview-mount .membership-preview-remote {
+  background: transparent !important;
+}
+#remote-membership-preview-mount .membership-preview-remote > .overflow-y-auto {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible !important;
+}
+#preview {
+  background: transparent !important;
+  min-height: 0 !important;
+}
+#remote-membership-preview-mount,
+#remote-membership-preview-mount .hl-wrapper-container,
+#remote-membership-preview-mount .n-config-provider {
+  font-family: var(--g-font) !important;
+}
+
+/* ---------- Sol sütun (CEO 2026-10-01): Growtify panel kapağı + açıklamadan tek paragraf.
+   Başlık gizli; açıklamada yalnız offer.client.js'in işaretlediği paragraf (.gai-lead) görünür —
+   bulunamazsa açıklama tamamen gizli kalır. Görseli offer.client.js değiştirir. */
+#offer-title {
+  display: none !important;
+}
+#offer-checkout-copy p:not(.gai-lead),
+#offer-checkout-copy div,
+#offer-checkout-copy :is(ul, ol, h1, h2, h3, h4, h5, h6, img, figure, blockquote, table, hr) {
+  display: none !important;
+}
+#offer-checkout-copy .gai-lead {
+  display: block !important;
+  font-family: var(--g-font) !important;
+  margin: 24px 0 0 !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-size: 19px !important;
+  line-height: 1.6 !important;
+  font-weight: 400;
+}
+#remote-membership-preview-mount .offer-content {
+  padding-top: 18px;
+}
+#offer-poster-image {
+  border-radius: 20px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  box-shadow: 0 30px 70px -28px rgba(0, 0, 0, 0.75);
+}
+
+/* ---------- Sağ sütun: ödeme kartı ---------- */
+@media (min-width: 768px) {
+  #checkout-form-container {
+    position: sticky;
+    top: 20px;
+    align-self: start;
+  }
+}
+#checkout-card {
+  border-radius: 22px !important;
+  border: none !important;
+  overflow: hidden;
+  box-shadow:
+    0 40px 90px -24px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.06) !important;
+}
+/* Alan sırası: Ad Soyad, E-posta, Telefon (eski GHL CSS'inin işi) */
+#offer-checkout-form > div > div {
+  display: flex !important;
+  flex-direction: column !important;
+}
+#offer-checkout-form .n-form-item:has(#full-name) {
+  order: 1;
+}
+#offer-checkout-form .n-form-item:has(#email) {
+  order: 2;
+}
+#offer-checkout-form .n-form-item:has(#phone) {
+  order: 3;
+}
+#checkout-card .n-form-item-label__text {
+  font-weight: 500 !important;
+  color: #3b3b44 !important;
+}
+#checkout-card .n-input {
+  --n-border-radius: 10px !important;
+  --n-height: 44px !important;
+  --n-border-hover: 1px solid var(--g-purple) !important;
+  --n-border-focus: 1px solid var(--g-purple) !important;
+  --n-box-shadow-focus: 0 0 0 3px rgba(93, 71, 240, 0.15) !important;
+  --n-caret-color: var(--g-purple) !important;
+}
+#coupon-code {
+  --n-border: 1.5px dashed #cfcbe3 !important;
+}
+#offer-amount {
+  font-family: var(--g-display) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+  color: var(--g-dark) !important;
+}
+/* Ödemeye Geç — growtify.app'teki koyu çağrı butonu + limon yeşili kilit. GHL rengi butona satır içi
+   yazıyor ve teklifin eski özel CSS'i kapsamlı seçiciyle geliyor: bu yüzden doğrudan özellikler + yüksek
+   özgüllük (3 kimlik). */
+html body #remote-membership-preview-mount #checkout-card #optin-submit {
+  --n-color: var(--g-dark) !important;
+  --n-color-hover: #000 !important;
+  --n-color-pressed: #000 !important;
+  --n-color-focus: #000 !important;
+  --n-color-disabled: var(--g-dark) !important;
+  --n-text-color: #fff !important;
+  --n-text-color-hover: #fff !important;
+  --n-text-color-pressed: #fff !important;
+  --n-text-color-focus: #fff !important;
+  --n-border: none !important;
+  --n-border-hover: none !important;
+  --n-border-pressed: none !important;
+  --n-border-focus: none !important;
+  --n-height: 52px !important;
+  --n-border-radius: 12px !important;
+  --n-font-size: 16px !important;
+  background-color: var(--g-dark) !important;
+  color: #fff !important;
+  height: 52px !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  box-shadow: 0 14px 30px -16px rgba(20, 20, 24, 0.85) !important;
+}
+html body #remote-membership-preview-mount #checkout-card #optin-submit:hover {
+  background-color: #000 !important;
+}
+html body #remote-membership-preview-mount #checkout-card #optin-submit .n-button__content::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  background: var(--g-lime);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='10.5' width='16' height='10.5' rx='2.5'/%3E%3Cpath d='M8 10.5V7.5a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='10.5' width='16' height='10.5' rx='2.5'/%3E%3Cpath d='M8 10.5V7.5a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+/* Kupon "Uygula": satır içi renkleri ezmek için aynı yöntem */
+html body #remote-membership-preview-mount #checkout-card #coupon-apply {
+  background-color: var(--g-purple-soft) !important;
+  color: var(--g-purple) !important;
+  border-radius: 10px !important;
+  height: 44px !important;
+}
+html body #remote-membership-preview-mount #checkout-card #coupon-apply * {
+  color: var(--g-purple) !important;
+}
+
+/* ---------- Geri sayım (kupon uygulanınca, fiyatın altında) ---------- */
+.gai-countdown {
+  margin: 12px 0 4px;
+  padding: 12px 14px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #232323 0%, #2c2650 100%);
+  color: #fff;
+  font-family: var(--g-font);
+  box-shadow: 0 12px 26px -16px rgba(35, 35, 35, 0.9);
+}
+.gai-countdown__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--g-lime);
+  letter-spacing: 0.01em;
+}
+.gai-countdown__label svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+.gai-countdown__units {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.gai-countdown__units span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+}
+.gai-countdown__units b {
+  font: 800 24px/1.1 var(--g-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.gai-countdown__units small {
+  margin-top: 2px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.6);
+}
+.gai-countdown__units i {
+  font: 700 20px/1.2 var(--g-display);
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.35);
+}
+.gai-countdown--done {
+  background: #3b3b44;
+}
+
+/* ---------- Alt bilgi ---------- */
+.gai-pay-footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 18px 20px 36px;
+  text-align: center;
+  color: var(--g-muted);
+  font: 400 13px/1.6 var(--g-font);
+  box-sizing: border-box;
+}
+.gai-pay-footer p {
+  margin: 6px 0;
+}
+.gai-pay-footer__trust {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+}
+.gai-pay-footer__trust svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  color: var(--g-lime);
+}
+.gai-pay-footer a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.gai-pay-footer__dot {
+  margin: 0 8px;
+  opacity: 0.6;
+}
+
+@media (max-width: 767px) {
+  .gai-pay-header__inner {
+    padding: 16px 16px 2px;
+  }
+  .gai-pay-header__logo {
+    height: 28px;
+  }
+  .gai-pay-header__secure {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+  #checkout-form-container {
+    margin-top: 8px;
+  }
+  #offer-checkout-copy .gai-lead {
+    font-size: 17px !important;
+    margin-top: 18px !important;
+  }
+  .gai-pay-footer {
+    padding: 14px 16px 28px;
+    font-size: 12px;
+  }
+}

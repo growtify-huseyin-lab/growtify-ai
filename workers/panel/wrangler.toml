@@ -1,0 +1,16 @@
+# panel.growtify.ai — GHL Client Portal edge proxy (canlıdaki adı: gai-portal-proxy).
+# Yayına alma: bu klasörde `npx wrangler deploy` (Cloudflare hesabı: Huseyin@growtify.app's Account).
+# Ayarlar canlıdakiyle aynı tutuldu: compatibility_date 2024-11-01, workers.dev açık.
+name = "gai-portal-proxy"
+main = "src/worker.js"
+compatibility_date = "2024-11-01"
+workers_dev = true
+routes = [
+  { pattern = "panel.growtify.ai/*", zone_name = "growtify.ai" },
+]
+
+# Teklif sayfasına gömülen CSS ve istemci betiği metin olarak paketlenir.
+[[rules]]
+type = "Text"
+globs = ["**/*.css", "**/*.client.js"]
+fallthrough = true
