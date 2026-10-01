@@ -1,0 +1,19 @@
+# odeme.growtify.app — GHL ödeme linklerinin Growtify markalı, Türkçe sürümü.
+# Yayına alma: bu klasörde `npx wrangler deploy` (Cloudflare hesabı: Huseyin@growtify.app's Account).
+name = "growtify-odeme"
+main = "src/worker.js"
+compatibility_date = "2026-08-01"
+workers_dev = false
+routes = [
+  # *.growtify.app/* rotasından daha özel olduğu için bu alan adında öncelik bu Worker'da.
+  { pattern = "odeme.growtify.app/*", zone_name = "growtify.app" },
+]
+
+# Tarayıcıya gömülen CSS ve istemci betiği metin olarak paketlenir.
+[[rules]]
+type = "Text"
+globs = ["**/*.css", "**/*.client.js"]
+fallthrough = true
+
+[observability]
+enabled = true
