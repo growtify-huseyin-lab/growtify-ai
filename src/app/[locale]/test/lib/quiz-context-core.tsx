@@ -21,6 +21,8 @@ export interface QuizContextValue {
   reset: () => void;
   submitEmail: () => Promise<{ ok: boolean; error?: string; couponCode?: string }>;
   couponCode: string | null;
+  /** GHL contact id (bireysel quiz only; kurumsal has no checkout). */
+  contactId?: string | null;
   resumeInfo: { screenId: number; currentIndex: number; savedAt: number } | null;
   acceptResume: () => void;
   declineResume: () => void;
