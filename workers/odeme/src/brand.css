@@ -1,0 +1,322 @@
+/* odeme.growtify.app — Growtify marka katmanı (GHL ödeme sayfasının üstüne).
+   Hedefler GHL'in sabit kimlikleri (#payment-link-modal, #left_section, #paybutton …).
+   GHL bunları değiştirirse stil sessizce düşer, sayfa yine çalışır. İşlevsel hiçbir öğe gizlenmez. */
+
+:root {
+  --g-dark: #232323;
+  --g-ink: #1d1d22;
+  --g-purple: #5d47f0;
+  --g-purple-soft: #efecff;
+  --g-lime: #c9ff85;
+  --g-line: #e7e6ee;
+  --g-muted: rgba(255, 255, 255, 0.62);
+  --g-font: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --g-display: "Urbanist", "Outfit", ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--g-dark) !important;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--g-font) !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* growtify.app'teki mor ışıltılar */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(42% 38% at 10% 6%, rgba(93, 71, 240, 0.42), transparent 70%),
+    radial-gradient(38% 42% at 94% 96%, rgba(54, 4, 137, 0.6), transparent 70%),
+    radial-gradient(22% 22% at 88% 8%, rgba(201, 255, 133, 0.08), transparent 70%);
+}
+.gai-pay-header,
+.gai-pay-footer,
+#__nuxt {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Başlık ---------- */
+.gai-pay-header__inner {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 22px 20px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.gai-pay-header__logo {
+  display: block;
+  height: 34px;
+  width: auto;
+}
+.gai-pay-header__secure {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font: 500 13px/1 var(--g-font);
+  letter-spacing: 0.01em;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.gai-pay-header__secure svg {
+  width: 14px;
+  height: 14px;
+  color: var(--g-lime);
+}
+
+/* ---------- Türkçe oturana kadar bekleme ---------- */
+/* visibility:hidden DEĞİL: Stripe kart çerçevesi görünmez kapsayıcıda çizilmiyor, boş kalıyor.
+   Şeffaflık çerçevenin çizilmesine izin verir. */
+#__nuxt {
+  transition: opacity 0.25s ease;
+}
+html:not(.gai-ready) #__nuxt {
+  opacity: 0;
+  animation: gai-reveal 0s linear 3.5s forwards;
+}
+@keyframes gai-reveal {
+  to {
+    opacity: 1;
+  }
+}
+.gai-pay-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.78);
+  font: 500 14px/1.4 var(--g-font);
+  pointer-events: none;
+  animation: gai-hide 0s linear 3.5s forwards;
+}
+@keyframes gai-hide {
+  to {
+    visibility: hidden;
+  }
+}
+html.gai-ready .gai-pay-loader {
+  display: none;
+}
+.gai-pay-loader__spin {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top-color: var(--g-lime);
+  animation: gai-spin 0.8s linear infinite;
+}
+@keyframes gai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- GHL uygulaması ---------- */
+#__nuxt .hr-wrapper-container,
+#__nuxt .hr-config-provider,
+#__nuxt main {
+  background: transparent !important;
+}
+#__nuxt .hr-config-provider,
+#__nuxt .hr-config-provider * {
+  font-family: var(--g-font) !important;
+}
+#payment-link-modal {
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 18px 16px 6px !important;
+  box-sizing: border-box;
+  background: transparent !important;
+}
+/* GHL kartı ekran yüksekliğine sabitleyip formu içeride kaydırıyor; biz kartı doğal boyuna bırakıp
+   sayfayı kaydırıyoruz — kart alanları ve ödeme butonu tek bakışta görünsün. */
+@media (min-width: 768px) {
+  #left_section {
+    max-height: none !important;
+  }
+  #right_section,
+  #payment-link-right {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+}
+#left_section {
+  margin-top: 0 !important;
+  max-width: 1020px;
+  width: 100%;
+  background: #fff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow:
+    0 40px 90px -24px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+/* Sol: ürün özeti */
+#product-details-preview {
+  background: #f7f6fb;
+}
+/* Kartın içindeki işletme satırı (küçük logo + "Growtify") başlıktaki ana logoyu tekrarlıyor:
+   gizle, yerine sade bir başlık koy. :has desteklenmeyen tarayıcıda satır olduğu gibi kalır. */
+#product-details-preview > .itm:first-child:has(> img) {
+  display: none !important;
+}
+#product-details-preview::before {
+  content: "Sipariş Özeti";
+  display: block;
+  margin: 2px 0 2px;
+  font: 800 22px/1.2 var(--g-display);
+  letter-spacing: -0.01em;
+  color: var(--g-dark);
+}
+#product-details-preview [id^="recurring-product-"],
+#product-details-preview [id^="one-time-product-"] {
+  accent-color: var(--g-purple);
+}
+#product-details-preview-scroll .rounded-md {
+  border-radius: 14px !important;
+  background: #fff;
+  border-color: var(--g-purple) !important;
+}
+#total-due-today span:last-child {
+  font-family: var(--g-display) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.01em;
+}
+
+/* Sağ: form */
+#payment-link-form .hr-form-item-label__text {
+  font-weight: 500;
+  color: #3b3b44;
+}
+#payment-link-form .hr-input {
+  border-radius: 10px !important;
+}
+
+/* Ödeme butonu — GHL rengini satır içi !important veriyor; üstüne koyu marka katmanı
+   (growtify.app'teki siyah çağrı butonu) + limon yeşili kilit simgesi. */
+#paybutton {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 52px;
+  border-radius: 12px !important;
+  box-shadow: 0 14px 30px -16px rgba(20, 20, 24, 0.85);
+}
+#paybutton::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: var(--g-dark);
+  transition: background 0.15s ease;
+}
+#paybutton:not(.hr-button--disabled):hover::before {
+  background: #000;
+}
+#paybutton .hr-button__content {
+  position: relative;
+  z-index: 1;
+}
+#paybutton .payment-link-pay-button__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  letter-spacing: 0.01em;
+}
+#paybutton .payment-link-pay-button__label::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: var(--g-lime);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='10.5' width='16' height='10.5' rx='2.5'/%3E%3Cpath d='M8 10.5V7.5a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='10.5' width='16' height='10.5' rx='2.5'/%3E%3Cpath d='M8 10.5V7.5a4 4 0 0 1 8 0v3'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.tc-payment-links,
+.terms-note {
+  color: #6b6b76 !important;
+}
+.terms-note a {
+  color: var(--g-purple) !important;
+}
+
+/* ---------- Alt bilgi ---------- */
+.gai-pay-footer {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 18px 20px 36px;
+  text-align: center;
+  color: var(--g-muted);
+  font: 400 13px/1.6 var(--g-font);
+}
+.gai-pay-footer p {
+  margin: 6px 0;
+}
+.gai-pay-footer__trust {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+}
+.gai-pay-footer__trust svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  color: var(--g-lime);
+}
+.gai-pay-footer a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.gai-pay-footer__dot {
+  margin: 0 8px;
+  opacity: 0.6;
+}
+
+@media (max-width: 767px) {
+  .gai-pay-header__inner {
+    padding: 16px 16px 2px;
+  }
+  .gai-pay-header__logo {
+    height: 28px;
+  }
+  .gai-pay-header__secure {
+    padding: 7px 12px;
+    font-size: 12px;
+  }
+  #payment-link-modal {
+    padding: 12px 10px 4px !important;
+  }
+  #left_section {
+    border-radius: 20px;
+  }
+  .gai-pay-footer {
+    padding: 14px 16px 28px;
+    font-size: 12px;
+  }
+}
