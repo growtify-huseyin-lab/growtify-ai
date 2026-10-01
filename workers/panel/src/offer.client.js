@@ -440,6 +440,79 @@
     } catch (e) {}
   }
 
+  // ---------------------------------------------------------------------------
+  // Geri sayım (CEO 2026-10-01): kupon başarıyla uygulandıysa fiyatın altında kuponun GERÇEK bitişine
+  // kalan süre. Bitiş quizden ?exp=<unix saniye> ile gelir (kuponun GHL'deki endDate'i — tek kaynak);
+  // kupon süresi değişirse sayaç kendiliğinden doğru gösterir. exp yoksa / geçmişse / kupon
+  // uygulanmadıysa sayaç çıkmaz — gerçek olmayan bir süre asla gösterilmez.
+  // ---------------------------------------------------------------------------
+  var EXP = (function () {
+    try {
+      var v = parseInt(new URLSearchParams(location.search).get("exp") || "", 10);
+      var now = Date.now() / 1000;
+      return v > now && v < now + 400 * 86400 ? v : 0;
+    } catch (e) {
+      return 0;
+    }
+  })();
+  var countdownTimer = null;
+  function pad2(n) { return (n < 10 ? "0" : "") + n; }
+  function renderCountdown(box) {
+    var left = Math.max(0, Math.floor(EXP - Date.now() / 1000));
+    var d = Math.floor(left / 86400), h = Math.floor((left % 86400) / 3600), m = Math.floor((left % 3600) / 60), sec = left % 60;
+    var vals = box.querySelectorAll("b");
+    if (vals.length === 4) {
+      vals[0].textContent = String(d);
+      vals[1].textContent = pad2(h);
+      vals[2].textContent = pad2(m);
+      vals[3].textContent = pad2(sec);
+    }
+    if (left === 0) {
+      box.classList.add("gai-countdown--done");
+      var label = box.querySelector(".gai-countdown__label span");
+      if (label) label.textContent = "Kupon süresi doldu";
+    }
+  }
+  function couponApplied(card) {
+    var t = (card && card.innerText) || "";
+    // GHL indirim satırı: "İndirim" etiketi ya da eksi tutar ("-4.999,50 TL")
+    return /(^|\n)\s*(İndirim|Discount)\b/.test(t) || /-\s?\d[\d.]*,\d{2} TL/.test(t);
+  }
+  function ensureCountdown() {
+    if (!EXP || !COUPON) return;
+    try {
+      var card = document.getElementById("checkout-card");
+      var amount = document.getElementById("offer-amount");
+      var existing = document.getElementById("gai-countdown");
+      if (!card || !amount || !couponApplied(card)) {
+        if (existing) existing.remove();
+        return;
+      }
+      if (existing && card.contains(existing)) return;
+      var row = amount.closest(".justify-between") || amount.parentElement;
+      if (!row || !row.parentElement) return;
+      var box = document.createElement("div");
+      box.id = "gai-countdown";
+      box.className = "gai-countdown";
+      box.setAttribute("role", "timer");
+      box.innerHTML =
+        '<div class="gai-countdown__label"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9.5 2.5h5"/></svg><span>İndirimli fiyat için kalan süre</span></div>' +
+        '<div class="gai-countdown__units">' +
+        '<span><b>0</b><small>gün</small></span><i>:</i>' +
+        '<span><b>00</b><small>saat</small></span><i>:</i>' +
+        '<span><b>00</b><small>dk</small></span><i>:</i>' +
+        '<span><b>00</b><small>sn</small></span></div>';
+      row.parentElement.insertBefore(box, row.nextSibling);
+      renderCountdown(box);
+      if (!countdownTimer) {
+        countdownTimer = setInterval(function () {
+          var b = document.getElementById("gai-countdown");
+          if (b) renderCountdown(b);
+        }, 1000);
+      }
+    } catch (e) {}
+  }
+
   // 6) Şartlar linki: GHL ayarında eski vercel adresi kayıtlı.
   function fixLegalLinks() {
     try {
@@ -472,6 +545,7 @@
       fixLeftSide();
       markReady();
       applyCouponFromUrl();
+      ensureCountdown();
     }
     try {
       if (document.documentElement.lang !== "tr") document.documentElement.lang = "tr";

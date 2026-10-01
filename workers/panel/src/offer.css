@@ -280,6 +280,66 @@ html body #remote-membership-preview-mount #checkout-card #coupon-apply * {
   color: var(--g-purple) !important;
 }
 
+/* ---------- Geri sayım (kupon uygulanınca, fiyatın altında) ---------- */
+.gai-countdown {
+  margin: 12px 0 4px;
+  padding: 12px 14px 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #232323 0%, #2c2650 100%);
+  color: #fff;
+  font-family: var(--g-font);
+  box-shadow: 0 12px 26px -16px rgba(35, 35, 35, 0.9);
+}
+.gai-countdown__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--g-lime);
+  letter-spacing: 0.01em;
+}
+.gai-countdown__label svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+.gai-countdown__units {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+.gai-countdown__units span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 48px;
+}
+.gai-countdown__units b {
+  font: 800 24px/1.1 var(--g-display);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+.gai-countdown__units small {
+  margin-top: 2px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.6);
+}
+.gai-countdown__units i {
+  font: 700 20px/1.2 var(--g-display);
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.35);
+}
+.gai-countdown--done {
+  background: #3b3b44;
+}
+
 /* ---------- Alt bilgi ---------- */
 .gai-pay-footer {
   max-width: 760px;
