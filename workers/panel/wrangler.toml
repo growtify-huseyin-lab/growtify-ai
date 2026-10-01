@@ -8,3 +8,9 @@ workers_dev = true
 routes = [
   { pattern = "panel.growtify.ai/*", zone_name = "growtify.ai" },
 ]
+
+# Teklif sayfasına gömülen CSS ve istemci betiği metin olarak paketlenir.
+[[rules]]
+type = "Text"
+globs = ["**/*.css", "**/*.client.js"]
+fallthrough = true
