@@ -296,6 +296,19 @@
       }
     } catch (e) {}
   }
+  // GHL'in linke eklediği "Powered by …" satırı (link ayarındaki marka metni): üstte ve altta zaten
+  // Growtify markası var, İngilizce satırı gizle. Türkçe özel bir metin yazılırsa dokunulmaz.
+  function hidePoweredBy() {
+    try {
+      var panel = document.getElementById("product-details-preview");
+      if (!panel) return;
+      for (var i = 0; i < panel.children.length; i++) {
+        var el = panel.children[i];
+        if (el.style.display !== "none" && /^\s*Powered by\b/i.test(el.textContent || "")) el.style.display = "none";
+      }
+    } catch (e) {}
+  }
+
   var amountObserver = null;
   function watchAmounts() {
     if (amountObserver || typeof MutationObserver !== "function") return;
@@ -305,7 +318,7 @@
     amountObserver = new MutationObserver(function () {
       if (queued) return;
       queued = true;
-      Promise.resolve().then(function () { queued = false; formatAmounts(); });
+      Promise.resolve().then(function () { queued = false; formatAmounts(); hidePoweredBy(); });
     });
     amountObserver.observe(root, { subtree: true, childList: true, characterData: true });
   }
@@ -364,6 +377,7 @@
         if (c.t(SENTINEL) !== TR.paymentLink.firstName) c.__gaiMerge.call(c, "en_US", TR);
       });
       formatAmounts();
+      hidePoweredBy();
       watchAmounts();
       if (document.documentElement.lang !== "tr") document.documentElement.lang = "tr";
       if (document.title !== TITLE) document.title = TITLE;
