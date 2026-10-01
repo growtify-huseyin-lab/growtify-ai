@@ -343,7 +343,7 @@ function DiscountDisclaimerBlock() {
 function FinalCtaBlock({ discounted }: { discounted: number }) {
   const PAYWALL_COPY = usePaywallCopy();
   const t = useTranslations("PaywallScreenC2");
-  const { couponCode, state } = useQuiz();
+  const { couponCode, couponExpiresAt, state } = useQuiz();
   const [copied, setCopied] = useState(false);
 
   const locale = useLocale();
@@ -352,6 +352,9 @@ function FinalCtaBlock({ discounted }: { discounted: number }) {
   const paymentUrl = (() => {
     const params = new URLSearchParams();
     if (couponCode) params.set("coupon", couponCode);
+    // Kuponun gerçek bitişi: satın alma sayfası fiyatın altında buna kalan süreyi gösterir.
+    const exp = couponExpiresAt ? Math.floor(Date.parse(couponExpiresAt) / 1000) : NaN;
+    if (couponCode && Number.isFinite(exp)) params.set("exp", String(exp));
     if (locale === "en") params.set("lang", "en");
     const q = params.toString();
     return q ? `${PAYMENT_LINK}?${q}` : PAYMENT_LINK;

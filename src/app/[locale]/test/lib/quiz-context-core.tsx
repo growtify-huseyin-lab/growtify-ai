@@ -21,6 +21,8 @@ export interface QuizContextValue {
   reset: () => void;
   submitEmail: () => Promise<{ ok: boolean; error?: string; couponCode?: string }>;
   couponCode: string | null;
+  /** Kuponun gerçek bitişi (ISO, GHL endDate) — satın alma sayfasındaki geri sayım için. */
+  couponExpiresAt?: string | null;
   resumeInfo: { screenId: number; currentIndex: number; savedAt: number } | null;
   acceptResume: () => void;
   declineResume: () => void;
