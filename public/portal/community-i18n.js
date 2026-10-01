@@ -38,6 +38,15 @@
 .ProseMirror p[data-placeholder="Type your answer"]::before {
   content: "Cevabını yaz" !important;
 }
+.ProseMirror p[data-placeholder="What do you want to talk about?"]::before,
+[data-placeholder="What do you want to talk about?"]::before {
+  content: "Ne hakkında konuşmak istiyorsun?" !important;
+}
+.ProseMirror p[data-placeholder="Add a comment"]::before,
+[data-placeholder="Add a comment"]::before,
+[data-placeholder="Add a comment..."]::before {
+  content: "Yorum ekle" !important;
+}
 .ProseMirror p[data-placeholder="Write here..."]::before,
 .ProseMirror p[data-placeholder="Write here.."]::before,
 .ProseMirror p[data-placeholder="Write here"]::before {
@@ -234,7 +243,203 @@
       "User Avatar": "Kullanıcı Avatarı",
     };
 
+    // Ay adları (takvim başlığı "September 2026", üye listesi "Joined 07 Jul 2026")
+    const TR_MONTHS = { January: "Ocak", February: "Şubat", March: "Mart", April: "Nisan", May: "Mayıs", June: "Haziran", July: "Temmuz", August: "Ağustos", September: "Eylül", October: "Ekim", November: "Kasım", December: "Aralık" };
+    const TR_MONTHS_SHORT = { Jan: "Oca", Feb: "Şub", Mar: "Mar", Apr: "Nis", May: "May", Jun: "Haz", Jul: "Tem", Aug: "Ağu", Sep: "Eyl", Oct: "Eki", Nov: "Kas", Dec: "Ara" };
+
     const phrases = [
+      // ===== 2026-09-30 GHL panel güncellemesi: yeni / değişen metinler =====
+      // En başta: sözlüğün kelime değişiminden ÖNCE tam cümleyi yakalar; yarım
+      // çevrilmiş halleri ("Sırala order", "Kursa Başla chat") de düzeltir.
+      // Kısa etiketler ^…$ ile tam metne sabit (içerikteki kelimelere dokunmaz).
+      // Hepsi idempotent: çıktı tekrar eşleşmez.
+      // — Kabuk / menü
+      { pattern: /^Dashboard$/, replacement: "Ana Sayfa" },
+      { pattern: /^Memberships$/, replacement: "Üyelikler" },
+      { pattern: /^Business & Operations$/, replacement: "İşletme ve Operasyonlar" },
+      { pattern: /^Appointments$/, replacement: "Randevular" },
+      { pattern: /^Collapse$/, replacement: "Daralt" },
+      { pattern: /^Expand$/, replacement: "Genişlet" },
+      { pattern: /^(?:Open|Kursa Başla) chat$/i, replacement: "Sohbeti aç" },
+      { pattern: /^Announcements$/, replacement: "Duyurular" },
+      { pattern: /^(?:Profile|Profil) Menu$/, replacement: "Profil Menüsü" },
+      // — Ana sayfa (dashboard)
+      { pattern: /^Here'?s what happening with your journey\.?$/i, replacement: "Yolculuğunda son durum burada." },
+      { pattern: /^\((\d+) new posts?\)$/, replacement: "($1 yeni gönderi)" },
+      { pattern: /^\((\d+) in progress\)$/, replacement: "($1 devam ediyor)" },
+      { pattern: /^Pick where you left off$/i, replacement: "Kaldığın yerden devam et" },
+      { pattern: /^(?:Continue|Devam Et) learning$/i, replacement: "Öğrenmeye devam et" },
+      { pattern: /(?:Pinned|Sabitlendi) communities/, replacement: "Sabitlenen topluluklar" },
+      { pattern: /^No pinned communities yet$/i, replacement: "Henüz sabitlenmiş topluluk yok" },
+      { pattern: /(?:Pin|Sabitle) your favou?rite communities for quick access from the dashboard\.?/i, replacement: "Sık kullandığın toplulukları sabitle, ana sayfadan hızlıca ulaş." },
+      { pattern: /^Go to my communities$/i, replacement: "Topluluklarıma git" },
+      // — Topluluklar
+      { pattern: /\bMy communities\b/, replacement: "Topluluklarım" },
+      { pattern: /^Your activity$/i, replacement: "Aktiviten" },
+      { pattern: /(?:Posts|Gönderiler) this month/, replacement: "Bu ayki gönderiler" },
+      { pattern: /^Likes received$/i, replacement: "Alınan beğeniler" },
+      { pattern: /^Discover communities$/i, replacement: "Toplulukları keşfet" },
+      { pattern: /^No new communities yet$/i, replacement: "Henüz yeni topluluk yok" },
+      { pattern: /Hang tight\s*-\s*new communities will (?:appear here|burada görünecek) soon\.?/i, replacement: "Biraz bekle, yeni topluluklar yakında burada görünecek." },
+      // — Randevular
+      { pattern: /^Book Appointment$/i, replacement: "Randevu Al" },
+      { pattern: /^Today$/, replacement: "Bugün" },
+      { pattern: /^Day$/, replacement: "Gün" },
+      { pattern: /^Week$/, replacement: "Hafta" },
+      { pattern: /^Month$/, replacement: "Ay" },
+      { pattern: /^Upcoming$/, replacement: "Yaklaşan" },
+      { pattern: /^Past$/, replacement: "Geçmiş" },
+      { pattern: /^No appointments today$/i, replacement: "Bugün randevu yok" },
+      { pattern: /^Appointments scheduled for today will appear here\.?$/i, replacement: "Bugüne planlanan randevular burada görünecek." },
+      { pattern: /^Previous$/, replacement: "Önceki" },
+      { pattern: /^Next$/, replacement: "Sonraki" },
+      { pattern: /^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})$/, replacement: function (m, mo, y) { return TR_MONTHS[mo] + " " + y; } },
+      // — Kurslar
+      { pattern: /^(?:Search|Ara) courses\.{0,3}$/i, replacement: "Kurslarda ara..." },
+      { pattern: /^My courses$/, replacement: "Kurslarım" },
+      { pattern: /^See all$/i, replacement: "Tümünü gör" },
+      { pattern: /^Total enrolled$/i, replacement: "Toplam kayıt" },
+      { pattern: /^In progress$/, replacement: "Devam ediyor" },
+      // — Topluluk: genel, akış
+      { pattern: /(?:Search|Ara) for posts, comments or (?:members|üye)\.{0,3}/i, replacement: "Gönderi, yorum veya üye ara..." },
+      { pattern: /^All (?:Posts|Gönderiler)$/, replacement: "Tüm Gönderiler" },
+      { pattern: /^Channels$/, replacement: "Kanallar" },
+      { pattern: /^New$/, replacement: "Yeni" },
+      { pattern: /^(?:Sort|Sırala) order: (?:Newest|En yeni)$/, replacement: "Sıralama: En yeni" },
+      { pattern: /^(?:Sort|Sırala) order: (?:Oldest|En eski)$/, replacement: "Sıralama: En eski" },
+      { pattern: /^Newest$/, replacement: "En yeni" },
+      { pattern: /^Oldest$/, replacement: "En eski" },
+      { pattern: /^posted in$/, replacement: "paylaştı:" },
+      { pattern: /^Like$/, replacement: "Beğen" },
+      { pattern: /^Share$/, replacement: "Paylaş" },
+      { pattern: /^Scroll to load more$/i, replacement: "Daha fazlası için kaydır" },
+      { pattern: /^You'?ve reached the end of the posts\.?$/i, replacement: "Tüm gönderileri gördün" },
+      { pattern: /^Be the first to create a post!?$/i, replacement: "İlk gönderiyi sen paylaş!" },
+      { pattern: /^Release to upload$/i, replacement: "Yüklemek için bırak" },
+      { pattern: /You are all set!/, replacement: "Her şey hazır!" },
+      { pattern: /^Private Group$/, replacement: "Özel Grup" },
+      { pattern: /^Private Channel$/, replacement: "Özel Kanal" },
+      { pattern: /^Admins$/, replacement: "Yöneticiler" },
+      { pattern: /^(?:View|Görüntüle) (.+)'s profile$/, replacement: "$1 profilini görüntüle" },
+      { pattern: /^Post options$/i, replacement: "Gönderi Seçenekleri" },
+      { pattern: /^(?:View|Görüntüle) media (\d+) of (\d+)$/, replacement: "Medyayı görüntüle ($1/$2)" },
+      { pattern: /^(?:Open|Kursa Başla) (?:member|üye) list, admins and owners$/i, replacement: "Üye listesini aç: yöneticiler ve sahipler" },
+      { pattern: /^(?:Open|Kursa Başla) (?:member|üye) list, active (?:members|üye)$/i, replacement: "Üye listesini aç: aktif üyeler" },
+      { pattern: /^Mention events, courses,? or channels$/i, replacement: "Etkinlik, kurs veya kanal etiketle" },
+      // — Gönderi oluştur
+      { pattern: /^Create a post$/i, replacement: "Gönderi Oluştur" },
+      { pattern: /^for$/, replacement: "Grup:" },
+      { pattern: /^Title$/, replacement: "Başlık" },
+      { pattern: /^Write a title for your post$/i, replacement: "Gönderine bir başlık yaz" },
+      { pattern: /^Description$/, replacement: "Açıklama" },
+      { pattern: /^What do you want to talk about\??$/i, replacement: "Ne hakkında konuşmak istiyorsun?" },
+      { pattern: /^Drop media or documents here$/i, replacement: "Medya veya belgeleri buraya bırak" },
+      { pattern: /^Enable comments$/, replacement: "Yorumları aç" },
+      { pattern: /^Post$/, replacement: "Paylaş" },
+      { pattern: /^Add media$/i, replacement: "Medya Ekle" },
+      { pattern: /^Create poll$/i, replacement: "Anket Oluştur" },
+      // — Gönderi detayı / yorumlar
+      { pattern: /^No comments yet$/i, replacement: "Henüz yorum yok" },
+      { pattern: /^Be the first to comment!?$/i, replacement: "İlk yorumu sen yaz!" },
+      { pattern: /^Add a comment\.{0,3}$/i, replacement: "Yorum ekle" },
+      { pattern: /^Images$/, replacement: "Görseller" },
+      { pattern: /^[Cc]lose$/, replacement: "Kapat" },
+      // — Gönderi menüsü (yönetici)
+      { pattern: /^Move Post to Channel$/i, replacement: "Gönderiyi Kanala Taşı" },
+      { pattern: /(?:Pin|Sabitle) to All (?:Posts|Gönderiler)/, replacement: "Tüm Gönderilerde Sabitle" },
+      { pattern: /(?:Pin|Sabitle) to Channel/, replacement: "Kanalda Sabitle" },
+      // — Öğrenme sekmesi
+      { pattern: /^No selection$/i, replacement: "Seçim yok" },
+      { pattern: /^Reset all$/i, replacement: "Tümünü sıfırla" },
+      { pattern: /^language$/, replacement: "Dil" },
+      { pattern: /^Add New (?:Course|Kurs)$/i, replacement: "Yeni Kurs Ekle" },
+      { pattern: /^Create a new course to share knowledge with your community\.?$/i, replacement: "Topluluğunla bilgi paylaşmak için yeni bir kurs oluştur" },
+      { pattern: /^Add course card$/i, replacement: "Kurs kartı ekle" },
+      // — Üyeler
+      { pattern: /^Joined (\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4})$/, replacement: function (m, d, mo, y) { return "Katılım: " + d + " " + TR_MONTHS_SHORT[mo] + " " + y; } },
+      { pattern: /^Message member$/i, replacement: "Üyeye mesaj gönder" },
+      { pattern: /^Roles$/, replacement: "Roller" },
+      { pattern: /^Contributor$/, replacement: "Katılımcı" },
+      { pattern: /^Status$/, replacement: "Durum" },
+      { pattern: /^Requested$/, replacement: "İstek gönderen" },
+      { pattern: /^Invited$/, replacement: "Davet edilen" },
+      { pattern: /^Banned$/, replacement: "Engellenen" },
+      // — Hakkında
+      { pattern: /(?:About|Hakkında) This (?:Community|Topluluk)/, replacement: "Bu Topluluk Hakkında" },
+      { pattern: /^(?:Upload|Yükle) Images\/Videos$/, replacement: "Görsel/Video Yükle" },
+      { pattern: /^Click to browse files$/i, replacement: "Dosya seçmek için tıkla" },
+      { pattern: /^Tap to add about content$/i, replacement: "Hakkında içeriği eklemek için dokun" },
+      // — Duyurular / bildirimler
+      { pattern: /^Sent to$/i, replacement: "Alıcılar" },
+      { pattern: /^Date range$/i, replacement: "Tarih aralığı" },
+      { pattern: /^No announcements yet$/i, replacement: "Henüz duyuru yok" },
+      { pattern: /^You'?re all caught up\.?$/i, replacement: "Hepsini gördün." },
+      { pattern: /^Show only (?:unread|Unread|Okunmadı)$/, replacement: "Yalnız okunmamışlar" },
+      { pattern: /^No notifications$/i, replacement: "Bildirim yok" },
+      { pattern: /When you (?:get|receive) notifications,? they'?ll appear here\.?/i, replacement: "Bildirim aldığında burada görünecek" },
+      { pattern: /Bildirim aldığında'?ll appear here\.?/, replacement: "Bildirim aldığında burada görünecek" },
+      // — Hesap ayarları
+      { pattern: /^Account (?:Settings|Ayarlar)$/, replacement: "Hesap Ayarları" },
+      { pattern: /^Certificates & Badges$/, replacement: "Sertifikalar ve Rozetler" },
+      { pattern: /(?:Update|Güncelle) your (?:Basic Details|Temel Detaylar) here/i, replacement: "Temel bilgilerini buradan güncelle" },
+      { pattern: /^Recommended dimensions of (\d+\s*x\s*\d+)$/i, replacement: "Önerilen boyut: $1" },
+      { pattern: /^This is how you will appear to others\.?$/i, replacement: "Diğer üyeler seni bu adla görür" },
+      { pattern: /^Unique link of your profile\.?$/i, replacement: "Profilinin benzersiz bağlantısı" },
+      { pattern: /^Your Title$/i, replacement: "Unvanın" },
+      { pattern: /^This is displayed throughout the platform, usually with your full name\.?$/i, replacement: "Platformun her yerinde, genellikle adınla birlikte görünür" },
+      { pattern: /^Tell everyone more about yourself\.?$/i, replacement: "Kendini biraz anlat" },
+      { pattern: /^Your location$/i, replacement: "Konumun" },
+      { pattern: /^Where have you joined from\??$/i, replacement: "Nereden katılıyorsun?" },
+      { pattern: /^Time Zone$/i, replacement: "Saat Dilimi" },
+      { pattern: /^What time zone are you in\??$/i, replacement: "Hangi saat dilimindesin?" },
+      { pattern: /^Preferred language$/i, replacement: "Tercih ettiğin dil" },
+      { pattern: /^Click to change photo$/i, replacement: "Fotoğrafı değiştirmek için tıkla" },
+      { pattern: /^Input Text$/, replacement: "Buraya yaz" },
+      { pattern: /(?:View|Görüntüle) account email and (?:change password|Şifre Değiştir)\.?/i, replacement: "Hesap e-postanı gör ve şifreni değiştir." },
+      { pattern: /^Your Account (?:Email|E-posta)$/, replacement: "Hesap E-postan" },
+      { pattern: /^This is the email you login with\.?$/i, replacement: "Giriş yaptığın e-posta adresi" },
+      { pattern: /^Enter the (?:New Password|Yeni Şifre) again\.?$/i, replacement: "Yeni şifreni tekrar gir" },
+      { pattern: /^Enter (?:Current Password|Mevcut Şifre)$/i, replacement: "Mevcut şifreni gir" },
+      { pattern: /^Enter (?:New Password|Yeni Şifre)$/i, replacement: "Yeni şifreni gir" },
+      { pattern: /^Enter the password you currently use to login\.?$/i, replacement: "Şu an giriş yaptığın şifreyi gir" },
+      { pattern: /(?:Password|Şifre) must have at least 8 characters, including uppercase, lowercase, number & special character\.?/i, replacement: "Şifre en az 8 karakter olmalı; büyük harf, küçük harf, rakam ve özel karakter içermeli" },
+      { pattern: /(?:Log ?out|Çıkış yap) from all devices\.?/i, replacement: "Tüm cihazlardan çıkış yap." },
+      { pattern: /^Visible to Everyone$/i, replacement: "Herkese görünür" },
+      { pattern: /^your email$/, replacement: "e-posta adresin" },
+      { pattern: /^Select Country$/i, replacement: "Ülke seç" },
+      { pattern: /(?:View|Görüntüle) and manage your certificates and badges/i, replacement: "Sertifika ve rozetlerini gör ve yönet" },
+      { pattern: /^No certificates found$/i, replacement: "Henüz sertifika yok" },
+      { pattern: /^Your certificates will appear here once issued\.?$/i, replacement: "Sertifikaların verildiğinde burada görünecek." },
+      { pattern: /Manage your community chat preferences and (?:Blocked Users|Engellenen Kullanıcılar)/i, replacement: "Topluluk sohbet tercihlerini ve engellediğin kullanıcıları yönet" },
+      { pattern: /Control which community (?:members|üye) can message you/i, replacement: "Hangi topluluk üyelerinin sana mesaj atabileceğini belirle" },
+      { pattern: /^Welcome badge issued$/i, replacement: "Hoş geldin rozeti verildiğinde" },
+      // — Üye profili
+      { pattern: /^GROUP$/, replacement: "GRUP" },
+      { pattern: /^FILTERS$/, replacement: "FİLTRELER" },
+      { pattern: /^(?:Posts|Gönderiler) only$/, replacement: "Yalnız gönderiler" },
+      { pattern: /^Joined$/, replacement: "Katıldığı" },
+      // — Giriş / kayıt / şifre (giriş yapmadan)
+      { pattern: /(?:Sign in|Giriş Yap) to access your account\.?/i, replacement: "Hesabına erişmek için giriş yap." },
+      { pattern: /^Or sign in with your email$/i, replacement: "Ya da e-postanla giriş yap" },
+      { pattern: /^Reset password$/, replacement: "Şifremi unuttum" },
+      { pattern: /(?:Sign in|Giriş Yap) with a secure code/i, replacement: "Güvenli kod ile giriş yap" },
+      { pattern: /(?:Sign in|Giriş Yap) with a password/i, replacement: "Şifre ile giriş yap" },
+      { pattern: /^New here\?$/i, replacement: "Hesabın yok mu?" },
+      { pattern: /^accessibility\.continueWithGoogle$/, replacement: "Google ile devam et" },
+      { pattern: /^Forgot password\??$/i, replacement: "Şifremi unuttum" },
+      { pattern: /^Recover access to your account\.?$/i, replacement: "Hesabına yeniden eriş." },
+      { pattern: /^We'?ll send a password reset link to this email\.?$/i, replacement: "Bu e-postaya bir şifre sıfırlama bağlantısı göndereceğiz." },
+      { pattern: /^Reset password now$/i, replacement: "Şifremi sıfırla" },
+      { pattern: /(?:Enter your email|E-posta adresini gir) to sign in/i, replacement: "Giriş yapmak için e-posta adresini gir" },
+      { pattern: /^We'?ll send a secure code to this email\.?$/i, replacement: "Bu e-postaya güvenli bir kod göndereceğiz." },
+      { pattern: /^Set up access to your account in a few seconds\.?$/i, replacement: "Birkaç saniyede hesabını oluştur." },
+      { pattern: /^Or sign up with your email$/i, replacement: "Ya da e-postanla kayıt ol" },
+      { pattern: /^Your full name$/i, replacement: "Adın soyadın" },
+      { pattern: /^We'?ll send a confirmation code to this email\.?$/i, replacement: "Bu e-postaya bir doğrulama kodu göndereceğiz." },
+      { pattern: /^Use at least 8 characters, including letters, numbers,? and symbols\.?$/i, replacement: "En az 8 karakter kullan; harf, rakam ve sembol içersin." },
+      { pattern: /(?:Sign up|Kayıt Ol) and verify email/i, replacement: "Kayıt ol ve e-postanı doğrula" },
+      { pattern: /(?:Confirm|Onayla) your (?:New Password|Yeni Şifre)\.?/i, replacement: "Yeni şifreni onayla." },
+      // ===== /2026-09-30 =====
       // — added 2026-07-07 (CEO: DM/mesajlaşma + hesap-seçim ekranı string'leri). En başta →
       //   kelime-fragmanlamadan önce yakalar ("View Profile"→"Görüntüle Profil" partial'ını önler).
       { pattern: /Select which account you want to (?:log\s*in|Giriş)/gi, replacement: "Giriş yapmak istediğin hesabı seç" },
@@ -488,6 +693,17 @@
       },
       { pattern: /Confirm New Password/g, replacement: "Yeni Şifreyi Onayla" },
       { pattern: /Onayla New Password/g, replacement: "Yeni Şifreyi Onayla" },
+      // Şifre belirleme formu (davet sonrası). Sözlükteki "Password→Şifre" ve
+      // "Confirm→Onayla" kelime değişiminden ÖNCE yakala; yarım çevrilmiş halleri
+      // ("Şifre is required", "Onayla password") de düzelt. Kısa etiketler tam
+      // metne sabit: "Password must be at least 8 characters" bozulmasın.
+      { pattern: /(?:Confirm|Onayla) password is required/gi, replacement: "Şifre tekrarı zorunludur" },
+      { pattern: /(?:Password|Şifre) is required/gi, replacement: "Şifre zorunludur" },
+      { pattern: /(?:Passwords|Şifreler) (?:do not|don'?t) match/gi, replacement: "Şifreler eşleşmiyor" },
+      { pattern: /^\s*(?:Confirm|Onayla) (?:password|Şifre)\s*$/i, replacement: "Şifreyi Onayla" },
+      { pattern: /^\s*Re-?enter your password\.?\s*$/i, replacement: "Şifreni tekrar gir" },
+      { pattern: /^\s*At least 8 characters\.?\s*$/i, replacement: "En az 8 karakter" },
+      { pattern: /^\s*Set password\s*$/i, replacement: "Şifreyi Belirle" },
 
       // COMMUNITY
       {
@@ -870,6 +1086,7 @@
       for (const p of phrases) {
         out = out.replace(p.pattern, p.replacement);
       }
+      const afterPhrases = out;
       const keys = Object.keys(translations).sort(function (a, b) {
         return b.length - a.length;
       });
@@ -878,11 +1095,30 @@
         const regex = new RegExp("\\b" + escaped + "\\b", "g");
         out = out.replace(regex, translations[en]);
       }
+      // Sözlük kelimeleri cümle içinde de değiştiriyor. Tanımadığımız (yeni) bir
+      // İngilizce cümlede bu yarım çeviri üretir ("Gönderiler this month"). Sözlük
+      // turundan sonra metinde hâlâ İngilizce bağlaç/zamir kalıyorsa sözlük
+      // değişikliğini geri al: cümle tamamen İngilizce kalır, karışık görünmez.
+      if (out !== afterPhrases && HALF_ENGLISH.test(out)) return afterPhrases;
       return out;
+    }
+
+    const HALF_ENGLISH = /\b(?:the|your|you|to|for|with|and|of|is|are|will|here|this|that|from|have|has|we|our|they|their|what|when|where|which|how|yet|only|into|any|all|my)\b/i;
+
+    // Sekme başlığı ("Sign in |", "Appointments |"): " |" öncesini çevir
+    function translateTitle() {
+      try {
+        const dt = document.title || "";
+        const cut = dt.indexOf(" |");
+        const head = cut >= 0 ? dt.slice(0, cut) : dt;
+        const th = translateString(head);
+        if (th !== head) document.title = th + (cut >= 0 ? dt.slice(cut) : "");
+      } catch (e) {}
     }
 
     function translate() {
       if (isEnglishContext()) return; // EN grupta dokunma
+      translateTitle();
 
       const walker = document.createTreeWalker(
         document.body,
