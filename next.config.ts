@@ -26,6 +26,14 @@ const nextConfig: NextConfig = {
           { key: "Access-Control-Allow-Origin", value: "*" },
         ],
       },
+      {
+        // Growtify.app CRM Türkçe katmanı (GHL ajans Custom JS yükler): betik, ayar ve katalog.
+        source: "/crm/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=60, s-maxage=60, must-revalidate" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+        ],
+      },
     ];
   },
   async redirects() {

@@ -1,0 +1,78 @@
+[
+ [
+  "^(\\d+) - (\\d+) of (\\d+)$",
+  "$1 - $2 / $3"
+ ],
+ [
+  "^Page (\\d+) of (\\d+)$",
+  "Sayfa $1 / $2"
+ ],
+ [
+  "^(\\d+) Tasks? Selected$",
+  "$1 Görev Seçildi"
+ ],
+ [
+  "^(\\d+) Tasks?$",
+  "$1 Görev"
+ ],
+ [
+  "^Select all (\\d+)$",
+  "Tümünü seç ($1)"
+ ],
+ [
+  "^Open - (\\d+)$",
+  "Açık - $1"
+ ],
+ [
+  "^Won - (\\d+)$",
+  "Kazanıldı - $1"
+ ],
+ [
+  "^Lost - (\\d+)$",
+  "Kaybedildi - $1"
+ ],
+ [
+  "^Abandoned - (\\d+)$",
+  "Vazgeçildi - $1"
+ ],
+ [
+  "^Knowledge base usage: (\\d+) of (\\d+) used, (\\d+) slots left$",
+  "Bilgi bankası kullanımı: $2 içinden $1 kullanıldı, $3 yer kaldı"
+ ],
+ [
+  "^(\\d+) Invoice\\(s\\) in Draft$",
+  "Taslakta $1 fatura"
+ ],
+ [
+  "^(\\d+) Invoice\\(s\\) in Due$",
+  "Vadesi gelen $1 fatura"
+ ],
+ [
+  "^(\\d+) Invoice\\(s\\) received$",
+  "Tahsil edilen $1 fatura"
+ ],
+ [
+  "^(\\d+) Invoice\\(s\\) Overdue$",
+  "Vadesi geçmiş $1 fatura"
+ ],
+ [
+  "^Created on: (.+)$",
+  "Oluşturulma: $1"
+ ],
+ [
+  "^Hi (.+)! I.m Calendar AI\\. Tell me what you.d like help with, or choose an option below\\.$",
+  "Merhaba $1! Ben Calendar AI. Neye yardım istediğini yaz ya da aşağıdan bir seçenek seç."
+ ],
+ [
+  "^Won (\\S*\\d\\S*)$",
+  "Kazanıldı $1"
+ ],
+ [
+  "^Open (\\S*\\d\\S*)$",
+  "Açık $1"
+ ],
+ [
+  "^Lost (\\S*\\d\\S*)$",
+  "Kaybedildi $1"
+ ]
+]
