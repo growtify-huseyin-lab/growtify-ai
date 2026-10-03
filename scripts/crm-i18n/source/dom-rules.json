@@ -206,5 +206,85 @@
  [
   "^\\$(\\S+)/month fee will be charged to your account$",
   "Hesabından aylık $$$1 ücret alınacak"
+ ],
+ [
+  "^(\\d+) seconds? ago$",
+  "$1 saniye önce"
+ ],
+ [
+  "^(\\d+) minutes? ago$",
+  "$1 dakika önce"
+ ],
+ [
+  "^(\\d+) hours? ago$",
+  "$1 saat önce"
+ ],
+ [
+  "^(\\d+) days? ago$",
+  "$1 gün önce"
+ ],
+ [
+  "^(\\d+) weeks? ago$",
+  "$1 hafta önce"
+ ],
+ [
+  "^(\\d+) months? ago$",
+  "$1 ay önce"
+ ],
+ [
+  "^(\\d+) years? ago$",
+  "$1 yıl önce"
+ ],
+ [
+  "^Pending phone calls: (\\d+)$",
+  "Bekleyen telefon aramaları: $1"
+ ],
+ [
+  "^Total pending actions: (\\d+)$",
+  "Toplam bekleyen eylem: $1"
+ ],
+ [
+  "^Select schedule: (.+)$",
+  "Program seç: $1"
+ ],
+ [
+  "^New Email from (.+)$",
+  "Yeni e-posta: $1"
+ ],
+ [
+  "^New SMS from (.+)$",
+  "Yeni SMS: $1"
+ ],
+ [
+  "^New Instagram message from (.+)$",
+  "Yeni Instagram mesajı: $1"
+ ],
+ [
+  "^New Facebook message from (.+)$",
+  "Yeni Facebook mesajı: $1"
+ ],
+ [
+  "^New WhatsApp message from (.+)$",
+  "Yeni WhatsApp mesajı: $1"
+ ],
+ [
+  "^A new chat with (.+) has been assigned to you\\.$",
+  "$1 ile yeni bir sohbet sana atandı."
+ ],
+ [
+  "^(\\d+) mins?$",
+  "$1 dk"
+ ],
+ [
+  "^(\\d+) hrs?$",
+  "$1 sa"
+ ],
+ [
+  "^(\\d+) hours?$",
+  "$1 saat"
+ ],
+ [
+  "^(\\d+) hr (\\d+) mins?$",
+  "$1 sa $2 dk"
  ]
 ]

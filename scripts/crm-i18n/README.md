@@ -11,8 +11,12 @@ Sürüm ve değişiklik kaydı: `docs/ceviri/SURUMLER.md`. Sürüm numarası: `s
   ```html
   <script>(function(){if(document.getElementById("__gai_crm_i18n"))return;var s=document.createElement("script");s.id="__gai_crm_i18n";s.src="https://growtify.ai/crm/crm-i18n.js?v=1";s.async=true;document.head.appendChild(s);})();</script>
   ```
-- `crm-config.json` — varsayılan dil ve İngilizce/Türkçe açılacak alt hesap listeleri.
-- `crm-tr.json` — derlenmiş Türkçe katalog: `{version, built_at, instances: {id: {keys, messages}}, dom}`.
+- `crm-config.json` — varsayılan dil, İngilizce/Türkçe açılacak alt hesap listeleri ve `frames` (iframe ekranları
+  için vekil adresler; silinirse o ekranlar GHL'den İngilizce açılır).
+- `crm-tr.json` — derlenmiş Türkçe katalog: `{version, built_at, instances: {id: {keys, messages}}, dom, text,
+  textRules, textPages}`.
+- `frames/<id>.json` — iframe ile gömülen GHL uygulamalarının küçük katalogları (takvim `calapp`, İşletme
+  Profili `crmset`, E-posta Hizmetleri `isv`); `workers/crm-frames` bunları çerçevedeki yükleyiciye verir.
 
 ## Kim Türkçe görür
 1. Kişinin seçimi önce gelir: üst çubuktaki TR/EN düğmesi (tarayıcıda `gai_crm_lang` olarak hatırlanır) ya da
@@ -35,9 +39,18 @@ Sayfadaki sürüm: `document.documentElement.dataset.gaiCrmTr` (ör. `"1.0.0"`).
   çoğul eki atılır ("584 Kişiler" → "584 Kişi", "7/103 sütunlar" → "7/103 sütun"; isim listesiyle), kodda
   birleştirilen "Ekle Kişi" → "Kişi Ekle". Tarihler: kısa/uzun ay adları ve aralıklar ("19 Eyl 2026 – 3 Eki 2026",
   "28 Eylül 2026", "24 Ağustos"); ay adı tam listeyle eşleşir ("Marketing 2" tarih sanılmaz).
-- Çevrilemeyenler (bugün): GHL'in ayrı alan adında iframe içinde çalışan uygulamalar — otomasyon kurucusu,
-  takvim ayarları, Ayarlar sayfalarının içeriği (`client-app-crm-settings`), Yapay Zeka Stüdyosu. Ajans
-  Custom JS oralara yüklenmez (bkz. SURUMLER.md, iş kaydı dev-028).
+- Saatler 24 saat biçiminde ("03:12 PM" → "15:12"); "30 min" → "30 dk", "5 minutes ago" → "5 dakika önce".
+- Sunucudan gelen uzun açıklamalar (ör. Laboratuvar) kalın yazı/bağlantıyla parçalara bölünür; bunların
+  çevirisi yalnız o sayfada geçerli sözlükte durur (`textPages`, kaynak `dom-pages.json`), "From" gibi kısa
+  parçalar başka ekranları bozmaz. Sayfa sözlüğünde 160 karakter sınırı yoktur.
+- **iframe ekranları (1.2):** GHL'in ayrı alan adında çalışan uygulamalarına ajans Custom JS yüklenmez. Takvim
+  ayarları, İşletme Profili ve E-posta Hizmetleri için yükleyici iframe adresini `crm-config.json` `frames`
+  listesindeki Growtify vekil adresine çevirir (`workers/crm-frames`, crm-*.growtify.app); vekil uygulamayı
+  GHL'den alıp aynı yükleyiciyi "çerçeve modunda" ekler. CRM ↔ uygulama köprüsünün (postmate) mesaj adresleri
+  yükleyicide çevrilir — Postmate iframe'i adres vermeden önce eklediği için boş iframe'lerin penceresi de
+  sarılır, `MessageEvent.source` aynı sarmalı döndürür. **Güvenlik ağı:** sayfa açılırken vekil
+  `/__gai/health` ile yoklanır; iframe birkaç saniyede cevap vermezse GHL'in kendi adresine döner (ekran
+  İngilizce ama çalışır). Hâlâ İngilizce: otomasyon kurucusu, Yapay Zeka Stüdyosu, Sohbet Sağlayıcıları.
 
 ## Kaynaklar (`scripts/crm-i18n/source/`)
 - `crm-tr.flat.json` — `"örnek::anahtar.yolu": "Türkçe"`; çevirinin tek kaynağı (düzeltmeler burada).
@@ -45,6 +58,11 @@ Sayfadaki sürüm: `document.documentElement.dataset.gaiCrmTr` (ör. `"1.0.0"`).
 - `instance-keys.json` — her katalog örneğinin İngilizce üst düzey anahtarları (yükleyici eşleştirmesi).
 - `dom-nav.json` — menüde sunucudan gelen etiketler; `dom-text.json` — GHL kodunda sabit yazılı metinler
   (ikisi de yalnız metnin tamamı birebir eşleşince uygulanır, kişi/mesaj verisine dokunulmaz).
+- `dom-rules.json` — sayı/ad içeren kalıplar (`[düzenli ifade, karşılık]`); `dom-pages.json` — yalnız bir sayfada
+  geçerli metinler (`{"/settings/labs": {...}}`).
+- `frames.json` — iframe uygulamaları (`id → GHL adresi, vekil adres, ekran`); bu örnekler ana katalogda değil
+  `public/crm/frames/<id>.json`'da derlenir. Katalog: uygulamanın adresini ayrı sekmede açıp
+  `tour/frame-extract.js` (çerçeve uygulamaları kompozisyon modunda; i18n örneği `provides` içinde).
 
 Derleme: `npm i --no-save @intlify/message-compiler && node scripts/crm-i18n/build.mjs` → `public/crm/crm-tr.json`
 (sürüm `VERSION`'dan; İngilizcesiyle aynı ve derlenmeyen metinler atlanır).

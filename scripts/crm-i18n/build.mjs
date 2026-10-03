@@ -8,6 +8,9 @@
 //   dom-nav.json          menüde sunucudan gelen etiketler (birebir eşleşme)
 //   dom-text.json         GHL kodunda sabit yazılı, katalogda olmayan metinler (birebir eşleşme)
 //   dom-rules.json        sayı içeren kalıplar için [düzenli ifade, karşılık] ("1 - 10 of 50" → "1 - 10 / 50")
+//   frames.json           iframe ile gömülen GHL uygulamaları → public/crm/frames/<id>.json (ana katalogda yok)
+//   dom-pages.json        yalnız bir sayfada geçerli metinler { "/settings/labs": { İngilizce: Türkçe } } (sunucudan gelen
+//                         parçalı açıklamalar; "From" gibi kısa parçalar başka ekranları bozmasın diye genel sözlüğe yazılmaz)
 import fs from "fs";
 import path from "path";
 import { createRequire } from "module";
@@ -45,13 +48,28 @@ for (const [fullKey, value] of Object.entries(tr)) {
 }
 
 const clean = (o) => Object.fromEntries(Object.entries(o).filter(([k, v]) => typeof v === "string" && v && v !== k && !k.startsWith("_")));
+// iframe uygulamaları (frames.json) ana katalogda taşınmaz: her biri kendi küçük kataloğunu alır.
+const frames = fs.existsSync(path.join(dir, "source", "frames.json")) ? src("frames.json") : {};
+const frameIds = Object.keys(frames).filter((k) => !k.startsWith("_"));
+const shellInstances = Object.fromEntries(Object.entries(instances).filter(([id]) => !frameIds.includes(id)));
 const catalog = {
   version: VERSION,
   built_at: new Date().toISOString(),
-  instances,
+  instances: shellInstances,
   dom: clean(src("dom-nav.json")),
   text: clean(src("dom-text.json")),
   textRules: src("dom-rules.json"), // [desen, karşılık] — sayı içeren kalıplar
+  textPages: Object.fromEntries(Object.entries(fs.existsSync(path.join(dir, "source", "dom-pages.json")) ? src("dom-pages.json") : {}).map(([p, d]) => [p, clean(d)])), // yalnız o sayfada geçerli metinler
 };
 fs.writeFileSync(out, JSON.stringify(catalog));
-console.log(JSON.stringify({ version: VERSION, strings: count, skipped_same_as_en: same, skipped_not_compiling: broken.length, broken: broken.slice(0, 10), page_text: Object.keys(catalog.text).length, bytes: fs.statSync(out).size }));
+const framesDir = path.join(path.dirname(out), "frames");
+fs.mkdirSync(framesDir, { recursive: true });
+const frameReport = {};
+for (const id of frameIds) {
+  if (!instances[id]) continue;
+  const fc = { ...catalog, instances: { [id]: instances[id] } };
+  delete fc.textPages; // sayfa sözlükleri CRM sayfalarına ait
+  fs.writeFileSync(path.join(framesDir, id + ".json"), JSON.stringify(fc));
+  frameReport[id] = fs.statSync(path.join(framesDir, id + ".json")).size;
+}
+console.log(JSON.stringify({ version: VERSION, strings: count, skipped_same_as_en: same, skipped_not_compiling: broken.length, broken: broken.slice(0, 10), page_text: Object.keys(catalog.text).length, bytes: fs.statSync(out).size, frames: frameReport }));

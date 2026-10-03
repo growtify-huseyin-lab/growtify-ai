@@ -1,0 +1,6 @@
+{
+ "_note": "GHL'in CRM'e iframe ile gömdüğü, ayrı alan adında çalışan uygulamalar. Bunların Türkçesi ana katalogda değil public/crm/frames/<id>.json'da durur; iframe'i workers/crm-frames (crm-*.growtify.app) sunar ve yükleyiciyi ekler. Açma/kapama: public/crm/crm-config.json 'frames' (GHL adresi → vekil adres).",
+ "calapp": { "origin": "https://calendar-app.leadconnectorhq.com", "proxy": "https://crm-takvim.growtify.app", "screens": "Ayarlar > Takvimler: takvim/hizmet menüsü/oda/ekipman listeleri, Tercihler, Bağlı Hesaplar" },
+ "crmset": { "origin": "https://client-app-crm-settings.leadconnectorhq.com", "proxy": "https://crm-ayarlar.growtify.app", "screens": "Ayarlar > İşletme Profili" },
+ "isv": { "origin": "https://ghl-isv-app-prod.leadconnectorhq.com", "proxy": "https://crm-eposta.growtify.app", "screens": "Ayarlar > E-posta Hizmetleri" }
+}
