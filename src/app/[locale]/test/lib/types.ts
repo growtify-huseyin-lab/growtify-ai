@@ -141,6 +141,12 @@ export interface ScreenConfig {
   likertMin?: string;
   likertMax?: string;
   cta?: string;
+  /**
+   * Structural flag: this text_input screen submits the lead (fires submitEmail).
+   * Decoupled from `cta` copy on purpose — changing a CTA's wording (TR or EN)
+   * must never silently stop lead capture. Set on exactly one screen per flow.
+   */
+  submitTrigger?: boolean;
   /** Placeholder / input hint for text_input screens. */
   placeholder?: string;
   /** For paywall / plan_ready screens: arbitrary display payload (kept loose for skeleton). */
