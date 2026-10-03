@@ -24,14 +24,14 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.1.0** | 1.0.0 yayında; 1.1.0 PR'da — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.1.0** | Yayında (#153) — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | Otomasyon kurucusu, takvim ayarları, Ayarlar içeriği, Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Başlamadı — vekil alt alan adı denemesi planlı |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
-- **1.1.0** — 2026-10-03 — Eksiksizlik turu (CEO: "tümünü yeniden kontrol et tek tek tamamla", "tıklamalar dahil
+- **1.1.0** — 2026-10-03 (#153, CEO "birleştirip yayına al") — Eksiksizlik turu (CEO: "tümünü yeniden kontrol et tek tek tamamla", "tıklamalar dahil
   turla"). Katalog 59.580 → **77.432** metin. **Tıklamalı tur:** 296 sayfa, 367 tıklama (sekmeler, filtre/sütun/sıralama düğmeleri, açılır menüler;
   hiçbir şey kaydedilmedi/silinmedi/gönderilmedi) → 1.562 aday metin. **Katalog farkı turu:** GHL'in sayfa açılınca
   sonradan yüklediği kabuk bölümleri ilk toplamada yoktu (reklam yöneticisi, müşteri portalı ayarları,
