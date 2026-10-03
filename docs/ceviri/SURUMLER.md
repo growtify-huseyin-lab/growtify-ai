@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.6** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.7** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,12 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.6.7** — 2026-10-03 — **Yükleyici önceliği (CEO onayı).** GHL Ajans Ayarları → White Label → Custom JS satırına
+  `s.fetchPriority="high"` eklendi (başka değişiklik yok; 893 → 916 karakter). Kök neden: GHL yükleyiciyi `async` ve düşük
+  öncelikli ekliyordu; ağır sayfalarda Chrome isteği 15–28 sn kuyrukta bekletiyor, o arada açılan çerçeveler İngilizce
+  kalıyordu. Canlı ölçüm (sayfa doğrudan açılarak): Pano, Otomasyon, Sohbetler — kuyruk 0–3 ms; yükleyici GHL'in Custom JS'i
+  eklediği anda (4–7,6 sn) iniyor, Otomasyon çerçevesi vekilden (`crm-otomasyon`) Türkçe açıldı. Kalan gecikme GHL'in kendi
+  açılış sırası (Custom JS'i ayarları çektikten sonra ekliyor) — bizim tarafımızda değil.
 - **1.6.6** — 2026-10-03 — **Sayfa oluşturucu kullanıcıya açık.** `frames`'e `crm-sayfa` eklendi. CEO'nun tarayıcısında denendi:
   üst çubuk (Geri, Otomatik kaydetme kapalı, Yayınla, Alan Adı Bağla), Yapay Zekaya Sor paneli, öğe ekleme paneli (Hızlı Ekle,
   Bölümler, Satırlar, Öğeler; "1 Sütun", "Başlık", "Paragraf") Türkçe; tuvaldeki sayfa (müşterinin içeriği) ve sayfa adları
@@ -55,7 +61,7 @@ bu dosyanın o anki özetidir.
   Sayfa oluşturucu (page-builder, `crm-sayfa`) kataloğu 6.380 metin (902'si mevcut çeviriden, 8 çeviri grubu); "zekâ" →
   CRM'deki "zeka" yazımı, "Generate with AI" → "Yapay Zekayla Oluştur", şema alanlarında terim birliği (Genel puan,
   Yayın tarihi, İl/Bölge). Not: ağır sayfalar doğrudan açıldığında yükleyici kuyrukta beklediği için oluşturucu o ziyarette
-  İngilizce açılabiliyor (Custom JS öncelik ayarı CEO kararında).
+  İngilizce açılabiliyordu (1.6.7'de Custom JS öncelik ayarıyla çözüldü).
 - **1.6.1** — 2026-10-03 — **Oluşturucularda sınırlı sözlük (`domOnly`).** Form oluşturucunun öğe paleti ("Personal Info",
   "Full Name", "Email"…) uygulama açılışında bir kez hesaplanıyor; Türkçe katalog sonradan gelince güncellenmiyor. Sözlük artık
   yalnız izin verilen arayüz alanlarında uygulanıyor (form: sol öğe paleti + alan ayarı etiketleri), tuval yine dokunulmaz.
