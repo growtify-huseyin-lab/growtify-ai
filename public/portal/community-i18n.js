@@ -248,6 +248,14 @@
     // Ay adları (takvim başlığı "September 2026", üye listesi "Joined 07 Jul 2026")
     const TR_MONTHS = { January: "Ocak", February: "Şubat", March: "Mart", April: "Nisan", May: "Mayıs", June: "Haziran", July: "Temmuz", August: "Ağustos", September: "Eylül", October: "Ekim", November: "Kasım", December: "Aralık" };
     const TR_MONTHS_SHORT = { Jan: "Oca", Feb: "Şub", Mar: "Mar", Apr: "Nis", May: "May", Jun: "Haz", Jul: "Tem", Aug: "Ağu", Sep: "Eyl", Oct: "Eki", Nov: "Kas", Dec: "Ara" };
+    // Gün adları (takvim başlıkları "Sun".."Sat", gönderi saati ipucu "Saturday / 03 Oct 2026 / 04:07 AM")
+    const TR_DAYS = { Sunday: "Pazar", Monday: "Pazartesi", Tuesday: "Salı", Wednesday: "Çarşamba", Thursday: "Perşembe", Friday: "Cuma", Saturday: "Cumartesi" };
+    const TR_DAYS_SHORT = { Sun: "Paz", Mon: "Pzt", Tue: "Sal", Wed: "Çar", Thu: "Per", Fri: "Cum", Sat: "Cmt" };
+    function to24h(h, mi, ap) {
+      let hh = parseInt(h, 10) % 12;
+      if (/pm/i.test(ap)) hh += 12;
+      return (hh < 10 ? "0" : "") + hh + ":" + mi;
+    }
 
     const phrases = [
       // ===== 2026-09-30 GHL panel güncellemesi: yeni / değişen metinler =====
@@ -255,6 +263,27 @@
       // çevrilmiş halleri ("Sırala order", "Kursa Başla chat") de düzeltir.
       // Kısa etiketler ^…$ ile tam metne sabit (içerikteki kelimelere dokunmaz).
       // Hepsi idempotent: çıktı tekrar eşleşmez.
+      // — 2026-10-03 taraması: yeni sürümle gelen metinler
+      { pattern: /^(?:Courses|Kurslar) in (.+)$/, replacement: "$1 kursları" },
+      { pattern: /^Unlocks for private channel$/i, replacement: "Özel kanal üyelerine açılır" },
+      { pattern: /^Default$/, replacement: "Varsayılan" },
+      { pattern: /^Drop media or documents$/i, replacement: "Medya veya belgeleri bırak" },
+      { pattern: /^Alternative text for avatar image not provided$/, replacement: "Profil fotoğrafı" },
+      { pattern: /^Alternative text for image not provided$/, replacement: "Görsel" },
+      { pattern: /^Open members list, admins and owners$/, replacement: "Üye listesini, yöneticileri ve sahipleri aç" },
+      { pattern: /^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday) \/ (\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) \/ (\d{1,2}):(\d{2}) ?(AM|PM)$/i, replacement: function (m, d, dd, mo, y, h, mi, ap) { return TR_DAYS[d] + " / " + dd + " " + TR_MONTHS_SHORT[mo] + " " + y + " / " + to24h(h, mi, ap); } },
+      { pattern: /^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2}), (\d{4})$/, replacement: function (m, mo, d, y) { return d + " " + TR_MONTHS[mo] + " " + y; } },
+      { pattern: /^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)$/, replacement: function (m, d) { return TR_DAYS[d]; } },
+      { pattern: /^(Sun|Mon|Tue|Wed|Thu|Fri|Sat)$/, replacement: function (m, d) { return TR_DAYS_SHORT[d]; } },
+      { pattern: /^Turkish$/i, replacement: "Türkçe" },
+      { pattern: /^Record a voice note$/i, replacement: "Sesli not kaydet" },
+      { pattern: /^loading$/i, replacement: "Yükleniyor" },
+      { pattern: /^(?:Course|Kurs) Card$/, replacement: "Kurs kartı" },
+      { pattern: /^(?:Course|Kurs) Card Content$/, replacement: "Kurs kartı içeriği" },
+      { pattern: /^(?:Course|Kurs) actions$/, replacement: "Kurs işlemleri" },
+      { pattern: /^Grid view$/i, replacement: "Izgara görünümü" },
+      { pattern: /^Table view$/i, replacement: "Tablo görünümü" },
+      { pattern: /^Breadcrumb$/, replacement: "Gezinti yolu" },
       // — Kabuk / menü
       { pattern: /^Dashboard$/, replacement: "Ana Sayfa" },
       { pattern: /^Memberships$/, replacement: "Üyelikler" },
@@ -1084,7 +1113,14 @@
 
     function translateString(text) {
       if (!text) return text;
-      let out = text;
+      // GHL'in yeni sürümünde metin düğümleri çoğu zaman baş/son boşlukla geliyor
+      // (" My courses ", "\n Continue learning \n"). ^…$ kalıpları boşluklu metni
+      // yakalayamıyordu → çeviri çekirdek metne uygulanır, boşluklar aynen geri eklenir.
+      const ws = /^(\s*)([\s\S]*?)(\s*)$/.exec(text);
+      const lead = ws[1];
+      const trail = ws[3];
+      if (!ws[2]) return text;
+      let out = ws[2];
       for (const p of phrases) {
         out = out.replace(p.pattern, p.replacement);
       }
@@ -1101,8 +1137,8 @@
       // İngilizce cümlede bu yarım çeviri üretir ("Gönderiler this month"). Sözlük
       // turundan sonra metinde hâlâ İngilizce bağlaç/zamir kalıyorsa sözlük
       // değişikliğini geri al: cümle tamamen İngilizce kalır, karışık görünmez.
-      if (out !== afterPhrases && HALF_ENGLISH.test(out)) return afterPhrases;
-      return out;
+      if (out !== afterPhrases && HALF_ENGLISH.test(out)) return lead + afterPhrases + trail;
+      return lead + out + trail;
     }
 
     const HALF_ENGLISH = /\b(?:the|your|you|to|for|with|and|of|is|are|will|here|this|that|from|have|has|we|our|they|their|what|when|where|which|how|yet|only|into|any|all|my)\b/i;
