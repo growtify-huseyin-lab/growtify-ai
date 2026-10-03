@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.11.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.11.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,21 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.11.1** — 2026-10-04 — **İkinci tur (canlı 1.11.0 üzerinde) + hız ölçümü.**
+  - **Tur:** 114 sayfa, hata 0; gömülü (vekil) ekran kontrolü 19, kalıntı 0. Arayüzde kalan tek İngilizce "Task Bilgi" (görev
+    filtreleri: GHL nesne adını İngilizce ekliyor) → kalıp "{nesne} Bilgi / Info" → "Görev Bilgisi", "Kişi Bilgisi"…
+    Kapsam dışı (bilerek): "Google Contacts" (marka), Uygulama Pazarı'ndaki 34 üçüncü taraf uygulama adı/tanıtımı, kişinin
+    aşama adları ("Call Completed" artık doğru biçimde dokunulmadan kalıyor), sohbet mesajı önizlemesi.
+  - **Canlı doğrulama (1.11.0):** sertifika/rozet/şablon ekranları, kurs analizi, kurs ayarları, ürünler, ödeme bağlantıları,
+    görevler, Yapay Zeka Ajanları → kalıntı 0; sertifika başlığı "Öyle sertifikalar tasarla ki resmi görünsün"; pano "0 TL /
+    0,2 TL / %20". Dönen tanıtım kartları 30 sn izlendi: 215 değişiklik, ekrana düşen İngilizce 0.
+  - **Hız (CRM penceresi arka planda — Chrome GHL'in zamanlayıcılarını kısıyor; iki mod aynı koşulda, 3–5 tur medyanı, ms,
+    TR / EN):** SPA geçişi kişiler 1794 / 1736 · sohbetler 1743 / 1689 · fırsatlar 2783 / 2769 · kişi detayı 2946 / 3651 ·
+    pano tam yükleme 19.355 / 19.380 (GHL kartları sırayla, iki modda aynı) · gömülü ekran açılışı takvim ayarları 1256 / 1634,
+    e-postalar 1579 / 1617. Katmanın 50 ms'yi aşan işi yok. Bilinen tek bekleme bizim dışımızda: tam sayfa yenilemede GHL
+    Custom JS'i geç ekliyor (ön planda 4–7,6 sn; SPA içi geçişte yok).
+  - **Bakım araçları:** tur ve katalog taraması beklemeleri Worker sayacıyla — arka plan sekmesinde Chrome `setTimeout`'u
+    dakikada bire indiriyordu (tur 14 dk'da 6 sayfaya düşmüştü).
 - **1.11.0** — 2026-10-04 — **Lansman öncesi tam tur: 145 ekran tıklamalarla gezildi, kalan İngilizce + biçim + akıcılık (CEO: "tam tur
   yapıp hiçbir yerde kalmadığından emin ol").**
   - **Tur:** 145 sayfa (bölüm içi bağlantılar + güvenli düğmeler: sekme, filtre, sıralama, alan yönetimi; kayıt/silme/gönderme yok),

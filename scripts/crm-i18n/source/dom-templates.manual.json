@@ -12,5 +12,7 @@
  "Birincil {objectLabel} (Associated {objectName})": "Birincil {objectLabel} (İlişkili {objectName})",
  "Primary {objectLabel} (Associated {objectName})": "Birincil {objectLabel} (İlişkili {objectName})",
  "Ek {objectPlural} (Associated {objectName})": "Ek {objectPlural} (İlişkili {objectName})",
- "Additional {objectPlural} (Associated {objectName})": "Ek {objectPlural} (İlişkili {objectName})"
+ "Additional {objectPlural} (Associated {objectName})": "Ek {objectPlural} (İlişkili {objectName})",
+ "{objectLabel} Bilgi": "{objectLabel} Bilgisi",
+ "{objectLabel} Info": "{objectLabel} Bilgisi"
 }

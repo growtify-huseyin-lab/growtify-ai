@@ -10,7 +10,11 @@
   opts = opts || {};
   var wait = opts.wait || 6000;
   var max = opts.max || 150;
-  var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+  // Arka plan sekmesinde setTimeout dakikada bire kısılır (Chrome, 5 dk sonra); beklemeler Worker sayacıyla yapılır.
+  var __wk = new Worker(URL.createObjectURL(new Blob(["onmessage=function(e){setTimeout(function(){postMessage(e.data)},e.data.ms)}"], { type: "text/javascript" })));
+  var __wseq = 0, __wwait = {};
+  __wk.onmessage = function (e) { var f = __wwait[e.data.id]; if (f) { delete __wwait[e.data.id]; f(); } };
+  var sleep = function (ms) { return new Promise(function (r) { var id = ++__wseq; __wwait[id] = r; __wk.postMessage({ id: id, ms: ms }); }); };
   var router = document.querySelector("#app").__vue_app__.config.globalProperties.$router;
   var loc = location.pathname.match(/location\/([A-Za-z0-9]+)/)[1];
   var EN = /\b(the|your|you|to|for|with|and|of|is|are|this|that|no|not|add|new|create|edit|delete|save|cancel|search|filter|sort|view|show|hide|select|all|none|more|settings|contacts?|opportunit\w*|pipelines?|calendars?|appointments?|conversations?|messages?|payments?|invoices?|products?|emails?|reports?|import|export|status|actions?|name|phone|date|time|today|week|month|total|open|won|lost|tags?|owner|assigned|due|tasks?|notes?|loading|learn|manage|connect|enable|disable|update|upload|download|next|back|close|done|apply|reset|clear|start|end|type|details?|overview|list|users?|team|price|amount|source|created|updated|last|first|group|yet|link|existing|associations?|compan\w+|business|address|city|country|state|postal|activit\w+|track|stay|keep|items?|records?|fields?|columns?|rows?|page|per|go|get|why|how|what|revenue|rate|conversion|enrollments?|checkouts?|value|order|highest|lowest|unique|views?|cumulative|activate|free|unlimited|automated|daily|instant|launch|migrate|seamless|lightning|fast|hosting|course|courses|progress|average|overall|previous|days|hrs|learning|completed|members?|analytics|assessment)\b/i;
@@ -76,7 +80,7 @@
       var h = function (e) { if (e.data && e.data.gaiFrameCatalog) got.push({ frame: e.data.gaiFrameCatalog.frame, texts: e.data.gaiFrameCatalog.texts || [], errors: (e.data.gaiFrameCatalog.errors || []).length, failed: (e.data.gaiFrameCatalog.failed || []).length }); };
       window.addEventListener("message", h);
       fr.forEach(function (f) { try { f.contentWindow.postMessage({ gaiCollect: 1 }, "*"); } catch (x) {} });
-      setTimeout(function () { window.removeEventListener("message", h); resolve({ proxied: got, direct: direct }); }, 1500);
+      sleep(1500).then(function () { window.removeEventListener("message", h); resolve({ proxied: got, direct: direct }); });
     });
   }
   (async function run() {
