@@ -41,16 +41,29 @@ const CRM_ANCESTORS = "https://app.gohighlevel.com https://*.gohighlevel.com htt
 const PASS_REQUEST_HEADERS = ["accept", "accept-language", "user-agent", "if-none-match", "if-modified-since", "range", "cache-control"];
 const DROP_RESPONSE_HEADERS = /^(set-cookie|x-frame-options|strict-transport-security|alt-svc|report-to|nel|content-length|content-encoding|transfer-encoding|connection)$/i;
 
+// Dil işareti (?gai_frame=tr|en) uygulama açılmadan adresten silinir: bazı uygulamalar (otomasyon) kendi adresini
+// CRM'in adres çubuğuna yansıtıyor. İşaret yükleyiciye window.__gaiCrmFrameLang ile, yeniden yüklemeler için
+// sekmeye özel sessionStorage ile kalır.
+const BOOT =
+  "(function(){try{var m=location.search.match(/[?&]gai_(?:frame|lang)=(tr|en)(?=&|$)/);if(!m)return;" +
+  "window.__gaiCrmFrameLang=m[1];try{sessionStorage.setItem('gai_crm_frame_lang',m[1])}catch(e){}" +
+  "var c=location.search.replace(/([?&])gai_(?:frame|lang)=(?:tr|en)(&|$)/g,function(x,a,b){return b?a:''});" +
+  "history.replaceState(history.state,'',location.pathname+(c==='?'?'':c)+location.hash)}catch(e){}})();";
+
+// Yükleyici beklemeden (async) gelir: growtify.ai yavaş cevap verirse uygulama bekletilmez, yalnız Türkçe birkaç
+// an sonra gelir. Yükleyici uygulamanın metinlerini açıldıktan sonra da değiştirebiliyor.
 function injection(frame) {
   return (
     "<script>window.__gaiCrmFrame=" +
     JSON.stringify(frame) +
     ";window.__gaiCrmCatalogUrl=" +
     JSON.stringify(CATALOG_BASE + frame + ".json") +
-    ";</script>" +
+    ";" +
+    BOOT +
+    "</script>" +
     '<script src="' +
     LOADER_URL +
-    '"></script>'
+    '" async></script>'
   );
 }
 

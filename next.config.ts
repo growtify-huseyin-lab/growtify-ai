@@ -32,6 +32,17 @@ const nextConfig: NextConfig = {
         headers: [
           { key: "Cache-Control", value: "public, max-age=60, s-maxage=60, must-revalidate" },
           { key: "Access-Control-Allow-Origin", value: "*" },
+          // Yükleme süreleri tarayıcıda ölçülebilsin (tanı; içerik paylaşmaz).
+          { key: "Timing-Allow-Origin", value: "*" },
+        ],
+      },
+      {
+        // Yükleyici betiği önbellekten hemen çalışır, arka planda yenilenir. GHL betiği düşük öncelikle (async)
+        // ekliyor; CRM'in yoğun açılışlarında ağdan gelmesi 20 sn'ye kadar sürebiliyordu (o sürede ekran
+        // İngilizce). Yeni sürüm ~1 dk sonra, en geç bir sonraki sayfa açılışında yayılır. (Üstteki kuralı ezer.)
+        source: "/crm/crm-i18n.js",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=60, s-maxage=60, stale-while-revalidate=604800" },
         ],
       },
     ];

@@ -36,7 +36,9 @@
   var frameLang = null;
   if (FRAME) {
     try {
-      var fm = location.search.match(/[?&]gai_(?:frame|lang)=(tr|en)(?=&|$)/);
+      // Vekil (workers/crm-frames) işareti sayfa başındaki küçük betikte okuyup adresten siler ve buraya bırakır.
+      if (window.__gaiCrmFrameLang === "tr" || window.__gaiCrmFrameLang === "en") frameLang = window.__gaiCrmFrameLang;
+      var fm = frameLang ? null : location.search.match(/[?&]gai_(?:frame|lang)=(tr|en)(?=&|$)/);
       if (fm) {
         frameLang = fm[1];
         try {
@@ -46,7 +48,7 @@
           return b ? a : "";
         });
         history.replaceState(history.state, "", location.pathname + (clean === "?" ? "" : clean) + location.hash);
-      } else {
+      } else if (!frameLang) {
         try {
           frameLang = sessionStorage.getItem("gai_crm_frame_lang");
         } catch (e) {}
