@@ -32,6 +32,13 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.2.3** — 2026-10-03 — Kataloglar ve düzeltmeler (yeni ekranlar henüz `frames` listesinde değil). E-postalar (`email`, 3.555
+  metin; Zamanla, Akıllı Gönderim, Dizi, geri dönme) ve Satış Ortaklığı (`aff`, 1.447 metin; satış ortağı, komisyon, ödeme, kademe)
+  katalogları `public/crm/frames/`. Satış Ortaklığı tanıtımındaki GHL örnek müşteri yorumu (kişi adı + "10 dakikada kurdum, bir
+  haftada ilk satış") Türkçede kişisiz, rakamsız bir ipucuyla değiştirildi (uydurma vaka/rakam kuralı). Yükleyici: TR/EN düğmesi
+  üst çubuğu olmayan tam ekran sayfalarda gizlenir (iş akışı kurucusunda Kaydet'in üstüne biniyordu); "Jun 02 2026, 2:50 PM" →
+  "02 Haz 2026, 14:50"; bakım için çerçeve cevabına ekranda İngilizce kalan metinler, çerçevedeki hatalar ve yüklenemeyen
+  dosyalar eklendi.
 - **1.2.2** — 2026-10-03 — Otomasyon hazırlığı (otomasyon ekranı henüz `frames` listesinde değil). Otomasyon uygulamasının
   kataloğu (`wf`, 7.060 metin; 8 çeviri + 1 gözden geçirme alt ajanı, ortak terim listesi: İş Akışı, Tetikleyici, Eylem, Olay,
   Eğer/Değilse, Bekle, dahil etme, Çalışma Günlükleri…) `public/crm/frames/wf.json`. Yükleyici düzeltmeleri: çerçeve dil

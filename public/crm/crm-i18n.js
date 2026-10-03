@@ -107,20 +107,19 @@
     }
   }
 
-  // Düğme üst çubuktaki simgelerin yanına (akışın içine) yerleşir; üst çubuk yoksa sağ üstte sabit durur.
+  // Düğme üst çubuktaki simgelerin yanına (akışın içine) yerleşir. Üst çubuğu olmayan tam ekran sayfalarda
+  // (iş akışı kurucusu gibi) gizlenir: sağ üstte sabit dururken kurucunun Kaydet düğmesinin üstüne biniyordu.
   function placeToggle(el) {
     var host = document.querySelector("header.hl_header .hl_header--controls");
     if (host) {
       if (el.parentNode !== host) host.insertBefore(el, host.firstChild);
+      el.style.display = "flex";
       el.style.position = "static";
       el.style.margin = "0 10px 0 0";
       el.style.alignSelf = "center";
-    } else if (document.body && el.parentNode !== document.body) {
-      document.body.appendChild(el);
-      el.style.position = "fixed";
-      el.style.top = "14px";
-      el.style.right = "16px";
-      el.style.margin = "0";
+    } else {
+      if (!el.parentNode && document.body) document.body.appendChild(el); // tekrar tekrar oluşturulmasın
+      el.style.display = "none";
     }
   }
 
@@ -440,6 +439,12 @@
     }],
     [new RegExp("^" + M + " (\\d{1,2}), (\\d{4}) [–-] " + M + " (\\d{1,2}), (\\d{4})$"), function (x, m1, d1, y1, m2, d2, y2) {
       return d1 + " " + ms(m1) + " " + y1 + " – " + d2 + " " + ms(m2) + " " + y2;
+    }],
+    [new RegExp("^" + M + " (\\d{1,2}),? (\\d{4}),? (\\d{1,2}):(\\d{2}) ?(AM|PM|am|pm)$"), function (x, m1, d, y, h, mm, ap) {
+      return d + " " + ms(m1) + " " + y + ", " + to24(h, mm, ap); // "Jun 02 2026, 2:50 PM" → "02 Haz 2026, 14:50"
+    }],
+    [new RegExp("^" + M + " (\\d{1,2}) (\\d{4})$"), function (x, m1, d, y) {
+      return d + " " + ms(m1) + " " + y;
     }],
     [new RegExp("^" + M + " (\\d{1,2}), (\\d{4}|20XX)$"), function (x, m1, d, y) {
       return d + " " + ms(m1) + " " + y;
@@ -1007,6 +1012,24 @@
     }
     return out;
   }
+  // Bakım: çerçevede oluşan hatalar ve yüklenemeyen dosyalar (yalnız son 30, kısaltılmış) — vekilden geçen
+  // uygulamada bir özellik bozulursa görebilmek için {gaiCollect: 1} cevabına eklenir.
+  var frameErrors = [];
+  function noteFrameError(t) {
+    if (frameErrors.length >= 30) frameErrors.shift();
+    frameErrors.push(String(t).slice(0, 160));
+  }
+  if (FRAME) {
+    window.addEventListener("error", function (e) {
+      var tg = e && e.target;
+      if (tg && tg !== window && (tg.src || tg.href)) noteFrameError("load " + (tg.tagName || "") + " " + String(tg.src || tg.href).replace(/[?#].*$/, ""));
+      else noteFrameError("error " + (e && e.message));
+    }, true);
+    window.addEventListener("unhandledrejection", function (e) {
+      var r = e && e.reason;
+      noteFrameError("rejection " + (r && (r.message || r.status || r)));
+    });
+  }
   if (FRAME) {
     window.addEventListener("message", function (e) {
       if (!e.data || e.data.gaiCollect !== 1 || e.source !== window.parent) return;
@@ -1028,8 +1051,25 @@
           }
         }
       } catch (x) {}
+      // Ekranda İngilizce kalan arayüz metinleri (çeviri avıyla aynı ölçüt: kişi verisi alanları hariç)
+      var texts = {};
       try {
-        window.parent.postMessage({ gaiFrameCatalog: { frame: window.__gaiCrmFrame, path: location.pathname.replace(/location\/[A-Za-z0-9]+/, "location/~"), instances: res } }, "*");
+        var ui = document.querySelectorAll(HUNT_UI);
+        for (var u = 0; u < ui.length && u < 6000; u++) {
+          if (ui[u].closest(HUNT_SKIP)) continue;
+          for (var c = ui[u].firstChild; c; c = c.nextSibling) {
+            var tt = c.nodeType === 3 ? c.nodeValue.replace(/\s+/g, " ").trim() : "";
+            if (tt && tt.length <= 100 && !/[çğıöşüÇĞİÖŞÜ]/.test(tt) && HUNT_EN.test(tt) && !/@|https?:/.test(tt)) texts[tt] = 1;
+          }
+        }
+      } catch (x) {}
+      try {
+        var failed = [];
+        try {
+          var rs = performance.getEntriesByType("resource");
+          for (var q = 0; q < rs.length; q++) if (rs[q].responseStatus >= 400) failed.push(rs[q].responseStatus + " " + rs[q].name.replace(/[?#].*$/, "").slice(0, 120));
+        } catch (x) {}
+        window.parent.postMessage({ gaiFrameCatalog: { frame: window.__gaiCrmFrame, path: location.pathname.replace(/location\/[A-Za-z0-9]+/, "location/~"), instances: res, texts: Object.keys(texts), errors: frameErrors.slice(), failed: failed.slice(0, 30) } }, "*");
       } catch (x) {}
     });
   }
