@@ -406,6 +406,7 @@
           var v = prov[syms[j]];
           if (v && v.global && typeof v.global.mergeLocaleMessage === "function" && typeof v.global.getLocaleMessage === "function") {
             patchInstance(els[i], v.global);
+            if (huntActive && !v.global.__gaiTr) huntInstance(els[i], v.global);
             break;
           }
         }
@@ -415,7 +416,115 @@
         textPassDone = true;
         trTree(document.body, catalog.text); // ilk tam geçiş; sonrası değişen düğümlerle (gözlemci)
       }
+      if (huntActive) huntScan();
     } catch (e) {}
+  }
+
+  /* ---------- Çeviri avı (gizli bakım modu): ?gai_hunt=1 açar, ?gai_hunt=0 kapatır ----------
+   * Türkçe açıkken ekranda İngilizce kalan arayüz metinlerini ve hiç eşleşmeyen i18n kataloglarını
+   * yalnız bu tarayıcıda (localStorage) biriktirir; hiçbir yere gönderilmez. Sol alttaki rozetten kopyalanır.
+   * Kişi/mesaj verisi toplamamak için yalnız arayüz öğelerine bakılır (düğme, sekme, başlık, etiket,
+   * tablo başlığı, menü, yer tutucu…); tablo gövdesi, mesaj alanları ve yazı alanları hariç. */
+  var HUNT_KEY = "gai_crm_hunt";
+  var HUNT_LOG = "gai_crm_hunt_log";
+  var huntActive = (function () {
+    try {
+      var m = location.search.match(/[?&]gai_hunt=(0|1)(?:&|$)/);
+      if (m) localStorage.setItem(HUNT_KEY, m[1]);
+      return localStorage.getItem(HUNT_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  })();
+  var hunt = null;
+  var huntLast = 0;
+  var HUNT_UI = "button,[role=button],[role=tab],[role=menuitem],[role=option],label,th,h1,h2,h3,h4,h5,legend,summary," +
+    "[class*=title],[class*=header],[class*=label],[class*=empty],[class*=tab],[class*=menu],[class*=tooltip],[class*=badge],[class*=chip]";
+  var HUNT_SKIP = "tbody,textarea,input,[contenteditable],[class*=message],[class*=Message],[class*=conversation-body],[class*=email-body],#__gai_lang_toggle,#__gai_hunt";
+  var HUNT_EN = /\b(the|your|you|to|for|with|and|of|is|are|this|that|no|not|add|new|create|edit|delete|save|cancel|search|filter|sort|view|show|hide|select|all|none|more|settings|contacts?|opportunit\w*|pipelines?|calendars?|appointments?|conversations?|messages?|payments?|invoices?|products?|emails?|reports?|import|export|status|actions?|name|phone|date|time|today|week|month|total|open|won|lost|tags?|owner|assigned|due|tasks?|notes?|loading|learn|manage|connect|enable|disable|update|upload|download|next|back|close|done|apply|reset|clear|start|end|type|details?|overview|list|users?|team|price|amount|source|created|updated|last|first|group|duration|followers?|unassigned|groups?|blocked|slots?|buffer)\b/i;
+  function huntData() {
+    if (hunt) return hunt;
+    try {
+      hunt = JSON.parse(localStorage.getItem(HUNT_LOG) || "null");
+    } catch (e) {}
+    hunt = hunt && hunt.s ? hunt : { s: {}, i: {} };
+    return hunt;
+  }
+  function huntSave() {
+    try {
+      localStorage.setItem(HUNT_LOG, JSON.stringify(hunt));
+    } catch (e) {}
+  }
+  function huntAdd(t, kind) {
+    t = (t || "").replace(/\s+/g, " ").trim();
+    if (!t || t.length > 100 || /[çğıöşüÇĞİÖŞÜ]/.test(t) || !HUNT_EN.test(t) || /@|https?:/.test(t)) return false;
+    var d = huntData();
+    if (d.s[t]) return false;
+    d.s[t] = { k: kind, p: location.pathname.replace(/\/location\/[A-Za-z0-9]+/, "/location/~").slice(0, 80) };
+    return true;
+  }
+  function huntInstance(rootEl, g) {
+    var loc = g.locale && g.locale.value;
+    if (!isEnglish(loc)) return;
+    var msgs = g.getLocaleMessage(loc) || {};
+    var keys = Object.keys(msgs);
+    if (!keys.length) return;
+    var sig = keys.slice(0, 6).join(",");
+    var d = huntData();
+    if (d.i[sig]) return;
+    d.i[sig] = { n: keys.length, root: (rootEl.id || String(rootEl.className || "")).slice(0, 40), p: location.pathname.replace(/\/location\/[A-Za-z0-9]+/, "/location/~").slice(0, 80) };
+    huntSave();
+    huntBadge();
+  }
+  function huntScan() {
+    var now = Date.now();
+    if (now - huntLast < 1500) return;
+    huntLast = now;
+    if (!document.getElementById("__gai_hunt")) huntBadge();
+    var added = false;
+    var els = document.querySelectorAll(HUNT_UI);
+    for (var i = 0; i < els.length && i < 4000; i++) {
+      var el = els[i];
+      if (el.closest(HUNT_SKIP)) continue;
+      for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && huntAdd(c.nodeValue, "text")) added = true;
+      if (el.children.length === 0 && huntAdd(el.textContent, "text")) added = true;
+    }
+    var attrs = document.querySelectorAll("[placeholder],[title],[aria-label]");
+    for (var a = 0; a < attrs.length && a < 4000; a++) {
+      if (attrs[a].closest(HUNT_SKIP.replace("textarea,input,", ""))) continue;
+      for (var k = 0; k < ATTRS.length; k++) if (huntAdd(attrs[a].getAttribute(ATTRS[k]), ATTRS[k])) added = true;
+    }
+    if (added) {
+      huntSave();
+      huntBadge();
+    }
+  }
+  function huntBadge() {
+    if (!document.body) return;
+    var d = huntData();
+    var el = document.getElementById("__gai_hunt");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "__gai_hunt";
+      el.style.cssText = "position:fixed;left:12px;bottom:12px;z-index:2147483000;background:#101828;color:#fff;border-radius:10px;" +
+        "padding:6px 10px;font:600 11px/1.4 Inter,system-ui,sans-serif;display:flex;gap:8px;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.25)";
+      el.innerHTML = '<span data-c></span><button data-a="copy" style="all:unset;cursor:pointer;color:#84caff">Kopyala</button>' +
+        '<button data-a="clear" style="all:unset;cursor:pointer;color:#fda29b">Temizle</button>';
+      el.addEventListener("click", function (e) {
+        var a = e.target && e.target.getAttribute && e.target.getAttribute("data-a");
+        if (a === "copy") {
+          try {
+            navigator.clipboard.writeText(JSON.stringify(huntData(), null, 1));
+          } catch (x) {}
+        } else if (a === "clear") {
+          hunt = { s: {}, i: {} };
+          huntSave();
+          huntBadge();
+        }
+      });
+      document.body.appendChild(el);
+    }
+    el.querySelector("[data-c]").textContent = "Çeviri avı: " + Object.keys(d.s).length + " metin · " + Object.keys(d.i).length + " katalog";
   }
 
   /* ---------- Sayfa sözlüğü: katalogda olmayan, GHL kodunda sabit yazılı metinler ---------- */

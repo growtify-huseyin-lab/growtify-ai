@@ -34,8 +34,11 @@ bu dosyanın o anki özetidir.
 - **1.0.0** — 2026-10-03 — Lansman. Yükleyici GHL Ajans Ayarları → White Label → Custom JS'te (CEO "yayına al";
   favicon betiği korundu). Varsayılan dil Türkçe; Harrington Housing ve Rentser alt hesapları İngilizce açılır
   (CEO kararı); kişinin TR/EN seçimi her zaman önce gelir (`crm-config.json`: `default`, `english`, `turkish`).
-  Tarih seçicilerde ay ve gün adları Türkçe (Ekim 2026, Pz Pt Sa Ça Pe Cu Ct). Panoda kalan başlıklar Türkçe
-  (Dönüşüm Oranı, Aşama Dağılımı, Satış Verimliliği, Google Analytics grafikleri, bağlantı uyarısı).
+  Tarih seçicilerde ay ve gün adları Türkçe (Ekim 2026, Pz Pt Sa Ça Pe Cu Ct); takvim görünümünde gün başlıkları
+  ("28 Pzt"), 24 saat etiketleri ve tarih aralığı ("28 Eyl – 4 Eki 2026"); listelerdeki tarih metinleri
+  ("3 Eki 2026"). Panoda kalan başlıklar ve CEO'nun bildirdiği metinler Türkçe. Gizli bakım modu
+  **çeviri avı** (`?gai_hunt=1` açar, `?gai_hunt=0` kapatır): Türkçe açıkken ekranda İngilizce kalan arayüz
+  metinlerini ve eşleşmeyen katalogları yalnız tarayıcıda biriktirir, sol alttaki rozetten kopyalanır.
 - **0.3.0** — 2026-10-03 (#151, aynı gün yayına alındı) — Yayın adayı: 97 parçanın tamamı çevrildi (58 bin metin; ana kabuk + sohbet, takvim,
   ödeme, pazar yeri, nesneler, hediye kartı uygulamaları). Son kontrol: terim birliği (Niyet, Fiyat Teklifi,
   Kampanya, Çoğalt/Kopyala, Google İşletme Profili, Transkript…), white-label (metinlerde HighLevel/GHL/
