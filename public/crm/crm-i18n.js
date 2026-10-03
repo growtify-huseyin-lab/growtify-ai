@@ -915,12 +915,13 @@
     };
     var warmQueue = [];
     var warming = null;
+    var opening = {}; // ilk açılışı süren ekranlar: arka plan hazırlığı aynı dosyaları ayrıca indirmesin
     var warmFailed = {};
     var warmDone = {};
     var warmNext = function () {
       if (warming || !warmQueue.length) return;
       var px = warmQueue.shift();
-      if (warmAge(px) < 36e5 || down[px] || !goodNet() || Date.now() - (warmFailed[px] || 0) < 36e5) return warmNext();
+      if (opening[px] || warmAge(px) < 36e5 || down[px] || !goodNet() || Date.now() - (warmFailed[px] || 0) < 36e5) return warmNext();
       warming = px;
       var f = document.createElement("iframe");
       f.setAttribute("aria-hidden", "true");
@@ -960,6 +961,7 @@
     setInterval(warmAll, 36e5);
     var watch = function (frame, orig, px, cold) {
       var restore = function () {
+        delete opening[px];
         if (!frame.isConnected) return; // kişi o ekrandan çıktı: vekil bozuk sayılmaz
         down[px] = true;
         sd.set.call(frame, orig);
@@ -982,6 +984,7 @@
         var t0 = Date.now();
         setTimeout(function () {
           if (!(lastMsg[px] >= t0)) return restore();
+          delete opening[px];
           // İlk açılış başarıyla bitti: dosyalar artık tarayıcıda → ekran bundan sonra hazır sayılır.
           if (warmList[px] && !isReady(px)) {
             var all = readWarm();
@@ -1013,6 +1016,7 @@
           var nu = map[o] + u.slice(o.length);
           var cold = !isReady(map[o]); // ilk açılış: çerçevede yükleme ekranı (?gai_boot=1), aynı dosyalar arka planda ayrıca inmesin
           if (cold) {
+            opening[map[o]] = Date.now();
             var qi = warmQueue.indexOf(map[o]);
             if (qi !== -1) warmQueue.splice(qi, 1);
           }

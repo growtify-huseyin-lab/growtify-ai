@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.9.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.9.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,9 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.9.1** — 2026-10-03 — İlk açılış süren ekran arka plan hazırlık sırasından çıkarılır (aynı dosyalar iki kez inmesin).
+  Uçtan uca denendi (CEO tarayıcısı): takvim ekranının "hazır" kaydı silinip açıldı → vekilden Türkçe geldi, kayıt yeniden
+  yazıldı; ancak açılış sürerken arka plan hazırlığı da aynı ekranı başlatmıştı (dosyalar önbellekte olduğu için zararsızdı).
 - **1.9.0** — 2026-10-03 — **İlk açılışta İngilizce yerine Growtify yükleme ekranı (CEO önerisi).** CEO ilkesi: "ilk yüklemede,
   eğer bir daha beklemeyecekse bekleme toleransı olabilir; devam süreçlerinde başka bekleme kabul edilemez." Hazır olmayan
   gömülü ekran artık GHL'in İngilizce sürümüne düşmüyor: kullanılabilir bağlantıda vekilden açılır, çerçevede Growtify yükleme
