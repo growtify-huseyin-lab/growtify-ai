@@ -84,7 +84,9 @@
   "proxy": "https://crm-formlar.growtify.app",
   "screens": "Siteler > Formlar / Anketler / Testler oluşturucusu (tam ekran)",
   "noDom": true,
-  "_noDom_note": "Tuvaldeki form önizlemesi kişinin kendi içeriği; sayfa sözlüğü uygulanmaz, yalnız uygulama kataloğu."
+  "_noDom_note": "Tuvaldeki form önizlemesi kişinin kendi içeriği; sayfa sözlüğü uygulanmaz, yalnız uygulama kataloğu.",
+  "domOnly": ".sidebar-elements-tabs, .field-name-sidebar",
+  "_domOnly_note": "Sözlük yalnız sol öğe paletinde ve alan ayarları etiketlerinde (tuval hariç)."
  },
  "page": {
   "origin": "https://page-builder.leadconnectorhq.com",

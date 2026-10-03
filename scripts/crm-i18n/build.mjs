@@ -71,12 +71,25 @@ for (const id of frameIds) {
   delete fc.textPages; // sayfa sözlükleri CRM sayfalarına ait
   // Yalnız o uygulamada geçerli birebir metinler (ör. sunucudan gelen tür adları): frames.json "<id>".text
   if (frames[id].text) fc.text = { ...fc.text, ...clean(frames[id].text) };
-  // Oluşturucularda sayfa sözlüğü kapalı (tuvaldeki önizleme kişinin içeriği): yalnız katalog.
+  // Oluşturucularda sayfa sözlüğü kapalı (tuvaldeki önizleme kişinin içeriği): yalnız katalog. domOnly verilmişse sözlük
+  // yalnız o arayüz alanlarında (ör. öğe paleti) uygulanır; uygulamanın kataloğundan kısa, tek anlamlı İngilizce → Türkçe eklenir
+  // (uygulama bazı adları açılışta bir kez hesaplıyor, Türkçe katalog sonradan gelince güncellenmiyor).
   if (frames[id].noDom) {
     fc.noDom = true;
-    fc.text = {};
     fc.textRules = [];
     delete fc.dom;
+    if (frames[id].domOnly) {
+      const seen = {};
+      for (const [k, v] of Object.entries(en)) {
+        if (!k.startsWith(id + "::") || typeof v !== "string" || v.length > 80 || /[{}<@|]/.test(v)) continue;
+        const t = tr[k];
+        if (typeof t !== "string" || !t || t === v || /[{}<@|]/.test(t)) continue;
+        (seen[v] = seen[v] || new Set()).add(t);
+      }
+      const fromCatalog = Object.fromEntries(Object.entries(seen).filter(([, s]) => s.size === 1).map(([v, s]) => [v, [...s][0]]));
+      fc.text = { ...fc.text, ...fromCatalog, ...clean(frames[id].text || {}) };
+      fc.domOnly = frames[id].domOnly;
+    } else fc.text = {};
   }
   fs.writeFileSync(path.join(framesDir, id + ".json"), JSON.stringify(fc));
   frameReport[id] = fs.statSync(path.join(framesDir, id + ".json")).size;
