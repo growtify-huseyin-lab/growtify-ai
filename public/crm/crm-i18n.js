@@ -1124,6 +1124,26 @@
     loadFails++;
     nextLoad = Date.now() + Math.min(300000, 2000 * Math.pow(2, loadFails));
   }
+  // Hızlı başlangıç: Türkçe açılacağı belli olan sayfada katalog, ayar dosyası beklenmeden istenir (bir gidiş-dönüş
+  // kazanılır). Belirti: çerçevenin dil işareti, kişinin dil seçimi ya da son ayar dosyasından kalan küçük özet.
+  var prefetched = null;
+  function fetchCatalog() {
+    return fetch(CATALOG_URL).then(function (r) {
+      return r.ok ? r.json() : null;
+    });
+  }
+  function likelyTr() {
+    if (FRAME) return frameLang === "tr";
+    var c = getChoice();
+    if (c) return c === "tr";
+    try {
+      var h = JSON.parse(localStorage.getItem("gai_crm_cfg_hint") || "null");
+      var loc = locationId();
+      return !!(h && h.d === "tr" && !(loc && (h.e || []).indexOf(loc) !== -1));
+    } catch (e) {
+      return false;
+    }
+  }
   function loadCatalog() {
     if (catalog || loading || Date.now() < nextLoad) return;
     if (window.__gaiCrmCatalog) {
@@ -1133,10 +1153,9 @@
       return;
     }
     loading = true;
-    fetch(CATALOG_URL)
-      .then(function (r) {
-        return r.ok ? r.json() : null;
-      })
+    var req = prefetched || fetchCatalog();
+    prefetched = null;
+    req
       .then(function (j) {
         if (!(j && j.instances)) return loadFailed();
         loading = false;
@@ -1198,9 +1217,18 @@
     } catch (e) {}
   }
 
+  try {
+    if (!window.__gaiCrmCatalog && likelyTr()) {
+      prefetched = fetchCatalog();
+      prefetched.catch(function () {}); // kullanılmazsa sessiz; kullanılırsa hatayı loadCatalog ele alır
+    }
+  } catch (e) {}
+
   if (window.__gaiCrmConfig) {
     config = window.__gaiCrmConfig;
     start();
+  } else if (FRAME && frameLang) {
+    start(); // çerçevede dil vekilin işaretinden belli: ayar dosyası beklenmez
   } else {
     try {
       fetch(CONFIG_URL)
@@ -1208,7 +1236,12 @@
           return r.ok ? r.json() : null;
         })
         .then(function (j) {
-          if (j && typeof j === "object" && (j.default || j.english || j.turkish || j.locations)) config = j;
+          if (j && typeof j === "object" && (j.default || j.english || j.turkish || j.locations)) {
+            config = j;
+            try {
+              localStorage.setItem("gai_crm_cfg_hint", JSON.stringify({ d: j.default, e: j.english || [] }));
+            } catch (e) {}
+          }
         })
         .catch(function () {})
         .then(start);

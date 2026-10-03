@@ -227,3 +227,13 @@ Exception: `affiliate.lead_exist_warning` receives the campaign's real name in `
 app code (`$t(key, {campaignName: ….label})`) before removing a term placeholder from a new string. Real entity names
 (`{affiliate}`, `{campaign}`, `{current_affiliate}`, `{new_affiliate}`, `{parentAffiliateName}`) always stay.
 `validate.mjs` reports the removed term placeholders as errors; that is expected for this app only.
+
+## Round 7 — `vibe` = Yapay Zeka Stüdyosu (2026-10-03)
+AI website/app builder (full screen). It has its own message catalog (collected via `{gaiCollect:1}` from the CRM tab with
+`sessionStorage.gai_frame_proxy` → `crm-studyo`). Terms: project → proje, template → şablon, starred → yıldızlı, publish →
+yayınla (published → yayında, unpublished → yayımlanmadı), deploy → yayına al, build error → derleme hatası, prompt → istem,
+secret → gizli anahtar, slug → kısa ad, visual edits → görsel düzenlemeler, margin → dış boşluk, padding → iç boşluk.
+Typewriter heading = `prompt.typewriter_prefix` + `prompt.typewriter_N` → prefix "Hadi " and full Turkish phrases
+("bir açılış sayfası oluşturalım"). Percent: write "yüzde {value}" — `%{` is Rails-style interpolation in vue-i18n and
+drops the sign. Hard-coded strings (template names, What's new modal) live in `source/frames.json` → `vibe.text`; the 12
+template prompts are replaced in the app file by the Worker (`workers/crm-frames` `JS_TEXT`).

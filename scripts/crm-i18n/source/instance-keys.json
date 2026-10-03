@@ -5520,5 +5520,25 @@
  ],
  "conv": [
   "conversations"
+ ],
+ "vibe": [
+  "banner",
+  "chat",
+  "code",
+  "common",
+  "dashboard",
+  "details",
+  "domainConnect",
+  "integrations",
+  "more",
+  "nav",
+  "permission_denied",
+  "preview",
+  "prompt",
+  "publish",
+  "settings",
+  "usage",
+  "version",
+  "visualEdits"
  ]
 }
