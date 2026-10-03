@@ -122,7 +122,12 @@
         b.title = lang === "tr" ? "Türkçe" : "English";
         b.style.cssText = "border:0;border-radius:999px;padding:5px 8px;cursor:pointer;";
         b.addEventListener("click", function () {
-          if (decide() === lang) return;
+          if (decide() === lang) {
+            // Bir gömülü ekran güvenlik ağıyla GHL'in İngilizce sürümüne döndüyse TR'ye basmak Türkçeyi yeniden dener
+            // (sayfa yenilenir; ikinci deneme hızlıdır, dosyalar ilk denemede inmiş olur).
+            if (lang === "tr" && window.__gaiFrameFellBack) location.reload();
+            return;
+          }
           setChoice(lang);
           location.reload();
         });
@@ -132,7 +137,13 @@
     placeToggle(el);
     var btns = el.querySelectorAll("button");
     for (var i = 0; i < btns.length; i++) {
-      var on = btns[i].getAttribute("data-lang") === current;
+      var bl = btns[i].getAttribute("data-lang");
+      if (bl === "tr") {
+        var retry = !!window.__gaiFrameFellBack && current === "tr";
+        btns[i].textContent = retry ? "TR ↻" : "TR";
+        btns[i].title = retry ? "Bu ekran İngilizce açıldı — Türkçe yeniden yükle" : "Türkçe";
+      }
+      var on = bl === current;
       btns[i].style.background = on ? "#155eef" : "transparent";
       btns[i].style.color = on ? "#fff" : "#475467";
       btns[i].setAttribute("aria-pressed", on ? "true" : "false");
@@ -965,6 +976,12 @@
         if (!frame.isConnected) return; // kişi o ekrandan çıktı: vekil bozuk sayılmaz
         down[px] = true;
         sd.set.call(frame, orig);
+        // TR düğmesi "yeniden dene" olur (iç içe çerçevede üst pencereye haber verilir).
+        window.__gaiFrameFellBack = true;
+        try {
+          if (FRAME) window.parent.postMessage({ gaiFellBack: 1 }, "*");
+          else renderToggle(mode);
+        } catch (e) {}
       };
       // Yükleme 25 sn'de bitmezse GHL adresine dönülür. Ama çerçevedeki yükleyici "buradayım" dediyse vekil çalışıyor,
       // uygulama yalnız iniyor (büyük oluşturucular ilk açılışta 26 MB; GHL'in kendi sürümü tarayıcı önbelleğinden
@@ -1145,8 +1162,14 @@
         if (e.__gai || !rev[e.origin]) return;
         lastMsg[e.origin] = Date.now();
         e.stopImmediatePropagation();
-        if (e.data && typeof e.data === "object" && (e.data.gaiFrameAlive || e.data.gaiWarm)) {
+        if (e.data && typeof e.data === "object" && (e.data.gaiFrameAlive || e.data.gaiWarm || e.data.gaiFellBack)) {
           // yalnız bizim için: uygulamaya iletilmez
+          if (e.data.gaiFellBack && !FRAME) {
+            window.__gaiFrameFellBack = true;
+            try {
+              renderToggle(mode);
+            } catch (x) {}
+          }
           var wm = e.data.gaiWarm;
           if (wm) {
             var ok = !wm.bad; // hiç dosya yoksa (uygulama dosyalarını GHL'in dağıtım ağından alıyor) zaten hazır
