@@ -144,6 +144,47 @@ class AssetRewriter {
   }
 }
 
+// Adında içerik özeti olan dosya (ör. index-lo00jb0I.js, Frame1.7d8ea9f0.svg) hiç değişmez; GHL yeni sürüm çıkarınca adı da
+// değişir → tarayıcıda uzun süre tutulur (oluşturucular 26 MB; her gün yeniden inmesin). Özeti olmayan ya da bizim metnini
+// değiştirdiğimiz (JS_TEXT) dosyalar 1 gün. Özet sayılan: son parçada en az 8 harf/rakam ve rakam ya da büyük-küçük karışık.
+function immutableAsset(pathname) {
+  const m = pathname.match(/[-.]([A-Za-z0-9_]{8,})\.[a-z0-9]+$/);
+  if (!m) return false;
+  const h = m[1];
+  return /[0-9]/.test(h) || (/[A-Z]/.test(h) && /[a-z]/.test(h));
+}
+
+// Önce hazırla (/__gai/warm): CRM'deki yükleyici bir ekranı ancak uygulama dosyaları tarayıcıda hazırsa vekilden açar;
+// hazır değilse GHL'in kendi sürümü anında açılır, bu küçük sayfa da görünmez bir çerçevede arka planda (düşük öncelik,
+// sırayla) uygulamanın açılış dosyalarını tarayıcı önbelleğine alır ve bitince üst pencereye haber verir. Dosya listesi
+// uygulamanın o anki giriş sayfasından okunur; liste özeti (sig) GHL yeni sürüm çıkardığında değişir.
+function fnv1a(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) {
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h.toString(16);
+}
+async function warmPage(app) {
+  const r = await fetch(app.origin + "/", { headers: { "user-agent": "Mozilla/5.0 (growtify-crm-frames warm)" } });
+  const html = r.ok ? await r.text() : "";
+  const list = [...new Set([...html.matchAll(/(?:src|href)="(\/assets\/[^"?#]+\.(?:js|css))"/g)].map((m) => m[1]))].sort();
+  const sig = fnv1a(list.join("|"));
+  const body =
+    '<!doctype html><meta charset="utf-8"><title>gai</title><script>(function(){var A=' +
+    JSON.stringify(list) +
+    ",F=" +
+    JSON.stringify(app.frame) +
+    ",S=" +
+    JSON.stringify(sig) +
+    ',t0=Date.now(),i=0,d=0,n=A.length,bad=0;function fin(){try{parent.postMessage({gaiWarm:{frame:F,sig:S,n:n,bad:bad,ms:Date.now()-t0}},"*")}catch(e){}}' +
+    'function next(){if(i>=n)return;var u=A[i++];var o={credentials:"same-origin"};try{o.priority="low"}catch(e){}' +
+    'fetch(u,o).then(function(r){if(!r.ok)bad++;return r.arrayBuffer()}).catch(function(){bad++}).then(function(){d++;if(d===n)fin();else next()})}' +
+    "if(!n)fin();for(var k=0;k<3;k++)next()})();</script>";
+  return new Response(body, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" } });
+}
+
 class HeadInjector {
   constructor(frame) {
     this.frame = frame;
@@ -168,6 +209,7 @@ export default {
     if (request.method !== "GET" && request.method !== "HEAD") {
       return new Response("Method not allowed", { status: 405, headers: { allow: "GET, HEAD" } });
     }
+    if (url.pathname === "/__gai/warm") return warmPage(app);
 
     const trAsset = request.method === "GET" && ASSET_TR[app.frame] && ASSET_TR[app.frame][url.pathname];
     if (trAsset) {
@@ -194,9 +236,16 @@ export default {
     const cacheKey = cache
       ? new Request(url.origin + url.pathname + (jsText ? "?gai_t=" + JS_TEXT_VERSION : ""), { method: "GET" })
       : null;
+    const assetCacheControl = !jsText && immutableAsset(url.pathname) ? "public, max-age=31536000, immutable" : "public, max-age=86400";
     if (cache) {
       const hit = await cache.match(cacheKey);
-      if (hit) return hit;
+      if (hit) {
+        // Önbellekteki kopya eski kuralla saklanmış olabilir: tarayıcıya giden süre her zaman güncel kurala göre.
+        if (hit.headers.get("cache-control") === assetCacheControl) return hit;
+        const r = new Response(hit.body, hit);
+        r.headers.set("cache-control", assetCacheControl);
+        return r;
+      }
     }
     const upstream = await fetch(app.origin + url.pathname + url.search, { method: request.method, headers, redirect: "manual" });
 
@@ -225,7 +274,7 @@ export default {
     }
     const res = new Response(body, { status: upstream.status, headers: out });
     if (cache && upstream.status === 200) {
-      res.headers.set("cache-control", "public, max-age=86400");
+      res.headers.set("cache-control", assetCacheControl);
       if (ctx && ctx.waitUntil) ctx.waitUntil(cache.put(cacheKey, res.clone()));
     }
     return res;

@@ -24,17 +24,29 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.7.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.8.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
 | Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.6** | Yayında |
-| E-posta oluşturucu | crm-eposta-tasarim.growtify.app — E-postalar çerçevesinin içinde iç içe (email-builder-prod) | **1.7.0** | Katalog + iç içe vekil hazır; kullanıcıya kapalı (denemede) |
+| E-posta oluşturucu | crm-eposta-tasarim.growtify.app (email-builder-prod) — şablon düzenleyici CRM sayfasında; kampanya düzenleyicisi E-postalar içinde iç içe | **1.8.0** | Şablon düzenleyici açık (önce hazırla ile); kampanya düzenleyicisi (iç içe) denemede |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.8.0** — 2026-10-03 — **Önce hazırla: Türkçe ekranlar hiçbir zaman GHL'den yavaş açılmaz (CEO: "tık diye gelmesi lazım").**
+  Ölçüm: vekilden açılan uygulamaların açılış dosyaları GHL'inkinden ayrı iniyor (sıkıştırılmış: e-posta oluşturucu 7,1 MB,
+  E-postalar 4,8, sayfa oluşturucu 4,7, İşletme Profili 3,7, takvim 3,2, form 2,7, sohbet/ortaklık 1,3–1,5 MB; Otomasyon
+  dosyalarını zaten GHL'den aldığı için ek yok). İlk açılışta e-posta oluşturucu 65 sn sürdü; dosyalar tarayıcıdayken
+  2,1 sn (GHL'in kendisi 1,7 sn). Kural: `crm-config.json` `warm` listesindeki ekran ancak dosyaları bu tarayıcıda hazırsa
+  vekilden (Türkçe) açılır; hazır değilse GHL'in kendi sürümü anında açılır ve dosyalar arka planda, görünmez bir çerçevede
+  (vekilin `/__gai/warm` sayfası) yalnız iyi bağlantıda (mobil veri tasarrufu / 2G / 3G'de hiç), sırayla ve düşük öncelikle
+  hazırlanır; CRM açıldıktan 8 sn sonra başlar, 12 saatte bir tazelenir, 7 günden eski kayıt geçersiz. Vekil: adında içerik
+  özeti olan dosyalar tarayıcıda 1 yıl (`immutable`; GHL yeni sürümde adı değiştiriyor), diğerleri 1 gün. Yükleme süresi
+  güvenlik ağı: çerçeve "buradayım" dediyse en çok 45 sn beklenir. Adres çevirmede hata olursa GHL adresi kullanılır.
+  E-posta şablonu düzenleyicisi (`email-builder-prod`) `frames`'e eklendi: CEO'nun tarayıcısında Türkçe açıldı (Email AI
+  paneli, öneriler, düğmeler), şablon içeriği olduğu gibi. Kampanya düzenleyicisi (E-postalar içinde iç içe) henüz kapalı.
 - **1.7.1** — 2026-10-03 — **Güvenlik ağı büyük uygulamaları beklesin.** Şablon düzenleyici CEO'nun tarayıcısında denendi:
   oluşturucu E-postalar'ın içinde değil, CRM'in kendi sayfasında açılıyor (`/emails/create/<id>/builder`, iframe
   `email-builder`) → üst düzey `frames` listesiyle çevrilebilir (kampanya düzenleyicisi E-postalar içinde iç içe). Vekilden
