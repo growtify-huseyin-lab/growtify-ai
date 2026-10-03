@@ -24,17 +24,22 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.5** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.6** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
-| Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.2** | Katalog hazır, kendi sekmede deneniyor |
+| Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.6** | Yayında |
 | E-posta oluşturucu | E-postalar içinde iç içe çerçeve (email-builder-prod / email-builder-beta) | **0.0.0** | Sırada — iç içe vekil gerekiyor |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.6.6** — 2026-10-03 — **Sayfa oluşturucu kullanıcıya açık.** `frames`'e `crm-sayfa` eklendi. CEO'nun tarayıcısında denendi:
+  üst çubuk (Geri, Otomatik kaydetme kapalı, Yayınla, Alan Adı Bağla), Yapay Zekaya Sor paneli, öğe ekleme paneli (Hızlı Ekle,
+  Bölümler, Satırlar, Öğeler; "1 Sütun", "Başlık", "Paragraf") Türkçe; tuvaldeki sayfa (müşterinin içeriği) ve sayfa adları
+  olduğu gibi; tanıda hata yok. Araç çubuğu ipuçları (`.hr-tooltip__content`) iki oluşturucuda da sınırlı sözlükte.
+  Bilinen kozmetik: uygulama bazı başlıkları CSS ile kelime kelime büyütüyor ("Formlar Ve Anketler").
 - **1.6.5** — 2026-10-03 — Sayfa oluşturucu öğe paleti: tanının kapsayıcı izi kartların `.gui__builder-card` olduğunu gösterdi
   → sınırlı sözlüğe eklendi. Vekil yükleyiciyi `?f=2` ile ekliyor (çerçeve önbelleği eski yükleyicide takılı kalmıştı;
   gerektiğinde bu sayı artırılır).
