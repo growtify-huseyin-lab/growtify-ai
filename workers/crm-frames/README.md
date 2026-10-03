@@ -9,6 +9,13 @@ adından sunar ve sayfanın başına aynı yükleyiciyi "çerçeve modunda" ekle
 | `crm-takvim.growtify.app` | `calendar-app.leadconnectorhq.com` | Ayarlar > Takvimler (listeler, tercihler, bağlı hesaplar) | `growtify.ai/crm/frames/calapp.json` |
 | `crm-ayarlar.growtify.app` | `client-app-crm-settings.leadconnectorhq.com` | Ayarlar > İşletme Profili | `growtify.ai/crm/frames/crmset.json` |
 | `crm-eposta.growtify.app` | `ghl-isv-app-prod.leadconnectorhq.com` | Ayarlar > E-posta Hizmetleri | `growtify.ai/crm/frames/isv.json` |
+| `crm-otomasyon.growtify.app` | `client-app-automation-workflows.leadconnectorhq.com` | Otomasyon > İş Akışları | `growtify.ai/crm/frames/wf.json` |
+| `crm-epostalar.growtify.app` | `email-home-prod.leadconnectorhq.com` | Pazarlama > E-postalar | `growtify.ai/crm/frames/email.json` |
+| `crm-sohbet.growtify.app` | `client-app-crm-conversations.leadconnectorhq.com` | Ayarlar > Sohbet Sağlayıcıları | `growtify.ai/crm/frames/conv.json` |
+| `crm-ortaklik.growtify.app` | `client-app-affiliate-manager.leadconnectorhq.com` | Pazarlama > Satış Ortaklığı | `growtify.ai/crm/frames/aff.json` |
+
+Bir adres kullanıcıya ancak `crm-config.json` `frames` listesine eklenince açılır; listede olmayan adres yalnız
+bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
 
 ## Nasıl çalışır
 
@@ -49,6 +56,10 @@ uygulamanın sunulacağı). CRM sekmesinde yalnız o sekme için: `sessionStorag
 
 ## Bakım
 
-GHL bu uygulamalara yeni metin eklediğinde: uygulamanın kendi adresini ayrı sekmede açıp
-`scripts/crm-i18n/tour/frame-extract.js` ile kataloğu indir → farkı çevir → `scripts/crm-i18n/source`'a işle →
-`node scripts/crm-i18n/build.mjs` (frames/<id>.json'u da üretir).
+GHL bu uygulamalara yeni metin eklediğinde kataloğu iki yoldan biriyle al:
+- Uygulama kendi adresinde açılıyorsa (takvim, ayarlar, e-posta hizmetleri, otomasyon): adresi ayrı sekmede aç,
+  `scripts/crm-i18n/tour/frame-extract.js` → `gai-crm-<ad>-katalog.json`.
+- Yalnız CRM içinde açılıyorsa (E-postalar, Sohbet Sağlayıcıları): CRM sekmesinde `sessionStorage.gai_frame_proxy`
+  (GHL adresi → vekil) ve `sessionStorage.gai_frame_lang = "en"` ile ekranı aç; iframe'e `{gaiCollect: 1}` gönder,
+  yükleyici `{gaiFrameCatalog: {frame, path, instances: [{top, flat}]}}` ile cevap verir.
+Sonra farkı çevir → `scripts/crm-i18n/source`'a işle → `node scripts/crm-i18n/build.mjs` (frames/<id>.json'u da üretir).

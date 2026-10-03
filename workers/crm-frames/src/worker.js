@@ -1,13 +1,15 @@
 /**
  * crm-*.growtify.app — GHL CRM'in iframe ile gömdüğü uygulamaları Türkçe katmanla sunar.
  *
- * CRM'deki bazı ekranlar (Ayarlar > Takvimler, İşletme Profili, E-posta Hizmetleri) GHL'in ayrı
+ * CRM'deki bazı ekranlar (Ayarlar > Takvimler, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar,
+ * Sohbet Sağlayıcıları, Satış Ortaklığı) GHL'in ayrı
  * alan adlarındaki uygulamalardan iframe ile gelir; ajans Custom JS oraya ulaşamaz. CRM'deki Türkçe
  * yükleyici (growtify.ai/crm/crm-i18n.js) bu iframe'lerin adresini buradaki karşılığına çevirir; bu
  * Worker aynı uygulamayı GHL'den alıp sayfanın başına yükleyiciyi ekler. Kullanıcı aynı ekranda kalır.
  *
  * Güvenlik:
- *   - Yalnız aşağıdaki GHL uygulama adresleri (açık vekil değil), yalnız GET/HEAD.
+ *   - Yalnız aşağıdaki GHL uygulama adresleri (açık vekil değil), yalnız GET/HEAD. Bir adresin kullanıcıya açılması
+ *     ayrıca crm-config.json "frames" listesine bağlıdır (listede olmayan adres yalnız bakım/deneme içindir).
  *   - İstekte çerez/kimlik başlığı GHL'e iletilmez; yanıttaki Set-Cookie atılır. Uygulamanın kimlik
  *     bilgisi CRM'den tarayıcı içinde mesajla gelir ve API çağrıları doğrudan GHL'e gider — bu Worker'dan
  *     geçmez.
@@ -23,6 +25,10 @@ const APPS = {
   "crm-takvim.growtify.app": { origin: "https://calendar-app.leadconnectorhq.com", frame: "calapp" },
   "crm-ayarlar.growtify.app": { origin: "https://client-app-crm-settings.leadconnectorhq.com", frame: "crmset" },
   "crm-eposta.growtify.app": { origin: "https://ghl-isv-app-prod.leadconnectorhq.com", frame: "isv" },
+  "crm-otomasyon.growtify.app": { origin: "https://client-app-automation-workflows.leadconnectorhq.com", frame: "wf" },
+  "crm-epostalar.growtify.app": { origin: "https://email-home-prod.leadconnectorhq.com", frame: "email" },
+  "crm-sohbet.growtify.app": { origin: "https://client-app-crm-conversations.leadconnectorhq.com", frame: "conv" },
+  "crm-ortaklik.growtify.app": { origin: "https://client-app-affiliate-manager.leadconnectorhq.com", frame: "aff" },
 };
 
 const LOADER_URL = "https://growtify.ai/crm/crm-i18n.js";

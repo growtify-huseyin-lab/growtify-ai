@@ -800,7 +800,12 @@
         if (u.indexOf(o) === 0 && !down[map[o]]) {
           var nu = map[o] + u.slice(o.length);
           if (frame) watch(frame, u, map[o]);
-          return nu + (nu.indexOf("?") === -1 ? "?" : "&") + "gai_lang=" + (mode === "en" ? "en" : "tr");
+          // Bakım: sessionStorage gai_frame_lang=en → çerçeve İngilizce açılır (katalog toplamak için)
+          var fl = null;
+          try {
+            fl = sessionStorage.getItem("gai_frame_lang");
+          } catch (e) {}
+          return nu + (nu.indexOf("?") === -1 ? "?" : "&") + "gai_lang=" + (fl === "en" || mode === "en" ? "en" : "tr");
         }
       }
       return u;
@@ -889,6 +894,100 @@
     );
   }
 
+  /* ---------- Bakım: çerçevedeki uygulamanın kataloğu ----------
+   * CRM (üst pencere) {gaiCollect: 1} gönderirse bu çerçevedeki uygulamanın o anki i18n mesajları düz anahtar
+   * listesi olarak geri gönderilir. GHL'in bazı uygulamaları metinlerini yalnız CRM içinde açılınca yükler;
+   * yeni/değişen metinleri bulmak için kullanılır. Yalnız arayüz metinleri gider, kişi verisi değil. İngilizcesi
+   * için çerçeve İngilizce açılmalıdır (üst sekmede sessionStorage gai_frame_lang=en). */
+  var COLLECT_CTX = {
+    normalize: function (a) {
+      return a.join("");
+    },
+    interpolate: function (v) {
+      return v;
+    },
+    named: function (k) {
+      return "{" + k + "}";
+    },
+    list: function (i) {
+      return "{" + i + "}";
+    },
+    plural: function (a) {
+      return a.join(" | ");
+    },
+    linked: function (k) {
+      return "@:" + k;
+    },
+    type: "text",
+    values: {},
+  };
+  function astText(n) {
+    if (n == null) return "";
+    if (typeof n === "string") return n;
+    var t = n.type != null ? n.type : n.t;
+    var items = n.items || (Array.isArray(n.i) ? n.i : null);
+    var stat = n.static != null ? n.static : n.s;
+    if (t === 0) return astText(n.body || n.b);
+    if (t === 1) return (n.cases || n.c || []).map(astText).join(" | ");
+    if (t === 2) return stat != null ? stat : (items || []).map(astText).join("");
+    if (t === 3 || t === 7) return n.value != null ? n.value : n.v;
+    if (t === 4) return "{" + (n.key != null ? n.key : n.k) + "}";
+    if (t === 5) return "{" + (n.index != null ? n.index : n.k != null ? n.k : n.i) + "}";
+    if (t === 9) return "{'" + (n.value != null ? n.value : n.v) + "'}";
+    if (t === 6) return "@:" + astText(n.key || n.k);
+    return "";
+  }
+  function msgText(v) {
+    if (typeof v === "string") return v;
+    if (typeof v === "function") {
+      if (typeof v.source === "string") return v.source;
+      try {
+        var r = v(COLLECT_CTX);
+        return typeof r === "string" ? r : null;
+      } catch (e) {
+        return null;
+      }
+    }
+    if (v && typeof v === "object" && (v.type === 0 || v.t === 0 || v.body || v.b)) return astText(v);
+    return null;
+  }
+  function flattenMsgs(o, p, out) {
+    for (var k in o) {
+      var v = o[k];
+      var key = p ? p + "." + k : k;
+      var s = msgText(v);
+      if (s !== null) out[key] = s;
+      else if (v && typeof v === "object" && !Array.isArray(v)) flattenMsgs(v, key, out);
+    }
+    return out;
+  }
+  if (FRAME) {
+    window.addEventListener("message", function (e) {
+      if (!e.data || e.data.gaiCollect !== 1 || e.source !== window.parent) return;
+      var res = [];
+      try {
+        var els = document.querySelectorAll("#app, [data-v-app]");
+        for (var i = 0; i < els.length; i++) {
+          var app = els[i].__vue_app__;
+          if (!app || !app._context) continue;
+          var prov = app._context.provides;
+          var syms = Object.getOwnPropertySymbols(prov);
+          for (var j = 0; j < syms.length; j++) {
+            var g = prov[syms[j]] && prov[syms[j]].global;
+            if (!g || typeof g.getLocaleMessage !== "function") continue;
+            var loc = g.locale && (g.locale.value || g.locale);
+            var msgs = g.getLocaleMessage(loc) || {};
+            res.push({ root: (els[i].id || String(els[i].className || "")).slice(0, 40), locale: loc, top: Object.keys(msgs), flat: flattenMsgs(msgs, "", {}) });
+            break;
+          }
+        }
+      } catch (x) {}
+      try {
+        window.parent.postMessage({ gaiFrameCatalog: { frame: window.__gaiCrmFrame, path: location.pathname.replace(/location\/[A-Za-z0-9]+/, "location/~"), instances: res } }, "*");
+      } catch (x) {}
+    });
+  }
+
   /* ---------- Akış ---------- */
   var mode = null; // "tr" | "en"
   var loading = false;
@@ -898,8 +997,16 @@
     if (catalog && catalog.version) document.documentElement.setAttribute("data-gai-crm-tr", String(catalog.version));
   }
 
+  // Katalog alınamazsa (ağ hatası, henüz yayında olmayan çerçeve kataloğu) giderek seyrelen aralıklarla yeniden denenir.
+  var loadFails = 0;
+  var nextLoad = 0;
+  function loadFailed() {
+    loading = false;
+    loadFails++;
+    nextLoad = Date.now() + Math.min(300000, 2000 * Math.pow(2, loadFails));
+  }
   function loadCatalog() {
-    if (catalog || loading) return;
+    if (catalog || loading || Date.now() < nextLoad) return;
     if (window.__gaiCrmCatalog) {
       catalog = window.__gaiCrmCatalog; // test için önceden verilmiş katalog
       markVersion();
@@ -912,16 +1019,13 @@
         return r.ok ? r.json() : null;
       })
       .then(function (j) {
+        if (!(j && j.instances)) return loadFailed();
         loading = false;
-        if (j && j.instances) {
-          catalog = j;
-          markVersion();
-          scanCatalog();
-        }
+        catalog = j;
+        markVersion();
+        scanCatalog();
       })
-      .catch(function () {
-        loading = false;
-      });
+      .catch(loadFailed);
   }
 
   function tick() {
