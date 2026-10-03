@@ -174,5 +174,6 @@ bu dosyanın o anki özetidir.
 - **1.0.0** — 2026-10-01 (#147) — teklif ödeme ekranı Türkçe: metinler, Stripe kart alanları, TR telefon, TL biçimi.
 
 ## Bakım araçları
+- **GHL güncelleme takibi** (2026-10-03): `scripts/crm-i18n/watch-ghl.mjs` + GitHub Actions `crm-i18n-watch` (dosya hazır, devreye almak için GitHub `workflow` izni gerekiyor) her gün CRM kabuğunun ve 8 gömülü uygulamanın sürüm izini karşılaştırır; değişen olursa repo'da issue açar (bilgisayardan bağımsız). İzler: `scripts/crm-i18n/source/ghl-versions.json`.
 - Panel: `scripts/panel-i18n/` (EN katalog dökümü → fark → çeviri → doğrulama → derleme).
 - CRM: `scripts/crm-i18n/` (katalog toplama, çeviri rehberi, doğrulama, terim kontrolü, derleme).
