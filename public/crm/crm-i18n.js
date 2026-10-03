@@ -873,6 +873,76 @@
       })(map[o2]);
     }
     var sd = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, "src");
+    /* Önce hazırla: büyük uygulamalar (takvim, ayarlar, e-postalar, oluşturucular…) vekilden açılınca açılış dosyaları
+     * GHL'inkinden ayrı iner (1–7 MB). Bu yüzden bir ekran ancak dosyaları bu tarayıcıda hazırsa vekilden (Türkçe) açılır;
+     * hazır değilse GHL'in kendi sürümü anında açılır (hiçbir zaman GHL'den yavaş değil) ve dosyalar arka planda, görünmez
+     * bir çerçevede (vekilin /__gai/warm sayfası) yalnız iyi bağlantıda, sırayla ve düşük öncelikle hazırlanır.
+     * Liste: crm-config.json "warm" (vekil adresleri); iç içe çerçevede listedeki hepsi. Kayıt: localStorage gai_crm_warm. */
+    var warmList = {};
+    var wl = FRAME ? Object.keys(rev) : config.warm || [];
+    for (var w0 = 0; w0 < wl.length; w0++) if (rev[wl[w0]]) warmList[wl[w0]] = true;
+    var WARM_KEY = "gai_crm_warm";
+    var readWarm = function () {
+      try {
+        return JSON.parse(localStorage.getItem(WARM_KEY) || "{}") || {};
+      } catch (e) {
+        return {};
+      }
+    };
+    var warmAge = function (px) {
+      var r = readWarm()[px];
+      return r && r.t ? Date.now() - r.t : Infinity;
+    };
+    var useProxy = function (px) {
+      return !down[px] && !(warmList[px] && warmAge(px) > 7 * 864e5);
+    };
+    var goodNet = function () {
+      var c = navigator.connection;
+      return !(c && (c.saveData || /2g|3g/.test(c.effectiveType || "")));
+    };
+    var warmQueue = [];
+    var warming = null;
+    var warmFailed = {};
+    var warmDone = {};
+    var warmNext = function () {
+      if (warming || !warmQueue.length) return;
+      var px = warmQueue.shift();
+      if (warmAge(px) < 12 * 36e5 || down[px] || !goodNet() || Date.now() - (warmFailed[px] || 0) < 36e5) return warmNext();
+      warming = px;
+      var f = document.createElement("iframe");
+      f.setAttribute("aria-hidden", "true");
+      f.tabIndex = -1;
+      f.style.cssText = "position:fixed;left:-10000px;top:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none";
+      var tmo;
+      var fin = function (ok) {
+        if (warming !== px) return;
+        clearTimeout(tmo);
+        warming = null;
+        delete warmDone[px];
+        if (!ok) warmFailed[px] = Date.now();
+        try {
+          f.parentNode && f.parentNode.removeChild(f);
+        } catch (e) {}
+        setTimeout(warmNext, 1500);
+      };
+      tmo = setTimeout(function () {
+        fin(false);
+      }, 180000);
+      warmDone[px] = fin;
+      sd.set.call(f, px + "/__gai/warm");
+      (document.body || document.documentElement).appendChild(f);
+    };
+    var scheduleWarm = function (px, first) {
+      if (warming === px || warmQueue.indexOf(px) !== -1) return;
+      if (first) warmQueue.unshift(px);
+      else warmQueue.push(px);
+      setTimeout(warmNext, 0);
+    };
+    var warmAll = function () {
+      for (var px in warmList) scheduleWarm(px, false);
+    };
+    setTimeout(warmAll, FRAME ? 3000 : 8000); // sayfa açılışını beklemeden değil, ondan sonra
+    setInterval(warmAll, 6 * 36e5);
     var watch = function (frame, orig, px) {
       var restore = function () {
         if (!frame.isConnected) return; // kişi o ekrandan çıktı: vekil bozuk sayılmaz
@@ -881,11 +951,12 @@
       };
       // Yükleme 25 sn'de bitmezse GHL adresine dönülür. Ama çerçevedeki yükleyici "buradayım" dediyse vekil çalışıyor,
       // uygulama yalnız iniyor (büyük oluşturucular ilk açılışta 26 MB; GHL'in kendi sürümü tarayıcı önbelleğinden
-      // geldiği için hızlı, vekildeki ilk kez iner) → yükleme bitene kadar beklenir (en çok 2 dk).
+      // geldiği için hızlı, vekildeki ilk kez iner) → yükleme bitene kadar beklenir (en çok 45 sn; "önce hazırla" ile
+      // vekilden yalnız dosyaları hazır ekranlar açıldığı için bu süre normalde hiç dolmaz).
       var t0 = Date.now();
       var loadTimer;
       var check = function () {
-        if (lastMsg[px] >= t0 && Date.now() - t0 < 120000) loadTimer = setTimeout(check, 5000);
+        if (lastMsg[px] >= t0 && Date.now() - t0 < 45000) loadTimer = setTimeout(check, 5000);
         else restore();
       };
       loadTimer = setTimeout(check, 25000);
@@ -899,10 +970,22 @@
       };
       frame.addEventListener("load", onload);
     };
+    // Adres çevirmede beklenmedik bir hata olursa GHL'in kendi adresi kullanılır: ekran hiçbir koşulda bozulmaz.
     var rewrite = function (u, frame) {
+      try {
+        return rewriteUrl(u, frame);
+      } catch (e) {
+        return u;
+      }
+    };
+    var rewriteUrl = function (u, frame) {
       if (typeof u !== "string") return u;
       for (var o in map) {
         if (u.indexOf(o) === 0 && !down[map[o]]) {
+          if (!useProxy(map[o])) {
+            scheduleWarm(map[o], true); // bu sefer GHL'in kendi sürümü; Türkçesi bir sonraki açılışta hazır
+            return u;
+          }
           var nu = map[o] + u.slice(o.length);
           if (frame) watch(frame, u, map[o]);
           // Bakım: sessionStorage gai_frame_lang=en → çerçeve İngilizce açılır (katalog toplamak için)
@@ -984,7 +1067,7 @@
     var catchFrame = function (f) {
       var s = f.getAttribute("src") || "";
       for (var o in map) {
-        if (s.indexOf(o) === 0 && !down[map[o]]) {
+        if (s.indexOf(o) === 0 && useProxy(map[o])) {
           f.src = s; // yamalı ayarlayıcı: vekile çevirir + güvenlik ağını kurar
           return;
         }
@@ -1020,7 +1103,22 @@
         if (e.__gai || !rev[e.origin]) return;
         lastMsg[e.origin] = Date.now();
         e.stopImmediatePropagation();
-        if (e.data && typeof e.data === "object" && e.data.gaiFrameAlive) return; // yalnız bizim için: uygulamaya iletilmez
+        if (e.data && typeof e.data === "object" && (e.data.gaiFrameAlive || e.data.gaiWarm)) {
+          // yalnız bizim için: uygulamaya iletilmez
+          var wm = e.data.gaiWarm;
+          if (wm) {
+            var ok = !wm.bad; // hiç dosya yoksa (uygulama dosyalarını GHL'in dağıtım ağından alıyor) zaten hazır
+            if (ok) {
+              var all = readWarm();
+              all[e.origin] = { s: String(wm.sig || ""), t: Date.now() };
+              try {
+                localStorage.setItem(WARM_KEY, JSON.stringify(all));
+              } catch (x) {}
+            }
+            if (warmDone[e.origin]) warmDone[e.origin](ok);
+          }
+          return;
+        }
         var ev = new MessageEvent("message", {
           data: e.data,
           origin: rev[e.origin],

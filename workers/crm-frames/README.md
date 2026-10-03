@@ -30,6 +30,15 @@ bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
 3. Worker uygulamanın sayfasını GHL'den alır, `<head>` başına küçük bir başlangıç betiği (dil işaretini okur, adresten
    siler) ve yükleyiciyi `async` ekler — uygulama yükleyiciyi beklemez; diğer dosyalar aynen geçer.
 
+## Önce hazırla (`/__gai/warm`)
+
+Vekilden açılan uygulamanın açılış dosyaları GHL'inkinden ayrı indiği için (sıkıştırılmış 1–7 MB) CRM'deki yükleyici bir
+ekranı ancak dosyaları tarayıcıda hazırsa vekilden açar (`crm-config.json` `warm`); hazır değilse GHL'in kendi sürümü anında
+açılır. Hazırlık: yükleyici görünmez bir çerçevede `https://<vekil>/__gai/warm` açar; bu sayfa uygulamanın o anki giriş
+sayfasındaki `/assets/` dosyalarını sırayla (3'er, düşük öncelik) indirip üst pencereye `{gaiWarm: {frame, sig, n, bad, ms}}`
+gönderir (`sig` dosya listesinin özeti; GHL yeni sürüm çıkarınca değişir). Adında içerik özeti olan dosyalar tarayıcıda 1 yıl
+(`immutable`), diğerleri 1 gün tutulur; kenar önbelleğinden verilen eski kopyalarda da süre güncel kurala göre yazılır.
+
 ## İç içe çerçeve (`nested`)
 
 Bazı uygulamalar başka bir GHL uygulamasını kendi içinde iframe ile açar: E-postalar (`crm-epostalar`) bir kampanyayı ya

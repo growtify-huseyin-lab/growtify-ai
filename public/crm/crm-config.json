@@ -10,7 +10,7 @@
   "6skVbw1EYX9ZReZpeAWw": "Rentser"
  },
  "turkish": [],
- "_frames_note": "GHL'in iframe ile gömdüğü ekranlar (takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları, Yapay Zeka Stüdyosu, form/anket/test oluşturucu, sayfa oluşturucu) bu vekil adreslerden Türkçe açılır (workers/crm-frames). Vekil cevap vermezse ekran kendiliğinden GHL'in kendi adresinden açılır. Bir ekranı kapatmak için o satırı, hepsini kapatmak için 'frames'i sil.",
+ "_frames_note": "GHL'in iframe ile gömdüğü ekranlar (takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları, Yapay Zeka Stüdyosu, form/anket/test oluşturucu, sayfa oluşturucu, e-posta şablonu oluşturucu) bu vekil adreslerden Türkçe açılır (workers/crm-frames). Vekil cevap vermezse ekran kendiliğinden GHL'in kendi adresinden açılır. Bir ekranı kapatmak için o satırı, hepsini kapatmak için 'frames'i sil.",
  "frames": {
   "https://calendar-app.leadconnectorhq.com": "https://crm-takvim.growtify.app",
   "https://client-app-crm-settings.leadconnectorhq.com": "https://crm-ayarlar.growtify.app",
@@ -21,6 +21,20 @@
   "https://client-app-crm-conversations.leadconnectorhq.com": "https://crm-sohbet.growtify.app",
   "https://leadgen-vibe-ai-builder.leadconnectorhq.com": "https://crm-studyo.growtify.app",
   "https://leadgen-apps-form-survey-builder.leadconnectorhq.com": "https://crm-formlar.growtify.app",
-  "https://page-builder.leadconnectorhq.com": "https://crm-sayfa.growtify.app"
- }
+  "https://page-builder.leadconnectorhq.com": "https://crm-sayfa.growtify.app",
+  "https://email-builder-prod.leadconnectorhq.com": "https://crm-eposta-tasarim.growtify.app"
+ },
+ "_warm_note": "Önce hazırla: bu vekil ekranlar ancak uygulama dosyaları kişinin tarayıcısında hazırsa Türkçe (vekilden) açılır; hazır değilse GHL'in kendi sürümü anında açılır ve dosyalar arka planda yalnız iyi bağlantıda hazırlanır (hiçbir zaman GHL'den yavaş değil). Otomasyon dosyalarını zaten GHL'den doğrudan aldığı için listede yok. Listeden çıkarılan ekran hazır olmasını beklemeden vekilden açılır.",
+ "warm": [
+  "https://crm-takvim.growtify.app",
+  "https://crm-ayarlar.growtify.app",
+  "https://crm-eposta.growtify.app",
+  "https://crm-epostalar.growtify.app",
+  "https://crm-ortaklik.growtify.app",
+  "https://crm-sohbet.growtify.app",
+  "https://crm-studyo.growtify.app",
+  "https://crm-formlar.growtify.app",
+  "https://crm-sayfa.growtify.app",
+  "https://crm-eposta-tasarim.growtify.app"
+ ]
 }
