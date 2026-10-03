@@ -25,13 +25,20 @@ bu dosyanın o anki özetidir.
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
 | CRM | Growtify.app CRM (admin.growtify.app) | **1.2.0** | Yayında (#154) — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
-| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri | crm-takvim / crm-ayarlar / crm-eposta .growtify.app (workers/crm-frames) | **1.2.0** | Yayında — Worker `growtify-crm-frames` (sürüm 0929ddc9) + #154 |
-| Otomasyon kurucusu, Yapay Zeka Stüdyosu, Sohbet Sağlayıcıları | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Başlamadı — aynı vekil yöntemiyle eklenebilir |
+| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik .growtify.app (workers/crm-frames) | **1.3.0** | Yayında |
+| Sohbet Sağlayıcıları, Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Sıradaki — aynı vekil yöntemi |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.3.0** — 2026-10-03 — **Otomasyon, E-postalar ve Satış Ortaklığı Türkçe** (CEO: "çeviri işiyle ilgili her şeyi bitirene kadar
+  devam… markete native Türkçe gibi çıkmamız lazım, tam white-label"). Üç ekran `frames` listesine eklendi: iş akışı listesi ve
+  kurucusu (`wf`, 7.055/7.060), Pazarlama > E-postalar (`email`, 3.546/3.555), Satış Ortaklığı Yöneticisi (`aff`, 1.446/1.447).
+  Yükleyici: iframe'in adresi eklendikten sonra verilse de yakalanır (otomasyon bazen önce adressiz ekliyor — ilk denemede
+  tutuyor, ikincide kaçıyordu); kişi yüklenmekte olan ekrandan çıkarsa güvenlik ağı vekili bozuk saymaz. Bu bilgisayarda
+  CEO'nun dil tercihine dokunmadan denendi: otomasyon üç ziyarette de vekilden açıldı, liste ve kurucu Türkçe; tanı: hata yok,
+  yüklenemeyen dosya yok, ekranda İngilizce kalan metin yok (E-postalar: "Updated On/by" sözlüğe eklendi).
 - **1.2.3** — 2026-10-03 — Kataloglar ve düzeltmeler (yeni ekranlar henüz `frames` listesinde değil). E-postalar (`email`, 3.555
   metin; Zamanla, Akıllı Gönderim, Dizi, geri dönme) ve Satış Ortaklığı (`aff`, 1.447 metin; satış ortağı, komisyon, ödeme, kademe)
   katalogları `public/crm/frames/`. Satış Ortaklığı tanıtımındaki GHL örnek müşteri yorumu (kişi adı + "10 dakikada kurdum, bir
