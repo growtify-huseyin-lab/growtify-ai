@@ -24,14 +24,19 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.3.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
-| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik .growtify.app (workers/crm-frames) | **1.3.1** | Yayında |
-| Sohbet Sağlayıcıları, Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Sıradaki — aynı vekil yöntemi |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.4.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.0** | Yayında |
+| Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe (leadgen-vibe-ai-builder; vue-i18n yok, metinler kodda) | **0.0.0** | Sıradaki — vekil + çerçeve metin sözlüğü |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.4.0** — 2026-10-03 — **Sohbet Sağlayıcıları Türkçe.** Ayarlar > Sohbet Sağlayıcıları (`conv`,
+  client-app-crm-conversations) `frames` listesine eklendi, `crm-sohbet.growtify.app` vekilinden açılıyor. Uygulamanın
+  bütün kataloğu 10 metin (CRM içinde, el sıkışmadan sonra yükleniyor; bakım ayarıyla vekilden açılıp toplandı). Tablodaki
+  sağlayıcı türü sunucudan İngilizce geliyor ("Call") → yalnız bu uygulamada geçerli sözlük: Arama / E-posta.
+  Derleme: `frames.json` içinde uygulamaya özel `text` desteği.
 - **1.3.1** — 2026-10-03 — **Satış Ortaklığı terimleri Türkçe, adres çubuğu temiz.** Satış Ortaklığı Yöneticisi "Affiliate",
   "Campaign", "Payout" kelimelerini çalışırken İngilizce olarak cümleye yerleştiriyordu ("Affiliate Ağını…", "bir Campaign
   başlat"). Bu yer tutucular kaldırıldı; 348 cümle Türkçe terimlerle, ekleri doğru olacak şekilde yeniden yazıldı: satış ortağı,
