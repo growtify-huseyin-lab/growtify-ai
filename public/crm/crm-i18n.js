@@ -981,19 +981,28 @@
       var onload = function () {
         frame.removeEventListener("load", onload);
         clearTimeout(loadTimer);
-        var t0 = Date.now();
-        setTimeout(function () {
-          if (!(lastMsg[px] >= t0)) return restore();
-          delete opening[px];
-          // İlk açılış başarıyla bitti: dosyalar artık tarayıcıda → ekran bundan sonra hazır sayılır.
-          if (warmList[px] && !isReady(px)) {
-            var all = readWarm();
-            all[px] = { s: "", t: Date.now() };
-            try {
-              localStorage.setItem(WARM_KEY, JSON.stringify(all));
-            } catch (e) {}
+        // Sayfa yüklendikten sonra uygulama CRM'le konuşmalı (postmate). Bazı uygulamalar asıl kodunu yüklemeden SONRA
+        // indiriyor (E-posta Hizmetleri): GHL yavaşken ilk mesaj 5 sn'yi geçebiliyor. Çerçevedeki yükleyici "buradayım"
+        // dediyse vekil sağlam demektir → 20 sn (ilk açılışta 30 sn) beklenir; haber yoksa eskisi gibi 5 sn.
+        var t1 = Date.now();
+        var wait = lastMsg[px] >= t0 ? (cold ? 30000 : 20000) : 5000;
+        var poll = function () {
+          if (lastMsg[px] >= t1) {
+            delete opening[px];
+            // İlk açılış başarıyla bitti: dosyalar artık tarayıcıda → ekran bundan sonra hazır sayılır.
+            if (warmList[px] && !isReady(px)) {
+              var all = readWarm();
+              all[px] = { s: "", t: Date.now() };
+              try {
+                localStorage.setItem(WARM_KEY, JSON.stringify(all));
+              } catch (e) {}
+            }
+            return;
           }
-        }, 5000);
+          if (Date.now() - t1 >= wait) return restore();
+          setTimeout(poll, 500);
+        };
+        setTimeout(poll, 500);
       };
       frame.addEventListener("load", onload);
     };

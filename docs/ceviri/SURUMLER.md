@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.9.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.9.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,12 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.9.2** — 2026-10-03 — **E-posta Hizmetleri İngilizce açılıyordu (CEO: "bu neden İngilizce").** Kök neden: güvenlik ağı sayfa
+  yüklendikten sonra 5 sn içinde uygulamadan mesaj bekliyor; E-posta Hizmetleri asıl kodunu yüklemeden SONRA indiriyor, GHL
+  yavaşken ilk mesajı 5 sn'yi geçti (ölçüm: vekil sayfası 4,9 sn'de yüklendi, 5 sn mesajsız → 9,9 sn'de GHL'e dönüldü; GHL
+  sürümünde el sıkışma yüklemeden 0,5 sn sonra — dosyalar artık önbellekteydi). Kural en baştan beri vardı; bugünkü yavaşlıkta
+  ortaya çıktı. Artık çerçevedeki yükleyici "buradayım" dediyse (vekil sağlam) 20 sn, ilk açılışta 30 sn beklenir; haber yoksa
+  eskisi gibi 5 sn. Uygulamanın ilk mesajı gelir gelmez (yarım saniyelik kontrol) başarı sayılır.
 - **1.9.1** — 2026-10-03 — İlk açılış süren ekran arka plan hazırlık sırasından çıkarılır (aynı dosyalar iki kez inmesin).
   Uçtan uca denendi (CEO tarayıcısı): takvim ekranının "hazır" kaydı silinip açıldı → vekilden Türkçe geldi, kayıt yeniden
   yazıldı; ancak açılış sürerken arka plan hazırlığı da aynı ekranı başlatmıştı (dosyalar önbellekte olduğu için zararsızdı).
