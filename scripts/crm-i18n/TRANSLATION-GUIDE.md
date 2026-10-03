@@ -216,3 +216,14 @@ API keys, SSO, audit logs, custom menu links, calling schedule, marketplace). `i
   Hostname → Host Adı. White-label: "LeadConnector Email System/Service" → "platformun e-posta sistemi/hizmeti";
   "LC Email" stays as the product name; DNS values (`spf.leadconnectorhq.com`) untouched; example domains →
   ornek.com / alanadin.com.
+
+## Round 6 — `aff` terminology (2026-10-03)
+The affiliate app injects the account's custom terms through `{affiliateName}`, `{campaignName}`, `{payoutName}`,
+`{customCampaignName}` and `{affiliates}`; their default values are English ("Affiliate", "Campaign", "Payout").
+In Turkish these placeholders are REMOVED and written as Turkish nouns with correct suffixes: satış ortağı / satış
+ortakları (programme or activity: satış ortaklığı), kampanya / kampanyalar, hakediş / hakedişler (payout record or
+paying affiliates; "Payout method" stays "Ödeme yöntemi"); `{affiliates}` (page name) → "Satış Ortakları".
+Exception: `affiliate.lead_exist_warning` receives the campaign's real name in `{campaignName}` — keep it. Check the
+app code (`$t(key, {campaignName: ….label})`) before removing a term placeholder from a new string. Real entity names
+(`{affiliate}`, `{campaign}`, `{current_affiliate}`, `{new_affiliate}`, `{parentAffiliateName}`) always stay.
+`validate.mjs` reports the removed term placeholders as errors; that is expected for this app only.
