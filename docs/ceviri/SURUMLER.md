@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.8.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.8.3** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,13 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.8.3** — 2026-10-03 — **İngilizce kaçağı daraltma (CEO: "TR pazarındaki müşteri İngilizce kaçağı mı görüyor").** Önce hazırla
+  kuralında GHL sürümü yalnız dosyalar tarayıcıda hazır değilken açılıyor; bu pencere küçültüldü: hazırlık girişten 2,5 sn
+  sonra başlıyor (8 sn yerine), en çok kullanılan ekranlar önde (E-postalar, e-posta oluşturucu, takvim, ayarlar, sohbet,
+  formlar, sayfa, ortaklık, stüdyo, e-posta hizmetleri), kayıt 30 gün geçerli (7 yerine; dosyalar tarayıcıda 1 yıl), 3G'de de
+  hazırlanıyor (yalnız veri tasarrufu ve 2G hariç). Kalan kaçak: yepyeni bir tarayıcının ilk dakikaları ve 2G / veri
+  tasarrufu. CRM'in gömülü olmayan ekranları (menüler, kişiler, sohbetler, fırsatlar, ödemeler…) bu kuraldan etkilenmez,
+  her zaman Türkçe.
 - **1.8.2** — 2026-10-03 — Kişinin kendi verdiği adlar korunur: web sitesi sayfa adları (`#website-header h6`) ve satış
   hunisi adımları (`#step-container p`, `#funnel-step-details span.truncate`) sözlükteki bir ifadeyle aynı olsa da çevrilmez
   ("Home" adlı sayfa "Ana sayfa" olmuyordu). Sayfa oluşturucu bölüm başlığı "Formlar & Anketler" (uygulama başlığı CSS ile

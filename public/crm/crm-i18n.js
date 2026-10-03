@@ -897,11 +897,11 @@
       return r && r.t ? Date.now() - r.t : Infinity;
     };
     var useProxy = function (px) {
-      return !down[px] && !(warmList[px] && warmAge(px) > 7 * 864e5);
+      return !down[px] && !(warmList[px] && warmAge(px) > 30 * 864e5); // dosyalar tarayıcıda 1 yıl kalıyor
     };
     var goodNet = function () {
       var c = navigator.connection;
-      return !(c && (c.saveData || /2g|3g/.test(c.effectiveType || "")));
+      return !(c && (c.saveData || /2g/.test(c.effectiveType || ""))); // veri tasarrufu ve 2G hariç (3G dahil)
     };
     var warmQueue = [];
     var warming = null;
@@ -944,7 +944,7 @@
     var warmAll = function () {
       for (var px in warmList) scheduleWarm(px, false);
     };
-    setTimeout(warmAll, FRAME ? 3000 : 8000); // sayfa açılışını beklemeden değil, ondan sonra
+    setTimeout(warmAll, FRAME ? 2000 : 2500); // girişten hemen sonra (düşük öncelik: GHL'in kendi dosyalarını bekletmez); sıra crm-config "warm" sırası
     setInterval(warmAll, 6 * 36e5);
     var watch = function (frame, orig, px) {
       var restore = function () {
