@@ -16,8 +16,9 @@ Sürüm ve değişiklik kaydı: `docs/ceviri/SURUMLER.md`. Sürüm numarası: `s
   için vekil adresler; silinirse o ekranlar GHL'den İngilizce açılır).
 - `crm-tr.json` — derlenmiş Türkçe katalog: `{version, built_at, instances: {id: {keys, messages}}, dom, text,
   textRules, textPages}`.
-- `frames/<id>.json` — iframe ile gömülen GHL uygulamalarının küçük katalogları (takvim `calapp`, İşletme
-  Profili `crmset`, E-posta Hizmetleri `isv`); `workers/crm-frames` bunları çerçevedeki yükleyiciye verir.
+- `frames/<id>.json` — iframe ile gömülen GHL uygulamalarının katalogları (liste: `source/frames.json`; ör. takvim
+  `calapp`, E-postalar `email`, e-posta oluşturucu `ebuild`); `workers/crm-frames` bunları çerçevedeki yükleyiciye verir.
+  Bir çerçevenin kendi gömdüğü GHL uygulaması (E-postalar içindeki e-posta oluşturucu) `frames.json` `nested` ile açılır.
 
 ## Kim Türkçe görür
 1. Kişinin seçimi önce gelir: üst çubuktaki TR/EN düğmesi (tarayıcıda `gai_crm_lang` olarak hatırlanır) ya da

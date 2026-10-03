@@ -71,6 +71,9 @@ for (const id of frameIds) {
   delete fc.textPages; // sayfa sözlükleri CRM sayfalarına ait
   // Yalnız o uygulamada geçerli birebir metinler (ör. sunucudan gelen tür adları): frames.json "<id>".text
   if (frames[id].text) fc.text = { ...fc.text, ...clean(frames[id].text) };
+  // İç içe çerçeve: bu uygulamanın kendi gömdüğü GHL uygulamaları da vekilden açılır ({GHL adresi: vekil adresi};
+  // yükleyici nestedProxyMap). Kapatmak için frames.json'dan "nested" silinir (ya da crm-config.json "frames" ile hepsi).
+  if (frames[id].nested) fc.nested = frames[id].nested;
   // Oluşturucularda sayfa sözlüğü kapalı (tuvaldeki önizleme kişinin içeriği): yalnız katalog. domOnly verilmişse sözlük
   // yalnız o arayüz alanlarında (ör. öğe paleti) uygulanır; uygulamanın kataloğundan kısa, tek anlamlı İngilizce → Türkçe eklenir
   // (uygulama bazı adları açılışta bir kez hesaplıyor, Türkçe katalog sonradan gelince güncellenmiyor).

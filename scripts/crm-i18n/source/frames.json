@@ -97,5 +97,15 @@
   "domOnly": ".gui__builder-card, .hl-buider-main-layout-drawer, .hl-builder-main-layout-drawer, .hl-builder-settings-sidebar, .hl-builder-settings-drawer, .hl-builder-layers-drawer, .hl-builder-typography-drawer, .hl-builder-background-drawer, .hl-builder-seo-meta-drawer, .hl-builder-popup-list-drawer, .hr-tooltip__content",
   "domText": "catalog",
   "_domOnly_note": "Sözlük yalnız araç panellerinde (öğe ekleme, ayarlar, katmanlar, yazı tipi, arka plan, SEO, açılır pencereler); sayfalar listesi (kişinin sayfa adları) ve tuval hariç; yalnız uygulama kataloğundan eşlemeler."
+ },
+ "ebuild": {
+  "origin": "https://email-builder-prod.leadconnectorhq.com",
+  "proxy": "https://crm-eposta-tasarim.growtify.app",
+  "screens": "Pazarlama > E-postalar içinde açılan e-posta oluşturucu (E-postalar çerçevesinin içinde iç içe çerçeve; email frames.json \"nested\")",
+  "noDom": true,
+  "_noDom_note": "Tuvaldeki e-posta kişinin kendi içeriği; sayfa sözlüğü uygulanmaz, yalnız uygulama kataloğu.",
+  "domOnly": ".ui-toolbar, .custom-sidebar, .hr-tooltip__content",
+  "domText": "catalog",
+  "_domOnly_note": "Öğe tür adları uygulama yüklenirken bir kez hesaplanıyor (Türkçe katalog sonradan gelir) → sözlük yalnız üst araç çubuğu, sol/sağ kenar panelleri ve ipuçlarında; tuval hariç; yalnız uygulama kataloğundan eşlemeler."
  }
 }

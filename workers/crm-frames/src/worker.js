@@ -2,10 +2,12 @@
  * crm-*.growtify.app — GHL CRM'in iframe ile gömdüğü uygulamaları Türkçe katmanla sunar.
  *
  * CRM'deki bazı ekranlar (Ayarlar > Takvimler, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar,
- * Sohbet Sağlayıcıları, Satış Ortaklığı, Yapay Zeka Stüdyosu, form ve sayfa oluşturucular) GHL'in ayrı
- * alan adlarındaki uygulamalardan iframe ile gelir; ajans Custom JS oraya ulaşamaz. CRM'deki Türkçe
+ * Sohbet Sağlayıcıları, Satış Ortaklığı, Yapay Zeka Stüdyosu, form, sayfa ve e-posta oluşturucular) GHL'in
+ * ayrı alan adlarındaki uygulamalardan iframe ile gelir; ajans Custom JS oraya ulaşamaz. CRM'deki Türkçe
  * yükleyici (growtify.ai/crm/crm-i18n.js) bu iframe'lerin adresini buradaki karşılığına çevirir; bu
  * Worker aynı uygulamayı GHL'den alıp sayfanın başına yükleyiciyi ekler. Kullanıcı aynı ekranda kalır.
+ * Bir uygulamanın kendi gömdüğü uygulama (E-postalar içindeki e-posta oluşturucu) da aynı yoldan gelir: o
+ * çerçevedeki yükleyici iç içe iframe'in adresini çevirir (frames.json "nested").
  *
  * Güvenlik:
  *   - Yalnız aşağıdaki GHL uygulama adresleri (açık vekil değil), yalnız GET/HEAD. Bir adresin kullanıcıya açılması
@@ -37,6 +39,8 @@ const APPS = {
   "crm-formlar.growtify.app": { origin: "https://leadgen-apps-form-survey-builder.leadconnectorhq.com", frame: "form" },
   // Satış hunisi / web sitesi sayfa oluşturucu (dosyaları CORS vermiyor → vekilden geçer).
   "crm-sayfa.growtify.app": { origin: "https://page-builder.leadconnectorhq.com", frame: "page" },
+  // E-posta oluşturucu: E-postalar çerçevesinin (crm-epostalar) içinde iç içe çerçeve (dosyaları CORS vermiyor → vekilden geçer).
+  "crm-eposta-tasarim.growtify.app": { origin: "https://email-builder-prod.leadconnectorhq.com", frame: "ebuild" },
 };
 
 // Kodda sabit olup ekrana değil işleme giden metinler: Yapay Zeka Stüdyosu şablonuna tıklanınca istem kutusuna yazılan

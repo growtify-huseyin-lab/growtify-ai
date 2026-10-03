@@ -24,17 +24,28 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.7** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.7.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
 | Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.6** | Yayında |
-| E-posta oluşturucu | E-postalar içinde iç içe çerçeve (email-builder-prod / email-builder-beta) | **0.0.0** | Sırada — iç içe vekil gerekiyor |
+| E-posta oluşturucu | crm-eposta-tasarim.growtify.app — E-postalar çerçevesinin içinde iç içe (email-builder-prod) | **1.7.0** | Katalog + iç içe vekil hazır; kullanıcıya kapalı (denemede) |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.7.0** — 2026-10-03 — **İç içe çerçeve desteği + e-posta oluşturucu kataloğu (kullanıcıya kapalı).** E-postalar
+  (`crm-epostalar`) kampanya/şablon düzenlerken e-posta oluşturucuyu (`email-builder-prod`) kendi içinde postmate ile gömüyor;
+  CRM'deki yükleyici oraya ulaşamıyordu. Artık çerçevedeki yükleyici de iç içe iframe'i vekile çevirebiliyor: liste
+  `frames.json` → `<id>.nested` (derlemede çerçeve kataloğuna), yalnız GHL adresi → `crm-*.growtify.app` kabul; deneme için
+  yalnız bir sekmede üst pencereden `{gaiNested: …}` mesajı. Oluşturucu kendi ebeveyninin adresini doğrulamıyor (postmate
+  el sıkışmasındaki adresi öğreniyor) → vekilden açılan ebeveynle uyumlu. Vekil: `crm-eposta-tasarim.growtify.app`
+  (dosyaları CORS vermiyor → vekilden, kenar önbelleğiyle). Katalog 3.555 metin; 3.550'si E-postalar kataloğuyla birebir
+  aynı anahtarlardan (aynı mesaj dosyası), kalan 5'i "1/3 : 2/3" gibi sütun oranları (çeviri gerekmez). Tuval kişinin
+  e-postası → `noDom`; öğe tür adları uygulama yüklenirken bir kez hesaplandığı için sınırlı sözlük üst araç çubuğu, kenar
+  panelleri ve ipuçlarında (`domText: catalog`). Not: GHL'in E-postalar ekranında Kampanyalar/Şablonlar sekmeleri şu an
+  GHL'in kendisinde de açılmıyor (katman kapalıyken de aynı; 2026-10-03 22:00) — bizden bağımsız.
 - **1.6.7** — 2026-10-03 — **Yükleyici önceliği (CEO onayı).** GHL Ajans Ayarları → White Label → Custom JS satırına
   `s.fetchPriority="high"` eklendi (başka değişiklik yok; 893 → 916 karakter). Kök neden: GHL yükleyiciyi `async` ve düşük
   öncelikli ekliyordu; ağır sayfalarda Chrome isteği 15–28 sn kuyrukta bekletiyor, o arada açılan çerçeveler İngilizce

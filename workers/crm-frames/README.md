@@ -16,6 +16,7 @@ adından sunar ve sayfanın başına aynı yükleyiciyi "çerçeve modunda" ekle
 | `crm-studyo.growtify.app` | `leadgen-vibe-ai-builder.leadconnectorhq.com` | Yapay Zeka Stüdyosu (tam ekran) | `growtify.ai/crm/frames/vibe.json` |
 | `crm-formlar.growtify.app` | `leadgen-apps-form-survey-builder.leadconnectorhq.com` | Form / anket / test oluşturucu (`noDom`) | `growtify.ai/crm/frames/form.json` |
 | `crm-sayfa.growtify.app` | `page-builder.leadconnectorhq.com` | Satış hunisi / web sitesi sayfa oluşturucu (`noDom`) | `growtify.ai/crm/frames/page.json` |
+| `crm-eposta-tasarim.growtify.app` | `email-builder-prod.leadconnectorhq.com` | E-posta oluşturucu — E-postalar çerçevesinin içinde (iç içe, `noDom`) | `growtify.ai/crm/frames/ebuild.json` |
 
 Bir adres kullanıcıya ancak `crm-config.json` `frames` listesine eklenince açılır; listede olmayan adres yalnız
 bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
@@ -29,9 +30,22 @@ bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
 3. Worker uygulamanın sayfasını GHL'den alır, `<head>` başına küçük bir başlangıç betiği (dil işaretini okur, adresten
    siler) ve yükleyiciyi `async` ekler — uygulama yükleyiciyi beklemez; diğer dosyalar aynen geçer.
 
+## İç içe çerçeve (`nested`)
+
+Bazı uygulamalar başka bir GHL uygulamasını kendi içinde iframe ile açar: E-postalar (`crm-epostalar`) bir kampanyayı ya
+da şablonu düzenlerken e-posta oluşturucuyu (`email-builder-prod`) postmate köprüsüyle gömer. CRM'deki yükleyici o
+iframe'e ulaşamaz; çevirme işini E-postalar çerçevesindeki yükleyici yapar. Liste `frames.json`'da çerçevenin `nested`
+alanındadır (`{GHL adresi: vekil adres}`), derlemede çerçeve kataloğuna kopyalanır. Yalnız GHL adresi → `crm-*.growtify.app`
+eşlemeleri kabul edilir. Kapatmak: `nested` silinir (ya da `crm-config.json` `frames` ile hepsi — dış çerçeve vekilden
+açılmazsa iç içe olan da açılmaz).
+
+Deneme (kullanıcıya açmadan, yalnız bir sekmede): CRM sekmesinde E-postalar açıkken
+`document.querySelector('iframe').contentWindow.postMessage({gaiNested: {"https://email-builder-prod.leadconnectorhq.com": "https://crm-eposta-tasarim.growtify.app"}}, "*")`
+— o sekmede çerçevenin sessionStorage'ına yazılır, oluşturucu açılınca vekilden gelir. Kaldırmak: `{gaiNested: null}`.
+
 ## Oluşturucular (`noDom`)
 
-Form ve sayfa oluşturucularında tuvaldeki önizleme kişinin kendi içeriğidir. `frames.json`'da `noDom: true` olan çerçevede
+Form, sayfa ve e-posta oluşturucularında tuvaldeki önizleme kişinin kendi içeriğidir. `frames.json`'da `noDom: true` olan çerçevede
 yükleyici sayfa sözlüğünü (birebir metin, kalıplar, tarih kuralları) hiç uygulamaz; yalnız uygulamanın kendi metin kataloğu
 çevrilir. Böylece önizleme ile kaydedilen içerik aynı kalır. `domOnly` (seçici) verilirse sözlük yalnız o arayüz alanlarında
 uygulanır (ör. form oluşturucunun öğe paleti); o alanların sözlüğü uygulamanın kataloğundan üretilir.

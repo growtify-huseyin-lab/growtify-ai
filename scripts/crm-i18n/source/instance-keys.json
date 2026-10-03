@@ -5636,5 +5636,30 @@
   "website",
   "widgetMarketplace",
   "wishlistButton"
+ ],
+ "ebuild": [
+  "ABTesting",
+  "assistModeOptions",
+  "autosave",
+  "bulkActions",
+  "bulkAddTagModal",
+  "campaignSchedule",
+  "chatBot",
+  "common",
+  "customVariables",
+  "defaultEmails",
+  "email-ai",
+  "emailBuilder",
+  "emailCampaign",
+  "emailCampaignClickTrackingDesc",
+  "emailHome",
+  "emailPreview",
+  "emailSequence",
+  "emailTemplate",
+  "emails",
+  "fakeStats",
+  "importTemplates",
+  "snippetSelect",
+  "tableCrud"
  ]
 }
