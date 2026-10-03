@@ -7,7 +7,11 @@
 (function (paths, opts) {
   opts = opts || {};
   var wait = opts.wait || 4000;
-  var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+  // Arka plan sekmesinde setTimeout dakikada bire kısılır (Chrome, 5 dk sonra); beklemeler Worker sayacıyla yapılır.
+  var __wk = new Worker(URL.createObjectURL(new Blob(["onmessage=function(e){setTimeout(function(){postMessage(e.data)},e.data.ms)}"], { type: "text/javascript" })));
+  var __wseq = 0, __wwait = {};
+  __wk.onmessage = function (e) { var f = __wwait[e.data.id]; if (f) { delete __wwait[e.data.id]; f(); } };
+  var sleep = function (ms) { return new Promise(function (r) { var id = ++__wseq; __wwait[id] = r; __wk.postMessage({ id: id, ms: ms }); }); };
   var router = document.querySelector("#app").__vue_app__.config.globalProperties.$router;
   function astText(n, d) {
     if (n == null || d > 12) return "";
