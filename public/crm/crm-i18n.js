@@ -27,14 +27,37 @@
   var LS_KEY = "gai_crm_lang";
   // Çerçeve modu: GHL'in ayrı sitesinde çalışan bir uygulama (ör. takvim ayarları) Growtify vekil adresinden
   // açıldığında yükleyici o sayfanın içinde de çalışır. Orada #app GHL kabuğu değildir; düğme ve avcı gösterilmez,
-  // dil seçimini üst sayfa adresle (?gai_lang=) iletir.
+  // dil seçimini üst sayfa adresle (?gai_frame=) iletir.
   var FRAME = !!window.__gaiCrmFrame;
 
-  function getChoice() {
+  // Çerçevede dil, vekilin adrese eklediği gai_frame ile gelir. Uygulama açılmadan adresten silinir (bazı GHL
+  // uygulamaları kendi adresini CRM'in adres çubuğuna yansıtıyor; işaret orada görünmesin) ve yalnız bu sekmede
+  // saklanır (çerçevenin localStorage'ı tüm sekmelerde ortak: TR ve EN hesap aynı anda açıkken birbirini değiştirmesin).
+  var frameLang = null;
+  if (FRAME) {
     try {
-      // Çerçevede dil, vekilin eklediği gai_frame ile gelir. Bazı GHL uygulamaları kendi adresini CRM'in adres çubuğuna
-      // yansıttığı için çerçeve işareti CRM'in gai_lang'ından ayrı tutulur (yoksa kişinin dil seçimi değişirdi).
-      var m = location.search.match(FRAME ? /[?&]gai_(?:frame|lang)=(tr|en)(?:&|$)/ : /[?&]gai_lang=(tr|en)(?:&|$)/);
+      var fm = location.search.match(/[?&]gai_(?:frame|lang)=(tr|en)(?=&|$)/);
+      if (fm) {
+        frameLang = fm[1];
+        try {
+          sessionStorage.setItem("gai_crm_frame_lang", frameLang);
+        } catch (e) {}
+        var clean = location.search.replace(/([?&])gai_(?:frame|lang)=(?:tr|en)(&|$)/g, function (x, a, b) {
+          return b ? a : "";
+        });
+        history.replaceState(history.state, "", location.pathname + (clean === "?" ? "" : clean) + location.hash);
+      } else {
+        try {
+          frameLang = sessionStorage.getItem("gai_crm_frame_lang");
+        } catch (e) {}
+      }
+    } catch (e) {}
+  }
+
+  function getChoice() {
+    if (FRAME) return frameLang === "tr" || frameLang === "en" ? frameLang : null;
+    try {
+      var m = location.search.match(/[?&]gai_lang=(tr|en)(?:&|$)/);
       if (m) localStorage.setItem(LS_KEY, m[1]);
       var v = localStorage.getItem(LS_KEY);
       return v === "tr" || v === "en" ? v : null;

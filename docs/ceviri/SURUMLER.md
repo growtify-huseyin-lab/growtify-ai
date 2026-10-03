@@ -24,14 +24,23 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.2.0** | Yayında (#154) — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
-| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik .growtify.app (workers/crm-frames) | **1.3.0** | Yayında |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.3.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik .growtify.app (workers/crm-frames) | **1.3.1** | Yayında |
 | Sohbet Sağlayıcıları, Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Sıradaki — aynı vekil yöntemi |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.3.1** — 2026-10-03 — **Satış Ortaklığı terimleri Türkçe, adres çubuğu temiz.** Satış Ortaklığı Yöneticisi "Affiliate",
+  "Campaign", "Payout" kelimelerini çalışırken İngilizce olarak cümleye yerleştiriyordu ("Affiliate Ağını…", "bir Campaign
+  başlat"). Bu yer tutucular kaldırıldı; 348 cümle Türkçe terimlerle, ekleri doğru olacak şekilde yeniden yazıldı: satış ortağı,
+  kampanya, hakediş (ödeme yöntemi yine "ödeme yöntemi"). Kampanyanın gerçek adını gösteren tek uyarıda ad korunuyor. Üst menü
+  çoğul: Kampanyalar · Satış Ortakları · Hakedişler. Not: Türkçe arayüzde bu terimlerin hesap ayarlarından özelleştirilmesi
+  etkisiz (doğal Türkçe için bilinçli tercih). Yükleyici: çerçevedeki uygulamalar dil işaretini (`gai_frame`) açılmadan
+  adresinden siliyor ve yalnız o sekmede saklıyor; Otomasyon'un CRM adres çubuğuna yansıttığı `?gai_frame=tr` artık görünmüyor,
+  aynı anda TR ve EN hesap açıkken çerçeve dili birbirini değiştirmiyor. Otomasyon: "İnceleme gerekiyor" sekmesi kesiliyordu →
+  "İncelenecek". Sözlük: "Global Workflow Settings", "Close drawer" (ekran okuyucu etiketleri).
 - **1.3.0** — 2026-10-03 — **Otomasyon, E-postalar ve Satış Ortaklığı Türkçe** (CEO: "çeviri işiyle ilgili her şeyi bitirene kadar
   devam… markete native Türkçe gibi çıkmamız lazım, tam white-label"). Üç ekran `frames` listesine eklendi: iş akışı listesi ve
   kurucusu (`wf`, 7.055/7.060), Pazarlama > E-postalar (`email`, 3.546/3.555), Satış Ortaklığı Yöneticisi (`aff`, 1.446/1.447).
