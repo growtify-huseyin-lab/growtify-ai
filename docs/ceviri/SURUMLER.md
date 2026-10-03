@@ -32,6 +32,13 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.2.1** — 2026-10-03 — Bakım altyapısı (kullanıcıya görünen değişiklik yok; CEO: "çeviri işiyle ilgili her şeyi bitirene
+  kadar devam"). Vekile dört yeni adres (henüz `frames` listesinde değil, kullanıcıya kapalı): `crm-otomasyon`
+  (Otomasyon > İş Akışları), `crm-epostalar` (Pazarlama > E-postalar), `crm-sohbet` (Sohbet Sağlayıcıları),
+  `crm-ortaklik` (Satış Ortaklığı). Yükleyici: çerçeve uygulaması istenince İngilizce kataloğunu CRM'e gönderir
+  (`{gaiCollect: 1}`; E-postalar ve Sohbet Sağlayıcıları metinlerini yalnız CRM içinde yüklüyor), bakım için
+  çerçeveyi İngilizce açma (`sessionStorage gai_frame_lang`); katalog alınamazsa saniyede bir yerine giderek
+  seyrelen yeniden deneme.
 - **1.2.0** — 2026-10-03 (#154 fcf74b4 + Cloudflare `growtify-crm-frames`, CEO "bitince yayınla son haliyle") — **iframe ekranları Türkçe** (CEO: "çözümüne bak", yerel deneme "denemeyi çalıştır",
   kalıcı sürüm "evet"). GHL'in ayrı alan adında çalışan üç uygulaması Growtify vekil adresinden açılır
   (`workers/crm-frames`, Cloudflare): takvim ayarları (`calapp`, 2.830 metin: takvim/hizmet menüsü/oda/ekipman
