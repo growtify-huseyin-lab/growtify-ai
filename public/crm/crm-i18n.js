@@ -12,8 +12,10 @@
  *   İngilizce açılan sayfada büyük Türkçe katalog hiç indirilmez.
  *
  * Yükleyici: GHL Ajans Ayarları → Company → White Label → Custom JS.
- * Farklı alan adında iframe içinde çalışan GHL uygulamalarına (otomasyon kurucusu, takvim ayarları,
- * Ayarlar içeriği, Yapay Zeka Stüdyosu) ulaşılamaz.
+ * Farklı alan adında iframe içinde çalışan GHL uygulamalarına buradan ulaşılamaz. Bunlardan takvim
+ * ayarları, İşletme Profili ve E-posta Hizmetleri, crm-config.json "frames" ile Growtify vekil adresinden
+ * (workers/crm-frames) açılır; orada aynı yükleyici çerçeve modunda çalışır. Diğerleri (otomasyon
+ * kurucusu, Yapay Zeka Stüdyosu…) şimdilik İngilizce.
  */
 (function () {
   if (window.__gaiCrmI18n) return;
@@ -21,8 +23,12 @@
 
   var BASE = "https://growtify.ai/crm/";
   var CONFIG_URL = BASE + "crm-config.json";
-  var CATALOG_URL = BASE + "crm-tr.json";
+  var CATALOG_URL = window.__gaiCrmCatalogUrl || BASE + "crm-tr.json";
   var LS_KEY = "gai_crm_lang";
+  // Çerçeve modu: GHL'in ayrı sitesinde çalışan bir uygulama (ör. takvim ayarları) Growtify vekil adresinden
+  // açıldığında yükleyici o sayfanın içinde de çalışır. Orada #app GHL kabuğu değildir; düğme ve avcı gösterilmez,
+  // dil seçimini üst sayfa adresle (?gai_lang=) iletir.
+  var FRAME = !!window.__gaiCrmFrame;
 
   function getChoice() {
     try {
@@ -62,6 +68,7 @@
 
   /* ---------- TR/EN düğmesi ---------- */
   function renderToggle(current) {
+    if (FRAME) return;
     var el = document.getElementById("__gai_lang_toggle");
     if (!el) {
       if (!document.body) return;
@@ -134,7 +141,7 @@
   // kataloğun yalnız o bölümleri kullanılır.
   function pickCatalog(rootEl, messages) {
     var shell = catalog.instances.shell || null;
-    if (rootEl.id === "app") return shell;
+    if (rootEl.id === "app" && !FRAME) return shell;
     var keys = Object.keys(messages || {});
     if (!keys.length) return null;
     var best = null;
@@ -242,12 +249,65 @@
     return false;
   }
 
+  // Bazı GHL uygulamaları (ör. takvim uygulaması) yalnız önceden derlenmiş mesajları anlar: düz metin olarak
+  // verilen Türkçede {ad} yer tutucuları ve "a | b" çoğulları doldurulmaz. Böyle bir örnekte yer tutuculu
+  // metinler küçük mesaj fonksiyonlarına çevrilir (vue-i18n mesaj bağlamı: normalize/interpolate/named/plural).
+  function compilesStrings(g, locale) {
+    try {
+      g.mergeLocaleMessage(locale, { __gai_probe__: "a{x}" });
+      return g.t("__gai_probe__", { x: "1" }) === "a1";
+    } catch (e) {
+      return true;
+    }
+  }
+  function toMessageFn(src) {
+    var forms = src.indexOf("|") === -1 ? [src] : src.split(/\s*\|\s*/);
+    var parsed = forms.map(function (f) {
+      var parts = [];
+      var re = /\{\s*('(?:[^'\\]|\\.)*'|[A-Za-z0-9_]+)\s*\}/g;
+      var last = 0;
+      var m;
+      while ((m = re.exec(f))) {
+        if (m.index > last) parts.push(f.slice(last, m.index));
+        parts.push({ p: m[1] });
+        last = re.lastIndex;
+      }
+      if (last < f.length) parts.push(f.slice(last));
+      return parts;
+    });
+    var fn = function (ctx) {
+      var build = function (parts) {
+        return ctx.normalize(
+          parts.map(function (x) {
+            if (typeof x === "string") return x;
+            if (x.p.charAt(0) === "'") return x.p.slice(1, -1);
+            return ctx.interpolate(/^\d+$/.test(x.p) ? ctx.list(+x.p) : ctx.named(x.p));
+          })
+        );
+      };
+      return parsed.length > 1 ? ctx.plural(parsed.map(build)) : build(parsed[0]);
+    };
+    fn.source = src;
+    return fn;
+  }
+  function toFnMessages(o) {
+    var out = {};
+    for (var k in o) {
+      var v = o[k];
+      if (typeof v === "string") out[k] = /[{|]/.test(v) ? toMessageFn(v) : v;
+      else if (v && typeof v === "object") out[k] = toFnMessages(v);
+      else out[k] = v;
+    }
+    return out;
+  }
+
   function patchInstance(rootEl, g) {
     var locale = g.locale && g.locale.value;
     if (!isEnglish(locale)) return; // kullanıcı GHL'de başka bir dil seçmiş
     var entry = g.__gaiTr || pickCatalog(rootEl, g.getLocaleMessage(locale));
     if (!entry) return;
     if (!g.__gaiTr) {
+      if (!compilesStrings(g, locale)) entry = { keys: entry.keys, messages: toFnMessages(entry.messages) };
       g.__gaiTr = entry;
       entry.probes = entry.probes || makeProbes(entry.messages);
       // GHL bu kataloğa sonradan İngilizce eklerse (alt uygulama yüklenince) Türkçeyi yeniden uygula.
@@ -376,8 +436,21 @@
       return MONTHS_TR[m1.slice(0, 3).toLowerCase()] + " " + y;
     }],
   ];
+  // Tek başına duran saatler Türkiye'deki gibi 24 saat biçimine çevrilir: "03:12 PM" → "15:12",
+  // "9:00 AM - 5:00 PM" → "09:00 - 17:00".
+  var TIME_RE = /^(\d{1,2}):(\d{2}) ?(AM|PM|am|pm)$/;
+  var TIME_RANGE_RE = /^(\d{1,2}):(\d{2}) ?(AM|PM|am|pm) ?[-–] ?(\d{1,2}):(\d{2}) ?(AM|PM|am|pm)$/;
+  function to24(h, mm, ap) {
+    var hh = parseInt(h, 10) % 12;
+    if (/^p/i.test(ap)) hh += 12;
+    return (hh < 10 ? "0" : "") + hh + ":" + mm;
+  }
   function dateLookup(core) {
     for (var i = 0; i < DATE_RULES.length; i++) if (DATE_RULES[i][0].test(core)) return core.replace(DATE_RULES[i][0], DATE_RULES[i][1]);
+    var m = core.match(TIME_RE);
+    if (m) return to24(m[1], m[2], m[3]);
+    m = core.match(TIME_RANGE_RE);
+    if (m) return to24(m[1], m[2], m[3]) + " - " + to24(m[4], m[5], m[6]);
     return null;
   }
 
@@ -463,6 +536,7 @@
   var HUNT_KEY = "gai_crm_hunt";
   var HUNT_LOG = "gai_crm_hunt_log";
   var huntActive = (function () {
+    if (FRAME) return false;
     try {
       var m = location.search.match(/[?&]gai_hunt=(0|1)(?:&|$)/);
       if (m) localStorage.setItem(HUNT_KEY, m[1]);
@@ -597,7 +671,30 @@
     }
     return lookupExact(core, dict);
   }
+  // Yalnız belirli bir sayfada geçerli sözlük (catalog.textPages: { "/settings/labs": {...} }). Sunucudan gelen
+  // uzun açıklamalar kalın yazı vb. ile parçalara bölünür; "From" gibi kısa parçalar başka ekranlarda farklı
+  // anlama gelir, o yüzden genel sözlüğe değil sayfanın kendi sözlüğüne yazılır.
+  var pageDictPath = null;
+  var pageDictCache = null;
+  function pageDict() {
+    var pages = catalog && catalog.textPages;
+    if (!pages) return null;
+    var path = location.pathname;
+    if (path === pageDictPath) return pageDictCache;
+    pageDictPath = path;
+    pageDictCache = null;
+    for (var key in pages) {
+      var i = path.indexOf(key);
+      if (i >= 0 && (i + key.length === path.length || path.charAt(i + key.length) === "/")) {
+        pageDictCache = pages[key];
+        break;
+      }
+    }
+    return pageDictCache;
+  }
   function lookupExact(core, dict) {
+    var pd = pageDict();
+    if (pd && Object.prototype.hasOwnProperty.call(pd, core)) return pd[core];
     if (Object.prototype.hasOwnProperty.call(dict, core)) return dict[core];
     var dt = dateLookup(core);
     if (dt !== null) return dt;
@@ -609,7 +706,12 @@
     var t = n.nodeValue;
     if (!t) return;
     var core = t.trim();
-    if (!core || core.length > 160) return;
+    if (!core) return;
+    if (core.length > 160) {
+      // Uzun paragraflar yalnız sayfanın kendi sözlüğünde aranır (ör. Laboratuvar açıklamaları).
+      var pd = pageDict();
+      if (!pd || !Object.prototype.hasOwnProperty.call(pd, core)) return;
+    }
     var tr = lookup(core, dict);
     if (tr === null || tr === core) return;
     var p = n.parentElement;
@@ -637,6 +739,154 @@
       if (n.nodeType === 3) trText(n, dict);
       else trAttrs(n, dict);
     }
+  }
+
+  /* ---------- Çerçeve vekili: GHL'in ayrı sitedeki uygulamaları Türkçe katmanla açılır ----------
+   * Örn. takvim ayarlarındaki liste ekranları calendar-app.leadconnectorhq.com'dan iframe ile gelir; oraya betik
+   * yüklenemez. Vekil adres (Growtify) aynı uygulamayı yükleyiciyle birlikte sunar. Kullanıcı aynı ekranda kalır:
+   * yalnız iframe kaynağı değişir; CRM ile uygulama arasındaki postmate el sıkışması için mesaj adresleri çevrilir.
+   * Açma: crm-config.json `frames` (ör. {"https://calendar-app.leadconnectorhq.com": "https://..."}) ya da yalnız
+   * bu sekme için sessionStorage `gai_frame_proxy` (deneme). */
+  function frameProxyMap() {
+    try {
+      var s = sessionStorage.getItem("gai_frame_proxy");
+      if (s) return JSON.parse(s);
+    } catch (e) {}
+    return config.frames || null;
+  }
+  function installFrameProxy(map) {
+    if (FRAME || !map || window.__gaiFrameProxy) return;
+    window.__gaiFrameProxy = map;
+    var rev = {};
+    for (var o in map) rev[map[o]] = o;
+    // Güvenlik ağı: vekil adres cevap vermezse ekran GHL'in kendi adresinden (İngilizce) açılır, hiç bozulmaz.
+    // Bir kez cevapsız kalan vekil bu sekmede bir daha denenmez.
+    var down = {};
+    var lastMsg = {};
+    for (var o2 in map) {
+      (function (px) {
+        try {
+          fetch(px + "/__gai/health", { cache: "no-store", credentials: "omit" }).then(
+            function (r) {
+              if (!r.ok) down[px] = true;
+            },
+            function () {
+              down[px] = true;
+            }
+          );
+        } catch (e) {}
+      })(map[o2]);
+    }
+    var sd = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, "src");
+    var watch = function (frame, orig, px) {
+      var restore = function () {
+        down[px] = true;
+        sd.set.call(frame, orig);
+      };
+      var loadTimer = setTimeout(restore, 15000);
+      var onload = function () {
+        frame.removeEventListener("load", onload);
+        clearTimeout(loadTimer);
+        var t0 = Date.now();
+        setTimeout(function () {
+          if (!(lastMsg[px] >= t0)) restore();
+        }, 5000);
+      };
+      frame.addEventListener("load", onload);
+    };
+    var rewrite = function (u, frame) {
+      if (typeof u !== "string") return u;
+      for (var o in map) {
+        if (u.indexOf(o) === 0 && !down[map[o]]) {
+          var nu = map[o] + u.slice(o.length);
+          if (frame) watch(frame, u, map[o]);
+          return nu + (nu.indexOf("?") === -1 ? "?" : "&") + "gai_lang=" + (mode === "en" ? "en" : "tr");
+        }
+      }
+      return u;
+    };
+    Object.defineProperty(HTMLIFrameElement.prototype, "src", {
+      configurable: true,
+      get: function () {
+        return sd.get.call(this);
+      },
+      set: function (v) {
+        sd.set.call(this, rewrite(v, this));
+      },
+    });
+    var sa = Element.prototype.setAttribute;
+    Element.prototype.setAttribute = function (n, v) {
+      if (this instanceof HTMLIFrameElement && String(n).toLowerCase() === "src") v = rewrite(v, this);
+      return sa.call(this, n, v);
+    };
+    // Postmate (GHL'in CRM ↔ uygulama köprüsü) iframe'i adres vermeden önce ekler ve pencereyi o an saklar;
+    // bu yüzden adresi henüz boş olan iframe'lerin penceresi de sarılır ve hedef adres mesaj anında çözülür.
+    // Başka adrese giden iframe'lerin (ör. ödeme formu) penceresi sarılmaz. Boşken sarılan bir pencere için de
+    // mesajların `source` alanı aynı sarmalı döndürür: `e.source === iframe.contentWindow` karşılaştırmaları bozulmaz.
+    var cw = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, "contentWindow");
+    var wrapped = typeof WeakMap === "function" ? new WeakMap() : null;
+    var rawToWrapped = wrapped ? new WeakMap() : null;
+    var srcDesc = Object.getOwnPropertyDescriptor(MessageEvent.prototype, "source");
+    var rawSource = function (e) {
+      return srcDesc && srcDesc.get ? srcDesc.get.call(e) : e.source;
+    };
+    if (srcDesc && srcDesc.get && rawToWrapped) {
+      Object.defineProperty(MessageEvent.prototype, "source", {
+        configurable: true,
+        get: function () {
+          var s = srcDesc.get.call(this);
+          return (s && rawToWrapped.get(s)) || s;
+        },
+      });
+    }
+    Object.defineProperty(HTMLIFrameElement.prototype, "contentWindow", {
+      configurable: true,
+      get: function () {
+        var w = cw.get.call(this);
+        if (!w || !wrapped) return w;
+        var src = sd.get.call(this) || "";
+        var proxied = !src || src === "about:blank";
+        for (var p in rev) if (src.indexOf(p) === 0) proxied = true;
+        if (!proxied) return w;
+        if (wrapped.has(this)) return wrapped.get(this);
+        var frame = this;
+        var px = new Proxy(w, {
+          get: function (t, k) {
+            if (k === "postMessage") {
+              return function (msg, origin, tr) {
+                var cur = sd.get.call(frame) || "";
+                for (var q in rev) if (cur.indexOf(q) === 0 && origin === rev[q]) origin = q;
+                return t.postMessage(msg, origin, tr);
+              };
+            }
+            var v = t[k];
+            return typeof v === "function" ? v.bind(t) : v;
+          },
+        });
+        wrapped.set(this, px);
+        rawToWrapped.set(w, px);
+        return px;
+      },
+    });
+    // Uygulamadan gelen mesajlar vekil adresten gelir; CRM asıl adresi beklediği için kaynağı geri yazılır.
+    window.addEventListener(
+      "message",
+      function (e) {
+        if (e.__gai || !rev[e.origin]) return;
+        lastMsg[e.origin] = Date.now();
+        e.stopImmediatePropagation();
+        var ev = new MessageEvent("message", {
+          data: e.data,
+          origin: rev[e.origin],
+          source: rawSource(e), // kurucu gerçek pencere ister; okunurken yine sarmal döner
+          ports: Array.prototype.slice.call(e.ports || []),
+          lastEventId: e.lastEventId,
+        });
+        ev.__gai = true;
+        window.dispatchEvent(ev);
+      },
+      true
+    );
   }
 
   /* ---------- Akış ---------- */
@@ -682,6 +932,7 @@
     }
     mode = want;
     renderToggle(mode);
+    if (mode === "tr") installFrameProxy(frameProxyMap());
     if (mode === "tr") {
       document.documentElement.setAttribute("data-gai-lang", "tr");
       loadCatalog();

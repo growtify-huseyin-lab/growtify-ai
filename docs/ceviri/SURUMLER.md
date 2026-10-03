@@ -24,13 +24,30 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.1.0** | Yayında (#153) — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
-| Otomasyon kurucusu, takvim ayarları, Ayarlar içeriği, Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Başlamadı — vekil alt alan adı denemesi planlı |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.2.0** | 1.1.0 yayında (#153); 1.2.0 PR'da — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri | crm-takvim / crm-ayarlar / crm-eposta .growtify.app (workers/crm-frames) | **1.2.0** | PR'da — önce Worker yayına alınır, sonra katalog |
+| Otomasyon kurucusu, Yapay Zeka Stüdyosu, Sohbet Sağlayıcıları | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Başlamadı — aynı vekil yöntemiyle eklenebilir |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.2.0** — 2026-10-03 (PR'da) — **iframe ekranları Türkçe** (CEO: "çözümüne bak", yerel deneme "denemeyi çalıştır",
+  kalıcı sürüm "evet"). GHL'in ayrı alan adında çalışan üç uygulaması Growtify vekil adresinden açılır
+  (`workers/crm-frames`, Cloudflare): takvim ayarları (`calapp`, 2.830 metin: takvim/hizmet menüsü/oda/ekipman
+  listeleri, tercihler, bağlı hesaplar), İşletme Profili (`crmset`, 5.578 metin; 4.961'i mevcut çeviriden, 236
+  kısa eşleşme bağlamına göre gözden geçirildi → 36 düzeltme), E-posta Hizmetleri (`isv`, 1.354 metin; "LeadConnector
+  Email System" → "Platformun E-posta Sistemi"). Katalog toplam **87.047** metin. Kullanıcı aynı ekranda kalır;
+  yalnız iframe kaynağı değişir. CEO'nun onayıyla bu bilgisayarda yerel vekille denendi: üç ekran Türkçe, CRM ↔
+  uygulama köprüsü çalışıyor. **Güvenlik ağı:** vekil sağlık yoklaması + iframe
+  birkaç saniyede cevap vermezse GHL'in kendi adresine dönüş (denendi: kapalı vekilde ekran ~6 sn'de
+  İngilizce açıldı); `crm-config.json` `frames` silinerek tümü kapatılır. GHL bu uygulamalarda CSP/X-Frame-
+  Options göndermiyor — vekil hiçbir korumayı kaldırmıyor; çerez iletilmez/saklanmaz. **Laboratuvar:** sunucudan
+  gelen parçalı açıklamalar sayfaya özel sözlükle (`dom-pages.json`, 415 parça; 160 karakter sınırı yok).
+  **Diğer:** Kullanıcılar sayfası "Ajans Sahibi / Hesap - yönetici"; Profilim > Bildirimler satırları; bildirim
+  akışı ("5 dakika önce", "Yeni e-posta: …"); saatler 24 saat ("15:12"), "30 dk"; çeviri avı listesinden 152
+  sayfa metni + 20 kalıp kuralı. Ana katalog küçüldü: iframe katalogları ayrı dosyada (`public/crm/frames/`).
+  Hâlâ İngilizce: Sohbet Sağlayıcıları (katalogunu yalnız CRM içinde yüklüyor), otomasyon kurucusu, Yapay Zeka Stüdyosu.
 - **1.1.0** — 2026-10-03 (#153, CEO "birleştirip yayına al") — Eksiksizlik turu (CEO: "tümünü yeniden kontrol et tek tek tamamla", "tıklamalar dahil
   turla"). Katalog 59.580 → **77.432** metin. **Tıklamalı tur:** 296 sayfa, 367 tıklama (sekmeler, filtre/sütun/sıralama düğmeleri, açılır menüler;
   hiçbir şey kaydedilmedi/silinmedi/gönderilmedi) → 1.562 aday metin. **Katalog farkı turu:** GHL'in sayfa açılınca

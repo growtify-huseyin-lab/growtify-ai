@@ -1,7 +1,19 @@
 {
  "_note": "Varsayılan arayüz dili. Kişinin TR/EN düğmesi seçimi her zaman önceliklidir. english: İngilizce açılacak alt hesaplar (GHL location ID); turkish: varsayılan 'en' olsaydı Türkçe açılacaklar.",
  "default": "tr",
- "english": ["SmVcAIEpSmLyntfw5KGT", "6skVbw1EYX9ZReZpeAWw"],
- "_english_names": { "SmVcAIEpSmLyntfw5KGT": "Harrington Housing", "6skVbw1EYX9ZReZpeAWw": "Rentser" },
- "turkish": []
+ "english": [
+  "SmVcAIEpSmLyntfw5KGT",
+  "6skVbw1EYX9ZReZpeAWw"
+ ],
+ "_english_names": {
+  "SmVcAIEpSmLyntfw5KGT": "Harrington Housing",
+  "6skVbw1EYX9ZReZpeAWw": "Rentser"
+ },
+ "turkish": [],
+ "_frames_note": "GHL'in iframe ile gömdüğü ekranlar (takvim ayarları, İşletme Profili, E-posta Hizmetleri) bu vekil adreslerden Türkçe açılır (workers/crm-frames). Vekil cevap vermezse ekran kendiliğinden GHL'in kendi adresinden açılır. Hepsini kapatmak için 'frames' satırını sil.",
+ "frames": {
+  "https://calendar-app.leadconnectorhq.com": "https://crm-takvim.growtify.app",
+  "https://client-app-crm-settings.leadconnectorhq.com": "https://crm-ayarlar.growtify.app",
+  "https://ghl-isv-app-prod.leadconnectorhq.com": "https://crm-eposta.growtify.app"
+ }
 }

@@ -1,0 +1,15 @@
+# crm-takvim / crm-ayarlar / crm-eposta .growtify.app — CRM'deki GHL iframe ekranlarının Türkçe katmanı.
+# Yayına alma: bu klasörde `npx wrangler deploy` (Cloudflare hesabı: Huseyin@growtify.app's Account).
+# Rotalar *.growtify.app/* rotasından daha özel olduğu için bu alan adlarında öncelik bu Worker'da.
+name = "growtify-crm-frames"
+main = "src/worker.js"
+compatibility_date = "2026-08-01"
+workers_dev = false
+routes = [
+  { pattern = "crm-takvim.growtify.app/*", zone_name = "growtify.app" },
+  { pattern = "crm-ayarlar.growtify.app/*", zone_name = "growtify.app" },
+  { pattern = "crm-eposta.growtify.app/*", zone_name = "growtify.app" },
+]
+
+[observability]
+enabled = true

@@ -189,3 +189,30 @@ Keys start with `shell::<section>.`; the section tells you the screen:
 
 - Values that are SUBMITTED to US carriers / registries (pre-filled A2P campaign texts such as auto-generated
   consent descriptions) stay in English; placeholders and help text around them are translated.
+
+## Round 4 — `calapp` (2026-10-03)
+`calapp` = GHL's legacy calendar settings app that opens inside Settings → Calendars (calendar list, groups,
+service menus, rooms, equipment, calendar create/edit wizard, availability, notifications, booking widget,
+appointment modal, activity log, SMS/e-mail/WhatsApp templates, tours, quick tips, aria labels). Keep every term
+consistent with `cal-a` / `calsched` (Appointment → Randevu, Calendar → Takvim, Group → Grup, Service menu →
+Hizmet menüsü, Room → Oda, Equipment → Ekipman, Availability → Müsaitlik, Buffer → Ara süre, Round robin →
+Dönüşümlü Atama, Booking → Rezervasyon, Staff/Team member → Ekip üyesi, Slot → Zaman aralığı, Widget → widget,
+Event (calendar type) → Etkinlik, Class booking → Grup dersi rezervasyonu, Collective booking → Ortak rezervasyon,
+Date updated → Güncellenme tarihi). Messages with `{name}` placeholders are interpolated by our loader, so keep
+placeholders exactly as usual.
+
+## Round 5 — `crmset` + `isv` (2026-10-03)
+`crmset` = GHL's settings app that renders Settings → Business Profile (also users/permissions, agency settings,
+API keys, SSO, audit logs, custom menu links, calling schedule, marketplace). `isv` = the Email Services app
+(Settings → Email Services). Both open in an iframe served through `workers/crm-frames`.
+- crmset: location/account meaning the sub-account → Alt Hesap; business-niche dropdown options use the
+  `shell::brandBoardsApp.builder.businessTypes.*` wording; audit-log actions are nouns/past forms (Birleştirme,
+  Geri Yüklendi, Kuruldu); "Check" → Kontrol et (never "Çek"); "10 sn" lowercase.
+- isv: bounce → geri dönme (Geri dönme oranı — never "Hemen çıkma", that is web analytics); warm-up → Isıtma as a
+  feature/action ("Alan Adı Isıtma"), "ısınma sürecinde" as a state; dedicated domain → ayrılmış alan adı
+  (sidebar "Ayrılmış Alan Adları"; "Özel Alan Adı" is Custom Domain); dedicated IP → özel IP; shared domain/IP →
+  paylaşımlı alan adı/IP; sending domain → gönderim alan adı; deliverability → teslim edilebilirlik; sender
+  reputation → gönderici itibarı; Postmaster Tools → Postmaster Araçları; Blacklist Monitor → Kara Liste İzleme;
+  Hostname → Host Adı. White-label: "LeadConnector Email System/Service" → "platformun e-posta sistemi/hizmeti";
+  "LC Email" stays as the product name; DNS values (`spf.leadconnectorhq.com`) untouched; example domains →
+  ornek.com / alanadin.com.
