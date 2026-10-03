@@ -80,7 +80,8 @@ const ASSET_TR = {
   aff: { "/assets/Frame1.7d8ea9f0.svg": "aff-hero.tr.svg" }, // Satış Ortaklığı tanıtım çizimi
 };
 
-const LOADER_URL = "https://growtify.ai/crm/crm-i18n.js";
+// ?f= çerçevelerin önbellek anahtarı: çerçeve tarayıcı önbelleğinde eski yükleyicide takılırsa artırılır (deploy ile).
+const LOADER_URL = "https://growtify.ai/crm/crm-i18n.js?f=2";
 const CATALOG_BASE = "https://growtify.ai/crm/frames/";
 // GHL uygulamalarını çerçeveleyebilecek CRM adresleri (yalnız GHL frame-ancestors gönderirse kullanılır).
 const CRM_ANCESTORS = "https://app.gohighlevel.com https://*.gohighlevel.com https://*.leadconnectorhq.com https://*.growtify.app";
