@@ -176,6 +176,13 @@
     "nameLabel": "Ad Soyad",
     "namePlaceholder": "Ad Soyad",
     "emailLabel": "E-posta",
+    "emailPlaceholder": "ornek@email.com",
+    "phoneLabel": "Telefon",
+    "phoneOptional": "(opsiyonel)",
+    "phonePlaceholder": "+90 5XX XXX XX XX",
+    "phoneRequiredForWhatsapp": "WhatsApp'tan ulaşabilmemiz için telefon numaranı gir.",
+    "phoneInvalid": "Geçerli bir telefon numarası gir.",
+    "whatsappOptin": "WhatsApp'tan yeni içerik önerilerini ve ücretsiz topluluğumuzun davetini almak istiyorum. (İstediğin an çıkabilirsin.)",
     "submitting": "Gönderiliyor..."
   },
   "RehberFormC": {

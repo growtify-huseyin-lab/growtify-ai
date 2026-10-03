@@ -40,6 +40,9 @@ export function LeadForm({
   const [utmMedium, setUtmMedium] = useState("");
   const [utmCampaign, setUtmCampaign] = useState("");
   const [landingPage, setLandingPage] = useState("");
+  // WhatsApp opt-in: separate + optional explicit consent (KVKK). The phone becomes
+  // required only once the visitor opts in (no phone = nothing to message).
+  const [waOptin, setWaOptin] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -52,16 +55,34 @@ export function LeadForm({
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("loading");
     setErrorMsg("");
 
     const form = e.currentTarget;
+    const phone = (
+      (form.elements.namedItem("phone") as HTMLInputElement | null)?.value ?? ""
+    ).trim();
+
+    // Same rule as the quiz capture screen: >= 10 chars once spaces are removed.
+    if (waOptin && !phone) {
+      setStatus("error");
+      setErrorMsg(t("phoneRequiredForWhatsapp"));
+      return;
+    }
+    if (phone && phone.replace(/\s/g, "").length < 10) {
+      setStatus("error");
+      setErrorMsg(t("phoneInvalid"));
+      return;
+    }
+
+    setStatus("loading");
     const data = {
       locale,
       slug,
       firstName: (form.elements.namedItem("firstName") as HTMLInputElement)
         .value,
       email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      phone: phone || undefined,
+      whatsappOptin: waOptin,
       utmSource,
       utmMedium,
       utmCampaign,
@@ -80,6 +101,7 @@ export function LeadForm({
         setStatus("success");
         trackEvent("lead_form", { method: "lead_form" });
         form.reset();
+        setWaOptin(false);
       } else {
         setStatus("error");
         setErrorMsg(json.error || t("genericError"));
@@ -192,9 +214,46 @@ export function LeadForm({
           name="email"
           required
           className={inputClass}
-          placeholder="ornek@email.com"
+          placeholder={t("emailPlaceholder")}
         />
       </div>
+      <div>
+        <label
+          htmlFor="phone"
+          className="block text-sm font-medium text-gray-700 dark:text-dark-text"
+        >
+          {t("phoneLabel")}{" "}
+          {waOptin ? (
+            <span className="text-red-500">*</span>
+          ) : (
+            <span className="font-normal text-gray-400 dark:text-dark-muted">
+              {t("phoneOptional")}
+            </span>
+          )}
+        </label>
+        <input
+          type="tel"
+          inputMode="tel"
+          id="phone"
+          name="phone"
+          autoComplete="tel"
+          required={waOptin}
+          className={inputClass}
+          placeholder={t("phonePlaceholder")}
+        />
+      </div>
+      <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 dark:border-dark-border dark:bg-dark-bg">
+        <input
+          type="checkbox"
+          name="whatsappOptin"
+          checked={waOptin}
+          onChange={(e) => setWaOptin(e.target.checked)}
+          className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-300 text-primary accent-primary"
+        />
+        <span className="text-xs leading-relaxed text-gray-500 dark:text-dark-muted">
+          {t("whatsappOptin")}
+        </span>
+      </label>
 
       {status === "error" && (
         <div className="flex items-center gap-2 rounded-lg bg-red-50 dark:bg-red-900/20 p-3 text-sm text-red-600 dark:text-red-400">

@@ -176,6 +176,13 @@
     "nameLabel": "Full Name",
     "namePlaceholder": "Full Name",
     "emailLabel": "Email",
+    "emailPlaceholder": "you@example.com",
+    "phoneLabel": "Phone",
+    "phoneOptional": "(optional)",
+    "phonePlaceholder": "+44 7700 900123",
+    "phoneRequiredForWhatsapp": "Please enter your phone number so we can reach you on WhatsApp.",
+    "phoneInvalid": "Please enter a valid phone number.",
+    "whatsappOptin": "I'd like to receive new content recommendations and a free community invite via WhatsApp. (You can opt out anytime.)",
     "submitting": "Submitting..."
   },
   "RehberFormC": {
