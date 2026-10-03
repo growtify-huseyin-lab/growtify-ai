@@ -43,8 +43,8 @@
  "vibe": {
   "origin": "https://leadgen-vibe-ai-builder.leadconnectorhq.com",
   "proxy": "https://crm-studyo.growtify.app",
-  "screens": "Yapay Zeka Stüdyosu (tam ekran)",
-  "_text_note": "Uygulamanın kodunda sabit (katalogda olmayan) metinler: şablon adları ve Yenilikler penceresi.",
+  "screens": "Yapay Zeka Stüdyosu (tam ekran: ana sayfa, projeler, kurucu)",
+  "_text_note": "Uygulamanın kodunda sabit (katalogda olmayan) metinler: şablon adları, Yenilikler penceresi ve şablon kartındaki istem açıklaması (aynı istemler workers/crm-frames JS_TEXT ile uygulama dosyasında da Türkçe).",
   "text": {
    "What's new": "Yenilikler",
    "Product updates and new capabilities": "Ürün güncellemeleri ve yeni özellikler",
@@ -64,7 +64,19 @@
    "Fitness Tracker": "Fitness Takibi",
    "Social Media Feed": "Sosyal Medya Akışı",
    "Calendar / Scheduling": "Takvim / Planlama",
-   "Weather App": "Hava Durumu Uygulaması"
+   "Weather App": "Hava Durumu Uygulaması",
+   "Create a modern SaaS landing page with hero, features, and pricing sections.": "Karşılama bölümü, özellikler ve fiyatlandırma bölümleri olan modern bir SaaS açılış sayfası oluştur.",
+   "Build an admin dashboard with sidebar navigation, charts, and data tables.": "Kenar çubuğu menüsü, grafikler ve veri tabloları olan bir yönetim paneli oluştur.",
+   "Create an e-commerce storefront with product grid, cart, and checkout flow.": "Ürün ızgarası, sepet ve ödeme akışı olan bir e-ticaret mağazası oluştur.",
+   "Build a minimal developer portfolio with project gallery and about section.": "Proje galerisi ve hakkımda bölümü olan sade bir geliştirici portfolyosu oluştur.",
+   "Build a blog platform with article listing, individual post pages, and a markdown content editor.": "Yazı listesi, ayrı yazı sayfaları ve Markdown içerik düzenleyicisi olan bir blog platformu oluştur.",
+   "Create a task management app with drag-and-drop kanban board, task creation, and status tracking.": "Sürükle-bırak kanban panosu, görev oluşturma ve durum takibi olan bir görev yönetimi uygulaması oluştur.",
+   "Build a real-time chat interface with conversation list, message bubbles, and a message input area.": "Sohbet listesi, mesaj balonları ve mesaj yazma alanı olan gerçek zamanlı bir sohbet arayüzü oluştur.",
+   "Create a restaurant website with a menu, dish details, and an order cart with checkout.": "Menü, yemek ayrıntıları ve ödeme adımlı sipariş sepeti olan bir restoran web sitesi oluştur.",
+   "Build a fitness tracker app with workout logging, exercise library, and progress charts.": "Antrenman kaydı, egzersiz kütüphanesi ve ilerleme grafikleri olan bir fitness takip uygulaması oluştur.",
+   "Create a social media feed with posts, likes, comments, and a profile sidebar.": "Gönderiler, beğeniler, yorumlar ve profil kenar çubuğu olan bir sosyal medya akışı oluştur.",
+   "Build a calendar app with monthly/weekly views, event creation, and time slot scheduling.": "Aylık ve haftalık görünümler, etkinlik oluşturma ve zaman aralığı planlaması olan bir takvim uygulaması oluştur.",
+   "Create a weather dashboard with current conditions, 7-day forecast, and location search.": "Anlık hava durumu, 7 günlük tahmin ve konum arama özelliği olan bir hava durumu paneli oluştur."
   }
  }
 }

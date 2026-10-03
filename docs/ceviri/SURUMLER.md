@@ -24,14 +24,18 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.5.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.5.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
-| Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.0** | Katalog hazır, kendi sekmede deneniyor — sonra `frames`'e eklenecek |
+| Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.5.1** — 2026-10-03 — **Yapay Zeka Stüdyosu kullanıcıya açık.** `frames`'e eklendi (crm-studyo). CEO'nun tarayıcısında
+  bakım ayarıyla denendi: ana sayfa (menü, yazı animasyonu, istem kutusu, sekmeler, şablon adları), Tüm projeler, boş durum
+  Türkçe; tanıda hata yok. Şablon kartındaki istem açıklamaları ekran sözlüğüne de eklendi (uygulama dosyası tarayıcı
+  önbelleğinden eski haliyle gelirse de Türkçe görünsün).
 - **1.5.0** — 2026-10-03 — **Yapay Zeka Stüdyosu kataloğu (henüz kullanıcıya kapalı) + daha hızlı Türkçe.** Uygulama
   (`vibe`, leadgen-vibe-ai-builder) aslında kendi metin kataloğunu kullanıyor: 790 metin (157'si mevcut çeviriden; "Margin" →
   "Dış Boşluk" bağlam düzeltmesi). Kodda sabit olanlar uygulamaya özel sözlükte: şablon adları, Yenilikler penceresi. Ana sayfa
