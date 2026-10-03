@@ -243,6 +243,7 @@
       "App Switcher": "Uygulamalar",
       "Tab Switcher": "Sekmeler",
       "User Avatar": "Kullanıcı Avatarı",
+      "Icon only toggle": "Aç/kapat", // bildirim panelindeki anahtarın ekran okuyucu etiketi
     };
 
     // Ay adları (takvim başlığı "September 2026", üye listesi "Joined 07 Jul 2026")
@@ -1009,6 +1010,16 @@
       },
 
       // TIME
+      // Gönderi akışındaki kısa süreler ("47m", "2d") — yalnız metnin tamamı buysa
+      // Giriş kutusundaki e-posta ipucu (bileşen ilk açılışta sabitliyor, katalog güncellemesini almıyor)
+      { pattern: /^you@example\.com$/, replacement: "sen@ornek.com" },
+      { pattern: /^(\d+)s$/, replacement: "$1 sn" },
+      { pattern: /^(\d+)m$/, replacement: "$1 dk" },
+      { pattern: /^(\d+)h$/, replacement: "$1 sa" },
+      { pattern: /^(\d+)d$/, replacement: "$1 g" },
+      { pattern: /^(\d+)w$/, replacement: "$1 hf" },
+      { pattern: /^(\d+)mo$/, replacement: "$1 ay" },
+      { pattern: /^(\d+)y$/, replacement: "$1 y" },
       { pattern: /(\d+) days? ago/g, replacement: "$1 gün önce" },
       { pattern: /(\d+) hours? ago/g, replacement: "$1 saat önce" },
       { pattern: /(\d+) minutes? ago/g, replacement: "$1 dakika önce" },
@@ -1143,18 +1154,183 @@
 
     const HALF_ENGLISH = /\b(?:the|your|you|to|for|with|and|of|is|are|will|here|this|that|from|have|has|we|our|they|their|what|when|where|which|how|yet|only|into|any|all|my)\b/i;
 
+    /* ===== Panelin kendi metin kataloğu (vue-i18n) — 2026-10-03 =====
+       GHL Client Portal arayüz metinlerini kendi kataloğundan, ANAHTAR bazında Türkçeleştirir
+       (public/portal/panel-tr.json: GHL anahtarı → Türkçe). Böylece hata mesajları, boş ekranlar,
+       menüler ve ipuçları da Türkçe olur; GHL metnin yazımını/boşluğunu değiştirse bile çeviri
+       bozulmaz. Türkçe, 'en' kataloğunun üstüne yazılır (locale 'en' kalır → GHL'in dil mantığı
+       değişmez). EN grupta (isEnglishContext) GHL'in orijinal İngilizcesi geri konur.
+       Kataloğun kapsamadığı sabit metinler ve tarihler için aşağıdaki DOM çevirmeni yedek. */
+    var PANEL_TR_URL = "https://growtify.ai/portal/panel-tr.json?v=1";
+    var panelTr = null;
+    var panelProbe = null; // [anahtar yolu, TR değeri] — katalog ezildi mi kontrolü
+    var panelI18n = null;
+    var panelEnOriginal = null;
+    var panelCatalogMode = "en";
+    var panelOrigMerge = null;
+    var panelOrigSet = null;
+    var panelApplying = false;
+
+    function findPanelI18n() {
+      try {
+        var root = document.getElementById("__nuxt");
+        var app = root && root.__vue_app__;
+        var prov = app && app._context && app._context.provides;
+        if (!prov) return null;
+        var syms = Object.getOwnPropertySymbols(prov);
+        for (var i = 0; i < syms.length; i++) {
+          var v = prov[syms[i]];
+          if (
+            v &&
+            v.global &&
+            typeof v.global.mergeLocaleMessage === "function" &&
+            typeof v.global.setLocaleMessage === "function" &&
+            typeof v.global.getLocaleMessage === "function"
+          )
+            return v.global;
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    function cloneMessages(o) {
+      return JSON.parse(JSON.stringify(o || {}));
+    }
+
+    function deepAssign(target, src) {
+      for (var k in src) {
+        if (!Object.prototype.hasOwnProperty.call(src, k)) continue;
+        var v = src[k];
+        if (v && typeof v === "object" && !Array.isArray(v)) {
+          if (!target[k] || typeof target[k] !== "object") target[k] = {};
+          deepAssign(target[k], v);
+        } else target[k] = v;
+      }
+      return target;
+    }
+
+    function firstLeaf(o, path) {
+      for (var k in o) {
+        if (!Object.prototype.hasOwnProperty.call(o, k)) continue;
+        var p = path.concat(k);
+        if (typeof o[k] === "string") return [p, o[k]];
+        if (o[k] && typeof o[k] === "object") {
+          var r = firstLeaf(o[k], p);
+          if (r) return r;
+        }
+      }
+      return null;
+    }
+
+    function messageAt(msgs, path) {
+      var cur = msgs;
+      for (var i = 0; i < path.length; i++) {
+        if (!cur || typeof cur !== "object") return undefined;
+        cur = cur[path[i]];
+      }
+      return cur;
+    }
+
+    function mergePanelTr() {
+      panelApplying = true;
+      try {
+        panelOrigMerge.call(panelI18n, "en", panelTr);
+      } finally {
+        panelApplying = false;
+      }
+    }
+
+    // GHL 'en' kataloğuna sonradan ekleme/değişiklik yaparsa: İngilizce yedeği güncelle,
+    // Türkçe moddaysak Türkçeyi yeniden üstüne yaz.
+    function hookPanelI18n(g) {
+      panelOrigMerge = g.mergeLocaleMessage;
+      panelOrigSet = g.setLocaleMessage;
+      g.mergeLocaleMessage = function (locale, messages) {
+        var r = panelOrigMerge.apply(g, arguments);
+        if (locale === "en" && !panelApplying) {
+          try {
+            deepAssign(panelEnOriginal, cloneMessages(messages));
+            if (panelCatalogMode === "tr") mergePanelTr();
+          } catch (e) {}
+        }
+        return r;
+      };
+      g.setLocaleMessage = function (locale, messages) {
+        var r = panelOrigSet.apply(g, arguments);
+        if (locale === "en" && !panelApplying) {
+          try {
+            panelEnOriginal = cloneMessages(messages);
+            if (panelCatalogMode === "tr") mergePanelTr();
+          } catch (e) {}
+        }
+        return r;
+      };
+    }
+
+    function applyPanelCatalog() {
+      if (!panelTr) return;
+      try {
+        if (!panelI18n) {
+          var g = findPanelI18n();
+          if (!g) return; // uygulama henüz yüklenmedi — translate() döngüsü tekrar dener
+          panelI18n = g;
+          panelEnOriginal = cloneMessages(g.getLocaleMessage("en"));
+          hookPanelI18n(g);
+        }
+        var want = isEnglishContext() ? "en" : "tr";
+        if (want === panelCatalogMode) {
+          // Katalog dışarıdan ezildiyse (ör. GHL tüm mesajları yeniden yükledi) tekrar uygula.
+          if (
+            want === "tr" &&
+            panelProbe &&
+            messageAt(panelI18n.getLocaleMessage("en"), panelProbe[0]) !== panelProbe[1]
+          )
+            mergePanelTr();
+          return;
+        }
+        if (want === "tr") {
+          mergePanelTr();
+        } else {
+          panelApplying = true;
+          try {
+            panelOrigSet.call(panelI18n, "en", cloneMessages(panelEnOriginal));
+          } finally {
+            panelApplying = false;
+          }
+        }
+        panelCatalogMode = want;
+      } catch (e) {}
+    }
+
+    try {
+      fetch(PANEL_TR_URL)
+        .then(function (r) {
+          return r.ok ? r.json() : null;
+        })
+        .then(function (j) {
+          if (!j || typeof j !== "object") return;
+          panelTr = j;
+          panelProbe = firstLeaf(j, []);
+          applyPanelCatalog();
+        })
+        .catch(function () {});
+    } catch (e) {}
+    /* ===== /Panelin kendi metin kataloğu ===== */
+
     // Sekme başlığı ("Sign in |", "Appointments |"): " |" öncesini çevir
     function translateTitle() {
       try {
         const dt = document.title || "";
         const cut = dt.indexOf(" |");
         const head = cut >= 0 ? dt.slice(0, cut) : dt;
-        const th = translateString(head);
+        // "About X" sayfa başlığı → "X hakkında" (katalog yalnız "About" kelimesini çevirir)
+        const th = translateString(head).replace(/^(?:About|Hakkında) (.+)$/, "$1 hakkında");
         if (th !== head) document.title = th + (cut >= 0 ? dt.slice(cut) : "");
       } catch (e) {}
     }
 
     function translate() {
+      applyPanelCatalog(); // katalog modu (TR/EN) sayfa geçişlerinde de doğru kalsın
       if (isEnglishContext()) return; // EN grupta dokunma
       translateTitle();
 
