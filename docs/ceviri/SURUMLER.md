@@ -22,9 +22,9 @@ bu dosyanın o anki özetidir.
 | Bileşen | Nerede | Güncel sürüm | Durum |
 |---|---|---|---|
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
-| Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
+| Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.8.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.8.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,10 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.8.2** — 2026-10-03 — Kişinin kendi verdiği adlar korunur: web sitesi sayfa adları (`#website-header h6`) ve satış
+  hunisi adımları (`#step-container p`, `#funnel-step-details span.truncate`) sözlükteki bir ifadeyle aynı olsa da çevrilmez
+  ("Home" adlı sayfa "Ana sayfa" olmuyordu). Sayfa oluşturucu bölüm başlığı "Formlar & Anketler" (uygulama başlığı CSS ile
+  kelime kelime büyütüyor; "ve" → "Ve" oluyordu).
 - **1.8.1** — 2026-10-03 — Şablon düzenleyicinin CRM'deki üst çubuğu: "Otomatik kaydetme açık/kapalı", "Şablonu kaydet",
   "Test E-postası", "Sürüm Geçmişini Gör", "Değişiklikleri senkronize et" (sayfa sözlüğü; çubuk tuvalin dışında). Kampanya
   düzenleyicisi açıldı: E-postalar çerçevesinin `nested` alanı (önce hazırla kuralıyla). CEO'nun tarayıcısında ölçüldü:
@@ -247,8 +251,8 @@ bu dosyanın o anki özetidir.
 - **1.0.0** — 2026-06-03 — Harici yükleyici (`community-i18n.js`, GHL Header Code'da tek satır), DOM sözlüğü.
 
 ### Ödeme sayfası (odeme.growtify.app)
-- **1.1.0** — 2026-10-01 (#146 içinde) — "Powered by" yazısı gizlendi. Kod main'de; ikinci deploy CEO'da —
-  canlıda olduğu henüz doğrulanmadı.
+- **1.1.0** — 2026-10-01 (#146 içinde) — "Powered by" yazısı gizlendi. Canlıda doğrulandı (2026-10-03): yayındaki sayfa
+  depodaki `client.client.js` ve `brand.css` ile birebir aynı (Worker sürümü 9c603dbc, 2026-10-01 14:00).
 - **1.0.0** — 2026-10-01 (#146) — Türkçe, Growtify markalı ödeme sayfası (Cloudflare Worker): tutar biçimi
   `40.000,00 TL`, "Sipariş Özeti", kart içi logo tekrarı kaldırıldı. CEO canlı deneme ödemesiyle doğruladı.
 
