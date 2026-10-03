@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
           { key: "Cache-Control", value: "public, max-age=60, s-maxage=60, must-revalidate" },
         ],
       },
+      {
+        // Panelin kendi metin kataloğunun Türkçesi (community-i18n.js yükler) — aynı kısa önbellek.
+        source: "/portal/panel-tr.json",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=60, s-maxage=60, must-revalidate" },
+          { key: "Access-Control-Allow-Origin", value: "*" },
+        ],
+      },
     ];
   },
   async redirects() {
