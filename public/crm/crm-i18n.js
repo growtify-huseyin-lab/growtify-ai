@@ -317,6 +317,62 @@
     }
   }
 
+  /* ---------- Tarih metinleri: "Sep 28 – Oct 4, 2026", "Oct 3, 2026", "19 Jun 2026, 12:05 AM" (metnin tamamı) ---------- */
+  var MON_TR = { jan: "Oca", feb: "Şub", mar: "Mar", apr: "Nis", may: "May", jun: "Haz", jul: "Tem", aug: "Ağu", sep: "Eyl", oct: "Eki", nov: "Kas", dec: "Ara" };
+  function ms(m) {
+    return MON_TR[m.slice(0, 3).toLowerCase()];
+  }
+  var M = "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\.?";
+  var DATE_RULES = [
+    [new RegExp("^" + M + " (\\d{1,2}) [–-] " + M + " (\\d{1,2}), (\\d{4})$"), function (x, m1, d1, m2, d2, y) {
+      return d1 + " " + ms(m1) + " – " + d2 + " " + ms(m2) + " " + y;
+    }],
+    [new RegExp("^" + M + " (\\d{1,2}) [–-] (\\d{1,2}), (\\d{4})$"), function (x, m1, d1, d2, y) {
+      return d1 + " – " + d2 + " " + ms(m1) + " " + y;
+    }],
+    [new RegExp("^" + M + " (\\d{1,2}), (\\d{4})$"), function (x, m1, d, y) {
+      return d + " " + ms(m1) + " " + y;
+    }],
+    [new RegExp("^(Created on: )?(\\d{1,2}) " + M + " (\\d{4})(,? .*)?$"), function (x, pre, d, m1, y, rest) {
+      return (pre ? "Oluşturulma: " : "") + d + " " + ms(m1) + " " + y + (rest || "");
+    }],
+    [new RegExp("^" + M + " (\\d{4})$"), function (x, m1, y) {
+      return MONTHS_TR[m1.toLowerCase()] + " " + y;
+    }],
+  ];
+  function dateLookup(core) {
+    for (var i = 0; i < DATE_RULES.length; i++) if (DATE_RULES[i][0].test(core)) return core.replace(DATE_RULES[i][0], DATE_RULES[i][1]);
+    return null;
+  }
+
+  /* ---------- Takvim görünümü (FullCalendar, .fc): gün başlıkları ve saat etiketleri ---------- */
+  var DAY3_TR = { Mon: "Pzt", Tue: "Sal", Wed: "Çar", Thu: "Per", Fri: "Cum", Sat: "Cmt", Sun: "Paz" };
+  var DAYFULL_TR = { Monday: "Pazartesi", Tuesday: "Salı", Wednesday: "Çarşamba", Thursday: "Perşembe", Friday: "Cuma", Saturday: "Cumartesi", Sunday: "Pazar" };
+  var FC_DAYNUM_RE = /^(\s*)(\d{1,2}) (Mon|Tue|Wed|Thu|Fri|Sat|Sun)(\s*)$/;
+  var FC_DAY_RE = /^(\s*)(Mon|Tue|Wed|Thu|Fri|Sat|Sun)(?: (\d{1,2}\/\d{1,2}))?(\s*)$/;
+  var FC_DAYFULL_RE = /^(\s*)(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(\s*)$/;
+  var FC_HOUR_RE = /^(\s*)(\d{1,2})(?::(\d{2}))? ?(AM|PM|am|pm|a|p)(\s*)$/;
+  function fixCalendars() {
+    var cals = document.querySelectorAll(".fc");
+    for (var i = 0; i < cals.length; i++) {
+      fixTextIn(cals[i], FC_DAYNUM_RE, function (x, a, d, day, b) {
+        return a + d + " " + DAY3_TR[day] + b;
+      });
+      fixTextIn(cals[i], FC_DAY_RE, function (x, a, day, md, b) {
+        return a + DAY3_TR[day] + (md ? " " + md : "") + b;
+      });
+      fixTextIn(cals[i], FC_DAYFULL_RE, function (x, a, day, b) {
+        return a + DAYFULL_TR[day] + b;
+      });
+      fixTextIn(cals[i], FC_HOUR_RE, function (x, a, h, mm, ap, b) {
+        var hh = parseInt(h, 10) % 12;
+        if (/^p/i.test(ap)) hh += 12;
+        return a + (hh < 10 ? "0" : "") + hh + ":" + (mm || "00") + b;
+      });
+      fixTextIn(cals[i], /^(\s*)all-day(\s*)$/, "$1tüm gün$2");
+    }
+  }
+
   function translateDom() {
     var dict = catalog.dom;
     var roots = document.querySelectorAll("#sidebar-v2, nav, [role=navigation], header.hl_header");
@@ -334,6 +390,7 @@
       for (var e = 0; e < els.length; e++) fixTextIn(els[e], DOM_FIXES[f].re, DOM_FIXES[f].to);
     }
     fixDatePanels();
+    fixCalendars();
   }
 
   function scanCatalog() {
@@ -381,6 +438,8 @@
   }
   function lookup(core, dict) {
     if (Object.prototype.hasOwnProperty.call(dict, core)) return dict[core];
+    var dt = dateLookup(core);
+    if (dt !== null) return dt;
     var rr = rules();
     for (var i = 0; i < rr.length; i++) if (rr[i][0].test(core)) return core.replace(rr[i][0], rr[i][1]);
     return null;
