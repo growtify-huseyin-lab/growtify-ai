@@ -1,0 +1,50 @@
+# DEVREYE ALMA: bu dosya .github/workflows/crm-i18n-watch.yml olarak eklenmeli. Depoya iş akışı dosyası yazmak için
+# GitHub anahtarında `workflow` izni gerekir (gh auth refresh -h github.com -s workflow) ya da dosya GitHub arayüzünden
+# (Add file → Create new file) yapıştırılır. O zamana kadar kontrol elle: node scripts/crm-i18n/watch-ghl.mjs
+name: crm-i18n-watch
+# CRM Türkçe katmanı — GHL güncelleme takibi. Türkçeleştirdiğimiz uygulamalardan biri (CRM kabuğu ya da gömülü
+# ekranlar) değişirse "CRM çeviri: GHL güncellemesi algılandı" issue'su açar/yorum ekler. Bilgisayardan bağımsız.
+on:
+  schedule:
+    - cron: "17 5 * * *" # her gün 08:17 (TR)
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Sürüm izlerini karşılaştır
+        id: watch
+        run: |
+          node scripts/crm-i18n/watch-ghl.mjs > watch.json
+          node -e '
+            const d = require("./watch.json");
+            const lines = d.changed.map((id) => "- `" + id + "`: " + d.before[id] + " → " + d.now[id]);
+            require("fs").writeFileSync("changed.txt", lines.join("\n"));
+            console.log("changed=" + d.changed.length);
+          ' >> "$GITHUB_OUTPUT"
+      - name: Issue aç / güncelle
+        if: steps.watch.outputs.changed != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="CRM çeviri: GHL güncellemesi algılandı"
+          SIG="sig:$(sha256sum changed.txt | cut -c1-16)"
+          BODY=$(printf '%s\n\n%s\n\n%s\n\n<!-- %s -->\n' \
+            "Türkçeleştirdiğimiz uygulamalardan biri güncellendi; yeni ya da değişen metinler İngilizce kalıyor olabilir." \
+            "$(cat changed.txt)" \
+            "Yapılacak: ilgili uygulamanın kataloğunu topla, farkı çevir, yayınla; sonra izleri güncelle: node scripts/crm-i18n/watch-ghl.mjs --write. Ayrıntı: scripts/crm-i18n/README.md ve workers/crm-frames/README.md (Bakım)." \
+            "$SIG")
+          N=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -z "$N" ]; then
+            gh issue create --title "$TITLE" --body "$BODY"
+          elif ! gh issue view "$N" --json body,comments --jq '.body, .comments[].body' | grep -q "$SIG"; then
+            gh issue comment "$N" --body "$BODY"
+          fi

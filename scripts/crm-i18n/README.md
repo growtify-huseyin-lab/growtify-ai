@@ -91,3 +91,11 @@ Derleme: `npm i --no-save @intlify/message-compiler && node scripts/crm-i18n/bui
 5. **Derle ve test et** — `build.mjs`, sonra CRM sekmesinde dosya yükleme yöntemiyle (gizli `<input type=file>`
    → katalog + yükleyici) modül modül gez; konsol temiz, metinler Türkçe, TR/EN düğmesi çalışıyor.
 6. **Sürüm** — `VERSION` artır + `docs/ceviri/SURUMLER.md` satırı + (ARA/ANA) D1 revizyon kaydı → PR → onay → merge.
+
+## GHL güncelleme takibi
+
+`watch-ghl.mjs` CRM kabuğunun (`app.js` ETag) ve gömülü uygulamaların (`frames.json` adreslerindeki ana betik adı)
+sürüm izlerini `source/ghl-versions.json` ile karşılaştırır. GitHub Actions bunu her gün çalıştırır (`crm-i18n-watch.workflow.yml`; devreye alma notu dosyanın başında —
+`workflow` izni gerekiyor); bir uygulama değiştiyse "CRM çeviri: GHL güncellemesi algılandı" issue'su açar. Yapılacak: o uygulamanın
+kataloğunu topla → farkı çevir → yayınla → `node scripts/crm-i18n/watch-ghl.mjs --write` ile izleri güncelle (aynı PR'da).
+Not: kabuğun alt uygulamaları (kişiler, fırsatlar…) ayrı yüklenir; onların değişimini en iyi çeviri avı (`?gai_hunt=1`) gösterir.
