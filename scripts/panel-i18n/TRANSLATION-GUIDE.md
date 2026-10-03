@@ -99,20 +99,22 @@ Skool, Apple, Facebook, Instagram, LinkedIn, YouTube, TikTok, WhatsApp…), file
 3. Plurals: a `|` separates plural variants. Keep exactly the same number of variants in the same order:
    "No posts | 1 post | {count} posts" → "Gönderi yok | 1 gönderi | {count} gönderi"
    (Turkish nouns stay singular after numbers).
-4. Leading/trailing spaces: preserve them exactly — these are fragments concatenated in code
+4. English plural endings: placeholders like `{s}` or `{plural}` glued to a word ("result{s}",
+   "day{plural}") add an English "s" — DROP them in Turkish: "{count} result{s}" → "{count} sonuç".
+5. Leading/trailing spaces: preserve them exactly — these are fragments concatenated in code
    (' / month' → ' / ay', ' + tax' → ' + vergi').
-5. Fragments: some sentences are built from parts around a dynamic value (e.g. `descriptionStart` +
+6. Fragments: some sentences are built from parts around a dynamic value (e.g. `descriptionStart` +
    SUBSCRIPTION NAME + `descriptionEnd`, or prefix + NAME). Look at the sibling keys, imagine the full
    concatenated sentence, and make the Turkish read naturally — restructure if needed, e.g.
    start "Are you sure you want to cancel " + NAME + " subscription?" →
    start "Şu aboneliği iptal etmek istediğine emin misin: " + NAME + end "?"
-6. Do not attach Turkish case suffixes directly to a placeholder ("{name}'in", "{group}'a",
+7. Do not attach Turkish case suffixes directly to a placeholder ("{name}'in", "{group}'a",
    "{count}'den") — vowel harmony can't be known in advance. Rephrase instead:
    "{name}'s profile" → "{name} profili" or "Profil: {name}"; "Welcome to {group}" → "{group} topluluğuna
    hoş geldin" is fine (suffix is on "topluluk", not on the placeholder).
-7. Single words that are English UI labels must be translated even if short ("All" → "Tümü",
+8. Single words that are English UI labels must be translated even if short ("All" → "Tümü",
    "New" → "Yeni", "Status" → "Durum", "Role" → "Rol").
-8. Screen-reader labels (`aria…`): natural descriptive Turkish ("Profil menüsünü aç").
+9. Screen-reader labels (`aria…`): natural descriptive Turkish ("Profil menüsünü aç").
 
 ## Output
 Write ONE flat JSON object (`"dotted.key": "Türkçe"`) with every key from the input file, same order.

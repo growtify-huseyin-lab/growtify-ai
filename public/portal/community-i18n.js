@@ -243,6 +243,7 @@
       "App Switcher": "Uygulamalar",
       "Tab Switcher": "Sekmeler",
       "User Avatar": "Kullanıcı Avatarı",
+      "Icon only toggle": "Aç/kapat", // bildirim panelindeki anahtarın ekran okuyucu etiketi
     };
 
     // Ay adları (takvim başlığı "September 2026", üye listesi "Joined 07 Jul 2026")
@@ -1010,6 +1011,8 @@
 
       // TIME
       // Gönderi akışındaki kısa süreler ("47m", "2d") — yalnız metnin tamamı buysa
+      // Giriş kutusundaki e-posta ipucu (bileşen ilk açılışta sabitliyor, katalog güncellemesini almıyor)
+      { pattern: /^you@example\.com$/, replacement: "sen@ornek.com" },
       { pattern: /^(\d+)s$/, replacement: "$1 sn" },
       { pattern: /^(\d+)m$/, replacement: "$1 dk" },
       { pattern: /^(\d+)h$/, replacement: "$1 sa" },
@@ -1320,7 +1323,8 @@
         const dt = document.title || "";
         const cut = dt.indexOf(" |");
         const head = cut >= 0 ? dt.slice(0, cut) : dt;
-        const th = translateString(head);
+        // "About X" sayfa başlığı → "X hakkında" (katalog yalnız "About" kelimesini çevirir)
+        const th = translateString(head).replace(/^(?:About|Hakkında) (.+)$/, "$1 hakkında");
         if (th !== head) document.title = th + (cut >= 0 ? dt.slice(cut) : "");
       } catch (e) {}
     }

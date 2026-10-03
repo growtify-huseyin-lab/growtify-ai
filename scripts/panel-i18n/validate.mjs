@@ -40,6 +40,7 @@ function splitPlural(s) {
 }
 const placeholders = (s) => (s.match(/\{[^{}]*\}/g) || []).slice().sort();
 const outsideBraces = (s) => s.replace(/\{[^{}]*\}/g, "");
+const DROPPABLE = /^\{(s|es|plural|pluralSuffix|suffix)\}$/;
 
 const ALLOW_SAME = /^(GIF|URL|PDF|CSV|ID|API|Stripe|PayPal|Google|Zoom|Skool|Emoji|OK|Email|E-mail|Video|Logo|Online|Offline|Admin|Quiz|Feed|Chat|Link|Banner|Hashtag|PNG|JPG|JPEG|SVG|MP4|MB|KB|GB|HTML|CSS|JS|iOS|Android|Apple|Facebook|Instagram|LinkedIn|X|YouTube|TikTok|WhatsApp|Discord|Slack|Telegram|Twitter|Vimeo|Loom|Wistia|Calendly|HighLevel|Growtify|SMS|OTP|2FA|FAQ|N\/A|AM|PM|UTC|GMT|[A-Z]{2,4}|[\d\s.,:%+\-\/()]+)$/;
 const EN_WORDS = /\b(the|your|you|to|for|with|and|of|is|are|will|here|this|that|from|have|has|we|our|they|their|what|when|where|which|how|yet|only|into|any|all|my|no|not|new|view|show|hide|post|posts|comment|comments|like|likes|share|search|sort|default|member|members|join|settings|account|profile|course|courses|lesson|lessons|start|continue|next|previous|back|save|cancel|delete|edit|remove|add|create|upload|download|open|close|select|filter|reset|apply|submit|send|message|messages|notification|notifications|today|week|month|upcoming|past|book|loading|complete|completed|progress|enrolled|total|private|public|channel|channels|group|groups|community|communities|admins|owner|leaderboard|level|points|events|calendar|about|home|newest|oldest|unread|read|mark|pin|pinned|title|description|required|enter|email|password|name|phone|country|language|time|zone|none|empty|found|results|items|page|showing|sent|date|range|please|invalid|error|something|went|wrong|successfully|failed|unable|try|again)\b/i;
@@ -57,7 +58,8 @@ for (const k of enKeys) {
     errors.push(`${k}: plural variant count ${tv.length} != source ${sv.length}  | src: ${s}  | tr: ${t}`);
   } else {
     for (let i = 0; i < sv.length; i++) {
-      const a = placeholders(sv[i]).join(" "), b = placeholders(tv[i]).join(" ");
+      // English plural-suffix placeholders ({s}, {plural}…) carry an English ending — Turkish drops them.
+      const a = placeholders(sv[i]).filter((p) => !(DROPPABLE.test(p) && !tv[i].includes(p))).join(" "), b = placeholders(tv[i]).join(" ");
       if (a !== b) errors.push(`${k}: placeholders differ in variant ${i + 1}: source [${a}] vs tr [${b}]  | tr: ${t}`);
     }
   }
