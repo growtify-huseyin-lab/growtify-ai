@@ -157,10 +157,38 @@
     var sset = keySet(shell);
     var shellHit = 0;
     for (var j = 0; j < keys.length; j++) if (sset[keys[j]]) shellHit++;
-    if (shellHit / keys.length < 0.9) return null;
-    var subset = {};
-    for (var k = 0; k < keys.length; k++) if (shell.messages[keys[k]] !== undefined) subset[keys[k]] = shell.messages[keys[k]];
-    return { messages: subset };
+    if (shellHit / keys.length >= 0.9) {
+      var subset = {};
+      for (var k = 0; k < keys.length; k++) if (shell.messages[keys[k]] !== undefined) subset[keys[k]] = shell.messages[keys[k]];
+      return { messages: subset };
+    }
+    return shellSubtree(keys);
+  }
+
+  // Bazı alt uygulamalar kendi i18n örneğini, ana katalogdaki bir bölümün (ör. shell.crmObjectsSettingsApp)
+  // içeriğiyle kurar: üst anahtarları o bölümün alt anahtarlarıyla eşleşir → o bölümün Türkçesi kullanılır.
+  var subtreeCache = {};
+  function shellSubtree(keys) {
+    var shell = catalog.instances.shell;
+    if (!shell || keys.length < 2) return null;
+    var sig = keys.slice().sort().join(",");
+    if (Object.prototype.hasOwnProperty.call(subtreeCache, sig)) return subtreeCache[sig];
+    var best = null;
+    var bestScore = 0;
+    for (var ns in shell.messages) {
+      var node = shell.messages[ns];
+      if (!node || typeof node !== "object") continue;
+      var hit = 0;
+      for (var i = 0; i < keys.length; i++) if (Object.prototype.hasOwnProperty.call(node, keys[i])) hit++;
+      var score = hit / keys.length;
+      if (score > bestScore) {
+        bestScore = score;
+        best = node;
+      }
+    }
+    var res = bestScore >= 0.8 ? { messages: best } : null;
+    subtreeCache[sig] = res;
+    return res;
   }
 
   function firstLeaf(o, path) {
@@ -320,9 +348,11 @@
   /* ---------- Tarih metinleri: "Sep 28 – Oct 4, 2026", "Oct 3, 2026", "19 Jun 2026, 12:05 AM" (metnin tamamı) ---------- */
   var MON_TR = { jan: "Oca", feb: "Şub", mar: "Mar", apr: "Nis", may: "May", jun: "Haz", jul: "Tem", aug: "Ağu", sep: "Eyl", oct: "Eki", nov: "Kas", dec: "Ara" };
   function ms(m) {
-    return MON_TR[m.slice(0, 3).toLowerCase()];
+    var k = m.slice(0, 3).toLowerCase();
+    return m.replace(".", "").length > 3 ? MONTHS_TR[k] : MON_TR[k]; // "September" → "Eylül", "Sep" → "Eyl"
   }
-  var M = "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\.?";
+  // Yalnız gerçek ay adları (kısa/uzun) — "Marketing 2", "Decimal 3" gibi adlar tarih sanılmasın.
+  var M = "(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|June?|July?|Aug(?:ust)?|Sep(?:t(?:ember)?)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\\.?";
   var DATE_RULES = [
     [new RegExp("^" + M + " (\\d{1,2}) [–-] " + M + " (\\d{1,2}), (\\d{4})$"), function (x, m1, d1, m2, d2, y) {
       return d1 + " " + ms(m1) + " – " + d2 + " " + ms(m2) + " " + y;
@@ -330,14 +360,20 @@
     [new RegExp("^" + M + " (\\d{1,2}) [–-] (\\d{1,2}), (\\d{4})$"), function (x, m1, d1, d2, y) {
       return d1 + " – " + d2 + " " + ms(m1) + " " + y;
     }],
-    [new RegExp("^" + M + " (\\d{1,2}), (\\d{4})$"), function (x, m1, d, y) {
+    [new RegExp("^" + M + " (\\d{1,2}), (\\d{4}) [–-] " + M + " (\\d{1,2}), (\\d{4})$"), function (x, m1, d1, y1, m2, d2, y2) {
+      return d1 + " " + ms(m1) + " " + y1 + " – " + d2 + " " + ms(m2) + " " + y2;
+    }],
+    [new RegExp("^" + M + " (\\d{1,2}), (\\d{4}|20XX)$"), function (x, m1, d, y) {
       return d + " " + ms(m1) + " " + y;
+    }],
+    [new RegExp("^" + M + " (\\d{1,2})$"), function (x, m1, d) {
+      return d + " " + ms(m1);
     }],
     [new RegExp("^(Created on: )?(\\d{1,2}) " + M + " (\\d{4})(,? .*)?$"), function (x, pre, d, m1, y, rest) {
       return (pre ? "Oluşturulma: " : "") + d + " " + ms(m1) + " " + y + (rest || "");
     }],
     [new RegExp("^" + M + " (\\d{4})$"), function (x, m1, y) {
-      return MONTHS_TR[m1.toLowerCase()] + " " + y;
+      return MONTHS_TR[m1.slice(0, 3).toLowerCase()] + " " + y;
     }],
   ];
   function dateLookup(core) {
@@ -416,7 +452,6 @@
         textPassDone = true;
         trTree(document.body, catalog.text); // ilk tam geçiş; sonrası değişen düğümlerle (gözlemci)
       }
-      if (huntActive) huntScan();
     } catch (e) {}
   }
 
@@ -545,7 +580,24 @@
     }
     return RULES;
   }
+  // GHL'in "her kelimenin ilk harfini büyüt" işlevi Türkçe harfleri kelime sınırı sanıyor:
+  // "kişiler" → "KişIler", "açıklama" → "AçıKlama". Küçük Türkçe harften hemen sonra gelen tek büyük
+  // ASCII harfi geri küçültür (kısaltmalara dokunmaz: arkasından yine büyük harf geliyorsa atlar).
+  var CAPS_BUG = /([çğıöşü])([A-Z])(?![A-ZÇĞİÖŞÜ])/g;
+  function fixCaps(s) {
+    return s.replace(CAPS_BUG, function (m, a, b) {
+      return a + b.toLowerCase();
+    });
+  }
   function lookup(core, dict) {
+    var fixed = fixCaps(core);
+    if (fixed !== core) {
+      var r = lookupExact(fixed, dict);
+      return r !== null ? r : fixed;
+    }
+    return lookupExact(core, dict);
+  }
+  function lookupExact(core, dict) {
     if (Object.prototype.hasOwnProperty.call(dict, core)) return dict[core];
     var dt = dateLookup(core);
     if (dt !== null) return dt;
@@ -660,6 +712,7 @@
           scanCatalog();
           var d = catalog && catalog.text;
           if (d) for (var k = 0; k < q.length; k++) q[k].nodeType === 1 && !q[k].isConnected ? 0 : trTree(q[k], d);
+          if (huntActive) setTimeout(huntScan, 1200); // çeviri ve Vue yeniden çizimi bittikten SONRA kalan İngilizceyi kaydet
         }, 150);
       }).observe(document.documentElement, {
         childList: true,

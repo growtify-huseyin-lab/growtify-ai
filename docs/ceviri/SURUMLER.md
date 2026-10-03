@@ -24,13 +24,31 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.0.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.1.0** | Yayında (#153) — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | Otomasyon kurucusu, takvim ayarları, Ayarlar içeriği, Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Başlamadı — vekil alt alan adı denemesi planlı |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.1.0** — 2026-10-03 (#153, CEO "birleştirip yayına al") — Eksiksizlik turu (CEO: "tümünü yeniden kontrol et tek tek tamamla", "tıklamalar dahil
+  turla"). Katalog 59.580 → **77.432** metin. **Tıklamalı tur:** 296 sayfa, 367 tıklama (sekmeler, filtre/sütun/sıralama düğmeleri, açılır menüler;
+  hiçbir şey kaydedilmedi/silinmedi/gönderilmedi) → 1.562 aday metin. **Katalog farkı turu:** GHL'in sayfa açılınca
+  sonradan yüklediği kabuk bölümleri ilk toplamada yoktu (reklam yöneticisi, müşteri portalı ayarları,
+  hizmetler/hizmet menüsü, kiralamalar, Yext ile listeleme, ajans/bayilik, şablon kütüphanesi, fiyat teklifleri…)
+  → 11.742 yeni kabuk metni. **Yeni alt uygulama katalogları:** Telefon Sistemi ayarları (`phone`, 5.287 metin:
+  numaralar, numara havuzları, WhatsApp Business, A2P/Güven Merkezi, SIP) ve takvim ayarları uygulaması
+  (`calsched`, 1.612 metin: çalışma programları, tarihe özel saatler, sorun giderme, hizmetler, odalar/ekipman)
+  + önceki turda bulunan toplu işlemler (`bulk`) ve Wave/Xero (`wave`). ABD operatörlerine gönderilen hazır A2P
+  metinleri bilerek İngilizce. Sayfa sözlüğü 828 metne çıktı (GHL kodunda sabit metinler: Yapay Zeka
+  Ajanları tanıtımı, Labs özellik listesi, kurs oluşturma/Kajabi içe aktarma, ödeme sağlayıcı açıklamaları,
+  entegrasyon açıklamaları, faturalandırma uyarıları…), sayı kalıpları 52 kural (görüntülenme/arama/üye/kayıt
+  sayıları, "Adım 2", "10 / sayfa", sekmelerdeki "(0)" sayaçları). **Yükleyici:** Türkçe büyük harf hatası
+  düzeltmesi ("KişIler" → "Kişiler", "FıRsatlar" → "Fırsatlar"), sayıdan sonra tekil ("584 Kişi", "7/103 sütun"),
+  "Ekle Kişi" → "Kişi Ekle", uzun ay adları ve tarih aralıkları ("28 Eylül 2026", "19 Eyl 2026 – 3 Eki 2026";
+  ay adı tam listeyle eşleşir). Terim birliği: opt-out = "abonelikten çıkma", buffer = "ara süre", slug =
+  "URL kısa adı". Kalan: takvim ayarlarındaki takvim/hizmet menüsü/oda/ekipman LİSTESİ ve otomasyon kurucusu
+  GHL'in ayrı sitesinden iframe ile geliyor (dev-028); Voice AI arama puanları kataloğu (küçük) yakalanamadı.
 - **1.0.0** — 2026-10-03 — Lansman. Yükleyici GHL Ajans Ayarları → White Label → Custom JS'te (CEO "yayına al";
   favicon betiği korundu). Varsayılan dil Türkçe; Harrington Housing ve Rentser alt hesapları İngilizce açılır
   (CEO kararı); kişinin TR/EN seçimi her zaman önce gelir (`crm-config.json`: `default`, `english`, `turkish`).
