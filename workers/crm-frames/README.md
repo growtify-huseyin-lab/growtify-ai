@@ -39,6 +39,13 @@ sayfasındaki `/assets/` dosyalarını sırayla (3'er, düşük öncelik) indiri
 gönderir (`sig` dosya listesinin özeti; GHL yeni sürüm çıkarınca değişir). Adında içerik özeti olan dosyalar tarayıcıda 1 yıl
 (`immutable`), diğerleri 1 gün tutulur; kenar önbelleğinden verilen eski kopyalarda da süre güncel kurala göre yazılır.
 
+## Yükleme ekranı (`?gai_boot=1`)
+
+Dosyaları tarayıcıda hazır olmayan ekran ilk kez açılırken yükleyici adrese `gai_boot=1` ekler; Worker yalnız o zaman sayfaya
+Growtify yükleme ekranını (gövdenin başında, uygulamanın `#app` kökü dışında; satır içi CSS + küçük betik) ekler. 0,4 sn'den
+kısa yüklemede görünmez; `load` sonrası uygulama çizilince (en çok 2 sn bekler) ya da en geç 90 sn'de kalkar. Parametre
+sayfa açılır açılmaz adresten silinir (BOOT).
+
 ## İç içe çerçeve (`nested`)
 
 Bazı uygulamalar başka bir GHL uygulamasını kendi içinde iframe ile açar: E-postalar (`crm-epostalar`) bir kampanyayı ya

@@ -46,9 +46,14 @@
         try {
           sessionStorage.setItem("gai_crm_frame_lang", frameLang);
         } catch (e) {}
-        var clean = location.search.replace(/([?&])gai_(?:frame|lang)=(?:tr|en)(&|$)/g, function (x, a, b) {
-          return b ? a : "";
-        });
+        var clean = location.search;
+        var prev;
+        do {
+          prev = clean;
+          clean = clean.replace(/([?&])gai_(?:(?:frame|lang)=(?:tr|en)|boot=1)(&|$)/, function (x, a, b) {
+            return b ? a : "";
+          });
+        } while (clean !== prev);
         history.replaceState(history.state, "", location.pathname + (clean === "?" ? "" : clean) + location.hash);
       } else if (!frameLang) {
         try {
@@ -896,8 +901,13 @@
       var r = readWarm()[px];
       return r && r.t ? Date.now() - r.t : Infinity;
     };
+    var isReady = function (px) {
+      return !warmList[px] || warmAge(px) <= 30 * 864e5; // dosyalar tarayıcıda 1 yıl kalıyor
+    };
+    // Hazır değilse de (ilk açılış) kullanılabilir bağlantıda vekilden açılır: çerçevede Growtify yükleme ekranı döner,
+    // dosyalar bir kez iner (CEO: ilk yüklemede beklemeye tolerans var, sonra yok). Veri tasarrufu / 2G: GHL sürümü.
     var useProxy = function (px) {
-      return !down[px] && !(warmList[px] && warmAge(px) > 30 * 864e5); // dosyalar tarayıcıda 1 yıl kalıyor
+      return !down[px] && (isReady(px) || goodNet());
     };
     var goodNet = function () {
       var c = navigator.connection;
@@ -910,7 +920,7 @@
     var warmNext = function () {
       if (warming || !warmQueue.length) return;
       var px = warmQueue.shift();
-      if (warmAge(px) < 12 * 36e5 || down[px] || !goodNet() || Date.now() - (warmFailed[px] || 0) < 36e5) return warmNext();
+      if (warmAge(px) < 36e5 || down[px] || !goodNet() || Date.now() - (warmFailed[px] || 0) < 36e5) return warmNext();
       warming = px;
       var f = document.createElement("iframe");
       f.setAttribute("aria-hidden", "true");
@@ -945,8 +955,10 @@
       for (var px in warmList) scheduleWarm(px, false);
     };
     setTimeout(warmAll, FRAME ? 2000 : 2500); // girişten hemen sonra (düşük öncelik: GHL'in kendi dosyalarını bekletmez); sıra crm-config "warm" sırası
-    setInterval(warmAll, 6 * 36e5);
-    var watch = function (frame, orig, px) {
+    // Saatte bir: GHL bir uygulamayı güncellediyse yeni dosyalar kişi ekranı açmadan arka planda iner (sonraki süreçlerde
+    // bekleme olmasın). Değişiklik yoksa dosyalar tarayıcı önbelleğinden gelir, ağ kullanılmaz.
+    setInterval(warmAll, 36e5);
+    var watch = function (frame, orig, px, cold) {
       var restore = function () {
         if (!frame.isConnected) return; // kişi o ekrandan çıktı: vekil bozuk sayılmaz
         down[px] = true;
@@ -954,12 +966,13 @@
       };
       // Yükleme 25 sn'de bitmezse GHL adresine dönülür. Ama çerçevedeki yükleyici "buradayım" dediyse vekil çalışıyor,
       // uygulama yalnız iniyor (büyük oluşturucular ilk açılışta 26 MB; GHL'in kendi sürümü tarayıcı önbelleğinden
-      // geldiği için hızlı, vekildeki ilk kez iner) → yükleme bitene kadar beklenir (en çok 45 sn; "önce hazırla" ile
-      // vekilden yalnız dosyaları hazır ekranlar açıldığı için bu süre normalde hiç dolmaz).
+      // geldiği için hızlı, vekildeki ilk kez iner) → yükleme bitene kadar beklenir: hazır ekranda en çok 45 sn, ilk
+      // açılışta (çerçevede yükleme ekranı dönerken) en çok 90 sn.
       var t0 = Date.now();
       var loadTimer;
+      var maxWait = cold ? 90000 : 45000;
       var check = function () {
-        if (lastMsg[px] >= t0 && Date.now() - t0 < 45000) loadTimer = setTimeout(check, 5000);
+        if (lastMsg[px] >= t0 && Date.now() - t0 < maxWait) loadTimer = setTimeout(check, 5000);
         else restore();
       };
       loadTimer = setTimeout(check, 25000);
@@ -968,7 +981,15 @@
         clearTimeout(loadTimer);
         var t0 = Date.now();
         setTimeout(function () {
-          if (!(lastMsg[px] >= t0)) restore();
+          if (!(lastMsg[px] >= t0)) return restore();
+          // İlk açılış başarıyla bitti: dosyalar artık tarayıcıda → ekran bundan sonra hazır sayılır.
+          if (warmList[px] && !isReady(px)) {
+            var all = readWarm();
+            all[px] = { s: "", t: Date.now() };
+            try {
+              localStorage.setItem(WARM_KEY, JSON.stringify(all));
+            } catch (e) {}
+          }
         }, 5000);
       };
       frame.addEventListener("load", onload);
@@ -990,13 +1011,18 @@
             return u;
           }
           var nu = map[o] + u.slice(o.length);
-          if (frame) watch(frame, u, map[o]);
+          var cold = !isReady(map[o]); // ilk açılış: çerçevede yükleme ekranı (?gai_boot=1), aynı dosyalar arka planda ayrıca inmesin
+          if (cold) {
+            var qi = warmQueue.indexOf(map[o]);
+            if (qi !== -1) warmQueue.splice(qi, 1);
+          }
+          if (frame) watch(frame, u, map[o], cold);
           // Bakım: sessionStorage gai_frame_lang=en → çerçeve İngilizce açılır (katalog toplamak için)
           var fl = null;
           try {
             fl = sessionStorage.getItem("gai_frame_lang");
           } catch (e) {}
-          return nu + (nu.indexOf("?") === -1 ? "?" : "&") + "gai_frame=" + (fl === "en" || mode === "en" ? "en" : "tr");
+          return nu + (nu.indexOf("?") === -1 ? "?" : "&") + "gai_frame=" + (fl === "en" || mode === "en" ? "en" : "tr") + (cold ? "&gai_boot=1" : "");
         }
       }
       return u;

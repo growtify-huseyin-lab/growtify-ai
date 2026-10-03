@@ -99,12 +99,48 @@ const DROP_RESPONSE_HEADERS = /^(set-cookie|x-frame-options|strict-transport-sec
 const BOOT =
   "(function(){try{var m=location.search.match(/[?&]gai_(?:frame|lang)=(tr|en)(?=&|$)/);if(!m)return;" +
   "window.__gaiCrmFrameLang=m[1];try{sessionStorage.setItem('gai_crm_frame_lang',m[1])}catch(e){}" +
-  "var c=location.search.replace(/([?&])gai_(?:frame|lang)=(?:tr|en)(&|$)/g,function(x,a,b){return b?a:''});" +
+  "var c=location.search,p;do{p=c;c=c.replace(/([?&])gai_(?:(?:frame|lang)=(?:tr|en)|boot=1)(&|$)/,function(x,a,b){return b?a:''})}while(c!==p);" +
   "history.replaceState(history.state,'',location.pathname+(c==='?'?'':c)+location.hash)}catch(e){}})();";
+
+// Yükleme ekranı: uygulama dosyaları inerken (uzun sürmesi yalnız ilk açılışta; sonra tarayıcı önbelleğinden gelir) boş
+// ekran yerine Growtify animasyonu. 0,4 sn'den kısa yüklemede hiç görünmez; uygulama çizilince ya da en geç 90 sn'de kalkar.
+// Uygulamanın kökü (#app) dışında, gövdenin başında durur; uygulamanın DOM'una dokunmaz.
+const BOOT_CSS =
+  "#gai-boot{position:fixed;inset:0;z-index:2147483646;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;" +
+  "background:#fff;opacity:0;animation:gai-boot-in .3s ease .4s forwards;font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif}" +
+  "#gai-boot .gai-w{font-size:34px;font-weight:700;letter-spacing:-.02em;color:#1f2433;line-height:1}" +
+  "#gai-boot .gai-d{display:inline-block;color:#ff4f5e;animation:gai-dot 1.1s ease-in-out infinite}" +
+  "#gai-boot .gai-b{position:relative;width:148px;height:3px;border-radius:3px;background:#eef0f5;overflow:hidden}" +
+  "#gai-boot .gai-b i{position:absolute;top:0;bottom:0;left:0;width:42%;border-radius:3px;background:linear-gradient(90deg,#5d47f0,#ff4f5e);animation:gai-run 1.2s ease-in-out infinite}" +
+  "#gai-boot .gai-t{font-size:13px;color:#7a8091}" +
+  "@keyframes gai-boot-in{to{opacity:1}}" +
+  "@keyframes gai-dot{0%,100%{transform:translateY(0)}45%{transform:translateY(-7px)}}" +
+  "@keyframes gai-run{0%{transform:translateX(-105%)}100%{transform:translateX(245%)}}" +
+  "html.gai-booted #gai-boot{opacity:0!important;animation:none;transition:opacity .3s;pointer-events:none}" +
+  "@media (prefers-reduced-motion:reduce){#gai-boot .gai-d,#gai-boot .gai-b i{animation:none}}";
+function bootMarkup(lang) {
+  const t = lang === "en" ? "Loading…" : "Yükleniyor…";
+  return (
+    '<div id="gai-boot" aria-hidden="true"><div class="gai-w">growtify<span class="gai-d">.</span></div><div class="gai-b"><i></i></div><div class="gai-t">' +
+    t +
+    "</div></div><script>(function(){var d=document.documentElement,done=0;" +
+    "function off(){if(done)return;done=1;d.className+=' gai-booted';setTimeout(function(){var b=document.getElementById('gai-boot');b&&b.parentNode&&b.parentNode.removeChild(b)},450)}" +
+    "function drawn(){var a=document.getElementById('app')||document.querySelector('[data-v-app]');if(!a)return true;return a.children.length>0&&(a.textContent||'').replace(/\\s/g,'').length>0}" +
+    "addEventListener('load',function(){var n=0;(function c(){if(drawn()||n++>13)off();else setTimeout(c,150)})()});setTimeout(off,90000)})();</script>"
+  );
+}
+class BodyInjector {
+  constructor(lang) {
+    this.lang = lang;
+  }
+  element(el) {
+    el.prepend(bootMarkup(this.lang), { html: true });
+  }
+}
 
 // Yükleyici beklemeden (async) gelir: growtify.ai yavaş cevap verirse uygulama bekletilmez, yalnız Türkçe birkaç
 // an sonra gelir. Yükleyici uygulamanın metinlerini açıldıktan sonra da değiştirebiliyor.
-function injection(frame) {
+function injection(frame, boot) {
   return (
     "<script>window.__gaiCrmFrame=" +
     JSON.stringify(frame) +
@@ -115,7 +151,8 @@ function injection(frame) {
     "</script>" +
     '<script src="' +
     LOADER_URL +
-    '" async></script>'
+    '" async></script>' +
+    (boot ? "<style>" + BOOT_CSS + "</style>" : "")
   );
 }
 
@@ -186,11 +223,12 @@ async function warmPage(app) {
 }
 
 class HeadInjector {
-  constructor(frame) {
+  constructor(frame, boot) {
     this.frame = frame;
+    this.boot = boot;
   }
   element(el) {
-    el.prepend(injection(this.frame), { html: true });
+    el.prepend(injection(this.frame, this.boot), { html: true });
   }
 }
 
@@ -262,7 +300,11 @@ export default {
     if (type.includes("text/html") && request.method === "GET") {
       out.set("cache-control", "no-store");
       const res = new Response(upstream.body, { status: upstream.status, headers: out });
-      let rw = new HTMLRewriter().on("head", new HeadInjector(app.frame));
+      const lang = url.searchParams.get("gai_frame") === "en" ? "en" : "tr";
+      // Yükleme ekranı yalnız ilk açılışta (yükleyici dosyalar tarayıcıda hazır değilken ?gai_boot=1 ekler).
+      const boot = url.searchParams.get("gai_boot") === "1";
+      let rw = new HTMLRewriter().on("head", new HeadInjector(app.frame, boot));
+      if (boot) rw = rw.on("body", new BodyInjector(lang));
       if (app.directAssets) rw = rw.on("script[src], link[href]", new AssetRewriter(app.origin));
       return rw.transform(res);
     }
