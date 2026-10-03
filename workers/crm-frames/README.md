@@ -14,6 +14,8 @@ adından sunar ve sayfanın başına aynı yükleyiciyi "çerçeve modunda" ekle
 | `crm-sohbet.growtify.app` | `client-app-crm-conversations.leadconnectorhq.com` | Ayarlar > Sohbet Sağlayıcıları (katalog 10 metin + sağlayıcı türleri) | `growtify.ai/crm/frames/conv.json` |
 | `crm-ortaklik.growtify.app` | `client-app-affiliate-manager.leadconnectorhq.com` | Pazarlama > Satış Ortaklığı | `growtify.ai/crm/frames/aff.json` |
 | `crm-studyo.growtify.app` | `leadgen-vibe-ai-builder.leadconnectorhq.com` | Yapay Zeka Stüdyosu (tam ekran) | `growtify.ai/crm/frames/vibe.json` |
+| `crm-formlar.growtify.app` | `leadgen-apps-form-survey-builder.leadconnectorhq.com` | Form / anket / test oluşturucu (`noDom`) | `growtify.ai/crm/frames/form.json` |
+| `crm-sayfa.growtify.app` | `page-builder.leadconnectorhq.com` | Satış hunisi / web sitesi sayfa oluşturucu (`noDom`) | `growtify.ai/crm/frames/page.json` |
 
 Bir adres kullanıcıya ancak `crm-config.json` `frames` listesine eklenince açılır; listede olmayan adres yalnız
 bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
@@ -26,6 +28,12 @@ bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
    kimlik bilgisi CRM'den tarayıcı içinde gelir, API çağrıları doğrudan GHL'e gider (Worker'dan geçmez).
 3. Worker uygulamanın sayfasını GHL'den alır, `<head>` başına küçük bir başlangıç betiği (dil işaretini okur, adresten
    siler) ve yükleyiciyi `async` ekler — uygulama yükleyiciyi beklemez; diğer dosyalar aynen geçer.
+
+## Oluşturucular (`noDom`)
+
+Form ve sayfa oluşturucularında tuvaldeki önizleme kişinin kendi içeriğidir. `frames.json`'da `noDom: true` olan çerçevede
+yükleyici sayfa sözlüğünü (birebir metin, kalıplar, tarih kuralları) hiç uygulamaz; yalnız uygulamanın kendi metin kataloğu
+çevrilir. Böylece önizleme ile kaydedilen içerik aynı kalır.
 
 ## Uygulama dosyasında metin değişikliği (`JS_TEXT`)
 

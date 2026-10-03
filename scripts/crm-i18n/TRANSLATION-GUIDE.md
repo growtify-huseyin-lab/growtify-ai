@@ -237,3 +237,10 @@ Typewriter heading = `prompt.typewriter_prefix` + `prompt.typewriter_N` → pref
 ("bir açılış sayfası oluşturalım"). Percent: write "yüzde {value}" — `%{` is Rails-style interpolation in vue-i18n and
 drops the sign. Hard-coded strings (template names, What's new modal) live in `source/frames.json` → `vibe.text`; the 12
 template prompts are replaced in the app file by the Worker (`workers/crm-frames` `JS_TEXT`).
+
+## Round 8 — `form` = Form / Survey / Quiz builder (2026-10-03)
+`{product}` / `{Product}` receive form/anket/test (lowercase/capitalised) — never attach a suffix to them; use nominative,
+compound-first or "bu {product}" structures. Terms: submission → gönderim, field → alan, element → öğe, slide → slayt,
+conditional logic → koşullu mantık, disqualify → ele/eleme, Next/Previous → İleri/Geri, filled (style) → dolgulu, font weight
+→ kalınlık. Merge tags in messages must use vue-i18n literals: `{'{{'}contact.email{'}}'}`. The frame runs with `noDom`
+(no page dictionary on the canvas).

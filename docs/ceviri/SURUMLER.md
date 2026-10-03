@@ -24,14 +24,25 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.5.3** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
+| Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.0** | Katalog hazır, kendi sekmede deneniyor |
+| Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **0.0.0** | Katalog çeviride (6.380 metin) |
+| E-posta oluşturucu | E-postalar içinde iç içe çerçeve (email-builder-prod / email-builder-beta) | **0.0.0** | Sırada — iç içe vekil gerekiyor |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.6.0** — 2026-10-03 — **Form / Anket / Test oluşturucu kataloğu (henüz kullanıcıya kapalı) + oluşturucu koruması.**
+  Oluşturucu ayrı bir uygulama (leadgen-apps-form-survey-builder), vekil `crm-formlar.growtify.app`. Katalog 1.328 metin
+  (346'sı mevcut çeviriden; "Filled" → "Dolgulu", yazı tipi "Weight" → "Kalınlık" bağlam düzeltmeleri; `{{contact.email}}`
+  etiketi vue-i18n biçimiyle). Uygulama "form/anket/test" kelimesini `{product}` ile cümleye ekliyor → Türkçede bu yer
+  tutucuya ek takılmadı ("{Product} kaydedildi", "{product} adı"). **Yeni: `noDom`** — oluşturucularda sayfa sözlüğü
+  kapalı: tuvaldeki önizleme kişinin kendi içeriği; "Email", "Submit" gibi alan adları önizlemede Türkçeleşip kaydedilen
+  formla çelişmesin. Yalnız uygulamanın kendi kataloğu çevrilir. Ayrıca vekilde sayfa oluşturucu adresi hazır
+  (`crm-sayfa.growtify.app` → page-builder; katalog çeviride).
 - **1.5.3** — 2026-10-03 — **Kalite turu.** En çok kullanılan 25 sayfada görünen 213 Türkçe metin tek tek okundu. Düzeltmeler:
   panodaki fırsat durumu grafiğinde İngilizce kalan "abandoned" → "vazgeçildi"; Başlangıç başlığı "Başarıya giden yolda ilk
   adımları birlikte atalım"; WhatsApp açıklamasındaki "anlık ve gerçek zamanlı" tekrarı kaldırıldı; her sayfadaki sohbet

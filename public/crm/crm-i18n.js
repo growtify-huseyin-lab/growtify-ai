@@ -568,6 +568,9 @@
           }
         }
       }
+      // Oluşturucu çerçevelerinde (form/anket/test) sayfa sözlüğü kapalı (noDom): tuvaldeki önizleme kişinin kendi
+      // içeriğidir; yalnız uygulamanın kendi metin kataloğu çevrilir (kaydedilen içerik önizlemeyle aynı kalsın).
+      if (catalog.noDom) return;
       translateDom();
       if (!textPassDone && catalog.text) {
         textPassDone = true;
@@ -1189,7 +1192,7 @@
       var t = null;
       var queue = [];
       new MutationObserver(function (recs) {
-        if (mode === "tr" && catalog && catalog.text) {
+        if (mode === "tr" && catalog && catalog.text && !catalog.noDom) {
           for (var i = 0; i < recs.length; i++) {
             var r = recs[i];
             if (r.type === "childList") for (var j = 0; j < r.addedNodes.length; j++) queue.push(r.addedNodes[j]);
