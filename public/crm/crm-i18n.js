@@ -803,6 +803,7 @@
     var sd = Object.getOwnPropertyDescriptor(HTMLIFrameElement.prototype, "src");
     var watch = function (frame, orig, px) {
       var restore = function () {
+        if (!frame.isConnected) return; // kişi o ekrandan çıktı: vekil bozuk sayılmaz
         down[px] = true;
         sd.set.call(frame, orig);
       };
@@ -909,9 +910,16 @@
       }
     };
     try {
+      // Hem eklenme anı hem de sonradan verilen adres izlenir (GHL bazen iframe'i önce adressiz ekliyor). Güvenlik ağı
+      // GHL adresine geri döndürdüğünde vekil "down" işaretli olduğundan tekrar yakalanmaz (döngü olmaz).
       new MutationObserver(function (recs) {
         for (var i = 0; i < recs.length; i++) {
-          var added = recs[i].addedNodes;
+          var r = recs[i];
+          if (r.type === "attributes") {
+            if (r.target.tagName === "IFRAME") catchFrame(r.target);
+            continue;
+          }
+          var added = r.addedNodes;
           for (var j = 0; j < added.length; j++) {
             var n = added[j];
             if (n.nodeType !== 1) continue;
@@ -922,7 +930,7 @@
             }
           }
         }
-      }).observe(document.documentElement, { childList: true, subtree: true });
+      }).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ["src"] });
     } catch (e) {}
     // Uygulamadan gelen mesajlar vekil adresten gelir; CRM asıl adresi beklediği için kaynağı geri yazılır.
     window.addEventListener(
