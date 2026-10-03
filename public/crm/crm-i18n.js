@@ -699,7 +699,10 @@
   /* ---------- Sayfa sözlüğü: katalogda olmayan, GHL kodunda sabit yazılı metinler ---------- */
   // Yalnız metnin TAMAMI sözlükteki bir ifadeyle birebir aynıysa çevrilir → kişi/mesaj verisine dokunulmaz.
   var textPassDone = false;
-  var SKIP_SEL = "script,style,textarea,code,pre,[contenteditable],[contenteditable] *";
+  // Kişinin kendi verdiği adlar (web sitesi sayfası, satış hunisi adımı) sözlükte bir ifadeyle aynı olsa da çevrilmez
+  // (ör. "Home" adlı sayfa "Ana sayfa" olmasın).
+  var USER_NAMES = "#website-header h6,#step-container p,#funnel-step-details span.truncate";
+  var SKIP_SEL = "script,style,textarea,code,pre,[contenteditable],[contenteditable] *," + USER_NAMES;
   var ATTRS = ["placeholder", "title", "aria-label"];
   // Sayı içeren kalıplar ("1 - 10 of 50", "Page 2 of 5"): katalogdaki [desen, karşılık] kuralları.
   var RULES = null;
