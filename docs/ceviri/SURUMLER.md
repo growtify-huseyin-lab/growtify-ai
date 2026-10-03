@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.5.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.5.3** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
@@ -32,6 +32,10 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.5.3** — 2026-10-03 — **Kalite turu.** En çok kullanılan 25 sayfada görünen 213 Türkçe metin tek tek okundu. Düzeltmeler:
+  panodaki fırsat durumu grafiğinde İngilizce kalan "abandoned" → "vazgeçildi"; Başlangıç başlığı "Başarıya giden yolda ilk
+  adımları birlikte atalım"; WhatsApp açıklamasındaki "anlık ve gerçek zamanlı" tekrarı kaldırıldı; her sayfadaki sohbet
+  düğmesinin ekran okuyucu etiketi "Sohbeti aç". Bu sayfalarda başka çevrilmemiş arayüz metni yok (ürün adları hariç).
 - **1.5.2** — 2026-10-03 — **Satış Ortaklığı tanıtım çizimi Türkçe.** Çizimdeki altı satır (Satış Ortaklarını Davet Et,
   Tanıt ve Takip Et, Hakedişleri Otomatikleştir + açıklamaları) SVG'de harf şekli olduğu için metin olarak çevrilemiyordu;
   aynı çizimin Türkçe yazılı kopyası `public/crm/frames/assets/aff-hero.tr.svg`, vekil (`ASSET_TR`) İngilizce dosya yerine
