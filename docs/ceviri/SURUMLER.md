@@ -24,14 +24,22 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **0.3.0** | Yayın adayı; yükleyicinin GHL'e eklenmesi bekliyor — 1.0.0 = lansman |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.0.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | Otomasyon kurucusu, takvim ayarları, Ayarlar içeriği, Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Başlamadı — vekil alt alan adı denemesi planlı |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
-- **0.3.0** — 2026-10-03 — Yayın adayı: 97 parçanın tamamı çevrildi (58 bin metin; ana kabuk + sohbet, takvim,
+- **1.0.0** — 2026-10-03 — Lansman. Yükleyici GHL Ajans Ayarları → White Label → Custom JS'te (CEO "yayına al";
+  favicon betiği korundu). Varsayılan dil Türkçe; Harrington Housing ve Rentser alt hesapları İngilizce açılır
+  (CEO kararı); kişinin TR/EN seçimi her zaman önce gelir (`crm-config.json`: `default`, `english`, `turkish`).
+  Tarih seçicilerde ay ve gün adları Türkçe (Ekim 2026, Pz Pt Sa Ça Pe Cu Ct); takvim görünümünde gün başlıkları
+  ("28 Pzt"), 24 saat etiketleri ve tarih aralığı ("28 Eyl – 4 Eki 2026"); listelerdeki tarih metinleri
+  ("3 Eki 2026"). Panoda kalan başlıklar ve CEO'nun bildirdiği metinler Türkçe. Gizli bakım modu
+  **çeviri avı** (`?gai_hunt=1` açar, `?gai_hunt=0` kapatır): Türkçe açıkken ekranda İngilizce kalan arayüz
+  metinlerini ve eşleşmeyen katalogları yalnız tarayıcıda biriktirir, sol alttaki rozetten kopyalanır.
+- **0.3.0** — 2026-10-03 (#151, aynı gün yayına alındı) — Yayın adayı: 97 parçanın tamamı çevrildi (58 bin metin; ana kabuk + sohbet, takvim,
   ödeme, pazar yeri, nesneler, hediye kartı uygulamaları). Son kontrol: terim birliği (Niyet, Fiyat Teklifi,
   Kampanya, Çoğalt/Kopyala, Google İşletme Profili, Transkript…), white-label (metinlerde HighLevel/GHL/
   LeadConnector adı yok), hitap (arayüz "sen"; müşterinin gördüğü sayfalar "siz"), birleştirme etiketleri
@@ -44,8 +52,6 @@ bu dosyanın o anki özetidir.
 - **0.1.0** — 2026-10-03 — 1. aşama (24 parça, ~15 bin metin: menü, kişiler, sohbetler, fırsatlar, takvim, pano,
   başlangıç, ayarlar, giriş) + yükleyici: alt hesap listesi Türkçe açılır, herkese TR/EN düğmesi (tarayıcıda
   hatırlanır). CEO'nun CRM sekmesinde dosya yükleme yöntemiyle doğrulandı; yayında değil.
-- **1.0.0** (hedef) — tüm katalog + GHL ajans ayarı Custom JS'e yükleyici (kalıcı ajans ayarı = CEO onayı) +
-  öğrenci alt hesap listesi (`public/crm/crm-config.json`).
 
 ### Öğrenci paneli (panel.growtify.ai)
 - **2.0.0** — 2026-10-03 (#150) — Panelin kendi metin kataloğu çevrildi: 4.327/4.327 metin (`public/portal/panel-tr.json`).

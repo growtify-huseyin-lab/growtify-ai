@@ -5,13 +5,15 @@
  * Türkçe, o kataloğun İngilizcesinin üstüne yazılır (dil kodu değişmez → GHL mantığı aynı kalır).
  * GHL'de başka bir dil (es, de…) seçilmişse dokunulmaz.
  *
- * Kimde Türkçe (CEO kararı 2026-10-03):
- *   1) Kişinin kendi seçimi — sağ üstteki TR/EN düğmesi (tarayıcıda hatırlanır; ?gai_lang=tr|en de olur)
- *   2) Seçim yoksa: public/crm/crm-config.json'daki "locations" listesindeki alt hesaplar (öğrenciler)
- *   3) Diğer herkes İngilizce (büyük Türkçe katalog hiç indirilmez).
+ * Kimde Türkçe (CEO kararları 2026-10-03):
+ *   1) Kişinin kendi seçimi — üst çubuktaki TR/EN düğmesi (tarayıcıda hatırlanır; ?gai_lang=tr|en de olur)
+ *   2) Seçim yoksa public/crm/crm-config.json: "english" listesindeki alt hesaplar İngilizce
+ *      (Harrington Housing, Rentser), "turkish" listesindekiler Türkçe, diğerleri "default" ("tr").
+ *   İngilizce açılan sayfada büyük Türkçe katalog hiç indirilmez.
  *
  * Yükleyici: GHL Ajans Ayarları → Company → White Label → Custom JS.
- * Farklı alan adında çalışan GHL uygulamalarına (workflow kurucusu, takvim ayarları) ulaşılamaz.
+ * Farklı alan adında iframe içinde çalışan GHL uygulamalarına (otomasyon kurucusu, takvim ayarları,
+ * Ayarlar içeriği, Yapay Zeka Stüdyosu) ulaşılamaz.
  */
 (function () {
   if (window.__gaiCrmI18n) return;
@@ -44,13 +46,18 @@
     return m ? m[1] : null;
   }
 
-  var config = { locations: [] };
+  var config = { default: "en", english: [], turkish: [] };
 
+  // Kişinin seçimi (TR/EN düğmesi, ?gai_lang) > alt hesap listeleri > varsayılan dil.
   function decide() {
     var c = getChoice();
     if (c) return c;
     var loc = locationId();
-    return loc && config.locations && config.locations.indexOf(loc) !== -1 ? "tr" : "en";
+    var en = config.english || [];
+    var tr = config.turkish || config.locations || []; // "locations" = eski adı (Türkçe liste)
+    if (loc && en.indexOf(loc) !== -1) return "en";
+    if (loc && tr.indexOf(loc) !== -1) return "tr";
+    return config.default === "tr" ? "tr" : "en";
   }
 
   /* ---------- TR/EN düğmesi ---------- */
@@ -281,6 +288,91 @@
 
   // Sunucudan gelen sabit etiketler (ör. sol menüde ve üst menüde "Contacts"): yalnız menülerde,
   // tam eşleşme — müşteri verisine dokunmaz.
+  /* ---------- Tarih seçici (HighRise UI): ay ve gün adları — yalnız .hr-date-panel içinde ---------- */
+  var MONTHS_TR = { jan: "Ocak", feb: "Şubat", mar: "Mart", apr: "Nisan", may: "Mayıs", jun: "Haziran", jul: "Temmuz", aug: "Ağustos", sep: "Eylül", oct: "Ekim", nov: "Kasım", dec: "Aralık" };
+  var MONTH_RE = /^(\s*)(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?(\s*)$/;
+  var MONTH_YEAR_RE = /^(\s*)(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?[\s\u00a0]+(\d{4})(\s*)$/;
+  // İngilizce "Sa" = Cumartesi, Türkçe "Sa" = Salı → çevrilen hücrenin özgün adı data-gai-en'de tutulur (çift çeviri olmaz).
+  var DAYS_TR = { Su: "Pz", Mo: "Pt", Tu: "Sa", We: "Ça", Th: "Pe", Fr: "Cu", Sa: "Ct", Sun: "Paz", Mon: "Pzt", Tue: "Sal", Wed: "Çar", Thu: "Per", Fri: "Cum", Sat: "Cmt" };
+  function fixDatePanels() {
+    var panels = document.querySelectorAll(".hr-date-panel");
+    for (var i = 0; i < panels.length; i++) {
+      var days = panels[i].querySelectorAll(".hr-date-panel-weekdays__day");
+      for (var d = 0; d < days.length; d++) {
+        var el = days[d];
+        var t = el.textContent.trim();
+        var orig = el.getAttribute("data-gai-en");
+        if (orig && DAYS_TR[orig] === t) continue; // zaten Türkçe
+        if (Object.prototype.hasOwnProperty.call(DAYS_TR, t)) {
+          el.setAttribute("data-gai-en", t);
+          el.textContent = DAYS_TR[t];
+        }
+      }
+      fixTextIn(panels[i], MONTH_YEAR_RE, function (m, a, mon, year, b) {
+        return a + MONTHS_TR[mon.toLowerCase()] + " " + year + b;
+      });
+      fixTextIn(panels[i], MONTH_RE, function (m, a, mon, b) {
+        return a + MONTHS_TR[mon.toLowerCase()] + b;
+      });
+    }
+  }
+
+  /* ---------- Tarih metinleri: "Sep 28 – Oct 4, 2026", "Oct 3, 2026", "19 Jun 2026, 12:05 AM" (metnin tamamı) ---------- */
+  var MON_TR = { jan: "Oca", feb: "Şub", mar: "Mar", apr: "Nis", may: "May", jun: "Haz", jul: "Tem", aug: "Ağu", sep: "Eyl", oct: "Eki", nov: "Kas", dec: "Ara" };
+  function ms(m) {
+    return MON_TR[m.slice(0, 3).toLowerCase()];
+  }
+  var M = "(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\\.?";
+  var DATE_RULES = [
+    [new RegExp("^" + M + " (\\d{1,2}) [–-] " + M + " (\\d{1,2}), (\\d{4})$"), function (x, m1, d1, m2, d2, y) {
+      return d1 + " " + ms(m1) + " – " + d2 + " " + ms(m2) + " " + y;
+    }],
+    [new RegExp("^" + M + " (\\d{1,2}) [–-] (\\d{1,2}), (\\d{4})$"), function (x, m1, d1, d2, y) {
+      return d1 + " – " + d2 + " " + ms(m1) + " " + y;
+    }],
+    [new RegExp("^" + M + " (\\d{1,2}), (\\d{4})$"), function (x, m1, d, y) {
+      return d + " " + ms(m1) + " " + y;
+    }],
+    [new RegExp("^(Created on: )?(\\d{1,2}) " + M + " (\\d{4})(,? .*)?$"), function (x, pre, d, m1, y, rest) {
+      return (pre ? "Oluşturulma: " : "") + d + " " + ms(m1) + " " + y + (rest || "");
+    }],
+    [new RegExp("^" + M + " (\\d{4})$"), function (x, m1, y) {
+      return MONTHS_TR[m1.toLowerCase()] + " " + y;
+    }],
+  ];
+  function dateLookup(core) {
+    for (var i = 0; i < DATE_RULES.length; i++) if (DATE_RULES[i][0].test(core)) return core.replace(DATE_RULES[i][0], DATE_RULES[i][1]);
+    return null;
+  }
+
+  /* ---------- Takvim görünümü (FullCalendar, .fc): gün başlıkları ve saat etiketleri ---------- */
+  var DAY3_TR = { Mon: "Pzt", Tue: "Sal", Wed: "Çar", Thu: "Per", Fri: "Cum", Sat: "Cmt", Sun: "Paz" };
+  var DAYFULL_TR = { Monday: "Pazartesi", Tuesday: "Salı", Wednesday: "Çarşamba", Thursday: "Perşembe", Friday: "Cuma", Saturday: "Cumartesi", Sunday: "Pazar" };
+  var FC_DAYNUM_RE = /^(\s*)(\d{1,2}) (Mon|Tue|Wed|Thu|Fri|Sat|Sun)(\s*)$/;
+  var FC_DAY_RE = /^(\s*)(Mon|Tue|Wed|Thu|Fri|Sat|Sun)(?: (\d{1,2}\/\d{1,2}))?(\s*)$/;
+  var FC_DAYFULL_RE = /^(\s*)(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)(\s*)$/;
+  var FC_HOUR_RE = /^(\s*)(\d{1,2})(?::(\d{2}))? ?(AM|PM|am|pm|a|p)(\s*)$/;
+  function fixCalendars() {
+    var cals = document.querySelectorAll(".fc");
+    for (var i = 0; i < cals.length; i++) {
+      fixTextIn(cals[i], FC_DAYNUM_RE, function (x, a, d, day, b) {
+        return a + d + " " + DAY3_TR[day] + b;
+      });
+      fixTextIn(cals[i], FC_DAY_RE, function (x, a, day, md, b) {
+        return a + DAY3_TR[day] + (md ? " " + md : "") + b;
+      });
+      fixTextIn(cals[i], FC_DAYFULL_RE, function (x, a, day, b) {
+        return a + DAYFULL_TR[day] + b;
+      });
+      fixTextIn(cals[i], FC_HOUR_RE, function (x, a, h, mm, ap, b) {
+        var hh = parseInt(h, 10) % 12;
+        if (/^p/i.test(ap)) hh += 12;
+        return a + (hh < 10 ? "0" : "") + hh + ":" + (mm || "00") + b;
+      });
+      fixTextIn(cals[i], /^(\s*)all-day(\s*)$/, "$1tüm gün$2");
+    }
+  }
+
   function translateDom() {
     var dict = catalog.dom;
     var roots = document.querySelectorAll("#sidebar-v2, nav, [role=navigation], header.hl_header");
@@ -297,6 +389,8 @@
       var els = document.querySelectorAll(DOM_FIXES[f].sel);
       for (var e = 0; e < els.length; e++) fixTextIn(els[e], DOM_FIXES[f].re, DOM_FIXES[f].to);
     }
+    fixDatePanels();
+    fixCalendars();
   }
 
   function scanCatalog() {
@@ -312,6 +406,7 @@
           var v = prov[syms[j]];
           if (v && v.global && typeof v.global.mergeLocaleMessage === "function" && typeof v.global.getLocaleMessage === "function") {
             patchInstance(els[i], v.global);
+            if (huntActive && !v.global.__gaiTr) huntInstance(els[i], v.global);
             break;
           }
         }
@@ -321,7 +416,115 @@
         textPassDone = true;
         trTree(document.body, catalog.text); // ilk tam geçiş; sonrası değişen düğümlerle (gözlemci)
       }
+      if (huntActive) huntScan();
     } catch (e) {}
+  }
+
+  /* ---------- Çeviri avı (gizli bakım modu): ?gai_hunt=1 açar, ?gai_hunt=0 kapatır ----------
+   * Türkçe açıkken ekranda İngilizce kalan arayüz metinlerini ve hiç eşleşmeyen i18n kataloglarını
+   * yalnız bu tarayıcıda (localStorage) biriktirir; hiçbir yere gönderilmez. Sol alttaki rozetten kopyalanır.
+   * Kişi/mesaj verisi toplamamak için yalnız arayüz öğelerine bakılır (düğme, sekme, başlık, etiket,
+   * tablo başlığı, menü, yer tutucu…); tablo gövdesi, mesaj alanları ve yazı alanları hariç. */
+  var HUNT_KEY = "gai_crm_hunt";
+  var HUNT_LOG = "gai_crm_hunt_log";
+  var huntActive = (function () {
+    try {
+      var m = location.search.match(/[?&]gai_hunt=(0|1)(?:&|$)/);
+      if (m) localStorage.setItem(HUNT_KEY, m[1]);
+      return localStorage.getItem(HUNT_KEY) === "1";
+    } catch (e) {
+      return false;
+    }
+  })();
+  var hunt = null;
+  var huntLast = 0;
+  var HUNT_UI = "button,[role=button],[role=tab],[role=menuitem],[role=option],label,th,h1,h2,h3,h4,h5,legend,summary," +
+    "[class*=title],[class*=header],[class*=label],[class*=empty],[class*=tab],[class*=menu],[class*=tooltip],[class*=badge],[class*=chip]";
+  var HUNT_SKIP = "tbody,textarea,input,[contenteditable],[class*=message],[class*=Message],[class*=conversation-body],[class*=email-body],#__gai_lang_toggle,#__gai_hunt";
+  var HUNT_EN = /\b(the|your|you|to|for|with|and|of|is|are|this|that|no|not|add|new|create|edit|delete|save|cancel|search|filter|sort|view|show|hide|select|all|none|more|settings|contacts?|opportunit\w*|pipelines?|calendars?|appointments?|conversations?|messages?|payments?|invoices?|products?|emails?|reports?|import|export|status|actions?|name|phone|date|time|today|week|month|total|open|won|lost|tags?|owner|assigned|due|tasks?|notes?|loading|learn|manage|connect|enable|disable|update|upload|download|next|back|close|done|apply|reset|clear|start|end|type|details?|overview|list|users?|team|price|amount|source|created|updated|last|first|group|duration|followers?|unassigned|groups?|blocked|slots?|buffer)\b/i;
+  function huntData() {
+    if (hunt) return hunt;
+    try {
+      hunt = JSON.parse(localStorage.getItem(HUNT_LOG) || "null");
+    } catch (e) {}
+    hunt = hunt && hunt.s ? hunt : { s: {}, i: {} };
+    return hunt;
+  }
+  function huntSave() {
+    try {
+      localStorage.setItem(HUNT_LOG, JSON.stringify(hunt));
+    } catch (e) {}
+  }
+  function huntAdd(t, kind) {
+    t = (t || "").replace(/\s+/g, " ").trim();
+    if (!t || t.length > 100 || /[çğıöşüÇĞİÖŞÜ]/.test(t) || !HUNT_EN.test(t) || /@|https?:/.test(t)) return false;
+    var d = huntData();
+    if (d.s[t]) return false;
+    d.s[t] = { k: kind, p: location.pathname.replace(/\/location\/[A-Za-z0-9]+/, "/location/~").slice(0, 80) };
+    return true;
+  }
+  function huntInstance(rootEl, g) {
+    var loc = g.locale && g.locale.value;
+    if (!isEnglish(loc)) return;
+    var msgs = g.getLocaleMessage(loc) || {};
+    var keys = Object.keys(msgs);
+    if (!keys.length) return;
+    var sig = keys.slice(0, 6).join(",");
+    var d = huntData();
+    if (d.i[sig]) return;
+    d.i[sig] = { n: keys.length, root: (rootEl.id || String(rootEl.className || "")).slice(0, 40), p: location.pathname.replace(/\/location\/[A-Za-z0-9]+/, "/location/~").slice(0, 80) };
+    huntSave();
+    huntBadge();
+  }
+  function huntScan() {
+    var now = Date.now();
+    if (now - huntLast < 1500) return;
+    huntLast = now;
+    if (!document.getElementById("__gai_hunt")) huntBadge();
+    var added = false;
+    var els = document.querySelectorAll(HUNT_UI);
+    for (var i = 0; i < els.length && i < 4000; i++) {
+      var el = els[i];
+      if (el.closest(HUNT_SKIP)) continue;
+      for (var c = el.firstChild; c; c = c.nextSibling) if (c.nodeType === 3 && huntAdd(c.nodeValue, "text")) added = true;
+      if (el.children.length === 0 && huntAdd(el.textContent, "text")) added = true;
+    }
+    var attrs = document.querySelectorAll("[placeholder],[title],[aria-label]");
+    for (var a = 0; a < attrs.length && a < 4000; a++) {
+      if (attrs[a].closest(HUNT_SKIP.replace("textarea,input,", ""))) continue;
+      for (var k = 0; k < ATTRS.length; k++) if (huntAdd(attrs[a].getAttribute(ATTRS[k]), ATTRS[k])) added = true;
+    }
+    if (added) {
+      huntSave();
+      huntBadge();
+    }
+  }
+  function huntBadge() {
+    if (!document.body) return;
+    var d = huntData();
+    var el = document.getElementById("__gai_hunt");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "__gai_hunt";
+      el.style.cssText = "position:fixed;left:12px;bottom:12px;z-index:2147483000;background:#101828;color:#fff;border-radius:10px;" +
+        "padding:6px 10px;font:600 11px/1.4 Inter,system-ui,sans-serif;display:flex;gap:8px;align-items:center;box-shadow:0 4px 12px rgba(0,0,0,.25)";
+      el.innerHTML = '<span data-c></span><button data-a="copy" style="all:unset;cursor:pointer;color:#84caff">Kopyala</button>' +
+        '<button data-a="clear" style="all:unset;cursor:pointer;color:#fda29b">Temizle</button>';
+      el.addEventListener("click", function (e) {
+        var a = e.target && e.target.getAttribute && e.target.getAttribute("data-a");
+        if (a === "copy") {
+          try {
+            navigator.clipboard.writeText(JSON.stringify(huntData(), null, 1));
+          } catch (x) {}
+        } else if (a === "clear") {
+          hunt = { s: {}, i: {} };
+          huntSave();
+          huntBadge();
+        }
+      });
+      document.body.appendChild(el);
+    }
+    el.querySelector("[data-c]").textContent = "Çeviri avı: " + Object.keys(d.s).length + " metin · " + Object.keys(d.i).length + " katalog";
   }
 
   /* ---------- Sayfa sözlüğü: katalogda olmayan, GHL kodunda sabit yazılı metinler ---------- */
@@ -344,6 +547,8 @@
   }
   function lookup(core, dict) {
     if (Object.prototype.hasOwnProperty.call(dict, core)) return dict[core];
+    var dt = dateLookup(core);
+    if (dt !== null) return dt;
     var rr = rules();
     for (var i = 0; i < rr.length; i++) if (rr[i][0].test(core)) return core.replace(rr[i][0], rr[i][1]);
     return null;
@@ -476,7 +681,7 @@
           return r.ok ? r.json() : null;
         })
         .then(function (j) {
-          if (j && j.locations) config = j;
+          if (j && typeof j === "object" && (j.default || j.english || j.turkish || j.locations)) config = j;
         })
         .catch(function () {})
         .then(start);

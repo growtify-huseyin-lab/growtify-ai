@@ -11,13 +11,14 @@ Sürüm ve değişiklik kaydı: `docs/ceviri/SURUMLER.md`. Sürüm numarası: `s
   ```html
   <script>(function(){if(document.getElementById("__gai_crm_i18n"))return;var s=document.createElement("script");s.id="__gai_crm_i18n";s.src="https://growtify.ai/crm/crm-i18n.js?v=1";s.async=true;document.head.appendChild(s);})();</script>
   ```
-- `crm-config.json` — Türkçe açılacak alt hesaplar (GHL location ID listesi, `locations`).
+- `crm-config.json` — varsayılan dil ve İngilizce/Türkçe açılacak alt hesap listeleri.
 - `crm-tr.json` — derlenmiş Türkçe katalog: `{version, built_at, instances: {id: {keys, messages}}, dom}`.
 
 ## Kim Türkçe görür
-1. Kişinin seçimi önce gelir: sağ üstteki TR/EN düğmesi (tarayıcıda `gai_crm_lang` olarak hatırlanır) ya da
+1. Kişinin seçimi önce gelir: üst çubuktaki TR/EN düğmesi (tarayıcıda `gai_crm_lang` olarak hatırlanır) ya da
    adres çubuğunda `?gai_lang=tr|en`.
-2. Seçim yoksa: alt hesap `crm-config.json` listesindeyse Türkçe, değilse İngilizce.
+2. Seçim yoksa `crm-config.json`: `english` listesindeki alt hesaplar (GHL location ID) İngilizce, `turkish`
+   listesindekiler Türkçe, diğerleri `default` (şu an `"tr"`; İngilizce kalanlar: Harrington Housing, Rentser).
 
 Sayfadaki sürüm: `document.documentElement.dataset.gaiCrmTr` (ör. `"1.0.0"`).
 
