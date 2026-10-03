@@ -23,7 +23,11 @@
  "email": {
   "origin": "https://email-home-prod.leadconnectorhq.com",
   "proxy": "https://crm-epostalar.growtify.app",
-  "screens": "Pazarlama > E-postalar (kampanyalar, şablonlar)"
+  "screens": "Pazarlama > E-postalar (kampanyalar, şablonlar)",
+  "nested": {
+   "https://email-builder-prod.leadconnectorhq.com": "https://crm-eposta-tasarim.growtify.app"
+  },
+  "_nested_note": "Kampanya düzenlerken E-postalar uygulaması e-posta oluşturucuyu kendi içinde gömüyor; bu çerçevedeki yükleyici onu vekile çevirir (önce hazırla kuralıyla: dosyalar tarayıcıda hazır değilse GHL'in kendi sürümü anında açılır). Kapatmak için bu alanı sil."
  },
  "conv": {
   "origin": "https://client-app-crm-conversations.leadconnectorhq.com",
