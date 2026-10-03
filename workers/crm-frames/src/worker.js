@@ -69,6 +69,13 @@ const JS_TEXT = {
   },
 };
 
+// Yazı içeren çizimlerin Türkçe kopyası (yazılar SVG'de harf şekli olarak duruyor, metin olarak çevrilemiyor). GHL çizimi
+// değiştirirse dosya adı (içerik özeti) değişir, eşleşme olmaz ve İngilizcesi gelir; Türkçe kopya alınamazsa da öyle.
+const ASSET_TR_BASE = "https://growtify.ai/crm/frames/assets/";
+const ASSET_TR = {
+  aff: { "/assets/Frame1.7d8ea9f0.svg": "aff-hero.tr.svg" }, // Satış Ortaklığı tanıtım çizimi
+};
+
 const LOADER_URL = "https://growtify.ai/crm/crm-i18n.js";
 const CATALOG_BASE = "https://growtify.ai/crm/frames/";
 // GHL uygulamalarını çerçeveleyebilecek CRM adresleri (yalnız GHL frame-ancestors gönderirse kullanılır).
@@ -151,6 +158,18 @@ export default {
     }
     if (request.method !== "GET" && request.method !== "HEAD") {
       return new Response("Method not allowed", { status: 405, headers: { allow: "GET, HEAD" } });
+    }
+
+    const trAsset = request.method === "GET" && ASSET_TR[app.frame] && ASSET_TR[app.frame][url.pathname];
+    if (trAsset) {
+      try {
+        const r = await fetch(ASSET_TR_BASE + trAsset, { cf: { cacheTtl: 3600, cacheEverything: true } });
+        if (r.ok) {
+          return new Response(r.body, {
+            headers: { "content-type": "image/svg+xml", "cache-control": "public, max-age=3600" },
+          });
+        }
+      } catch (e) {}
     }
 
     const headers = new Headers();

@@ -34,6 +34,13 @@ yapay zekâ siteyi bu dilde kurar). Bunlar `src/worker.js` `JS_TEXT` haritasıyl
 birebir değiştirilir. Vekil yalnız Türkçe arayüzde kullanıldığı için güvenli; GHL metni değiştirirse eşleşme olmaz, dosya
 olduğu gibi geçer. Haritayı değiştirince `JS_TEXT_VERSION`'ı artır (kenar önbelleği anahtarı).
 
+## Yazı içeren çizimler (`ASSET_TR`)
+
+Yazıları harf şekline çevrilmiş SVG çizimler metin olarak çevrilemez. Türkçe kopyası `public/crm/frames/assets/` altında
+durur; vekil, `src/worker.js` `ASSET_TR` haritasındaki dosya adı istendiğinde Türkçe kopyayı sunar. GHL çizimi değiştirirse
+dosya adı değişir ve İngilizcesi gelir (bozulmaz); yeni çizimin Türkçe kopyası hazırlanıp harita güncellenir. Şu an: Satış
+Ortaklığı tanıtım çizimi (`Frame1.7d8ea9f0.svg` → `aff-hero.tr.svg`).
+
 ## Güvenlik
 
 - Yalnız tablodaki GHL adresleri; açık vekil değil. Yalnız GET/HEAD.

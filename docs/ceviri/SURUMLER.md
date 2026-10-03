@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.5.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.5.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
@@ -32,6 +32,11 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.5.2** — 2026-10-03 — **Satış Ortaklığı tanıtım çizimi Türkçe.** Çizimdeki altı satır (Satış Ortaklarını Davet Et,
+  Tanıt ve Takip Et, Hakedişleri Otomatikleştir + açıklamaları) SVG'de harf şekli olduğu için metin olarak çevrilemiyordu;
+  aynı çizimin Türkçe yazılı kopyası `public/crm/frames/assets/aff-hero.tr.svg`, vekil (`ASSET_TR`) İngilizce dosya yerine
+  onu sunuyor (kopya alınamazsa ya da GHL çizimi değiştirirse İngilizcesi gelir). İlke (CEO): iskelet Türkçe; müşteri verisi,
+  yapay zekâ çıktısı ve sunucudan gelen adlar olduğu gibi kalır.
 - **1.5.1** — 2026-10-03 — **Yapay Zeka Stüdyosu kullanıcıya açık.** `frames`'e eklendi (crm-studyo). CEO'nun tarayıcısında
   bakım ayarıyla denendi: ana sayfa (menü, yazı animasyonu, istem kutusu, sekmeler, şablon adları), Tüm projeler, boş durum
   Türkçe; tanıda hata yok. Şablon kartındaki istem açıklamaları ekran sözlüğüne de eklendi (uygulama dosyası tarayıcı
