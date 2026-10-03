@@ -24,15 +24,15 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.2.0** | 1.1.0 yayında (#153); 1.2.0 PR'da — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
-| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri | crm-takvim / crm-ayarlar / crm-eposta .growtify.app (workers/crm-frames) | **1.2.0** | PR'da — önce Worker yayına alınır, sonra katalog |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.2.0** | Yayında (#154) — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri | crm-takvim / crm-ayarlar / crm-eposta .growtify.app (workers/crm-frames) | **1.2.0** | Yayında — Worker `growtify-crm-frames` (sürüm 0929ddc9) + #154 |
 | Otomasyon kurucusu, Yapay Zeka Stüdyosu, Sohbet Sağlayıcıları | GHL'in ayrı sitesinde çalışan iframe'ler | **0.0.0** | Başlamadı — aynı vekil yöntemiyle eklenebilir |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
-- **1.2.0** — 2026-10-03 (PR'da) — **iframe ekranları Türkçe** (CEO: "çözümüne bak", yerel deneme "denemeyi çalıştır",
+- **1.2.0** — 2026-10-03 (#154 fcf74b4 + Cloudflare `growtify-crm-frames`, CEO "bitince yayınla son haliyle") — **iframe ekranları Türkçe** (CEO: "çözümüne bak", yerel deneme "denemeyi çalıştır",
   kalıcı sürüm "evet"). GHL'in ayrı alan adında çalışan üç uygulaması Growtify vekil adresinden açılır
   (`workers/crm-frames`, Cloudflare): takvim ayarları (`calapp`, 2.830 metin: takvim/hizmet menüsü/oda/ekipman
   listeleri, tercihler, bağlı hesaplar), İşletme Profili (`crmset`, 5.578 metin; 4.961'i mevcut çeviriden, 236
@@ -48,6 +48,8 @@ bu dosyanın o anki özetidir.
   akışı ("5 dakika önce", "Yeni e-posta: …"); saatler 24 saat ("15:12"), "30 dk"; çeviri avı listesinden 152
   sayfa metni + 20 kalıp kuralı. Ana katalog küçüldü: iframe katalogları ayrı dosyada (`public/crm/frames/`).
   Hâlâ İngilizce: Sohbet Sağlayıcıları (katalogunu yalnız CRM içinde yüklüyor), otomasyon kurucusu, Yapay Zeka Stüdyosu.
+  Canlı doğrulama: üç vekilin `/__gai/health` yanıtı tamam; canlı CRM'de üç iframe crm-*.growtify.app'ten açıldı, Takvimler Türkçe.
+  D1: `ART-growtify-ai-dev-tr-i18n-tracker-r005`.
 - **1.1.0** — 2026-10-03 (#153, CEO "birleştirip yayına al") — Eksiksizlik turu (CEO: "tümünü yeniden kontrol et tek tek tamamla", "tıklamalar dahil
   turla"). Katalog 59.580 → **77.432** metin. **Tıklamalı tur:** 296 sayfa, 367 tıklama (sekmeler, filtre/sütun/sıralama düğmeleri, açılır menüler;
   hiçbir şey kaydedilmedi/silinmedi/gönderilmedi) → 1.562 aday metin. **Katalog farkı turu:** GHL'in sayfa açılınca
