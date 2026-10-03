@@ -100,8 +100,13 @@ Facebook, Instagram, WhatsApp, Zoom, Outlook, Gmail, Twilio, Mailgun, Zapier, Qu
    technical tokens). Do not re-read files you already have; keep tool calls to a minimum.
 
 ## Decisions already made in earlier batches (follow them)
-- Product names stay in English: Conversation AI, Voice AI, Calendar AI, LC Phone, LC Email, Content AI,
-  Agent Studio, Workflow AI. Snapshot → "Hesap Şablonu".
+- AI product names are TURKISH (CEO, 2026-10-04 — same names as the menu, everywhere): Conversation(s) AI →
+  "Sohbet Yapay Zekası", Voice AI → "Sesli Yapay Zeka", Content AI → "İçerik Yapay Zekası", Email AI → "E-posta
+  Yapay Zekası", Reviews AI → "Değerlendirme Yapay Zekası", Funnel AI → "Satış Hunisi Yapay Zekası", Workflow AI →
+  "İş Akışı Yapay Zekası" (Workflow AI Assistant → "İş Akışı Yapay Zeka Asistanı"), Calendar AI → "Takvim Yapay
+  Zekası", Certificate AI → "Sertifika Yapay Zekası", Agent Studio → "Ajan Stüdyosu", AI Employee → "Yapay Zeka
+  Çalışanı"; deploy (an agent) → "devreye al". Suffixes: "Sohbet Yapay Zekasını/Zekasına", "Sesli Yapay
+  Zekayı/Zekaya". LC Phone and LC Email stay. Snapshot → "Hesap Şablonu".
 - "widget" stays "widget" (widget'ı, widget'lar). Social Planner → "Sosyal Planlayıcı".
   Attribution → "İlişkilendirme". Round robin → "Dönüşümlü Atama". Campaign steps ("events" inside a
   campaign: SMS, wait, call) → "Adım". Activity → "Aktivite" (Etkinlik = calendar Event).

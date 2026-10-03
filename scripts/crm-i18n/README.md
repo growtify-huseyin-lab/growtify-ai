@@ -58,6 +58,8 @@ Sayfadaki sürüm: `document.documentElement.dataset.gaiCrmTr` (ör. `"1.0.0"`).
 - `crm-tr.flat.json` — `"örnek::anahtar.yolu": "Türkçe"`; çevirinin tek kaynağı (düzeltmeler burada).
 - `crm-en.flat.json` — aynı anahtarların İngilizcesi; GHL metin değiştirdiğinde farkı bulmak için.
 - `instance-keys.json` — her katalog örneğinin İngilizce üst düzey anahtarları (yükleyici eşleştirmesi).
+- `instance-roots.json` — genel üst anahtarlı kataloglar (`analytics`, `common/nav/settings`) için uygulamanın bağlandığı
+  kök öğenin id'si; yükleyici bu kataloğu yalnız o kök öğedeki uygulamaya verir (1.11.0).
 - `dom-nav.json` — menüde sunucudan gelen etiketler; `dom-text.json` — GHL kodunda sabit yazılı metinler
   (ikisi de yalnız metnin tamamı birebir eşleşince uygulanır, kişi/mesaj verisine dokunulmaz).
 - `dom-rules.json` — sayı/ad içeren kalıplar (`[düzenli ifade, karşılık]`); `dom-pages.json` — yalnız bir sayfada
@@ -88,6 +90,13 @@ Derleme: `npm i --no-save @intlify/message-compiler && node scripts/crm-i18n/bui
    - `cat-tour.js` — **katalog farkı turu**: GHL bazı kabuk bölümlerini (reklam yöneticisi, müşteri portalı,
      hizmetler/kiralamalar, Yext…) yalnız o sayfa açılınca yükler; ilk katalog toplamada görünmezler. Her
      sayfayı açıp canlı i18n mesajlarını toplar → `delta-process.mjs` bizde olmayan anahtarları çıkarır.
+   - `qa-tour.js` — **lansman kalite turu** (1.11.0): başlangıç sayfalarından bölüm içi bağlantıları kuyruğa ekleyerek
+     gezer (en çok `max` sayfa), güvenli düğmelere tıklar, görünen İngilizceyi + gömülü ekran kalıntılarını toplar. Durum
+     localStorage `gai_qa_tour`'da: sayfa tam yenilenirse aynı çağrı kaldığı yerden sürer. Sonuç `gai-crm-qa-tour-<tag>.json`.
+   - `catalog-sweep.js` + `sweep-process.py` — **katalog anahtar karşılaştırması** (1.11.0): Türkçe açıkken her sayfadaki
+     i18n örneğini yükleyicinin yazdığı Türkçeyle (`g.__gaiTr`) anahtar anahtar karşılaştırır → GHL'in sonradan eklediği
+     anahtarlar (`miss`) + hiç eşleşmeyen örnekler. Büyük kataloğu imzası değişmedikçe yeniden açmaz (sekme donmasın).
+     `sweep-process.py out.json gai-crm-newcats2-*.json` → örnek bazında çevrilecek anahtarlar.
    - **Tuzak:** CEO başka pencerede çalışırken sekme arka planda kalır ve tarayıcı `setTimeout`'u
      yavaşlatır (5 dk sonra dakikada bir). Turların beklemesi bu yüzden bir Worker sayacıyla yapılır.
 5. **Derle ve test et** — `build.mjs`, sonra CRM sekmesinde dosya yükleme yöntemiyle (gizli `<input type=file>`

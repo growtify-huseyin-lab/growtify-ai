@@ -5,6 +5,7 @@
 //   crm-tr.flat.json      "örnek::anahtar.yolu" → Türkçe (çevirinin tek kaynağı; düzenlemeler burada yapılır)
 //   crm-en.flat.json      aynı anahtarların İngilizcesi (GHL değişikliklerini bulmak için anlık görüntü)
 //   instance-keys.json    örnek → İngilizce üst düzey anahtarlar (yükleyici hangi kataloğun hangi uygulamaya ait olduğunu bununla bulur)
+//   instance-roots.json   örnek → bağlandığı kök öğenin id'si (isteğe bağlı; genel üst anahtarlı kataloglar için)
 //   dom-nav.json          menüde sunucudan gelen etiketler (birebir eşleşme)
 //   dom-text.json         GHL kodunda sabit yazılı, katalogda olmayan metinler (birebir eşleşme)
 //   dom-rules.json        sayı içeren kalıplar için [düzenli ifade, karşılık] ("1 - 10 of 50" → "1 - 10 / 50")
@@ -47,6 +48,11 @@ for (const [fullKey, value] of Object.entries(tr)) {
   count++;
 }
 
+// Örnek kök öğesi (instance-roots.json, isteğe bağlı): genel üst anahtarlı kataloglar ("analytics", "common/nav/settings")
+// yalnız kendi bağlanma noktasındaki uygulamaya verilir (başka bir uygulama aynı üst anahtarlarla eşleşmesin).
+const roots = fs.existsSync(path.join(dir, "source", "instance-roots.json")) ? src("instance-roots.json") : {};
+for (const [id, root] of Object.entries(roots)) if (instances[id] && !id.startsWith("_")) instances[id].root = root;
+
 const clean = (o) => Object.fromEntries(Object.entries(o).filter(([k, v]) => typeof v === "string" && v && v !== k && !k.startsWith("_")));
 // iframe uygulamaları (frames.json) ana katalogda taşınmaz: her biri kendi küçük kataloğunu alır.
 const frames = fs.existsSync(path.join(dir, "source", "frames.json")) ? src("frames.json") : {};
@@ -65,6 +71,10 @@ function buildTemplates(onlyPrefix) {
   const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const out = [];
   const seen = new Set();
+  // Yalnız ipucu/yer tutucuda uygulanacak kalıplar (dom-templates.manual.json "_attr_only"): kısa ve serbest değişkenli
+  // kalıplar ("Call {name}") ekrandaki kişi verisine ("Call Completed" aşama adı) uymasın.
+  const manualPath = path.join(dir, "source", "dom-templates.manual.json");
+  const attrOnly = new Set((fs.existsSync(manualPath) ? src("dom-templates.manual.json")._attr_only : null) || []);
   const add = (from, to, objOnly) => {
     if (typeof from !== "string" || typeof to !== "string" || from.length > 220) return;
     if (/\{'|@:| \| |\$/.test(from) || /\{'|@:| \| |\$/.test(to)) return;
@@ -95,7 +105,9 @@ function buildTemplates(onlyPrefix) {
     const key = re + "\u0000" + rep;
     if (seen.has(key)) return;
     seen.add(key);
-    out.push([re, rep, words[0].toLowerCase(), names.map((n, i) => (OBJ_PH.test(n) ? i + 1 : 0)).filter(Boolean)]);
+    const row = [re, rep, words[0].toLowerCase(), names.map((n, i) => (OBJ_PH.test(n) ? i + 1 : 0)).filter(Boolean)];
+    if (attrOnly.has(from)) row.push(1);
+    out.push(row);
   };
   // Çerçeve kataloğunda (onlyPrefix "wf::" gibi) yalnız o uygulamanın kendi Türkçe kalıpları; sağ panel kalıpları CRM'e ait.
   if (!onlyPrefix) {

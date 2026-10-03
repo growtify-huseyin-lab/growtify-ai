@@ -128,9 +128,9 @@
         b.style.cssText = "border:0;border-radius:999px;padding:5px 8px;cursor:pointer;";
         b.addEventListener("click", function () {
           if (decide() === lang) {
-            // Bir gömülü ekran güvenlik ağıyla GHL'in İngilizce sürümüne döndüyse TR'ye basmak Türkçeyi yeniden dener
-            // (sayfa yenilenir; ikinci deneme hızlıdır, dosyalar ilk denemede inmiş olur).
-            if (lang === "tr" && window.__gaiFrameFellBack) location.reload();
+            // TR seçiliyken TR'ye basmak Türkçeyi yeniden yükler (sayfa yenilenir). Bir gömülü ekran güvenlik ağıyla GHL'in
+            // İngilizce sürümüne döndüyse düğmede "TR ↻" görünür; ikinci deneme hızlıdır (dosyalar ilk denemede inmiş olur).
+            if (lang === "tr") location.reload();
             return;
           }
           setChoice(lang);
@@ -146,7 +146,7 @@
       if (bl === "tr") {
         var retry = !!window.__gaiFrameFellBack && current === "tr";
         btns[i].textContent = retry ? "TR ↻" : "TR";
-        btns[i].title = retry ? "Bu ekran İngilizce açıldı — Türkçe yeniden yükle" : "Türkçe";
+        btns[i].title = retry ? "Bu ekran İngilizce açıldı — Türkçe yeniden yükle" : current === "tr" ? "Türkçe — yeniden yüklemek için tıkla" : "Türkçe";
       }
       var on = bl === current;
       btns[i].style.background = on ? "#155eef" : "transparent";
@@ -193,11 +193,16 @@
     if (rootEl.id === "app" && !FRAME) return shell;
     var keys = Object.keys(messages || {});
     if (!keys.length) return null;
+    // Kök öğesi belli kataloglar (ör. kurs analizi, kurs ayarları) yalnız kendi bağlanma noktasına verilir.
+    for (var rid in catalog.instances) {
+      if (catalog.instances[rid].root && catalog.instances[rid].root === rootEl.id) return catalog.instances[rid];
+    }
     var best = null;
     var bestScore = 0;
     for (var id in catalog.instances) {
       if (id === "shell") continue;
       var entry = catalog.instances[id];
+      if (entry.root) continue;
       var set = keySet(entry);
       var size = (entry.keys || []).length || Object.keys(set).length;
       var hit = 0;
@@ -760,13 +765,37 @@
       return a ? a + b.toLowerCase() : c + d.toLowerCase();
     });
   }
-  function lookup(core, dict) {
+  // Sonuç önbelleği: listelerde aynı metin (sütun adları, durumlar) tekrar tekrar çizilir; her metin sayfa başına bir kez
+  // aranır. Sayfa (adres) değişince ya da 5.000 kaydı geçince boşaltılır (sayfa sözlüğü adrese bağlı).
+  var LCACHE = typeof Map === "function" ? new Map() : null;
+  var lcachePath = null;
+  function lookup(core, dict, attr) {
+    if (!LCACHE) return lookupUncached(core, dict, attr);
+    var path = location.pathname;
+    if (path !== lcachePath || LCACHE.size > 5000) {
+      LCACHE.clear();
+      lcachePath = path;
+    }
+    var ck = (attr ? "\u0001" : "") + core;
+    var hit = LCACHE.get(ck);
+    if (hit !== undefined) return hit;
+    var res = lookupUncached(core, dict, attr);
+    LCACHE.set(ck, res);
+    return res;
+  }
+  function lookupUncached(core, dict, attr) {
     var fixed = fixCaps(core);
     if (fixed !== core) {
-      var r = lookupExact(fixed, dict);
+      var r = lookupExact(fixed, dict, attr);
       return r !== null ? r : fixed;
     }
-    return lookupExact(core, dict);
+    var r2 = lookupExact(core, dict, attr);
+    // Satır sonu / çift boşluk içeren düğüm ("Completion Rate: 0%\n  1 Enrollment") tek boşlukla yeniden denenir.
+    if (r2 === null && /\s\s|[\n\t\u00a0]/.test(core)) {
+      var flat = core.replace(/\s+/g, " ");
+      if (flat !== core) r2 = lookupExact(flat, dict, attr);
+    }
+    return r2;
   }
   // Yalnız belirli bir sayfada geçerli sözlük (catalog.textPages: { "/settings/labs": {...} }). Sunucudan gelen
   // uzun açıklamalar kalın yazı vb. ile parçalara bölünür; "From" gibi kısa parçalar başka ekranlarda farklı
@@ -806,13 +835,15 @@
     var src = (catalog && catalog.textTpl) || [];
     for (var i = 0; i < src.length; i++) {
       try {
-        (TPL[src[i][2]] = TPL[src[i][2]] || []).push({ re: new RegExp(src[i][0]), to: src[i][1], obj: src[i][3] || [] });
+        (TPL[src[i][2]] = TPL[src[i][2]] || []).push({ re: new RegExp(src[i][0]), to: src[i][1], obj: src[i][3] || [], attr: !!src[i][4] });
       } catch (e) {}
     }
     return TPL;
   }
   var WORD_RE = /[A-Za-zÇĞİÖŞÜçğıöşü]{3,}/g;
-  function tplLookup(core) {
+  // attr: yalnız ipucu/yer tutucu metinlerinde kullanılan kalıplar (5. alan) — "Call {name}" gibi kısa kalıplar ekrandaki
+  // kişi verisine ("Call Completed" aşama adı) uymasın.
+  function tplLookup(core, attr) {
     var oc = core.match(OBJ_COUNT_RE);
     if (oc) return OBJ_TR[oc[1]] + " (" + oc[2] + ")";
     if (!catalog || !catalog.textTpl || core.length > 220) return null;
@@ -828,6 +859,7 @@
       if (!list) continue;
       for (var j = 0; j < list.length; j++) {
         var t = list[j];
+        if (t.attr && !attr) continue;
         var m = t.re.exec(core);
         if (!m) continue;
         return t.to.replace(/\$(\d+)/g, function (x, n) {
@@ -838,15 +870,44 @@
     }
     return null;
   }
-  function lookupExact(core, dict) {
+  function lookupExact(core, dict, attr) {
     var pd = pageDict();
     if (pd && Object.prototype.hasOwnProperty.call(pd, core)) return pd[core];
     if (Object.prototype.hasOwnProperty.call(dict, core)) return dict[core];
     var dt = dateLookup(core);
     if (dt !== null) return dt;
     var rr = rules();
-    for (var i = 0; i < rr.length; i++) if (rr[i][0].test(core)) return core.replace(rr[i][0], rr[i][1]);
-    return tplLookup(core);
+    for (var i = 0; i < rr.length; i++) {
+      if (!rr[i][0].test(core)) continue;
+      // Bir kez daha: iç içe kalıplar ("Last updated: 9 minutes ago" → "Son güncelleme: 9 dakika önce")
+      var out = core.replace(rr[i][0], rr[i][1]);
+      for (var k = 0; k < rr.length; k++) if (k !== i && rr[k][0].test(out)) return out.replace(rr[k][0], rr[k][1]);
+      return out;
+    }
+    return tplLookup(core, attr);
+  }
+  /* Para biçimi: GHL tutarları İngilizce biçimde yazıyor ("TL2,546.00", grafik ekseninde "TL0.2") → Türkçe biçim
+   * ("2.546,00 TL", "0,2 TL"). Yalnız "TL" ile hemen arkasından gelen sayı (GHL'in para biçimi); "TL9.999" gibi zaten
+   * Türkçe binlik ayraçlı tutarın yalnız birimi sona alınır. */
+  var MONEY_RE = /(^|[\s(])(-?)TL ?(\d{1,3}(?:,\d{3})+(?:\.\d+)?|\d+(?:\.\d+)?)(?=$|[\s),])/g;
+  function trNum(num) {
+    var m = num.match(/^(\d{1,3}(?:,\d{3})+|\d+)(?:\.(\d+))?$/);
+    if (!m) return num;
+    if (m[2] && m[2].length === 3 && m[1].indexOf(",") === -1 && m[1] !== "0") return num; // "9.999": binlik ayraç
+    return m[1].replace(/,/g, ".") + (m[2] ? "," + m[2] : "");
+  }
+  // Yüzde de Türkçe biçimde: "33.33%" → "%33,33", "+38%" → "+%38".
+  var PCT_RE = /(^|[\s(+-])(\d+(?:\.\d+)?)%(?=$|[\s),;:]|\.(?!\d))/g;
+  function fixMoney(s) {
+    if (s.indexOf("TL") !== -1)
+      s = s.replace(MONEY_RE, function (x, pre, sign, num) {
+        return pre + sign + trNum(num) + " TL";
+      });
+    if (s.indexOf("%") !== -1)
+      s = s.replace(PCT_RE, function (x, pre, num) {
+        return pre + "%" + num.replace(".", ",");
+      });
+    return s;
   }
   function trText(n, dict) {
     var t = n.nodeValue;
@@ -859,10 +920,13 @@
       if (!pd || !Object.prototype.hasOwnProperty.call(pd, core)) return;
     }
     var tr = lookup(core, dict);
-    if (tr === null || tr === core) return;
+    tr = fixMoney(tr === null ? core : tr);
+    if (tr === core) return;
     var p = n.parentElement;
     if (!p || p.closest(SKIP_SEL)) return;
-    n.nodeValue = t.replace(core, tr);
+    n.nodeValue = t.replace(core, function () {
+      return tr;
+    });
   }
   function trAttrs(el, dict) {
     if (!el.getAttribute) return;
@@ -870,8 +934,15 @@
       var v = el.getAttribute(ATTRS[i]);
       var core = v && v.trim();
       if (!core || core.length > 160) continue;
-      var tr = lookup(core, dict);
-      if (tr !== null && tr !== core) el.setAttribute(ATTRS[i], v.replace(core, tr));
+      var tr = lookup(core, dict, true);
+      tr = fixMoney(tr === null ? core : tr);
+      if (tr !== core)
+        el.setAttribute(
+          ATTRS[i],
+          v.replace(core, function () {
+            return tr;
+          })
+        );
     }
   }
   // Yalnız catalog.domOnly seçicisine uyan alanların içinde çevir (oluşturucularda tuval kişinin içeriği).
@@ -1363,6 +1434,23 @@
         else sessionStorage.removeItem("gai_frame_nested");
       } catch (x) {}
     });
+    // Hız ölçümü (bakım): üst pencere {gaiTiming: 1} gönderirse çerçevenin açılış süreleri döner (ms, çerçevenin kendi
+    // başlangıcına göre): DOM hazır, yükleme, Türkçenin ilk uygulandığı an, en büyük içeriğin çizildiği an (LCP).
+    var frameLcp = null;
+    try {
+      new PerformanceObserver(function (l) {
+        var es = l.getEntries();
+        if (es.length) frameLcp = Math.round(es[es.length - 1].startTime);
+      }).observe({ type: "largest-contentful-paint", buffered: true });
+    } catch (e) {}
+    window.addEventListener("message", function (e) {
+      if (!e.data || e.data.gaiTiming !== 1 || e.source !== window.parent) return;
+      try {
+        var nav = performance.getEntriesByType("navigation")[0] || {};
+        var trm = performance.getEntriesByName("gai-crm-tr")[0];
+        window.parent.postMessage({ gaiFrameTiming: { frame: window.__gaiCrmFrame, dcl: Math.round(nav.domContentLoadedEventEnd || 0), load: Math.round(nav.loadEventEnd || 0), tr: trm ? Math.round(trm.startTime) : null, lcp: frameLcp } }, "*");
+      } catch (x) {}
+    });
     window.addEventListener("message", function (e) {
       if (!e.data || e.data.gaiCollect !== 1 || e.source !== window.parent) return;
       var res = [];
@@ -1492,6 +1580,9 @@
     if (mode === "tr") installFrameProxy(frameProxyMap());
     if (mode === "tr") {
       document.documentElement.setAttribute("data-gai-lang", "tr");
+      // Büyük harf dönüşümü (CSS text-transform) Türkçe kurallarla: "destekli" → "DESTEKLİ" (yoksa "DESTEKLI").
+      // Oluşturucu çerçevelerinde değil: tuval kişinin içeriği, önizleme kaydedilenle aynı kalmalı.
+      if (catalog && !catalog.noDom && document.documentElement.getAttribute("lang") !== "tr") document.documentElement.setAttribute("lang", "tr");
       loadCatalog();
       scanCatalog();
     }
@@ -1502,14 +1593,44 @@
     setInterval(tick, 700);
     try {
       var t = null;
+      var trNode = function (n, d) {
+        if (n.nodeType === 1 && !n.isConnected) return;
+        if (catalog.noDom) trScoped(n, d);
+        else trTree(n, d);
+      };
+      /* Değişen düğümler ekrana ÇİZİLMEDEN çevrilir: gözlemcinin geri çağrısı, sayfayı değiştiren işten hemen sonra ve
+       * tarayıcı boyamadan önce çalışır. (Eskiden 150 ms sonra çevriliyordu; kendi kendine dönen içerikte — ör. Yapay
+       * Zeka Ajanları tanıtım kartları — her turda İngilizce bir an görünüyordu.) Yeni bağlanan bir Vue uygulamasının
+       * metin kataloğu da aynı anda Türkçeleşir. Ağır işler (menü sözlüğü, tarih panelleri) 150 ms'de bir toplu yapılır. */
+      // Döngü sigortası: aynı görev içinde art arda 30'dan fazla geri çağrı (bizim yazdığımız metin yine değişiyorsa) →
+      // o turun düğümleri eski yöntemle 150 ms sonra toplu çevrilir; sayfa hiçbir koşulda donmaz.
+      var depth = 0;
+      var depthTimer = false;
       var queue = [];
       new MutationObserver(function (recs) {
-        if (mode === "tr" && catalog && catalog.text && (!catalog.noDom || catalog.domOnly)) {
+        var d = mode === "tr" && catalog && catalog.text && (!catalog.noDom || catalog.domOnly) ? catalog.text : null;
+        if (d) {
+          if (!depthTimer) {
+            depthTimer = true;
+            setTimeout(function () {
+              depth = 0;
+              depthTimer = false;
+            }, 0);
+          }
+          var sync = ++depth <= 30;
+          var mounted = false;
           for (var i = 0; i < recs.length; i++) {
             var r = recs[i];
-            if (r.type === "childList") for (var j = 0; j < r.addedNodes.length; j++) queue.push(r.addedNodes[j]);
+            if (r.type === "childList") {
+              if (r.target.__vue_app__) mounted = true; // yeni bir Vue uygulaması bağlandı
+              for (var j = 0; j < r.addedNodes.length; j++) {
+                if (sync) trNode(r.addedNodes[j], d);
+                else queue.push(r.addedNodes[j]);
+              }
+            } else if (sync) trNode(r.target, d);
             else queue.push(r.target);
           }
+          if (mounted && sync) scanCatalog();
         }
         if (t) return;
         t = setTimeout(function () {
@@ -1518,13 +1639,8 @@
           queue = [];
           if (mode !== "tr") return;
           scanCatalog();
-          var d = catalog && catalog.text;
-          if (d)
-            for (var k = 0; k < q.length; k++) {
-              if (q[k].nodeType === 1 && !q[k].isConnected) continue;
-              if (catalog.noDom) trScoped(q[k], d);
-              else trTree(q[k], d);
-            }
+          var dd = catalog && catalog.text;
+          if (dd) for (var k = 0; k < q.length; k++) trNode(q[k], dd);
           if (huntActive) setTimeout(huntScan, 1200); // çeviri ve Vue yeniden çizimi bittikten SONRA kalan İngilizceyi kaydet
         }, 150);
       }).observe(document.documentElement, {

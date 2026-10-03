@@ -1,0 +1,5 @@
+{
+ "_note": "örnek → uygulamanın bağlandığı kök öğenin id'si (yükleyici pickCatalog önce buna bakar)",
+ "mlytics": "membership-analytics-mount",
+ "msettings": "membership-settings-mount"
+}
