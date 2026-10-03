@@ -30,6 +30,11 @@ Sayfadaki sürüm: `document.documentElement.dataset.gaiCrmTr` (ör. `"1.0.0"`).
   anahtarlarla kontrol) yeniden uygulanır.
 - Sunucudan gelen menü etiketleri (`dom`) ve GHL kodunda sabit yazılı metinler (`text`) için birebir eşleşen
   sayfa sözlükleri; değişen düğümler gözlemciyle izlenir. "5 fırsat" gibi sayı+çoğul düzeltmeleri ayrıca.
+- Türkçe dil bilgisi düzeltmeleri: GHL'in "kelime başlarını büyüt" işlevi Türkçe harfi kelime sınırı sanar
+  ("KişIler", "AçıKlama") → küçük Türkçe harften sonraki tek büyük ASCII harf geri küçültülür. Sayıdan sonra
+  çoğul eki atılır ("584 Kişiler" → "584 Kişi", "7/103 sütunlar" → "7/103 sütun"; isim listesiyle), kodda
+  birleştirilen "Ekle Kişi" → "Kişi Ekle". Tarihler: kısa/uzun ay adları ve aralıklar ("19 Eyl 2026 – 3 Eki 2026",
+  "28 Eylül 2026", "24 Ağustos"); ay adı tam listeyle eşleşir ("Marketing 2" tarih sanılmaz).
 - Çevrilemeyenler (bugün): GHL'in ayrı alan adında iframe içinde çalışan uygulamalar — otomasyon kurucusu,
   takvim ayarları, Ayarlar sayfalarının içeriği (`client-app-crm-settings`), Yapay Zeka Stüdyosu. Ajans
   Custom JS oralara yüklenmez (bkz. SURUMLER.md, iş kaydı dev-028).
@@ -54,7 +59,17 @@ Derleme: `npm i --no-save @intlify/message-compiler && node scripts/crm-i18n/bui
    `validate.mjs` ile 0 HATA olmalı (yer tutucular, çoğul `|` sayısı, baş/son boşluk, HTML etiketleri,
    çıplak `@ { } |`, @intlify derlemesi). Sonuç `source/crm-tr.flat.json`'a, İngilizcesi `crm-en.flat.json`'a.
 4. **Sabit metinler** — Türkçe açıkken sayfaları gezip İngilizce kalan metinleri topla; katalogda karşılığı
-   olanları aynı Türkçeyle, olmayanları çevirerek `source/dom-text.json`'a ekle.
+   olanları aynı Türkçeyle, olmayanları çevirerek `source/dom-text.json`'a ekle. Araçlar (`tour/`):
+   - `tour.js` — **tıklamalı tur**: her sayfada sekmeleri, filtre/sütun/sıralama düğmelerini, açılır menü ve
+     seçim kutularını AÇAR (seçeneğe tıklamaz, Escape ile kapatır; sil/gönder/yayınla/oluştur/ekle yasak;
+     sohbet gelen kutusu ve otomasyon dışarıda). İngilizceyi katalogdan kurulan kelime dağarcığıyla tanır,
+     Türkçe büyük harf hatalarını ("KişIler") ve eşleşmeyen i18n kataloglarını ayrıca toplar. Sayfalar
+     `window.__gaiTourRange` ile birkaç sekmeye bölünür; sonuç tek dosya indirilir. → `tour-process.mjs`
+   - `cat-tour.js` — **katalog farkı turu**: GHL bazı kabuk bölümlerini (reklam yöneticisi, müşteri portalı,
+     hizmetler/kiralamalar, Yext…) yalnız o sayfa açılınca yükler; ilk katalog toplamada görünmezler. Her
+     sayfayı açıp canlı i18n mesajlarını toplar → `delta-process.mjs` bizde olmayan anahtarları çıkarır.
+   - **Tuzak:** CEO başka pencerede çalışırken sekme arka planda kalır ve tarayıcı `setTimeout`'u
+     yavaşlatır (5 dk sonra dakikada bir). Turların beklemesi bu yüzden bir Worker sayacıyla yapılır.
 5. **Derle ve test et** — `build.mjs`, sonra CRM sekmesinde dosya yükleme yöntemiyle (gizli `<input type=file>`
    → katalog + yükleyici) modül modül gez; konsol temiz, metinler Türkçe, TR/EN düğmesi çalışıyor.
 6. **Sürüm** — `VERSION` artır + `docs/ceviri/SURUMLER.md` satırı + (ARA/ANA) D1 revizyon kaydı → PR → onay → merge.

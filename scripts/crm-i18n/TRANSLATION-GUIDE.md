@@ -135,3 +135,57 @@ Facebook, Instagram, WhatsApp, Zoom, Outlook, Gmail, Twilio, Mailgun, Zapier, Qu
   GHL or LeadConnector — say "platform" or reword ("destek ekibiyle iletişime geç"). Keep vendor names only
   inside URLs, code/identifiers, fixed product names (LC Phone, LC Email), or where the user must find
   that exact name elsewhere (e.g. the "LeadConnector" mobile app in the app stores).
+
+## Round 2 bundles (2026-10-03 clicking tour)
+- `phone` = Phone System settings (LC Phone): buying and porting numbers, number pools, call/SMS settings,
+  IVR / voice navigation, WhatsApp Business setup, A2P / Trust Center regulatory registration, SIP.
+  Terms: Phone number → Telefon numarası · Number pool → Numara havuzu · Port in (a number) → Numara taşıma ·
+  Toll-free → Ücretsiz numara · Short code → Kısa kod · Caller ID → Arayan kimliği · Call forwarding → Çağrı
+  yönlendirme · Call recording → Arama kaydı · Inbound/Outbound → Gelen/Giden · Voicemail → Sesli mesaj ·
+  IVR → IVR (sesli yanıt menüsü) · Whisper message → Fısıltı mesajı · Missed call text-back → Cevapsız arama
+  SMS'i · Trust Center → Güven Merkezi · Brand / Campaign registration (A2P) → Marka / Kampanya kaydı ·
+  Business profile → İşletme profili · Opt-in → İzin verme · Opt-out → Abonelikten çıkma (the existing catalogs use this; never "izinden çıkma") · Compliance →
+  Uyumluluk · WhatsApp Business Account (WABA) → WhatsApp Business Hesabı (WABA) · WhatsApp message template →
+  Şablon · Quality rating → Kalite puanı · Messaging limit → Mesaj limiti · Suspension appeal → Askıya alma
+  itirazı. Keep US regulatory names and acronyms (A2P 10DLC, TCPA, CTIA, EIN, CNAM, STIR/SHAKEN, SIP, E.164,
+  ISV) and carrier/vendor names as they are; legal entity types (LLC, Sole Proprietor…) may be translated with
+  the English in parentheses when the user must pick the official type.
+- `calsched` = Calendar settings app: availability schedules (work hours, date-specific hours), calendar
+  preferences, troubleshooting why slots don't show, staff, rooms and equipment (resources), service menus,
+  notifications, onboarding. Terms: Schedule (availability) → Çalışma programı (short: Program) · Work Hours
+  → Çalışma Saatleri · Date specific hours → Tarihe özel saatler · Service menu → Hizmet menüsü · Rooms →
+  Odalar · Equipment → Ekipman · Resources → Kaynaklar · Staff → Ekip üyeleri · Buffer → Ara süre ·
+  Minimum scheduling notice → Minimum planlama süresi · Slot interval → Zaman aralığı sıklığı · Add-ons →
+  Ek hizmetler.
+
+## Round 3 — shell sections GHL loads only when a page opens (2026-10-03)
+Keys start with `shell::<section>.`; the section tells you the screen:
+- `adPublishingApp` = Ad Manager (create and report Facebook/Instagram, Google, LinkedIn ads). Terms: Ad
+  Manager → Reklam Yöneticisi · Ad account → Reklam hesabı · Campaign → Kampanya · Ad set → Reklam seti ·
+  Ad → Reklam · Objective → Kampanya hedefi · Audience → Hedef kitle · Lookalike → Benzer hedef kitle ·
+  Placement → Yerleşim · Budget → Bütçe · Daily/Lifetime budget → Günlük/Toplam bütçe · Bid (strategy) →
+  Teklif (stratejisi) · Creative → Reklam görseli · Headline → Başlık · Primary text → Ana metin · Call to
+  action → Harekete geçirici ifade · Impressions → Gösterim · Reach → Erişim · Clicks → Tıklama ·
+  Conversions → Dönüşüm · Cost per result → Sonuç başına maliyet · Pixel → Piksel · Lead form → Potansiyel
+  müşteri formu · Boost → Öne çıkar. Keep metric acronyms (CTR, CPC, CPM, ROAS) as they are.
+- `yext` = Listings: the business's profile on online directories via Yext. Listing → Listeleme ·
+  Directory / Publisher → Dizin / Yayıncı · Duplicate listing → Yinelenen listeleme · Suppress (a duplicate)
+  → Bastır · Sync → Eşitle · Business information → İşletme bilgileri.
+- `calendarServicesApp` = Services / service menu (v2) and `calendarRentalsApp` = rentals (booking rooms,
+  equipment, rentable items). Service → Hizmet · Service menu → Hizmet menüsü · Rental → Kiralama ·
+  Rentable item → Kiralanabilir öğe · Check-in / Check-out → Giriş / Çıkış · Inventory → Stok.
+- `clientPortalBuilder` = Client Portal settings (branding, apps shown to members, chat widget, e-mail
+  notifications for groups/communities/courses). Client portal → Müşteri portalı · Magic link → Sihirli
+  bağlantı · Group → Grup · Member → Üye.
+- `agency`, `reselling`, `domainResellingApp`, `saas`, `snapshots`, `aiProductRebilling`, `suspendModal`,
+  `switchyard` = agency-level administration (sub-accounts, SaaS plans, reselling products and domains,
+  rebilling usage to clients). Agency → Ajans · Sub-account → Alt hesap · Snapshot → Hesap Şablonu ·
+  Rebilling → Yeniden faturalandırma · Markup → Kâr payı · Reseller → Bayi · Domain → Alan adı ·
+  Registrar → Alan adı kayıt firması · Renewal → Yenileme. Keep WHOIS, DNS, SSL, A/CNAME/TXT record names.
+- `templateLibraryApp` = template library · `estimatesApp` = Estimates (Estimate → Fiyat Teklifi) ·
+  `goKollabApp` = GoKollab marketplace (keep "GoKollab") · `communitiesApp` = Communities (Topluluklar) ·
+  `prospecting` = prospecting tool (Prospect → Potansiyel müşteri adayı) · `fpDebugger` = affiliate
+  tracking debugger · `a2p`, `cnam`, `shakenStir`, `regulatoryBundle` = phone regulatory compliance.
+
+- Values that are SUBMITTED to US carriers / registries (pre-filled A2P campaign texts such as auto-generated
+  consent descriptions) stay in English; placeholders and help text around them are translated.

@@ -74,5 +74,137 @@
  [
   "^Lost (\\S*\\d\\S*)$",
   "Kaybedildi $1"
+ ],
+ [
+  "^Activate scroll mode for (.+)$",
+  "$1 için kaydırma modunu etkinleştir"
+ ],
+ [
+  "^(\\d[\\d.,]*(?:\\s*/\\s*\\d[\\d.,]*)?) ([Kk]işi|[Kk]ayıt|[Ff]ırsat|[Gg]örev|[Ff]atura|[Üü]rün|[Ss]onuç|[Öö]ğe|[Ee]tiket|[Mm]esaj|[Rr]andevu|[Kk]ullanıcı|[Ss]ütun|[Ss]ohbet|[Tt]akvim|[Ff]orm|[Aa]nket|[Ss]ayfa|[Dd]osya|[Kk]lasör|[Gg]ün|[Ss]aat|[Dd]akika|[Ss]aniye|[Hh]afta|[Aa]y|[Yy]ıl|[Ss]eçenek|[Aa]lan|[Aa]dım|[İi]şlem|[Bb]ildirim|[Ss]ipariş|[Aa]bonelik|[Yy]orum|[Dd]eğerlendirme|[Kk]ampanya|[Şş]ablon|[Ee]-posta|[Dd]ers|[Mm]odül|[Üü]ye|[Ee]tkinlik|[Gg]rup|[Pp]lan|[Kk]art|[Ss]atır|[Aa]jan|[Aa]rama|[Nn]ot|[Bb]elge|[Tt]eklif|[Öö]deme|[Mm]üşteri|[Hh]esap|[Bb]ağlantı|[Gg]önderi|[Vv]ideo|[Gg]örsel|[Nn]umara|[Ll]iste|[Ff]iltre|[Rr]apor|[Ss]ekme|[Kk]ategori|[Kk]oleksiyon|[Kk]upon|[Ss]özleşme|[Kk]atılımcı|[Hh]izmet|[Oo]da|[Ee]kipman|[Kk]aynak|[Pp]ersonel|[Çç]alışan|[Tt]etikleyici|[Ee]ylem|[Dd]eğişken|[Şş]irket|[İi]şletme|[Ee]kip|[Kk]urs|[Pp]rogram|[Ss]oru|[Cc]evap|[Yy]anıt|[Tt]alep|[Pp]roje|[Nn]esne|[Iı]lişki|[İi]lişki)(?:ler|lar|\\((?:ler|lar)\\))$",
+  "$1 $2"
+ ],
+ [
+  "^Show Page (\\d+)$",
+  "Sayfa $1"
+ ],
+ [
+  "^(\\d+) new notifications?$",
+  "$1 yeni bildirim"
+ ],
+ [
+  "^(Ekle|Oluştur|Sil|Düzenle) ([A-ZÇĞİÖŞÜ][a-zçğıöşü]+(?: [A-ZÇĞİÖŞÜ][a-zçğıöşü]+)?)$",
+  "$2 $1"
+ ],
+ [
+  "^([\\d.,]+[KMB]?) [Vv]iews$",
+  "$1 görüntülenme"
+ ],
+ [
+  "^([\\d.,]+[KMB]?) Search$",
+  "$1 arama"
+ ],
+ [
+  "^(\\d[\\d.,]*) members?$",
+  "$1 üye"
+ ],
+ [
+  "^(\\d[\\d.,]*) Products?$",
+  "$1 Ürün"
+ ],
+ [
+  "^(\\d[\\d.,]*) records?$",
+  "$1 kayıt"
+ ],
+ [
+  "^(\\d[\\d.,]*) calendars?$",
+  "$1 takvim"
+ ],
+ [
+  "^(\\d[\\d.,]*) minutes?$",
+  "$1 dakika"
+ ],
+ [
+  "^(\\d+) Selected$",
+  "$1 seçildi"
+ ],
+ [
+  "^(\\d+) / page$",
+  "$1 / sayfa"
+ ],
+ [
+  "^All categories \\((\\d+)\\)$",
+  "Tüm kategoriler ($1)"
+ ],
+ [
+  "^Pending \\((\\d+)\\)$",
+  "Bekliyor ($1)"
+ ],
+ [
+  "^Approved \\((\\d+)\\)$",
+  "Onaylandı ($1)"
+ ],
+ [
+  "^Unapproved \\((\\d+)\\)$",
+  "Onaylanmadı ($1)"
+ ],
+ [
+  "^Trash \\((\\d+)\\)$",
+  "Çöp kutusu ($1)"
+ ],
+ [
+  "^Internal Domains \\((\\d+)\\)$",
+  "Dahili Alan Adları ($1)"
+ ],
+ [
+  "^External Domains \\((\\d+)\\)$",
+  "Harici Alan Adları ($1)"
+ ],
+ [
+  "^(\\d+) in sent$",
+  "Gönderilen: $1"
+ ],
+ [
+  "^(\\d+) in accepted$",
+  "Kabul edilen: $1"
+ ],
+ [
+  "^(\\d+) in declined$",
+  "Reddedilen: $1"
+ ],
+ [
+  "^(\\d+) in invoiced$",
+  "Faturalanan: $1"
+ ],
+ [
+  "^Step (\\d+)$",
+  "Adım $1"
+ ],
+ [
+  "^Sample Item (\\d+)$",
+  "Örnek Kalem $1"
+ ],
+ [
+  "^Review Template (\\d+)$",
+  "Değerlendirme Şablonu $1"
+ ],
+ [
+  "^Duration: (\\d+) days, ~(\\d+) minutes each day$",
+  "Süre: $1 gün, her gün ~$2 dakika"
+ ],
+ [
+  "^Completion Rate: (\\d+)% (\\d+) Enrollments?$",
+  "Tamamlanma Oranı: %$1 · $2 kayıt"
+ ],
+ [
+  "^(\\d+)s ago$",
+  "$1 sn önce"
+ ],
+ [
+  "^([A-ZÇĞİÖŞÜ][^ ]*) sort$",
+  "$1 sıralaması"
+ ],
+ [
+  "^\\$(\\S+)/month fee will be charged to your account$",
+  "Hesabından aylık $$$1 ücret alınacak"
  ]
 ]
