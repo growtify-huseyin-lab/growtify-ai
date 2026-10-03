@@ -255,6 +255,14 @@
       // çevrilmiş halleri ("Sırala order", "Kursa Başla chat") de düzeltir.
       // Kısa etiketler ^…$ ile tam metne sabit (içerikteki kelimelere dokunmaz).
       // Hepsi idempotent: çıktı tekrar eşleşmez.
+      // — 2026-10-03 taraması: yeni sürümle gelen metinler
+      { pattern: /^(?:Courses|Kurslar) in (.+)$/, replacement: "$1 kursları" },
+      { pattern: /^Unlocks for private channel$/i, replacement: "Özel kanal üyelerine açılır" },
+      { pattern: /^Default$/, replacement: "Varsayılan" },
+      { pattern: /^Drop media or documents$/i, replacement: "Medya veya belgeleri bırak" },
+      { pattern: /^Alternative text for avatar image not provided$/, replacement: "Profil fotoğrafı" },
+      { pattern: /^Alternative text for image not provided$/, replacement: "Görsel" },
+      { pattern: /^Open members list, admins and owners$/, replacement: "Üye listesini, yöneticileri ve sahipleri aç" },
       // — Kabuk / menü
       { pattern: /^Dashboard$/, replacement: "Ana Sayfa" },
       { pattern: /^Memberships$/, replacement: "Üyelikler" },
@@ -1084,7 +1092,14 @@
 
     function translateString(text) {
       if (!text) return text;
-      let out = text;
+      // GHL'in yeni sürümünde metin düğümleri çoğu zaman baş/son boşlukla geliyor
+      // (" My courses ", "\n Continue learning \n"). ^…$ kalıpları boşluklu metni
+      // yakalayamıyordu → çeviri çekirdek metne uygulanır, boşluklar aynen geri eklenir.
+      const ws = /^(\s*)([\s\S]*?)(\s*)$/.exec(text);
+      const lead = ws[1];
+      const trail = ws[3];
+      if (!ws[2]) return text;
+      let out = ws[2];
       for (const p of phrases) {
         out = out.replace(p.pattern, p.replacement);
       }
@@ -1101,8 +1116,8 @@
       // İngilizce cümlede bu yarım çeviri üretir ("Gönderiler this month"). Sözlük
       // turundan sonra metinde hâlâ İngilizce bağlaç/zamir kalıyorsa sözlük
       // değişikliğini geri al: cümle tamamen İngilizce kalır, karışık görünmez.
-      if (out !== afterPhrases && HALF_ENGLISH.test(out)) return afterPhrases;
-      return out;
+      if (out !== afterPhrases && HALF_ENGLISH.test(out)) return lead + afterPhrases + trail;
+      return lead + out + trail;
     }
 
     const HALF_ENGLISH = /\b(?:the|your|you|to|for|with|and|of|is|are|will|here|this|that|from|have|has|we|our|they|their|what|when|where|which|how|yet|only|into|any|all|my)\b/i;
