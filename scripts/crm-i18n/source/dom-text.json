@@ -826,5 +826,11 @@
  "Total Products": "Toplam Ürün",
  "Search for agents...": "Ajan ara...",
  "snapshots.loadSnapshotsTemplate.selectSnapshotTemplate": "Hesap şablonu seç",
- "Phone Number": "Telefon Numarası"
+ "Phone Number": "Telefon Numarası",
+ "Activity": "Aktivite",
+ "Notes": "Notlar",
+ "Documents": "Belgeler",
+ "Payments": "Ödemeler",
+ "Contact": "Kişi",
+ "Conversations": "Sohbetler"
 }
