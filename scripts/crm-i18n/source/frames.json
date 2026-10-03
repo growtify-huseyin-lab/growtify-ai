@@ -39,5 +39,32 @@
   "origin": "https://client-app-affiliate-manager.leadconnectorhq.com",
   "proxy": "https://crm-ortaklik.growtify.app",
   "screens": "Pazarlama > Satış Ortaklığı Yöneticisi"
+ },
+ "vibe": {
+  "origin": "https://leadgen-vibe-ai-builder.leadconnectorhq.com",
+  "proxy": "https://crm-studyo.growtify.app",
+  "screens": "Yapay Zeka Stüdyosu (tam ekran)",
+  "_text_note": "Uygulamanın kodunda sabit (katalogda olmayan) metinler: şablon adları ve Yenilikler penceresi.",
+  "text": {
+   "What's new": "Yenilikler",
+   "Product updates and new capabilities": "Ürün güncellemeleri ve yeni özellikler",
+   "Changelog dates": "Değişiklik tarihleri",
+   "Full-stack apps: SSR, server functions, and secrets": "Tam kapsamlı uygulamalar: SSR, sunucu fonksiyonları ve gizli anahtarlar",
+   "AI Studio just leveled up from “generate a pretty frontend” to build a real full-stack web app. New projects run on TanStack Start: server-rendered pages, real backend (server functions and REST APIs), and a proper secrets vault. Prompt it. Ship it. Watch search engines, social cards, and users all see the same live site.": "Yapay Zeka Stüdyosu artık yalnızca “güzel bir ön yüz üretmekle” kalmıyor, gerçek bir tam kapsamlı web uygulaması kuruyor. Yeni projeler TanStack Start üzerinde çalışır: sunucuda oluşturulan sayfalar, gerçek bir arka uç (sunucu fonksiyonları ve REST API'leri) ve düzgün bir gizli anahtar kasası. İstemini yaz, yayına al. Arama motorları, sosyal medya kartları ve kullanıcılar aynı canlı siteyi görür.",
+   "Shell execution: inspect, test, and verify like a developer": "Komut çalıştırma: bir geliştirici gibi incele, test et ve doğrula",
+   "AI Studio can now run commands inside your project to inspect the live app, investigate errors, recover from environment issues, and verify fixes—like a developer working on your behalf.": "Yapay Zeka Stüdyosu artık projende komut çalıştırarak canlı uygulamayı inceleyebiliyor, hataları araştırabiliyor, ortam sorunlarını giderebiliyor ve düzeltmeleri doğrulayabiliyor; senin adına çalışan bir geliştirici gibi.",
+   "Landing page": "Açılış sayfası",
+   "Dashboard": "Pano",
+   "E-commerce": "E-ticaret",
+   "Portfolio": "Portfolyo",
+   "Blog / CMS": "Blog / İçerik Yönetimi",
+   "Todo / Task Manager": "Yapılacaklar / Görev Yöneticisi",
+   "Chat Application": "Sohbet Uygulaması",
+   "Restaurant / Food Ordering": "Restoran / Yemek Siparişi",
+   "Fitness Tracker": "Fitness Takibi",
+   "Social Media Feed": "Sosyal Medya Akışı",
+   "Calendar / Scheduling": "Takvim / Planlama",
+   "Weather App": "Hava Durumu Uygulaması"
+  }
  }
 }

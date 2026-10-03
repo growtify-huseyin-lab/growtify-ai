@@ -13,6 +13,7 @@ adından sunar ve sayfanın başına aynı yükleyiciyi "çerçeve modunda" ekle
 | `crm-epostalar.growtify.app` | `email-home-prod.leadconnectorhq.com` | Pazarlama > E-postalar | `growtify.ai/crm/frames/email.json` |
 | `crm-sohbet.growtify.app` | `client-app-crm-conversations.leadconnectorhq.com` | Ayarlar > Sohbet Sağlayıcıları (katalog 10 metin + sağlayıcı türleri) | `growtify.ai/crm/frames/conv.json` |
 | `crm-ortaklik.growtify.app` | `client-app-affiliate-manager.leadconnectorhq.com` | Pazarlama > Satış Ortaklığı | `growtify.ai/crm/frames/aff.json` |
+| `crm-studyo.growtify.app` | `leadgen-vibe-ai-builder.leadconnectorhq.com` | Yapay Zeka Stüdyosu (tam ekran) | `growtify.ai/crm/frames/vibe.json` |
 
 Bir adres kullanıcıya ancak `crm-config.json` `frames` listesine eklenince açılır; listede olmayan adres yalnız
 bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
@@ -25,6 +26,13 @@ bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
    kimlik bilgisi CRM'den tarayıcı içinde gelir, API çağrıları doğrudan GHL'e gider (Worker'dan geçmez).
 3. Worker uygulamanın sayfasını GHL'den alır, `<head>` başına küçük bir başlangıç betiği (dil işaretini okur, adresten
    siler) ve yükleyiciyi `async` ekler — uygulama yükleyiciyi beklemez; diğer dosyalar aynen geçer.
+
+## Uygulama dosyasında metin değişikliği (`JS_TEXT`)
+
+Bazı metinler ekrana değil işleme gider (ör. Yapay Zeka Stüdyosu şablonuna tıklanınca istem kutusuna yazılan hazır istem;
+yapay zekâ siteyi bu dilde kurar). Bunlar `src/worker.js` `JS_TEXT` haritasıyla uygulamanın `/assets/*.js` dosyasında
+birebir değiştirilir. Vekil yalnız Türkçe arayüzde kullanıldığı için güvenli; GHL metni değiştirirse eşleşme olmaz, dosya
+olduğu gibi geçer. Haritayı değiştirince `JS_TEXT_VERSION`'ı artır (kenar önbelleği anahtarı).
 
 ## Güvenlik
 

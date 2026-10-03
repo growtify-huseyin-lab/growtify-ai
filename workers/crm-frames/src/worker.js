@@ -2,7 +2,7 @@
  * crm-*.growtify.app — GHL CRM'in iframe ile gömdüğü uygulamaları Türkçe katmanla sunar.
  *
  * CRM'deki bazı ekranlar (Ayarlar > Takvimler, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar,
- * Sohbet Sağlayıcıları, Satış Ortaklığı) GHL'in ayrı
+ * Sohbet Sağlayıcıları, Satış Ortaklığı, Yapay Zeka Stüdyosu) GHL'in ayrı
  * alan adlarındaki uygulamalardan iframe ile gelir; ajans Custom JS oraya ulaşamaz. CRM'deki Türkçe
  * yükleyici (growtify.ai/crm/crm-i18n.js) bu iframe'lerin adresini buradaki karşılığına çevirir; bu
  * Worker aynı uygulamayı GHL'den alıp sayfanın başına yükleyiciyi ekler. Kullanıcı aynı ekranda kalır.
@@ -31,6 +31,42 @@ const APPS = {
   "crm-epostalar.growtify.app": { origin: "https://email-home-prod.leadconnectorhq.com", frame: "email" },
   "crm-sohbet.growtify.app": { origin: "https://client-app-crm-conversations.leadconnectorhq.com", frame: "conv" },
   "crm-ortaklik.growtify.app": { origin: "https://client-app-affiliate-manager.leadconnectorhq.com", frame: "aff" },
+  // Yapay Zeka Stüdyosu: dosyaları CORS izni vermiyor → vekilden (kenar önbelleğiyle) geçer.
+  "crm-studyo.growtify.app": { origin: "https://leadgen-vibe-ai-builder.leadconnectorhq.com", frame: "vibe" },
+};
+
+// Kodda sabit olup ekrana değil işleme giden metinler: Yapay Zeka Stüdyosu şablonuna tıklanınca istem kutusuna yazılan
+// hazır istemler (yapay zekâ siteyi bu dilde kurar). Bu vekil yalnız Türkçe arayüzde kullanıldığı için uygulama
+// dosyasında doğrudan Türkçeleştirilir; GHL metni değiştirirse eşleşme olmaz, dosya olduğu gibi geçer (bozulmaz).
+// İçerik değişince JS_TEXT_VERSION artırılır (kenar önbelleği anahtarı).
+const JS_TEXT_VERSION = "1";
+const JS_TEXT = {
+  vibe: {
+    "Create a modern SaaS landing page with hero, features, and pricing sections.":
+      "Karşılama bölümü, özellikler ve fiyatlandırma bölümleri olan modern bir SaaS açılış sayfası oluştur.",
+    "Build an admin dashboard with sidebar navigation, charts, and data tables.":
+      "Kenar çubuğu menüsü, grafikler ve veri tabloları olan bir yönetim paneli oluştur.",
+    "Create an e-commerce storefront with product grid, cart, and checkout flow.":
+      "Ürün ızgarası, sepet ve ödeme akışı olan bir e-ticaret mağazası oluştur.",
+    "Build a minimal developer portfolio with project gallery and about section.":
+      "Proje galerisi ve hakkımda bölümü olan sade bir geliştirici portfolyosu oluştur.",
+    "Build a blog platform with article listing, individual post pages, and a markdown content editor.":
+      "Yazı listesi, ayrı yazı sayfaları ve Markdown içerik düzenleyicisi olan bir blog platformu oluştur.",
+    "Create a task management app with drag-and-drop kanban board, task creation, and status tracking.":
+      "Sürükle-bırak kanban panosu, görev oluşturma ve durum takibi olan bir görev yönetimi uygulaması oluştur.",
+    "Build a real-time chat interface with conversation list, message bubbles, and a message input area.":
+      "Sohbet listesi, mesaj balonları ve mesaj yazma alanı olan gerçek zamanlı bir sohbet arayüzü oluştur.",
+    "Create a restaurant website with a menu, dish details, and an order cart with checkout.":
+      "Menü, yemek ayrıntıları ve ödeme adımlı sipariş sepeti olan bir restoran web sitesi oluştur.",
+    "Build a fitness tracker app with workout logging, exercise library, and progress charts.":
+      "Antrenman kaydı, egzersiz kütüphanesi ve ilerleme grafikleri olan bir fitness takip uygulaması oluştur.",
+    "Create a social media feed with posts, likes, comments, and a profile sidebar.":
+      "Gönderiler, beğeniler, yorumlar ve profil kenar çubuğu olan bir sosyal medya akışı oluştur.",
+    "Build a calendar app with monthly/weekly views, event creation, and time slot scheduling.":
+      "Aylık ve haftalık görünümler, etkinlik oluşturma ve zaman aralığı planlaması olan bir takvim uygulaması oluştur.",
+    "Create a weather dashboard with current conditions, 7-day forecast, and location search.":
+      "Anlık hava durumu, 7 günlük tahmin ve konum arama özelliği olan bir hava durumu paneli oluştur.",
+  },
 };
 
 const LOADER_URL = "https://growtify.ai/crm/crm-i18n.js";
@@ -125,8 +161,11 @@ export default {
     // Sürümlü (adı içerik özetli) /assets dosyaları Worker'ın kenar önbelleğinde tutulur: GHL bu dosyaları
     // önbelleklemeden veriyor (büyük paketler ilk istekte onlarca saniye sürebiliyor).
     const isAsset = url.pathname.startsWith("/assets/") && request.method === "GET";
+    const jsText = isAsset && url.pathname.endsWith(".js") ? JS_TEXT[app.frame] : null;
     const cache = isAsset && typeof caches !== "undefined" ? caches.default : null;
-    const cacheKey = cache ? new Request(url.origin + url.pathname, { method: "GET" }) : null;
+    const cacheKey = cache
+      ? new Request(url.origin + url.pathname + (jsText ? "?gai_t=" + JS_TEXT_VERSION : ""), { method: "GET" })
+      : null;
     if (cache) {
       const hit = await cache.match(cacheKey);
       if (hit) return hit;
@@ -150,7 +189,13 @@ export default {
       if (app.directAssets) rw = rw.on("script[src], link[href]", new AssetRewriter(app.origin));
       return rw.transform(res);
     }
-    const res = new Response(upstream.body, { status: upstream.status, headers: out });
+    let body = upstream.body;
+    if (jsText && upstream.status === 200) {
+      let js = await upstream.text();
+      for (const en in jsText) if (js.indexOf(en) !== -1) js = js.split(en).join(jsText[en]);
+      body = js;
+    }
+    const res = new Response(body, { status: upstream.status, headers: out });
     if (cache && upstream.status === 200) {
       res.headers.set("cache-control", "public, max-age=86400");
       if (ctx && ctx.waitUntil) ctx.waitUntil(cache.put(cacheKey, res.clone()));

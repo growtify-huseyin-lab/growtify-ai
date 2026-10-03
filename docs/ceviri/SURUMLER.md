@@ -24,14 +24,21 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.4.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.5.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
-| Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe (leadgen-vibe-ai-builder; vue-i18n yok, metinler kodda) | **0.0.0** | Sıradaki — vekil + çerçeve metin sözlüğü |
+| Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.0** | Katalog hazır, kendi sekmede deneniyor — sonra `frames`'e eklenecek |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.5.0** — 2026-10-03 — **Yapay Zeka Stüdyosu kataloğu (henüz kullanıcıya kapalı) + daha hızlı Türkçe.** Uygulama
+  (`vibe`, leadgen-vibe-ai-builder) aslında kendi metin kataloğunu kullanıyor: 790 metin (157'si mevcut çeviriden; "Margin" →
+  "Dış Boşluk" bağlam düzeltmesi). Kodda sabit olanlar uygulamaya özel sözlükte: şablon adları, Yenilikler penceresi. Ana sayfa
+  başlığı harf harf yazılıyor ("Let's build" + ifade) → "Hadi bir açılış sayfası oluşturalım". Şablona tıklayınca kutuya
+  yazılan 12 hazır istem Türkçe (yapay zekâ siteyi Türkçe kurar): vekil, uygulama dosyasında metni değiştiriyor
+  (`JS_TEXT`, yalnız Türkçe arayüzde kullanılan `crm-studyo.growtify.app`). Yükleyici: Türkçe katalog ayar dosyasını beklemeden
+  isteniyor (son ayardan kalan küçük özetle); gömülü ekranlarda ayar dosyası hiç beklenmiyor.
 - **1.4.1** — 2026-10-03 — **Hızlı ve bozulmaz açılış.** Ölçüm: GHL yükleyici betiğini düşük öncelikle (async) ekliyor; CRM'in
   yoğun açılışlarında betiğin ağdan gelmesi iki kez 16–20 sn sürdü, o sürede ekran İngilizce kaldı. Betik artık tarayıcı
   önbelleğinden hemen çalışıyor ve arka planda yenileniyor (`stale-while-revalidate`; yeni sürüm ~1 dk sonra, en geç bir sonraki
