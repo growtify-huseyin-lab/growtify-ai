@@ -1,1 +1,7 @@
-{"_note":"Türkçe açılacak alt hesaplar (GHL location ID). Kişinin TR/EN düğmesi seçimi her zaman önceliklidir.","locations":[]}
+{
+ "_note": "Varsayılan arayüz dili. Kişinin TR/EN düğmesi seçimi her zaman önceliklidir. english: İngilizce açılacak alt hesaplar (GHL location ID); turkish: varsayılan 'en' olsaydı Türkçe açılacaklar.",
+ "default": "tr",
+ "english": ["SmVcAIEpSmLyntfw5KGT", "6skVbw1EYX9ZReZpeAWw"],
+ "_english_names": { "SmVcAIEpSmLyntfw5KGT": "Harrington Housing", "6skVbw1EYX9ZReZpeAWw": "Rentser" },
+ "turkish": []
+}

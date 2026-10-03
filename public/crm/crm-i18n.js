@@ -5,13 +5,15 @@
  * Türkçe, o kataloğun İngilizcesinin üstüne yazılır (dil kodu değişmez → GHL mantığı aynı kalır).
  * GHL'de başka bir dil (es, de…) seçilmişse dokunulmaz.
  *
- * Kimde Türkçe (CEO kararı 2026-10-03):
- *   1) Kişinin kendi seçimi — sağ üstteki TR/EN düğmesi (tarayıcıda hatırlanır; ?gai_lang=tr|en de olur)
- *   2) Seçim yoksa: public/crm/crm-config.json'daki "locations" listesindeki alt hesaplar (öğrenciler)
- *   3) Diğer herkes İngilizce (büyük Türkçe katalog hiç indirilmez).
+ * Kimde Türkçe (CEO kararları 2026-10-03):
+ *   1) Kişinin kendi seçimi — üst çubuktaki TR/EN düğmesi (tarayıcıda hatırlanır; ?gai_lang=tr|en de olur)
+ *   2) Seçim yoksa public/crm/crm-config.json: "english" listesindeki alt hesaplar İngilizce
+ *      (Harrington Housing, Rentser), "turkish" listesindekiler Türkçe, diğerleri "default" ("tr").
+ *   İngilizce açılan sayfada büyük Türkçe katalog hiç indirilmez.
  *
  * Yükleyici: GHL Ajans Ayarları → Company → White Label → Custom JS.
- * Farklı alan adında çalışan GHL uygulamalarına (workflow kurucusu, takvim ayarları) ulaşılamaz.
+ * Farklı alan adında iframe içinde çalışan GHL uygulamalarına (otomasyon kurucusu, takvim ayarları,
+ * Ayarlar içeriği, Yapay Zeka Stüdyosu) ulaşılamaz.
  */
 (function () {
   if (window.__gaiCrmI18n) return;
@@ -44,13 +46,18 @@
     return m ? m[1] : null;
   }
 
-  var config = { locations: [] };
+  var config = { default: "en", english: [], turkish: [] };
 
+  // Kişinin seçimi (TR/EN düğmesi, ?gai_lang) > alt hesap listeleri > varsayılan dil.
   function decide() {
     var c = getChoice();
     if (c) return c;
     var loc = locationId();
-    return loc && config.locations && config.locations.indexOf(loc) !== -1 ? "tr" : "en";
+    var en = config.english || [];
+    var tr = config.turkish || config.locations || []; // "locations" = eski adı (Türkçe liste)
+    if (loc && en.indexOf(loc) !== -1) return "en";
+    if (loc && tr.indexOf(loc) !== -1) return "tr";
+    return config.default === "tr" ? "tr" : "en";
   }
 
   /* ---------- TR/EN düğmesi ---------- */
@@ -281,6 +288,35 @@
 
   // Sunucudan gelen sabit etiketler (ör. sol menüde ve üst menüde "Contacts"): yalnız menülerde,
   // tam eşleşme — müşteri verisine dokunmaz.
+  /* ---------- Tarih seçici (HighRise UI): ay ve gün adları — yalnız .hr-date-panel içinde ---------- */
+  var MONTHS_TR = { jan: "Ocak", feb: "Şubat", mar: "Mart", apr: "Nisan", may: "Mayıs", jun: "Haziran", jul: "Temmuz", aug: "Ağustos", sep: "Eylül", oct: "Ekim", nov: "Kasım", dec: "Aralık" };
+  var MONTH_RE = /^(\s*)(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?(\s*)$/;
+  var MONTH_YEAR_RE = /^(\s*)(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\.?[\s\u00a0]+(\d{4})(\s*)$/;
+  // İngilizce "Sa" = Cumartesi, Türkçe "Sa" = Salı → çevrilen hücrenin özgün adı data-gai-en'de tutulur (çift çeviri olmaz).
+  var DAYS_TR = { Su: "Pz", Mo: "Pt", Tu: "Sa", We: "Ça", Th: "Pe", Fr: "Cu", Sa: "Ct", Sun: "Paz", Mon: "Pzt", Tue: "Sal", Wed: "Çar", Thu: "Per", Fri: "Cum", Sat: "Cmt" };
+  function fixDatePanels() {
+    var panels = document.querySelectorAll(".hr-date-panel");
+    for (var i = 0; i < panels.length; i++) {
+      var days = panels[i].querySelectorAll(".hr-date-panel-weekdays__day");
+      for (var d = 0; d < days.length; d++) {
+        var el = days[d];
+        var t = el.textContent.trim();
+        var orig = el.getAttribute("data-gai-en");
+        if (orig && DAYS_TR[orig] === t) continue; // zaten Türkçe
+        if (Object.prototype.hasOwnProperty.call(DAYS_TR, t)) {
+          el.setAttribute("data-gai-en", t);
+          el.textContent = DAYS_TR[t];
+        }
+      }
+      fixTextIn(panels[i], MONTH_YEAR_RE, function (m, a, mon, year, b) {
+        return a + MONTHS_TR[mon.toLowerCase()] + " " + year + b;
+      });
+      fixTextIn(panels[i], MONTH_RE, function (m, a, mon, b) {
+        return a + MONTHS_TR[mon.toLowerCase()] + b;
+      });
+    }
+  }
+
   function translateDom() {
     var dict = catalog.dom;
     var roots = document.querySelectorAll("#sidebar-v2, nav, [role=navigation], header.hl_header");
@@ -297,6 +333,7 @@
       var els = document.querySelectorAll(DOM_FIXES[f].sel);
       for (var e = 0; e < els.length; e++) fixTextIn(els[e], DOM_FIXES[f].re, DOM_FIXES[f].to);
     }
+    fixDatePanels();
   }
 
   function scanCatalog() {
@@ -476,7 +513,7 @@
           return r.ok ? r.json() : null;
         })
         .then(function (j) {
-          if (j && j.locations) config = j;
+          if (j && typeof j === "object" && (j.default || j.english || j.turkish || j.locations)) config = j;
         })
         .catch(function () {})
         .then(start);
