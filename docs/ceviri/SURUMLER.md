@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.10.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.11.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,37 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.11.0** — 2026-10-04 — **Lansman öncesi tam tur: 145 ekran tıklamalarla gezildi, kalan İngilizce + biçim + akıcılık (CEO: "tam tur
+  yapıp hiçbir yerde kalmadığından emin ol").**
+  - **Tur:** 145 sayfa (bölüm içi bağlantılar + güvenli düğmeler: sekme, filtre, sıralama, alan yönetimi; kayıt/silme/gönderme yok),
+    yenilenme 0, hata 0. Gömülü (vekil) ekranlarda kalıntı 0. Ardından her ekranın i18n kataloğu bizimkiyle anahtar anahtar
+    karşılaştırıldı (katalog taraması v2b): GHL'in sonradan eklediği **967 yeni metin** (Yeterlilik Belgeleri: sertifika/rozet,
+    mağaza kataloğu: ürün/koleksiyon/değerlendirme, ödeme bağlantıları) + kurs ayarları ekranının hiç eşleşmeyen kataloğu
+    (**259 metin**, yeni örnek `msettings`) + kurs analizi (`mlytics`, 148 metin) çevrildi (5 paralel paket, doğrulayıcı temiz).
+  - **Çizimden önce çeviri:** değişen düğümler artık tarayıcı boyamadan önce çevriliyor (eskiden 150 ms sonra). Kendi kendine dönen
+    içerik (Yapay Zeka Ajanları tanıtım kartları her ~5 sn'de İngilizce bir an görünüyordu) artık hiç İngilizce görünmüyor; yeni
+    bağlanan uygulamanın kataloğu da ilk boyamadan önce Türkçeleşiyor. Döngü sigortası (art arda 30 tur → eski toplu yöntem) +
+    sonuç önbelleği. Ölçüm (yerel test): 10.000 metin düğümü ~80 ms; tekil metin araması ~5 µs.
+  - **Türkçe büyük harf:** sayfanın dili `tr` (önceden `en-US`) — CSS büyük harf dönüşümü "DESTEKLI" yerine "DESTEKLİ" yazar
+    (oluşturucu çerçevelerinde değil: tuval kişinin içeriği).
+  - **Para ve yüzde biçimi:** "TL2,546.00" → "2.546,00 TL", grafik ekseni "TL0.2" → "0,2 TL", "33.33%" → "%33,33", "+38%" → "+%38".
+  - **Yapay zeka ürün adları her yerde Türkçe** (menüdekiyle aynı): Conversation AI → Sohbet Yapay Zekası, Voice AI → Sesli Yapay Zeka,
+    Email AI → E-posta Yapay Zekası, Reviews AI → Değerlendirme Yapay Zekası, Funnel AI → Satış Hunisi Yapay Zekası, Workflow AI →
+    İş Akışı Yapay Zekası, Calendar AI → Takvim Yapay Zekası, Content AI → İçerik Yapay Zekası — 322 cümlede, Türkçe eklerle
+    ("Sohbet Yapay Zekasını", "Sesli Yapay Zekayı"). Çeviri rehberi güncellendi.
+  - **Kalıp/kural düzeltmeleri:** "Won   TL0" (çoklu boşluk) → "Kazanıldı   0 TL"; satır sonu/çift boşluklu düğümler tek boşlukla
+    yeniden denenir ("1 - 5 of 5", "Completion Rate…"); iç içe kurallar ikinci kez uygulanır ("Last updated: 9 minutes ago" →
+    "Son güncelleme: 9 dakika önce"); görev filtreleri "Created At ( +03 )" → "Oluşturulma Tarihi ( +03 )"; fırsat tahmini
+    "Slipped 1+ times…" → "1+ kez ertelendi…"; "Birincil Company (Associated Company)" → "Birincil Şirket (İlişkili Şirket)".
+  - **Kişi verisi korunuyor:** "Call {name}" kalıbı yalnız ipucu/yer tutucuda uygulanır — kişinin kendi aşama adı "Call Completed"
+    artık "Telefonla ara: Completed"e dönmüyor.
+  - **Genel adlı kataloglar** (`analytics`, `common/nav/settings`) yalnız kendi bağlanma noktasına verilir (`instance-roots.json`).
+  - **Sözlük:** +82 metin (Yapay Zeka Ajanları kartları, pazar yeri kategorileri, fatura/sipariş filtreleri, kurs panosu,
+    entegrasyon açıklamaları, sertifika sayfası); +27 kural. Katalog 110.934 → **112.186** metin (+1.374 anahtar), bozuk 0.
+  - **TR düğmesi:** Türkçe zaten açıkken basınca sayfa yenilenir (her zaman "Türkçeyi yeniden yükle" — CEO: "göremedim").
+  - **Bakım:** çerçeveye `{gaiTiming: 1}` → açılış süreleri (DOM hazır, yükleme, Türkçenin ilk uygulandığı an, LCP) — hız testi için.
+  - Kapsam dışı (kişi/üçüncü taraf verisi, bilerek dokunulmadı): pazar yeri uygulama adları/tanıtımları, aşama adları
+    ("New Lead", "Order Completed"), özel alan adları ("GAI - …"), dosya adları.
 - **1.10.0** — 2026-10-03 — **Kişi / fırsat / görev ekranlarındaki İngilizce kalıntılar (CEO ekran görüntüleriyle).**
   - **Sağ panel (contacts-highrise):** GHL'in kişi sayfası modülü metinlerini sayfaya bağlamadan kendi içinde tutuyor (yükleyicinin
     ulaşabildiği hiçbir katalogda yok). Modülün dosyalarından İngilizce metin blokları çıkarıldı (1.461 metin; 1.103'ü mevcut

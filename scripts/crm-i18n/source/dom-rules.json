@@ -64,16 +64,16 @@
   "Merhaba $1! Ben Calendar AI. Neye yardım istediğini yaz ya da aşağıdan bir seçenek seç."
  ],
  [
-  "^Won (\\S*\\d\\S*)$",
-  "Kazanıldı $1"
+  "^Won(\\s+)(\\S*\\d\\S*)$",
+  "Kazanıldı$1$2"
  ],
  [
-  "^Open (\\S*\\d\\S*)$",
-  "Açık $1"
+  "^Open(\\s+)(\\S*\\d\\S*)$",
+  "Açık$1$2"
  ],
  [
-  "^Lost (\\S*\\d\\S*)$",
-  "Kaybedildi $1"
+  "^Lost(\\s+)(\\S*\\d\\S*)$",
+  "Kaybedildi$1$2"
  ],
  [
   "^Activate scroll mode for (.+)$",
@@ -208,32 +208,32 @@
   "Hesabından aylık $$$1 ücret alınacak"
  ],
  [
-  "^(\\d+) seconds? ago$",
-  "$1 saniye önce"
+  "^([^:]{1,40}: )?(\\d+) seconds? ago$",
+  "$1$2 saniye önce"
  ],
  [
-  "^(\\d+) minutes? ago$",
-  "$1 dakika önce"
+  "^([^:]{1,40}: )?(\\d+) minutes? ago$",
+  "$1$2 dakika önce"
  ],
  [
-  "^(\\d+) hours? ago$",
-  "$1 saat önce"
+  "^([^:]{1,40}: )?(\\d+) hours? ago$",
+  "$1$2 saat önce"
  ],
  [
-  "^(\\d+) days? ago$",
-  "$1 gün önce"
+  "^([^:]{1,40}: )?(\\d+) days? ago$",
+  "$1$2 gün önce"
  ],
  [
-  "^(\\d+) weeks? ago$",
-  "$1 hafta önce"
+  "^([^:]{1,40}: )?(\\d+) weeks? ago$",
+  "$1$2 hafta önce"
  ],
  [
-  "^(\\d+) months? ago$",
-  "$1 ay önce"
+  "^([^:]{1,40}: )?(\\d+) months? ago$",
+  "$1$2 ay önce"
  ],
  [
-  "^(\\d+) years? ago$",
-  "$1 yıl önce"
+  "^([^:]{1,40}: )?(\\d+) years? ago$",
+  "$1$2 yıl önce"
  ],
  [
   "^Pending phone calls: (\\d+)$",
@@ -276,7 +276,7 @@
   "$1 dk"
  ],
  [
-  "^(\\d+) hrs?$",
+  "^(\\d+) [Hh]rs?$",
   "$1 sa"
  ],
  [
@@ -286,5 +286,113 @@
  [
   "^(\\d+) hr (\\d+) mins?$",
   "$1 sa $2 dk"
+ ],
+ [
+  "^([^:]{1,40}: )?a few seconds ago$",
+  "$1birkaç saniye önce"
+ ],
+ [
+  "^([^:]{1,40}: )?a minute ago$",
+  "$11 dakika önce"
+ ],
+ [
+  "^([^:]{1,40}: )?an hour ago$",
+  "$11 saat önce"
+ ],
+ [
+  "^([^:]{1,40}: )?a day ago$",
+  "$11 gün önce"
+ ],
+ [
+  "^([^:]{1,40}: )?a month ago$",
+  "$11 ay önce"
+ ],
+ [
+  "^([^:]{1,40}: )?a year ago$",
+  "$11 yıl önce"
+ ],
+ [
+  "^Last updated: (.+)$",
+  "Son güncelleme: $1"
+ ],
+ [
+  "^(\\d+)% conversion rate$",
+  "%$1 dönüşüm oranı"
+ ],
+ [
+  "^(\\d+)% response rate$",
+  "%$1 yanıt oranı"
+ ],
+ [
+  "^\\+(\\d+) [Mm]ore$",
+  "+$1 daha"
+ ],
+ [
+  "^Created At \\(\\s*([+-][\\d:]+)\\s*\\)$",
+  "Oluşturulma Tarihi ( $1 )"
+ ],
+ [
+  "^Updated At \\(\\s*([+-][\\d:]+)\\s*\\)$",
+  "Güncellenme Tarihi ( $1 )"
+ ],
+ [
+  "^Due Date \\(\\s*([+-][\\d:]+)\\s*\\)$",
+  "Son Tarih ( $1 )"
+ ],
+ [
+  "^Completed At \\(\\s*([+-][\\d:]+)\\s*\\)$",
+  "Tamamlanma Tarihi ( $1 )"
+ ],
+ [
+  "^(\\d[\\d.,]*) total members?$",
+  "Toplam $1 üye"
+ ],
+ [
+  "^(\\d[\\d.,]*) members on this page$",
+  "Bu sayfada $1 üye"
+ ],
+ [
+  "^Current page (\\d+)$",
+  "Geçerli sayfa: $1"
+ ],
+ [
+  "^Go to page (\\d+)$",
+  "$1. sayfaya git"
+ ],
+ [
+  "^No change, (.+)$",
+  "Değişim yok, $1"
+ ],
+ [
+  "^Increased by (.+)$",
+  "Artış: $1"
+ ],
+ [
+  "^Decreased by (.+)$",
+  "Azalış: $1"
+ ],
+ [
+  "^Progress bar (.+)$",
+  "İlerleme çubuğu $1"
+ ],
+ [
+  "^Slipped (\\d+)\\+ times (?:veya|or) (\\d+)\\+ days$",
+  "$1+ kez ertelendi veya $2+ gün gecikti"
+ ],
+ [
+  "^Slipped (\\d+)\\+ times (?:veya|or) (\\d+)\\+ days \\(excluding high/medium\\)$",
+  "$1+ kez ertelendi veya $2+ gün gecikti (yüksek/orta hariç)"
+ ],
+ [
+  "^Slipped (\\d+)\\+ times (?:veya|or) (\\d+)\\+ days \\(excluding high\\)$",
+  "$1+ kez ertelendi veya $2+ gün gecikti (yüksek hariç)"
+ ],
+ [
+  "^([\\s\\S]*\\n)?Expected revenue rate: (.+)$",
+  "$1Beklenen gelir oranı: $2"
+ ],
+ [
+  "^Completion Rate: (\\d+)%\\s+(\\d+) Enrollments?$",
+  "Tamamlanma Oranı: %$1 · $2 kayıt"
  ]
 ]

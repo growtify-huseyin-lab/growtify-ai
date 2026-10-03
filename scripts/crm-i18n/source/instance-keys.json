@@ -5661,5 +5661,13 @@
   "importTemplates",
   "snippetSelect",
   "tableCrud"
+ ],
+ "mlytics": [
+  "analytics"
+ ],
+ "msettings": [
+  "common",
+  "nav",
+  "settings"
  ]
 }

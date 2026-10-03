@@ -5,5 +5,12 @@
  "No {objectLabel} Yet": "Henüz {objectLabel} yok",
  "No {objectLabel} yet": "Henüz {objectLabel} yok",
  "Add {objectLabel}": "{objectLabel} Ekle",
- "Add {object}": "{object} Ekle"
+ "Add {object}": "{object} Ekle",
+ "_attr_only": [
+  "Call {name}"
+ ],
+ "Birincil {objectLabel} (Associated {objectName})": "Birincil {objectLabel} (İlişkili {objectName})",
+ "Primary {objectLabel} (Associated {objectName})": "Birincil {objectLabel} (İlişkili {objectName})",
+ "Ek {objectPlural} (Associated {objectName})": "Ek {objectPlural} (İlişkili {objectName})",
+ "Additional {objectPlural} (Associated {objectName})": "Ek {objectPlural} (İlişkili {objectName})"
 }
