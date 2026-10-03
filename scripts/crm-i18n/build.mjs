@@ -71,6 +71,13 @@ for (const id of frameIds) {
   delete fc.textPages; // sayfa sözlükleri CRM sayfalarına ait
   // Yalnız o uygulamada geçerli birebir metinler (ör. sunucudan gelen tür adları): frames.json "<id>".text
   if (frames[id].text) fc.text = { ...fc.text, ...clean(frames[id].text) };
+  // Oluşturucularda sayfa sözlüğü kapalı (tuvaldeki önizleme kişinin içeriği): yalnız katalog.
+  if (frames[id].noDom) {
+    fc.noDom = true;
+    fc.text = {};
+    fc.textRules = [];
+    delete fc.dom;
+  }
   fs.writeFileSync(path.join(framesDir, id + ".json"), JSON.stringify(fc));
   frameReport[id] = fs.statSync(path.join(framesDir, id + ".json")).size;
 }

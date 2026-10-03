@@ -5540,5 +5540,14 @@
   "usage",
   "version",
   "visualEdits"
+ ],
+ "form": [
+  "common",
+  "fields",
+  "form",
+  "overallScore",
+  "quiz",
+  "survey",
+  "textEditor"
  ]
 }

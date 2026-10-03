@@ -78,5 +78,19 @@
    "Build a calendar app with monthly/weekly views, event creation, and time slot scheduling.": "Aylık ve haftalık görünümler, etkinlik oluşturma ve zaman aralığı planlaması olan bir takvim uygulaması oluştur.",
    "Create a weather dashboard with current conditions, 7-day forecast, and location search.": "Anlık hava durumu, 7 günlük tahmin ve konum arama özelliği olan bir hava durumu paneli oluştur."
   }
+ },
+ "form": {
+  "origin": "https://leadgen-apps-form-survey-builder.leadconnectorhq.com",
+  "proxy": "https://crm-formlar.growtify.app",
+  "screens": "Siteler > Formlar / Anketler / Testler oluşturucusu (tam ekran)",
+  "noDom": true,
+  "_noDom_note": "Tuvaldeki form önizlemesi kişinin kendi içeriği; sayfa sözlüğü uygulanmaz, yalnız uygulama kataloğu."
+ },
+ "page": {
+  "origin": "https://page-builder.leadconnectorhq.com",
+  "proxy": "https://crm-sayfa.growtify.app",
+  "screens": "Siteler > satış hunisi / web sitesi sayfa oluşturucu (tam ekran)",
+  "noDom": true,
+  "_noDom_note": "Tuvaldeki sayfa kişinin kendi içeriği; sayfa sözlüğü uygulanmaz, yalnız uygulama kataloğu."
  }
 }
