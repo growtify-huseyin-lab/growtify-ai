@@ -879,7 +879,16 @@
         down[px] = true;
         sd.set.call(frame, orig);
       };
-      var loadTimer = setTimeout(restore, 25000); // büyük uygulamalarda ilk yükleme uzun sürebilir
+      // Yükleme 25 sn'de bitmezse GHL adresine dönülür. Ama çerçevedeki yükleyici "buradayım" dediyse vekil çalışıyor,
+      // uygulama yalnız iniyor (büyük oluşturucular ilk açılışta 26 MB; GHL'in kendi sürümü tarayıcı önbelleğinden
+      // geldiği için hızlı, vekildeki ilk kez iner) → yükleme bitene kadar beklenir (en çok 2 dk).
+      var t0 = Date.now();
+      var loadTimer;
+      var check = function () {
+        if (lastMsg[px] >= t0 && Date.now() - t0 < 120000) loadTimer = setTimeout(check, 5000);
+        else restore();
+      };
+      loadTimer = setTimeout(check, 25000);
       var onload = function () {
         frame.removeEventListener("load", onload);
         clearTimeout(loadTimer);
@@ -1011,6 +1020,7 @@
         if (e.__gai || !rev[e.origin]) return;
         lastMsg[e.origin] = Date.now();
         e.stopImmediatePropagation();
+        if (e.data && typeof e.data === "object" && e.data.gaiFrameAlive) return; // yalnız bizim için: uygulamaya iletilmez
         var ev = new MessageEvent("message", {
           data: e.data,
           origin: rev[e.origin],
@@ -1111,6 +1121,10 @@
     });
   }
   if (FRAME) {
+    // Üst pencereye "buradayım": vekil adres ve yükleyici çalışıyor, uygulama iniyor (güvenlik ağı beklesin; bkz. watch).
+    try {
+      window.parent.postMessage({ gaiFrameAlive: 1 }, "*");
+    } catch (e) {}
     // Bakım: iç içe çerçeve vekilini yalnız bu sekmede dene / kapat (bkz. nestedProxyMap).
     window.addEventListener("message", function (e) {
       if (!e.data || typeof e.data !== "object" || !("gaiNested" in e.data) || e.source !== window.parent) return;
