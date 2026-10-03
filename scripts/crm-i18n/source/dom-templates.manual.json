@@ -1,0 +1,9 @@
+{
+ "_note": "Elle eklenen kalıplar ({İngilizce kalıp: Türkçe kalıp}); dom-templates.json (sağ panelden üretilir) ile birlikte derlenir.",
+ "{objectLabel} Details": "{objectLabel} Ayrıntıları",
+ "Tags ({count})": "Etiketler ({count})",
+ "No {objectLabel} Yet": "Henüz {objectLabel} yok",
+ "No {objectLabel} yet": "Henüz {objectLabel} yok",
+ "Add {objectLabel}": "{objectLabel} Ekle",
+ "Add {object}": "{object} Ekle"
+}

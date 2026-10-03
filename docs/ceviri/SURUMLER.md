@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.9.3** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.10.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,25 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.10.0** — 2026-10-03 — **Kişi / fırsat / görev ekranlarındaki İngilizce kalıntılar (CEO ekran görüntüleriyle).**
+  - **Sağ panel (contacts-highrise):** GHL'in kişi sayfası modülü metinlerini sayfaya bağlamadan kendi içinde tutuyor (yükleyicinin
+    ulaşabildiği hiçbir katalogda yok). Modülün dosyalarından İngilizce metin blokları çıkarıldı (1.461 metin; 1.103'ü mevcut
+    çevirilerden, 357'si yeni — 3 paralel çeviri, doğrulama temiz) → sayfa sözlüğü (`dom-highrise.json`, birebir) + kalıplar.
+  - **Kalıp eşleyici (`textTpl`):** değişken içeren metinler ekrandaki hâliyle çevrilir ("83 / 2000 characters" → "83 / 2000
+    karakter", "{objectLabel} Details" → "… Ayrıntıları"); her kalıp en ayırt edici kelimesiyle dizinlenir (hızlı). Nesne adı
+    yerindeki İngilizce değer Türkçeleşir; Türkçe kataloğumuzdaki nesne adı alan kalıplar da (Türkçe → Türkçe): "İlişkili Company yok"
+    → "İlişkili Şirket yok", "İlişkili Contacts" → "İlişkili Kişiler", "Yeni Contact ekleme…" → "Yeni Kişi ekleme…", "Companies (0)"
+    → "Şirketler (0)". Kişinin verisi (görev başlığı, kişi adı) eşleşmez. Çerçevelerde yalnız o uygulamanın kendi kalıpları
+    (oluşturucularda hiç); sağ panel sözlüğü yalnız CRM sayfalarında (çerçeve katalogları büyümedi).
+  - **Tarih:** "Oluşturulma tarihi: Oct 3, 2026 12:36 PM (GMT +03)" → "… 3 Eki 2026 12:36 (GMT +03)".
+  - **Büyük harf hatası:** GHL'in kelime başı büyütmesi büyük Türkçe harften sonra da bozuyordu ("ŞIrketler", "Add ŞIrket") →
+    düzeltildi (ÜRÜN gibi tamamı büyük kelimelere dokunulmaz).
+  - **Terimler:** "Agent Studio / Voice AI / Conversation AI / Content AI" → "Ajan Stüdyosu / Sesli Yapay Zeka / Sohbet Yapay Zekası /
+    İçerik Yapay Zekası" (56 yer; ürün adı diye bırakılmıştı); ajanlarda "Deploy" → "Devreye al" ("Hemen dağıt" → "Hemen devreye al",
+    18 yer); "Associate new" → "İlişkilendir:" (nesne adı ayrı parça olarak arkasına geliyor); "Build Using AI" (otomasyon).
+  - **Bakım:** `sessionStorage gai_crm_lang_tab` (yalnız o sekmede dil — hız ölçümü için; kayıtlı seçim değişmez);
+    `performance.mark("gai-crm-tr")` (Türkçenin ilk uygulandığı an).
+  - CEO'nun gönderdiği 42 kalıntı metin simülasyonda 42/42 Türkçe.
 - **1.9.3** — 2026-10-03 — **TR düğmesi "yeniden dene" (CEO: "İngilizceye döndüğünde kullanıcı TR'ye basınca ikincide TR
   gelir mi").** Önceden TR zaten seçiliyken düğme hiçbir şey yapmıyordu (yalnız sayfa yenileme işe yarıyordu). Artık bir
   gömülü ekran güvenlik ağıyla GHL'in İngilizce sürümüne dönerse TR düğmesinde "TR ↻" görünür (ipucu: "Bu ekran İngilizce

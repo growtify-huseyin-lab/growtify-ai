@@ -65,6 +65,11 @@
 
   function getChoice() {
     if (FRAME) return frameLang === "tr" || frameLang === "en" ? frameLang : null;
+    // Bakım / hız ölçümü: yalnız bu sekmede dil (sessionStorage gai_crm_lang_tab; kişinin kayıtlı seçimini değiştirmez)
+    try {
+      var tl = sessionStorage.getItem("gai_crm_lang_tab");
+      if (tl === "tr" || tl === "en") return tl;
+    } catch (e) {}
     try {
       var m = location.search.match(/[?&]gai_lang=(tr|en)(?:&|$)/);
       if (m) localStorage.setItem(LS_KEY, m[1]);
@@ -486,6 +491,10 @@
     [new RegExp("^" + M + " (\\d{1,2}),? (\\d{4}),? (\\d{1,2}):(\\d{2}) ?(AM|PM|am|pm)$"), function (x, m1, d, y, h, mm, ap) {
       return d + " " + ms(m1) + " " + y + ", " + to24(h, mm, ap); // "Jun 02 2026, 2:50 PM" → "02 Haz 2026, 14:50"
     }],
+    // Önünde Türkçe etiket, arkasında saat dilimi olabilir: "Oluşturulma tarihi: Oct 3, 2026 12:36 PM (GMT +03)"
+    [new RegExp("^([^:]{1,40}: )?" + M + " (\\d{1,2}),? (\\d{4}),? (\\d{1,2}):(\\d{2}) ?(AM|PM|am|pm)( \\((?:GMT|UTC) ?[+-]?\\d{1,2}(?::?\\d{2})?\\))?$"), function (x, pre, m1, d, y, h, mm, ap, tz) {
+      return (pre || "") + d + " " + ms(m1) + " " + y + " " + to24(h, mm, ap) + (tz || "");
+    }],
     [new RegExp("^" + M + " (\\d{1,2}) (\\d{4})$"), function (x, m1, d, y) {
       return d + " " + ms(m1) + " " + y;
     }],
@@ -581,6 +590,13 @@
           var v = prov[syms[j]];
           if (v && v.global && typeof v.global.mergeLocaleMessage === "function" && typeof v.global.getLocaleMessage === "function") {
             patchInstance(els[i], v.global);
+            // Hız ölçümü: Türkçenin sayfaya ilk uygulandığı an (performance.getEntriesByName("gai-crm-tr")).
+            if (!window.__gaiTrMarked) {
+              window.__gaiTrMarked = true;
+              try {
+                performance.mark("gai-crm-tr");
+              } catch (e) {}
+            }
             if (huntActive && !v.global.__gaiTr) huntInstance(els[i], v.global);
             break;
           }
@@ -736,10 +752,12 @@
   // GHL'in "her kelimenin ilk harfini büyüt" işlevi Türkçe harfleri kelime sınırı sanıyor:
   // "kişiler" → "KişIler", "açıklama" → "AçıKlama". Küçük Türkçe harften hemen sonra gelen tek büyük
   // ASCII harfi geri küçültür (kısaltmalara dokunmaz: arkasından yine büyük harf geliyorsa atlar).
-  var CAPS_BUG = /([çğıöşü])([A-Z])(?![A-ZÇĞİÖŞÜ])/g;
+  // Büyük Türkçe harften sonra da olur: "Şirket" → "ŞIrket" — yalnız ardından küçük harf geliyorsa (ÜRÜN gibi tamamı
+  // büyük kelimelere dokunulmaz).
+  var CAPS_BUG = /([çğıöşü])([A-Z])(?![A-ZÇĞİÖŞÜ])|([ÇĞŞÖÜ])([A-Z])(?=[a-zçğıöşü])/g;
   function fixCaps(s) {
-    return s.replace(CAPS_BUG, function (m, a, b) {
-      return a + b.toLowerCase();
+    return s.replace(CAPS_BUG, function (m, a, b, c, d) {
+      return a ? a + b.toLowerCase() : c + d.toLowerCase();
     });
   }
   function lookup(core, dict) {
@@ -771,6 +789,55 @@
     }
     return pageDictCache;
   }
+  /* Kalıplar: değişken içeren metinler ("{count} seçildi", "{objectLabel} Ayrıntıları"). Kataloğuna ulaşamadığımız GHL
+   * modüllerinde (kişi sayfasının sağ paneli, contacts-highrise) ve Türkçe cümleye İngilizce nesne adı yerleşen yerlerde
+   * ("İlişkili Company yok") metin ekrandaki hâliyle kalıba göre çevrilir. Her kalıp en ayırt edici kelimesiyle
+   * dizinlenir; bir metin yalnız içindeki kelimelerin kalıplarıyla denenir. Nesne adı yerindeki değer (Contact, Company…)
+   * Türkçeleşir. catalog.textTpl: [[desen, karşılık ($1…), dizin kelimesi, nesne adı grupları]] */
+  var OBJ_TR = {
+    Contact: "Kişi", Contacts: "Kişiler", Company: "Şirket", Companies: "Şirketler", Opportunity: "Fırsat", Opportunities: "Fırsatlar", Task: "Görev", Tasks: "Görevler",
+    contact: "kişi", contacts: "kişiler", company: "şirket", companies: "şirketler", opportunity: "fırsat", opportunities: "fırsatlar", task: "görev", tasks: "görevler",
+  };
+  var OBJ_COUNT_RE = /^(Contacts?|Compan(?:y|ies)|Opportunit(?:y|ies)|Tasks?) \((\d+)\)$/;
+  var TPL = null;
+  function tplIndex() {
+    if (TPL) return TPL;
+    TPL = {};
+    var src = (catalog && catalog.textTpl) || [];
+    for (var i = 0; i < src.length; i++) {
+      try {
+        (TPL[src[i][2]] = TPL[src[i][2]] || []).push({ re: new RegExp(src[i][0]), to: src[i][1], obj: src[i][3] || [] });
+      } catch (e) {}
+    }
+    return TPL;
+  }
+  var WORD_RE = /[A-Za-zÇĞİÖŞÜçğıöşü]{3,}/g;
+  function tplLookup(core) {
+    var oc = core.match(OBJ_COUNT_RE);
+    if (oc) return OBJ_TR[oc[1]] + " (" + oc[2] + ")";
+    if (!catalog || !catalog.textTpl || core.length > 220) return null;
+    var idx = tplIndex();
+    var words = core.match(WORD_RE);
+    if (!words) return null;
+    var seen = {};
+    for (var w = 0; w < words.length; w++) {
+      var k = words[w].toLowerCase();
+      if (seen[k]) continue;
+      seen[k] = 1;
+      var list = idx[k];
+      if (!list) continue;
+      for (var j = 0; j < list.length; j++) {
+        var t = list[j];
+        var m = t.re.exec(core);
+        if (!m) continue;
+        return t.to.replace(/\$(\d+)/g, function (x, n) {
+          var v = m[+n] || "";
+          return t.obj.indexOf(+n) !== -1 && OBJ_TR[v] ? OBJ_TR[v] : v;
+        });
+      }
+    }
+    return null;
+  }
   function lookupExact(core, dict) {
     var pd = pageDict();
     if (pd && Object.prototype.hasOwnProperty.call(pd, core)) return pd[core];
@@ -779,7 +846,7 @@
     if (dt !== null) return dt;
     var rr = rules();
     for (var i = 0; i < rr.length; i++) if (rr[i][0].test(core)) return core.replace(rr[i][0], rr[i][1]);
-    return null;
+    return tplLookup(core);
   }
   function trText(n, dict) {
     var t = n.nodeValue;

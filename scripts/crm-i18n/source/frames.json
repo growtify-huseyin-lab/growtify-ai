@@ -18,7 +18,10 @@
  "wf": {
   "origin": "https://client-app-automation-workflows.leadconnectorhq.com",
   "proxy": "https://crm-otomasyon.growtify.app",
-  "screens": "Otomasyon > İş Akışları (liste, kurucu, günlükler, ayarlar)"
+  "screens": "Otomasyon > İş Akışları (liste, kurucu, günlükler, ayarlar)",
+  "text": {
+   "Build Using AI": "Yapay Zekayla Oluştur"
+  }
  },
  "email": {
   "origin": "https://email-home-prod.leadconnectorhq.com",
