@@ -991,5 +991,11 @@
  "Global Workflow Settings": "Genel İş Akışı Ayarları",
  "Close drawer": "Paneli kapat",
  "abandoned": "vazgeçildi",
- "Open chat": "Sohbeti aç"
+ "Open chat": "Sohbeti aç",
+ "Autosave on": "Otomatik kaydetme açık",
+ "Autosave off": "Otomatik kaydetme kapalı",
+ "Save template": "Şablonu kaydet",
+ "Test Email": "Test E-postası",
+ "See Version History": "Sürüm Geçmişini Gör",
+ "Sync changes": "Değişiklikleri senkronize et"
 }

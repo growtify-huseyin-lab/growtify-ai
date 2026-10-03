@@ -24,17 +24,23 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.8.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.8.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
 | Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.6** | Yayında |
-| E-posta oluşturucu | crm-eposta-tasarim.growtify.app (email-builder-prod) — şablon düzenleyici CRM sayfasında; kampanya düzenleyicisi E-postalar içinde iç içe | **1.8.0** | Şablon düzenleyici açık (önce hazırla ile); kampanya düzenleyicisi (iç içe) denemede |
+| E-posta oluşturucu | crm-eposta-tasarim.growtify.app (email-builder-prod) — şablon düzenleyici CRM sayfasında; kampanya düzenleyicisi E-postalar içinde iç içe | **1.8.1** | Açık (önce hazırla ile): şablon düzenleyici CRM sayfasında, kampanya düzenleyicisi E-postalar içinde iç içe |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.8.1** — 2026-10-03 — Şablon düzenleyicinin CRM'deki üst çubuğu: "Otomatik kaydetme açık/kapalı", "Şablonu kaydet",
+  "Test E-postası", "Sürüm Geçmişini Gör", "Değişiklikleri senkronize et" (sayfa sözlüğü; çubuk tuvalin dışında). Kampanya
+  düzenleyicisi açıldı: E-postalar çerçevesinin `nested` alanı (önce hazırla kuralıyla). CEO'nun tarayıcısında ölçüldü:
+  oluşturucunun dosyaları hazırken vekilden açılışı 1,5 sn (GHL'in kendisi 1,7 sn); E-postalar ekranı iç içe vekil
+  desteğiyle sorunsuz (hata ve başarısız istek yok). Arka plan hazırlığı tarayıcıda düşük öncelikle yavaş ilerliyor
+  (takvim 3,2 MB → 38 sn) — kullanıcı görmüyor; vekilin kendisi hızlı (aynı dosyalar 1,6 sn).
 - **1.8.0** — 2026-10-03 — **Önce hazırla: Türkçe ekranlar hiçbir zaman GHL'den yavaş açılmaz (CEO: "tık diye gelmesi lazım").**
   Ölçüm: vekilden açılan uygulamaların açılış dosyaları GHL'inkinden ayrı iniyor (sıkıştırılmış: e-posta oluşturucu 7,1 MB,
   E-postalar 4,8, sayfa oluşturucu 4,7, İşletme Profili 3,7, takvim 3,2, form 2,7, sohbet/ortaklık 1,3–1,5 MB; Otomasyon
