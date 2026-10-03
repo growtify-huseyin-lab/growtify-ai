@@ -7,9 +7,10 @@ Sürüm ve değişiklik kaydı: `docs/ceviri/SURUMLER.md`. Sürüm numarası: `s
 
 ## Yayındaki dosyalar (`public/crm/`, 60 sn önbellek, CORS açık)
 - `crm-i18n.js` — yükleyici. GHL Ajans Ayarları → Company → White Label → **Custom JS** içindeki tek satır
-  bunu yükler (o satır bir daha değişmez):
+  bunu yükler (o satır bir daha değişmez; `fetchPriority="high"` 1.6.7'de eklendi — ağır sayfalarda Chrome düşük
+  öncelikli betiği 15–28 sn kuyrukta bekletiyordu):
   ```html
-  <script>(function(){if(document.getElementById("__gai_crm_i18n"))return;var s=document.createElement("script");s.id="__gai_crm_i18n";s.src="https://growtify.ai/crm/crm-i18n.js?v=1";s.async=true;document.head.appendChild(s);})();</script>
+  <script>(function(){if(document.getElementById("__gai_crm_i18n"))return;var s=document.createElement("script");s.id="__gai_crm_i18n";s.src="https://growtify.ai/crm/crm-i18n.js?v=1";s.async=true;s.fetchPriority="high";document.head.appendChild(s);})();</script>
   ```
 - `crm-config.json` — varsayılan dil, İngilizce/Türkçe açılacak alt hesap listeleri ve `frames` (iframe ekranları
   için vekil adresler; silinirse o ekranlar GHL'den İngilizce açılır).
