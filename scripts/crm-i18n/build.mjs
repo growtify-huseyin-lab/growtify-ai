@@ -69,6 +69,8 @@ for (const id of frameIds) {
   if (!instances[id]) continue;
   const fc = { ...catalog, instances: { [id]: instances[id] } };
   delete fc.textPages; // sayfa sözlükleri CRM sayfalarına ait
+  // Yalnız o uygulamada geçerli birebir metinler (ör. sunucudan gelen tür adları): frames.json "<id>".text
+  if (frames[id].text) fc.text = { ...fc.text, ...clean(frames[id].text) };
   fs.writeFileSync(path.join(framesDir, id + ".json"), JSON.stringify(fc));
   frameReport[id] = fs.statSync(path.join(framesDir, id + ".json")).size;
 }

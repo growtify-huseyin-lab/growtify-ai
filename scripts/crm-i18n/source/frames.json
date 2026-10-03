@@ -28,7 +28,12 @@
  "conv": {
   "origin": "https://client-app-crm-conversations.leadconnectorhq.com",
   "proxy": "https://crm-sohbet.growtify.app",
-  "screens": "Ayarlar > Sohbet Sağlayıcıları"
+  "screens": "Ayarlar > Sohbet Sağlayıcıları",
+  "text": {
+   "Call": "Arama",
+   "SMS": "SMS",
+   "Email": "E-posta"
+  }
  },
  "aff": {
   "origin": "https://client-app-affiliate-manager.leadconnectorhq.com",

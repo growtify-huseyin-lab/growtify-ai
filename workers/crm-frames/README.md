@@ -11,7 +11,7 @@ adından sunar ve sayfanın başına aynı yükleyiciyi "çerçeve modunda" ekle
 | `crm-eposta.growtify.app` | `ghl-isv-app-prod.leadconnectorhq.com` | Ayarlar > E-posta Hizmetleri | `growtify.ai/crm/frames/isv.json` |
 | `crm-otomasyon.growtify.app` | `client-app-automation-workflows.leadconnectorhq.com` | Otomasyon > İş Akışları | `growtify.ai/crm/frames/wf.json` |
 | `crm-epostalar.growtify.app` | `email-home-prod.leadconnectorhq.com` | Pazarlama > E-postalar | `growtify.ai/crm/frames/email.json` |
-| `crm-sohbet.growtify.app` | `client-app-crm-conversations.leadconnectorhq.com` | Ayarlar > Sohbet Sağlayıcıları | `growtify.ai/crm/frames/conv.json` |
+| `crm-sohbet.growtify.app` | `client-app-crm-conversations.leadconnectorhq.com` | Ayarlar > Sohbet Sağlayıcıları (katalog 10 metin + sağlayıcı türleri) | `growtify.ai/crm/frames/conv.json` |
 | `crm-ortaklik.growtify.app` | `client-app-affiliate-manager.leadconnectorhq.com` | Pazarlama > Satış Ortaklığı | `growtify.ai/crm/frames/aff.json` |
 
 Bir adres kullanıcıya ancak `crm-config.json` `frames` listesine eklenince açılır; listede olmayan adres yalnız
@@ -27,7 +27,7 @@ bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
 
 ## Güvenlik
 
-- Yalnız tablodaki üç GHL adresi; açık vekil değil. Yalnız GET/HEAD.
+- Yalnız tablodaki GHL adresleri; açık vekil değil. Yalnız GET/HEAD.
 - İstekte çerez/kimlik başlığı iletilmez; yanıttaki `Set-Cookie` atılır.
 - GHL bu uygulamalarda şu an CSP / X-Frame-Options göndermiyor (2026-10-03). İleride gönderirse çerçeveleme
   izni CRM adresleriyle sınırlanır (`frame-ancestors`), betik izni yalnız growtify.ai için genişletilir.

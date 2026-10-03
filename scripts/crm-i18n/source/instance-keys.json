@@ -5517,5 +5517,8 @@
   "payouts",
   "settings",
   "validation"
+ ],
+ "conv": [
+  "conversations"
  ]
 }
