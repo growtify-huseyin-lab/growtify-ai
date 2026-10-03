@@ -1109,13 +1109,29 @@
       } catch (x) {}
       // Ekranda İngilizce kalan arayüz metinleri (çeviri avıyla aynı ölçüt: kişi verisi alanları hariç)
       var texts = {};
+      var where = {}; // bakım: İngilizce kalan metnin kapsayıcıları (sınırlı sözlük seçicisini kanıtla seçmek için)
+      var nWhere = 0;
+      var trail = function (el) {
+        var out = [];
+        for (var a = el, d = 0; a && a.nodeType === 1 && d < 9; a = a.parentElement, d++) {
+          var cls = typeof a.className === "string" ? a.className.trim().split(/\s+/).slice(0, 3).join(".") : "";
+          out.push(a.tagName.toLowerCase() + (a.id ? "#" + a.id : "") + (cls ? "." + cls : ""));
+        }
+        return out.join(" < ").slice(0, 400);
+      };
       try {
         var ui = document.querySelectorAll(HUNT_UI);
         for (var u = 0; u < ui.length && u < 6000; u++) {
           if (ui[u].closest(HUNT_SKIP)) continue;
           for (var c = ui[u].firstChild; c; c = c.nextSibling) {
             var tt = c.nodeType === 3 ? c.nodeValue.replace(/\s+/g, " ").trim() : "";
-            if (tt && tt.length <= 100 && !/[çğıöşüÇĞİÖŞÜ]/.test(tt) && HUNT_EN.test(tt) && !/@|https?:/.test(tt)) texts[tt] = 1;
+            if (tt && tt.length <= 100 && !/[çğıöşüÇĞİÖŞÜ]/.test(tt) && HUNT_EN.test(tt) && !/@|https?:/.test(tt)) {
+              texts[tt] = 1;
+              if (!where[tt] && nWhere < 25) {
+                where[tt] = trail(ui[u]);
+                nWhere++;
+              }
+            }
           }
         }
       } catch (x) {}
@@ -1125,7 +1141,7 @@
           var rs = performance.getEntriesByType("resource");
           for (var q = 0; q < rs.length; q++) if (rs[q].responseStatus >= 400) failed.push(rs[q].responseStatus + " " + rs[q].name.replace(/[?#].*$/, "").slice(0, 120));
         } catch (x) {}
-        window.parent.postMessage({ gaiFrameCatalog: { frame: window.__gaiCrmFrame, path: location.pathname.replace(/location\/[A-Za-z0-9]+/, "location/~"), instances: res, texts: Object.keys(texts), errors: frameErrors.slice(), failed: failed.slice(0, 30) } }, "*");
+        window.parent.postMessage({ gaiFrameCatalog: { frame: window.__gaiCrmFrame, path: location.pathname.replace(/location\/[A-Za-z0-9]+/, "location/~"), instances: res, texts: Object.keys(texts), where: where, errors: frameErrors.slice(), failed: failed.slice(0, 30) } }, "*");
       } catch (x) {}
     });
   }
