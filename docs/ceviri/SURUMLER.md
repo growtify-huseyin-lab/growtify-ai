@@ -24,14 +24,20 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.4.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
-| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.0** | Yayında |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.4.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | GHL'in ayrı sitesinde çalışan iframe (leadgen-vibe-ai-builder; vue-i18n yok, metinler kodda) | **0.0.0** | Sıradaki — vekil + çerçeve metin sözlüğü |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.4.1** — 2026-10-03 — **Hızlı ve bozulmaz açılış.** Ölçüm: GHL yükleyici betiğini düşük öncelikle (async) ekliyor; CRM'in
+  yoğun açılışlarında betiğin ağdan gelmesi iki kez 16–20 sn sürdü, o sürede ekran İngilizce kaldı. Betik artık tarayıcı
+  önbelleğinden hemen çalışıyor ve arka planda yenileniyor (`stale-while-revalidate`; yeni sürüm ~1 dk sonra, en geç bir sonraki
+  açılışta yayılır). Vekil (Worker) çerçevedeki uygulamayı yükleyiciyi beklemeden açıyor: dil işareti sayfa başındaki küçük
+  betikte okunup adresten siliniyor, yükleyici `async` geliyor (growtify.ai yavaşlarsa uygulama bekletilmez). `/crm/*`
+  yanıtlarına ölçüm için `Timing-Allow-Origin`.
 - **1.4.0** — 2026-10-03 — **Sohbet Sağlayıcıları Türkçe.** Ayarlar > Sohbet Sağlayıcıları (`conv`,
   client-app-crm-conversations) `frames` listesine eklendi, `crm-sohbet.growtify.app` vekilinden açılıyor. Uygulamanın
   bütün kataloğu 10 metin (CRM içinde, el sıkışmadan sonra yükleniyor; bakım ayarıyla vekilden açılıp toplandı). Tablodaki

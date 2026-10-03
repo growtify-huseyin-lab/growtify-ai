@@ -23,7 +23,8 @@ bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
    iframe'in adresini buradaki karşılığına çevirir (`?gai_frame=tr|en` ekler; CRM'in kendi `gai_lang`'ından ayrı, çünkü bazı uygulamalar adreslerini CRM'in adres çubuğuna yansıtıyor). Kullanıcı aynı ekranda kalır.
 2. CRM ile uygulama arasındaki köprü (postmate) mesajlarının adresleri yükleyicide çevrilir; uygulamanın
    kimlik bilgisi CRM'den tarayıcı içinde gelir, API çağrıları doğrudan GHL'e gider (Worker'dan geçmez).
-3. Worker uygulamanın sayfasını GHL'den alır, `<head>` başına yükleyiciyi ekler; diğer dosyalar aynen geçer.
+3. Worker uygulamanın sayfasını GHL'den alır, `<head>` başına küçük bir başlangıç betiği (dil işaretini okur, adresten
+   siler) ve yükleyiciyi `async` ekler — uygulama yükleyiciyi beklemez; diğer dosyalar aynen geçer.
 
 ## Güvenlik
 
