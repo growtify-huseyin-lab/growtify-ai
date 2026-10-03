@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.9.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.9.3** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,12 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.9.3** — 2026-10-03 — **TR düğmesi "yeniden dene" (CEO: "İngilizceye döndüğünde kullanıcı TR'ye basınca ikincide TR
+  gelir mi").** Önceden TR zaten seçiliyken düğme hiçbir şey yapmıyordu (yalnız sayfa yenileme işe yarıyordu). Artık bir
+  gömülü ekran güvenlik ağıyla GHL'in İngilizce sürümüne dönerse TR düğmesinde "TR ↻" görünür (ipucu: "Bu ekran İngilizce
+  açıldı — Türkçe yeniden yükle"); basınca sayfa yenilenip Türkçe yeniden denenir (ikinci deneme hızlı: dosyalar ilk denemede
+  inmiş olur). İç içe çerçevedeki geri dönüş de üst pencereye bildirilir. 1.9.2 ile E-posta Hizmetleri denendi: vekilden
+  Türkçe, el sıkışma yüklemeden 0,5 sn sonra.
 - **1.9.2** — 2026-10-03 — **E-posta Hizmetleri İngilizce açılıyordu (CEO: "bu neden İngilizce").** Kök neden: güvenlik ağı sayfa
   yüklendikten sonra 5 sn içinde uygulamadan mesaj bekliyor; E-posta Hizmetleri asıl kodunu yüklemeden SONRA indiriyor, GHL
   yavaşken ilk mesajı 5 sn'yi geçti (ölçüm: vekil sayfası 4,9 sn'de yüklendi, 5 sn mesajsız → 9,9 sn'de GHL'e dönüldü; GHL
