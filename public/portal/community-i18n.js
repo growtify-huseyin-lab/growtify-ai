@@ -248,6 +248,14 @@
     // Ay adları (takvim başlığı "September 2026", üye listesi "Joined 07 Jul 2026")
     const TR_MONTHS = { January: "Ocak", February: "Şubat", March: "Mart", April: "Nisan", May: "Mayıs", June: "Haziran", July: "Temmuz", August: "Ağustos", September: "Eylül", October: "Ekim", November: "Kasım", December: "Aralık" };
     const TR_MONTHS_SHORT = { Jan: "Oca", Feb: "Şub", Mar: "Mar", Apr: "Nis", May: "May", Jun: "Haz", Jul: "Tem", Aug: "Ağu", Sep: "Eyl", Oct: "Eki", Nov: "Kas", Dec: "Ara" };
+    // Gün adları (takvim başlıkları "Sun".."Sat", gönderi saati ipucu "Saturday / 03 Oct 2026 / 04:07 AM")
+    const TR_DAYS = { Sunday: "Pazar", Monday: "Pazartesi", Tuesday: "Salı", Wednesday: "Çarşamba", Thursday: "Perşembe", Friday: "Cuma", Saturday: "Cumartesi" };
+    const TR_DAYS_SHORT = { Sun: "Paz", Mon: "Pzt", Tue: "Sal", Wed: "Çar", Thu: "Per", Fri: "Cum", Sat: "Cmt" };
+    function to24h(h, mi, ap) {
+      let hh = parseInt(h, 10) % 12;
+      if (/pm/i.test(ap)) hh += 12;
+      return (hh < 10 ? "0" : "") + hh + ":" + mi;
+    }
 
     const phrases = [
       // ===== 2026-09-30 GHL panel güncellemesi: yeni / değişen metinler =====
@@ -263,6 +271,19 @@
       { pattern: /^Alternative text for avatar image not provided$/, replacement: "Profil fotoğrafı" },
       { pattern: /^Alternative text for image not provided$/, replacement: "Görsel" },
       { pattern: /^Open members list, admins and owners$/, replacement: "Üye listesini, yöneticileri ve sahipleri aç" },
+      { pattern: /^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday) \/ (\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) \/ (\d{1,2}):(\d{2}) ?(AM|PM)$/i, replacement: function (m, d, dd, mo, y, h, mi, ap) { return TR_DAYS[d] + " / " + dd + " " + TR_MONTHS_SHORT[mo] + " " + y + " / " + to24h(h, mi, ap); } },
+      { pattern: /^(January|February|March|April|May|June|July|August|September|October|November|December) (\d{1,2}), (\d{4})$/, replacement: function (m, mo, d, y) { return d + " " + TR_MONTHS[mo] + " " + y; } },
+      { pattern: /^(Sunday|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday)$/, replacement: function (m, d) { return TR_DAYS[d]; } },
+      { pattern: /^(Sun|Mon|Tue|Wed|Thu|Fri|Sat)$/, replacement: function (m, d) { return TR_DAYS_SHORT[d]; } },
+      { pattern: /^Turkish$/i, replacement: "Türkçe" },
+      { pattern: /^Record a voice note$/i, replacement: "Sesli not kaydet" },
+      { pattern: /^loading$/i, replacement: "Yükleniyor" },
+      { pattern: /^(?:Course|Kurs) Card$/, replacement: "Kurs kartı" },
+      { pattern: /^(?:Course|Kurs) Card Content$/, replacement: "Kurs kartı içeriği" },
+      { pattern: /^(?:Course|Kurs) actions$/, replacement: "Kurs işlemleri" },
+      { pattern: /^Grid view$/i, replacement: "Izgara görünümü" },
+      { pattern: /^Table view$/i, replacement: "Tablo görünümü" },
+      { pattern: /^Breadcrumb$/, replacement: "Gezinti yolu" },
       // — Kabuk / menü
       { pattern: /^Dashboard$/, replacement: "Ana Sayfa" },
       { pattern: /^Memberships$/, replacement: "Üyelikler" },
