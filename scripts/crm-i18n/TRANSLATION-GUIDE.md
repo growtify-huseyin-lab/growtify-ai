@@ -244,3 +244,10 @@ compound-first or "bu {product}" structures. Terms: submission → gönderim, fi
 conditional logic → koşullu mantık, disqualify → ele/eleme, Next/Previous → İleri/Geri, filled (style) → dolgulu, font weight
 → kalınlık. Merge tags in messages must use vue-i18n literals: `{'{{'}contact.email{'}}'}`. The frame runs with `noDom`
 (no page dictionary on the canvas).
+
+## Round 9 — `page` = funnel / website page builder (2026-10-03)
+Glossary: `scratchpad/crm/batches/page-glossary.md` (section → bölüm, row → satır, column → sütun, element → öğe, global
+section → genel bölüm, popup → açılır pencere, order bump → sipariş eki, upsell → ek satış, testimonial → müşteri görüşü).
+CRM convention: "yapay zeka" (never "zekâ"); "Generate with AI" → "Yapay Zekayla Oluştur". `placeHolders.*` are sample copy
+placed into new elements (Turkish sample text is intended). Schema markup fields: Genel puan, En yüksek/düşük puan, Yayın
+tarihi, İl/Bölge. The frame runs with `noDom` (canvas = customer's page).

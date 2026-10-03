@@ -24,17 +24,24 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
-| Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.0** | Katalog hazır, kendi sekmede deneniyor |
-| Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **0.0.0** | Katalog çeviride (6.380 metin) |
+| Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
+| Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.2** | Katalog hazır, kendi sekmede deneniyor |
 | E-posta oluşturucu | E-postalar içinde iç içe çerçeve (email-builder-prod / email-builder-beta) | **0.0.0** | Sırada — iç içe vekil gerekiyor |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.6.2** — 2026-10-03 — **Form / Anket / Test oluşturucu kullanıcıya açık + sayfa oluşturucu kataloğu (kapalı).**
+  `frames`'e `crm-formlar` eklendi. CEO'nun tarayıcısında denendi: üst menü, sekmeler, düğmeler ve öğe paleti Türkçe (Kişisel
+  Bilgiler, Ad Soyad, Telefon, E-posta, Gönder); tuvaldeki form (müşterinin kendi alanları) olduğu gibi; tanıda hata yok.
+  Sayfa oluşturucu (page-builder, `crm-sayfa`) kataloğu 6.380 metin (902'si mevcut çeviriden, 8 çeviri grubu); "zekâ" →
+  CRM'deki "zeka" yazımı, "Generate with AI" → "Yapay Zekayla Oluştur", şema alanlarında terim birliği (Genel puan,
+  Yayın tarihi, İl/Bölge). Not: ağır sayfalar doğrudan açıldığında yükleyici kuyrukta beklediği için oluşturucu o ziyarette
+  İngilizce açılabiliyor (Custom JS öncelik ayarı CEO kararında).
 - **1.6.1** — 2026-10-03 — **Oluşturucularda sınırlı sözlük (`domOnly`).** Form oluşturucunun öğe paleti ("Personal Info",
   "Full Name", "Email"…) uygulama açılışında bir kez hesaplanıyor; Türkçe katalog sonradan gelince güncellenmiyor. Sözlük artık
   yalnız izin verilen arayüz alanlarında uygulanıyor (form: sol öğe paleti + alan ayarı etiketleri), tuval yine dokunulmaz.
