@@ -12,10 +12,12 @@
  *   İngilizce açılan sayfada büyük Türkçe katalog hiç indirilmez.
  *
  * Yükleyici: GHL Ajans Ayarları → Company → White Label → Custom JS.
- * Farklı alan adında iframe içinde çalışan GHL uygulamalarına buradan ulaşılamaz. Bunlardan takvim
- * ayarları, İşletme Profili ve E-posta Hizmetleri, crm-config.json "frames" ile Growtify vekil adresinden
- * (workers/crm-frames) açılır; orada aynı yükleyici çerçeve modunda çalışır. Diğerleri (otomasyon
- * kurucusu, Yapay Zeka Stüdyosu…) şimdilik İngilizce.
+ * Farklı alan adında iframe içinde çalışan GHL uygulamalarına buradan ulaşılamaz. Bunlar (takvim ayarları,
+ * İşletme Profili, E-posta Hizmetleri, otomasyon, e-postalar, sohbet sağlayıcıları, satış ortaklığı, Yapay
+ * Zeka Stüdyosu, form ve sayfa oluşturucular) crm-config.json "frames" ile Growtify vekil adresinden
+ * (workers/crm-frames) açılır; orada aynı yükleyici çerçeve modunda çalışır. Bir çerçevenin içinde açılan
+ * GHL çerçeveleri (E-postalar içindeki e-posta oluşturucu) o çerçevenin kataloğundaki "nested" listesiyle
+ * aynı yoldan açılır.
  */
 (function () {
   if (window.__gaiCrmI18n) return;
@@ -819,14 +821,36 @@
    * Açma: crm-config.json `frames` (ör. {"https://calendar-app.leadconnectorhq.com": "https://..."}) ya da yalnız
    * bu sekme için sessionStorage `gai_frame_proxy` (deneme). */
   function frameProxyMap() {
+    if (FRAME) return nestedProxyMap();
     try {
       var s = sessionStorage.getItem("gai_frame_proxy");
       if (s) return JSON.parse(s);
     } catch (e) {}
     return config.frames || null;
   }
+  /* İç içe çerçeve: vekilden açılan bir uygulamanın kendi gömdüğü GHL uygulaması (ör. E-postalar içinde açılan e-posta
+   * oluşturucu) aynı yoldan vekile çevrilir. Liste çerçevenin kataloğundan gelir (frames.json "<id>".nested). Bakım /
+   * deneme: yalnız bu sekmede, üst pencereden {gaiNested: {...}} mesajıyla (sessionStorage gai_frame_nested; null
+   * gönderilirse silinir). Yalnız GHL adresi → Growtify vekil adresi (crm-*.growtify.app) eşlemeleri kabul edilir. */
+  var NESTED_FROM = /^https:\/\/[a-z0-9-]+(\.[a-z0-9-]+)*\.(leadconnectorhq\.com|gohighlevel\.com|web\.app)$/;
+  var NESTED_TO = /^https:\/\/crm-[a-z0-9-]+\.growtify\.app$/;
+  function cleanNested(m) {
+    if (!m || typeof m !== "object") return null;
+    var out = null;
+    for (var o in m) {
+      if (NESTED_FROM.test(o) && typeof m[o] === "string" && NESTED_TO.test(m[o])) (out = out || {})[o] = m[o];
+    }
+    return out;
+  }
+  function nestedProxyMap() {
+    try {
+      var s = sessionStorage.getItem("gai_frame_nested");
+      if (s) return cleanNested(JSON.parse(s));
+    } catch (e) {}
+    return cleanNested(catalog && catalog.nested);
+  }
   function installFrameProxy(map) {
-    if (FRAME || !map || window.__gaiFrameProxy) return;
+    if (!map || window.__gaiFrameProxy) return;
     window.__gaiFrameProxy = map;
     var rev = {};
     for (var o in map) rev[map[o]] = o;
@@ -1087,6 +1111,14 @@
     });
   }
   if (FRAME) {
+    // Bakım: iç içe çerçeve vekilini yalnız bu sekmede dene / kapat (bkz. nestedProxyMap).
+    window.addEventListener("message", function (e) {
+      if (!e.data || typeof e.data !== "object" || !("gaiNested" in e.data) || e.source !== window.parent) return;
+      try {
+        if (e.data.gaiNested) sessionStorage.setItem("gai_frame_nested", JSON.stringify(cleanNested(e.data.gaiNested) || {}));
+        else sessionStorage.removeItem("gai_frame_nested");
+      } catch (x) {}
+    });
     window.addEventListener("message", function (e) {
       if (!e.data || e.data.gaiCollect !== 1 || e.source !== window.parent) return;
       var res = [];
