@@ -33,7 +33,8 @@ bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
 
 Form ve sayfa oluşturucularında tuvaldeki önizleme kişinin kendi içeriğidir. `frames.json`'da `noDom: true` olan çerçevede
 yükleyici sayfa sözlüğünü (birebir metin, kalıplar, tarih kuralları) hiç uygulamaz; yalnız uygulamanın kendi metin kataloğu
-çevrilir. Böylece önizleme ile kaydedilen içerik aynı kalır.
+çevrilir. Böylece önizleme ile kaydedilen içerik aynı kalır. `domOnly` (seçici) verilirse sözlük yalnız o arayüz alanlarında
+uygulanır (ör. form oluşturucunun öğe paleti); o alanların sözlüğü uygulamanın kataloğundan üretilir.
 
 ## Uygulama dosyasında metin değişikliği (`JS_TEXT`)
 

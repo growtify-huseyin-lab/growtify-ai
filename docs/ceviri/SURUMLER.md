@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.0** | Katalog hazır, kendi sekmede deneniyor |
@@ -35,6 +35,10 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.6.1** — 2026-10-03 — **Oluşturucularda sınırlı sözlük (`domOnly`).** Form oluşturucunun öğe paleti ("Personal Info",
+  "Full Name", "Email"…) uygulama açılışında bir kez hesaplanıyor; Türkçe katalog sonradan gelince güncellenmiyor. Sözlük artık
+  yalnız izin verilen arayüz alanlarında uygulanıyor (form: sol öğe paleti + alan ayarı etiketleri), tuval yine dokunulmaz.
+  Bu alanların sözlüğü uygulamanın kendi kataloğundan üretiliyor (kısa, tek anlamlı İngilizce → Türkçe).
 - **1.6.0** — 2026-10-03 — **Form / Anket / Test oluşturucu kataloğu (henüz kullanıcıya kapalı) + oluşturucu koruması.**
   Oluşturucu ayrı bir uygulama (leadgen-apps-form-survey-builder), vekil `crm-formlar.growtify.app`. Katalog 1.328 metin
   (346'sı mevcut çeviriden; "Filled" → "Dolgulu", yazı tipi "Weight" → "Kalınlık" bağlam düzeltmeleri; `{{contact.email}}`

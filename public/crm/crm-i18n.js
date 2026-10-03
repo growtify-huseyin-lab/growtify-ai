@@ -570,7 +570,14 @@
       }
       // Oluşturucu çerçevelerinde (form/anket/test) sayfa sözlüğü kapalı (noDom): tuvaldeki önizleme kişinin kendi
       // içeriğidir; yalnız uygulamanın kendi metin kataloğu çevrilir (kaydedilen içerik önizlemeyle aynı kalsın).
-      if (catalog.noDom) return;
+      if (catalog.noDom) {
+        // İzin verilen arayüz alanlarında (ör. öğe paleti: uygulama adları açılışta bir kez hesaplıyor) sözlük uygulanır.
+        if (catalog.domOnly && catalog.text && !textPassDone) {
+          textPassDone = true;
+          trScoped(document.body, catalog.text);
+        }
+        return;
+      }
       translateDom();
       if (!textPassDone && catalog.text) {
         textPassDone = true;
@@ -778,6 +785,19 @@
       var tr = lookup(core, dict);
       if (tr !== null && tr !== core) el.setAttribute(ATTRS[i], v.replace(core, tr));
     }
+  }
+  // Yalnız catalog.domOnly seçicisine uyan alanların içinde çevir (oluşturucularda tuval kişinin içeriği).
+  function trScoped(node, dict) {
+    var sel = catalog && catalog.domOnly;
+    var el = node && (node.nodeType === 1 ? node : node.parentElement);
+    if (!sel || !el) return;
+    try {
+      if (el.closest && el.closest(sel)) return trTree(node, dict);
+      if (el.querySelectorAll) {
+        var rs = el.querySelectorAll(sel);
+        for (var i = 0; i < rs.length; i++) trTree(rs[i], dict);
+      }
+    } catch (e) {}
   }
   function trTree(root, dict) {
     if (!root) return;
@@ -1192,7 +1212,7 @@
       var t = null;
       var queue = [];
       new MutationObserver(function (recs) {
-        if (mode === "tr" && catalog && catalog.text && !catalog.noDom) {
+        if (mode === "tr" && catalog && catalog.text && (!catalog.noDom || catalog.domOnly)) {
           for (var i = 0; i < recs.length; i++) {
             var r = recs[i];
             if (r.type === "childList") for (var j = 0; j < r.addedNodes.length; j++) queue.push(r.addedNodes[j]);
@@ -1207,7 +1227,12 @@
           if (mode !== "tr") return;
           scanCatalog();
           var d = catalog && catalog.text;
-          if (d) for (var k = 0; k < q.length; k++) q[k].nodeType === 1 && !q[k].isConnected ? 0 : trTree(q[k], d);
+          if (d)
+            for (var k = 0; k < q.length; k++) {
+              if (q[k].nodeType === 1 && !q[k].isConnected) continue;
+              if (catalog.noDom) trScoped(q[k], d);
+              else trTree(q[k], d);
+            }
           if (huntActive) setTimeout(huntScan, 1200); // çeviri ve Vue yeniden çizimi bittikten SONRA kalan İngilizceyi kaydet
         }, 150);
       }).observe(document.documentElement, {
