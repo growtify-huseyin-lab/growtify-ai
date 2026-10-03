@@ -32,7 +32,9 @@
 
   function getChoice() {
     try {
-      var m = location.search.match(/[?&]gai_lang=(tr|en)(?:&|$)/);
+      // Çerçevede dil, vekilin eklediği gai_frame ile gelir. Bazı GHL uygulamaları kendi adresini CRM'in adres çubuğuna
+      // yansıttığı için çerçeve işareti CRM'in gai_lang'ından ayrı tutulur (yoksa kişinin dil seçimi değişirdi).
+      var m = location.search.match(FRAME ? /[?&]gai_(?:frame|lang)=(tr|en)(?:&|$)/ : /[?&]gai_lang=(tr|en)(?:&|$)/);
       if (m) localStorage.setItem(LS_KEY, m[1]);
       var v = localStorage.getItem(LS_KEY);
       return v === "tr" || v === "en" ? v : null;
@@ -301,10 +303,26 @@
     return out;
   }
 
+  // Bazı uygulamalarda (ör. otomasyon) CRM içinde dil "en_US" olur ama metinler yedek dil "en" altında durur;
+  // geçerli dil boşsa eşleştirme yedek dildeki metinlerle yapılır (Türkçe yine geçerli dile yazılır, önce o okunur).
+  function localeMessages(g, locale) {
+    var msgs = g.getLocaleMessage(locale);
+    if (msgs && Object.keys(msgs).length) return msgs;
+    var fb = g.fallbackLocale && (g.fallbackLocale.value !== undefined ? g.fallbackLocale.value : g.fallbackLocale);
+    var list = typeof fb === "string" ? [fb] : Array.isArray(fb) ? fb : [];
+    list.push("en", "en-US", "en_US");
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] === locale) continue;
+      var m = g.getLocaleMessage(list[i]);
+      if (m && Object.keys(m).length) return m;
+    }
+    return msgs || {};
+  }
+
   function patchInstance(rootEl, g) {
     var locale = g.locale && g.locale.value;
     if (!isEnglish(locale)) return; // kullanıcı GHL'de başka bir dil seçmiş
-    var entry = g.__gaiTr || pickCatalog(rootEl, g.getLocaleMessage(locale));
+    var entry = g.__gaiTr || pickCatalog(rootEl, localeMessages(g, locale));
     if (!entry) return;
     if (!g.__gaiTr) {
       if (!compilesStrings(g, locale)) entry = { keys: entry.keys, messages: toFnMessages(entry.messages) };
@@ -575,7 +593,7 @@
   function huntInstance(rootEl, g) {
     var loc = g.locale && g.locale.value;
     if (!isEnglish(loc)) return;
-    var msgs = g.getLocaleMessage(loc) || {};
+    var msgs = localeMessages(g, loc);
     var keys = Object.keys(msgs);
     if (!keys.length) return;
     var sig = keys.slice(0, 6).join(",");
@@ -783,7 +801,7 @@
         down[px] = true;
         sd.set.call(frame, orig);
       };
-      var loadTimer = setTimeout(restore, 15000);
+      var loadTimer = setTimeout(restore, 25000); // büyük uygulamalarda ilk yükleme uzun sürebilir
       var onload = function () {
         frame.removeEventListener("load", onload);
         clearTimeout(loadTimer);
@@ -805,7 +823,7 @@
           try {
             fl = sessionStorage.getItem("gai_frame_lang");
           } catch (e) {}
-          return nu + (nu.indexOf("?") === -1 ? "?" : "&") + "gai_lang=" + (fl === "en" || mode === "en" ? "en" : "tr");
+          return nu + (nu.indexOf("?") === -1 ? "?" : "&") + "gai_frame=" + (fl === "en" || mode === "en" ? "en" : "tr");
         }
       }
       return u;
@@ -852,6 +870,7 @@
         var src = sd.get.call(this) || "";
         var proxied = !src || src === "about:blank";
         for (var p in rev) if (src.indexOf(p) === 0) proxied = true;
+        for (var p2 in map) if (src.indexOf(p2) === 0) proxied = true; // birazdan vekile çevrilecek (aşağıdaki gözlemci)
         if (!proxied) return w;
         if (wrapped.has(this)) return wrapped.get(this);
         var frame = this;
@@ -873,6 +892,33 @@
         return px;
       },
     });
+    // Bazı GHL ekranları iframe'i adresiyle birlikte, yukarıdaki kancaları atlayan bir yolla ekler (ör. otomasyon:
+    // name="workflow-builder"). Sayfaya eklenen böyle bir iframe hemen vekil adrese çevrilir.
+    var catchFrame = function (f) {
+      var s = f.getAttribute("src") || "";
+      for (var o in map) {
+        if (s.indexOf(o) === 0 && !down[map[o]]) {
+          f.src = s; // yamalı ayarlayıcı: vekile çevirir + güvenlik ağını kurar
+          return;
+        }
+      }
+    };
+    try {
+      new MutationObserver(function (recs) {
+        for (var i = 0; i < recs.length; i++) {
+          var added = recs[i].addedNodes;
+          for (var j = 0; j < added.length; j++) {
+            var n = added[j];
+            if (n.nodeType !== 1) continue;
+            if (n.tagName === "IFRAME") catchFrame(n);
+            else if (n.getElementsByTagName) {
+              var fs = n.getElementsByTagName("iframe");
+              for (var k = 0; k < fs.length; k++) catchFrame(fs[k]);
+            }
+          }
+        }
+      }).observe(document.documentElement, { childList: true, subtree: true });
+    } catch (e) {}
     // Uygulamadan gelen mesajlar vekil adresten gelir; CRM asıl adresi beklediği için kaynağı geri yazılır.
     window.addEventListener(
       "message",
@@ -976,7 +1022,7 @@
             var g = prov[syms[j]] && prov[syms[j]].global;
             if (!g || typeof g.getLocaleMessage !== "function") continue;
             var loc = g.locale && (g.locale.value || g.locale);
-            var msgs = g.getLocaleMessage(loc) || {};
+            var msgs = localeMessages(g, loc);
             res.push({ root: (els[i].id || String(els[i].className || "")).slice(0, 40), locale: loc, top: Object.keys(msgs), flat: flattenMsgs(msgs, "", {}) });
             break;
           }
