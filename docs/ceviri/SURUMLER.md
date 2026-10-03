@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | 1.0.0 yayında; 1.1.0 deploy'u doğrulanacak |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.4** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.6.5** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,9 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.6.5** — 2026-10-03 — Sayfa oluşturucu öğe paleti: tanının kapsayıcı izi kartların `.gui__builder-card` olduğunu gösterdi
+  → sınırlı sözlüğe eklendi. Vekil yükleyiciyi `?f=2` ile ekliyor (çerçeve önbelleği eski yükleyicide takılı kalmıştı;
+  gerektiğinde bu sayı artırılır).
 - **1.6.4** — 2026-10-03 — Sayfa oluşturucu: öğe paleti ("1 Column", "Headline", "Paragraph"…) açılışta bir kez hesaplanıyor →
   sınırlı sözlük yalnız araç panellerinde (öğe ekleme, ayarlar, katmanlar, yazı tipi, arka plan, SEO, açılır pencereler);
   sayfalar listesi (kişinin sayfa adları) ve tuval hariç. Bu çerçevede genel sayfa sözlüğü kullanılmıyor, yalnız uygulamanın
