@@ -52,12 +52,70 @@ const clean = (o) => Object.fromEntries(Object.entries(o).filter(([k, v]) => typ
 const frames = fs.existsSync(path.join(dir, "source", "frames.json")) ? src("frames.json") : {};
 const frameIds = Object.keys(frames).filter((k) => !k.startsWith("_"));
 const shellInstances = Object.fromEntries(Object.entries(instances).filter(([id]) => !frameIds.includes(id)));
+
+// Kalıplar (değişken içeren metinler) → [desen, karşılık ($1…), dizin kelimesi, nesne adı grupları]. Kaynak:
+// dom-templates.json ({İngilizce kalıp: Türkçe kalıp}, kataloğuna ulaşamadığımız modüller) + Türkçe kataloğumuzdaki nesne
+// adı alan kalıplar (Türkçe → Türkçe: GHL nesne adını İngilizce yerleştiriyor, "İlişkili Company yok" → "İlişkili Şirket yok").
+// Nesne adı yerine yalnız bilinen nesne adları, sayı yerine yalnız sayı eşleşir; dizin kelimesi en az 4 harf olmalı.
+function buildTemplates(onlyPrefix) {
+  const OBJ_PH = /^(object|objectName|objectLabel|objectPlural|objectSingular|objectNamePlural|objectNameSingular|objName|entity|entityName|entityLabel|recordLabel|recordType|module|moduleName)$/;
+  const NUM_PH = /^(count|max|min|total|length|itemCount|number|num|n|limit|size|current|selected|pagination)$/i;
+  const OBJ_ALT = "Contacts|Contact|Companies|Company|Opportunities|Opportunity|Tasks|Task|contacts|contact|companies|company|opportunities|opportunity|tasks|task|Kişiler|Kişi|Şirketler|Şirket|Fırsatlar|Fırsat|Görevler|Görev|kişiler|kişi|şirketler|şirket|fırsatlar|fırsat|görevler|görev";
+  const PH = /\{\s*([A-Za-z0-9_]+)\s*\}/g;
+  const esc = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const out = [];
+  const seen = new Set();
+  const add = (from, to, objOnly) => {
+    if (typeof from !== "string" || typeof to !== "string" || from.length > 220) return;
+    if (/\{'|@:| \| |\$/.test(from) || /\{'|@:| \| |\$/.test(to)) return;
+    const names = [];
+    let re = "^";
+    let last = 0;
+    let m;
+    PH.lastIndex = 0;
+    while ((m = PH.exec(from))) {
+      re += esc(from.slice(last, m.index));
+      names.push(m[1]);
+      re += OBJ_PH.test(m[1]) ? "(" + OBJ_ALT + ")" : NUM_PH.test(m[1]) ? "([\\d.,]+)" : "(.+?)";
+      last = m.index + m[0].length;
+    }
+    if (!names.length) return;
+    if (objOnly && !names.some((n) => OBJ_PH.test(n))) return;
+    re += esc(from.slice(last)) + "$";
+    let ok = true;
+    const rep = to.replace(PH, (x, n) => {
+      const i = names.indexOf(n);
+      if (i === -1) ok = false;
+      return "$" + (i + 1);
+    });
+    if (!ok) return;
+    // Dizin kelimesi: en uzun sabit kelime (≥4 harf; yoksa ≥3: "No {objectLabel} Yet", "Add {object}")
+    const words = (from.replace(PH, " ").match(/[A-Za-zÇĞİÖŞÜçğıöşü]{3,}/g) || []).sort((a, b) => b.length - a.length);
+    if (!words.length) return;
+    const key = re + "\u0000" + rep;
+    if (seen.has(key)) return;
+    seen.add(key);
+    out.push([re, rep, words[0].toLowerCase(), names.map((n, i) => (OBJ_PH.test(n) ? i + 1 : 0)).filter(Boolean)]);
+  };
+  // Çerçeve kataloğunda (onlyPrefix "wf::" gibi) yalnız o uygulamanın kendi Türkçe kalıpları; sağ panel kalıpları CRM'e ait.
+  if (!onlyPrefix) {
+    for (const f of ["dom-templates.manual.json", "dom-templates.json"]) {
+      const tpl = fs.existsSync(path.join(dir, "source", f)) ? src(f) : {};
+      for (const [from, to] of Object.entries(tpl)) if (!from.startsWith("_")) add(from, to, false);
+    }
+  }
+  for (const [k, t] of Object.entries(tr)) if (!onlyPrefix || k.startsWith(onlyPrefix)) add(t, t, true);
+  return out;
+}
 const catalog = {
   version: VERSION,
   built_at: new Date().toISOString(),
   instances: shellInstances,
   dom: clean(src("dom-nav.json")),
-  text: clean(src("dom-text.json")),
+  // Sayfa sözlüğü: GHL kodunda sabit metinler + kataloğuna ulaşamadığımız modüllerin (kişi sayfasının sağ paneli,
+  // contacts-highrise) birebir metinleri. dom-text.json önceliklidir.
+  text: { ...clean(fs.existsSync(path.join(dir, "source", "dom-highrise.json")) ? src("dom-highrise.json") : {}), ...clean(src("dom-text.json")) },
+  textTpl: buildTemplates(),
   textRules: src("dom-rules.json"), // [desen, karşılık] — sayı içeren kalıplar
   textPages: Object.fromEntries(Object.entries(fs.existsSync(path.join(dir, "source", "dom-pages.json")) ? src("dom-pages.json") : {}).map(([p, d]) => [p, clean(d)])), // yalnız o sayfada geçerli metinler
 };
@@ -69,6 +127,13 @@ for (const id of frameIds) {
   if (!instances[id]) continue;
   const fc = { ...catalog, instances: { [id]: instances[id] } };
   delete fc.textPages; // sayfa sözlükleri CRM sayfalarına ait
+  if (frames[id].noDom) delete fc.textTpl; // oluşturucularda kalıp yok (tuval kişinin içeriği)
+  else {
+    // Çerçeveye CRM'in sağ panel sözlüğü/kalıpları gitmez (boyut): genel sayfa sözlüğü + uygulamanın kendi kalıpları.
+    fc.text = clean(src("dom-text.json"));
+    fc.textTpl = buildTemplates(id + "::");
+    if (!fc.textTpl.length) delete fc.textTpl;
+  }
   // Yalnız o uygulamada geçerli birebir metinler (ör. sunucudan gelen tür adları): frames.json "<id>".text
   if (frames[id].text) fc.text = { ...fc.text, ...clean(frames[id].text) };
   // İç içe çerçeve: bu uygulamanın kendi gömdüğü GHL uygulamaları da vekilden açılır ({GHL adresi: vekil adresi};
@@ -91,7 +156,7 @@ for (const id of frameIds) {
       }
       const fromCatalog = Object.fromEntries(Object.entries(seen).filter(([, s]) => s.size === 1).map(([v, s]) => [v, [...s][0]]));
       // domText: "catalog" → genel sayfa sözlüğü eklenmez, yalnız uygulamanın kendi kataloğundan gelen eşlemeler.
-      const base = frames[id].domText === "catalog" ? {} : fc.text;
+      const base = frames[id].domText === "catalog" ? {} : { ...clean(src("dom-text.json")), ...clean(frames[id].text || {}) };
       fc.text = { ...base, ...fromCatalog, ...clean(frames[id].text || {}) };
       fc.domOnly = frames[id].domOnly;
     } else fc.text = {};
