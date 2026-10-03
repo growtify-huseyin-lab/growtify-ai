@@ -87,7 +87,9 @@ for (const id of frameIds) {
         (seen[v] = seen[v] || new Set()).add(t);
       }
       const fromCatalog = Object.fromEntries(Object.entries(seen).filter(([, s]) => s.size === 1).map(([v, s]) => [v, [...s][0]]));
-      fc.text = { ...fc.text, ...fromCatalog, ...clean(frames[id].text || {}) };
+      // domText: "catalog" → genel sayfa sözlüğü eklenmez, yalnız uygulamanın kendi kataloğundan gelen eşlemeler.
+      const base = frames[id].domText === "catalog" ? {} : fc.text;
+      fc.text = { ...base, ...fromCatalog, ...clean(frames[id].text || {}) };
       fc.domOnly = frames[id].domOnly;
     } else fc.text = {};
   }

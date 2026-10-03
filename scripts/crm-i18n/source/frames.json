@@ -93,6 +93,9 @@
   "proxy": "https://crm-sayfa.growtify.app",
   "screens": "Siteler > satış hunisi / web sitesi sayfa oluşturucu (tam ekran)",
   "noDom": true,
-  "_noDom_note": "Tuvaldeki sayfa kişinin kendi içeriği; sayfa sözlüğü uygulanmaz, yalnız uygulama kataloğu."
+  "_noDom_note": "Tuvaldeki sayfa kişinin kendi içeriği; sayfa sözlüğü uygulanmaz, yalnız uygulama kataloğu.",
+  "domOnly": ".hl-buider-main-layout-drawer, .hl-builder-main-layout-drawer, .hl-builder-settings-sidebar, .hl-builder-settings-drawer, .hl-builder-layers-drawer, .hl-builder-typography-drawer, .hl-builder-background-drawer, .hl-builder-seo-meta-drawer, .hl-builder-popup-list-drawer",
+  "domText": "catalog",
+  "_domOnly_note": "Sözlük yalnız araç panellerinde (öğe ekleme, ayarlar, katmanlar, yazı tipi, arka plan, SEO, açılır pencereler); sayfalar listesi (kişinin sayfa adları) ve tuval hariç; yalnız uygulama kataloğundan eşlemeler."
  }
 }
