@@ -20,7 +20,7 @@ bakım/deneme içindir (çeviri hazır olmadan kullanıcıya gösterilmez).
 ## Nasıl çalışır
 
 1. CRM'deki yükleyici `crm-config.json` içindeki `frames` listesine bakar; listedeki bir GHL adresine giden
-   iframe'in adresini buradaki karşılığına çevirir (`?gai_lang=tr|en` ekler). Kullanıcı aynı ekranda kalır.
+   iframe'in adresini buradaki karşılığına çevirir (`?gai_frame=tr|en` ekler; CRM'in kendi `gai_lang`'ından ayrı, çünkü bazı uygulamalar adreslerini CRM'in adres çubuğuna yansıtıyor). Kullanıcı aynı ekranda kalır.
 2. CRM ile uygulama arasındaki köprü (postmate) mesajlarının adresleri yükleyicide çevrilir; uygulamanın
    kimlik bilgisi CRM'den tarayıcı içinde gelir, API çağrıları doğrudan GHL'e gider (Worker'dan geçmez).
 3. Worker uygulamanın sayfasını GHL'den alır, `<head>` başına yükleyiciyi ekler; diğer dosyalar aynen geçer.

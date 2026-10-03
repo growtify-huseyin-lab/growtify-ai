@@ -32,6 +32,14 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.2.2** — 2026-10-03 — Otomasyon hazırlığı (otomasyon ekranı henüz `frames` listesinde değil). Otomasyon uygulamasının
+  kataloğu (`wf`, 7.060 metin; 8 çeviri + 1 gözden geçirme alt ajanı, ortak terim listesi: İş Akışı, Tetikleyici, Eylem, Olay,
+  Eğer/Değilse, Bekle, dahil etme, Çalışma Günlükleri…) `public/crm/frames/wf.json`. Yükleyici düzeltmeleri: çerçeve dil
+  işareti `gai_frame` (bazı uygulamalar adreslerini CRM'in adres çubuğuna yansıtıyor; `gai_lang` olsaydı kişinin dil seçimi
+  değişirdi — denemede yaşandı, geri alındı); kancaları atlayarak eklenen iframe'ler (otomasyon `workflow-builder`) eklendiği
+  anda vekile çevrilir; uygulamanın geçerli dili boşsa (CRM içinde `en_US`, metinler `en` altında) eşleştirme yedek dilden;
+  güvenlik ağı yükleme süresi 25 sn. Vekil: otomasyon kod dosyaları GHL'den doğrudan (tarayıcı önbelleği), diğer
+  uygulamaların dosyaları Worker kenar önbelleğinde.
 - **1.2.1** — 2026-10-03 — Bakım altyapısı (kullanıcıya görünen değişiklik yok; CEO: "çeviri işiyle ilgili her şeyi bitirene
   kadar devam"). Vekile dört yeni adres (henüz `frames` listesinde değil, kullanıcıya kapalı): `crm-otomasyon`
   (Otomasyon > İş Akışları), `crm-epostalar` (Pazarlama > E-postalar), `crm-sohbet` (Sohbet Sağlayıcıları),

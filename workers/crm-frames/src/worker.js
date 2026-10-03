@@ -25,7 +25,9 @@ const APPS = {
   "crm-takvim.growtify.app": { origin: "https://calendar-app.leadconnectorhq.com", frame: "calapp" },
   "crm-ayarlar.growtify.app": { origin: "https://client-app-crm-settings.leadconnectorhq.com", frame: "crmset" },
   "crm-eposta.growtify.app": { origin: "https://ghl-isv-app-prod.leadconnectorhq.com", frame: "isv" },
-  "crm-otomasyon.growtify.app": { origin: "https://client-app-automation-workflows.leadconnectorhq.com", frame: "wf" },
+  // directAssets: uygulamanın /assets dosyaları GHL'den doğrudan yüklenir (GHL bu uygulamada CORS'a izin veriyor);
+  // büyük uygulama vekilden geçmez, kullanıcının tarayıcısındaki GHL önbelleği kullanılır.
+  "crm-otomasyon.growtify.app": { origin: "https://client-app-automation-workflows.leadconnectorhq.com", frame: "wf", directAssets: true },
   "crm-epostalar.growtify.app": { origin: "https://email-home-prod.leadconnectorhq.com", frame: "email" },
   "crm-sohbet.growtify.app": { origin: "https://client-app-crm-conversations.leadconnectorhq.com", frame: "conv" },
   "crm-ortaklik.growtify.app": { origin: "https://client-app-affiliate-manager.leadconnectorhq.com", frame: "aff" },
@@ -64,6 +66,19 @@ function adjustCsp(csp) {
   return out.join("; ");
 }
 
+// /assets/… dosyalarını GHL'in kendi adresine yönlendirir (yalnız directAssets uygulamalarda).
+class AssetRewriter {
+  constructor(origin) {
+    this.origin = origin;
+  }
+  element(el) {
+    for (const attr of ["src", "href"]) {
+      const v = el.getAttribute(attr);
+      if (v && v.startsWith("/assets/")) el.setAttribute(attr, this.origin + v);
+    }
+  }
+}
+
 class HeadInjector {
   constructor(frame) {
     this.frame = frame;
@@ -74,7 +89,7 @@ class HeadInjector {
 }
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
     // Yerel deneme: `npx wrangler dev --var DEV_APP:crm-ayarlar.growtify.app` (localhost'ta hangi uygulama)
     const app = APPS[url.hostname] || (env && env.DEV_APP && APPS[env.DEV_APP]);
@@ -94,6 +109,15 @@ export default {
       const v = request.headers.get(h);
       if (v) headers.set(h, v);
     }
+    // Sürümlü (adı içerik özetli) /assets dosyaları Worker'ın kenar önbelleğinde tutulur: GHL bu dosyaları
+    // önbelleklemeden veriyor (büyük paketler ilk istekte onlarca saniye sürebiliyor).
+    const isAsset = url.pathname.startsWith("/assets/") && request.method === "GET";
+    const cache = isAsset && typeof caches !== "undefined" ? caches.default : null;
+    const cacheKey = cache ? new Request(url.origin + url.pathname, { method: "GET" }) : null;
+    if (cache) {
+      const hit = await cache.match(cacheKey);
+      if (hit) return hit;
+    }
     const upstream = await fetch(app.origin + url.pathname + url.search, { method: request.method, headers, redirect: "manual" });
 
     const out = new Headers();
@@ -109,8 +133,15 @@ export default {
     if (type.includes("text/html") && request.method === "GET") {
       out.set("cache-control", "no-store");
       const res = new Response(upstream.body, { status: upstream.status, headers: out });
-      return new HTMLRewriter().on("head", new HeadInjector(app.frame)).transform(res);
+      let rw = new HTMLRewriter().on("head", new HeadInjector(app.frame));
+      if (app.directAssets) rw = rw.on("script[src], link[href]", new AssetRewriter(app.origin));
+      return rw.transform(res);
     }
-    return new Response(upstream.body, { status: upstream.status, headers: out });
+    const res = new Response(upstream.body, { status: upstream.status, headers: out });
+    if (cache && upstream.status === 200) {
+      res.headers.set("cache-control", "public, max-age=86400");
+      if (ctx && ctx.waitUntil) ctx.waitUntil(cache.put(cacheKey, res.clone()));
+    }
+    return res;
   },
 };
