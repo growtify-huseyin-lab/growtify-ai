@@ -1,6 +1,3 @@
-# DEVREYE ALMA: bu dosya .github/workflows/crm-i18n-watch.yml olarak eklenmeli. Depoya iş akışı dosyası yazmak için
-# GitHub anahtarında `workflow` izni gerekir (gh auth refresh -h github.com -s workflow) ya da dosya GitHub arayüzünden
-# (Add file → Create new file) yapıştırılır. O zamana kadar kontrol elle: node scripts/crm-i18n/watch-ghl.mjs
 name: crm-i18n-watch
 # CRM Türkçe katmanı — GHL güncelleme takibi. Türkçeleştirdiğimiz uygulamalardan biri (CRM kabuğu ya da gömülü
 # ekranlar) değişirse "CRM çeviri: GHL güncellemesi algılandı" issue'su açar/yorum ekler. Bilgisayardan bağımsız.
@@ -40,7 +37,7 @@ jobs:
           BODY=$(printf '%s\n\n%s\n\n%s\n\n<!-- %s -->\n' \
             "Türkçeleştirdiğimiz uygulamalardan biri güncellendi; yeni ya da değişen metinler İngilizce kalıyor olabilir." \
             "$(cat changed.txt)" \
-            "Yapılacak: ilgili uygulamanın kataloğunu topla, farkı çevir, yayınla; sonra izleri güncelle: node scripts/crm-i18n/watch-ghl.mjs --write. Ayrıntı: scripts/crm-i18n/README.md ve workers/crm-frames/README.md (Bakım)." \
+            "Yapılacak: CRM sekmesinde tour/catalog-sweep.js ile katalog anahtar karşılaştırması (yeni metinler) + tour/qa-tour.js ile kalite turu → farkı çevir, yayınla; sonra izleri güncelle: node scripts/crm-i18n/watch-ghl.mjs --write. Ayrıntı: scripts/crm-i18n/README.md ve workers/crm-frames/README.md (Bakım)." \
             "$SIG")
           N=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
           if [ -z "$N" ]; then
