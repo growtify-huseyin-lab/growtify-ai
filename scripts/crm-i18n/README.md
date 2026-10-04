@@ -106,7 +106,6 @@ Derleme: `npm i --no-save @intlify/message-compiler && node scripts/crm-i18n/bui
 ## GHL güncelleme takibi
 
 `watch-ghl.mjs` CRM kabuğunun (`app.js` ETag) ve gömülü uygulamaların (`frames.json` adreslerindeki ana betik adı)
-sürüm izlerini `source/ghl-versions.json` ile karşılaştırır. GitHub Actions bunu her gün çalıştırır (`crm-i18n-watch.workflow.yml`; devreye alma notu dosyanın başında —
-`workflow` izni gerekiyor); bir uygulama değiştiyse "CRM çeviri: GHL güncellemesi algılandı" issue'su açar. Yapılacak: o uygulamanın
+sürüm izlerini `source/ghl-versions.json` ile karşılaştırır. GitHub Actions bunu her gün 08:17'de çalıştırır (`.github/workflows/crm-i18n-watch.yml`, 2026-10-04'ten beri açık — CEO izni); bir uygulama değiştiyse "CRM çeviri: GHL güncellemesi algılandı" issue'su açar. Yapılacak: o uygulamanın
 kataloğunu topla → farkı çevir → yayınla → `node scripts/crm-i18n/watch-ghl.mjs --write` ile izleri güncelle (aynı PR'da).
 Not: kabuğun alt uygulamaları (kişiler, fırsatlar…) ayrı yüklenir; onların değişimini en iyi çeviri avı (`?gai_hunt=1`) gösterir.
