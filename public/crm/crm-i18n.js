@@ -1062,15 +1062,66 @@
       var c = navigator.connection;
       return !(c && (c.saveData || /2g/.test(c.effectiveType || ""))); // veri tasarrufu ve 2G hariç (3G dahil)
     };
+    /* Arka plan hazırlığı kişinin işini YAVAŞLATMAZ (CEO, gizli pencere testi 2026-10-04: yeni tarayıcıda sayfalar çok geç
+     * açılıyordu). Yeni tarayıcıda GHL kendi dosyalarını da sıfırdan indiriyor; hazırlık (10 uygulama ≈ 29 MB) girişten 2,5 sn
+     * sonra başlayınca bağlantıyı paylaşıyordu. Artık yalnız sayfa sakinken: girişten en az 30 sn sonra, son 8 sn'de sayfa
+     * ağdan 20 KB'tan büyük bir şey indirmemişse, tarayıcı boştayken — ve HER uygulamadan önce yeniden. Dokunmatik cihazda ve
+     * 4G'den yavaş bağlantıda hiç yapılmaz (o ekran ilk açıldığında yükleme ekranıyla bir kez iner). */
+    var heavyAt = Date.now();
+    try {
+      new PerformanceObserver(function (l) {
+        var es = l.getEntries();
+        for (var i = 0; i < es.length; i++) if ((es[i].transferSize || 0) > 20000) heavyAt = Date.now();
+      }).observe({ type: "resource" });
+    } catch (e) {}
+    var bootAt = Date.now();
+    var warmNet = function () {
+      if (!goodNet()) return false;
+      var c = navigator.connection;
+      if (c && c.effectiveType && c.effectiveType !== "4g") return false;
+      try {
+        if (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) return false;
+      } catch (e) {}
+      return true;
+    };
+    var calmWait = false;
+    var whenCalm = function (cb) {
+      var check = function () {
+        var now = Date.now();
+        if (now - bootAt >= 30000 && now - heavyAt >= 8000 && document.readyState === "complete") {
+          if (window.requestIdleCallback)
+            window.requestIdleCallback(
+              function () {
+                cb();
+              },
+              { timeout: 4000 }
+            );
+          else cb();
+        } else setTimeout(check, 2000);
+      };
+      check();
+    };
     var warmQueue = [];
     var warming = null;
     var opening = {}; // ilk açılışı süren ekranlar: arka plan hazırlığı aynı dosyaları ayrıca indirmesin
     var warmFailed = {};
     var warmDone = {};
     var warmNext = function () {
+      if (warming || calmWait || !warmQueue.length) return;
+      calmWait = true;
+      whenCalm(function () {
+        calmWait = false;
+        warmStart();
+      });
+    };
+    var warmStart = function () {
       if (warming || !warmQueue.length) return;
+      if (!warmNet()) {
+        warmQueue.length = 0; // bu oturumda hazırlık yok
+        return;
+      }
       var px = warmQueue.shift();
-      if (opening[px] || warmAge(px) < 36e5 || down[px] || !goodNet() || Date.now() - (warmFailed[px] || 0) < 36e5) return warmNext();
+      if (opening[px] || warmAge(px) < 36e5 || down[px] || Date.now() - (warmFailed[px] || 0) < 36e5) return warmStart();
       warming = px;
       var f = document.createElement("iframe");
       f.setAttribute("aria-hidden", "true");

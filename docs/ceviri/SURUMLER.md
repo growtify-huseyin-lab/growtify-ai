@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.11.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.11.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,18 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.11.2** — 2026-10-04 — **Yeni tarayıcıda sayfalar yavaştı (CEO, gizli pencerede kullanıcı hesabıyla): arka plan hazırlığı artık
+  yalnız sayfa sakinken.**
+  - **Kök neden:** yeni tarayıcıda (gizli pencere, yeni kullanıcı) GHL kendi dosyalarını sıfırdan indirirken katman girişten 2,5 sn
+    sonra 10 gömülü uygulamanın dosyalarını arka planda indirmeye başlıyordu → bağlantı paylaşılıyordu. Ölçüm (sıkıştırılmış,
+    önbelleksiz): toplam 29,4 MB — e-posta oluşturucu 7,1 · e-postalar 4,8 · sayfa 4,7 · ayarlar 3,7 · takvim 3,2 · formlar 2,7 ·
+    sohbet 1,5 · satış ortaklığı 1,3 · stüdyo 0,4. (Türkçe katalog 1,3 MB, tarayıcı başına bir kez — sorun değil.)
+  - **Düzeltme:** hazırlık girişten en az 30 sn sonra, son 8 sn'de sayfa ağdan 20 KB'tan büyük bir şey indirmemişse ve tarayıcı
+    boştayken başlar; HER uygulamadan önce aynı koşul yeniden beklenir (kişi gezinirken hazırlık durur). Dokunmatik cihazda ve
+    4G'den yavaş bağlantıda hiç yapılmaz. Sıra: takvim, ayarlar, formlar, sayfa, e-postalar, e-posta oluşturucu, sohbet, satış
+    ortaklığı, stüdyo. Hazır olmayan ekran ilk açılışta yükleme ekranıyla bir kez iner (değişmedi).
+  - **Test (yerel):** 15–45 sn arası sürekli büyük indirme benzetimi → hazırlık 57. sn'de başladı (eskisi: 2,5. sn), uygulamalar
+    arasında ~10 sn sakin bekleme.
 - **1.11.1** — 2026-10-04 — **İkinci tur (canlı 1.11.0 üzerinde) + hız ölçümü.**
   - **Tur:** 114 sayfa, hata 0; gömülü (vekil) ekran kontrolü 19, kalıntı 0. Arayüzde kalan tek İngilizce "Task Bilgi" (görev
     filtreleri: GHL nesne adını İngilizce ekliyor) → kalıp "{nesne} Bilgi / Info" → "Görev Bilgisi", "Kişi Bilgisi"…
