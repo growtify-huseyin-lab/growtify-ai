@@ -50,6 +50,12 @@ bu dosyanın o anki özetidir.
     Custom JS'i geç ekliyor (ön planda 4–7,6 sn; SPA içi geçişte yok).
   - **Bakım araçları:** tur ve katalog taraması beklemeleri Worker sayacıyla — arka plan sekmesinde Chrome `setTimeout`'u
     dakikada bire indiriyordu (tur 14 dk'da 6 sayfaya düşmüştü).
+  - **Ön planda ölçüm (CEO pencereyi öne aldı, 2026-10-04 01:40):** tam sayfa açılışı (pano, 2'şer): GHL betiğimizi 3,5–4,9 sn'de
+    ekliyor, Türkçe 0,2–0,6 sn sonra uygulanıyor; ana içerik (LCP) TR 4,7–7,1 sn / EN 4,6–5,4 sn — önbellekli açılışta fark
+    ~0,1 sn, Türkçe ana içerikten ÖNCE geliyor. Ekran geçişi (TR): kişiler 2,1–2,7 sn, sohbetler 1,9–2,7, fırsatlar 0,3–0,7,
+    kişi detayı 1,9–3,8; gömülü ekran açılışı takvim ayarları 1,2–2,5, e-postalar 1,5–2,3, otomasyon 2,2. (EN ekran geçişi
+    ön planda ölçülemedi: GHL sayfaları ön planda sürekli canlı güncelleme yaptığı için "içerik oturdu" ölçütü zaman aşımına
+    düştü; TR/EN geçiş karşılaştırması yukarıdaki aynı koşul ölçümüdür.)
 - **1.11.0** — 2026-10-04 — **Lansman öncesi tam tur: 145 ekran tıklamalarla gezildi, kalan İngilizce + biçim + akıcılık (CEO: "tam tur
   yapıp hiçbir yerde kalmadığından emin ol").**
   - **Tur:** 145 sayfa (bölüm içi bağlantılar + güvenli düğmeler: sekme, filtre, sıralama, alan yönetimi; kayıt/silme/gönderme yok),
