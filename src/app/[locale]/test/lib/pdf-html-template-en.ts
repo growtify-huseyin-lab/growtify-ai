@@ -476,7 +476,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string, couponExp
     <div style="border:1.5px solid #E2E8F0; border-radius:12px; padding:9px 14px; background:white;">
       <div style="font-size:11px; font-weight:700; color:${DARK};">Want to Try It Free First?</div>
       <div style="font-size:10px; color:${GRAY}; margin-top:2px;">GROWT Community · Weekly Tips + Community Support</div>
-      <a href="https://panel.growtify.ai/communities/groups/growtify-ai/" style="display:inline-block; margin-top:8px; padding:6px 18px; border:1.5px solid ${PRIMARY}; border-radius:20px; font-size:11px; font-weight:700; color:${PRIMARY}; text-decoration:none; background:#F5F8FF;">Join the Community Free →</a>
+      <a href="https://panel.growtify.ai/communities/groups/en-growtify-ai/" style="display:inline-block; margin-top:8px; padding:6px 18px; border:1.5px solid ${PRIMARY}; border-radius:20px; font-size:11px; font-weight:700; color:${PRIMARY}; text-decoration:none; background:#F5F8FF;">Join the Community Free →</a>
     </div>
   </div>
 
