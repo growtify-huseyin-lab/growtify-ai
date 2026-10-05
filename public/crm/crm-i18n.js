@@ -1561,6 +1561,165 @@
     });
   }
 
+  /* ---------- Tur bekçisi: tanıtım turları sayfayı kilitlemesin (CEO 2026-10-05) ---------- */
+  // GHL'in Launchpad turu (driver.js) ana sayfada ve takvim, otomasyon, e-postalar, ayarlar, e-posta/sayfa oluşturucu
+  // çerçevelerinde kapatılamaz kurulu: kapat düğmesi yok, ESC ve karartılmış alana tıklama kapalı, vurgulanan öğe
+  // tıklanamaz; ilk girişte tanıtım videosu kapanınca kendiliğinden başlar. Bir adım sonraki öğeyi beklerken balon
+  // gizlenir ama sayfa görünmeden kilitli kalır (GHL 20 sn bekler). Bekçi her turu kapatılabilir yapar: balonda
+  // "Turu kapat" (×), ESC, karartılmış alana tıklama. Balon görünmezken kilit kalkar; 30 sn balonsuz kalan tur
+  // temizlenir. Kapatma GHL'in kendi kullandığı driver.destroy() ile (temizlik ve kayıt GHL'in kendi kodunda).
+  // HighLevel'in kendi rehberleri (Pendo; İngilizce, HighLevel içeriği) Türkçe sayfada gösterilmez — crm-config.json
+  // "hlGuides": "show" ile açılır. GHL kodu Pendo'yu başka iş için kullanmıyor (yalnız olay kaydı ve bu rehberler).
+  var tourWd = null;
+  var tourLast = 0;
+  function tourOn() {
+    return (mode === "tr" || mode === "en") && !!(document.body && document.body.classList.contains("driver-active"));
+  }
+  function tourShown(el) {
+    if (!el || !el.isConnected) return false;
+    var cs = getComputedStyle(el);
+    if (cs.display === "none" || cs.visibility === "hidden") return false;
+    var r = el.getBoundingClientRect();
+    return r.width > 0 && r.height > 0;
+  }
+  function tourClose() {
+    // GHL tur örneğini window'a koyar: ana sayfa ve çoğu çerçeve "driver", takvim "driver_frame", e-postalar
+    // "driver_email_home", e-posta oluşturucu "driver_email_builder" (ileride eklenecekler de "driver" ile başlar).
+    var ks = [];
+    try {
+      ks = Object.keys(window).filter(function (k) {
+        return k.indexOf("driver") === 0;
+      });
+    } catch (e) {}
+    if (ks.indexOf("driver") === -1) ks.push("driver");
+    ks.forEach(function (k) {
+      try {
+        var d = window[k];
+        if (!d || typeof d.destroy !== "function") return;
+        if (typeof d.isActive === "function" && !d.isActive()) return;
+        d.destroy();
+        // GHL sayfa değişiminde açık turu buradan okuyup çerçeveye taşır: kapanan tur orada dirilmesin.
+        if (window[k] === d) window[k] = null;
+      } catch (e) {}
+    });
+    setTimeout(function () {
+      if (!document.body || !document.body.classList.contains("driver-active")) return;
+      // Sürücü örneğine ulaşılamadıysa (window.driver'a bağlanmayan bir tur) izleri elle kaldır.
+      var x = document.querySelectorAll(".driver-overlay,.driver-popover");
+      for (var i = 0; i < x.length; i++) x[i].remove();
+      document.body.classList.remove("driver-active", "driver-fade", "driver-simple");
+      var y = document.querySelectorAll(".driver-active-element,.driver-no-interaction");
+      for (var j = 0; j < y.length; j++) y[j].classList.remove("driver-active-element", "driver-no-interaction");
+      document.documentElement.classList.remove("gai-tour-free");
+    }, 300);
+  }
+  function tourButton(p) {
+    if (!p || p.querySelector(".gai-tour-close")) return;
+    var own = p.querySelector(".driver-popover-close-btn");
+    if (own && tourShown(own)) return; // kapatılabilir turların kendi kapat düğmesi var
+    var label = mode === "tr" ? "Turu kapat" : "Close tour";
+    var b = document.createElement("button");
+    b.type = "button";
+    b.className = "gai-tour-close";
+    b.setAttribute("aria-label", label);
+    b.title = label;
+    b.textContent = "×";
+    b.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      tourClose();
+    });
+    p.appendChild(b);
+    p.classList.add("gai-tour-x");
+  }
+  function tourCheck() {
+    var h = document.documentElement;
+    if (!tourOn()) {
+      clearInterval(tourWd);
+      tourWd = null;
+      h.classList.remove("gai-tour-free");
+      return;
+    }
+    var p = document.querySelector(".driver-popover");
+    if (tourShown(p)) {
+      tourLast = Date.now();
+      h.classList.remove("gai-tour-free");
+      tourButton(p);
+      return;
+    }
+    var idle = Date.now() - tourLast;
+    if (idle > 1200) h.classList.add("gai-tour-free"); // adım bekliyor: sayfa kullanılabilir
+    if (idle > 30000) tourClose(); // takılı kalmış tur
+  }
+  function tourWatch() {
+    if (tourWd) return;
+    tourLast = Date.now();
+    tourWd = setInterval(tourCheck, 300);
+    tourCheck();
+  }
+  function guideTick() {
+    if (tourOn()) tourWatch();
+    var off = mode === "tr" && !(config && config.hlGuides === "show");
+    var h = document.documentElement;
+    if (off !== h.classList.contains("gai-hl-guides-off")) h.classList.toggle("gai-hl-guides-off", off);
+    var pd = window.pendo;
+    if (!off || !pd || typeof pd.stopGuides !== "function") return;
+    try {
+      // stopGuides yalnız bu sayfa için kapatır; GHL Pendo'yu yeniden başlatırsa (kimlik değişimi) tekrar kapatılır.
+      if (typeof pd.areGuidesDisabled !== "function" || !pd.areGuidesDisabled()) pd.stopGuides();
+    } catch (e) {}
+  }
+  function installTourGuard() {
+    try {
+      var st = document.createElement("style");
+      st.id = "gai-tour-guard";
+      st.textContent =
+        // adım beklerken (balon gizli) GHL'in sayfa kilidi kalksın; karartma da (sürücü fare/boyut olayında yeniden
+        // çizebiliyor, görünmez bir perde gibi tıklamayı yutuyordu)
+        "html.gai-tour-free body.driver-active *{pointer-events:auto!important}" +
+        "html.gai-tour-free body .driver-overlay{display:none!important}" +
+        ".driver-popover .gai-tour-close{all:unset;position:absolute!important;top:8px!important;right:8px!important;z-index:3!important;" +
+        "box-sizing:border-box!important;width:28px!important;height:28px!important;border-radius:6px!important;color:#667085!important;" +
+        "font:400 20px/28px system-ui,-apple-system,'Segoe UI',sans-serif!important;text-align:center!important;cursor:pointer!important;" +
+        "pointer-events:auto!important}" +
+        ".driver-popover .gai-tour-close:hover,.driver-popover .gai-tour-close:focus-visible{background:#f2f4f7!important;color:#101828!important}" +
+        ".driver-popover.gai-tour-x .driver-popover-title{padding-right:30px!important}" +
+        // HighLevel'in İngilizce rehberleri (Pendo) Türkçe sayfada: yedek gizleme (asıl kapatma pendo.stopGuides)
+        "html.gai-hl-guides-off [id^='pendo-base'],html.gai-hl-guides-off [id^='pendo-backdrop'],html.gai-hl-guides-off ._pendo-guide-backdrop_{display:none!important}";
+      (document.head || document.documentElement).appendChild(st);
+    } catch (e) {}
+    window.addEventListener(
+      "keydown",
+      function (e) {
+        if ((e.key === "Escape" || e.key === "Esc") && tourOn()) {
+          e.preventDefault();
+          e.stopPropagation();
+          tourClose();
+        }
+      },
+      true
+    );
+    window.addEventListener(
+      "click",
+      function (e) {
+        if (!tourOn()) return;
+        var p = document.querySelector(".driver-popover");
+        if (!tourShown(p)) return; // adım bekliyor: sayfa zaten serbest
+        var t = e.target;
+        if (t && t.nodeType === 1 && p.contains(t)) return;
+        var a = document.querySelector(".driver-active-element");
+        if (a) {
+          var r = a.getBoundingClientRect();
+          if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) return;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+        tourClose(); // karartılmış alana tıklama turu kapatır
+      },
+      true
+    );
+  }
+
   /* ---------- Akış ---------- */
   var mode = null; // "tr" | "en"
   var loading = false;
@@ -1637,9 +1796,11 @@
       loadCatalog();
       scanCatalog();
     }
+    guideTick();
   }
 
   function start() {
+    installTourGuard();
     tick();
     setInterval(tick, 700);
     try {
@@ -1659,6 +1820,17 @@
       var depthTimer = false;
       var queue = [];
       new MutationObserver(function (recs) {
+        // Tanıtım turu: yeni adımın balonuna kapat düğmesi beklemeden gelsin (bkz. Tur bekçisi).
+        if (tourOn()) {
+          if (!tourWd) tourWatch();
+          for (var ti = 0; ti < recs.length; ti++) {
+            if (recs[ti].target !== document.body) continue;
+            for (var tj = 0; tj < recs[ti].addedNodes.length; tj++) {
+              var tn = recs[ti].addedNodes[tj];
+              if (tn.classList && tn.classList.contains("driver-popover")) tourButton(tn);
+            }
+          }
+        }
         var d = mode === "tr" && catalog && catalog.text && (!catalog.noDom || catalog.domOnly) ? catalog.text : null;
         if (d) {
           if (!depthTimer) {
