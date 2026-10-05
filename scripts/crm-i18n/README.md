@@ -54,6 +54,14 @@ Sayfadaki sürüm: `document.documentElement.dataset.gaiCrmTr` (ör. `"1.0.0"`).
   `/__gai/health` ile yoklanır; iframe birkaç saniyede cevap vermezse GHL'in kendi adresine döner (ekran
   İngilizce ama çalışır). Hâlâ İngilizce: otomasyon kurucusu, Yapay Zeka Stüdyosu, Sohbet Sağlayıcıları.
 
+## Tur bekçisi (1.12.0 — tanıtım turları sayfayı kilitlemez)
+GHL'in Launchpad tur motoru (driver.js) kapatılamaz kurulu (kapat düğmesi yok, ESC ve karartılmış alana tıklama kapalı) ve
+ana sayfa + takvim, otomasyon, e-postalar, ayarlar, e-posta/sayfa oluşturucu, e-posta hizmetleri çerçevelerinde çalışır.
+Yükleyici her tur balonuna "Turu kapat" (×) ekler; ESC ve karartılmış alana tıklama turu kapatır (GHL'in kullandığı
+`window.driver.destroy()`); adım beklerken balon gizliyse kilidi ve karartmayı kaldırır; 30 sn balonsuz kalan turu temizler.
+HighLevel'in kendi rehberleri (Pendo) Türkçe sayfada `pendo.stopGuides()` ile kapalı; `crm-config.json` `"hlGuides": "show"` açar.
+Denenen senaryolar (GHL kurulumunun birebiri, gerçek fare/klavye): `docs/ceviri/SURUMLER.md` 1.12.0 notu.
+
 ## Kaynaklar (`scripts/crm-i18n/source/`)
 - `crm-tr.flat.json` — `"örnek::anahtar.yolu": "Türkçe"`; çevirinin tek kaynağı (düzeltmeler burada).
 - `crm-en.flat.json` — aynı anahtarların İngilizcesi; GHL metin değiştirdiğinde farkı bulmak için.

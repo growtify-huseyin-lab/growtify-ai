@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.11.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.12.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,32 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.12.0** — 2026-10-05 — **Tanıtım turları sayfayı kilitlemiyor (CEO: "ilk girişte adım adım açılan pencereler sayfayı kilitliyor
+  gibi"; "tüm sistemdekileri tara, bloklamasın").**
+  - **Tarama:** ana uygulama + 129 alt uygulama (GHL manifest) + 11 vekil çerçeve uygulamasının tüm JS kodu indirildi (~12.500
+    dosya). Sayfayı kilitleyen tek mekanizma GHL'in Launchpad tur motoru (driver.js): ana sayfada (Launchpad, e-posta dizileri,
+    mağaza bileşenleri) ve takvim, otomasyon, e-postalar, ayarlar, e-posta oluşturucu, e-posta hizmetleri, sayfa oluşturucu
+    çerçevelerinde aynı kurulumla: `allowClose:false`, `allowKeyboardControl:false`, `disableActiveInteraction:true`, balonda yalnız
+    "İleri/Tamamla" düğmesi — kapat düğmesi yok, ESC ve karartılmış alana tıklama çalışmıyor, vurgulanan öğe tıklanamıyor. Yeni
+    kullanıcıda Launchpad tanıtım videosu kapanınca kendiliğinden başlıyor; takvim gibi çerçeveli ekranlarda tur çerçeveye taşınıp
+    orada sürüyor. Ayrıca bir adım sonraki öğeyi beklerken (GHL 20 sn'ye kadar bekler) balon ve karartma gizleniyor ama sayfa
+    görünmeden kilitli kalıyor — "kilitliyor gibi" hissinin asıl kaynağı. Diğerleri kilitlemiyor: GHL'in öteki driver.js turları
+    (sosyal planlayıcı, WordPress…) kapatılabilir; pencereler (Naive UI) kapat düğmeli; "yeni özellik" kartları ve dürtmeler
+    küçük kart. HighLevel'in kendi rehberleri (Pendo — "Pathfinder") her ekranda yükleniyor; İngilizce ve HighLevel içeriği.
+  - **Tur bekçisi (`crm-i18n.js`, ana sayfa + bütün çerçeveler, TR ve EN):** her tur balonuna "Turu kapat" (×) düğmesi (turun
+    kendi kapat düğmesi görünüyorsa eklenmez), ESC ve karartılmış alana tıklama turu kapatır, vurgulanan öğeye tıklama turu
+    kapatmaz. Kapatma GHL'in kendi kullandığı `driver.destroy()` ile (GHL'in "kapatma" engeli atlanır, temizlik ve kayıt GHL
+    kodunda); `window.driver` boşaltılır → GHL kapanan turu sonraki ekranda çerçeveye taşıyıp diriltmez. Adım beklerken
+    (balon gizli, 1,2 sn) sayfanın kilidi ve karartma kalkar — sürücü fare olayında karartmayı yeniden çizip tıklamayı yutuyordu;
+    balon yeniden görünce tur normal sürer. 30 sn balonsuz kalan tur temizlenir.
+  - **HighLevel rehberleri (Pendo) Türkçe sayfada gösterilmiyor:** `pendo.stopGuides()` (yalnız o sayfa yüklemesi; GHL Pendo'yu
+    yeniden başlatırsa tekrar) + yedek gizleme. GHL kodu Pendo'yu yalnız olay kaydı ve bu rehberler için kullanıyor (yardım
+    menüsü vb. değil) → işlev kaybı yok. Açmak için `crm-config.json` `"hlGuides": "show"`. İngilizcede dokunulmuyor.
+  - **Test (yerel, GHL'in birebir tur kurulumu + driver.js 1.3.1, gerçek fare/klavye):** × → tur kapandı, GHL `onDestroyed`
+    çalıştı, `window.driver` boş; ESC → kapandı; karartılmış alana tıklama → kapandı, alttaki düğmeye tıklama geçmedi; vurgulanan
+    öğeye tıklama → tur sürdü; bekleyen adımda sayfa düğmesine gerçek tıklama → çalıştı (düzeltmeden önce karartma yutuyordu),
+    sonraki adım gelince tur sürdü ve yeni balonda × vardı; takılı tur → sayfa hep kullanılabilir, 30. sn'de temizlendi;
+    kapatılabilir turda kendi düğmesi kaldı, ikinci × eklenmedi; EN: "Close tour", Pendo'ya dokunulmadı.
 - **1.11.2** — 2026-10-04 — **Yeni tarayıcıda sayfalar yavaştı (CEO, gizli pencerede kullanıcı hesabıyla): arka plan hazırlığı artık
   yalnız sayfa sakinken.**
   - **Kök neden:** yeni tarayıcıda (gizli pencere, yeni kullanıcı) GHL kendi dosyalarını sıfırdan indirirken katman girişten 2,5 sn
