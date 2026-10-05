@@ -10,6 +10,7 @@ import { CommunityCTA } from "@/components/CommunityCTA";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CookieBanner } from "@/components/legal/CookieBanner";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { AttributionCapture } from "@/components/AttributionCapture";
 import { routing } from "@/i18n/routing";
 
 const inter = Inter({
@@ -158,6 +159,7 @@ export default async function LocaleLayout({
             <Footer />
             <CookieBanner />
             <GoogleAnalytics />
+            <AttributionCapture />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
