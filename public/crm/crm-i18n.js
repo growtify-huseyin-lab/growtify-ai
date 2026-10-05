@@ -1583,14 +1583,25 @@
     return r.width > 0 && r.height > 0;
   }
   function tourClose() {
-    var d = window.driver;
+    // GHL tur örneğini window'a koyar: ana sayfa ve çoğu çerçeve "driver", takvim "driver_frame", e-postalar
+    // "driver_email_home", e-posta oluşturucu "driver_email_builder" (ileride eklenecekler de "driver" ile başlar).
+    var ks = [];
     try {
-      if (d && typeof d.destroy === "function") d.destroy();
+      ks = Object.keys(window).filter(function (k) {
+        return k.indexOf("driver") === 0;
+      });
     } catch (e) {}
-    // GHL sayfa değişiminde açık turu window.driver'dan okuyup çerçeveye taşır: kapanan tur orada dirilmesin.
-    try {
-      if (d && window.driver === d) window.driver = null;
-    } catch (e) {}
+    if (ks.indexOf("driver") === -1) ks.push("driver");
+    ks.forEach(function (k) {
+      try {
+        var d = window[k];
+        if (!d || typeof d.destroy !== "function") return;
+        if (typeof d.isActive === "function" && !d.isActive()) return;
+        d.destroy();
+        // GHL sayfa değişiminde açık turu buradan okuyup çerçeveye taşır: kapanan tur orada dirilmesin.
+        if (window[k] === d) window[k] = null;
+      } catch (e) {}
+    });
     setTimeout(function () {
       if (!document.body || !document.body.classList.contains("driver-active")) return;
       // Sürücü örneğine ulaşılamadıysa (window.driver'a bağlanmayan bir tur) izleri elle kaldır.

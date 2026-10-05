@@ -49,8 +49,10 @@ bu dosyanın o anki özetidir.
     küçük kart. HighLevel'in kendi rehberleri (Pendo — "Pathfinder") her ekranda yükleniyor; İngilizce ve HighLevel içeriği.
   - **Tur bekçisi (`crm-i18n.js`, ana sayfa + bütün çerçeveler, TR ve EN):** her tur balonuna "Turu kapat" (×) düğmesi (turun
     kendi kapat düğmesi görünüyorsa eklenmez), ESC ve karartılmış alana tıklama turu kapatır, vurgulanan öğeye tıklama turu
-    kapatmaz. Kapatma GHL'in kendi kullandığı `driver.destroy()` ile (GHL'in "kapatma" engeli atlanır, temizlik ve kayıt GHL
-    kodunda); `window.driver` boşaltılır → GHL kapanan turu sonraki ekranda çerçeveye taşıyıp diriltmez. Adım beklerken
+    kapatmaz. Kapatma GHL'in kendi kullandığı `destroy()` ile (GHL'in "kapatma" engeli atlanır, temizlik ve kayıt GHL kodunda).
+    Tur örneği her uygulamada başka adla duruyor — `driver` (ana sayfa, otomasyon, ayarlar, sayfa oluşturucu…), `driver_frame`
+    (takvim), `driver_email_home` (e-postalar, e-posta dizileri), `driver_email_builder` (e-posta oluşturucu); bekçi "driver" ile
+    başlayan bütün etkin örnekleri kapatır ve boşaltır → GHL kapanan turu sonraki ekranda çerçeveye taşıyıp diriltmez. Adım beklerken
     (balon gizli, 1,2 sn) sayfanın kilidi ve karartma kalkar — sürücü fare olayında karartmayı yeniden çizip tıklamayı yutuyordu;
     balon yeniden görünce tur normal sürer. 30 sn balonsuz kalan tur temizlenir.
   - **HighLevel rehberleri (Pendo) Türkçe sayfada gösterilmiyor:** `pendo.stopGuides()` (yalnız o sayfa yüklemesi; GHL Pendo'yu
