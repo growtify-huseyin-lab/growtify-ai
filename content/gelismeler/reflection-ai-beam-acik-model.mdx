@@ -1,0 +1,22 @@
+---
+slug: reflection-ai-beam-acik-model
+date: "2026-10-06"
+title: "Reflection AI, Açık Ağırlıklı İlk Modeli Beam'i Duyurdu: Apache 2.0 Lisansıyla, Ağırlıklar Bu Ay Geliyor"
+summary: "Reflection AI, kodlama, akıl yürütme ve ajan işleri için geliştirdiği Beam modelini duyurdu: 501 milyar parametreli, her adımda 23 milyarı çalışan bir model. Ağırlıklar Apache 2.0 lisansıyla bu ay içinde yayınlanacak. Şirketin paylaştığı test sonuçları kendi ölçümleri."
+tags: ["yapay zeka", "modeller"]
+---
+
+Reflection AI, açık ağırlıklı model serisinin ilki olan Beam'i duyurdu. Model, kodlama, akıl yürütme ve ajan işleri için tasarlanmış. Şirket ağırlıkları, kullanım ve ticari serbestliği geniş bir lisans olan Apache 2.0 ile yayınlayacak.
+
+## Kısaca
+
+- **Ne duyuruldu:** 5 Ekim'de Beam. Toplam 501 milyar parametreli, her adımda 23 milyarı devreye giren seyrek bir "uzmanlar karışımı" modeli. Eğitimde 1 milyon token'a kadar bağlamla çalışılmış.
+- **Lisans ve erişim:** Ağırlıklar, teknik rapor ve model kartı Apache 2.0 lisansıyla "bu ay içinde" yayınlanacak. Şimdilik erken erişim için bekleme listesi var, fiyat açıklanmadı.
+- **Şirketin sonuçları:** Reflection'ın paylaştığı testlerde SWE-bench Verified'da 80,9, GPQA Diamond'da 90,5 gibi sonuçlar var. Kıyaslama ağırlıklı olarak GLM, Kimi K3, Qwen ve DeepSeek gibi açık modellerle yapılmış. Şirket, GLM-5.2'ye yakın sonuçları 3-4 kat daha az hesaplama gücüyle aldığını söylüyor.
+- **Eğitim ölçeği:** Ön eğitim 23,8 trilyon token üzerinde, binlerce NVIDIA GB300 GPU'yla dört haftanın altında tamamlanmış.
+
+## Bizim yorumumuz
+
+Beam'in öne çıkan yanı lisansı: Apache 2.0, modeli ticari işlerde kullanmak ve üzerine uyarlamak için en az kısıtlayıcı lisanslardan biri. Açık modellerin sayısı arttıkça işletmelerin tek bir sağlayıcıya bağlı kalma zorunluluğu da azalıyor. Bunu daha önce [Kimi K3'ün açık ağırlıklarında](/gelismeler/kimi-k3-acik-agirliklar-yayinda) da görmüştük. Yine de iki konuda temkinli olmak lazım. Birincisi, ağırlıklar henüz ortada yok; şu an elimizde sadece duyuru var. İkincisi, rakamlar şirketin kendi testleri ve kıyaslama çoğunlukla diğer açık modellerle yapılmış, en güçlü kapalı modellerle değil. 501 milyar parametrelik bir modeli kendi bilgisayarında çalıştırmak da pratik değil; sıradan bir işletme ona büyük ihtimalle bir sağlayıcı ya da model yönlendirici üzerinden ulaşacak. Ağırlıklar çıkınca bağımsız testlerle birlikte tekrar bakmaya değer.
+
+Kaynak: [Reflection AI](https://reflection.ai/blog/introducing-beam)

@@ -1,0 +1,22 @@
+---
+slug: reflection-ai-beam
+date: "2026-10-06"
+title: "Reflection AI Announces Beam, Its First Open-Weight Model: Apache 2.0, With Weights Due This Month"
+summary: "Reflection AI announced Beam, a model built for coding, reasoning, and agentic work: 501 billion parameters, with 23 billion active per step. Weights are due this month under the Apache 2.0 license. The benchmark results it shared are its own measurements."
+tags: ["AI", "models"]
+---
+
+Reflection AI announced Beam, the first model in its open-weight series, designed for coding, reasoning, and agentic work. The company will release the weights under Apache 2.0, a license that gives broad freedom for commercial use and adaptation.
+
+## In brief
+
+- **What was announced:** Beam, on October 5. A sparse "mixture of experts" model with 501 billion total parameters, 23 billion of which are active per step. Training worked with context of up to 1 million tokens.
+- **License and access:** weights, a technical report, and a model card are due "later this month" under Apache 2.0. For now there's an early-access waitlist, and no pricing has been announced.
+- **The company's results:** Reflection's tests include scores like 80.9 on SWE-bench Verified and 90.5 on GPQA Diamond. Comparisons are mostly against other open models such as GLM, Kimi K3, Qwen, and DeepSeek. The company says it gets results close to GLM-5.2 with 3–4x less compute.
+- **Training scale:** pretraining on 23.8 trillion tokens, completed in under four weeks on thousands of NVIDIA GB300 GPUs.
+
+## Our take
+
+Beam's standout feature is its license: Apache 2.0 is one of the least restrictive licenses for using a model commercially and adapting it. As open models multiply, businesses are less locked into a single provider; we saw the same with [Kimi K3's open weights](/en/news/kimi-k3-open-weights-released). Still, two cautions. First, the weights aren't out yet; for now there's only the announcement. Second, the numbers are the company's own tests, and the comparisons are mostly against other open models, not the strongest closed ones. Running a 501-billion-parameter model on your own machine isn't practical either; a typical business will most likely reach it through a provider or model router. It's worth another look once the weights are out and independent tests arrive.
+
+Kaynak: [Reflection AI](https://reflection.ai/blog/introducing-beam)
