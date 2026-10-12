@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.1.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.13.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.13.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,11 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.13.1** — 2026-10-12 — **Yapay Zeka Stüdyosu güncellemesi Türkçe** (CEO: "buna da bak"). Katalog oturumsuz, doğrudan uygulama
+  dosyasından çıkarıldı (acorn ile `nav`+`chat` içeren mesaj nesnesi; bölümler değişkenlere ayrılmış, çözümlendi): 814 metin. GHL
+  "Ayarlar" bölümünü "Daha fazla"ya taşımış (150 anahtar) + yeni Analitik ve Form gönderimleri sayfaları: 177 yeni/değişen → 104'ü
+  taşınan metnin mevcut Türkçesi, 73 yeni çeviri. validate 0 hata. Sabit metin sözlüğü (31) ve vekildeki şablon istemi
+  değişimleri (12) yeni kodda birebir duruyor → çalışmaya devam ediyor. Bekçi izi güncellendi; GHL güncelleme kaydı kapatıldı.
 - **1.13.0** — 2026-10-12 — **GHL güncellemesi: 5.170 yeni metin Türkçe** (bekçi #194 "kabuk, takvim, sayfa değişti"; CEO: "kontrol
   et, sürekli güncel kalalım"). CEO'nun Chrome'unda (app.gohighlevel.com, yalnız o sekmede geçici TR) 114 sayfada katalog anahtar
   karşılaştırması: ana katalog 3.238 (Takvim Yapay Zekası, toplu işlemler + içe aktarma sihirbazı, Sesli Yapay Zeka oluşturucu,
