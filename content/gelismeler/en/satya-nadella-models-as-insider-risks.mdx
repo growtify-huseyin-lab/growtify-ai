@@ -1,0 +1,22 @@
+---
+slug: satya-nadella-models-as-insider-risks
+date: "2026-10-12"
+title: "Satya Nadella: AI Models Should Be Treated Like \"Insider Risks\""
+summary: "Microsoft CEO Satya Nadella published an essay arguing that companies should manage AI models with access to sensitive data and the power to act on their behalf as \"insider risks\": not because they are malicious, but because they can make mistakes or be compromised. His proposal: control a model's access and authority from outside the model."
+tags: ["AI", "safety"]
+---
+
+In an essay on X titled "Models as Insider Risks in the Super Intelligence Era," Microsoft CEO Satya Nadella argued that companies need to change how they think about AI. His core idea: separate the supply of intelligence from the authority over it.
+
+## In brief
+
+- **The problem:** Nadella says that with traditional software we could trace a behavior back to a specific code path; with today's models, we can't. Yet we're giving these models access to our most sensitive data and the power to take critical actions on our behalf. A model provider's assurances don't relieve a company of that responsibility.
+- **His proposed approach:** treat models, closed or open-weight, like "insider risks." Not because they're malicious, but because any capable actor with access to important systems can make mistakes or be compromised. The principles companies already apply to powerful insiders (establishing identity, limiting privileges, logging activity, setting boundaries) should apply to models too.
+- **Controls outside the model:** the controls that govern what a model can access and do should sit outside the model, not inside it. Nadella says using one model to check another is useful but not enough on its own, and can create "nested black boxes."
+- **Seven principles:** don't depend on a single model; leave tamper-proof, human-readable evidence of every meaningful model action; continuously test failures and attacks, not just successful tasks; control access and permissions independently; keep auditing independent of the model being audited; make sure an authorized person can pause or stop a model mid-task; and disclose incidents promptly to those affected.
+
+## Our take
+
+The essay's last line sums it up: the most trustworthy AI system won't be the one with the model we trust most, but the one that lets us trust the model the least. That applies to small businesses as much as large ones. If you use an AI agent with access to your inbox, customer list, or payment account, a few concrete habits follow from Nadella's principles. Give the agent only the access its job needs. Keep a record of what it does and read it yourself from time to time. Don't let the same model check its own important results. And always keep a way to stop it. We stressed the same point in our [Grok Bot piece](/en/news/xai-grok-bot-ai-agents): test autonomous agents on low-stakes work first. One note: Microsoft sells enterprise security and agent-governance products in this space, so the essay also reflects the company's own position. But whatever product you use, these are sensible principles.
+
+Kaynak: [Satya Nadella, X](https://x.com/satyanadella/status/2108931348857827686)
