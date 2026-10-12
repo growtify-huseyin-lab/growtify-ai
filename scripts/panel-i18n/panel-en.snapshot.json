@@ -369,6 +369,15 @@
    "address": "Billing address",
    "payment": "Payment"
   },
+  "plan": {
+   "title": "Choose your billing",
+   "perMonth": "{price}/mo",
+   "perYear": "{price}/yr",
+   "perWeek": "{price}/wk",
+   "billedMonthly": "{price} billed monthly",
+   "billedAnnually": "{price} billed annually",
+   "billedWeekly": "{price} billed weekly"
+  },
   "modal": {
    "successTitle": "Payment Successful!",
    "successMessage": "Your payment has been processed successfully."
@@ -379,6 +388,11 @@
    "groupMessage": "Welcome to the group! You can now access all content and participate in discussions.",
    "done": "Done"
   }
+ },
+ "appOpenBanner": {
+  "title": "Use app for better experience",
+  "cta": "Open app",
+  "dismiss": "Dismiss"
  },
  "selectableList": {
   "loading": "Loading items...",
@@ -577,10 +591,10 @@
     "feedback": "Unique link of your profile"
    },
    "title": {
-    "label": "Your Title",
-    "placeholder": "Input Text",
+    "label": "Title",
+    "placeholder": "e.g. Head of growth",
     "feedback": "This is displayed throughout the platform, usually with your full name",
-    "maxLength": "Title cannot exceed 150 characters"
+    "maxLength": "Title cannot exceed 80 characters"
    },
    "bio": {
     "label": "Bio",
@@ -605,6 +619,17 @@
     "feedback": "Unique link of your profile",
     "required": "Profile slug is required",
     "invalid": "Slug can only contain lowercase letters, numbers, and hyphens"
+   },
+   "company": {
+    "label": "Company",
+    "placeholder": "e.g. Acme Agency",
+    "feedback": "Where you currently work"
+   },
+   "website": {
+    "label": "Website",
+    "placeholder": "example.com",
+    "feedback": "Link people can visit from your profile",
+    "invalid": "Enter a valid website, e.g. example.com"
    },
    "language_preference": {
     "label": "Preferred language"
@@ -1342,7 +1367,125 @@
     "chats": "Chat",
     "meeting": "Meeting",
     "language_settings": "Language Settings",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "events": "Events"
+   }
+  },
+  "events": {
+   "title": "Events",
+   "tabsAriaLabel": "Events sections",
+   "subtitle": {
+    "tickets": "Tickets for events you have registered for",
+    "connections": "People you have met at events",
+    "schedule": "Sessions you have saved across every event",
+    "bookmarks": "Everything you have bookmarked at events"
+   },
+   "tabs": {
+    "tickets": "My tickets",
+    "connections": "My connections",
+    "schedule": "My schedule",
+    "bookmarks": "My bookmarks"
+   },
+   "emptyState": {
+    "title": "Nothing here yet"
+   },
+   "status": {
+    "live": "Live",
+    "upcoming": "Upcoming",
+    "past": "Past"
+   },
+   "tickets": {
+    "countOne": "1 ticket",
+    "countMany": "{count} tickets",
+    "pageRange": "Showing {start}–{end} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "emptyTitle": "No tickets yet",
+    "emptyDescription": "Tickets you buy for an event will show up here.",
+    "errorTitle": "We could not load your tickets",
+    "errorDescription": "Something went wrong. Please refresh the page and try again."
+   },
+   "connections": {
+    "message": "Message",
+    "pageRange": "Showing {start}–{end} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "emptyTitle": "No connections yet",
+    "emptyDescription": "People you connect with at events will show up here.",
+    "errorTitle": "We could not load your connections",
+    "errorDescription": "Something went wrong. Please refresh the page and try again."
+   },
+   "schedule": {
+    "countOne": "1 session",
+    "countMany": "{count} sessions",
+    "pageRange": "Showing {start}–{end} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "allEvents": "All events",
+    "emptyTitle": "Nothing scheduled yet",
+    "emptyDescription": "Sessions you save from an event agenda will show up here.",
+    "errorTitle": "We could not load your schedule",
+    "errorDescription": "Something went wrong. Please refresh the page and try again."
+   },
+   "ticket": {
+    "allTickets": "All tickets",
+    "ticketPosition": "Ticket {index} / {total}",
+    "qrRailLabelOne": "1 ticket for this event",
+    "qrRailLabelMany": "{count} tickets for this event",
+    "qrAria": "Ticket QR code",
+    "qrUnavailable": "QR code unavailable",
+    "scanAtVenue": "Scan at venue",
+    "previousTicket": "Previous ticket",
+    "nextTicket": "Next ticket",
+    "fieldTicketType": "Ticket type",
+    "fieldVenue": "Venue",
+    "getDirections": "Get directions",
+    "downloadTicket": "Download ticket",
+    "online": {
+     "title": "Online event",
+     "statusUpcoming": "Not started yet",
+     "statusLive": "Live now",
+     "statusPast": "Ended",
+     "helperUpcoming": "You can join anytime before it starts.",
+     "helperLive": "The event has started.",
+     "helperPast": "This event has already ended.",
+     "join": "Join event",
+     "copyLink": "Copy link",
+     "linkCopied": "Link copied",
+     "availableAt": "The join link will be available on {date}",
+     "unavailable": "The join link isn't available yet"
+    }
+   },
+   "placeholder": {
+    "tickets": {
+     "title": "No tickets yet",
+     "description": "Tickets you buy for an event will show up here."
+    },
+    "connections": {
+     "title": "No connections yet",
+     "description": "People you connect with at events will show up here."
+    },
+    "schedule": {
+     "title": "Nothing scheduled yet",
+     "description": "Sessions you save from an event agenda will show up here."
+    },
+    "bookmarks": {
+     "title": "No bookmarks yet",
+     "description": "Anything you bookmark at an event will show up here."
+    }
+   },
+   "bookmarks": {
+    "pageRange": "Showing {start}–{end} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "allEvents": "All events",
+    "emptyTitle": "No bookmarks yet",
+    "emptyDescription": "Anything you bookmark at an event will show up here.",
+    "errorTitle": "We could not load your bookmarks",
+    "errorDescription": "Something went wrong. Please refresh the page and try again.",
+    "saved": "Remove bookmark",
+    "unsaved": "Save bookmark",
+    "openExhibitor": "Open {name}"
    }
   },
   "language_settings": {
@@ -1781,7 +1924,29 @@
  "library": {
   "myCourseCard": {
    "aboutThisCourse": "About This Course",
-   "byInstructor": "By {instructor}"
+   "byInstructor": "By {instructor}",
+   "tags": {
+    "language": {
+     "en": "English",
+     "es": "Spanish",
+     "fr-CA": "French (Canada)",
+     "fr-FR": "French (France)",
+     "pt-PT": "Portuguese (Portugal)",
+     "pt-BR": "Portuguese (Brazil)",
+     "de": "German",
+     "nl": "Dutch",
+     "it": "Italian",
+     "da": "Danish",
+     "no": "Norwegian",
+     "fi": "Finnish",
+     "sv": "Swedish"
+    },
+    "difficulty": {
+     "beginner": "Beginner",
+     "intermediate": "Intermediate",
+     "advanced": "Advanced"
+    }
+   }
   },
   "bundleCard": {
    "free": "Free",
@@ -2550,6 +2715,37 @@
    },
    "joinToViewChannels": "Join the group to view channels"
   },
+  "access": {
+   "title": "You don't have access to this channel",
+   "description": "This is a private channel. Contact your group admin to request access.",
+   "paidTitle": "Join {channelName}",
+   "paidDescription": "Purchase access to view and participate in this channel.",
+   "paidJoinHint": "Complete the payment to join the channel.",
+   "requestAccessHint": "Contact a channel manager or admin to request access.",
+   "joinChannelButton": "Join channel",
+   "statsMembers": "{count} member | {count} members",
+   "statsPosts": "{count} post | {count} posts",
+   "statsAdmins": "{count} admin | {count} admins",
+   "statsManagers": "{count} manager | {count} managers",
+   "statsSeparator": "·",
+   "channelManagers": "Channel managers",
+   "managersSeparator": ", ",
+   "managersAnd": " and ",
+   "managersOneOther": "1 other",
+   "managersOthers": "{count} others",
+   "descriptionLabel": "Description",
+   "activityLabel": "Activity",
+   "creatorTag": "Creator",
+   "showMoreManagers": "Show more",
+   "offerLabelOneTime": "One-time",
+   "offerLabelAnnual": "Annual",
+   "offerLabelMonthly": "Monthly",
+   "payModalTitle": "Join {channelName}",
+   "paymentUnavailableTitle": "Payment unavailable",
+   "paymentUnavailableDescription": "This channel is missing payment configuration. Contact your group admin.",
+   "joinFailedTitle": "Could not join channel",
+   "joinFailed": "Failed to join channel after payment."
+  },
   "icon": {
    "select": "Select Icon"
   },
@@ -2558,6 +2754,9 @@
    "buttonTooltip": "Create Channel/Section",
    "description": "Set a relatable name and explain the purpose of this channel",
    "submit": "Create Channel",
+   "continue": "Continue",
+   "stepOf": "Step {current}/{total}",
+   "failed": "Failed to create channel",
    "type": {
     "channel": {
      "title": "Channel",
@@ -2593,6 +2792,16 @@
      "label": "Private channel",
      "toggle": "Only invited members can join",
      "helper": "When a channel is private, only invited members can join and view messages",
+     "discoverable": {
+      "visible": {
+       "title": "Visible",
+       "description": "This channel appears in the list for non-members to spark interest before they join to view posts and resources."
+      },
+      "hidden": {
+       "title": "Hidden",
+       "description": "This channel stays off the list for non-members, so it remains truly private."
+      }
+     },
      "confirmToPrivate": {
       "title": "Make Channel Private",
       "message": "Only invited members will be able to view and join \"{name}\". Are you sure?"
@@ -2615,6 +2824,25 @@
    "description": "Update channel name, description, and settings",
    "submit": "Save Changes"
   },
+  "paymentSetup": {
+   "types": {
+    "free": "Free",
+    "recurring": "Recurring",
+    "oneTime": "One time"
+   },
+   "currency": "Currency",
+   "billingOptions": "Billing options",
+   "intervals": {
+    "monthly": "Monthly",
+    "annually": "Annually"
+   },
+   "price": "Price",
+   "oneTimeHelper": "One-time payment for lifetime access",
+   "freeEmptyTitle": "No pricing options available for free channel",
+   "freeEmptyDescription": "Members can join without paying. Choose Recurring or One time to charge for access.",
+   "testMode": "Test Mode",
+   "privateOnlyTooltip": "Payment setup is only for private channels"
+  },
   "aria": {
    "removeMember": "Remove member"
   },
@@ -2624,12 +2852,21 @@
    "selectAll": "Select All ({count})"
   },
   "settings": {
+   "tabs": {
+    "about": "About",
+    "pricing": "Pricing"
+   },
    "about": {
     "channelDetails": "Channel Details",
     "edit": "Edit",
     "channelNameAndIcon": "Channel Name and Icon",
     "channelDescription": "Channel Description",
     "thisChannelIs": "This channel is",
+    "visibilitySummary": {
+     "publicVisible": "Public-Visible",
+     "privateVisible": "Private-Visible",
+     "privateHidden": "Private-Hidden"
+    },
     "managedBy": "Managed by",
     "noManagersAssigned": "No managers assigned",
     "andOther": " and {count} other",
@@ -2648,6 +2885,9 @@
     "leaveChannelConfirmation": "Are you sure you want to leave the channel \"{name}\"? You will need to be re-invited to rejoin.",
     "deleteChannel": "Delete Channel",
     "deleteChannelConfirmation": "Are you sure you want to delete the channel \"{name}\"? This action cannot be undone."
+   },
+   "pricing": {
+    "saveFailed": "Failed to save pricing. Please try again."
    }
   },
   "sections": {
@@ -3513,7 +3753,6 @@
    "saveConfirmMessage": "This will update your membership questions for new members joining your group.",
    "newBadge": "New"
   },
-  "groupOptions": "Group options",
   "publicGroup": "Public Group",
   "privateGroup": "Private Group",
   "menuOptions": {
@@ -3581,7 +3820,7 @@
     "edit": "Edit",
     "mostPopular": "Most popular",
     "freeTrialDays": "{count}-day free trial",
-    "memberCount": "{count} members",
+    "memberCount": "{count} members | {count} member | {count} members",
     "activateAria": "Activate the {name} plan",
     "deactivateAria": "Deactivate the {name} plan",
     "moreActionsAria": "More actions for the {name} plan",
@@ -3593,16 +3832,22 @@
      "descriptionWhenFree": "No plan is active, so members join for free. Activate a plan below to start charging.",
      "confirm": {
       "title": "Make this community free?",
-      "description": "This switches off {count} active plan(s) so nothing is on sale.",
-      "warning": "New members will be able to join without paying. All active plan subscriptions will be cancelled. Existing members keep their access.",
-      "reversible": "You can start charging again at any time by activating a plan.",
-      "action": "Make community free"
+      "description": "This switches off all active plans. You can start charging again anytime by activating a plan.",
+      "warning": "New members join for free. Existing members keep their access.",
+      "cancelSubscriptions": "Cancel active subscriptions",
+      "cancelSubscriptionsHint": "Stops recurring billing. Members keep their access.",
+      "action": "Make community free",
+      "reversible": "You can start charging again anytime by activating a plan."
      }
     },
     "actions": {
      "edit": "Edit",
+     "viewDetails": "View details",
      "markMostPopular": "Mark as most popular",
      "delete": "Delete plan",
+     "deleteMenu": "Delete",
+     "deleteDisabledHelper": "Plans with active members can't be deleted",
+     "deleteLastActiveHelper": "Deactivate this plan or add another before deleting the last active plan",
      "unmarkMostPopular": "Remove most popular"
     },
     "empty": {
@@ -3613,10 +3858,16 @@
      "createTitle": "Create pricing plan",
      "editTitle": "Edit pricing plan",
      "breadcrumbRoot": "Subscriptions",
-     "back": "Back",
+     "back": "Previous",
      "next": "Next",
      "createPlan": "Create plan",
      "saveChanges": "Save changes",
+     "discard": {
+      "title": "Discard changes?",
+      "description": "You'll lose unsaved changes to this plan.",
+      "keepEditing": "Keep editing",
+      "discard": "Discard"
+     },
      "steps": {
       "access": "Access",
       "details": "Details",
@@ -3630,11 +3881,12 @@
       "descriptionTooLong": "Description must be {max} characters or fewer.",
       "currencyRequired": "Pick a currency.",
       "billingRequired": "Switch on at least one billing period.",
-      "amountRequired": "Enter an amount greater than 0."
+      "amountRequired": "Enter an amount greater than 0.",
+      "benefitsRequired": "Add at least one benefit."
      },
      "access": {
       "title": "What does this plan unlock?",
-      "description": "Pick the channels, courses and events members get with this plan. You'll price it next.",
+      "description": "Pick the channels, courses and events members get with this plan. You'll name it and price it next.",
       "unlockCount": "Unlocks {count} of {total} items",
       "fullAccess": {
        "title": "Full access",
@@ -3647,8 +3899,12 @@
       },
       "loadError": "Could not load what this plan can unlock.",
       "empty": "This group has no private channels, paid courses or paid upcoming events to unlock yet.",
+      "generalCommunityAccess": "General community access",
       "searchPlaceholder": "Search channels, courses, or events",
-      "searchEmpty": "No items match your search."
+      "searchEmpty": "No items match your search.",
+      "existingAccessLockedTooltip": "Existing access items can't be removed.",
+      "lockedBanner": "Access controls are locked while editing. You can add new access but can't remove existing ones. To change the access structure, {link}.",
+      "lockedBannerLink": "create a new plan"
      },
      "details": {
       "name": "Plan name",
@@ -3662,10 +3918,27 @@
       "days": "days",
       "testMode": "Test Mode",
       "testModeAria": "Create this plan against the test payment integration",
+      "billingFrequency": "Billing frequency",
       "billingPeriod": "Billing period",
       "amount": "Amount",
       "status": "Status",
-      "statusAria": "Enable the {name} billing option"
+      "statusAria": "Enable the {name} billing option",
+      "existingPriceLockedTooltip": "Existing billing periods can't be turned off.",
+      "editPricesNotice": "You can change amounts, free trial, and payment mode. Currency stays the same for this plan.",
+      "recurringUpdateConfirm": {
+       "title": "Update recurring prices?",
+       "description": "You're changing at least one recurring billing amount. New members will see the new prices.",
+       "warning": "Existing subscribers keep their current price unless you choose to move them.",
+       "moveSubscribers": "Move active subscribers to the new recurring prices",
+       "moveSubscribersHint": "One-time purchases are never moved.",
+       "action": "Save price changes"
+      },
+      "intervalHint": {
+       "weekly": "Billed every week",
+       "monthly": "Billed every month",
+       "yearly": "Billed every year",
+       "oneTime": "Paid once, never expires"
+      }
      },
      "benefits": {
       "add": "Add benefit",
@@ -3679,10 +3952,15 @@
       "namePlaceholder": "Plan name",
       "descriptionPlaceholder": "Description will appear here",
       "noPrice": "$—",
+      "priceWeekly": "{amount}/wk",
+      "priceMonthly": "{amount}/mo",
+      "priceYearly": "{amount}/yr",
       "perMonth": "{price}/mo, billed yearly",
+      "save": "Save {percent}%",
       "included": "What's included",
       "noBenefits": "Benefits will appear here",
-      "subscribe": "Subscribe"
+      "subscribe": "Subscribe",
+      "startTrial": "Start {count}-day free trial"
      }
     },
     "errors": {
@@ -3692,27 +3970,40 @@
      "createFailed": "Could not create the pricing plan",
      "activateFailed": "Could not activate the plan",
      "deactivateFailed": "Could not deactivate the plan",
-     "makeFreeFailed": "Could not deactivate {count} plan(s). The community is still paid.",
+     "makeFreeFailed": "Could not make the community free. The community is still paid.",
      "markMostPopularFailed": "Could not mark the plan as most popular",
      "unmarkMostPopularFailed": "Could not remove the most popular mark",
      "testModeFailed": "Could not switch the payment mode. The plan was not created.",
      "testModeRollback": "The plan was not created. Payment mode was reverted.",
      "testModeRollbackFailed": "Could not revert the payment mode after the plan failed to create.",
      "missingGroupContext": "Could not save the plan because the group or location is missing.",
+     "deleted": "Pricing plan deleted",
+     "deleteFailed": "Could not delete the plan",
      "deleteUnavailable": "Deleting plans is not available yet.",
+     "updated": "Pricing plan updated",
+     "updateFailed": "Could not update the plan",
+     "reorderFailed": "Could not reorder the plan",
      "updateUnavailable": "Editing plans is not available yet."
     },
     "statusConfirm": {
      "activateTitle": "Activate {name}?",
-     "deactivateTitle": "Deactivate {name}?",
+     "deactivateTitle": "Deactivate \"{name}\"?",
+     "deactivateLastTitle": "Deactivate your last plan?",
      "activateDescription": "Members will be able to subscribe to this plan.",
-     "deactivateDescription": "This plan will stop accepting new subscribers.",
+     "deactivateDescription": "This plan won't be available to new members.",
+     "deactivateLastDescription": "This is your only active plan, so the community becomes free. You can charge again anytime.",
      "becomesPaid": "This is your first active plan, so the community becomes paid. New members will have to subscribe to join.",
-     "becomesFree": "This is your last active plan. Deactivating it makes the community free — anyone will be able to join without paying.",
      "appearsOnJoin": "The plan appears on the join screen straight away.",
-     "keepsExistingMembers": "It disappears from the join screen. Members already on this plan keep their access and continue to be billed.",
+     "keepsExistingMembers": "Current subscribers keep their access and stay billed as usual.",
      "confirmActivate": "Activate plan",
      "confirmDeactivate": "Deactivate plan"
+    },
+    "preview": {
+     "title": "Member view",
+     "subtitle": "This is how members choose a plan for {community}.",
+     "detailsTitle": "Plan details",
+     "detailsSubtitle": "This is how members see this plan.",
+     "close": "Close"
     }
    }
   },
@@ -3769,6 +4060,7 @@
    "inviteMembers": "Invite Members"
   },
   "leave": {
+   "manageMembership": "Manage membership",
    "leaveGroup": "Leave Group",
    "confirmTitle": "Leave Group",
    "confirmMessage": "Are you sure you want to leave this group? You may need to rejoin or be re-invited to access this group again.",
@@ -3800,6 +4092,10 @@
    "sendInvite": "Send Invite",
    "invitationSentSuccessfully": "Invitation Sent",
    "invitationSentSuccessfullyDescription": "Invitation has been sent to {0}",
+   "acceptedTitle": "Invitation Accepted",
+   "acceptedDescription": "You have been added to the group. Welcome!",
+   "acceptFailedTitle": "Unable to Accept Invitation",
+   "acceptFailedDescription": "Something went wrong while accepting the invitation. Please try again later.",
    "permissionDenied": "You don't have permission to invite members to this group",
    "labels": {
     "name": "Name",
@@ -3880,7 +4176,21 @@
    "requestSentTitle": "Request Sent",
    "requestSentDescription": "The group admin will approve or decline it. We will email you their decision.",
    "requestApprovedTitle": "Membership Approved",
-   "requestApprovedDescription": "Congratulations, the admin has approved your membership."
+   "requestApprovedDescription": "Congratulations, the admin has approved your membership.",
+   "joinedTitle": "Group Joined!",
+   "joinedDescription": "You have successfully joined the group.",
+   "submissionFailedTitle": "Submission Failed",
+   "submissionFailedFallback": "Failed to submit membership answers",
+   "paymentInitiationFailedTitle": "Payment Initiation Failed",
+   "paymentInitiationFailedFallback": "Payment initiation failed",
+   "paymentCaptureFailedTitle": "Payment Capture Failed",
+   "paymentCaptureFailedFallback": "Payment capture failed",
+   "joinFailedTitle": "Join Failed",
+   "joinFailedFallback": "Failed to join group",
+   "paymentErrorTitle": "Payment Error",
+   "paymentModalFailedFallback": "Failed to open payment modal",
+   "allQuestionsRequired": "All questions must be answered",
+   "selectAtLeastOneOption": "Question {index}: Please select at least one option"
   },
   "redirectingToGroupHome": "Redirecting to group home...",
   "members": {
@@ -3937,6 +4247,133 @@
    "viewAllEventsByDescription": "creating an account or logging in",
    "viewAllEvents": "View all Events",
    "viewAllPostsPrivateTitle": "This is a private group"
+  },
+  "joinPlans": {
+   "title": "Choose your plan",
+   "subtitle": "Pick how you'd like to join {community}.",
+   "back": "Back to {community}",
+   "breadcrumb": {
+    "plans": "Choose your plan"
+   },
+   "change": {
+    "title": "Change plan",
+    "subtitle": "Pick the plan that fits. You can switch back any time.",
+    "breadcrumb": "Change plan",
+    "successTitle": "Plan updated",
+    "successBody": "You're now on {planName}.",
+    "errorTitle": "Couldn't change plan",
+    "errorBody": "Something went wrong switching your plan. Try again.",
+    "frequencyChangeWarning": "You'll be charged the new amount now, and your billing date resets to today."
+   },
+   "emptyBody": "This community has no plans on offer right now.",
+   "errorTitle": "Couldn't load plans",
+   "loadError": "Something went wrong loading the plans. Try again in a moment.",
+   "ribbon": {
+    "mostPopular": "Most popular",
+    "current": "Current plan"
+   },
+   "actions": {
+    "choosePlan": "Choose plan",
+    "startTrial": "Start {count}-day free trial",
+    "currentPlan": "Current plan",
+    "changePlan": "Change plan",
+    "changeBilling": "Change billing",
+    "continue": "Continue",
+    "updating": "Updating…",
+    "confirmPlanChange": "Confirm plan change",
+    "confirmBillingChange": "Confirm billing change",
+    "confirmAndPay": "Confirm & pay"
+   },
+   "unit": {
+    "weekly": "/week",
+    "monthly": "/month",
+    "yearly": "/year",
+    "oneTime": "one time"
+   },
+   "included": "What's included",
+   "price": {
+    "perWeek": "{amount}/wk",
+    "perMonth": "{amount}/mo",
+    "perYear": "{amount}/yr",
+    "oneTime": "One-time payment",
+    "billedEvery": "billed {period}",
+    "billedYearlyNote": "{monthly}/mo, billed yearly",
+    "altPrices": "or {prices}"
+   },
+   "frequency": {
+    "title": "Choose how you pay",
+    "legend": "Billing period",
+    "save": "Save {percent}%",
+    "currentBadge": "Current"
+   },
+   "confirm": {
+    "currentPlan": "Current plan",
+    "newPlan": "New plan",
+    "planWithPeriod": "{plan} · {period}",
+    "dueOn": "Due on {date}",
+    "dueNow": "Due now",
+    "noteChange": "You'll get the new plan immediately. You'll be charged on {date}.",
+    "intervals": {
+     "weekly": "Weekly",
+     "monthly": "Monthly",
+     "yearly": "Annual",
+     "oneTime": "One-time",
+     "unknown": "Unknown"
+    }
+   },
+   "checkoutTitle": "Join group",
+   "checkoutError": "Couldn't open checkout"
+  },
+  "manageSubscription": {
+   "title": "Manage subscription",
+   "back": "Back to {community}",
+   "loadError": "Something went wrong loading your subscription. Try again in a moment.",
+   "emptyBody": "You don't have a subscription to this community.",
+   "included": "What's included",
+   "free": {
+    "planName": "{community} member",
+    "communityAccess": "{community} community access"
+   },
+   "status": {
+    "active": "Active",
+    "paymentFailed": "Payment failed"
+   },
+   "labels": {
+    "nextPayment": "Next payment",
+    "accessUntil": "Access until",
+    "billing": "Billing",
+    "oneTimePayment": "One-time",
+    "paymentMethod": "Payment method",
+    "memberSince": "Member since",
+    "notApplicable": "—"
+   },
+   "price": {
+    "perWeek": "{amount}/wk",
+    "perMonth": "{amount}/mo",
+    "perYear": "{amount}/yr",
+    "billedYearlyNote": "{monthly}/mo, billed yearly"
+   },
+   "paymentMethod": {
+    "masked": "{brand} •••• {last4}",
+    "editAria": "Edit payment method"
+   },
+   "footer": {
+    "renews": "Renews automatically.",
+    "oneTime": "One-time payment. No renewals.",
+    "updateCard": "Update your card to keep access."
+   },
+   "alert": {
+    "title": "We couldn't process your payment",
+    "retry": "We'll try again on {date}. If that fails too, your access ends.",
+    "retrySoon": "We'll try again shortly. If that fails too, your access ends."
+   },
+   "actions": {
+    "changePlan": "Change plan",
+    "leavePrompt": "Don't need it anymore?",
+    "leaveGroup": "Cancel any time"
+   },
+   "leaveFailedTitle": "Couldn't leave group",
+   "leaveFailedBody": "Something went wrong while leaving. Please try again."
   }
  },
  "completeProfile": {
@@ -4943,23 +5380,49 @@
  },
  "appointments": {
   "title": "Appointments",
-  "emptyState": {
-   "title": "No appointments yet",
-   "description": "Book your first appointment to get started."
-  },
   "cta": {
    "book": "Book Appointment"
   },
+  "catalog": {
+   "title": "Catalog",
+   "searchPlaceholder": "Search calendars, service booking pages",
+   "searchPlaceholderCalendars": "Search calendars",
+   "searchPlaceholderServices": "Search service booking pages",
+   "empty": "No booking options match your filters.",
+   "unavailable": "No calendars or services enabled for booking from clientportal.",
+   "viewAll": "View all",
+   "viewAllCalendars": "View all calendars",
+   "viewAllServices": "View all services",
+   "moreAvailable": "{count} more available to book",
+   "detailNotFound": "This booking option is unavailable.",
+   "filters": {
+    "ariaLabel": "Booking type filters",
+    "all": "All",
+    "calendars": "Calendars",
+    "services": "Services"
+   },
+   "sections": {
+    "calendars": "Calendars {count}",
+    "services": "Services {count}"
+   },
+   "card": {
+    "book": "Book",
+    "view": "View",
+    "free": "Free",
+    "serviceCount": "{count} services",
+    "allServices": "All Services",
+    "noDescription": "No description added",
+    "rescheduleAllowed": "Reschedulable",
+    "rescheduleNotAllowed": "Non-reschedulable",
+    "cancellationAllowed": "Cancellable",
+    "cancellationNotAllowed": "Non-cancellable"
+   }
+  },
   "book": {
-   "back": "Back to appointments",
-   "subtitle": "Pick a calendar and choose a time that works for you.",
-   "switching": "Loading calendar…",
    "bookAnother": "Book Another Appointment",
    "viewAppointments": "View Appointments"
   },
   "list": {
-   "title": "Upcoming Appointments",
-   "loadMore": "Load more",
    "allLoaded": "You're all caught up",
    "error": "Couldn't load appointments.",
    "retry": "Retry",
@@ -4967,11 +5430,6 @@
     "title": "No upcoming appointments",
     "description": "When you book an appointment, it'll show up here."
    }
-  },
-  "tabs": {
-   "upcoming": "Upcoming",
-   "past": "Past",
-   "ariaLabel": "Appointment lists"
   },
   "sidebar": {
    "sections": {
@@ -4985,11 +5443,9 @@
     "tomorrow": "Tomorrow",
     "done": "Completed",
     "pending": "Pending"
-   },
-   "noAppointments": "No appointments found"
+   }
   },
   "past": {
-   "title": "Past Appointments",
    "empty": "No past appointments.",
    "emptyDescription": "Completed and past appointments will appear here."
   },
@@ -5007,18 +5463,14 @@
   },
   "detail": {
    "status": "Status",
-   "location": "Location",
    "meetingLocation": "Meeting location",
    "schedule": "Schedule",
    "more": "more",
    "guests": "Guests",
    "viewMoreGuests": "View more",
-   "viewLessGuests": "View less",
-   "guestsLoading": "Loading guest details..."
+   "viewLessGuests": "View less"
   },
   "card": {
-   "date": "Date",
-   "time": "Time",
    "email": "Email",
    "phone": "Phone",
    "cancel": "Cancel",
@@ -5027,8 +5479,7 @@
    "moreDetails": "More details",
    "copyAddress": "Copy address",
    "addressCopied": "Address copied",
-   "joinDisabledTooltip": "Available {minutes} minutes before schedule",
-   "actionsAria": "Appointment actions"
+   "joinDisabledTooltip": "Available {minutes} minutes before schedule"
   },
   "widgetModal": {
    "cancelTitle": "Cancel Appointment",
@@ -5049,26 +5500,17 @@
    "invalid": "Invalid",
    "new": "New",
    "booked": "Booked",
-   "pending": "Pending"
+   "pending": "Pending",
+   "unconfirmed": "Unconfirmed",
+   "active": "Active"
   },
   "modal": {
    "title": "Book Appointment",
-   "widgetTitle": "Select a Time",
    "widgetEmbedTitle": "Calendar booking widget",
-   "back": "Back",
    "close": "Close",
-   "continue": "Continue",
-   "appointmentType": {
-    "label": "Appointment Type",
-    "placeholder": "Select appointment type",
-    "meeting": "Meeting",
-    "service": "Service",
-    "rental": "Rental"
-   },
    "calendars": {
     "label": "Select a Calendar",
     "placeholder": "Choose a calendar",
-    "loading": "Loading calendars...",
     "empty": "No calendars available.",
     "error": "Couldn't load calendars.",
     "retry": "Retry",
@@ -5130,6 +5572,8 @@
     "noPastDescription": "Past events will show up here after they end.",
     "noSearchResultsTitle": "No matching events",
     "noSearchResultsDescription": "Try a different search to find an event.",
+    "noEventsTitle": "No events yet",
+    "noEventsDescription": "New events will show up here when they are published.",
     "noFilterResultsTitle": "No events in this location",
     "noFilterResultsDescription": "Try another location or clear the filter to see all events."
    },
@@ -5145,8 +5589,17 @@
     "formatInPerson": "In person",
     "formatOnline": "Online",
     "organizerEmail": "Email",
-    "organizerPhone": "Call",
+    "organizerPhone": "Phone",
     "organizerWebsite": "Website",
+    "sponsorsTitle": "Sponsors",
+    "sponsorsViewAll": "View all",
+    "sponsorsShowLess": "Show less",
+    "sponsorsMore": "+{count}",
+    "sponsorsViewAllAria": "View all {count} {tier} sponsors",
+    "interstitialAdSponsored": "Sponsored",
+    "interstitialAdSkip": "Skip",
+    "interstitialAdAria": "Sponsored message",
+    "interstitialAdSkipAria": "Skip ad, closes in {seconds} seconds",
     "register": "Register",
     "agendaSaved": "Saved",
     "agendaSearch": "Search sessions",
@@ -5163,6 +5616,8 @@
     "agendaSearchEmptyDescription": "No sessions match \"{query}\". Try a different search.",
     "agendaTimeTo": "to {time}",
     "agendaAddToCalendar": "Add to calendar",
+    "sessionAddToSchedule": "Add to schedule",
+    "sessionSavedNotice": "Session saved. Find it under My schedule in your profile settings.",
     "agendaReadMore": "Read more",
     "agendaReadLess": "Read less",
     "loadingTitle": "Loading event",
@@ -5170,61 +5625,170 @@
     "loadErrorDescription": "Refresh the page and try again.",
     "notFoundTitle": "Event not found",
     "notFoundDescription": "This event is unavailable or the link is incorrect.",
-    "customPdfPlaceholder": "This document will open here in a later update.",
-    "customEmbedPlaceholder": "This preview will open here in a later update.",
+    "openCustomInBrowser": "Open in browser",
+    "adBannerAria": "Event advertisement",
+    "copyCustomLink": "Copy link",
+    "customLinkCopied": "Copied!",
+    "customTabPreviewErrorTitle": "Preview unavailable",
+    "customTabPreviewErrorDescription": "This section cannot be shown here.",
+    "customPdfOpen": "Open PDF in a new tab",
+    "customPdfDownload": "Download",
+    "customPdfLoading": "Loading document…",
+    "customPdfError": "Preview unavailable.",
+    "customPdfPrev": "Previous page",
+    "customPdfNext": "Next page",
+    "customPdfZoomIn": "Zoom in",
+    "customPdfZoomOut": "Zoom out",
+    "customPdfZoomLevel": "{value}%",
+    "customPdfPage": "Page {current} of {total}",
+    "customPdfPageCompact": "{current} / {total}",
+    "customPdfPan": "Drag to move the page",
     "noVisibleSectionsTitle": "No sections to show",
     "noVisibleSectionsDescription": "This event has no visible sections for your portal.",
+    "directoryFilters": "Filters",
+    "directoryFilterClear": "Clear",
     "speakersSearch": "Search speakers",
-    "speakersFilters": "Filters",
-    "speakersFilterByLabel": "Filter by label",
-    "speakersFilterClear": "Clear",
-    "speakersEmpty": "No speakers match your search.",
-    "speakersSessionsTitle": "Sessions",
-    "speakersSessionCountOne": "1 session",
-    "speakersSessionCountMany": "{count} sessions",
-    "speakersSessionsLoading": "Loading sessions.",
-    "speakersSessionsLoadingAria": "Loading speaker sessions",
-    "speakersSessionsError": "Sessions could not load.",
-    "speakersSessionsErrorDescription": "Refresh the page and try again.",
-    "speakersSessionsEmpty": "No sessions for this speaker.",
+    "speakersFilterLabelGroup": "Label",
+    "speakersHintTitle": "Get to know the speakers",
+    "speakersHintBody": "Open a speaker's profile to read their bio and see the sessions they're presenting. Connect with them to keep the conversation going.",
+    "speakersEmptyTitle": "No speakers yet",
+    "speakersEmptyDescription": "Speakers will show up here once they are added to the event.",
+    "speakersSearchEmptyTitle": "No matching speakers",
+    "speakersSearchEmptyDescription": "No speakers match \"{query}\". Try a different search.",
     "speakersOpenDetails": "View details for {name}",
-    "speakersAll": "All speakers",
-    "speakersFollow": "Social",
-    "speakersShare": "Share",
-    "speakersCopyLink": "Copy link",
-    "speakersCopied": "Copied!",
     "speakersFollowAria": "Open {network} for {name}",
-    "speakersCopyLinkAria": "Copy link to {name}",
     "attendeesYou": "{name} (You)",
     "attendeesTitle": "Attendees",
     "attendeesSearch": "Search attendees",
+    "attendeesHintTitle": "Meet your fellow attendees",
+    "attendeesHintBody": "See who else is attending, open a profile to learn more about someone, and send a connection request to start networking.",
     "attendeesEmptyTitle": "No attendees found",
     "attendeesEmptyDescription": "Attendees will show up here after they register.",
     "attendeesSearchEmptyTitle": "No matching attendees",
     "attendeesSearchEmptyDescription": "No one matches \"{query}\". Try a different name or email.",
     "attendeesLoadingAriaLabel": "Loading attendees",
+    "attendeesOpenDetails": "View details for {name}",
+    "userBack": "Back",
+    "userOpenProfile": "View profile of {name}",
+    "userLoadingAria": "Loading profile",
+    "userErrorTitle": "This profile could not load.",
+    "userErrorDescription": "Refresh the page and try again.",
+    "userNotFoundTitle": "Profile not found",
+    "userNotFoundDescription": "This person is not part of the event.",
+    "userMemberOf": "Member of",
+    "userSpeakingAt": "Speaking at",
+    "userAttending": "Attending sessions",
+    "userFollow": "Social",
+    "userFollowAria": "Open {network} for {name}",
     "exhibitorsSearch": "Search exhibitors",
-    "exhibitorsEmpty": "No exhibitors match your search.",
+    "exhibitorsFilterByTier": "Type",
+    "exhibitorsBookmarkTipTitle": "Click {icon} to bookmark your favorites",
+    "exhibitorsBookmarkTipBody": "Bookmark the companies that catch your interest. You can access them anytime in your profile under “My bookmarks.”",
+    "exhibitorsEmptyTitle": "No exhibitors yet",
+    "exhibitorsEmptyDescription": "Exhibitors will show up here once they are added to the event.",
+    "exhibitorsSearchEmptyTitle": "No matching exhibitors",
+    "exhibitorsSearchEmptyDescription": "No exhibitors match \"{query}\". Try a different search.",
     "exhibitorsAllLoaded": "All exhibitors loaded",
-    "exhibitorsFilters": "Filters",
-    "exhibitorsFilterByTier": "Filter by tier",
-    "exhibitorsFilterClear": "Clear",
+    "exhibitorsBookmarked": "Bookmarked",
+    "exhibitorsNotBookmarked": "Not bookmarked",
+    "exhibitorsBookmark": "Bookmark",
+    "exhibitorBookmarkedNotice": "Exhibitor bookmarked. Find it under My bookmarks in your profile settings.",
     "exhibitorsAll": "All exhibitors",
-    "exhibitorsInformation": "Information",
     "exhibitorsTeam": "Team",
     "exhibitorsPeopleCountOne": "1 person",
     "exhibitorsPeopleCountMany": "{count} people",
+    "exhibitorsSocial": "Social details",
     "exhibitorsContact": "Contact details",
     "exhibitorsContactEmail": "Email",
-    "exhibitorsContactPhone": "Phone",
     "exhibitorsContactWebsite": "Website",
-    "exhibitorsContactBooth": "Booth",
+    "exhibitorsInformationTitle": "Information",
+    "exhibitorsInformationEmpty": "No information added yet.",
+    "exhibitorsEditAction": "Edit",
+    "exhibitorsManageAction": "Manage",
+    "exhibitorCenterToggleEvent": "Event",
+    "exhibitorCenterToggleCenter": "Exhibitor center",
+    "exhibitorCenterToggleAria": "Switch between event and exhibitor center",
+    "exhibitorCenterNavCompany": "Company",
+    "exhibitorCenterNavOverview": "Overview",
+    "exhibitorCenterNavTeam": "Team",
+    "exhibitorCenterNavLeads": "Leads",
+    "exhibitorCenterNavConnection": "Connection",
+    "exhibitorCenterNavExport": "Export",
+    "exhibitorCenterNavAria": "Exhibitor center sections",
+    "exhibitorCenterMobileEventsTitle": "Events",
+    "exhibitorCenterSwitcherAria": "Switch exhibitor",
+    "exhibitorCenterExportTitle": "Export",
+    "exhibitorCenterExportDescription": "Take your team's leads into your own tools to follow up after the event.",
+    "exhibitorCenterExportDownloadTitle": "Download all leads",
+    "exhibitorCenterExportDownloadDescription": "Get every contact your team made at this event in one CSV file. Open it in a spreadsheet or import it into your CRM.",
+    "exhibitorCenterExportDownload": "Download CSV",
+    "exhibitorCenterExportFailed": "The leads could not be downloaded. Try again.",
+    "exhibitorCenterLeadsTitle": "Team's contacts",
+    "exhibitorCenterLeadsDescription": "Every contact your team made at this event, in one place.",
+    "exhibitorCenterLeadsSearchPlaceholder": "Search contacts",
+    "exhibitorCenterLeadsFilterAria": "Sort and filter contacts",
+    "exhibitorCenterLeadsFilterActive": "Connected with: {count} selected",
+    "exhibitorCenterLeadsFilterLoadedHint": "The team member filter applies to the contacts loaded so far.",
+    "exhibitorCenterLeadsColumnName": "Name",
+    "exhibitorCenterLeadsColumnEmail": "Email",
+    "exhibitorCenterLeadsColumnConnectedWith": "Connected with",
+    "exhibitorCenterLeadsSortTitle": "Sort by",
+    "exhibitorCenterLeadsSortNewest": "Newest first",
+    "exhibitorCenterLeadsSortOldest": "Oldest first",
+    "exhibitorCenterLeadsMoreCollectorsAria": "Connected with {count} more team members",
+    "exhibitorCenterLeadsUnnamedContact": "Unnamed contact",
+    "exhibitorCenterLeadsUnnamedMember": "Team member",
+    "exhibitorCenterLeadsPrevious": "Previous",
+    "exhibitorCenterLeadsNext": "Next",
+    "exhibitorCenterLeadsCancel": "Cancel",
+    "exhibitorCenterLeadsApply": "Apply",
+    "exhibitorCenterLeadsClearFilters": "Clear filters",
+    "exhibitorCenterLeadsEmptyTitle": "No contacts yet",
+    "exhibitorCenterLeadsEmptyDescription": "Contacts your team connects with at this event will appear here.",
+    "exhibitorCenterLeadsNoResultsTitle": "No contacts match your search",
+    "exhibitorCenterLeadsNoResultsDescription": "Try a different name or email address.",
+    "exhibitorCenterLeadsFilteredTitle": "No contacts from the selected team members",
+    "exhibitorCenterLeadsFilteredDescription": "Clear the filter or select other team members.",
+    "exhibitorCenterLeadsErrorTitle": "Contacts could not be loaded",
+    "exhibitorCenterLeadsErrorDescription": "Refresh the page to try again.",
+    "exhibitorCenterTeamTitle": "Team members",
+    "exhibitorCenterTeamSearchPlaceholder": "Search a team member",
+    "exhibitorCenterTeamColumnMember": "Team member",
+    "exhibitorCenterTeamColumnJobTitle": "Job title",
+    "exhibitorCenterTeamColumnRole": "Role",
+    "exhibitorCenterTeamRoleAdmin": "Admin",
+    "exhibitorCenterTeamRoleMember": "Member",
+    "exhibitorCenterTeamEmptyTitle": "No team members yet",
+    "exhibitorCenterTeamEmptyDescription": "Team members will appear here once they are added to this exhibitor.",
+    "exhibitorCenterTeamNoResultsTitle": "No team members match your search",
+    "exhibitorCenterTeamNoResultsDescription": "Try a different name.",
+    "exhibitorCenterEditHeaderTitle": "Customize your logo",
+    "exhibitorCenterEditLogoLabel": "Company logo",
+    "exhibitorCenterEditLogoCta": "Click to upload or drag and drop",
+    "exhibitorCenterEditLogoHint": "PNG, JPG, or WebP · 400×200",
+    "exhibitorCenterEditLogoUploading": "Uploading logo…",
+    "exhibitorCenterEditLogoFailed": "The logo could not be uploaded. Try again.",
+    "exhibitorCenterEditLogoInvalidType": "Upload a PNG, JPG, or WebP image.",
+    "exhibitorCenterEditLogoTooLarge": "The logo must be 10 MB or smaller.",
+    "exhibitorCenterEditLogoRemove": "Remove logo",
+    "exhibitorCenterEditLogoPreview": "Cropped company logo",
+    "exhibitorCenterEditDescriptionLabel": "Company description",
+    "exhibitorCenterEditDescriptionHint": "Shown at the top of your company page. {used} of {max} characters.",
+    "exhibitorCenterEditEmailLabel": "Email",
+    "exhibitorCenterEditWebsiteLabel": "Website",
+    "exhibitorCenterEditShowContact": "Show contact details on the public page",
+    "exhibitorCenterEditLinkTitleLabel": "Title",
+    "exhibitorCenterEditLinkUrlLabel": "URL",
+    "exhibitorCenterEditAddLink": "Add link",
+    "exhibitorCenterEditRemoveLink": "Remove link",
+    "exhibitorCenterEditSocialInvalid": "Each link needs a title and a valid https:// URL.",
+    "exhibitorCenterEditWebsiteInvalid": "Enter a valid https:// URL.",
+    "exhibitorCenterEditSave": "Save changes",
+    "exhibitorCenterEditSaveFailed": "Couldn't save your changes. Try again.",
     "exhibitorsOpenDetails": "View details for {name}",
-    "exhibitorsView": "View",
     "exhibitorsBoothLabel": "Booth {number}",
+    "exhibitorsBoothNoteLine": "{booth} - {note}",
     "exhibitorsWebsiteAria": "Visit {label}",
-    "exhibitorsCoverAria": "Cover image for {name}",
-    "exhibitorsMembersLoading": "Loading team members.",
     "exhibitorsMembersError": "Team members could not load.",
     "exhibitorsMembersEmpty": "No team members listed.",
     "previous": "Previous",
@@ -5236,8 +5800,40 @@
      "speakers": "Speakers",
      "attendees": "Attendees",
      "exhibitors": "Exhibitors",
+     "badge": "Badge",
      "ariaLabel": "Event sections"
+    },
+    "badge": {
+     "title": "Your badge",
+     "qrAria": "Check-in QR code",
+     "error": "Your badge could not load. Try again in a moment.",
+     "empty": "There is no badge for you at this event yet."
     }
+   },
+   "connections": {
+    "notificationDeclined": "You declined this request",
+    "presetStayInTouchLabel": "Stay in touch",
+    "notificationUnavailable": "Request status is unavailable",
+    "decline": "Decline",
+    "introQuote": "“{message}”",
+    "incomingTitle": "{name} wants to connect",
+    "presetStayInTouchMessage": "Hi {name}, I'd love to stay in touch after the event.",
+    "message": "Message",
+    "composerTitle": "Connect with {name}",
+    "notificationChecking": "Checking request status…",
+    "accept": "Accept",
+    "notificationConnected": "Connected",
+    "messagePlaceholder": "Write a message",
+    "composerDescription": "Choose a message, edit it if you like, and send your request.",
+    "requested": "Requested",
+    "presetInsightsLabel": "Mention their insights",
+    "cancel": "Cancel",
+    "viewRequest": "View Request",
+    "presetInsightsMessage": "Hi {name}, I enjoyed your insights. Let's connect.",
+    "presetHelloLabel": "Say hello",
+    "connect": "Connect",
+    "presetHelloMessage": "Hi {name}, I'd like to connect.",
+    "sendRequest": "Send request"
    }
   },
   "dashboard": {
@@ -5298,6 +5894,10 @@
     "loadingLabel": "Loading shared files",
     "fileActionsAria": "Options for {name}",
     "totalFiles": "Total: {count} files"
+   },
+   "liveEvents": {
+    "emptyTitle": "No live events right now",
+    "emptyDescription": "Events that are happening now will show up here."
    }
   },
   "breadcrumb": {
@@ -5313,6 +5913,7 @@
    "affiliatesMedia": "Media",
    "folder": "Shared files",
    "bookAppointment": "Book appointment",
+   "bookAppointmentDetail": "Booking",
    "groupHome": "Group",
    "channel": "Channel",
    "post": "Post",
@@ -5323,11 +5924,17 @@
    "course": "Course",
    "lesson": "Lesson",
    "myLibrary": "My library",
+   "loyalty": "Rewards Program",
+   "loyaltyActivity": "Recent activity",
    "eventDetail": "Event",
+   "exhibitorCenter": "Exhibitor center",
+   "eventsUpcoming": "Upcoming",
+   "eventsPast": "Past",
    "eventsLive": "Live"
   },
   "navigation": {
    "dashboard": "Dashboard",
+   "discover": "Discover",
    "courses": "Courses",
    "communities": "Communities",
    "sharedFiles": "Shared files",
@@ -5336,7 +5943,8 @@
    "contracts": "Contracts",
    "appointments": "Appointments",
    "events": "Events",
-   "affiliates": "Affiliates"
+   "affiliates": "Affiliates",
+   "loyalty": "Loyalty"
   },
   "sidebar": {
    "expandSidebar": "Expand",
@@ -5360,6 +5968,10 @@
    "dashboard": {
     "title": "Dashboard",
     "description": "Overview of your activity, billing, and learning."
+   },
+   "discover": {
+    "title": "Discover",
+    "description": "Browse communities and courses available in this portal."
    },
    "invoices": {
     "title": "Invoices",
@@ -5393,9 +6005,29 @@
     "title": "Event",
     "description": "View event details, agenda, and organizer information."
    },
+   "exhibitorCenter": {
+    "title": "Exhibitor center",
+    "description": "Manage your exhibitor profile for this event."
+   },
+   "eventUser": {
+    "title": "Profile",
+    "description": "See who someone is at this event and the booths they staff."
+   },
+   "eventsUpcoming": {
+    "title": "Upcoming events",
+    "description": "Browse upcoming events."
+   },
+   "eventsPast": {
+    "title": "Past events",
+    "description": "Browse past events."
+   },
    "eventsLive": {
     "title": "Live events",
     "description": "Browse events happening now."
+   },
+   "bookAppointmentDetail": {
+    "title": "Book",
+    "description": "Choose a time to book."
    },
    "communities": {
     "title": "Communities",
@@ -5452,6 +6084,14 @@
    "affiliatesMediaFolder": {
     "title": "Affiliate media folder",
     "description": "Browse media inside this folder."
+   },
+   "loyalty": {
+    "title": "Rewards Program",
+    "description": "View your loyalty points, redeem rewards, and track activity."
+   },
+   "loyaltyActivity": {
+    "title": "Recent activity",
+    "description": "View your loyalty points activity, coupons, and referral rewards."
    }
   }
  },
@@ -5569,6 +6209,72 @@
   },
   "viewGroup": "View",
   "scrollToLoadMore": "Scroll to load more"
+ },
+ "discover": {
+  "tabs": {
+   "communities": "Communities",
+   "courses": "Courses"
+  },
+  "tabsAriaLabel": "Discover sections",
+  "searchPlaceholder": "Search communities and courses...",
+  "filters": {
+   "free": "Free",
+   "freeAriaLabel": "Show only free listings"
+  },
+  "options": {
+   "language": {
+    "en": "English",
+    "es": "Spanish",
+    "fr": "French",
+    "de": "German",
+    "pt": "Portuguese"
+   },
+   "difficulty": {
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced"
+   },
+   "category": {
+    "design": "Design",
+    "business": "Business",
+    "technology": "Technology",
+    "gaming": "Gaming",
+    "wellness": "Wellness",
+    "literature": "Literature"
+   }
+  },
+  "chips": {
+   "bundle": "Bundle",
+   "unknown": "Other",
+   "members": "{count} members"
+  },
+  "price": {
+   "free": "Free",
+   "oneTime": "{price}",
+   "perMonth": "{price}/month",
+   "perWeek": "{price}/week",
+   "perYear": "{price}/year"
+  },
+  "loadingMore": "Loading more results",
+  "loadMoreResults": "Show more results",
+  "emptyState": {
+   "courses": {
+    "title": "No courses to discover yet",
+    "description": "Courses will appear here once they're published. Check back soon."
+   },
+   "communities": {
+    "title": "No communities to discover yet",
+    "description": "Communities will appear here once they're published. Check back soon."
+   },
+   "noResults": {
+    "title": "No matches found",
+    "description": "Try clearing a filter or switching tabs to see more."
+   }
+  },
+  "errorState": {
+   "title": "We couldn't load Discover",
+   "description": "Something went wrong on our side. Refresh the page to try again."
+  }
  },
  "estimates": {
   "testMode": "(Test mode)",
@@ -5858,6 +6564,190 @@
    "contact_required_for_actions": "Contact ID is required for invoice actions.",
    "export_contact_required": "Contact ID is required to export invoices.",
    "unknown_action": "Unknown action: {action}"
+  }
+ },
+ "loyalty": {
+  "common": {
+   "copy": "Copy",
+   "copied": "Copied"
+  },
+  "home": {
+   "pageTitle": "Rewards Program",
+   "pageDescription": "View your loyalty points, redeem rewards, and track activity.",
+   "redeem": {
+    "title": "Redeem points",
+    "balanceLabel": "Balance",
+    "balanceValue": "{points} pts",
+    "expiringSoon": "{points} points expiring soon",
+    "spendingPrefix": "You are spending",
+    "spendingPoints": "{points} points",
+    "spendingSuffix": "for",
+    "spendingFreeProduct": "a free product",
+    "spendingPercentage": "{percentage}%",
+    "pointValue": "1 point = {value}",
+    "redeemNow": "Redeem now",
+    "confirmTitle": "Confirm redemption?",
+    "confirmSubtitle": "Review the details below before you continue.",
+    "confirmMessage": "This cannot be undone. Points will be deducted immediately.",
+    "confirmSpending": "You are spending",
+    "confirmReceiving": "You will receive",
+    "confirmReceivingValue": "{value} off (coupon)",
+    "confirmRemaining": "Remaining balance",
+    "confirmCancel": "Cancel",
+    "confirmSubmit": "Confirm & redeem",
+    "redeemError": "Unable to redeem points. Please try again.",
+    "successMessagePrefix": "You have redeemed ",
+    "successMessagePoints": "{points} points",
+    "successMessageMiddle": " for ",
+    "successMessageFreeProductPrefix": "You have redeemed ",
+    "successMessageFreeProductSuffix": " for a free product",
+    "redeemMore": "Redeem more",
+    "visitWebsite": "Visit website",
+    "copyCoupon": "Copy",
+    "couponCopied": "Copied",
+    "successMessagePointsSuffix": " points"
+   },
+   "activity": {
+    "title": "Recent activity",
+    "seeAll": "See all",
+    "historyColumn": "Activity history",
+    "pointsColumn": "Point(s)",
+    "emptyState": {
+     "title": "No activity found",
+     "description": "Engage more with the brand to see data here."
+    }
+   },
+   "freeProduct": {
+    "title": "Free product!",
+    "description": "With your next purchase, you can claim a complimentary product!"
+   },
+   "wallet": {
+    "title": "Integrate with your wallet",
+    "description": "You can now connect your wallet to earn rewards and track your points balance.",
+    "appleWallet": "Apple wallet",
+    "googleWallet": "Google wallet",
+    "qrModalAppleTitle": "Add to Apple Wallet",
+    "qrModalGoogleTitle": "Add to Google Wallet",
+    "qrModalSubtitle": "Scan this to add the QR code to your digital wallet.",
+    "qrModalLinkHint": "Can't scan? Copy or open the link below.",
+    "qrModalOpenLink": "Open wallet link",
+    "qrModalErrorTitle": "Something went wrong"
+   },
+   "referral": {
+    "title": "Get referral bonus",
+    "seeHistory": "See history",
+    "description": "You get instant {referrerPoints} points. They get {refereePoints} points {refereeBenefit}.",
+    "descriptionPrefix": "You get instant ",
+    "descriptionReferrerPoints": "{points} points. ",
+    "descriptionMiddle": "They get ",
+    "descriptionRefereePoints": "{points} points",
+    "descriptionSuffix": " {benefit}.",
+    "allotPointsAfter": {
+     "on_join": "after their referral joins the brand",
+     "on_purchase": "after their referral makes a purchase"
+    },
+    "copyLink": "Copy",
+    "copied": "Copied"
+   },
+   "loadError": "Couldn't load your rewards. Please try again.",
+   "emptyState": {
+    "title": "No activity found",
+    "description": "Engage more with the brand to see data here."
+   }
+  },
+  "activity": {
+   "pageTitle": "Recent activity",
+   "pageDescription": "View your loyalty points activity, coupons, and referral rewards.",
+   "tabsAriaLabel": "Activity filters",
+   "labels": {
+    "redeem": "Redeem",
+    "purchase": "Purchase",
+    "today": "Today"
+   },
+   "tabs": {
+    "all": "All activity",
+    "coupons": "Coupons",
+    "referral": "Referral"
+   },
+   "all": {
+    "pointsColumn": "Points",
+    "redeemedOnColumn": "Date",
+    "descriptionColumn": "Description"
+   },
+   "coupons": {
+    "codeColumn": "Coupon code",
+    "pointsColumn": "Points",
+    "valueColumn": "Value",
+    "redeemedOnColumn": "Date",
+    "statusColumn": "Status",
+    "status": {
+     "active": "Active",
+     "used": "Used"
+    }
+   },
+   "referral": {
+    "customerJoinedColumn": "Customer joined",
+    "pointsEarnedColumn": "Points earned",
+    "joinedOnColumn": "Date"
+   },
+   "table": {
+    "rowsPerPage": "Rows per page",
+    "previous": "Previous",
+    "next": "Next"
+   },
+   "emptyState": {
+    "title": "No activity found",
+    "description": "Engage more with the brand to see data here.",
+    "couponsTitle": "No coupons found",
+    "referralTitle": "No referral activity found"
+   }
+  },
+  "signup": {
+   "pageTitle": "Join Loyalty Program",
+   "pageDescription": "Sign up for our loyalty rewards program",
+   "createAccount": "Create your account",
+   "createAccountSubtitle": "Join in seconds and start earning today.",
+   "campaignNotFound": "Campaign not found",
+   "signupFailed": "Signup failed. Please try again.",
+   "walletLabel": "Or add points to",
+   "appleWalletBadgeAlt": "Add to Apple Wallet",
+   "googleWalletBadgeAlt": "Add to Google Wallet",
+   "back": "Back",
+   "verifyEmail": "Verify your email",
+   "verifyEmailSubtitle": "We sent a code to {email}",
+   "existingUserCrossCampaignNote": "An account with this email already exists in another campaign. Enter the OTP we sent to sign in and join this program.",
+   "fullName": "Full name",
+   "fullNamePlaceholder": "Enter here",
+   "fullNameHint": "This is how we will address you",
+   "email": "Email",
+   "emailPlaceholder": "Enter here",
+   "emailHint": "We will send your account confirmation code here",
+   "password": "Password",
+   "passwordPlaceholder": "Create a password",
+   "passwordHint": "Must be at least 8 characters with upper, lower, number and special char",
+   "phoneNumber": "Phone number",
+   "birthday": "Birthday",
+   "birthdayPlaceholder": "Select date",
+   "acceptTermsPrefix": "I accept the",
+   "termsLink": "terms & conditions",
+   "ofTheRewardsProgram": "of the rewards program",
+   "submit": "Submit",
+   "defaultProgramName": "Loyalty Program",
+   "successTitle": "Success!",
+   "successDescription": "Congratulations on joining loyalty program! Visit our client portal to unlock fantastic offers.",
+   "goToClientPortal": "Go to client portal",
+   "fillFormAgain": "Sign up another person",
+   "termsModalTitle": "Terms & conditions",
+   "invalidPhone": "Please enter a valid phone number",
+   "fullNameRequired": "Full name is required",
+   "fullNameInvalid": "Please enter a valid name",
+   "emailRequired": "Email is required",
+   "failedToLoadCampaign": "Failed to load campaign",
+   "locationUnavailable": "Unable to open this signup page. Please use the link provided by your business.",
+   "failedToEnroll": "Failed to enroll in loyalty program",
+   "indexTitle": "Loyalty program signup",
+   "indexDescription": "Open the signup link provided by your loyalty program to get started.",
+   "emailInvalid": "Please enter a valid email address"
   }
  }
 }
