@@ -1,6 +1,10 @@
 name: crm-i18n-watch
-# CRM Türkçe katmanı — GHL güncelleme takibi. Türkçeleştirdiğimiz uygulamalardan biri (CRM kabuğu ya da gömülü
-# ekranlar) değişirse "CRM çeviri: GHL güncellemesi algılandı" issue'su açar/yorum ekler. Bilgisayardan bağımsız.
+# Türkçe katmanlar — GHL güncelleme takibi (bilgisayardan bağımsız, her gün):
+#  - CRM: Türkçeleştirdiğimiz uygulamalardan biri (kabuk ya da gömülü ekranlar) değişirse
+#    "CRM çeviri: GHL güncellemesi algılandı" issue'su açar/yorum ekler.
+#  - Öğrenci paneli (panel.growtify.ai): İngilizce katalog çevirinin dayandığı anlık görüntüden farklıysa
+#    (yeni / değişen metin) "Panel çeviri: yeni metin algılandı" issue'su açar/yorum ekler (CEO 2026-10-12:
+#    "sürekli güncel kalalım" — Loyalty sayfası fark edilmeden İngilizce gelmişti).
 on:
   schedule:
     - cron: "17 5 * * *" # her gün 08:17 (TR)
@@ -38,6 +42,47 @@ jobs:
             "Türkçeleştirdiğimiz uygulamalardan biri güncellendi; yeni ya da değişen metinler İngilizce kalıyor olabilir." \
             "$(cat changed.txt)" \
             "Yapılacak: CRM sekmesinde tour/catalog-sweep.js ile katalog anahtar karşılaştırması (yeni metinler) + tour/qa-tour.js ile kalite turu → farkı çevir, yayınla; sonra izleri güncelle: node scripts/crm-i18n/watch-ghl.mjs --write. Ayrıntı: scripts/crm-i18n/README.md ve workers/crm-frames/README.md (Bakım)." \
+            "$SIG")
+          N=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
+          if [ -z "$N" ]; then
+            gh issue create --title "$TITLE" --body "$BODY"
+          elif ! gh issue view "$N" --json body,comments --jq '.body, .comments[].body' | grep -q "$SIG"; then
+            gh issue comment "$N" --body "$BODY"
+          fi
+  panel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Panel kataloğunu indir ve karşılaştır
+        id: diff
+        run: |
+          mkdir -p /tmp/pp && cp scripts/panel-i18n/dump-en-catalog.mjs /tmp/pp/
+          (cd /tmp/pp && npm init -y >/dev/null && npm i --no-audit --no-fund puppeteer-core >/dev/null)
+          CHROME_PATH="$(command -v google-chrome || command -v chromium)" node /tmp/pp/dump-en-catalog.mjs /tmp/panel-en.new.json
+          node scripts/panel-i18n/diff-catalog.mjs /tmp/panel-en.new.json /tmp/panel-todo.en.json | tee diff.txt
+          node -e '
+            const t = require("/tmp/panel-todo.en.json");
+            const groups = {};
+            for (const k of Object.keys(t)) groups[k.split(".")[0]] = (groups[k.split(".")[0]] || 0) + 1;
+            require("fs").writeFileSync("groups.txt", Object.entries(groups).sort((a, b) => b[1] - a[1]).map(([g, n]) => "- `" + g + "`: " + n).join("\n"));
+            console.log("todo=" + Object.keys(t).length);
+          ' >> "$GITHUB_OUTPUT"
+      - name: Issue aç / güncelle
+        if: steps.diff.outputs.todo != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TITLE="Panel çeviri: yeni metin algılandı"
+          SIG="sig:$(sha256sum groups.txt | cut -c1-16)"
+          BODY=$(printf '%s\n\n%s\n\n%s\n\n%s\n\n<!-- %s -->\n' \
+            "GHL öğrenci paneline (panel.growtify.ai) yeni ya da değişen metin ekledi; çevrilene kadar İngilizce görünür." \
+            "$(head -1 diff.txt)" \
+            "$(cat groups.txt)" \
+            "Yapılacak: scripts/panel-i18n/README.md \"GHL güncellemesinden sonra yenileme\" (dump → diff → çevir → validate → build-tr) → PR → merge." \
             "$SIG")
           N=$(gh issue list --state open --search "\"$TITLE\" in:title" --json number --jq '.[0].number // empty')
           if [ -z "$N" ]; then

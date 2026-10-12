@@ -28,3 +28,9 @@ Sonra PR → merge; Vercel'e çıktıktan ~60 sn sonra panelde canlıdır (`pane
 
 `panel-en.snapshot.json`, çevirinin dayandığı İngilizce kataloğun kopyasıdır; `diff-catalog.mjs`
 yeni ve İngilizcesi değişen anahtarları buna göre bulur.
+
+## Günlük otomatik kontrol
+`.github/workflows/crm-i18n-watch.yml` içindeki `panel` işi her gün 08:17'de (TR) panelin İngilizce kataloğunu indirip
+`panel-en.snapshot.json` ile karşılaştırır; yeni ya da değişen metin varsa "Panel çeviri: yeni metin algılandı" issue'su
+açar (aynı fark için tekrar açmaz, yeni farkta yorum ekler). Çeviri yayınlanınca `build-tr.mjs` anlık görüntüyü günceller,
+ertesi gün kontrol temiz döner.
