@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.1.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.12.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.13.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,20 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.13.0** — 2026-10-12 — **GHL güncellemesi: 5.170 yeni metin Türkçe** (bekçi #194 "kabuk, takvim, sayfa değişti"; CEO: "kontrol
+  et, sürekli güncel kalalım"). CEO'nun Chrome'unda (app.gohighlevel.com, yalnız o sekmede geçici TR) 114 sayfada katalog anahtar
+  karşılaştırması: ana katalog 3.238 (Takvim Yapay Zekası, toplu işlemler + içe aktarma sihirbazı, Sesli Yapay Zeka oluşturucu,
+  konum raporlama panosu, sosyal planlayıcı ayarları, Copilot, markalı uygulama…), telefon 789 (RCS, WhatsApp, taşınan numaralar,
+  Güven Merkezi), takvim (cal-a) 665 (saha hizmetleri, randevu penceresi, kiralamalar), sohbet 195 (mesaj ilişkilendirmeleri,
+  sosyal yorumlar), analitik 163, nesneler 109, pazar yeri 7, çalışma programı 4. 10 paralel çeviri, validate 0 hata; beyaz etiket
+  taraması 0. "Highline" (GHL'in Labs'taki yeni gezinmesi) → "yeni gezinme". Kabuk sonrası katalog 117.281.
+  - **Gömülü ekranlar da (aynı sürüm):** çerçeve uygulamalarının İngilizce katalogları oturumsuz, başsız tarayıcıyla indirildi
+    (`frame-extract.js` mantığı) → 3.259 yeni/değişen metin: otomasyon 969, e-postalar 741 (e-posta oluşturucu aynı kataloğu
+    paylaşıyor, aynı çeviri), sayfa oluşturucu 575, form 217, e-posta hizmetleri 12, takvim ayarları 3, ayarlar 1. 5 paralel
+    çeviri, validate 0 hata, beyaz etiket taraması 0. Katalog 117.281 → 120.083. Bekçi izleri güncellendi (Yapay Zeka Stüdyosu
+    hariç: vue-i18n kullanmıyor, sabit metin sözlüğü — ayrı kontrol edilecek, bekçi o yüzden onu hâlâ işaretli tutuyor).
+  - **Risk notu:** GHL Labs'taki yeni gezinme ("Highline") açılırsa "eski kenar çubuğu için özel CSS/JS çalışmaz" uyarısı var →
+    Türkçe katman özel JS; yeni gezinmeyle denenecek.
 - **1.12.0** — 2026-10-05 — **Tanıtım turları sayfayı kilitlemiyor (CEO: "ilk girişte adım adım açılan pencereler sayfayı kilitliyor
   gibi"; "tüm sistemdekileri tara, bloklamasın").**
   - **Tarama:** ana uygulama + 129 alt uygulama (GHL manifest) + 11 vekil çerçeve uygulamasının tüm JS kodu indirildi (~12.500
