@@ -12,7 +12,7 @@ import puppeteer from "puppeteer-core";
 const out = process.argv[2] || "panel-en.new.json";
 const CHROME = process.env.CHROME_PATH || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const prof = fs.mkdtempSync(path.join(os.tmpdir(), "panel-cat-"));
-const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, userDataDir: prof, args: ["--no-first-run", "--lang=en-US"] });
+const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, userDataDir: prof, args: ["--no-first-run", "--lang=en-US", ...(process.env.CI ? ["--no-sandbox"] : [])] });
 try {
   const page = await browser.newPage();
   // Bizim Türkçe katmanımız yüklenmesin: saf İngilizce katalog lazım.
