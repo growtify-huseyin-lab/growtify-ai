@@ -21,7 +21,7 @@ bu dosyanın o anki özetidir.
 
 | Bileşen | Nerede | Güncel sürüm | Durum |
 |---|---|---|---|
-| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.0.0** | Yayında |
+| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.1.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
 | CRM | Growtify.app CRM (admin.growtify.app) | **1.12.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
@@ -386,6 +386,11 @@ bu dosyanın o anki özetidir.
   hatırlanır). CEO'nun CRM sekmesinde dosya yükleme yöntemiyle doğrulandı; yayında değil.
 
 ### Öğrenci paneli (panel.growtify.ai)
+- **2.1.0** — 2026-10-12 — **Yeni Sadakat (Loyalty) sayfası + GHL'in sonradan eklediği metinler Türkçe** (CEO: "Loyalty sekmesi
+  eklenmiş, çevirileri lazım"). GHL kataloğu 4.327 → 5.011 metin: 741 yeni + 15 İngilizcesi değişen = 756 çeviri (sadakat 142,
+  etkinlikler/panel 207, gruplar 103, hesap 96, grup ayarları 60, kanal 55, keşfet 38, randevular 29…). Terimler: Loyalty → Sadakat
+  (menü), Rewards Program → Ödül Programı, Redeem → Kullan, Activity → Hareket (Etkinlik = Event). Parça parça kurulan cümlelerin sırası
+  panel kodundan doğrulandı (yönlendirme bonusu, puan harcama, kullanım sonucu, şartlar onayı). validate 0 hata; 5.011/5.011 metin.
 - **2.0.0** — 2026-10-03 (#150) — Panelin kendi metin kataloğu çevrildi: 4.327/4.327 metin (`public/portal/panel-tr.json`).
   Katalog katmanı GHL'in metin değişikliklerinde Türkçeyi yeniden uygular; EN grupta İngilizce korunur.
 - **1.3.0** — 2026-10-03 (#149) — GHL güncellemesi metinleri boşlukla sarınca çevirilerin hiç eşleşmemesi düzeltildi.
