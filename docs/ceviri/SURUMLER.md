@@ -41,10 +41,12 @@ bu dosyanın o anki özetidir.
   konum raporlama panosu, sosyal planlayıcı ayarları, Copilot, markalı uygulama…), telefon 789 (RCS, WhatsApp, taşınan numaralar,
   Güven Merkezi), takvim (cal-a) 665 (saha hizmetleri, randevu penceresi, kiralamalar), sohbet 195 (mesaj ilişkilendirmeleri,
   sosyal yorumlar), analitik 163, nesneler 109, pazar yeri 7, çalışma programı 4. 10 paralel çeviri, validate 0 hata; beyaz etiket
-  taraması 0. "Highline" (GHL'in Labs'taki yeni gezinmesi) → "yeni gezinme". Katalog 112.186 → 117.281.
-  - **Kalan (sonraki adım):** gömülü ekran uygulamaları da güncellendi (takvim ayarları, ayarlar, e-posta hizmetleri, otomasyon,
-    e-postalar, Yapay Zeka Stüdyosu, form, sayfa, e-posta oluşturucu) → çerçeve katalogları ayrı toplanacak; bekçi izleri bu
-    yüzden yalnız kabuk için güncellendi.
+  taraması 0. "Highline" (GHL'in Labs'taki yeni gezinmesi) → "yeni gezinme". Kabuk sonrası katalog 117.281.
+  - **Gömülü ekranlar da (aynı sürüm):** çerçeve uygulamalarının İngilizce katalogları oturumsuz, başsız tarayıcıyla indirildi
+    (`frame-extract.js` mantığı) → 3.259 yeni/değişen metin: otomasyon 969, e-postalar 741 (e-posta oluşturucu aynı kataloğu
+    paylaşıyor, aynı çeviri), sayfa oluşturucu 575, form 217, e-posta hizmetleri 12, takvim ayarları 3, ayarlar 1. 5 paralel
+    çeviri, validate 0 hata, beyaz etiket taraması 0. Katalog 117.281 → 120.083. Bekçi izleri güncellendi (Yapay Zeka Stüdyosu
+    hariç: vue-i18n kullanmıyor, sabit metin sözlüğü — ayrı kontrol edilecek, bekçi o yüzden onu hâlâ işaretli tutuyor).
   - **Risk notu:** GHL Labs'taki yeni gezinme ("Highline") açılırsa "eski kenar çubuğu için özel CSS/JS çalışmaz" uyarısı var →
     Türkçe katman özel JS; yeni gezinmeyle denenecek.
 - **1.12.0** — 2026-10-05 — **Tanıtım turları sayfayı kilitlemiyor (CEO: "ilk girişte adım adım açılan pencereler sayfayı kilitliyor
