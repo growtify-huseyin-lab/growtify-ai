@@ -1766,7 +1766,8 @@
   "exportMenu",
   "fieldServices",
   "fieldServicesList",
-  "viewSettings"
+  "viewSettings",
+  "manualBookingForm"
  ],
  "cal-b": [
   "common",
@@ -2128,7 +2129,8 @@
   "whatsapp",
   "hostedNumbers",
   "rcsMessaging",
-  "tableHostedNumbers"
+  "tableHostedNumbers",
+  "voiceIntelligenceSettings"
  ],
  "calsched": [
   "addons",
@@ -5523,7 +5525,13 @@
   "zero_errors",
   "zero_errors_count",
   "zoom_in",
-  "zoom_out"
+  "zoom_out",
+  "agency_named_plan",
+  "agency_starter_plan",
+  "agency_unlimited_plan",
+  "appointment_status_not_found",
+  "ticket_conditions",
+  "tickets"
  ],
  "email": [
   "ABTesting",
@@ -5590,7 +5598,9 @@
   "settings",
   "usage",
   "version",
-  "visualEdits"
+  "visualEdits",
+  "git",
+  "widgets"
  ],
  "form": [
   "common",
@@ -5599,7 +5609,8 @@
   "overallScore",
   "quiz",
   "survey",
-  "textEditor"
+  "textEditor",
+  "integrate"
  ],
  "page": [
   "actionBar",

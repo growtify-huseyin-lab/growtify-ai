@@ -111,6 +111,11 @@ Derleme: `npm i --no-save @intlify/message-compiler && node scripts/crm-i18n/bui
    → katalog + yükleyici) modül modül gez; konsol temiz, metinler Türkçe, TR/EN düğmesi çalışıyor.
 6. **Sürüm** — `VERSION` artır + `docs/ceviri/SURUMLER.md` satırı + (ARA/ANA) D1 revizyon kaydı → PR → onay → merge.
 
+## Gömülü ekran farkı (oturumsuz)
+`node scripts/crm-i18n/frame-diff.mjs out.en.json [calapp wf …]` — çerçeve uygulamalarının İngilizce kataloğunu giriş yapmadan indirir
+(Yapay Zeka Stüdyosu'nu JS dosyasından acorn ile çıkarır) ve `crm-en.flat.json` ile karşılaştırır → çevrilecekler. Gerekenler:
+`npm i --no-save puppeteer-core acorn acorn-walk`. Kabuk (ana uygulama) için oturum gerekir → `tour/catalog-sweep.js`.
+
 ## GHL güncelleme takibi
 
 `watch-ghl.mjs` CRM kabuğunun (`app.js` ETag) ve gömülü uygulamaların (`frames.json` adreslerindeki ana betik adı)

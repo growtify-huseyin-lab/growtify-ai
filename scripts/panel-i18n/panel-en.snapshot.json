@@ -301,7 +301,7 @@
    "totalAmount": "Total Amount",
    "securePayments": "100% secure & safe payments",
    "continuePayment": "Continue Payment",
-   "helperTrialThen": "{days} day free trial, then {symbol}{price}/{interval}",
+   "helperTrialThen": "{days}-day free trial, then {symbol}{price}/{interval}",
    "helperRecurring": "{symbol}{price} per {interval}",
    "helperOneTime": "One-time payment of {symbol}{price}",
    "confirmSubscription": "Confirm Subscription - {symbol}{amount}",
@@ -318,7 +318,7 @@
    "hideBreakdown": "Hide breakdown",
    "trialDays": "{days} Day Trial",
    "recurring": "{symbol}{price}/{interval}",
-   "recurringWithTrial": "{days} day free trial, then {symbol}{price}/{interval}",
+   "recurringWithTrial": "{days}-day free trial, then {symbol}{price}/{interval}",
    "taxSuffix": " + tax",
    "taxHint": "Tax calculated after billing address.",
    "taxInclusive": "Incl. tax",
@@ -1401,7 +1401,7 @@
     "previous": "Previous",
     "next": "Next",
     "emptyTitle": "No tickets yet",
-    "emptyDescription": "Tickets you buy for an event will show up here.",
+    "emptyDescription": "Tickets you purchase will show up here.",
     "errorTitle": "We could not load your tickets",
     "errorDescription": "Something went wrong. Please refresh the page and try again."
    },
@@ -1411,7 +1411,7 @@
     "previous": "Previous",
     "next": "Next",
     "emptyTitle": "No connections yet",
-    "emptyDescription": "People you connect with at events will show up here.",
+    "emptyDescription": "People you connect with at events appear here.",
     "errorTitle": "We could not load your connections",
     "errorDescription": "Something went wrong. Please refresh the page and try again."
    },
@@ -1422,8 +1422,16 @@
     "previous": "Previous",
     "next": "Next",
     "allEvents": "All events",
-    "emptyTitle": "Nothing scheduled yet",
-    "emptyDescription": "Sessions you save from an event agenda will show up here.",
+    "addToCalendar": "Add to calendar",
+    "addedToCalendar": "Added to calendar",
+    "mySchedule": "My schedule",
+    "calendarMenu": "Calendar options",
+    "calendarGoogle": "Google Calendar",
+    "calendarApple": "Apple Calendar",
+    "calendarOutlook": "Outlook",
+    "calendarOthers": "Others (.ics file)",
+    "emptyTitle": "Nothing on your schedule",
+    "emptyDescription": "Sessions you save from an event will show up here.",
     "errorTitle": "We could not load your schedule",
     "errorDescription": "Something went wrong. Please refresh the page and try again."
    },
@@ -1459,19 +1467,19 @@
    "placeholder": {
     "tickets": {
      "title": "No tickets yet",
-     "description": "Tickets you buy for an event will show up here."
+     "description": "Tickets you purchase will show up here."
     },
     "connections": {
      "title": "No connections yet",
-     "description": "People you connect with at events will show up here."
+     "description": "People you connect with at events appear here."
     },
     "schedule": {
-     "title": "Nothing scheduled yet",
-     "description": "Sessions you save from an event agenda will show up here."
+     "title": "Nothing on your schedule",
+     "description": "Sessions you save from an event will show up here."
     },
     "bookmarks": {
      "title": "No bookmarks yet",
-     "description": "Anything you bookmark at an event will show up here."
+     "description": "Exhibitors you bookmark will show up here."
     }
    },
    "bookmarks": {
@@ -1480,7 +1488,7 @@
     "next": "Next",
     "allEvents": "All events",
     "emptyTitle": "No bookmarks yet",
-    "emptyDescription": "Anything you bookmark at an event will show up here.",
+    "emptyDescription": "Exhibitors you bookmark will show up here.",
     "errorTitle": "We could not load your bookmarks",
     "errorDescription": "Something went wrong. Please refresh the page and try again.",
     "saved": "Remove bookmark",
@@ -1729,7 +1737,11 @@
  },
  "userProfile": {
   "level": "Level {level}",
-  "pointsToLevelUp": "points to level up",
+  "levelLocked": "Locked",
+  "pointsToNextLevel": "{points} points to level up",
+  "maxLevelReached": "Max level reached!",
+  "levelWithName": "Level {level} - {name}",
+  "gamificationLevelsLoadFailed": "Could not load level thresholds. Please refresh and try again.",
   "lastVisited": "Last visited {date}",
   "joined": "Joined {date}",
   "viewProfile": "View Profile",
@@ -1796,7 +1808,9 @@
    "navigationLabel": "User profile tabs",
    "tabs": {
     "contributions": "Contributions",
-    "groups": "Groups"
+    "groups": "Groups",
+    "badges": "Badges",
+    "new": "New"
    }
   },
   "bio": {
@@ -1992,6 +2006,10 @@
    "expired": {
     "title": "This course is expired",
     "description": "Access to this course has expired on {date}."
+   },
+   "notStarted": {
+    "title": "Course not available yet",
+    "description": "Access to this course will be available from {date}."
    },
    "noAccess": {
     "title": "Access required",
@@ -2491,7 +2509,7 @@
   "sessionLiveNow": "Session is live now!",
   "joinAfterHostStarts": "You'll be able to join after the host starts the session",
   "recurring": "Recurring",
-  "oneTime": "One time",
+  "oneTime": "One-time",
   "notAssigned": "Not assigned",
   "defaultTitle": "Live session",
   "boundedSession": "{current}/{total} sessions",
@@ -2681,6 +2699,169 @@
    "success": "Analytics data refreshed"
   }
  },
+ "badges": {
+  "title": "Badges",
+  "subtitle": "Award badges automatically when members reach a milestone. Members can display any badge they earn.",
+  "infoBanner": "Badges are also awarded automatically to members who already meet the conditions below. To keep an engagement badge, members must meet its conditions every quarter.",
+  "oneTimeSectionTitle": "One-time badges",
+  "engagementSectionTitle": "Engagement badges",
+  "engagementSectionHint": "Refreshes every quarter",
+  "credentialsHintPrefix": "To create new badges, go to",
+  "credentialsHintLink": "Memberships > Credentials",
+  "loadErrorTitle": "Couldn't load badge settings",
+  "loadErrorDescription": "Please try again.",
+  "updateError": "Failed to update badge settings. Please try again.",
+  "duplicateTemplateError": "Each trigger must use a different badge template.",
+  "invalidThresholdError": "Enter a whole number greater than 0.",
+  "templateDeletedError": "The linked badge template was deleted. Re-enable after choosing a new template.",
+  "missingTriggerIdError": "This badge trigger is not available yet. Refresh the page or contact support if it persists.",
+  "triggerErrorGeneric": "This badge trigger could not be loaded. Refresh the page or contact support if it persists.",
+  "longTemplateNameWarning": "Badge titles longer than {max} characters may be truncated when displayed.",
+  "thresholdAria": "Badge threshold",
+  "templateSelectPlaceholder": "Select badge template",
+  "templateSelectAria": "Select badge template for {badge}",
+  "templatePreviewAria": "Badge template preview",
+  "toggleAria": "Toggle {badge} badge",
+  "triggers": {
+   "groupAdmin": {
+    "title": "Admin",
+    "defaultSelectedOption": "Group Admin",
+    "subtitle": "When a member becomes a community admin",
+    "tooltip": "Awarded to members with admin or owner role in this group."
+   },
+   "foundingMember": {
+    "title": "Founding Member",
+    "defaultSelectedOption": "Founding Member",
+    "subtitle": "When a member is one of the first {threshold} to join.",
+    "tooltip": "Awarded to the earliest members. The owner is always number 1. For example, set 5 to award the owner and the next 4 members.",
+    "thresholdLabel": "Founding member count"
+   },
+   "newMember": {
+    "title": "New Member",
+    "defaultSelectedOption": "Newbie",
+    "subtitle": "When a member joins the community.",
+    "tooltip": "This badge stays active for 30 days after a member joins."
+   },
+   "commentsPosted": {
+    "title": "Comments",
+    "defaultSelectedOption": "Top Contributor",
+    "subtitle": "When a member posts {threshold} comment | When a member posts {threshold} comments",
+    "tooltip": "Awarded when a member reaches the comment threshold in the current quarter.",
+    "thresholdLabel": "Comments required"
+   },
+   "postsCreated": {
+    "title": "Posts",
+    "defaultSelectedOption": "Power User",
+    "subtitle": "When a member publishes {threshold} post | When a member publishes {threshold} posts",
+    "tooltip": "Awarded when a member reaches the post threshold in the current quarter.",
+    "thresholdLabel": "Posts required"
+   },
+   "consecutiveDaysActive": {
+    "title": "Day Streak",
+    "defaultSelectedOption": "Always On",
+    "subtitle": "When a member comments, reacts, or posts {threshold} day in a row | When a member comments, reacts, or posts {threshold} days in a row",
+    "tooltip": "Comments, reactions, and posts count toward the activity streak.",
+    "thresholdLabel": "Consecutive active days"
+   },
+   "likesReceived": {
+    "title": "Likes Received",
+    "defaultSelectedOption": "Crowd Favourite",
+    "subtitle": "When a member receives {threshold} like on their posts | When a member receives {threshold} likes on their posts",
+    "tooltip": "Awarded when a member receives enough likes on their posts in the current quarter.",
+    "thresholdLabel": "Likes required"
+   }
+  },
+  "profile": {
+   "seeHowBadgesWork": "See how badges work",
+   "howBadgesWorkTitle": "How badges work",
+   "howBadgesWorkEarn": "Earn badges by participating in this community.",
+   "howBadgesWorkDisplay": "You can display one earned badge next to your name. Click it again to remove it.",
+   "howBadgesWorkUpcoming": "Upcoming badges show your progress and are only visible to you.",
+   "catalog": {
+    "title": "Badges",
+    "intro": "Badges celebrate what you do in this community. Earn them, and display your favorite next to your name.",
+    "empty": "No badges are available in this community yet.",
+    "repeatableAria": "Repeats each quarter",
+    "descriptions": {
+     "groupAdmin": "When you become a community admin",
+     "newMember": "When you join the community",
+     "foundingMember": "When you are one of the first {threshold} member to join | When you are one of the first {threshold} members to join",
+     "consecutiveDaysActive": "When you post, comment, or react {threshold} day in a row | When you post, comment, or react {threshold} days in a row",
+     "commentsPosted": "When you post {threshold} comment | When you post {threshold} comments",
+     "postsCreated": "When you publish {threshold} post | When you publish {threshold} posts",
+     "likesReceived": "When you receive {threshold} like on your posts | When you receive {threshold} likes on your posts"
+    },
+    "seeYourBadges": "See your badges",
+    "repeatableTooltip": "This badge refreshes every {interval}. Meet the {cadence} milestone to keep the badge.",
+    "intervals": {
+     "day": "day",
+     "week": "week",
+     "month": "month",
+     "quarter": "quarter",
+     "year": "year"
+    },
+    "cadences": {
+     "day": "daily",
+     "week": "weekly",
+     "month": "monthly",
+     "quarter": "quarterly",
+     "year": "yearly"
+    }
+   },
+   "earnedTitle": "Earned",
+   "earnedHint": "Click a badge to display it next to your name. Click it again to remove it.",
+   "displayed": "Displayed",
+   "upNextTitle": "Up next",
+   "onlyVisibleToYou": "Only visible to you",
+   "upNextHint": "Your progress toward badges you haven't earned yet.",
+   "otherEarnedCount": "{name} has earned {count} badge. | {name} has earned {count} badges.",
+   "thisUser": "This user",
+   "emptyEarned": "No badges earned yet.",
+   "emptyUpcoming": "No upcoming badges right now.",
+   "selectError": "Couldn't update your displayed badge. Please try again.",
+   "loadErrorTitle": "Couldn't load badges",
+   "loadErrorDescription": "Please try again.",
+   "progress": {
+    "commentsPosted": "{current} of {target} comment posted | {current} of {target} comments posted",
+    "postsCreated": "{current} of {target} post published | {current} of {target} posts published",
+    "consecutiveDaysActive": "{current} of {target} consecutive day active | {current} of {target} consecutive days active",
+    "likesReceived": "{current} of {target} like received | {current} of {target} likes received",
+    "generic": "{current} of {target}"
+   },
+   "selectSuccess": "Displayed badge updated.",
+   "deselectSuccess": "Displayed badge removed.",
+   "emptyTitle": "No badges yet",
+   "otherEmptyDescription": "{name} hasn't earned any badges in this community."
+  },
+  "discussion": {
+   "title": "Your badges",
+   "summary": "{earned} earned • {upcoming} more to unlock",
+   "summaryEarnedOnly": "{count} earned",
+   "summaryUpcomingOnly": "{count} to unlock",
+   "emptySetupHint": "This community doesn't award badges yet. Set them up so members can start earning them.",
+   "setupCta": "Set up badges",
+   "setupDescription": "Reward members for showing up and contributing. Badges keep your community active and engaged.",
+   "badgeNew": "New"
+  },
+  "rail": {
+   "viewBadges": "View {count} badge | View {count} badges"
+  },
+  "pill": {
+   "seeAll": "See all {title}",
+   "seeAllMembersWithBadge": "See all members with this badge",
+   "viewBadge": "Badge: {title}",
+   "openProfileBadges": "View {title} on profile",
+   "descriptions": {
+    "groupAdmin": "This badge is awarded to members with admin or owner role in this group.",
+    "newMember": "This badge is awarded to members who recently join this community.",
+    "foundingMember": "This badge is awarded to members who are among the first {threshold} member to join. | This badge is awarded to members who are among the first {threshold} members to join.",
+    "consecutiveDaysActive": "This badge is awarded to members who post, comment, or react {threshold} day in a row. | This badge is awarded to members who post, comment, or react {threshold} days in a row.",
+    "commentsPosted": "This badge is awarded to members who post {threshold} comment. | This badge is awarded to members who post {threshold} comments.",
+    "postsCreated": "This badge is awarded to members who publish {threshold} post. | This badge is awarded to members who publish {threshold} posts.",
+    "likesReceived": "This badge is awarded to members who receive {threshold} like on their posts. | This badge is awarded to members who receive {threshold} likes on their posts."
+   }
+  }
+ },
  "emojiPicker": {
   "notfound": "No emoji found",
   "recent": "Recent",
@@ -2828,7 +3009,7 @@
    "types": {
     "free": "Free",
     "recurring": "Recurring",
-    "oneTime": "One time"
+    "oneTime": "One-time"
    },
    "currency": "Currency",
    "billingOptions": "Billing options",
@@ -2839,7 +3020,7 @@
    "price": "Price",
    "oneTimeHelper": "One-time payment for lifetime access",
    "freeEmptyTitle": "No pricing options available for free channel",
-   "freeEmptyDescription": "Members can join without paying. Choose Recurring or One time to charge for access.",
+   "freeEmptyDescription": "Members can join without paying. Choose Recurring or One-time to charge for access.",
    "testMode": "Test Mode",
    "privateOnlyTooltip": "Payment setup is only for private channels"
   },
@@ -3065,7 +3246,9 @@
   "pricing": {
    "free": "Free",
    "adminFreeHint": "Admins can register for paid events for free",
-   "planCoveredHint": "Included in your membership plan"
+   "planCoveredHint": "Included in your membership plan",
+   "youSavedWithPlan": "You saved {amount} with your existing plan.",
+   "priceLabel": "Price"
   },
   "create": {
    "title": "Title",
@@ -3181,6 +3364,7 @@
    "people": "People",
    "going": "Going",
    "description": "Description",
+   "register": "Register",
    "registerNow": "Register Now",
    "addToCalendar": "Add to Calendar",
    "attendeesList": "Attendees List",
@@ -3586,11 +3770,38 @@
     "skoolPassword": "Password is required"
    },
    "gamificationAndRewards": "Gamification & Rewards",
-   "gamificationDescription": "Customise level names and add rewards for better engagement of members",
+   "gamificationDescription": "Decide how members earn points, name your levels, and set up rewards.",
+   "gamificationTabLevels": "Levels",
+   "gamificationTabRewards": "Rewards",
+   "levelTitleOnly": "Level {id}",
+   "levelStartsAtZero": "Starts at 0 pts",
+   "levelNeedsPoints": "Needs {points} pts",
+   "levelMustBeBetween": "Must be between {min} and {max} pts.",
+   "levelMustBeMoreThan": "Must be more than {points} pts.",
+   "levelScaleBarZero": "0 pts",
+   "levelScaleBarTop": "{points} pts",
+   "levelEditorLabel": "Level {id}",
+   "gamificationLevelsLoadFailed": "Could not load level thresholds. Please refresh and try again.",
+   "gamificationRewardsSaveFailedAfterLevels": "Level changes were saved, but rewards could not be saved. Please try again.",
+   "gamificationValidation": {
+    "exactLevelCount": "Exactly {count} levels are required",
+    "minPointsNonNegative": "Level {level} points must be a non-negative number",
+    "minPointsNotInteger": "Level {level} points must be a whole number",
+    "minPointsTooLarge": "Level {level} points must be {max} or less",
+    "duplicateLevel": "Duplicate level {level}",
+    "level1MinPointsZero": "Level 1 points must be 0",
+    "minPointsNotIncreasing": "Level {level} points must be greater than level {previousLevel} points ({previousMinPoints})",
+    "minPointsGreaterThanLower": "Must be greater than {points}",
+    "minPointsLessThanHigher": "Must be less than {points}",
+    "missingLevel": "Missing level {level}",
+    "nameTooLong": "Level {level} name must be {max} characters or less"
+   },
    "levels": "Levels",
+   "levelsDescription": "Rename each level and set the points needed to reach it. Members move up automatically as they earn points. Level 1 always starts at 0.",
+   "levelMinPointsLabel": "Points required",
+   "level1ThresholdLocked": "Threshold fixed at 0",
    "levelNamePlaceholder": "Level name",
-   "editLevelName": "Edit level name",
-   "rewards": "Rewards",
+   "editLevelAria": "Edit Level {id}",
    "addReward": "Add Reward",
    "editReward": "Edit Reward",
    "deleteReward": "Delete reward",
@@ -3761,7 +3972,9 @@
    "branding": "Branding",
    "themes": "Appearance",
    "membershipQuestions": "Membership Questions",
+   "welcomeSetup": "Welcome Setup",
    "gamificationAndRewards": "Gamification & Rewards",
+   "badges": "Badges",
    "links": "Promotional Links",
    "discovery": "Discovery",
    "newsletter": "Newsletter",
@@ -3772,6 +3985,12 @@
    "contentModeration": "Content Moderation"
   },
   "analytics": {
+   "newBadge": "New"
+  },
+  "badges": {
+   "newBadge": "New"
+  },
+  "welcomeSetup": {
    "newBadge": "New"
   },
   "subscriptions": {
@@ -3830,6 +4049,7 @@
      "description": "Members join for free. Paid plans below are paused while this is on.",
      "toggleAria": "Make this community free",
      "descriptionWhenFree": "No plan is active, so members join for free. Activate a plan below to start charging.",
+     "toggleDisabledHelper": "Activate any one plan to make this community paid",
      "confirm": {
       "title": "Make this community free?",
       "description": "This switches off all active plans. You can start charging again anytime by activating a plan.",
@@ -3991,12 +4211,17 @@
      "deactivateLastTitle": "Deactivate your last plan?",
      "activateDescription": "Members will be able to subscribe to this plan.",
      "deactivateDescription": "This plan won't be available to new members.",
-     "deactivateLastDescription": "This is your only active plan, so the community becomes free. You can charge again anytime.",
+     "deactivateLastDescription": "This is your only active plan. Switching off the plan makes the community free.",
      "becomesPaid": "This is your first active plan, so the community becomes paid. New members will have to subscribe to join.",
      "appearsOnJoin": "The plan appears on the join screen straight away.",
      "keepsExistingMembers": "Current subscribers keep their access and stay billed as usual.",
      "confirmActivate": "Activate plan",
      "confirmDeactivate": "Deactivate plan"
+    },
+    "deleteConfirm": {
+     "title": "Delete {name}?",
+     "description": "This permanently removes the plan. You can't undo this.",
+     "confirm": "Delete plan"
     },
     "preview": {
      "title": "Member view",
@@ -4067,7 +4292,9 @@
    "cancelRequestTitle": "Cancel group joining Request",
    "cancelRequestMessage": "Are you sure you want to cancel your request to join this group? You will need to request again to access this group.",
    "confirm": "Leave",
-   "cancel": "Cancel"
+   "cancel": "Cancel",
+   "errorTitle": "Couldn't leave group",
+   "errorBody": "Something went wrong while leaving. Please try again."
   },
   "leaderboard": {
    "title": "Leaderboard"
@@ -4202,7 +4429,8 @@
     "invited": "Invited",
     "banned": "Banned",
     "rolesLabel": "Roles",
-    "statusLabel": "Status"
+    "statusLabel": "Status",
+    "badgesLabel": "Badges"
    },
    "states": {
     "noMembers": "No members found",
@@ -4268,6 +4496,13 @@
    "emptyBody": "This community has no plans on offer right now.",
    "errorTitle": "Couldn't load plans",
    "loadError": "Something went wrong loading the plans. Try again in a moment.",
+   "moreFeatures": "+{count} more",
+   "trial": "{days} day free | {days} days free",
+   "carousel": {
+    "prev": "Previous plans",
+    "next": "Next plans",
+    "page": "{current}/{total}"
+   },
    "ribbon": {
     "mostPopular": "Most popular",
     "current": "Current plan"
@@ -4288,7 +4523,7 @@
     "weekly": "/week",
     "monthly": "/month",
     "yearly": "/year",
-    "oneTime": "one time"
+    "oneTime": "one-time"
    },
    "included": "What's included",
    "price": {
@@ -4380,13 +4615,15 @@
   "uploadHeading": "Upload a Profile Photo",
   "subtitle": "Communities thrive on trust to forge connections with others",
   "submit": "Start Discovering Communities Now",
+  "cancel": "Cancel",
   "avatar": {
    "click": "Click to upload your photo",
    "uploading": "Uploading…",
    "helper": "Upload a SVG, PNG, JPG, JPEG, WEBP, ICO. Recommended Aspect Ratio 1:1"
   },
   "bio": {
-   "placeholder": "Add a bio... (Optional)"
+   "placeholder": "Add a bio... (Optional)",
+   "placeholderRequired": "Add a bio"
   },
   "success": {
    "title": "Profile updated",
@@ -4455,17 +4692,22 @@
    }
   },
   "level": "Level {level}",
-  "points": "points",
+  "levelWithName": "Level {level} - {name}",
+  "levelDetailsSummary": "{percentage}% of members",
+  "guestSpotOpen": "Your spot is open",
+  "guestJoinToEarn": "Join to start earning points",
+  "pointsCount": "{points} points",
   "points_to_level_up": "{points} points to level up",
   "max_level_reached": "🎉 Max level reached!",
   "howPointsWork": "How do points work?",
   "pointsAndLevels": "Points & levels",
   "pointsTitle": "Points",
+  "levelMinPointsSuffix": ": {points} Points",
   "pointsDescription": "You earn points when other members like your posts or comments. 1 like = 1 point. This encourages users to produce quality content and interact with other members in your community.",
   "levelsTitle": "Levels",
   "levelsDescription": "As you gain points, you level up. Your level is shown at the bottom right of your avatar. The number of points required to get to the next level is shown via the progress bar on leaderboard screen.",
   "mobile": {
-   "pointsToLevelUp": "points to level up",
+   "pointsToLevelUpCount": "+{points} points to level up",
    "rewardCount": "{count} rewards"
   },
   "table": {
@@ -4478,7 +4720,8 @@
   },
   "viewLeaderboardsBy": "View Leaderboards by",
   "viewLeaderboardsByDescription": "creating an account or logging in",
-  "errorLoading": "Failed to load leaderboard"
+  "errorLoading": "Failed to load leaderboard",
+  "lastUpdated": "Last updated: {datetime}"
  },
  "members": {
   "card": {
@@ -5039,6 +5282,145 @@
    "accessibilityLabel": "Sort order: {order}",
    "loading": "Updating order"
   }
+ },
+ "welcomeSetup": {
+  "pageTitle": "Welcome setup",
+  "pageDescription": "Configure what new members experience when they join your community.",
+  "tip": "Communities with onboarding steps see significantly higher new member activation.",
+  "tipLabel": "Tip:",
+  "cancel": "Cancel",
+  "save": "Save",
+  "saveChanges": "Save changes",
+  "discard": "Discard",
+  "unsavedChanges": "You have unsaved changes",
+  "saveSuccess": "Welcome setup saved",
+  "saveError": "Failed to save welcome setup. Please try again.",
+  "loadError": "Failed to load welcome setup.",
+  "edit": "Edit",
+  "setup": "Setup",
+  "owner": "Owner",
+  "admin": "Admin",
+  "autoDm": {
+   "title": "Auto DM to new members",
+   "description": "Automatically send a DM to new members when they join.",
+   "defaultMessage": "Hey, welcome to the community! 🎉\nWe're excited to have you here. Head over to discussions tab and share a bit about yourself. We'd love to get to know you.",
+   "editorPlaceholder": "Write the message new members will receive…",
+   "mentionHint": "Type {'@'} to insert member name.",
+   "linkPrompt": "Enter link URL",
+   "linkModalTitle": "Add a link",
+   "linkModalDescription": "Insert a clickable link into the welcome message.",
+   "linkTextLabel": "Text",
+   "linkTextPlaceholder": "Link text",
+   "linkUrlLabel": "URL",
+   "linkTextRequired": "Link text is required",
+   "linkUrlRequired": "URL is required",
+   "linkUrlInvalid": "Enter a valid URL",
+   "senderNameChip": "Sender name",
+   "memberNameChip": "Member name",
+   "peopleGroup": "People",
+   "platformVideo": "{platform} video",
+   "fallbackSenderName": "Community admin",
+   "attachmentUploading": "Uploading… {progress}%",
+   "attachmentUploadError": "Could not upload attachment. Please try again.",
+   "attachmentRemove": "Remove attachment",
+   "attachImages": "Images",
+   "attachVideos": "Videos",
+   "attachDocuments": "Documents",
+   "attachAudio": "Audio",
+   "attachmentLimitImages": "You can attach up to {count} images.",
+   "attachmentLimitVideos": "You can attach up to {count} videos.",
+   "attachmentLimitFiles": "You can attach up to {count} documents.",
+   "attachmentLimitAudio": "You can attach up to {count} audio files.",
+   "attachmentSizeError": "File must be 50 MB or smaller.",
+   "attachmentVideoSizeError": "Video must be 500 MB or smaller.",
+   "attachmentVideoDurationError": "Video must be 3 minutes or shorter.",
+   "attachmentTypeError": "This file type is not supported.",
+   "toolbarBold": "Bold",
+   "toolbarItalic": "Italic",
+   "toolbarUnderline": "Underline",
+   "toolbarStrikethrough": "Strikethrough",
+   "toolbarAddLink": "Add link",
+   "toolbarAttachFile": "Attach file",
+   "insertMention": "Insert mention",
+   "mentionNoMatches": "No matches",
+   "openAttachmentPreview": "Open attachment preview"
+  },
+  "steps": {
+   "title": "Onboarding steps",
+   "description": "Set up to {max} steps for new members to complete when they first visit.",
+   "emptyTitle": "Set up onboarding steps",
+   "emptyDescription": "Give new members up to {max} quick actions to complete when they first visit.",
+   "addFirstStep": "Add your first step",
+   "addStep": "Add step",
+   "remaining": "{count} remaining",
+   "dragHandle": "Reorder step",
+   "stepActions": "Step actions",
+   "changeStepType": "Change step type",
+   "editStep": "Edit step",
+   "deleteStep": "Delete step",
+   "eventLabel": "Event",
+   "selectEvent": "Select an event",
+   "noUpcomingEvents": "No upcoming recurring events",
+   "recurringEventsOnlyHint": "Only recurring events are shown here.",
+   "eventRequired": "Event required to publish this step.",
+   "eventsLoading": "Loading events…",
+   "uploadVideo": "Upload a video",
+   "uploadingVideo": "Uploading video…",
+   "processingVideo": "Processing video…",
+   "uploadProgress": "{progress}% uploaded",
+   "uploadVideoHint": "MP4, MOV, or WebM — up to 2 GB",
+   "videoTypeError": "Use an MP4, MOV, or WebM file.",
+   "videoSizeError": "Video must be 2 GB or smaller.",
+   "videoUploadError": "Upload failed. Try again or paste a link.",
+   "orPasteLink": "or paste a link",
+   "videoUrlPlaceholder": "YouTube, Vimeo or Loom URL",
+   "replace": "Replace",
+   "addStepModalTitle": "Add a step",
+   "changeStepModalTitle": "Change step type",
+   "addStepModalDescription": "Choose what new members should do.",
+   "enterStepTitle": "Enter step title...",
+   "stepTitleLabel": "Step title",
+   "linkUrlLabel": "Link URL",
+   "linkUrlPlaceholder": "Add a link (optional)"
+  },
+  "taskTypes": {
+   "completeProfile": "Add a bio & a latest profile picture",
+   "likePost": "Like & comment on a post",
+   "introPost": "Write a post & introduce yourself",
+   "rsvpEvent": "RSVP to an event",
+   "watchVideo": "Watch the introductory video",
+   "customTask": "Create a custom step",
+   "autoTracked": "Auto-tracked",
+   "videoTracked": "Video-tracked",
+   "selfTracked": "Self-tracked"
+  },
+  "validation": {
+   "tooManySteps": "You can add up to 5 onboarding steps.",
+   "emptyAutoDm": "Welcome message cannot be empty when Auto DM is enabled.",
+   "missingSender": "A sender is required when Auto DM is enabled.",
+   "missingStepTitle": "Custom steps need a title.",
+   "missingVideo": "Add a video upload or link before saving.",
+   "missingEvent": "Select an event before saving.",
+   "invalidLinkUrl": "Enter a valid URL (http or https).",
+   "duplicateStep": "Each step type can only be added once.",
+   "emptySteps": "Add at least one onboarding step before saving."
+  }
+ },
+ "welcomeOnboarding": {
+  "title": "Get started",
+  "titleWithGroup": "Get started in {groupName}",
+  "progress": "{done} of {total}",
+  "allSetTitle": "You're all set",
+  "allSetProgress": "{done} of {total}",
+  "expand": "Expand onboarding checklist",
+  "collapse": "Collapse onboarding checklist",
+  "watchVideoTitle": "Welcome video",
+  "closeVideo": "Close video",
+  "watchVideoEmpty": "No video is available for this step yet.",
+  "openVideoLink": "Open video link",
+  "markVideoComplete": "Mark as complete",
+  "markAsDone": "Mark complete",
+  "videoAriaLabel": "Welcome video"
  },
  "affiliates": {
   "tabs": {
@@ -5601,7 +5983,12 @@
     "interstitialAdAria": "Sponsored message",
     "interstitialAdSkipAria": "Skip ad, closes in {seconds} seconds",
     "register": "Register",
-    "agendaSaved": "Saved",
+    "join": "Join event",
+    "joinEnded": "This event has already ended.",
+    "joinAvailableAt": "The join link will be available on {date}",
+    "joinUnavailable": "The join link isn't available yet",
+    "viewTicket": "View ticket",
+    "agendaIncludedWith": "Included with:",
     "agendaSearch": "Search sessions",
     "agendaFilters": "Filters",
     "agendaFilterByLabel": "Filter by label",
@@ -5609,15 +5996,27 @@
     "agendaDays": "Days",
     "agendaDaySessionsOne": "1 session",
     "agendaDaySessionsMany": "{count} sessions",
-    "agendaEmptyTitle": "No sessions found",
-    "agendaEmptyDescription": "Sessions will show up here when they are added to the agenda.",
+    "agendaEmptyTitle": "No agenda added yet",
+    "agendaEmptyDescription": "Check back soon, the agenda is still being planned.",
     "agendaEmptySearch": "No sessions match your search.",
+    "agendaHighlightLiveBadge": "Live",
+    "agendaSessionUpNext": "Up next",
+    "agendaViewMySchedule": "My schedule",
+    "agendaAllSessions": "All sessions",
+    "agendaScheduleToggleAria": "Show all sessions or only my schedule",
+    "agendaMyScheduleEmptyTitle": "No saved sessions yet",
+    "agendaMyScheduleEmptyDescription": "Save sessions from the agenda to build your schedule here.",
     "agendaSearchEmptyTitle": "No matching sessions",
     "agendaSearchEmptyDescription": "No sessions match \"{query}\". Try a different search.",
-    "agendaTimeTo": "to {time}",
     "agendaAddToCalendar": "Add to calendar",
-    "sessionAddToSchedule": "Add to schedule",
-    "sessionSavedNotice": "Session saved. Find it under My schedule in your profile settings.",
+    "agendaAddedToCalendar": "Added to calendar",
+    "calendarMySchedule": "My schedule",
+    "calendarMenu": "Calendar options",
+    "sessionSavedNotice": "Saved to 'My Schedule' under profile settings",
+    "calendarGoogle": "Google Calendar",
+    "calendarOutlook": "Outlook",
+    "calendarApple": "Apple Calendar",
+    "calendarOthers": "Others (.ics file)",
     "agendaReadMore": "Read more",
     "agendaReadLess": "Read less",
     "loadingTitle": "Loading event",
@@ -5651,8 +6050,8 @@
     "speakersFilterLabelGroup": "Label",
     "speakersHintTitle": "Get to know the speakers",
     "speakersHintBody": "Open a speaker's profile to read their bio and see the sessions they're presenting. Connect with them to keep the conversation going.",
-    "speakersEmptyTitle": "No speakers yet",
-    "speakersEmptyDescription": "Speakers will show up here once they are added to the event.",
+    "speakersEmptyTitle": "No speakers announced yet",
+    "speakersEmptyDescription": "The lineup will appear here once it's confirmed.",
     "speakersSearchEmptyTitle": "No matching speakers",
     "speakersSearchEmptyDescription": "No speakers match \"{query}\". Try a different search.",
     "speakersOpenDetails": "View details for {name}",
@@ -5662,8 +6061,8 @@
     "attendeesSearch": "Search attendees",
     "attendeesHintTitle": "Meet your fellow attendees",
     "attendeesHintBody": "See who else is attending, open a profile to learn more about someone, and send a connection request to start networking.",
-    "attendeesEmptyTitle": "No attendees found",
-    "attendeesEmptyDescription": "Attendees will show up here after they register.",
+    "attendeesEmptyTitle": "No attendees yet",
+    "attendeesEmptyDescription": "People who register will show up here.",
     "attendeesSearchEmptyTitle": "No matching attendees",
     "attendeesSearchEmptyDescription": "No one matches \"{query}\". Try a different name or email.",
     "attendeesLoadingAriaLabel": "Loading attendees",
@@ -5685,10 +6084,9 @@
     "exhibitorsBookmarkTipTitle": "Click {icon} to bookmark your favorites",
     "exhibitorsBookmarkTipBody": "Bookmark the companies that catch your interest. You can access them anytime in your profile under “My bookmarks.”",
     "exhibitorsEmptyTitle": "No exhibitors yet",
-    "exhibitorsEmptyDescription": "Exhibitors will show up here once they are added to the event.",
+    "exhibitorsEmptyDescription": "Companies joining the event will show up here.",
     "exhibitorsSearchEmptyTitle": "No matching exhibitors",
     "exhibitorsSearchEmptyDescription": "No exhibitors match \"{query}\". Try a different search.",
-    "exhibitorsAllLoaded": "All exhibitors loaded",
     "exhibitorsBookmarked": "Bookmarked",
     "exhibitorsNotBookmarked": "Not bookmarked",
     "exhibitorsBookmark": "Bookmark",
@@ -5756,6 +6154,15 @@
     "exhibitorCenterTeamColumnMember": "Team member",
     "exhibitorCenterTeamColumnJobTitle": "Job title",
     "exhibitorCenterTeamColumnRole": "Role",
+    "exhibitorCenterTeamColumnVisibility": "Visibility",
+    "exhibitorCenterTeamColumnContacts": "Contacts",
+    "exhibitorCenterTeamVisibilityTooltip": "Visible members are listed on the exhibitor's public profile. Hidden members are not.",
+    "exhibitorCenterTeamContactsTooltip": "When shared, the contacts this member collects are shared with the exhibitor's team.",
+    "exhibitorCenterTeamVisible": "Visible",
+    "exhibitorCenterTeamHidden": "Hidden",
+    "exhibitorCenterTeamShared": "Shared",
+    "exhibitorCenterTeamNotShared": "Not shared",
+    "exhibitorCenterTeamUpdateFailed": "Could not update the team member. Please try again.",
     "exhibitorCenterTeamRoleAdmin": "Admin",
     "exhibitorCenterTeamRoleMember": "Member",
     "exhibitorCenterTeamEmptyTitle": "No team members yet",
@@ -5765,11 +6172,11 @@
     "exhibitorCenterEditHeaderTitle": "Customize your logo",
     "exhibitorCenterEditLogoLabel": "Company logo",
     "exhibitorCenterEditLogoCta": "Click to upload or drag and drop",
-    "exhibitorCenterEditLogoHint": "PNG, JPG, or WebP · 400×200",
+    "exhibitorCenterEditLogoHint": "PNG, JPG, or WebP · 400×200 · Max 5 MB",
     "exhibitorCenterEditLogoUploading": "Uploading logo…",
     "exhibitorCenterEditLogoFailed": "The logo could not be uploaded. Try again.",
     "exhibitorCenterEditLogoInvalidType": "Upload a PNG, JPG, or WebP image.",
-    "exhibitorCenterEditLogoTooLarge": "The logo must be 10 MB or smaller.",
+    "exhibitorCenterEditLogoTooLarge": "The logo must be 5 MB or smaller.",
     "exhibitorCenterEditLogoRemove": "Remove logo",
     "exhibitorCenterEditLogoPreview": "Cropped company logo",
     "exhibitorCenterEditDescriptionLabel": "Company description",
@@ -5800,11 +6207,13 @@
      "speakers": "Speakers",
      "attendees": "Attendees",
      "exhibitors": "Exhibitors",
-     "badge": "Badge",
+     "badge": "Digital Badge",
      "ariaLabel": "Event sections"
     },
     "badge": {
      "title": "Your badge",
+     "subtitle": "Let other attendees, speakers, and exhibitors scan this to connect with you instantly.",
+     "download": "Download badge",
      "qrAria": "Check-in QR code",
      "error": "Your badge could not load. Try again in a moment.",
      "empty": "There is no badge for you at this event yet."
