@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "generate-pdfs": "npx tsx scripts/generate-pdfs.ts",
+    "check:quiz": "npx tsx scripts/check-quiz-submit.ts",
     "start": "next start",
     "lint": "eslint"
   },
