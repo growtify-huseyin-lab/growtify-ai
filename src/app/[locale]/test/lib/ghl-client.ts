@@ -37,6 +37,8 @@ interface GhlConfig {
   locationId: string;
   apiBase: string;
   apiVersion: string;
+  temelProductId: string;
+  temelPriceId: string;
 }
 
 function readConfig(): GhlConfig | null {
@@ -44,8 +46,11 @@ function readConfig(): GhlConfig | null {
   const locationId = process.env.GHL_LOCATION_ID;
   const apiBase = process.env.GHL_API_BASE ?? "https://services.leadconnectorhq.com";
   const apiVersion = process.env.GHL_API_VERSION ?? "2021-07-28";
+  // ghl-008: Temel product/price scope for quiz + nurture coupons (fail-closed at call site).
+  const temelProductId = process.env.GHL_TEMEL_PRODUCT_ID ?? "";
+  const temelPriceId = process.env.GHL_TEMEL_PRICE_ID ?? "";
   if (!apiToken || !locationId) return null;
-  return { apiToken, locationId, apiBase, apiVersion };
+  return { apiToken, locationId, apiBase, apiVersion, temelProductId, temelPriceId };
 }
 
 export interface UpsertResult {
@@ -236,6 +241,16 @@ export async function createQuizCoupon(
   const config = readConfig();
   if (!config) return { ok: false, error: "GHL credentials missing" };
 
+  // ghl-008: scope the coupon to the Temel product, else the % applies
+  // location-wide (incl. Tam ₺49.000). Fail closed — never fall back to an
+  // unrestricted coupon when the scope env is missing.
+  if (!config.temelProductId) {
+    console.error(
+      "[coupon] GHL_TEMEL_PRODUCT_ID missing — refusing to create an unrestricted (location-wide) coupon",
+    );
+    return { ok: false, error: "coupon_scope_env_missing" };
+  }
+
   const MAX_ATTEMPTS = 3;
   let lastError: string | undefined;
 
@@ -268,6 +283,8 @@ export async function createQuizCoupon(
         body: JSON.stringify({
           altId: config.locationId,
           altType: "location",
+          productIds: [config.temelProductId],
+          ...(config.temelPriceId ? { priceIds: [config.temelPriceId] } : {}),
           name: "Quiz Discount — " + code,
           code,
           discountType: "percentage",
