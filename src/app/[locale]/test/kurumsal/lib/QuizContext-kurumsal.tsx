@@ -10,6 +10,7 @@ import React, {
 import { initialKurumsalState, type KurumsalQuizState } from "./types-kurumsal";
 import { useKScreens, useKTotalScreens } from "./content-kurumsal-runtime-hooks";
 import { useLocale } from "next-intl";
+import { getAttribution } from "@/lib/attribution";
 import { computeKurumsalResults } from "./scoring-kurumsal";
 import {
   clearQuizSnapshot,
@@ -149,7 +150,7 @@ export function KurumsalQuizProvider({ children }: { children: React.ReactNode }
       const res = await fetch("/test/kurumsal/api/submit-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...state, locale }),
+        body: JSON.stringify({ ...state, locale, attribution: getAttribution() }),
       });
       if (!res.ok) {
         return { ok: false, error: `HTTP ${res.status}` };

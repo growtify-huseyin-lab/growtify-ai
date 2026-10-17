@@ -7,6 +7,7 @@ export const maxDuration = 60;
 
 import { after } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { parseAttribution, sourceTag, utmCustomFields } from "@/lib/attribution";
 import type { KurumsalQuizState } from "../../lib/types-kurumsal";
 import {
   uploadPdfToContact,
@@ -59,8 +60,13 @@ export async function POST(request: Request) {
 
   // 1. Upsert contact — reuse bireysel ghl-client with kurumsal mapping
   const locale = (state as { locale?: string }).locale === "en" ? "en" : "tr";
-  const tags = locale === "en" ? buildGhlTagsEn(state) : buildGhlTags(state);
-  const customFields = buildGhlCustomFields(state);
+  const attribution = parseAttribution((state as { attribution?: unknown }).attribution);
+  console.log("[kurumsal/submit-email] attribution →", JSON.stringify({ attribution: attribution ?? null, sourceTag: sourceTag(attribution) }));
+  const tags = [
+    ...(locale === "en" ? buildGhlTagsEn(state) : buildGhlTags(state)),
+    sourceTag(attribution),
+  ];
+  const customFields = [...buildGhlCustomFields(state), ...utmCustomFields(attribution)];
 
   // Build a minimal state-like object that bireysel ghl-client expects
   const ghlPayload = {
