@@ -21,10 +21,10 @@ bu dosyanın o anki özetidir.
 
 | Bileşen | Nerede | Güncel sürüm | Durum |
 |---|---|---|---|
-| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.1.0** | Yayında |
+| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.2.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.13.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.14.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -35,6 +35,12 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.14.0** — 2026-10-17 — **GHL güncellemesi (bekçi #201): 2.132 yeni/değişen metin Türkçe.** Kabuk (CEO Chrome, yalnız sekmede geçici
+  TR, 114 sayfa catalog-sweep) 1.101: telefon 529 (RCS, WhatsApp akışları, Ses Analizi ayarları), Sesli Yapay Zeka sürümleme, arama
+  sonrası ekranı (Power Dialer), Takvim Yapay Zekası, Copilot, uygulama pazarı 186, elle randevu formu 28. Gömülü ekranlar (yeni
+  `scripts/crm-i18n/frame-diff.mjs`, oturumsuz) 1.031: otomasyon 417 (destek talepleri, A/B testi, iş akışı haritaları), Yapay Zeka
+  Stüdyosu 246 (Git, sohbet widget'ları), e-posta hizmetleri 174 (alan adı ısıtma), form 138, sayfa 52, takvim 4; e-postalar ve
+  e-posta oluşturucuda değişiklik yok. 7 paralel çeviri, validate 0 hata, beyaz etiket taraması 0. Katalog 122.342. Bekçi izleri güncellendi.
 - **1.13.1** — 2026-10-12 — **Yapay Zeka Stüdyosu güncellemesi Türkçe** (CEO: "buna da bak"). Katalog oturumsuz, doğrudan uygulama
   dosyasından çıkarıldı (acorn ile `nav`+`chat` içeren mesaj nesnesi; bölümler değişkenlere ayrılmış, çözümlendi): 814 metin. GHL
   "Ayarlar" bölümünü "Daha fazla"ya taşımış (150 anahtar) + yeni Analitik ve Form gönderimleri sayfaları: 177 yeni/değişen → 104'ü
@@ -405,6 +411,8 @@ bu dosyanın o anki özetidir.
   hatırlanır). CEO'nun CRM sekmesinde dosya yükleme yöntemiyle doğrulandı; yayında değil.
 
 ### Öğrenci paneli (panel.growtify.ai)
+- **2.2.0** — 2026-10-17 — **GHL güncellemesi (bekçi #202 — panel bekçisinin ilk yakaladığı fark): 385 metin** (356 yeni + 29 değişen;
+  rozetler, karşılama kurulumu, etkinlik hesap sayfaları, ödeme/deneme metinleri). Katalog 5.011 → 5.358, tamamı Türkçe.
 - **2.1.0** — 2026-10-12 — **Yeni Sadakat (Loyalty) sayfası + GHL'in sonradan eklediği metinler Türkçe** (CEO: "Loyalty sekmesi
   eklenmiş, çevirileri lazım"). GHL kataloğu 4.327 → 5.011 metin: 741 yeni + 15 İngilizcesi değişen = 756 çeviri (sadakat 142,
   etkinlikler/panel 207, gruplar 103, hesap 96, grup ayarları 60, kanal 55, keşfet 38, randevular 29…). Terimler: Loyalty → Sadakat
