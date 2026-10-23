@@ -44,7 +44,7 @@ export function buildSystem(sectionId: string): { system: string; internal: stri
   const sorular = (p.sorular ?? [])
     .map(
       (q: Prompt) =>
-        `Soru (${q.anahtar}): ${q.soru}\n  Derinleştirme örnekleri: ${(q.derinlestirme ?? []).join(" | ")}\n  İyi cevap: ${q.iyi_cevap}\n  Dikkat: ${(q.kirmizi_bayrak ?? []).join(" | ")}`,
+        `Soru (${q.anahtar}): ${q.soru}${q.ikinci_soru ? `\n  Bu soru netleşince AYRI bir mesajda sor: ${q.ikinci_soru} (iki cevap aynı satıra yazılır)` : ""}${q.neden_soruyoruz ? `\n  Öğrenci neden sorduğunu merak ederse: ${q.neden_soruyoruz}` : ""}\n  Derinleştirme örnekleri: ${(q.derinlestirme ?? []).join(" | ")}\n  İyi cevap: ${q.iyi_cevap}\n  Dikkat: ${(q.kirmizi_bayrak ?? []).join(" | ")}`,
     )
     .join("\n");
   const akis = typeof p.akis === "object" && !Array.isArray(p.akis)
