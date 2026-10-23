@@ -217,6 +217,23 @@ export async function uploadPdfToContact(
 /*  Create Unique Coupon Code via GHL Payments API                            */
 /* -------------------------------------------------------------------------- */
 
+/**
+ * Her indirim kuponunun kısıtları (2026-10-23 sızıntı düzeltmesi). Önceden kupon ürün bağı olmadan
+ * doğuyordu → Temel için verilen %20-50 kod Tam Paket'te ve hesaptaki diğer ürünlerde de geçiyordu.
+ * Ayrıca "tek kullanım" GHL'in tanımadığı `maxRedemptions` alanıyla gönderiliyordu → kodlar sınırsız
+ * kullanılabiliyordu. GHL'in alanları: productIds, usageLimit, limitPerCustomer (API'de doğrulandı).
+ * Temel ürünü: "GROWT Metod" (GHL ürün kimliği aşağıda; ortam değişkeniyle değiştirilebilir).
+ */
+export const TEMEL_PRODUCT_ID = process.env.GHL_TEMEL_PRODUCT_ID || "69df69d181387216de509cf7";
+export function couponRestrictions() {
+  return {
+    productIds: [TEMEL_PRODUCT_ID],
+    usageLimit: 1,
+    limitPerCustomer: true,
+    applyToFuturePayments: false,
+  };
+}
+
 export interface CouponResult {
   ok: boolean;
   code?: string;
@@ -227,7 +244,7 @@ export interface CouponResult {
 }
 
 /**
- * Create a unique single-use 50% discount coupon in GHL.
+ * Create a unique single-use discount coupon in GHL, valid only for the Temel product (couponRestrictions).
  * Code format: GROWT + random 6 chars (e.g., GROWTX8K2M9).
  */
 export async function createQuizCoupon(
@@ -273,7 +290,7 @@ export async function createQuizCoupon(
           discountType: "percentage",
           discountValue: discountPercent,
           durationType: "once",
-          maxRedemptions: 1,
+          ...couponRestrictions(),
           startDate,
           endDate,
         }),
