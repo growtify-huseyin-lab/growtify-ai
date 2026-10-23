@@ -1,16 +1,21 @@
-// /g1 — DeepGap AI Maturity assessment. Two secure entry modes:
+// /g1 — DeepGap AI Maturity assessment. Secure entry modes:
+//   (oturum)                 — Çalışma Dosyam oturumu (growtify.ai'de bir kez e-posta koduyla giriş; panel
+//                              2026-09'da Firebase'den GHL'in kendi oturumuna geçti, ft artık gelmiyor).
+//                              Oturumdan kısa ömürlü HMAC belirteci üretilir; submit değişmeden çalışır.
 //   ?ft=<firebase id token>  — from the GHL portal (g1-link.js injects the member's
 //                              live Firebase token; verified against Google's keys).
 //   ?t=<hmac token>          — from a GHL-workflow-minted signed deep link (fallback).
 // Either path carries a trusted identity; the same token is re-verified by
 // /api/g1/submit (no separate session secret needed — the Firebase token IS the
 // auth, valid for the whole ~5-10 min sitting; HMAC for the fallback path).
-import { verifyG1Token } from "@/lib/g1/token";
+import { signG1Token, verifyG1Token } from "@/lib/g1/token";
 import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
 import { getG1Contact } from "@/lib/g1/ghl-g1";
 import { loadG1Config } from "@/lib/g1/config";
 import type { G1PriorResult } from "@/lib/g1/types";
 import G1Client from "./G1Client";
+import GirisForm from "@/components/dosyam/GirisForm";
+import { currentStudent } from "@/lib/dosyam/session";
 
 export const dynamic = "force-dynamic"; // identity lives in the query string
 
@@ -66,11 +71,41 @@ export default async function G1Page({
   let email = "";
   let prior: G1PriorResult | null = null;
 
+  // Çalışma Dosyam oturumu varsa testi o kişi olarak aç; yoksa ortak giriş (panelden gelende kod kendiliğinden gider).
+  async function sessionOrLogin() {
+    const student = await currentStudent();
+    if (!student) {
+      return (
+        <GirisForm
+          ipucu={typeof sp.k === "string" ? sp.k : undefined}
+          baslik="AI Olgunluk Testi"
+          aciklama="Testi senin adına açabilmemiz için programa kayıtlı e-postanla bir kez giriş yap. Bu tarayıcı seni program boyunca hatırlar."
+        />
+      );
+    }
+    const c = await getG1Contact(student.ghl_contact_id);
+    const sName = c.firstName || student.first_name || nameParam || "";
+    const sRet = safeRet(retParam);
+    const token = signG1Token({ sub: student.ghl_contact_id, name: sName, email: c.email, ret: sRet || undefined }, 3 * 3600);
+    return (
+      <G1Client
+        config={loadG1Config(sector, locale)}
+        authToken={token}
+        authMode="hmac"
+        ret={sRet || null}
+        name={sName}
+        email={c.email || ""}
+        locale={locale}
+        prior={c.prior ?? null}
+      />
+    );
+  }
+
   if (ft) {
     // Firebase path — verify the portal member token; pass it through so submit
     // re-verifies it (no intermediate secret needed).
     const fb = await verifyFirebaseIdToken(ft);
-    if (!fb.ok) return <ErrorView reason={fb.reason} />;
+    if (!fb.ok) return sessionOrLogin();
     authToken = ft;
     authMode = "firebase";
     ret = safeRet(retParam);
@@ -90,7 +125,7 @@ export default async function G1Page({
     name = v.payload.name ?? "";
     email = v.payload.email ?? "";
   } else {
-    return <ErrorView reason="no_token" />;
+    return sessionOrLogin();
   }
 
   const config = loadG1Config(sector, locale);

@@ -2,8 +2,9 @@
 // 1) Sol menüde "Üyelikler" altına, Kurslar'ın arkasına "Çalışma Dosyam" ekler — yalnız programa kayıtlı
 //    üyeye (growtify.ai/api/dosyam/hak ile sorulur; ücretsiz üye görmez).
 // 2) Derslerdeki statik growtify.ai/dosyam bağlantılarını (ör. /dosyam/R2) üyenin kendi oturumuyla açar.
-// Kimlik: g1-link.js'in taze Firebase kimliği (window.gaiPortalToken); growtify.ai sunucuda Google
-// anahtarlarıyla doğrular ve oturum açar (/api/dosyam/panel). Kimlik URL'de kalmaz: sunucu hemen yönlendirir.
+// Kimlik: growtify.ai öğrenciyi kendi oturumuyla tanır (bir kez e-posta koduyla giriş, program boyunca hatırlanır).
+// Panel kişisinin kimliği yalnız İPUCU olarak gider (k): görünürlük ve kodun kişinin kendi e-postasına
+// kendiliğinden gönderilmesi için; giriş kanıtı değildir. (Panel 2026-09'da Firebase'den kendi oturumuna geçti.)
 (function () {
   "use strict";
   var BASE = "https://growtify.ai";
@@ -12,35 +13,24 @@
   var hak = null; // null = sorulmadı, true/false = cevap
   var soruluyor = false;
 
-  function token() {
-    return typeof window.gaiPortalToken === "function" ? window.gaiPortalToken() : Promise.resolve(null);
+  function kisi() {
+    return typeof window.gaiPanelKisi === "function" ? window.gaiPanelKisi() : "";
   }
 
   function ac(bolum) {
-    // Pencereyi tıklama anında aç (açılır pencere engelleyicisi), adresi kimlik gelince ver.
-    var w = window.open("about:blank", "_blank");
-    token().then(function (tk) {
-      var url = tk
-        ? BASE + "/api/dosyam/panel?ft=" + encodeURIComponent(tk) + (bolum ? "&bolum=" + encodeURIComponent(bolum) : "")
-        : BASE + "/dosyam";
-      if (w) w.location.href = url;
-      else window.location.href = url;
-    });
+    var k = kisi();
+    var url = BASE + "/dosyam" + (bolum ? "/" + encodeURIComponent(bolum) : "") + (k ? "?k=" + encodeURIComponent(k) : "");
+    window.open(url, "_blank", "noopener");
   }
 
   function hakSor() {
     if (hak !== null || soruluyor) return;
+    var k = kisi();
+    if (!k) return;
     soruluyor = true;
-    token()
-      .then(function (tk) {
-        if (!tk) return null;
-        return fetch(BASE + "/api/dosyam/hak", {
-          method: "POST",
-          headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify({ ft: tk }),
-        }).then(function (r) {
-          return r.ok ? r.json() : null;
-        });
+    fetch(BASE + "/api/dosyam/hak", { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ k: k }) })
+      .then(function (r) {
+        return r.ok ? r.json() : null;
       })
       .then(function (j) {
         // Ağ hatasında tekrar sorulabilsin; kesin cevap saklanır.
