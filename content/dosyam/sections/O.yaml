@@ -1,0 +1,138 @@
+# Çalışma Dosyam · bölüm tanımları · O iç sistem (O.0–O.4)
+# Kaynak: scriptler/o1/O.0 … O.4 teslim tabloları (2026-10-23).
+# MIMARI §2 anahtarları "O1–O4" diyor; O.0 da bir teslim taşıdığı için O0 eklendi (README açık nokta 3).
+# GHL adları §3'te yalnız O2 için var; diğerleri §3 kalıbıyla öneri.
+
+- anahtar: O0
+  baslik: "Sisteme Taşıma Başlangıç Kartı"
+  ders: O.0
+  script: scriptler/o1/O.0-o-vsl.md
+  modul: Beyin Dosyası
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: bir_numarali_surec, etiket: "1 numaralı süreç", olcu: "G › fırsat haritası (\"en çok zamanımı yiyen iş\")", tur: kisa_metin, zorunlu: true, kaynak_alanlar: [G5.baslangic_noktasi]}
+    - {anahtar: cekirdek_ve_ses, etiket: "Kimlik çekirdeğim + ses notum", olcu: "R.2", tur: referans, kaynak_alanlar: [R2], zorunlu: true, not: "öğrenci yazmaz; R2'den gösterilir"}
+    - {anahtar: teklif_tek_cumle, etiket: "Teklifim (tek cümle)", olcu: "R.3", tur: kisa_metin, kaynak_alanlar: [R3.soz], zorunlu: true}
+    - {anahtar: en_iyi_isler_nerede, etiket: "En iyi 3–5 işim nerede duruyor", olcu: "(klasör, dosya, mesaj geçmişi) — O.2'de lazım olacak", tur: kisa_metin, zorunlu: true, not: kimliksiz}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "O boyunca kaç parça \"çalışır\" hale geldi (O.1–O.4 teslimleri)", tur: sayi, sonradan_doldurulur: true, not: "araç O1–O4 onaylarından otomatik sayabilir"}
+  bagimli: [R2, R3]
+  ghl:
+    - {alan_adi: "GAI - O0 Baslangic Karti", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_o0}
+  tam_yuvasi: null
+  sohbet_kipi: yok
+
+- anahtar: O1
+  baslik: "İlk Sürecim"
+  ders: O.1
+  script: scriptler/o1/O.1-yapmak-zorundasin.md
+  modul: Beyin Dosyası
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: surec, etiket: "Taşıyacağım tek süreç", olcu: "fırsat haritasındaki \"en çok zamanımı yiyen iş\" ya da \"tekrar eden ve zanaat gerektirmeyen\" iş", tur: kisa_metin, zorunlu: true}
+    - {anahtar: neden, etiket: "Neden o", olcu: "tek cümle", tur: kisa_metin, zorunlu: true}
+    - {anahtar: dakika_sefer, etiket: "Bir seferde kaç dakika", tur: sayi, zorunlu: true}
+    - {anahtar: haftada_kac, etiket: "Haftada kaç kez", tur: sayi, zorunlu: true}
+    - {anahtar: haftalik_toplam, etiket: "Haftalık toplam (dakika)", olcu: "O.4'teki \"eskiden X → şimdi Y\" ölçümünün başlangıç değeri", tur: sayi, hesaplanan: "dakika_sefer * haftada_kac"}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Bu sürecin haftalık süresi (O.4'te tekrar ölçülür)", tur: sayi, sonradan_doldurulur: false, not: "haftalik_toplam ile aynı değer; O.4'te yeniden ölçülür"}
+  bagimli: [O0]
+  ghl:
+    - {alan_adi: "GAI - O1 Ilk Surec", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_o1}
+  tam_yuvasi: null
+  sohbet_kipi: cikar
+
+- anahtar: O2
+  baslik: "Beyin Dosyam v1"
+  ders: O.2
+  script: scriptler/o1/O.2-esiz-mekanizma.md
+  modul: Beyin Dosyası
+  tekrar: tek_sefer
+  olcu_genel: "en fazla ~3 sayfa"
+  alanlar:
+    - {anahtar: kim_ve_kime, etiket: "Kim ve kime", olcu: "Kimlik çekirdeği (6 satır)", tur: referans, kaynak_alanlar: [R2], toplanir: true}
+    - {anahtar: teklif, etiket: "Teklif", olcu: "Teklif kartı + en sert 5 itiraz ve cevabı", tur: referans, kaynak_alanlar: [R3], toplanir: true}
+    - {anahtar: sik_sorulanlar, etiket: "Sık sorulanlar", olcu: "En sık 10 soru ve cevabı", tur: uzun_metin, kaynak_alanlar: [R4.en_sik_10_soru], toplanir: true, not: "R4 yalnız soruları içeriyor; CEVAPLAR burada eklenir (README açık nokta)"}
+    - {anahtar: erisim, etiket: "Erişim", olcu: "Kanallar, saatler, devir anları", tur: referans, kaynak_alanlar: [R6.acik_kanallar, R6.saatlerim, R6.devir_anlari], toplanir: true}
+    - {anahtar: guven, etiket: "Güven", olcu: "Güven sözleşmesi (doğrula / kimliksizleştir / sus)", tur: referans, kaynak_alanlar: [R9], toplanir: true}
+    - {anahtar: yontem_ilkeler, etiket: "Yöntem + ilkeler", olcu: "Adımlar + \"önce şuna bakarım, çünkü…\"", tur: uzun_metin, zorunlu: true}
+    - {anahtar: kalite_kurallari, etiket: "Kalite kuralları", olcu: "\"İyi iş neye benzer\", kabul etmediklerim", tur: uzun_metin, zorunlu: true}
+    - {anahtar: ses, etiket: "Ses", olcu: "Kullan / kaçın listesi, çeviri kokusu yasakları", tur: uzun_metin, zorunlu: true, kaynak_alanlar: [R2.ses], not: "R2 ham ses notu burada tamamlanır"}
+    - {anahtar: ornek_isler, etiket: "Örnek işler", olcu: "3–5 iyi iş + neden iyi", tur: liste, adet_min: 3, adet_max: 5, zorunlu: true, not: kimliksiz}
+    - {anahtar: asla_verilmez, etiket: "Asla verilmez", olcu: "Yapay zekâya hiç girmeyecek bilgi türleri", tur: liste, zorunlu: true, kaynak_alanlar: [R9.musteri_verisi]}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Önce/sonra testinde ikinci cevabı kaç düzeltmeyle kullanılır buldum?", tur: sayi, sonradan_doldurulur: true}
+  ek_teslim: "Dosyanın öğrencinin kendi yapay zekâ çalışma alanına bağlanmış hâli + önce/sonra ekran görüntüsü (toplulukta paylaşılabilir) — dosyada alan değil, 'kendi yapay zekâna kopyala' çıkışı."
+  bagimli: [R2, R3, R4, R6, R9]
+  ghl:
+    - {alan_adi: "GAI - O2 Beyin Dosyasi", tur: buyuk_metin, not: "MIMARI §3: alan sınırı aşılırsa özet + 'tam metin dosyada' bağlantısı"}
+    - {etiket: gai_dosya_o2}
+  tam_yuvasi: "OV.6 / TP.5: Sohbet Yapay Zekası Bilgi Bankası"
+  sohbet_kipi: cikar
+  model: agir
+  not: "R'den TOPLANIR, yeniden yazdırılmaz: araç R2/R3/R4/R6/R9 onaylı alanlarını doldurur, öğrenci yalnız yöntem, kalite, ses, örnek işleri ekler."
+
+- anahtar: O3
+  baslik: "Yöntem Dosyam + çalıştırma kaydı"
+  ders: O.3
+  script: scriptler/o1/O.3-surecleri-sisteme-tasi.md
+  modul: Beyin Dosyası
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: surec, etiket: "Süreç", olcu: "(O.1'de seçtiğin)", tur: referans, kaynak_alanlar: [O1.surec]}
+    - {anahtar: tetikleyici, etiket: "Tetikleyici", olcu: "Süreci ne başlatır", tur: kisa_metin, zorunlu: true}
+    - {anahtar: girdiler, etiket: "Girdiler", olcu: "Her seferinde ne vermem gerekir (kimliksizleştirme adımıyla)", tur: uzun_metin, zorunlu: true}
+    - anahtar: adimlar
+      etiket: "Adımlar (3–7)"
+      tur: tablo
+      adet_min: 3
+      adet_max: 7
+      sutunlar:
+        - {anahtar: talimat, etiket: "Talimat", tur: kisa_metin}
+        - {anahtar: baglam, etiket: "Bağlam", tur: kisa_metin}
+        - {anahtar: iyi_ornek, etiket: "İyi örnek", tur: kisa_metin}
+        - {anahtar: yanit_bicimi, etiket: "Yanıt biçimi", tur: kisa_metin}
+        - {anahtar: basari_olcutu, etiket: "Başarı ölçütü", tur: kisa_metin}
+        - {anahtar: devret_birlikte_sende, etiket: "Devret / birlikte / sende", tur: secim, secenekler: ["devret", "birlikte", "sende"]}
+      zorunlu: true
+    - {anahtar: cikti, etiket: "Çıktı", olcu: "Sonunda ne teslim edilir", tur: kisa_metin, zorunlu: true}
+    - {anahtar: bana_don, etiket: "Ne zaman bana dön", olcu: "Çırağın durup beni çağıracağı durumlar", tur: liste, zorunlu: true}
+    - anahtar: calistirmalar
+      etiket: "3 çalıştırma"
+      tur: tablo
+      adet: 3
+      sutunlar:
+        - {anahtar: tarih, etiket: "Tarih", tur: tarih}
+        - {anahtar: duzeltme_sayisi, etiket: "Kaç düzeltme gerekti", tur: sayi}
+        - {anahtar: sure_dk, etiket: "Süre", tur: sayi}
+      zorunlu: true
+      not: "Program sırasında 3 çalıştırma dolmayabilir (28 gün); kayıt sonradan tamamlanabilir olmalı."
+    - {anahtar: siradaki_adaylar, etiket: "Sıradaki 3 aday", olcu: "Dört kaynaktan (ders altı)", tur: liste, adet: 3, zorunlu: false}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Üçüncü çalıştırmada düzeltme sayısı ve süre (O.1 başlangıç değeriyle kıyas)", tur: kisa_metin, sonradan_doldurulur: true}
+  bagimli: [O1, O2]
+  ghl:
+    - {alan_adi: "GAI - O3 Yontem Dosyasi", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_o3}
+  tam_yuvasi: "Otomasyon (tetikleyicinin growtify.app karşılığı; playbook düzeltmesiz çalışınca otomasyona taşınır)"
+  sohbet_kipi: cikar
+
+- anahtar: O4
+  baslik: "Üretim Sistemim + ölçüm"
+  ders: O.4
+  script: scriptler/o1/O.4-ureten-sistemler.md
+  modul: Beyin Dosyası
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: asil_teslimat, etiket: "Asıl teslimatım", tur: kisa_metin, zorunlu: true}
+    - {anahtar: uc_katman, etiket: "Üç katman", olcu: "Karar / yapı · Zanaat · Dokunuş — her biri bir cümle", tur: uzun_metin, zorunlu: true}
+    - {anahtar: kurulan_katman, etiket: "Sistemi kurduğum katman", olcu: "(çoğunlukla karar / yapı)", tur: secim, secenekler: ["karar / yapı", "zanaat", "dokunuş"], zorunlu: true}
+    - {anahtar: kaydedilmis_sistem, etiket: "Kaydedilmiş sistem", olcu: "Talimat + beyin dosyası + yöntem dosyası + 5–10 örnek iş (neden iyi)", tur: uzun_metin, zorunlu: true, kaynak_alanlar: [O2, O3]}
+    - {anahtar: geri_besleme, etiket: "Geri besleme", olcu: "Kaç tur · hangi kuralları ekledim · sürüm notu", tur: uzun_metin, zorunlu: true}
+    - {anahtar: olcum, etiket: "Ölçüm", olcu: "Eskiden __ dk → şimdi __ dk · haftada __ kez · ayda __ saat (kendi ölçümüm)", tur: kisa_metin, zorunlu: true, not: "alt alanlar sayı olabilir: eskiden_dk, simdi_dk, haftada_kac, ayda_saat (hesaplanan)"}
+    - {anahtar: ilk_asistan_adayi, etiket: "İlk asistan adayı", olcu: "Bu beyin müşteriye dokunsaydı ilk nerede çalışırdı? (tek paragraf; OV.6'ya köprü)", tur: uzun_metin, zorunlu: true}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Bu katmanda aylık kazandığım saat", tur: sayi, sonradan_doldurulur: false}
+  bagimli: [O2, O3]
+  ghl:
+    - {alan_adi: "GAI - O4 Uretim Sistemi", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_o4}
+  tam_yuvasi: "OV.6 asistan (ilk asistan adayı)"
+  sohbet_kipi: cikar

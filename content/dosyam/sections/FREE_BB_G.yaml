@@ -1,0 +1,280 @@
+# Çalışma Dosyam · bölüm tanımları · Free + Buradan Başla + G
+# Kaynak: scriptler/free, buradan-basla, g teslimleri (2026-10-23). Bu scriptlerde teslimler "GROWT defteri"ne yazılıyor;
+# Çalışma Dosyam'da bu defterin karşılığı bu bölümlerdir (README açık nokta: "GROWT defteri" adı scriptlerde güncellenmeli mi).
+# G1 testi bizim sitemizde ayrı çalışır; G1'den gelen profil / ölçüm / bedel rakamları SALT OKUNUR (G1 motoru yazar).
+# Free dersleri Temel öncesi (ücretsiz katman) — Çalışma Dosyam'a dahil olup olmadığı CEO kararı (README).
+# Teslimlerin çoğu "ders altı görev kutusu"; alan ölçüleri scriptte gevşek, uydurma alan eklenmedi.
+
+# ---------- Free ----------
+- anahtar: FREE2
+  baslik: "İşimde bir agent'ın alabileceği 3 köşe"
+  ders: Free.2
+  script: scriptler/free/Free.2-ai-agents-ve-beklenti.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: uc_kose, etiket: "İşimde bir agent'ın alabileceği 3 köşe", olcu: "tekrar eden, her seferinde benzer işler", tur: liste, adet: 3, zorunlu: true}
+  tek_olcut: null
+  bagimli: []
+  ghl: null
+  sohbet_kipi: yok
+  not: "Free.4'te 'yapay zekâya' sütununun başlangıcı."
+
+- anahtar: FREE3
+  baslik: "Yapay zekânın benim işim hakkında bilmediği 3 şey"
+  ders: Free.3
+  script: scriptler/free/Free.3-neden-simdi-neden-sen.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: bilmedigi_3_sey, etiket: "Yapay zekânın benim işim hakkında bilmediği 3 şey", olcu: "yöntemin, müşterini tanıma biçimin, asla atlamadığın bir şey", tur: liste, adet: 3, zorunlu: true}
+  tek_olcut: null
+  bagimli: []
+  ghl: null
+  sohbet_kipi: yok
+  not: "İlk Kazanım dersinde bağlamın ilk parçası."
+
+- anahtar: FREE4
+  baslik: "Neyi devredersin, neyi asla"
+  ders: Free.4
+  script: scriptler/free/Free.4-neyi-devredersin-neyi-asla.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: on_is_uc_sutun, etiket: "Kendi haftandan 10 iş, üç sütunda", tur: tablo, adet: 10, sutunlar: [{anahtar: is, etiket: "İş", tur: kisa_metin}, {anahtar: sutun, etiket: "Sütun", tur: secim, secenekler: ["devret (yapay zekâya)", "birlikte", "sende"], not: "sütun adları scriptte üç sütun; adlar Free.4 metnine göre teyit edilmeli"}], zorunlu: true}
+    - {anahtar: asla_listesi, etiket: "Üç satırlık \"asla\" listesi", olcu: "veri / karar / temas", tur: tablo, satirlar: ["veri", "karar", "temas"], sutunlar: [{anahtar: asla, etiket: "Asla", tur: kisa_metin}], zorunlu: true}
+  tek_olcut: null
+  bagimli: [FREE2]
+  ghl: null
+  sohbet_kipi: cikar
+
+- anahtar: FREE4B
+  baslik: "İlk Kazanım"
+  ders: Free.4b
+  script: scriptler/free/Free.4b-ilk-kazanim.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: gercek_cikti, etiket: "Kendi işinden gerçek bir çıktı", olcu: "bu hafta kullanacağın bir mesaj ya da metin", tur: uzun_metin, zorunlu: true, not: kimliksiz}
+    - {anahtar: once_sonra, etiket: "Önce/sonra", olcu: "bağlamsız cevap, bağlamlı cevap, kendi ölçtüğün kazanılan dakika", tur: uzun_metin, zorunlu: false, not: "scriptte topluluk paylaşımı; dosyada isteğe bağlı kopya"}
+    - {anahtar: kazanilan_dakika, etiket: "Kazanılan dakika", tur: sayi, zorunlu: false}
+  tek_olcut: null
+  bagimli: [FREE3]
+  ghl: null
+  sohbet_kipi: cikar
+  not: "Free.4b ders olarak CEO onayına bağlı (Free.3 'onaylanırsa' diyor)."
+
+- anahtar: FREE5
+  baslik: "Mesele araç değil"
+  ders: Free.5
+  script: scriptler/free/Free.5-mesele-arac-degil.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: versiyon, etiket: "Hangi versiyon", tur: secim, secenekler: ["A: İlk Kazanım çıktısına bir tasarım hamlesi", "B: 'yapay zekâya' sütunundan bir işte üç hamle"], zorunlu: true}
+    - {anahtar: fark, etiket: "Fark", olcu: "iki cümle", tur: kisa_metin, zorunlu: true}
+  tek_olcut: null
+  bagimli: [FREE4]
+  ghl: null
+  sohbet_kipi: yok
+
+- anahtar: FREE6
+  baslik: "Karar"
+  ders: Free.6
+  script: scriptler/free/Free.6-growtify-ai-nedir-ve-growt.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: cekici_asama, etiket: "GROWT'ta beni en çok çeken aşama ve neden", tur: kisa_metin, zorunlu: false, not: "scriptte isteğe bağlı topluluk paylaşımı"}
+  tek_olcut: null
+  bagimli: []
+  ghl: null
+  sohbet_kipi: yok
+  not: "Asıl teslim 'Temel'e devam / toplulukta kal' kararı; bu bir satın alma olayı, dosya alanı değil."
+
+# ---------- Buradan Başla ----------
+- anahtar: BB1
+  baslik: "Program tanıtımı"
+  ders: BB.1
+  script: scriptler/buradan-basla/BB.1-program-tanitimi.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: takvim_bloklari, etiket: "4 haftalık günlük GROWT blokları", olcu: "takvimde; gün ve saat", tur: kisa_metin, zorunlu: true, not: "scriptte ekran görüntüsü; dosyada yazılı gün/saat önerilir"}
+    - {anahtar: neden_basladim, etiket: "Neden başladım", olcu: "Free.1'deki cümle", tur: kisa_metin, zorunlu: false, not: "topluluk tanışma postunun dosyadaki kopyası"}
+  tek_olcut: null
+  bagimli: []
+  ghl: null
+  sohbet_kipi: yok
+
+- anahtar: BB2
+  baslik: "Yapay zekâ teknik işleri"
+  ders: BB.2
+  script: scriptler/buradan-basla/BB.2-yapay-zeka-teknik-isleri.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: gizlilik_ayari, etiket: "Gizlilik ayarı kapalı mı", tur: secim, secenekler: ["evet", "hayır"], zorunlu: true, not: "scriptte ekran görüntüsü; dosyada onay kutusu"}
+    - {anahtar: kalici_tohum, etiket: "Kalıcı alana yazdığın tohum", olcu: "3–5 cümle", tur: uzun_metin, zorunlu: true}
+  tek_olcut: null
+  bagimli: [FREE4, FREE4B]
+  ghl: null
+  sohbet_kipi: yok
+  not: "'Açılmış GROWT defteri' teslimi Çalışma Dosyam'ın kendisi; alan değil."
+
+- anahtar: BB3
+  baslik: "3 motor, 3 dağınıklık"
+  ders: BB.3
+  script: scriptler/buradan-basla/BB.3-growtify-app-tanitimi.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: nasil_buluyorlar, etiket: "Beni nasıl buluyorlar? Şu an hangi araç / yöntem?", tur: kisa_metin, zorunlu: true}
+    - {anahtar: nasil_evet, etiket: "Nasıl \"evet\" diyorlar? (mesaj, randevu, ödeme nerede?)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: iceride_ne_yasiyorlar, etiket: "İçeri girince ne yaşıyorlar? (takip, teslim, iletişim nerede?)", tur: kisa_metin, zorunlu: true}
+  tek_olcut: null
+  bagimli: []
+  ghl: null
+  sohbet_kipi: yok
+  not: "OV.0'daki 'müşterilerim hangi 3 yerde dağılmış' satırıyla örtüşüyor (README)."
+
+- anahtar: BB4
+  baslik: "Üç motor kartım"
+  ders: BB.4
+  script: scriptler/buradan-basla/BB.4-takip-edilecek-yol-haritasi.md
+  modul: Başlangıç
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: uc_motor, etiket: "Her motor için tek cümle", olcu: "Beni nasıl buluyorlar? / Nasıl \"evet\" diyorlar? / İçeri girince ne yaşıyorlar?", tur: liste, adet: 3, zorunlu: true}
+    - {anahtar: en_zayif_motor, etiket: "En zayıf motorum", tur: secim, secenekler: ["çekmek", "dönüştürmek", "tutmak"], zorunlu: true}
+    - {anahtar: en_dusuk_pencere, etiket: "Testteki en düşük pencerem", tur: referans, kaynak_alanlar: [G1.en_dusuk_pencere], not: "G1'den; test çözülmediyse G'de doldurulur"}
+    - {anahtar: ilk_durak, etiket: "\"İlk durağım şu\" notu", tur: kisa_metin, zorunlu: true}
+    - {anahtar: doksan_gun_degisiklik, etiket: "90 gün sonra işimde görmek istediğim tek değişiklik", olcu: "bir cümle; rakam şart değil", tur: kisa_metin, zorunlu: true}
+  tek_olcut: null
+  bagimli: [BB3]
+  ghl: null
+  sohbet_kipi: yok
+
+# ---------- G ----------
+- anahtar: G1
+  baslik: "Haftamda beni en çok yoran iş"
+  ders: G.1
+  script: scriptler/g/G.1-gap-vsl.md
+  modul: Gap Raporum
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: yoran_is, etiket: "Haftamda beni en çok yoran iş", tur: kisa_metin, zorunlu: true}
+    - {anahtar: tahmini_saat, etiket: "Tahminen kaç saat", tur: sayi, zorunlu: true}
+  tek_olcut: null
+  bagimli: []
+  ghl: null
+  sohbet_kipi: yok
+  not: "Bölüm anahtarı G1 = G.1 dersi; G1 TESTİ (motor) ile karışmasın. Development farklı anahtar isterse G_1 kullanılabilir."
+
+- anahtar: G2
+  baslik: "G1 profili ve PDF"
+  ders: G.2
+  script: scriptler/g/G.2-kontrol-noktasi.md
+  modul: Gap Raporum
+  tekrar: tek_sefer
+  salt_okunur: true
+  kaynak: "G1 motoru (growtify.ai/g1); profil + PDF + g1_baseline"
+  alanlar:
+    - {anahtar: profil, etiket: "AI Olgunluk Profilim", tur: referans, kaynak_alanlar: [G1.profil, G1.pdf], not: "salt okunur, G1'den gelir"}
+  tek_olcut: null
+  bagimli: []
+  ghl: {mevcut: "G1 alanları (G1 Baseline, G1 Archetype, G1 Gap Summary, G1 Completed At …)"}
+  sohbet_kipi: yok
+
+- anahtar: G3
+  baslik: "Seviyem ve en zayıf halkam"
+  ders: G.3
+  script: scriptler/g/G.3-ai-olgunluk-profilin.md
+  modul: Gap Raporum
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: seviye, etiket: "Seviyem", tur: referans, kaynak_alanlar: [G1.seviye], not: "salt okunur, G1'den"}
+    - {anahtar: en_zayif_halka, etiket: "En zayıf halkam (x/5)", tur: referans, kaynak_alanlar: [G1.en_zayif_halka], not: "salt okunur, G1'den"}
+    - {anahtar: bende_gorunusu, etiket: "Bu bende şöyle görünüyor", tur: kisa_metin, zorunlu: true}
+    - {anahtar: ayna_sorusu, etiket: "Ayna sorusunun cevabı (isteğe bağlı)", olcu: "bir cümle", tur: kisa_metin, zorunlu: false}
+  tek_olcut: null
+  bagimli: [G2]
+  ghl: null
+  sohbet_kipi: yok
+
+- anahtar: G4
+  baslik: "Mesleğim ve yapay zekâ"
+  ders: G.4
+  script: scriptler/g/G.4-sektorun-nereye-gidiyor.md
+  modul: Gap Raporum
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: yz_alacagi_isler, etiket: "Mesleğimde yapay zekânın aldığı / alacağı işler", tur: liste, adet_min: 3, zorunlu: true}
+    - {anahtar: bende_kalan, etiket: "Bende kalan ve değer kazanan şeyler", tur: liste, adet_min: 3, zorunlu: true}
+    - {anahtar: g1_kiyas_boyut, etiket: "G1 kıyasında önde / aynı / geride olduğum bir boyut", tur: kisa_metin, zorunlu: false, kaynak_alanlar: [G1]}
+    - {anahtar: meslektas_taramasi, etiket: "Meslektaş taramasından üç isim ve devrettikleri işler", tur: liste, adet: 3, zorunlu: false, not: "kamuya açık meslektaşlar; kişisel veri değil ama isim içeriyor — README açık nokta"}
+  tek_olcut: null
+  bagimli: [G2]
+  ghl: null
+  sohbet_kipi: yok
+
+- anahtar: G5
+  baslik: "Fırsat Haritası"
+  ders: G.5
+  script: scriptler/g/G.5-firsat-haritan.md
+  modul: Gap Raporum
+  tekrar: tek_sefer
+  alanlar:
+    - anahtar: aday_isler
+      etiket: "Aday dijital işler (5–10)"
+      tur: tablo
+      adet_min: 5
+      adet_max: 10
+      sutunlar:
+        - {anahtar: is, etiket: "İş", tur: kisa_metin}
+        - {anahtar: haftalik_saat, etiket: "Haftalık saat", tur: sayi}
+        - {anahtar: uygunluk, etiket: "Uygunluk puanı (0–6)", tur: sayi, aralik: [0, 6]}
+        - {anahtar: korunuyor_mu, etiket: "Korunuyor mu?", tur: secim, secenekler: ["evet", "hayır"]}
+      zorunlu: true
+    - {anahtar: baslangic_noktasi, etiket: "Seçilmiş 1 başlangıç noktası", tur: kisa_metin, zorunlu: true}
+    - {anahtar: neden_bu, etiket: "Neden bu", olcu: "tek cümle", tur: kisa_metin, zorunlu: true}
+    - {anahtar: g1_tahminle_kiyas, etiket: "G.1'deki tahminle karşılaştırma", olcu: "bir satır", tur: kisa_metin, zorunlu: true, kaynak_alanlar: [G1.yoran_is, G1.tahmini_saat]}
+  tek_olcut: null
+  bagimli: [G1, G4]
+  ghl: null
+  sohbet_kipi: cikar
+  not: "O0.bir_numarali_surec ve O1.surec buradan beslenir. G1 motoru da bir fırsat haritası üretiyorsa bu bölüm onunla birleştirilmeli (README)."
+
+- anahtar: G6
+  baslik: "Bedel kartı"
+  ders: G.6
+  script: scriptler/g/G.6-hareketsizligin-bedeli.md
+  modul: Gap Raporum
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: uc_rakam, etiket: "G1'den üç rakam", olcu: "yılda geri dönecek saat · kaçan ₺ · boş kapasite ₺/ay", tur: referans, kaynak_alanlar: [G1.bedel_saat, G1.bedel_kacan_tl, G1.bedel_bos_kapasite], not: "salt okunur, G1'den gelir"}
+    - {anahtar: operasyonel_borc, etiket: "Operasyonel borç testinde \"evet\" dediğim maddeler", tur: liste, zorunlu: true}
+    - {anahtar: kacak_adim, etiket: "Kaçağın olduğunu düşündüğün adım", tur: secim, secenekler: ["ilk mesaj", "randevu", "görüşme", "karar"], zorunlu: true}
+  tek_olcut: null
+  bagimli: [G2]
+  ghl: null
+  sohbet_kipi: yok
+
+- anahtar: G7
+  baslik: "Gap Raporum + İlk 30 Günüm"
+  ders: G.7
+  script: scriptler/g/G.7-ilk-30-gunun.md
+  modul: Gap Raporum
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: gap_raporu, etiket: "Gap Raporum", olcu: "3 sayfa (profil PDF + Fırsat Haritası + Bedel kartı)", tur: referans, kaynak_alanlar: [G2, G5, G6], not: "derlenir; öğrenci yazmaz"}
+    - {anahtar: dort_hafta_odak, etiket: "İlk 30 Günüm: 4 hafta × tek odak", olcu: "program / deneme / ölçüm şeritleri", tur: tablo, satirlar: ["Hafta 1", "Hafta 2", "Hafta 3", "Hafta 4"], sutunlar: [{anahtar: odak, etiket: "Tek odak", tur: kisa_metin}], zorunlu: true}
+    - {anahtar: uc_engel, etiket: "3 engel + önceden çözüm", tur: liste, adet: 3, zorunlu: true}
+    - {anahtar: neden_onemli, etiket: "\"Neden önemli\" cümlesi", tur: kisa_metin, zorunlu: true}
+    - {anahtar: sabit_saat, etiket: "Takvimde sabit bir saat", tur: kisa_metin, zorunlu: true}
+    - {anahtar: olcum_gunlugu, etiket: "Ölçüm günlüğü başlığı", tur: kisa_metin, zorunlu: false}
+  tek_olcut: null
+  bagimli: [G2, G5, G6]
+  ghl: null
+  sohbet_kipi: yok
+  not: "G kontrol noktası (5 aşama geçişi maili G.7→R). Topluluk paylaşımı alan değil."

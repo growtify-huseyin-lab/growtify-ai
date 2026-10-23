@@ -15,6 +15,9 @@ const intlG1 = createMiddleware({ ...routing, localeDetection: false });
 // Matches /g1, /g1/..., /en/g1, /en/g1/... (but NOT /g1foo).
 const G1_PATH = /^\/(en\/)?g1(\/.*)?$/;
 
+// Çalışma Dosyam yalnız Türkçe: tarayıcı dili İngilizce olan öğrenci /en/dosyam'a yönlendirilmez.
+const DOSYAM_PATH = /^\/dosyam(\/.*)?$/;
+
 // Off-locale segment canonicalization (SEO-S2-BILINGUAL-ALIGNMENT-AUDIT-001).
 // Each bilingual route exists as two physical dirs (e.g. /sektor + /sectors), so the
 // wrong-locale variant resolves and creates duplicate content. We 301 it to the correct
@@ -58,7 +61,7 @@ export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // G1 assessment — honor the URL locale, skip locale-detection redirect.
-  if (G1_PATH.test(pathname)) {
+  if (G1_PATH.test(pathname) || DOSYAM_PATH.test(pathname)) {
     return intlG1(req);
   }
 

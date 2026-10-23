@@ -1,0 +1,126 @@
+# Çalışma Dosyam · bölüm tanımları · T (Kurucu Dosyası, sayfa 1–4 + kapanış)
+# Kaynak: scriptler/t/T.1 … T.5 teslim tabloları (2026-10-23).
+# Kurucu Dosyası = Çalışma Dosyam'ın son bölümü. Beyin dosyası "ben nasıl çalışırım", Kurucu Dosyası "işim sensiz nasıl döner".
+# GHL adları §3'te yok; kalıpla öneri.
+
+- anahtar: K1
+  baslik: "Kurucu Dosyası › Sayfa 1"
+  ders: T.1
+  script: scriptler/t/T.1-sahibi-mi-iscisi-mi.md
+  modul: Kurucu Dosyası
+  sayfa_no: 1
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: kafes_testi, etiket: "Kafes testi", olcu: "\"Bugün iki hafta kaybolsam işim ne kadar döner?\" · 1–10 kafes skoru", tur: sayi, aralik: [1, 10], zorunlu: true, kaynak_alanlar: [W6.t_sorusu]}
+    - {anahtar: kafes_aciklama, etiket: "Kafes testi (cevabın)", tur: kisa_metin, zorunlu: false, not: "skora eşlik eden dürüst cevap; scriptte aynı satırda"}
+    - {anahtar: gorunen_gorevler, etiket: "Görünen görevlerim", olcu: "8–12 görev", tur: liste, adet_min: 8, adet_max: 12, zorunlu: true}
+    - {anahtar: gorunmeyen_deger, etiket: "Müşterimin aldığı görünmeyen değer", olcu: "3–5 değer (güven, tanınma, rahatlama…)", tur: liste, adet_min: 3, adet_max: 5, zorunlu: true}
+    - {anahtar: koruma_listesi, etiket: "Koruma listem", olcu: "Anlam veren, devretmeyeceğim ilk 5 iş · (sorumluluk meslekleri: imza ve son söz en başta)", tur: liste, adet: 5, zorunlu: true}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Kafes skoru; 60. gün testinde yeniden (T.5)", tur: sayi, sonradan_doldurulur: false, not: "kafes_testi değeri; yeniden ölçüm T5.altmisinci_gun"}
+  bagimli: [W6]
+  ghl:
+    - {alan_adi: "GAI - K1 Kafes ve Koruma", tur: buyuk_metin, not: "öneri"}
+    - {alan_adi: "GAI - K1 Kafes Skoru", tur: kisa_metin, not: "öneri; 60. gün kıyası için sayısal tek alan"}
+    - {etiket: gai_dosya_k1}
+  tam_yuvasi: null
+  sohbet_kipi: cikar
+
+- anahtar: K2
+  baslik: "Yapay Zekâ Ekip Şeması"
+  ders: T.2
+  script: scriptler/t/T.2-yapay-zeka-ekibin.md
+  modul: Kurucu Dosyası
+  sayfa_no: 2
+  tekrar: tek_sefer
+  alanlar:
+    - anahtar: koltuklar
+      etiket: "Koltuklar (5–8)"
+      tur: tablo
+      adet_min: 5
+      adet_max: 8
+      sutunlar:
+        - {anahtar: koltuk, etiket: "Koltuk", tur: kisa_metin, olcu: "karşılama · içerik · satış takibi · teslimat asistanı · arka ofis · analist…"}
+        - {anahtar: su_an_kim, etiket: "Şu an kim yapıyor", tur: secim, secenekler: ["ben", "yardımcım", "kimse"]}
+        - {anahtar: haftalik_saat, etiket: "Haftalık saat", tur: sayi, olcu: "yaklaşık"}
+        - {anahtar: kim_oturacak, etiket: "Kim oturacak", tur: secim, secenekler: ["yapay zekâ", "insan", "ikisi birlikte"]}
+        - {anahtar: olgunluk, etiket: "Olgunluk", tur: secim, secenekler: ["cevap veren", "seni bilen ortak", "senin için çalışan sistem"], not: "G.3 kanonik adları"}
+        - {anahtar: kontrol_noktasi, etiket: "İnsan kontrol noktası", tur: kisa_metin, olcu: "\"ne zaman bana döner\""}
+        - {anahtar: koltugun_evi, etiket: "Koltuğun evi", tur: secim, secenekler: ["sohbet asistanı", "growtify.app iş akışı", "insan"]}
+      zorunlu: true
+    - anahtar: ilk_koltuk_is_tanimi
+      etiket: "İlk koltuğun iş tanımı"
+      olcu: "bağlam · nasıl yapılır · uç durumlar · ne zaman bana döner · 5 deneme ve düzeltme sayısı"
+      tur: uzun_metin
+      zorunlu: true
+      not: "5 denemenin düzeltme sayıları ayrı sayı alanı olabilir (deneme_1 … deneme_5)"
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "İlk koltukta 5 denemedeki düzeltme sayısı; bir hafta sonra yeniden", tur: sayi, sonradan_doldurulur: true}
+  bagimli: [K1, O3]
+  ghl:
+    - {alan_adi: "GAI - K2 Ekip Semasi", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_k2}
+  tam_yuvasi: "Yapay Zeka Ajanları / iş akışları (koltuğun evi)"
+  sohbet_kipi: cikar
+  not: "Karma ekip (insan da oturabilir) CEO kararına bağlı (T-SON-HAL soru 3); 'insan' seçenekleri karara göre kalır/çıkar."
+
+- anahtar: K3
+  baslik: "Kurucu Dosyası › Sayfa 3"
+  ders: T.3
+  script: scriptler/t/T.3-isinden-kovuldun.md
+  modul: Kurucu Dosyası
+  sayfa_no: 3
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: zaman_denetimi, etiket: "Zaman denetimi", olcu: "bütün işler · sonucun çoğunu getiren 3 iş · tekrar edenler · kolaydan zora sıra", tur: uzun_metin, zorunlu: true}
+    - {anahtar: devir_plani, etiket: "Devir planı", olcu: "hangi koltuktan hangi hafta çıkıyorum (4–8 haftalık takvim)", tur: tablo, sutunlar: [{anahtar: koltuk, etiket: "Koltuk", tur: secim, secenekler_kaynagi: K2.koltuklar}, {anahtar: hafta, etiket: "Hafta", tur: sayi}], zorunlu: true}
+    - {anahtar: devir_paketleri, etiket: "Devir paketleri", olcu: "her koltuk: bağlam · nasıl yapılır · uç durumlar · ne zaman bana döner · durum (hazır / taslak)", tur: liste, zorunlu: true, not: "her öğe için durum: hazır / taslak"}
+    - {anahtar: karar_ilkeleri, etiket: "Karar ilkeleri v1", olcu: "en sık 5–10 karar için \"eğer … olursa … yaparım\" · \"bu benim cevabım mı?\" denetimi", tur: liste, adet_min: 5, adet_max: 10, zorunlu: true}
+    - {anahtar: kalite_olcutu, etiket: "Kalite ölçütü", olcu: "\"iyi iş neye benzer\" (yapay zekâ da insan yardımcı da aynı ölçütle)", tur: uzun_metin, zorunlu: true, kaynak_alanlar: [O2.kalite_kurallari]}
+    - {anahtar: yokluk_provasi, etiket: "Yokluk provası", olcu: "hangi gün · neler kırıldı · her kırılmanın yarattığı yeni iş tanımı / ilke", tur: uzun_metin, zorunlu: true, sonradan_doldurulur: true, not: "prova program içinde yapılmayabilir; tarih bugün, sonuç sonra"}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Haftada bana gelen soru sayısı; devir planından önce ve sonra", tur: kisa_metin, sonradan_doldurulur: true}
+  bagimli: [K2]
+  ghl:
+    - {alan_adi: "GAI - K3 Devir Plani", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_k3}
+  tam_yuvasi: "Otomasyon (bir kez yazılan kararlar akışa), Görevler (ne zaman bana dön)"
+  sohbet_kipi: cikar
+
+- anahtar: K4
+  baslik: "Kurucu Dosyası › Sayfa 4"
+  ders: T.4
+  script: scriptler/t/T.4-bagimsizlik.md
+  modul: Kurucu Dosyası
+  sayfa_no: 4
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: hayal_is, etiket: "Hayal iş", olcu: "haftalık saat · kime hizmet · yeterli gelir · bırakacaklarım · \"yeterli büyüklük\" cümlesi", tur: uzun_metin, zorunlu: true}
+    - {anahtar: kazanilan_zaman, etiket: "Kazanılan zaman", olcu: "\"haftada __ saat kazanırsam şuraya harcayacağım\"", tur: kisa_metin, zorunlu: true}
+    - {anahtar: sabit_degisken, etiket: "Sabit / değişken", olcu: "değerlerim, vizyonum, kime hizmet ettiğim · yöntemlerim ve araçlarım", tur: uzun_metin, zorunlu: true}
+    - {anahtar: hedef_90_gun, etiket: "90 günlük hedef sayfası", olcu: "hedef · engeller · önceden yazılmış çözümler · neden önemli (yapay zekâya eleştirtilmiş ve düzeltilmiş hali)", tur: uzun_metin, zorunlu: true}
+    - {anahtar: aylik_yonetim_saati, etiket: "Aylık yönetim saati", olcu: "takvimdeki tarih · dört masa sırası", tur: kisa_metin, zorunlu: true, not: "tarih alt alanı: tur tarih"}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Kazanılan saatlerin kaçı yazdığım yere gitti? (ilk yönetim saatinde)", tur: sayi, sonradan_doldurulur: true}
+  bagimli: [K1, K3, BUYUME_DONGUM]
+  ghl:
+    - {alan_adi: "GAI - K4 Bagimsizlik Plani", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_k4}
+  tam_yuvasi: "Pano / raporlar (aylık yönetim saati)"
+  sohbet_kipi: rol
+  not: "90 günlük hedefin 'yapay zekâya eleştirtilmiş' hali ve dört masa (ayna masası vb.) rol kipini ima ediyor; kurma kısmı çıkarma."
+
+- anahtar: T5
+  baslik: "Kurucu Dosyası › Kapanış"
+  ders: T.5
+  script: scriptler/t/T.5-kapanis.md
+  modul: Kurucu Dosyası
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: once_sonra_haritasi, etiket: "Önce/sonra haritan", olcu: "G'deki ilk ölçüm ↔ W.5'teki yeniden ölçüm (yan yana)", tur: referans, kaynak_alanlar: [G1.ilk_olcum, G1.yeniden_olcum], not: "G1 motorundan gelir; öğrenci yazmaz. 'Karne' denmez."}
+    - {anahtar: altmisinci_gun, etiket: "60. gün tarihi", olcu: "takvimde · o gün: Kurucu Dosyası okuma + yönetim saati + kafes testi (T.1 puanıyla kıyas)", tur: tarih, zorunlu: true}
+    - {anahtar: sonraki_adim, etiket: "Bir sonraki adımım", olcu: "kendi başıma · Tam Paket · uzman ekip (tek cümle)", tur: secim, secenekler: ["kendi başıma", "Tam Paket", "uzman ekip"], zorunlu: true, not: "+ tek cümlelik açıklama alanı"}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "60. günde Kurucu Dosyası'nı hâlâ açıyor muyum, kafes skorum değişti mi?", tur: kisa_metin, sonradan_doldurulur: true, not: "60. günde kafes skoru K1.kafes_testi ile kıyaslanır; 28 gün sonrası salt okunur kararıyla çelişebilir (README)"}
+  bagimli: [K1, K2, K3, K4, W5]
+  ghl:
+    - {alan_adi: "GAI - T5 Kapanis", tur: buyuk_metin, not: "öneri"}
+    - {alan_adi: "GAI - T5 Sonraki Adim", tur: kisa_metin, not: "öneri; Tam/uzman ekip yönlendirmesi için segment"}
+    - {etiket: gai_dosya_t5}
+  tam_yuvasi: "Tam köprüsü (seçim 'Tam Paket' ise)"
+  sohbet_kipi: yok

@@ -8,7 +8,7 @@
     "generate-pdfs": "npx tsx scripts/generate-pdfs.ts",
     "start": "next start",
     "lint": "eslint",
-    "test:dosyam": "tsc -p workers/dosyam-api && node --no-warnings --import tsx --test workers/dosyam-api/test/*.test.ts"
+    "test:dosyam": "node scripts/dosyam/build-sections.mjs --check && tsc -p workers/dosyam-api && node --no-warnings --import tsx --test workers/dosyam-api/test/*.test.ts tests/dosyam/*.test.ts"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.4.1",
@@ -30,11 +30,13 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/js-yaml": "^4.0.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.2",
+    "js-yaml": "^4.3.2",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "typescript": "^5"
