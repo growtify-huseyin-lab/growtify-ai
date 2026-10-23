@@ -11,6 +11,7 @@
     "test:dosyam": "node scripts/dosyam/build-sections.mjs --check && tsc -p workers/dosyam-api && node --no-warnings --import tsx --test workers/dosyam-api/test/*.test.ts tests/dosyam/*.test.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.2.0",
     "@react-pdf/renderer": "^4.4.1",
     "@sparticuz/chromium": "^143.0.4",
     "@sparticuz/chromium-min": "^143.0.4",

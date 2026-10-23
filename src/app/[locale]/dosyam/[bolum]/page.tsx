@@ -6,6 +6,7 @@ import { dosyamApi, type Submission } from "@/lib/dosyam/api";
 import { editableFields, getSection, loadSections, renderSection, type Clean } from "@/lib/dosyam/sections";
 import { currentStudent } from "@/lib/dosyam/session";
 import BolumForm from "@/components/dosyam/BolumForm";
+import { hasAssistant } from "@/lib/dosyam/prompts";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Çalışma Dosyam", robots: { index: false, follow: false } };
@@ -74,6 +75,7 @@ export default async function BolumPage({
         status={latest?.status ?? null}
         approvedAt={cur.body.approved?.approved_at ?? null}
         readOnly={student.mode !== "aktif" || !!section.salt_okunur}
+        asistan={hasAssistant(section.anahtar) && Boolean(process.env.DOSYAM_ANTHROPIC_API_KEY)}
       />
     </main>
   );

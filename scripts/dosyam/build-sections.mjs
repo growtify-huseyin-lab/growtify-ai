@@ -1,4 +1,4 @@
-// content/dosyam/sections/*.yaml (Course yazar) → src/data/dosyam/sections.json (uygulama okur).
+// content/dosyam/sections/*.yaml + prompts/*.yaml (Course yazar) → src/data/dosyam/{sections,prompts}.json.
 // Çalışma anında dosya okumaya gerek kalmaz (Vercel'de dosya izleme sorunu yok).
 // Kullanım: node scripts/dosyam/build-sections.mjs          → yazar
 //           node scripts/dosyam/build-sections.mjs --check  → güncel değilse hata (CI)
@@ -17,16 +17,31 @@ for (const s of sections) {
   ids.add(s.anahtar);
   if (!Array.isArray(s.alanlar)) throw new Error(`alanlar yok: ${s.anahtar}`);
 }
-const json = JSON.stringify(sections, null, 1) + "\n";
+// Asistan ders yönergeleri: dosya adı = bölüm anahtarı (R2.yaml → R2).
+const pdir = path.join("content", "dosyam", "prompts");
+const prompts = {};
+for (const f of fs.readdirSync(pdir).filter((f) => f.endsWith(".yaml")).sort()) {
+  const p = yaml.load(fs.readFileSync(path.join(pdir, f), "utf8"));
+  const id = f.replace(/\.yaml$/, "");
+  if (p.id !== id) throw new Error(`yönerge kimliği dosya adıyla aynı değil: ${f} (${p.id})`);
+  if (!ids.has(id)) throw new Error(`yönergenin bölümü yok: ${id}`);
+  prompts[id] = p;
+}
 
-if (process.argv.includes("--check")) {
-  const cur = fs.existsSync(out) ? fs.readFileSync(out, "utf8") : "";
-  if (cur !== json) {
-    console.error(`${out} güncel değil: node scripts/dosyam/build-sections.mjs`);
-    process.exit(1);
+const outputs = [
+  [out, JSON.stringify(sections, null, 1) + "\n", `${sections.length} bölüm`],
+  [path.join("src", "data", "dosyam", "prompts.json"), JSON.stringify(prompts, null, 1) + "\n", `${Object.keys(prompts).length} yönerge`],
+];
+for (const [file, json, label] of outputs) {
+  if (process.argv.includes("--check")) {
+    const cur = fs.existsSync(file) ? fs.readFileSync(file, "utf8") : "";
+    if (cur !== json) {
+      console.error(`${file} güncel değil: node scripts/dosyam/build-sections.mjs`);
+      process.exit(1);
+    }
+    console.log(`${file} güncel (${label})`);
+  } else {
+    fs.writeFileSync(file, json);
+    console.log(`${file} yazıldı (${label})`);
   }
-  console.log(`${out} güncel (${sections.length} bölüm)`);
-} else {
-  fs.writeFileSync(out, json);
-  console.log(`${out} yazıldı (${sections.length} bölüm)`);
 }
