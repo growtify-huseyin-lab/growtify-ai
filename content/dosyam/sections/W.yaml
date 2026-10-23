@@ -13,19 +13,21 @@
   alanlar:
     - anahtar: kapi_testi
       etiket: "Kapı testi"
+      soru: "Kendi işine müşteri gibi yazdığında kanalların ne kadar sürede cevap verdi?"
+      aciklama: "WhatsApp dahil üç kanaldan kendine yaz, form doldur ya da ara; her kanal için cevabın ne kadar sürede geldiğini not et."
       olcu: "3 kanal (WhatsApp mutlaka) × dönüş süresi · gece mesajına ne oldu · bulunan 1 kilit · hangi O dersine dönülecek"
       tur: tablo
       adet: 3
       sutunlar:
-        - {anahtar: kanal, etiket: "Kanal", tur: kisa_metin}
-        - {anahtar: donus_suresi, etiket: "Dönüş süresi", tur: kisa_metin}
+        - {anahtar: kanal, soru: "Hangi kanalı denedin?", aciklama: "Denediğin kanalın adını yaz.", ornek: "WhatsApp", etiket: "Kanal", tur: kisa_metin}
+        - {anahtar: donus_suresi, soru: "Bu kanaldan cevap ne kadar sürede geldi?", aciklama: "Dakika, saat ya da gün olarak yaz; hiç gelmediyse \"gelmedi\" de.", ornek: "Ertesi gün öğlen", etiket: "Dönüş süresi", tur: kisa_metin}
       zorunlu: true
-    - {anahtar: gece_mesaji, etiket: "Gece mesajına ne oldu", tur: kisa_metin, zorunlu: true}
-    - {anahtar: bulunan_kilit, etiket: "Bulunan 1 kilit", tur: kisa_metin, zorunlu: true}
-    - {anahtar: donulecek_o_dersi, etiket: "Hangi O dersine dönülecek", tur: secim, secenekler: ["OV.2", "OV.3", "OV.4", "OV.5", "OV.6", "OV.7", "OV.8", "OV.9"], zorunlu: false}
-    - {anahtar: tersten_hesap, etiket: "Tersten hesap", olcu: "\"Ayda __ müşteri için haftada __ doğru kişi\" (varsayımlar yanında)", tur: kisa_metin, zorunlu: true, not: "alt alanlar sayı olabilir: aylik_musteri, haftalik_dogru_kisi, varsayimlar"}
-    - {anahtar: ileri_plan, etiket: "İleri plan", olcu: "Takvimde haftalık saha bloğu (gün, saat)", tur: kisa_metin, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Kapı testinde en yavaş kanalın dönüş süresi; bir sonraki testte kısaldı mı?", tur: kisa_metin, sonradan_doldurulur: true}
+    - {anahtar: gece_mesaji, soru: "Akşam saat onda attığın mesaja ne oldu?", aciklama: "Gece gönderdiğin mesaja cevap gelip gelmediğini, geldiyse ne zaman ve nasıl geldiğini yaz.", ornek: "Sabah dokuzda cevap geldi; o saate kadar hiçbir şey olmadı.", etiket: "Gece mesajına ne oldu", tur: kisa_metin, zorunlu: true}
+    - {anahtar: bulunan_kilit, soru: "Testte kapının kilitli olduğu yeri buldun mu?", aciklama: "Bir müşterinin kapıda kaybolabileceği tek bir yeri yaz.", ornek: "Form bir e-posta kutusuna düşüyor ve kimse haftalarca bakmıyor.", etiket: "Bulunan 1 kilit", tur: kisa_metin, zorunlu: true}
+    - {anahtar: donulecek_o_dersi, soru: "Bu kilidi açmak için hangi derse geri döneceksin?", aciklama: "Kilidin ilgili olduğu O vitrin dersini seç; gerekmiyorsa boş bırak.", etiket: "Hangi O dersine dönülecek", tur: secim, secenekler: ["OV.2", "OV.3", "OV.4", "OV.5", "OV.6", "OV.7", "OV.8", "OV.9"], zorunlu: false}
+    - {anahtar: tersten_hesap, soru: "Ayda istediğin müşteri sayısına ulaşmak için haftada kaç doğru kişiye ulaşman gerekiyor?", aciklama: "Hedef müşteri sayından geriye doğru hesapla ve varsayımlarını yanına yaz.", ornek: "Ayda 4 müşteri için haftada 15 doğru kişi · görüşmelerin üçte biri müşteri oluyor (tahmin)", etiket: "Tersten hesap", olcu: "\"Ayda __ müşteri için haftada __ doğru kişi\" (varsayımlar yanında)", tur: kisa_metin, zorunlu: true, not: "alt alanlar sayı olabilir: aylik_musteri, haftalik_dogru_kisi, varsayimlar"}
+    - {anahtar: ileri_plan, soru: "Müşteri bulma işine takviminde hangi gün ve saati ayırıyorsun?", aciklama: "Her hafta tekrar eden bir saha bloğunun gününü ve saatini yaz.", ornek: "Her salı 10.00–11.00", etiket: "İleri plan", olcu: "Takvimde haftalık saha bloğu (gün, saat)", tur: kisa_metin, zorunlu: true}
+  tek_olcut: {soru: "Kapı testinde en yavaş kanalın dönüş süresi bir sonraki testte kısaldı mı?", aciklama: "İlk testteki en yavaş süreyi ve bir sonraki testteki süreyi yaz.", etiket: "Tek ölçütüm", olcu: "Kapı testinde en yavaş kanalın dönüş süresi; bir sonraki testte kısaldı mı?", tur: kisa_metin, sonradan_doldurulur: true}
   buyume_dongum: "Sayfayı açar: 8 temel sütun + ilk satır (son 30 gün, geriye dönük; bilinmeyen hücre: tahmin + ?)"
   bagimli: []
   ghl:
@@ -41,11 +43,11 @@
   modul: Büyüme Döngüm
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: iki_yol, etiket: "Seçtiğim 2 yol", olcu: "hızlı: __ · sabırlı: __", tur: kisa_metin, zorunlu: true, secenekler: ["çekmek", "gitmek", "ödünç kitle", "referans", "uyuyan liste"], not: "iki ayrı seçim: hizli_yol, sabirli_yol"}
-    - {anahtar: plan_14_gun, etiket: "14 günlük plan", olcu: "her yol için: kime · hangi mesaj · hangi eylem çağrısı · kaç kişi", tur: uzun_metin, zorunlu: true}
-    - {anahtar: bugun_5_kisi, etiket: "Bugün", olcu: "uyuyan listeden 5 kişi · her birine ne dendi · sonuç", tur: liste, adet: 5, zorunlu: true, not: "kimliksiz (danışan 1 … 5); isim yok"}
-    - {anahtar: sablon_adayi, etiket: "Şablon adayı", olcu: "5 mesajdan en iyi çalışanı (ileride akışın mesajı)", tur: uzun_metin, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "İki yolun her birinden haftada gelen doğru kişi sayısı", tur: kisa_metin, sonradan_doldurulur: true}
+    - {anahtar: iki_yol, soru: "Müşteriye ulaşmak için hangi iki yolu seçiyorsun?", aciklama: "Biri bu hafta sonuç veren hızlı yol, biri gelecek ayları dolduran sabırlı yol olsun: çekmek, gitmek, ödünç kitle, referans ya da uyuyan liste.", ornek: "Hızlı: uyuyan liste · sabırlı: çekmek", etiket: "Seçtiğim 2 yol", olcu: "hızlı: __ · sabırlı: __", tur: kisa_metin, zorunlu: true, secenekler: ["çekmek", "gitmek", "ödünç kitle", "referans", "uyuyan liste"], not: "iki ayrı seçim: hizli_yol, sabirli_yol"}
+    - {anahtar: plan_14_gun, soru: "Önümüzdeki iki haftada bu iki yolla ne yapacaksın?", aciklama: "Her yol için kime, hangi mesajla, hangi eylem çağrısıyla ve kaç kişiye ulaşacağını yaz.", ornek: "Uyuyan liste: iki aydır gelmeyen danışanlara yargılamayan kısa not, haftada beş kişi · Çekmek: rehber paylaşımı, sonunda 'dönüş yaz' çağrısı", etiket: "14 günlük plan", olcu: "her yol için: kime · hangi mesaj · hangi eylem çağrısı · kaç kişi", tur: uzun_metin, zorunlu: true}
+    - {anahtar: bugun_5_kisi, soru: "Bugün eski listenden hangi beş kişiye döndün ve ne oldu?", aciklama: "İsim yazmadan her biri için ne yazdığını ve sonucunu not et.", ornek: "Danışan 1: 'Aklıma geldin, kaldığın yerden devam edebiliriz' · cevap verdi, randevu istedi", etiket: "Bugün", olcu: "uyuyan listeden 5 kişi · her birine ne dendi · sonuç", tur: liste, adet: 5, zorunlu: true, not: "kimliksiz (danışan 1 … 5); isim yok"}
+    - {anahtar: sablon_adayi, soru: "Bugün yazdığın beş mesajdan en iyi çalışanı hangisi?", aciklama: "En iyi sonucu veren mesajı aynen yaz; ileride otomatik takip mesajının taslağı olacak.", ornek: "Aklıma geldin. Ara vermek bu sürecin bir parçası; kaldığın yerden, hiçbir şeyi baştan yargılamadan devam edebiliriz.", etiket: "Şablon adayı", olcu: "5 mesajdan en iyi çalışanı (ileride akışın mesajı)", tur: uzun_metin, zorunlu: true}
+  tek_olcut: {soru: "Seçtiğin iki yolun her birinden haftada kaç doğru kişi geliyor?", aciklama: "Her yoldan gelen kişileri haftalık olarak say ve yaz.", etiket: "Tek ölçütüm", olcu: "İki yolun her birinden haftada gelen doğru kişi sayısı", tur: kisa_metin, sonradan_doldurulur: true}
   buyume_dongum: "Kaynak sütunu (hangi yoldan geldi) + ilk satıra son 30 günün kaynak dağılımı (biliniyorsa)"
   bagimli: [R2, R3, R4]
   ghl:
@@ -63,18 +65,20 @@
   alanlar:
     - anahtar: zincir
       etiket: "Zincir tablosu"
+      soru: "Son otuz günde satış zincirinin her halkasında kaç kişi vardı?"
+      aciklama: "Gelen ilgiden satışa kadar altı halkaya son otuz günün sayısını yaz; bilmiyorsan tahmin yaz ve işaretle."
       olcu: "6 halka × son 30 günün rakamı (bilinmeyen: tahmin + ?)"
       tur: tablo
       satirlar: ["Gelen ilgi", "İlk dönüş", "Tanışma", "Görüşme", "Teklif", "Satış"]
       sutunlar:
-        - {anahtar: son_30_gun, etiket: "Son 30 gün", tur: sayi}
-        - {anahtar: tahmin_mi, etiket: "Tahmin mi?", tur: secim, secenekler: ["gerçek", "tahmin"]}
+        - {anahtar: son_30_gun, soru: "Son otuz günde bu halkada kaç kişi vardı?", aciklama: "Mesaj geçmişine ve takvimine geriye doğru bakıp say.", etiket: "Son 30 gün", tur: sayi}
+        - {anahtar: tahmin_mi, soru: "Bu sayı gerçek mi, tahmin mi?", aciklama: "Saydıysan gerçek, tahmin ettiysen tahmin seç.", etiket: "Tahmin mi?", tur: secim, secenekler: ["gerçek", "tahmin"]}
       zorunlu: true
-    - {anahtar: en_buyuk_kacak, etiket: "En büyük kaçak", olcu: "hangi halka · neden", tur: kisa_metin, zorunlu: true}
-    - {anahtar: tek_kacak_plani, etiket: "2 haftalık tek-kaçak planı", olcu: "ne değişecek · kim · ne zaman", tur: uzun_metin, zorunlu: true}
-    - {anahtar: bugun_ilk_eylem, etiket: "Bugün", olcu: "atılan ilk eylem (ör. \"düşüneyim\" diyen 3 kişiye not, gelmeyene yeni saat)", tur: kisa_metin, zorunlu: true}
-    - {anahtar: sablon_adayi, etiket: "Şablon adayı", olcu: "bugün yazdığın takip notlarından en iyi çalışanı (ileride akışın mesajı)", tur: uzun_metin, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "En büyük kaçak halkasındaki oran; plan sonunda değişti mi?", tur: kisa_metin, sonradan_doldurulur: true}
+    - {anahtar: en_buyuk_kacak, soru: "Zincirinde en çok kişiyi hangi halkada kaybediyorsun?", aciklama: "Halkayı ve nedenini kısaca yaz.", ornek: "Teklif sonrası: 'düşüneyim' diyenlere bir daha yazmıyorum.", etiket: "En büyük kaçak", olcu: "hangi halka · neden", tur: kisa_metin, zorunlu: true}
+    - {anahtar: tek_kacak_plani, soru: "Önümüzdeki iki hafta bu kaçağı kapatmak için ne değiştireceksin?", aciklama: "Neyin değişeceğini, kimin yapacağını ve ne zaman yapılacağını yaz; yalnız bu kaçağa odaklan.", ornek: "Teklif verdiğim herkese iki gün sonra kısa bir not · ben yazacağım · her salı ve cuma", etiket: "2 haftalık tek-kaçak planı", olcu: "ne değişecek · kim · ne zaman", tur: uzun_metin, zorunlu: true}
+    - {anahtar: bugun_ilk_eylem, soru: "Bugün attığın ilk adım ne oldu?", aciklama: "Bugün yaptığın somut ilk eylemi yaz.", ornek: "'Düşüneyim' diyen üç kişiye suçlamadan kısa bir not yazdım.", etiket: "Bugün", olcu: "atılan ilk eylem (ör. \"düşüneyim\" diyen 3 kişiye not, gelmeyene yeni saat)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: sablon_adayi, soru: "Bugün yazdığın takip notlarından en iyi çalışanı hangisi?", aciklama: "En iyi sonucu veren notu aynen yaz; ileride otomatik takip mesajının taslağı olacak.", ornek: "Aklında soru kaldıysa cevaplayayım; hazır olduğunda buradayım.", etiket: "Şablon adayı", olcu: "bugün yazdığın takip notlarından en iyi çalışanı (ileride akışın mesajı)", tur: uzun_metin, zorunlu: true}
+  tek_olcut: {soru: "En büyük kaçak halkasındaki oran planın sonunda değişti mi?", aciklama: "Planın başında ve sonunda o halkadaki oranı yaz.", etiket: "Tek ölçütüm", olcu: "En büyük kaçak halkasındaki oran; plan sonunda değişti mi?", tur: kisa_metin, sonradan_doldurulur: true}
   buyume_dongum: "Görüşme · satış · gelmedi sütunları (ilk satıra son 30 gün)"
   bagimli: [R3, R5]
   ghl:
@@ -91,12 +95,12 @@
   modul: Büyüme Döngüm
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: uce_ayrim, etiket: "Üçe ayrım", olcu: "aktif __ · riskli __ · bekleyen __ (sayı; isim değil)", tur: kisa_metin, zorunlu: true, not: "alt alanlar sayı: aktif, riskli, bekleyen"}
-    - {anahtar: riskli_3, etiket: "Riskli 3 kişi", olcu: "yapılan dokunuş · cevap · sonuç", tur: liste, adet: 3, zorunlu: true, not: "kimliksiz"}
-    - {anahtar: son_3_yeni, etiket: "Son 3 yeni müşteri", olcu: "ilk kazanımı yaşadı mı · eksik kalan ağırlama adımı", tur: liste, adet: 3, zorunlu: true, not: "kimliksiz"}
-    - {anahtar: yorum_istegi, etiket: "Yorum isteği", olcu: "gönderilen sayısı · dönen · olumsuz yorum varsa verilen cevap", tur: kisa_metin, zorunlu: true}
-    - {anahtar: sablon_adayi, etiket: "Şablon adayı", olcu: "riskli kişiye yazdığın en iyi not (ileride akışın mesajı)", tur: uzun_metin, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Riskli listeden bir ay içinde aktife dönen kişi sayısı", tur: sayi, sonradan_doldurulur: true}
+    - {anahtar: uce_ayrim, soru: "Müşterilerinin kaçı aktif, kaçı riskli, kaçı bekleyen durumda?", aciklama: "İsim yazmadan her gruptaki kişi sayısını yaz.", ornek: "aktif __ · riskli __ · bekleyen __", etiket: "Üçe ayrım", olcu: "aktif __ · riskli __ · bekleyen __ (sayı; isim değil)", tur: kisa_metin, zorunlu: true, not: "alt alanlar sayı: aktif, riskli, bekleyen"}
+    - {anahtar: riskli_3, soru: "Riskli listendeki üç kişiye nasıl dokundun ve ne oldu?", aciklama: "İsim yazmadan her biri için ne yazdığını, gelen cevabı ve sonucu not et.", ornek: "Danışan 1: 'Bir süredir haberleşemedik, nasıl gidiyor?' · cevap verdi, seansı yeniden planladık", etiket: "Riskli 3 kişi", olcu: "yapılan dokunuş · cevap · sonuç", tur: liste, adet: 3, zorunlu: true, not: "kimliksiz"}
+    - {anahtar: son_3_yeni, soru: "Son üç yeni müşterin ilk kazanımı yaşadı mı?", aciklama: "İsim yazmadan her biri için ilk kazanımı yaşayıp yaşamadığını ve eksik kalan ağırlama adımını yaz.", ornek: "Müşteri 1: yaşadı · Müşteri 2: ilk hafta planı gecikti", etiket: "Son 3 yeni müşteri", olcu: "ilk kazanımı yaşadı mı · eksik kalan ağırlama adımı", tur: liste, adet: 3, zorunlu: true, not: "kimliksiz"}
+    - {anahtar: yorum_istegi, soru: "Kaç kişiye yorum isteği gönderdin ve kaçı döndü?", aciklama: "Gönderilen ve dönen sayısını, olumsuz bir yorum geldiyse verdiğin cevabı yaz; herkese aynı istek gider.", ornek: "Beş kişiye gönderdim, ikisi yorum yazdı.", etiket: "Yorum isteği", olcu: "gönderilen sayısı · dönen · olumsuz yorum varsa verilen cevap", tur: kisa_metin, zorunlu: true}
+    - {anahtar: sablon_adayi, soru: "Riskli bir müşterine yazdığın en iyi not hangisi?", aciklama: "En iyi sonucu veren notu aynen yaz; ileride otomatik yoklama mesajının taslağı olacak.", ornek: "Bir süredir haberleşemedik, nasıl gidiyor? Zorlandığın bir yer varsa birlikte bakalım.", etiket: "Şablon adayı", olcu: "riskli kişiye yazdığın en iyi not (ileride akışın mesajı)", tur: uzun_metin, zorunlu: true}
+  tek_olcut: {soru: "Riskli listenden bir ay içinde kaç kişi yeniden aktif oldu?", aciklama: "Bir ay sonra say ve yaz.", etiket: "Tek ölçütüm", olcu: "Riskli listeden bir ay içinde aktife dönen kişi sayısı", tur: sayi, sonradan_doldurulur: true}
   buyume_dongum: "Kalan · kaybedilen · yorum isteği · yorum/referans sütunları (ilk satıra son 30 gün)"
   bagimli: [R8]
   ghl:
@@ -112,13 +116,13 @@
   modul: Büyüme Döngüm
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: adim_oranlari, etiket: "Adım oranları", olcu: "değilen → ilgi → görüşme → müşteri → kalan → getiren (geriye dönük)", tur: tablo, satirlar: ["değilen → ilgi", "ilgi → görüşme", "görüşme → müşteri", "müşteri → kalan", "kalan → getiren"], sutunlar: [{anahtar: oran, etiket: "Oran", tur: sayi}], zorunlu: true, not: "Büyüme Döngüm sütunlarından araçla hesaplanabilir"}
-    - {anahtar: darbogaz, etiket: "Darboğaz", olcu: "tek adım · neden", tur: kisa_metin, zorunlu: true}
-    - {anahtar: tek_degisiklik, etiket: "Tek değişiklik + eşik", olcu: "ne değişiyor · eşik (süre ya da kişi sayısı) · sonuç tarihi", tur: kisa_metin, zorunlu: true}
-    - {anahtar: kaynak_siralamasi, etiket: "Kaynak sıralaması", olcu: "hangi yoldan kaç kişi (biliniyorsa)", tur: liste, zorunlu: false}
-    - {anahtar: kazanilan_saat, etiket: "Kazanılan saat", olcu: "iş · eskiden __ dk · şimdi __ dk (kendi ölçümün)", tur: kisa_metin, zorunlu: false, kaynak_alanlar: [O1, O4.olcum]}
-    - {anahtar: test_yeniden, etiket: "Test yeniden", olcu: "yeni sonuç · ilk ölçümle kıyas (T.5'te birlikte gösterilir)", tur: referans, kaynak_alanlar: [G1.yeniden_olcum], not: "G1 motorundan gelir; öğrenci yazmaz"}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Seçtiğim darboğaz adımının oranı; eşik dolunca değişti mi?", tur: kisa_metin, sonradan_doldurulur: true}
+    - {anahtar: adim_oranlari, soru: "Zincirinde her adımdan bir sonrakine kaç kişi geçiyor?", aciklama: "Değilen kişiden tavsiye edene kadar her adımın oranını geriye dönük yaz; Büyüme Döngüm'deki sayılarından hesaplanabilir.", etiket: "Adım oranları", olcu: "değilen → ilgi → görüşme → müşteri → kalan → getiren (geriye dönük)", tur: tablo, satirlar: ["değilen → ilgi", "ilgi → görüşme", "görüşme → müşteri", "müşteri → kalan", "kalan → getiren"], sutunlar: [{anahtar: oran, soru: "Bu adımın oranı ne?", aciklama: "Bir sonraki adıma geçenlerin sayısını, bu adımdakilerin sayısına böl.", etiket: "Oran", tur: sayi}], zorunlu: true, not: "Büyüme Döngüm sütunlarından araçla hesaplanabilir"}
+    - {anahtar: darbogaz, soru: "Zincirinin en zayıf adımı hangisi?", aciklama: "Tek bir adım seç ve nedenini yaz.", ornek: "Görüşme → müşteri: teklifi duyanlar düşünmek istiyor ve kayboluyor.", etiket: "Darboğaz", olcu: "tek adım · neden", tur: kisa_metin, zorunlu: true}
+    - {anahtar: tek_degisiklik, soru: "O adımda neyi değiştireceksin ve sonucuna ne zaman bakacaksın?", aciklama: "Tek bir değişikliği, ne kadar süre ya da kaç kişi bekleyeceğini ve sonuç tarihini yaz; aynı anda başka bir şey değiştirme.", ornek: "Düşünmek isteyene ikinci not · iki hafta ya da on kişi · ayın sonunda bakacağım", etiket: "Tek değişiklik + eşik", olcu: "ne değişiyor · eşik (süre ya da kişi sayısı) · sonuç tarihi", tur: kisa_metin, zorunlu: true}
+    - {anahtar: kaynak_siralamasi, soru: "Yeni gelenler en çok hangi yollardan geliyor?", aciklama: "Hangi yoldan kaç kişi geldiğini çoktan aza sırala; bilmiyorsan boş bırak.", ornek: "Uyuyan liste · Instagram · tavsiye", etiket: "Kaynak sıralaması", olcu: "hangi yoldan kaç kişi (biliniyorsa)", tur: liste, zorunlu: false}
+    - {anahtar: kazanilan_saat, soru: "Yapay zekâya devrettiğin işler sana ne kadar zaman kazandırdı?", aciklama: "İşi, eskiden ve şimdi kaç dakika sürdüğünü kendi ölçümünle yaz.", ornek: "Haftalık plan · eskiden __ dk · şimdi __ dk", etiket: "Kazanılan saat", olcu: "iş · eskiden __ dk · şimdi __ dk (kendi ölçümün)", tur: kisa_metin, zorunlu: false, kaynak_alanlar: [O1, O4.olcum]}
+    - {anahtar: test_yeniden, aciklama: "Programın başında çözdüğün testi yeniden çözdüğünde sonucun buraya gelir; ilk ölçümle kıyas kapanış dersinde gösterilir.", etiket: "Test yeniden", olcu: "yeni sonuç · ilk ölçümle kıyas (T.5'te birlikte gösterilir)", tur: referans, kaynak_alanlar: [G1.yeniden_olcum], not: "G1 motorundan gelir; öğrenci yazmaz"}
+  tek_olcut: {soru: "Seçtiğin zayıf adımın oranı beklediğin süre dolunca değişti mi?", aciklama: "Değişiklikten önceki ve sonraki oranı yaz.", etiket: "Tek ölçütüm", olcu: "Seçtiğim darboğaz adımının oranı; eşik dolunca değişti mi?", tur: kisa_metin, sonradan_doldurulur: true}
   buyume_dongum: "Haftalık rapor satırı (sabit sıra) + takvimde haftalık rapor saati"
   bagimli: [W1, W3]
   ghl:
@@ -134,13 +138,13 @@
   modul: Büyüme Döngüm
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: dongu_semasi, etiket: "Döngü şeman", olcu: "5 ok · her okun üstünde son 30 günün rakamı (tahmin: ?) · boş oklar işaretli", tur: tablo, satirlar: ["Bul", "Kazan", "Tut", "Çoğalt", "Yeniden bul"], sutunlar: [{anahtar: son_30_gun, etiket: "Son 30 gün", tur: sayi}, {anahtar: tahmin_mi, etiket: "Tahmin mi?", tur: secim, secenekler: ["gerçek", "tahmin", "boş"]}], zorunlu: true}
-    - {anahtar: uc_hesap, etiket: "Üç hesap", olcu: "müşteri değeri (ödeme × kalma + referans) · kendini besleme oranı (bedava yollardan gelen / tüm yeni) · tur süresi", tur: uzun_metin, zorunlu: true}
-    - {anahtar: tek_kaldirac, etiket: "Tek kaldıraç", olcu: "hangi ok · ne yapacağım", tur: kisa_metin, zorunlu: true}
-    - {anahtar: sisteme_ilk_ok, etiket: "Sisteme verilecek ilk ok", olcu: "hangi oku ilk kez yazılı hale getirip otomatiğe taşırsın (ileride Tam'da)", tur: kisa_metin, zorunlu: true}
-    - {anahtar: aylik_toplanti, etiket: "Aylık döngü toplantısı", olcu: "ilk tarih (takvimde)", tur: tarih, zorunlu: true}
-    - {anahtar: t_sorusu, etiket: "T sorusu", olcu: "\"İki hafta kaybolsam döner mi?\" · dürüst cevap (T.0'a girdi)", tur: kisa_metin, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Kendini besleme oranı: yeni müşterilerin kaçı bedava yollardan geldi", tur: sayi, sonradan_doldurulur: true}
+    - {anahtar: dongu_semasi, soru: "Büyüme döngünün beş okunda son otuz günde neler oldu?", aciklama: "Bul, kazan, tut, çoğalt ve yeniden bul oklarının her birine son otuz günün sayısını yaz; bilmiyorsan tahmin, hiç yoksa boş olarak işaretle.", etiket: "Döngü şeman", olcu: "5 ok · her okun üstünde son 30 günün rakamı (tahmin: ?) · boş oklar işaretli", tur: tablo, satirlar: ["Bul", "Kazan", "Tut", "Çoğalt", "Yeniden bul"], sutunlar: [{anahtar: son_30_gun, soru: "Son otuz günde bu okta kaç kişi vardı?", aciklama: "Büyüme Döngüm sayfandan ya da tahminle yaz.", etiket: "Son 30 gün", tur: sayi}, {anahtar: tahmin_mi, soru: "Bu sayı gerçek mi, tahmin mi, yoksa ok boş mu?", aciklama: "Gerçek, tahmin ya da boş seç.", etiket: "Tahmin mi?", tur: secim, secenekler: ["gerçek", "tahmin", "boş"]}], zorunlu: true}
+    - {anahtar: uc_hesap, soru: "Bir müşteri sana ne getiriyor, döngün kendini ne kadar besliyor ve bir tur ne kadar sürüyor?", aciklama: "Müşteri değerini, bedava yollardan gelenlerin oranını ve bir müşterinin bulunmasından bir başkasını getirmesine kadar geçen süreyi kaba hesapla yaz.", ornek: "Müşteri değeri: programın ücreti ve getirdiği bir arkadaşı · kendini besleme: yeni müşterilerin bir kısmı tavsiyeyle · tur süresi: yaklaşık üç ay", etiket: "Üç hesap", olcu: "müşteri değeri (ödeme × kalma + referans) · kendini besleme oranı (bedava yollardan gelen / tüm yeni) · tur süresi", tur: uzun_metin, zorunlu: true}
+    - {anahtar: tek_kaldirac, soru: "Gelecek ay döngünü hızlandırmak için hangi oka dokunacaksın?", aciklama: "Tek bir ok seç ve ne yapacağını yaz.", ornek: "Çoğalt: ilk kazanımı yaşayan herkese 'beni birine önermek ister misin?' diye soracağım.", etiket: "Tek kaldıraç", olcu: "hangi ok · ne yapacağım", tur: kisa_metin, zorunlu: true}
+    - {anahtar: sisteme_ilk_ok, soru: "Hangi oku ilk kez yazılı hale getirip otomatiğe taşırsın?", aciklama: "İleride Tam Paket'te kendi hesabında kuracağın ilk oku yaz.", ornek: "Kazan: düşünmek isteyenlere giden takip mesajları.", etiket: "Sisteme verilecek ilk ok", olcu: "hangi oku ilk kez yazılı hale getirip otomatiğe taşırsın (ileride Tam'da)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: aylik_toplanti, soru: "Aylık döngü toplantının ilk tarihi ne?", aciklama: "Kendinle yarım saatlik döngü toplantısının ilk tarihini takvimine koy ve yaz.", etiket: "Aylık döngü toplantısı", olcu: "ilk tarih (takvimde)", tur: tarih, zorunlu: true}
+    - {anahtar: t_sorusu, soru: "Bugün iki hafta ortadan kaybolsan işin döner mi?", aciklama: "Dürüstçe evet ya da hayır de ve nedenini bir cümleyle yaz.", ornek: "Hayır; takipleri ve yeni gelenlere dönüşü yalnız ben yapıyorum.", etiket: "T sorusu", olcu: "\"İki hafta kaybolsam döner mi?\" · dürüst cevap (T.0'a girdi)", tur: kisa_metin, zorunlu: true}
+  tek_olcut: {soru: "Yeni müşterilerinin kaçı bedava yollardan, yani tavsiye ya da eski listenden geldi?", aciklama: "Bir ay sonra say ve yaz.", etiket: "Tek ölçütüm", olcu: "Kendini besleme oranı: yeni müşterilerin kaçı bedava yollardan geldi", tur: sayi, sonradan_doldurulur: true}
   buyume_dongum: "Aylık döngü satırı (5 okun rakamı, ay sonunda)"
   bagimli: [W1, W2, W3, W4, W5]
   ghl:

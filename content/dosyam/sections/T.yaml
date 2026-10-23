@@ -11,12 +11,12 @@
   sayfa_no: 1
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: kafes_testi, etiket: "Kafes testi", olcu: "\"Bugün iki hafta kaybolsam işim ne kadar döner?\" · 1–10 kafes skoru", tur: sayi, aralik: [1, 10], zorunlu: true, kaynak_alanlar: [W6.t_sorusu]}
-    - {anahtar: kafes_aciklama, etiket: "Kafes testi (cevabın)", tur: kisa_metin, zorunlu: false, not: "skora eşlik eden dürüst cevap; scriptte aynı satırda"}
-    - {anahtar: gorunen_gorevler, etiket: "Görünen görevlerim", olcu: "8–12 görev", tur: liste, adet_min: 8, adet_max: 12, zorunlu: true}
-    - {anahtar: gorunmeyen_deger, etiket: "Müşterimin aldığı görünmeyen değer", olcu: "3–5 değer (güven, tanınma, rahatlama…)", tur: liste, adet_min: 3, adet_max: 5, zorunlu: true}
-    - {anahtar: koruma_listesi, etiket: "Koruma listem", olcu: "Anlam veren, devretmeyeceğim ilk 5 iş · (sorumluluk meslekleri: imza ve son söz en başta)", tur: liste, adet: 5, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Kafes skoru; 60. gün testinde yeniden (T.5)", tur: sayi, sonradan_doldurulur: false, not: "kafes_testi değeri; yeniden ölçüm T5.altmisinci_gun"}
+    - {anahtar: kafes_testi, soru: "Bugün iki hafta ortadan kaybolsan işin ne kadar döner?", aciklama: "Bir ile on arasında puan ver: bir hiç dönmez, on sensiz de tamamen döner.", etiket: "Kafes testi", olcu: "\"Bugün iki hafta kaybolsam işim ne kadar döner?\" · 1–10 kafes skoru", tur: sayi, aralik: [1, 10], zorunlu: true, kaynak_alanlar: [W6.t_sorusu]}
+    - {anahtar: kafes_aciklama, soru: "Bu puanı neden verdin?", aciklama: "Dürüst cevabını bir iki cümleyle yaz.", ornek: "Takipleri ve yeni gelenlere dönüşü yalnız ben yapıyorum; iki hafta yoksam her şey durur.", etiket: "Kafes testi (cevabın)", tur: kisa_metin, zorunlu: false, not: "skora eşlik eden dürüst cevap; scriptte aynı satırda"}
+    - {anahtar: gorunen_gorevler, soru: "Gün boyunca yaptığın görünen görevler neler?", aciklama: "Sekiz ile on iki arasında görev yaz; bunlar ileride yapay zekâya ya da bir yardımcıya gidebilecek işler.", ornek: "Randevu ayarlamak · haftalık plan yazmak · mesajlara cevap vermek · fatura kesmek", etiket: "Görünen görevlerim", olcu: "8–12 görev", tur: liste, adet_min: 8, adet_max: 12, zorunlu: true}
+    - {anahtar: gorunmeyen_deger, soru: "Müşterin senden aslında hangi görünmeyen değeri alıyor?", aciklama: "Üç beş değer yaz: güven, anlaşılmak, rahatlama gibi; bunlar seninle büyüyecek şeyler.", ornek: "Yargılanmadan anlaşılmak · kendine güvenin geri gelmesi · yalnız olmadığını bilmek", etiket: "Müşterimin aldığı görünmeyen değer", olcu: "3–5 değer (güven, tanınma, rahatlama…)", tur: liste, adet_min: 3, adet_max: 5, zorunlu: true}
+    - {anahtar: koruma_listesi, soru: "Verimli olsa bile hangi beş işi hiç devretmeyeceksin?", aciklama: "Sana anlam veren ilk beş işi yaz; sorumluluk taşıyan bir meslekteysen imza ve son sözü en başa koy.", ornek: "İlk görüşme · planın son kontrolü · zor bir günde danışanla konuşmak", etiket: "Koruma listem", olcu: "Anlam veren, devretmeyeceğim ilk 5 iş · (sorumluluk meslekleri: imza ve son söz en başta)", tur: liste, adet: 5, zorunlu: true}
+  tek_olcut: {soru: "Bugünkü kafes puanın kaç?", aciklama: "Yukarıdaki puan; altmışıncı gün testinde yeniden ölçeceksin.", etiket: "Tek ölçütüm", olcu: "Kafes skoru; 60. gün testinde yeniden (T.5)", tur: sayi, sonradan_doldurulur: false, not: "kafes_testi değeri; yeniden ölçüm T5.altmisinci_gun"}
   bagimli: [W6]
   ghl:
     - {alan_adi: "GAI - K1 Kafes ve Koruma", tur: buyuk_metin, not: "öneri"}
@@ -35,25 +35,30 @@
   alanlar:
     - anahtar: koltuklar
       etiket: "Koltuklar (5–8)"
+      soru: "İşini bir şirket gibi düşünsen hangi koltuklara ayrılıyor?"
+      aciklama: "Beş ile sekiz koltuk yaz; her biri için bugün kimin oturduğunu, haftalık süresini, kimin oturacağını, olgunluğunu, kontrol noktasını ve koltuğun evini doldur."
       tur: tablo
       adet_min: 5
       adet_max: 8
       sutunlar:
-        - {anahtar: koltuk, etiket: "Koltuk", tur: kisa_metin, olcu: "karşılama · içerik · satış takibi · teslimat asistanı · arka ofis · analist…"}
-        - {anahtar: su_an_kim, etiket: "Şu an kim yapıyor", tur: secim, secenekler: ["ben", "yardımcım", "kimse"]}
-        - {anahtar: haftalik_saat, etiket: "Haftalık saat", tur: sayi, olcu: "yaklaşık"}
-        - {anahtar: kim_oturacak, etiket: "Kim oturacak", tur: secim, secenekler: ["yapay zekâ", "insan", "ikisi birlikte"]}
-        - {anahtar: olgunluk, etiket: "Olgunluk", tur: secim, secenekler: ["cevap veren", "seni bilen ortak", "senin için çalışan sistem"], not: "G.3 kanonik adları"}
-        - {anahtar: kontrol_noktasi, etiket: "İnsan kontrol noktası", tur: kisa_metin, olcu: "\"ne zaman bana döner\""}
-        - {anahtar: koltugun_evi, etiket: "Koltuğun evi", tur: secim, secenekler: ["sohbet asistanı", "growtify.app iş akışı", "insan"]}
+        - {anahtar: koltuk, soru: "Bu koltuğun adı ne?", aciklama: "Koltuğun yaptığı işi kısa bir adla yaz.", ornek: "Karşılama", etiket: "Koltuk", tur: kisa_metin, olcu: "karşılama · içerik · satış takibi · teslimat asistanı · arka ofis · analist…"}
+        - {anahtar: su_an_kim, soru: "Bu koltukta şu an kim oturuyor?", aciklama: "Sen mi, bir yardımcın mı, yoksa kimse mi seç.", etiket: "Şu an kim yapıyor", tur: secim, secenekler: ["ben", "yardımcım", "kimse"]}
+        - {anahtar: haftalik_saat, soru: "Bu koltuk haftada yaklaşık kaç saatini alıyor?", aciklama: "Yaklaşık saat olarak yaz.", etiket: "Haftalık saat", tur: sayi, olcu: "yaklaşık"}
+        - {anahtar: kim_oturacak, soru: "Bu koltuğa kim oturacak?", aciklama: "Yapay zekâ, insan ya da ikisi birlikte seç.", etiket: "Kim oturacak", tur: secim, secenekler: ["yapay zekâ", "insan", "ikisi birlikte"]}
+        - {anahtar: olgunluk, soru: "Bu koltukta yapay zekâ hangi seviyede çalışacak?", aciklama: "Cevap veren, seni bilen ortak ya da senin için çalışan sistem seç.", etiket: "Olgunluk", tur: secim, secenekler: ["cevap veren", "seni bilen ortak", "senin için çalışan sistem"], not: "G.3 kanonik adları"}
+        - {anahtar: kontrol_noktasi, soru: "Bu koltuk ne zaman sana dönmeli?", aciklama: "Koltuğun kendi başına karar vermeyip seni çağıracağı anı yaz.", ornek: "Sağlıkla ilgili bir soru geldiğinde.", etiket: "İnsan kontrol noktası", tur: kisa_metin, olcu: "\"ne zaman bana döner\""}
+        - {anahtar: koltugun_evi, soru: "Bu koltuğun işi nerede dönecek?", aciklama: "Sohbet asistanı, growtify.app iş akışı ya da insan seç.", etiket: "Koltuğun evi", tur: secim, secenekler: ["sohbet asistanı", "growtify.app iş akışı", "insan"]}
       zorunlu: true
     - anahtar: ilk_koltuk_is_tanimi
       etiket: "İlk koltuğun iş tanımı"
+      soru: "İlk boşaltacağın koltuğun iş tanımı ne?"
+      aciklama: "Bağlamı, işin nasıl yapılacağını, uç durumları ve ne zaman sana döneceğini yaz; beş deneme yap ve düzeltme sayılarını not et."
+      ornek: "Karşılama: yeni gelene ilk mesajı atar, sık sorulara cevap verir, randevu bağlantısı gönderir; sağlık sorusunda bana döner."
       olcu: "bağlam · nasıl yapılır · uç durumlar · ne zaman bana döner · 5 deneme ve düzeltme sayısı"
       tur: uzun_metin
       zorunlu: true
       not: "5 denemenin düzeltme sayıları ayrı sayı alanı olabilir (deneme_1 … deneme_5)"
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "İlk koltukta 5 denemedeki düzeltme sayısı; bir hafta sonra yeniden", tur: sayi, sonradan_doldurulur: true}
+  tek_olcut: {soru: "İlk koltukta beş denemede kaç düzeltme gerekti?", aciklama: "Beş denemenin toplam düzeltme sayısını yaz; bir hafta sonra yeniden say.", etiket: "Tek ölçütüm", olcu: "İlk koltukta 5 denemedeki düzeltme sayısı; bir hafta sonra yeniden", tur: sayi, sonradan_doldurulur: true}
   bagimli: [K1, O3]
   ghl:
     - {alan_adi: "GAI - K2 Ekip Semasi", tur: buyuk_metin, not: "öneri"}
@@ -70,13 +75,13 @@
   sayfa_no: 3
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: zaman_denetimi, etiket: "Zaman denetimi", olcu: "bütün işler · sonucun çoğunu getiren 3 iş · tekrar edenler · kolaydan zora sıra", tur: uzun_metin, zorunlu: true}
-    - {anahtar: devir_plani, etiket: "Devir planı", olcu: "hangi koltuktan hangi hafta çıkıyorum (4–8 haftalık takvim)", tur: tablo, sutunlar: [{anahtar: koltuk, etiket: "Koltuk", tur: secim, secenekler_kaynagi: K2.koltuklar}, {anahtar: hafta, etiket: "Hafta", tur: sayi}], zorunlu: true}
-    - {anahtar: devir_paketleri, etiket: "Devir paketleri", olcu: "her koltuk: bağlam · nasıl yapılır · uç durumlar · ne zaman bana döner · durum (hazır / taslak)", tur: liste, zorunlu: true, not: "her öğe için durum: hazır / taslak"}
-    - {anahtar: karar_ilkeleri, etiket: "Karar ilkeleri v1", olcu: "en sık 5–10 karar için \"eğer … olursa … yaparım\" · \"bu benim cevabım mı?\" denetimi", tur: liste, adet_min: 5, adet_max: 10, zorunlu: true}
-    - {anahtar: kalite_olcutu, etiket: "Kalite ölçütü", olcu: "\"iyi iş neye benzer\" (yapay zekâ da insan yardımcı da aynı ölçütle)", tur: uzun_metin, zorunlu: true, kaynak_alanlar: [O2.kalite_kurallari]}
-    - {anahtar: yokluk_provasi, etiket: "Yokluk provası", olcu: "hangi gün · neler kırıldı · her kırılmanın yarattığı yeni iş tanımı / ilke", tur: uzun_metin, zorunlu: true, sonradan_doldurulur: true, not: "prova program içinde yapılmayabilir; tarih bugün, sonuç sonra"}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Haftada bana gelen soru sayısı; devir planından önce ve sonra", tur: kisa_metin, sonradan_doldurulur: true}
+    - {anahtar: zaman_denetimi, soru: "Bir hafta boyunca zamanın nereye gidiyor?", aciklama: "Bütün işlerini yaz, sonucun çoğunu getiren üç işi ve tekrar edenleri işaretle, devretme sırasını kolaydan zora diz.", ornek: "Mesajlar ve randevu ayarlamak her gün tekrar ediyor · sonucu getiren: görüşmeler ve plan · ilk devredilecek: randevu ayarlamak", etiket: "Zaman denetimi", olcu: "bütün işler · sonucun çoğunu getiren 3 iş · tekrar edenler · kolaydan zora sıra", tur: uzun_metin, zorunlu: true}
+    - {anahtar: devir_plani, soru: "Hangi koltuktan hangi hafta çıkıyorsun?", aciklama: "Dört ile sekiz haftalık bir takvimde her koltuğun devir haftasını yaz.", etiket: "Devir planı", olcu: "hangi koltuktan hangi hafta çıkıyorum (4–8 haftalık takvim)", tur: tablo, sutunlar: [{anahtar: koltuk, soru: "Hangi koltuktan çıkıyorsun?", aciklama: "Koltuklar listenden seç.", etiket: "Koltuk", tur: secim, secenekler_kaynagi: K2.koltuklar}, {anahtar: hafta, soru: "Bu koltuktan kaçıncı hafta çıkıyorsun?", aciklama: "Devir takviminde haftanın numarasını yaz.", etiket: "Hafta", tur: sayi}], zorunlu: true}
+    - {anahtar: devir_paketleri, soru: "Her koltuğu devrederken neleri yazılı bırakıyorsun?", aciklama: "Her koltuk için bağlamı, nasıl yapıldığını, uç durumları, ne zaman sana döneceğini ve paketin hazır mı taslak mı olduğunu yaz.", ornek: "Randevu ayarlama: kimlere hangi saatler verilir · iptalde ne yapılır · fiyat sorusunda bana döner · hazır", etiket: "Devir paketleri", olcu: "her koltuk: bağlam · nasıl yapılır · uç durumlar · ne zaman bana döner · durum (hazır / taslak)", tur: liste, zorunlu: true, not: "her öğe için durum: hazır / taslak"}
+    - {anahtar: karar_ilkeleri, soru: "En sık verdiğin kararları hangi ilkelerle başkasına bırakabilirsin?", aciklama: "Beş on kararı 'eğer … olursa … yaparım' biçiminde yaz ve her birini 'bu benim cevabım mı?' diye kontrol et.", ornek: "Eğer danışan seansı iki kez ertelerse, ona yargılamadan yeni bir saat öneririm.", etiket: "Karar ilkeleri v1", olcu: "en sık 5–10 karar için \"eğer … olursa … yaparım\" · \"bu benim cevabım mı?\" denetimi", tur: liste, adet_min: 5, adet_max: 10, zorunlu: true}
+    - {anahtar: kalite_olcutu, soru: "Senin için iyi iş neye benziyor?", aciklama: "Yapay zekânın da insan yardımcının da aynı ölçütle çalışacağı kalite tarifini yaz.", ornek: "İyi cevap kısa, sıcak ve bir sonraki adımı söyler; asla sağlık tavsiyesi vermez.", etiket: "Kalite ölçütü", olcu: "\"iyi iş neye benzer\" (yapay zekâ da insan yardımcı da aynı ölçütle)", tur: uzun_metin, zorunlu: true, kaynak_alanlar: [O2.kalite_kurallari]}
+    - {anahtar: yokluk_provasi, soru: "Bir gün hiç işe bakmadığında neler aksadı?", aciklama: "Provanın gününü, neyin aksadığını ve her aksamanın sana kazandırdığı yeni iş tanımını ya da ilkeyi yaz.", ornek: "Salı · iki mesaj cevapsız kaldı · yeni ilke: mesai dışı mesaja otomatik karşılama", etiket: "Yokluk provası", olcu: "hangi gün · neler kırıldı · her kırılmanın yarattığı yeni iş tanımı / ilke", tur: uzun_metin, zorunlu: true, sonradan_doldurulur: true, not: "prova program içinde yapılmayabilir; tarih bugün, sonuç sonra"}
+  tek_olcut: {soru: "Haftada sana kaç soru geliyor?", aciklama: "Devir planından önce ve sonra haftalık soru sayını yaz.", etiket: "Tek ölçütüm", olcu: "Haftada bana gelen soru sayısı; devir planından önce ve sonra", tur: kisa_metin, sonradan_doldurulur: true}
   bagimli: [K2]
   ghl:
     - {alan_adi: "GAI - K3 Devir Plani", tur: buyuk_metin, not: "öneri"}
@@ -92,12 +97,12 @@
   sayfa_no: 4
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: hayal_is, etiket: "Hayal iş", olcu: "haftalık saat · kime hizmet · yeterli gelir · bırakacaklarım · \"yeterli büyüklük\" cümlesi", tur: uzun_metin, zorunlu: true}
-    - {anahtar: kazanilan_zaman, etiket: "Kazanılan zaman", olcu: "\"haftada __ saat kazanırsam şuraya harcayacağım\"", tur: kisa_metin, zorunlu: true}
-    - {anahtar: sabit_degisken, etiket: "Sabit / değişken", olcu: "değerlerim, vizyonum, kime hizmet ettiğim · yöntemlerim ve araçlarım", tur: uzun_metin, zorunlu: true}
-    - {anahtar: hedef_90_gun, etiket: "90 günlük hedef sayfası", olcu: "hedef · engeller · önceden yazılmış çözümler · neden önemli (yapay zekâya eleştirtilmiş ve düzeltilmiş hali)", tur: uzun_metin, zorunlu: true}
-    - {anahtar: aylik_yonetim_saati, etiket: "Aylık yönetim saati", olcu: "takvimdeki tarih · dört masa sırası", tur: kisa_metin, zorunlu: true, not: "tarih alt alanı: tur tarih"}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Kazanılan saatlerin kaçı yazdığım yere gitti? (ilk yönetim saatinde)", tur: sayi, sonradan_doldurulur: true}
+    - {anahtar: hayal_is, soru: "Hayalindeki iş haftada kaç saat sürüyor, kime hizmet ediyor ve sana ne kadar yetiyor?", aciklama: "Haftalık çalışma saatini, kime hizmet ettiğini, sana yeten geliri, bırakacağın işleri ve 'yeterli büyüklük' cümleni yaz.", ornek: "Haftada dört gün çalışıyorum, kendi danışanlarımla ilgileniyorum, mesajlara ve randevulara ben bakmıyorum; bu bana yetiyor.", etiket: "Hayal iş", olcu: "haftalık saat · kime hizmet · yeterli gelir · bırakacaklarım · \"yeterli büyüklük\" cümlesi", tur: uzun_metin, zorunlu: true}
+    - {anahtar: kazanilan_zaman, soru: "Kazandığın zamanı nereye harcayacaksın?", aciklama: "'Haftada __ saat kazanırsam şuraya harcayacağım' cümlesini tamamla.", ornek: "Haftada __ saat kazanırsam kendi atölyemi hazırlamaya ve aileme ayıracağım.", etiket: "Kazanılan zaman", olcu: "\"haftada __ saat kazanırsam şuraya harcayacağım\"", tur: kisa_metin, zorunlu: true}
+    - {anahtar: sabit_degisken, soru: "İşinde neyi asla değiştirmeyeceksin, neyi değiştirebilirsin?", aciklama: "Sabit kalanları (değerler, vizyon, kime hizmet) ve değişebilenleri (yöntemler, araçlar) ayrı yaz.", ornek: "Sabit: yasaksız yaklaşım, kırkından sonraki kadınlar · Değişken: görüşme biçimi, kullandığım araçlar", etiket: "Sabit / değişken", olcu: "değerlerim, vizyonum, kime hizmet ettiğim · yöntemlerim ve araçlarım", tur: uzun_metin, zorunlu: true}
+    - {anahtar: hedef_90_gun, soru: "Önümüzdeki doksan gün için hedefin ne?", aciklama: "Hedefi, önündeki engelleri, önceden yazdığın çözümleri ve neden önemli olduğunu yaz; yapay zekâya eleştirtip düzelttiğin halini kaydet.", ornek: "Hedef: randevu ve karşılama koltuğunu tamamen devretmek · engel: alışkanlık · çözüm: her akşam mesajlara değil, görevlere bakmak", etiket: "90 günlük hedef sayfası", olcu: "hedef · engeller · önceden yazılmış çözümler · neden önemli (yapay zekâya eleştirtilmiş ve düzeltilmiş hali)", tur: uzun_metin, zorunlu: true}
+    - {anahtar: aylik_yonetim_saati, soru: "Aylık yönetim saatin ne zaman ve hangi sırayla ilerleyecek?", aciklama: "Takvimdeki ilk tarihi ve toplantının dört bölümünün sırasını yaz.", ornek: "Her ayın ilk pazartesi 09.00 · rakamlar, devirler, kararlar, gelecek ay", etiket: "Aylık yönetim saati", olcu: "takvimdeki tarih · dört masa sırası", tur: kisa_metin, zorunlu: true, not: "tarih alt alanı: tur tarih"}
+  tek_olcut: {soru: "Kazandığın saatlerin kaçı yazdığın yere gitti?", aciklama: "İlk yönetim saatinde kazanılan saatleri ve nereye gittiklerini kıyaslayıp yaz.", etiket: "Tek ölçütüm", olcu: "Kazanılan saatlerin kaçı yazdığım yere gitti? (ilk yönetim saatinde)", tur: sayi, sonradan_doldurulur: true}
   bagimli: [K1, K3, BUYUME_DONGUM]
   ghl:
     - {alan_adi: "GAI - K4 Bagimsizlik Plani", tur: buyuk_metin, not: "öneri"}
@@ -113,10 +118,10 @@
   modul: Kurucu Dosyası
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: once_sonra_haritasi, etiket: "Önce/sonra haritan", olcu: "G'deki ilk ölçüm ↔ W.5'teki yeniden ölçüm (yan yana)", tur: referans, kaynak_alanlar: [G1.ilk_olcum, G1.yeniden_olcum], not: "G1 motorundan gelir; öğrenci yazmaz. 'Karne' denmez."}
-    - {anahtar: altmisinci_gun, etiket: "60. gün tarihi", olcu: "takvimde · o gün: Kurucu Dosyası okuma + yönetim saati + kafes testi (T.1 puanıyla kıyas)", tur: tarih, zorunlu: true}
-    - {anahtar: sonraki_adim, etiket: "Bir sonraki adımım", olcu: "kendi başıma · Tam Paket · uzman ekip (tek cümle)", tur: secim, secenekler: ["kendi başıma", "Tam Paket", "uzman ekip"], zorunlu: true, not: "+ tek cümlelik açıklama alanı"}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "60. günde Kurucu Dosyası'nı hâlâ açıyor muyum, kafes skorum değişti mi?", tur: kisa_metin, sonradan_doldurulur: true, not: "60. günde kafes skoru K1.kafes_testi ile kıyaslanır; 28 gün sonrası salt okunur kararıyla çelişebilir (README)"}
+    - {anahtar: once_sonra_haritasi, aciklama: "Programın başında çözdüğün test ile W aşamasında yeniden çözdüğün test burada yan yana görünür; sen yazmazsın.", etiket: "Önce/sonra haritan", olcu: "G'deki ilk ölçüm ↔ W.5'teki yeniden ölçüm (yan yana)", tur: referans, kaynak_alanlar: [G1.ilk_olcum, G1.yeniden_olcum], not: "G1 motorundan gelir; öğrenci yazmaz. 'Karne' denmez."}
+    - {anahtar: altmisinci_gun, soru: "Altmışıncı gün kontrolünü hangi tarihe koyuyorsun?", aciklama: "O gün Kurucu Dosyanı okuyacak, yönetim saatini yapacak ve kafes testini yeniden çözeceksin; tarihi takvimine koy.", etiket: "60. gün tarihi", olcu: "takvimde · o gün: Kurucu Dosyası okuma + yönetim saati + kafes testi (T.1 puanıyla kıyas)", tur: tarih, zorunlu: true}
+    - {anahtar: sonraki_adim, soru: "Buradan sonra hangi yoldan devam etmek istiyorsun?", aciklama: "Kendi başına, Tam Paket ile ya da uzman ekiple devam etmeyi seç ve istersen tek cümleyle nedenini yaz.", etiket: "Bir sonraki adımım", olcu: "kendi başıma · Tam Paket · uzman ekip (tek cümle)", tur: secim, secenekler: ["kendi başıma", "Tam Paket", "uzman ekip"], zorunlu: true, not: "+ tek cümlelik açıklama alanı"}
+  tek_olcut: {soru: "Altmışıncı günde Kurucu Dosyanı hâlâ açıyor musun ve kafes puanın değişti mi?", aciklama: "Altmışıncı günde iki soruyu cevapla ve yeni puanını yaz.", etiket: "Tek ölçütüm", olcu: "60. günde Kurucu Dosyası'nı hâlâ açıyor muyum, kafes skorum değişti mi?", tur: kisa_metin, sonradan_doldurulur: true, not: "60. günde kafes skoru K1.kafes_testi ile kıyaslanır; 28 gün sonrası salt okunur kararıyla çelişebilir (README)"}
   bagimli: [K1, K2, K3, K4, W5]
   ghl:
     - {alan_adi: "GAI - T5 Kapanis", tur: buyuk_metin, not: "öneri"}

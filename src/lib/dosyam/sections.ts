@@ -19,6 +19,7 @@ export interface FieldDef {
   sutunlar?: FieldDef[];
   satirlar?: string[];
   kaynak_alanlar?: string[];
+  referans?: boolean; // yazılabilir alan + üstünde kaynak alanların içeriği gösterilir (OV2)
   hesaplanan?: boolean;
   sonradan_doldurulur?: boolean;
   not?: string;

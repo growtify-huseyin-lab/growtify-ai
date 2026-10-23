@@ -13,7 +13,7 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: uc_kose, etiket: "İşimde bir agent'ın alabileceği 3 köşe", olcu: "tekrar eden, her seferinde benzer işler", tur: liste, adet: 3, zorunlu: true}
+    - {anahtar: uc_kose, soru: "İşinde her seferinde benzer şekilde tekrar eden hangi üç işi yapay zekâ senin yerine üstlenebilir?", aciklama: "Haftada birkaç kez, hep aynı adımlarla yaptığın üç işi yaz.", ornek: "Yeni gelene ilk mesajı yazmak · haftalık plan taslağı · sık sorulan sorulara cevap", etiket: "İşimde bir agent'ın alabileceği 3 köşe", olcu: "tekrar eden, her seferinde benzer işler", tur: liste, adet: 3, zorunlu: true}
   tek_olcut: null
   bagimli: []
   ghl: null
@@ -27,7 +27,7 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: bilmedigi_3_sey, etiket: "Yapay zekânın benim işim hakkında bilmediği 3 şey", olcu: "yöntemin, müşterini tanıma biçimin, asla atlamadığın bir şey", tur: liste, adet: 3, zorunlu: true}
+    - {anahtar: bilmedigi_3_sey, soru: "Yapay zekânın senin işin hakkında bilmediği üç şey ne?", aciklama: "Yöntemini, müşterini tanıma biçimini ve asla atlamadığın bir şeyi yaz; bunlar ona vereceğin bağlamın ilk parçası.", ornek: "Yasak listesi vermem · ilk görüşmede önce günlük düzenini sorarım · her planı danışanla birlikte son kez okurum", etiket: "Yapay zekânın benim işim hakkında bilmediği 3 şey", olcu: "yöntemin, müşterini tanıma biçimin, asla atlamadığın bir şey", tur: liste, adet: 3, zorunlu: true}
   tek_olcut: null
   bagimli: []
   ghl: null
@@ -41,8 +41,8 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: on_is_uc_sutun, etiket: "Kendi haftandan 10 iş, üç sütunda", tur: tablo, adet: 10, sutunlar: [{anahtar: is, etiket: "İş", tur: kisa_metin}, {anahtar: sutun, etiket: "Sütun", tur: secim, secenekler: ["devret (yapay zekâya)", "birlikte", "sende"], not: "sütun adları scriptte üç sütun; adlar Free.4 metnine göre teyit edilmeli"}], zorunlu: true}
-    - {anahtar: asla_listesi, etiket: "Üç satırlık \"asla\" listesi", olcu: "veri / karar / temas", tur: tablo, satirlar: ["veri", "karar", "temas"], sutunlar: [{anahtar: asla, etiket: "Asla", tur: kisa_metin}], zorunlu: true}
+    - {anahtar: on_is_uc_sutun, soru: "Haftanda yaptığın on işi hangi sütuna koyarsın?", aciklama: "On işini yaz ve her birini yapay zekâya devret, birlikte yap ya da sende kalsın diye ayır.", etiket: "Kendi haftandan 10 iş, üç sütunda", tur: tablo, adet: 10, sutunlar: [{anahtar: is, soru: "Bu iş ne?", aciklama: "Haftanda yaptığın bir işi kısaca yaz.", ornek: "Randevu hatırlatması göndermek", etiket: "İş", tur: kisa_metin}, {anahtar: sutun, soru: "Bu iş hangi sütuna gidiyor?", aciklama: "Yapay zekâya devret, birlikte ya da sende seç.", etiket: "Sütun", tur: secim, secenekler: ["devret (yapay zekâya)", "birlikte", "sende"], not: "sütun adları scriptte üç sütun; adlar Free.4 metnine göre teyit edilmeli"}], zorunlu: true}
+    - {anahtar: asla_listesi, soru: "Yapay zekâya asla bırakmayacağın üç şey ne?", aciklama: "Bir veri, bir karar ve bir temas için birer satır yaz.", etiket: "Üç satırlık \"asla\" listesi", olcu: "veri / karar / temas", tur: tablo, satirlar: ["veri", "karar", "temas"], sutunlar: [{anahtar: asla, soru: "Bu satırda asla neyi bırakmazsın?", aciklama: "Satırın konusuna göre tek bir şey yaz.", ornek: "Danışanın sağlık bilgisini sohbete yazmam", etiket: "Asla", tur: kisa_metin}], zorunlu: true}
   tek_olcut: null
   bagimli: [FREE2]
   ghl: null
@@ -55,9 +55,9 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: gercek_cikti, etiket: "Kendi işinden gerçek bir çıktı", olcu: "bu hafta kullanacağın bir mesaj ya da metin", tur: uzun_metin, zorunlu: true, not: kimliksiz}
-    - {anahtar: once_sonra, etiket: "Önce/sonra", olcu: "bağlamsız cevap, bağlamlı cevap, kendi ölçtüğün kazanılan dakika", tur: uzun_metin, zorunlu: false, not: "scriptte topluluk paylaşımı; dosyada isteğe bağlı kopya"}
-    - {anahtar: kazanilan_dakika, etiket: "Kazanılan dakika", tur: sayi, zorunlu: false}
+    - {anahtar: gercek_cikti, soru: "Bu hafta gerçekten kullanacağın hangi mesajı ya da metni yapay zekâyla hazırladın?", aciklama: "Çıktının son halini buraya kopyala; içinde müşteri adı ya da sağlık bilgisi olmasın.", ornek: "Yeni danışana gönderilecek, ilk görüşmeye nasıl hazırlanacağını anlatan kısa karşılama mesajı.", etiket: "Kendi işinden gerçek bir çıktı", olcu: "bu hafta kullanacağın bir mesaj ya da metin", tur: uzun_metin, zorunlu: true, not: kimliksiz}
+    - {anahtar: once_sonra, soru: "Bağlam vermeden ve bağlam vererek aldığın iki cevap arasında ne değişti?", aciklama: "İki cevabı kısaca karşılaştır ve kendi ölçtüğün zaman kazancını not et; bu alan isteğe bağlı.", etiket: "Önce/sonra", olcu: "bağlamsız cevap, bağlamlı cevap, kendi ölçtüğün kazanılan dakika", tur: uzun_metin, zorunlu: false, not: "scriptte topluluk paylaşımı; dosyada isteğe bağlı kopya"}
+    - {anahtar: kazanilan_dakika, soru: "Bu işte kaç dakika kazandın?", aciklama: "Kendi ölçtüğün dakikayı yaz; tahmin değil, ölçtüğün süre.", etiket: "Kazanılan dakika", tur: sayi, zorunlu: false}
   tek_olcut: null
   bagimli: [FREE3]
   ghl: null
@@ -71,8 +71,8 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: versiyon, etiket: "Hangi versiyon", tur: secim, secenekler: ["A: İlk Kazanım çıktısına bir tasarım hamlesi", "B: 'yapay zekâya' sütunundan bir işte üç hamle"], zorunlu: true}
-    - {anahtar: fark, etiket: "Fark", olcu: "iki cümle", tur: kisa_metin, zorunlu: true}
+    - {anahtar: versiyon, soru: "Bu derste hangi denemeyi yaptın?", aciklama: "İlk Kazanım çıktına bir tasarım hamlesi ya da devrettiğin bir işte üç hamle seç.", etiket: "Hangi versiyon", tur: secim, secenekler: ["A: İlk Kazanım çıktısına bir tasarım hamlesi", "B: 'yapay zekâya' sütunundan bir işte üç hamle"], zorunlu: true}
+    - {anahtar: fark, soru: "Denemeden sonra çıktı nasıl değişti?", aciklama: "Farkı iki cümleyle yaz.", ornek: "İlk mesaj artık daha kısa ve sıcak. Danışan ne yapacağını ilk okumada anlıyor.", etiket: "Fark", olcu: "iki cümle", tur: kisa_metin, zorunlu: true}
   tek_olcut: null
   bagimli: [FREE4]
   ghl: null
@@ -85,7 +85,7 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: cekici_asama, etiket: "GROWT'ta beni en çok çeken aşama ve neden", tur: kisa_metin, zorunlu: false, not: "scriptte isteğe bağlı topluluk paylaşımı"}
+    - {anahtar: cekici_asama, soru: "GROWT'un hangi aşaması seni en çok çekiyor ve neden?", aciklama: "Aşamayı ve nedenini bir iki cümleyle yaz; bu alan isteğe bağlı.", ornek: "Rota, çünkü müşterinin yolunu hiç baştan sona yazmadım.", etiket: "GROWT'ta beni en çok çeken aşama ve neden", tur: kisa_metin, zorunlu: false, not: "scriptte isteğe bağlı topluluk paylaşımı"}
   tek_olcut: null
   bagimli: []
   ghl: null
@@ -100,8 +100,8 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: takvim_bloklari, etiket: "4 haftalık günlük GROWT blokları", olcu: "takvimde; gün ve saat", tur: kisa_metin, zorunlu: true, not: "scriptte ekran görüntüsü; dosyada yazılı gün/saat önerilir"}
-    - {anahtar: neden_basladim, etiket: "Neden başladım", olcu: "Free.1'deki cümle", tur: kisa_metin, zorunlu: false, not: "topluluk tanışma postunun dosyadaki kopyası"}
+    - {anahtar: takvim_bloklari, soru: "Önümüzdeki dört hafta GROWT'a hangi gün ve saatlerde çalışacaksın?", aciklama: "Takvimine koyduğun günleri ve saatleri yaz.", ornek: "Hafta içi her sabah 08.30–09.00", etiket: "4 haftalık günlük GROWT blokları", olcu: "takvimde; gün ve saat", tur: kisa_metin, zorunlu: true, not: "scriptte ekran görüntüsü; dosyada yazılı gün/saat önerilir"}
+    - {anahtar: neden_basladim, soru: "Bu programa neden başladın?", aciklama: "Başlarken yazdığın cümleyi buraya da koy; bu alan isteğe bağlı.", ornek: "Akşamları mesajlarla değil, ailemle olmak istiyorum.", etiket: "Neden başladım", olcu: "Free.1'deki cümle", tur: kisa_metin, zorunlu: false, not: "topluluk tanışma postunun dosyadaki kopyası"}
   tek_olcut: null
   bagimli: []
   ghl: null
@@ -114,8 +114,8 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: gizlilik_ayari, etiket: "Gizlilik ayarı kapalı mı", tur: secim, secenekler: ["evet", "hayır"], zorunlu: true, not: "scriptte ekran görüntüsü; dosyada onay kutusu"}
-    - {anahtar: kalici_tohum, etiket: "Kalıcı alana yazdığın tohum", olcu: "3–5 cümle", tur: uzun_metin, zorunlu: true}
+    - {anahtar: gizlilik_ayari, soru: "Yapay zekâ sohbetinde konuşmalarının modeli eğitmek için kullanılmasını kapattın mı?", aciklama: "Ayarı kontrol edip evet ya da hayır seç.", etiket: "Gizlilik ayarı kapalı mı", tur: secim, secenekler: ["evet", "hayır"], zorunlu: true, not: "scriptte ekran görüntüsü; dosyada onay kutusu"}
+    - {anahtar: kalici_tohum, soru: "Yapay zekânın her konuşmada hatırlaması için kendin ve işin hakkında ne yazdın?", aciklama: "Kalıcı hafıza alanına yazdığın üç beş cümleyi buraya kopyala; müşteri bilgisi yazma.", ornek: "Kırkından sonraki kadınlarla yasaksız beslenme üzerine çalışan bir diyetisyenim. Sade ve sıcak konuşurum, kısa cevapları severim.", etiket: "Kalıcı alana yazdığın tohum", olcu: "3–5 cümle", tur: uzun_metin, zorunlu: true}
   tek_olcut: null
   bagimli: [FREE4, FREE4B]
   ghl: null
@@ -129,9 +129,9 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: nasil_buluyorlar, etiket: "Beni nasıl buluyorlar? Şu an hangi araç / yöntem?", tur: kisa_metin, zorunlu: true}
-    - {anahtar: nasil_evet, etiket: "Nasıl \"evet\" diyorlar? (mesaj, randevu, ödeme nerede?)", tur: kisa_metin, zorunlu: true}
-    - {anahtar: iceride_ne_yasiyorlar, etiket: "İçeri girince ne yaşıyorlar? (takip, teslim, iletişim nerede?)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: nasil_buluyorlar, soru: "Müşterilerin seni bugün nasıl buluyor?", aciklama: "Hangi kanalı, aracı ya da yöntemi kullandığını yaz.", ornek: "Instagram paylaşımları ve tavsiye", etiket: "Beni nasıl buluyorlar? Şu an hangi araç / yöntem?", tur: kisa_metin, zorunlu: true}
+    - {anahtar: nasil_evet, soru: "Müşterilerin sana nasıl 'evet' diyor?", aciklama: "Mesajın, randevunun ve ödemenin şu an nerede olduğunu yaz.", ornek: "WhatsApp'tan yazışıyoruz, randevuyu telefondan ayarlıyorum, ödeme havaleyle geliyor.", etiket: "Nasıl \"evet\" diyorlar? (mesaj, randevu, ödeme nerede?)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: iceride_ne_yasiyorlar, soru: "Seninle çalışmaya başlayan müşteri neler yaşıyor?", aciklama: "Takibin, teslimin ve iletişimin şu an nerede döndüğünü yaz.", ornek: "Haftalık planı PDF olarak gönderiyorum, takibi WhatsApp'tan yapıyorum.", etiket: "İçeri girince ne yaşıyorlar? (takip, teslim, iletişim nerede?)", tur: kisa_metin, zorunlu: true}
   tek_olcut: null
   bagimli: []
   ghl: null
@@ -145,11 +145,11 @@
   modul: Başlangıç
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: uc_motor, etiket: "Her motor için tek cümle", olcu: "Beni nasıl buluyorlar? / Nasıl \"evet\" diyorlar? / İçeri girince ne yaşıyorlar?", tur: liste, adet: 3, zorunlu: true}
-    - {anahtar: en_zayif_motor, etiket: "En zayıf motorum", tur: secim, secenekler: ["çekmek", "dönüştürmek", "tutmak"], zorunlu: true}
-    - {anahtar: en_dusuk_pencere, etiket: "Testteki en düşük pencerem", tur: referans, kaynak_alanlar: [G1.en_dusuk_pencere], not: "G1'den; test çözülmediyse G'de doldurulur"}
-    - {anahtar: ilk_durak, etiket: "\"İlk durağım şu\" notu", tur: kisa_metin, zorunlu: true}
-    - {anahtar: doksan_gun_degisiklik, etiket: "90 gün sonra işimde görmek istediğim tek değişiklik", olcu: "bir cümle; rakam şart değil", tur: kisa_metin, zorunlu: true}
+    - {anahtar: uc_motor, soru: "Üç motorun her biri için bugünkü durumu tek cümleyle nasıl anlatırsın?", aciklama: "Bulunma, evet deme ve içeride yaşananlar için birer cümle yaz.", ornek: "İnsanlar beni çoğunlukla tavsiyeyle buluyor.", etiket: "Her motor için tek cümle", olcu: "Beni nasıl buluyorlar? / Nasıl \"evet\" diyorlar? / İçeri girince ne yaşıyorlar?", tur: liste, adet: 3, zorunlu: true}
+    - {anahtar: en_zayif_motor, soru: "Üç motordan hangisi en zayıf?", aciklama: "Çekmek, dönüştürmek ya da tutmak seç.", etiket: "En zayıf motorum", tur: secim, secenekler: ["çekmek", "dönüştürmek", "tutmak"], zorunlu: true}
+    - {anahtar: en_dusuk_pencere, aciklama: "Bu G testinden gelir; sen yazmazsın.", etiket: "Testteki en düşük pencerem", tur: referans, kaynak_alanlar: [G1.en_dusuk_pencere], not: "G1'den; test çözülmediyse G'de doldurulur"}
+    - {anahtar: ilk_durak, soru: "İlk nereden başlayacaksın?", aciklama: "En zayıf motoruna göre ilk durağını tek cümleyle yaz.", ornek: "İlk durağım: bana yazan ama randevu almayanlara geri dönmek.", etiket: "\"İlk durağım şu\" notu", tur: kisa_metin, zorunlu: true}
+    - {anahtar: doksan_gun_degisiklik, soru: "Doksan gün sonra işinde görmek istediğin tek değişiklik ne?", aciklama: "Tek bir cümle yaz; rakam şart değil.", ornek: "Akşamları mesaj cevaplamadan işimin dönmesi.", etiket: "90 gün sonra işimde görmek istediğim tek değişiklik", olcu: "bir cümle; rakam şart değil", tur: kisa_metin, zorunlu: true}
   tek_olcut: null
   bagimli: [BB3]
   ghl: null
@@ -163,8 +163,8 @@
   modul: Gap Raporum
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: yoran_is, etiket: "Haftamda beni en çok yoran iş", tur: kisa_metin, zorunlu: true}
-    - {anahtar: tahmini_saat, etiket: "Tahminen kaç saat", tur: sayi, zorunlu: true}
+    - {anahtar: yoran_is, soru: "Haftanda seni en çok yoran iş ne?", aciklama: "Tek bir iş yaz; G aşamasının sonunda bu tahmini yeniden göreceksin.", ornek: "Danışanlardan gelen mesajlara tek tek cevap vermek", etiket: "Haftamda beni en çok yoran iş", tur: kisa_metin, zorunlu: true}
+    - {anahtar: tahmini_saat, soru: "Bu iş haftada tahminen kaç saatini alıyor?", aciklama: "Tahmini saat yaz; ölçmen gerekmez.", etiket: "Tahminen kaç saat", tur: sayi, zorunlu: true}
   tek_olcut: null
   bagimli: []
   ghl: null
@@ -180,7 +180,7 @@
   salt_okunur: true
   kaynak: "G1 motoru (growtify.ai/g1); profil + PDF + g1_baseline"
   alanlar:
-    - {anahtar: profil, etiket: "AI Olgunluk Profilim", tur: referans, kaynak_alanlar: [G1.profil, G1.pdf], not: "salt okunur, G1'den gelir"}
+    - {anahtar: profil, aciklama: "Bu G testinden gelir; sen yazmazsın.", etiket: "AI Olgunluk Profilim", tur: referans, kaynak_alanlar: [G1.profil, G1.pdf], not: "salt okunur, G1'den gelir"}
   tek_olcut: null
   bagimli: []
   ghl: {mevcut: "G1 alanları (G1 Baseline, G1 Archetype, G1 Gap Summary, G1 Completed At …)"}
@@ -193,10 +193,10 @@
   modul: Gap Raporum
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: seviye, etiket: "Seviyem", tur: referans, kaynak_alanlar: [G1.seviye], not: "salt okunur, G1'den"}
-    - {anahtar: en_zayif_halka, etiket: "En zayıf halkam (x/5)", tur: referans, kaynak_alanlar: [G1.en_zayif_halka], not: "salt okunur, G1'den"}
-    - {anahtar: bende_gorunusu, etiket: "Bu bende şöyle görünüyor", tur: kisa_metin, zorunlu: true}
-    - {anahtar: ayna_sorusu, etiket: "Ayna sorusunun cevabı (isteğe bağlı)", olcu: "bir cümle", tur: kisa_metin, zorunlu: false}
+    - {anahtar: seviye, aciklama: "Bu G testinden gelir; sen yazmazsın.", etiket: "Seviyem", tur: referans, kaynak_alanlar: [G1.seviye], not: "salt okunur, G1'den"}
+    - {anahtar: en_zayif_halka, aciklama: "Bu G testinden gelir; sen yazmazsın.", etiket: "En zayıf halkam (x/5)", tur: referans, kaynak_alanlar: [G1.en_zayif_halka], not: "salt okunur, G1'den"}
+    - {anahtar: bende_gorunusu, soru: "En zayıf halkan senin işinde nasıl görünüyor?", aciklama: "Bir iki cümleyle kendi işinden somut bir an anlat.", ornek: "Yapay zekâya her seferinde kendimi baştan anlatıyorum, bu yüzden cevaplar hep genel kalıyor.", etiket: "Bu bende şöyle görünüyor", tur: kisa_metin, zorunlu: true}
+    - {anahtar: ayna_sorusu, soru: "Dersteki ayna sorusuna cevabın ne?", aciklama: "Tek cümle yaz; bu alan isteğe bağlı.", etiket: "Ayna sorusunun cevabı (isteğe bağlı)", olcu: "bir cümle", tur: kisa_metin, zorunlu: false}
   tek_olcut: null
   bagimli: [G2]
   ghl: null
@@ -209,10 +209,10 @@
   modul: Gap Raporum
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: yz_alacagi_isler, etiket: "Mesleğimde yapay zekânın aldığı / alacağı işler", tur: liste, adet_min: 3, zorunlu: true}
-    - {anahtar: bende_kalan, etiket: "Bende kalan ve değer kazanan şeyler", tur: liste, adet_min: 3, zorunlu: true}
-    - {anahtar: g1_kiyas_boyut, etiket: "G1 kıyasında önde / aynı / geride olduğum bir boyut", tur: kisa_metin, zorunlu: false, kaynak_alanlar: [G1]}
-    - {anahtar: meslektas_taramasi, etiket: "Meslektaş taramasından üç isim ve devrettikleri işler", tur: liste, adet: 3, zorunlu: false, not: "kamuya açık meslektaşlar; kişisel veri değil ama isim içeriyor — README açık nokta"}
+    - {anahtar: yz_alacagi_isler, soru: "Mesleğinde yapay zekânın aldığı ya da alacağı işler neler?", aciklama: "En az üç iş yaz.", ornek: "Örnek menü taslağı · kalori hesabı · sık sorulara ilk cevap", etiket: "Mesleğimde yapay zekânın aldığı / alacağı işler", tur: liste, adet_min: 3, zorunlu: true}
+    - {anahtar: bende_kalan, soru: "Mesleğinde sende kalan ve değeri artan şeyler neler?", aciklama: "En az üç şey yaz.", ornek: "Danışanı dinlemek · motivasyonun düştüğü haftayı fark etmek · son kararı vermek", etiket: "Bende kalan ve değer kazanan şeyler", tur: liste, adet_min: 3, zorunlu: true}
+    - {anahtar: g1_kiyas_boyut, soru: "Testteki kıyasta hangi boyutta önde, aynı ya da geride olduğunu görüyorsun?", aciklama: "Bir boyutu ve konumunu yaz; bu alan isteğe bağlı.", etiket: "G1 kıyasında önde / aynı / geride olduğum bir boyut", tur: kisa_metin, zorunlu: false, kaynak_alanlar: [G1]}
+    - {anahtar: meslektas_taramasi, soru: "Mesleğinden hangi üç kişi yapay zekâya hangi işleri devretmiş?", aciklama: "Kamuya açık paylaşım yapan üç meslektaşının ne tür bir iş olduğunu ve yapay zekâya devrettikleri işi yaz; isim yazman gerekmez, bu alan isteğe bağlı.", etiket: "Meslektaş taramasından üç isim ve devrettikleri işler", tur: liste, adet: 3, zorunlu: false, not: "kamuya açık meslektaşlar; kişisel veri değil ama isim içeriyor — README açık nokta"}
   tek_olcut: null
   bagimli: [G2]
   ghl: null
@@ -227,18 +227,20 @@
   alanlar:
     - anahtar: aday_isler
       etiket: "Aday dijital işler (5–10)"
+      soru: "Dijital olarak devredebileceğin hangi işler var?"
+      aciklama: "Beş ile on iş yaz; her birinin haftalık saatini, sıfır ile altı arasında uygunluk puanını ve korunup korunmadığını doldur."
       tur: tablo
       adet_min: 5
       adet_max: 10
       sutunlar:
-        - {anahtar: is, etiket: "İş", tur: kisa_metin}
-        - {anahtar: haftalik_saat, etiket: "Haftalık saat", tur: sayi}
-        - {anahtar: uygunluk, etiket: "Uygunluk puanı (0–6)", tur: sayi, aralik: [0, 6]}
-        - {anahtar: korunuyor_mu, etiket: "Korunuyor mu?", tur: secim, secenekler: ["evet", "hayır"]}
+        - {anahtar: is, soru: "Bu iş ne?", aciklama: "Dijital ortamda yaptığın bir işi kısaca yaz.", ornek: "Haftalık plan yazmak", etiket: "İş", tur: kisa_metin}
+        - {anahtar: haftalik_saat, soru: "Bu iş haftada kaç saatini alıyor?", aciklama: "Yaklaşık saat yaz.", etiket: "Haftalık saat", tur: sayi}
+        - {anahtar: uygunluk, soru: "Bu iş yapay zekâya ne kadar uygun?", aciklama: "Dersteki ölçütlere göre sıfır ile altı arasında puan ver.", etiket: "Uygunluk puanı (0–6)", tur: sayi, aralik: [0, 6]}
+        - {anahtar: korunuyor_mu, soru: "Bu işi korunacak işler listene aldın mı?", aciklama: "Asla devretmeyeceğin bir işse evet seç.", etiket: "Korunuyor mu?", tur: secim, secenekler: ["evet", "hayır"]}
       zorunlu: true
-    - {anahtar: baslangic_noktasi, etiket: "Seçilmiş 1 başlangıç noktası", tur: kisa_metin, zorunlu: true}
-    - {anahtar: neden_bu, etiket: "Neden bu", olcu: "tek cümle", tur: kisa_metin, zorunlu: true}
-    - {anahtar: g1_tahminle_kiyas, etiket: "G.1'deki tahminle karşılaştırma", olcu: "bir satır", tur: kisa_metin, zorunlu: true, kaynak_alanlar: [G1.yoran_is, G1.tahmini_saat]}
+    - {anahtar: baslangic_noktasi, soru: "Bu işlerden hangisiyle başlıyorsun?", aciklama: "Listeden tek bir iş seç.", ornek: "Haftalık plan yazmak", etiket: "Seçilmiş 1 başlangıç noktası", tur: kisa_metin, zorunlu: true}
+    - {anahtar: neden_bu, soru: "Neden bu işle başlıyorsun?", aciklama: "Tek cümle yaz.", ornek: "Her hafta tekrar ediyor ve en çok zamanımı o alıyor.", etiket: "Neden bu", olcu: "tek cümle", tur: kisa_metin, zorunlu: true}
+    - {anahtar: g1_tahminle_kiyas, soru: "G aşamasının başında tahmin ettiğin işle bugün seçtiğin iş arasında ne fark var?", aciklama: "İlk tahmininle bugünkü seçimini bir satırda karşılaştır.", ornek: "Mesajların yorduğunu sanıyordum, asıl zamanı plan yazmak alıyormuş.", etiket: "G.1'deki tahminle karşılaştırma", olcu: "bir satır", tur: kisa_metin, zorunlu: true, kaynak_alanlar: [G1.yoran_is, G1.tahmini_saat]}
   tek_olcut: null
   bagimli: [G1, G4]
   ghl: null
@@ -252,9 +254,9 @@
   modul: Gap Raporum
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: uc_rakam, etiket: "G1'den üç rakam", olcu: "yılda geri dönecek saat · kaçan ₺ · boş kapasite ₺/ay", tur: referans, kaynak_alanlar: [G1.bedel_saat, G1.bedel_kacan_tl, G1.bedel_bos_kapasite], not: "salt okunur, G1'den gelir"}
-    - {anahtar: operasyonel_borc, etiket: "Operasyonel borç testinde \"evet\" dediğim maddeler", tur: liste, zorunlu: true}
-    - {anahtar: kacak_adim, etiket: "Kaçağın olduğunu düşündüğün adım", tur: secim, secenekler: ["ilk mesaj", "randevu", "görüşme", "karar"], zorunlu: true}
+    - {anahtar: uc_rakam, aciklama: "Bu G testinden gelir; sen yazmazsın.", etiket: "G1'den üç rakam", olcu: "yılda geri dönecek saat · kaçan ₺ · boş kapasite ₺/ay", tur: referans, kaynak_alanlar: [G1.bedel_saat, G1.bedel_kacan_tl, G1.bedel_bos_kapasite], not: "salt okunur, G1'den gelir"}
+    - {anahtar: operasyonel_borc, soru: "Operasyonel borç testinde hangi maddelere 'evet' dedin?", aciklama: "Evet dediğin maddeleri olduğu gibi yaz.", etiket: "Operasyonel borç testinde \"evet\" dediğim maddeler", tur: liste, zorunlu: true}
+    - {anahtar: kacak_adim, soru: "Sence müşteri en çok hangi adımda kaçıyor?", aciklama: "İlk mesaj, randevu, görüşme ya da karar seç.", etiket: "Kaçağın olduğunu düşündüğün adım", tur: secim, secenekler: ["ilk mesaj", "randevu", "görüşme", "karar"], zorunlu: true}
   tek_olcut: null
   bagimli: [G2]
   ghl: null
@@ -267,12 +269,12 @@
   modul: Gap Raporum
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: gap_raporu, etiket: "Gap Raporum", olcu: "3 sayfa (profil PDF + Fırsat Haritası + Bedel kartı)", tur: referans, kaynak_alanlar: [G2, G5, G6], not: "derlenir; öğrenci yazmaz"}
-    - {anahtar: dort_hafta_odak, etiket: "İlk 30 Günüm: 4 hafta × tek odak", olcu: "program / deneme / ölçüm şeritleri", tur: tablo, satirlar: ["Hafta 1", "Hafta 2", "Hafta 3", "Hafta 4"], sutunlar: [{anahtar: odak, etiket: "Tek odak", tur: kisa_metin}], zorunlu: true}
-    - {anahtar: uc_engel, etiket: "3 engel + önceden çözüm", tur: liste, adet: 3, zorunlu: true}
-    - {anahtar: neden_onemli, etiket: "\"Neden önemli\" cümlesi", tur: kisa_metin, zorunlu: true}
-    - {anahtar: sabit_saat, etiket: "Takvimde sabit bir saat", tur: kisa_metin, zorunlu: true}
-    - {anahtar: olcum_gunlugu, etiket: "Ölçüm günlüğü başlığı", tur: kisa_metin, zorunlu: false}
+    - {anahtar: gap_raporu, aciklama: "Profil, Fırsat Haritası ve Bedel kartından kendiliğinden derlenir; sen yazmazsın.", etiket: "Gap Raporum", olcu: "3 sayfa (profil PDF + Fırsat Haritası + Bedel kartı)", tur: referans, kaynak_alanlar: [G2, G5, G6], not: "derlenir; öğrenci yazmaz"}
+    - {anahtar: dort_hafta_odak, soru: "Önümüzdeki dört haftanın her biri için tek odağın ne?", aciklama: "Her haftaya tek bir odak yaz.", etiket: "İlk 30 Günüm: 4 hafta × tek odak", olcu: "program / deneme / ölçüm şeritleri", tur: tablo, satirlar: ["Hafta 1", "Hafta 2", "Hafta 3", "Hafta 4"], sutunlar: [{anahtar: odak, soru: "Bu hafta tek odağın ne?", aciklama: "Tek bir iş ya da hedef yaz.", ornek: "Haftalık plan taslağını yapay zekâyla hazırlamak", etiket: "Tek odak", tur: kisa_metin}], zorunlu: true}
+    - {anahtar: uc_engel, soru: "Seni yolda durdurabilecek üç engel ne ve her birini nasıl aşacaksın?", aciklama: "Her engelin yanına önceden düşündüğün çözümü yaz.", ornek: "Akşam yorgun oluyorum → çalışmayı sabaha alıyorum", etiket: "3 engel + önceden çözüm", tur: liste, adet: 3, zorunlu: true}
+    - {anahtar: neden_onemli, soru: "Bu dört hafta senin için neden önemli?", aciklama: "Tek cümle yaz; zorlandığında bunu okuyacaksın.", ornek: "Akşamlarımı geri almak istiyorum.", etiket: "\"Neden önemli\" cümlesi", tur: kisa_metin, zorunlu: true}
+    - {anahtar: sabit_saat, soru: "Takviminde bu iş için hangi sabit saati ayırdın?", aciklama: "Gün ve saat yaz.", ornek: "Her sabah 08.30", etiket: "Takvimde sabit bir saat", tur: kisa_metin, zorunlu: true}
+    - {anahtar: olcum_gunlugu, soru: "Ölçüm günlüğüne hangi başlığı koyuyorsun?", aciklama: "Neyi ölçeceğini anlatan kısa bir başlık yaz; bu alan isteğe bağlı.", ornek: "Plan yazma süresi", etiket: "Ölçüm günlüğü başlığı", tur: kisa_metin, zorunlu: false}
   tek_olcut: null
   bagimli: [G2, G5, G6]
   ghl: null

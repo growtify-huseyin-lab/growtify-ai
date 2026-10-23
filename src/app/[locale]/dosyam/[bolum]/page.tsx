@@ -44,7 +44,8 @@ export default async function BolumPage({
       const d = (r.body.approved?.data ?? {}) as Clean;
       for (const k of wanted) {
         const [sid, fk] = k.split(".");
-        if (sid === id && fk) refs[k] = renderSection(def, d, [fk]);
+        // "R2" = bölümün tamamı, "R2.neden" = tek alan.
+        if (sid === id && Object.keys(d).length) refs[k] = fk ? renderSection(def, d, [fk]) : renderSection(def, d);
       }
     }
   }
