@@ -154,9 +154,44 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
   const cokSorulu = asistanMesajlari.filter((m) => SORU_SAYISI(m.metin) > 1).length;
 
   const olcutler: string[] = getPrompt(bolum).degerlendirme.olcutler;
+  const puan = await puanla(bolum, s, persona, olcutler, approved, gecmis, taslak, uyarilar);
+  return { id: s.id, meslek: s.meslek, ozellik: s.ozellik, tur: transcript.length, cokSorulu, olaylar, taslak, uyarilar, puan, gecmis, maliyetAsistan };
+}
+
+// Puanlayıcı: ölçüt numarası sabit (özet tablosu ölçüt başına tek satır), "uygulanamaz" ayrı sayılır,
+// bozuk/yarım JSON'da bir kez daha denenir (2026-10-24: bir R3 senaryosu bu yüzden kaybolmuştu).
+async function puanla(
+  bolum: string,
+  s: { id: string },
+  persona: string,
+  olcutler: string[],
+  approved: unknown,
+  gecmis: { rol: string; metin: string }[],
+  taslak: unknown,
+  uyarilar: string[],
+) {
+  for (let deneme = 1; ; deneme++) {
+    try {
+      return await puanlaBir(bolum, s, persona, olcutler, approved, gecmis, taslak, uyarilar);
+    } catch (e) {
+      if (deneme >= 2) throw e;
+    }
+  }
+}
+
+async function puanlaBir(
+  bolum: string,
+  s: { id: string },
+  persona: string,
+  olcutler: string[],
+  approved: unknown,
+  gecmis: { rol: string; metin: string }[],
+  taslak: unknown,
+  uyarilar: string[],
+) {
   const res = await client.messages.create({
     model: JUDGE,
-    max_tokens: 4000,
+    max_tokens: 8000,
     output_config: {
       effort: "medium",
       format: {
@@ -171,11 +206,11 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
               items: {
                 type: "object",
                 additionalProperties: false,
-                required: ["olcut", "tur", "gecti", "puan", "gerekce"],
+                required: ["no", "tur", "durum", "puan", "gerekce"],
                 properties: {
-                  olcut: { type: "string" },
+                  no: { type: "integer", enum: olcutler.map((_, i) => i + 1) },
                   tur: { type: "string", enum: ["ikili", "puan"] },
-                  gecti: { type: ["boolean", "null"] },
+                  durum: { type: "string", enum: ["gecti", "kaldi", "uygulanamaz"] },
                   puan: { type: ["number", "null"] },
                   gerekce: { type: "string" },
                 },
@@ -187,7 +222,7 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
       },
     },
     system:
-      "Bir eğitim asistanının sohbetini, verilen ölçütlerle tarafsız ve katı biçimde değerlendiriyorsun. Her ölçüt için: evet/hayır ölçütlerinde tur='ikili' ve gecti; '(1–5)' yazanlarda tur='puan' ve puan (1–5). Gerekçe 1 cümle, Türkçe. Senaryonun beklenen davranışını da hesaba kat.",
+      "Bir eğitim asistanının sohbetini, verilen ölçütlerle tarafsız ve katı biçimde değerlendiriyorsun. Her ölçüt için bir kayıt; 'no' ölçüt numarasıdır. Evet/hayır ölçütlerinde tur='ikili' ve durum ('gecti' ya da 'kaldi'); '(1–5)' yazanlarda tur='puan' ve puan (1–5). Ölçüt bu sohbette gerçekten uygulanamıyorsa (ör. senaryo gereği o aşamaya hiç gelinmemesi beklenir) durum='uygulanamaz' ve puan=null. Gerekçe 1 cümle, Türkçe. Senaryonun beklenen davranışını da hesaba kat.",
     messages: [
       {
         role: "user",
@@ -198,8 +233,8 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
     ],
   });
   maliyet(JUDGE, res.usage);
-  const puan = JSON.parse(metin(res.content));
-  return { id: s.id, meslek: s.meslek, ozellik: s.ozellik, tur: transcript.length, cokSorulu, olaylar, taslak, uyarilar, puan, gecmis, maliyetAsistan };
+  if (res.stop_reason !== "end_turn") throw new Error(`puanlayıcı yarım kaldı: ${res.stop_reason}`);
+  return JSON.parse(metin(res.content));
 }
 
 async function havuz<T, R>(items: T[], n: number, fn: (t: T) => Promise<R>): Promise<R[]> {
@@ -233,23 +268,31 @@ for (const bolum of bolumler) {
   fs.writeFileSync(path.join(cikti, `${tarih}-${bolum}.json`), JSON.stringify(sonuc, null, 1));
 
   // Özet: ölçüt başına geçen / ortalama
-  const ozet = new Map<string, { gecti: number; ikili: number; puanlar: number[] }>();
+  const olcutAdlari: string[] = p.degerlendirme.olcutler;
+  const ozet = olcutAdlari.map(() => ({ gecti: 0, ikili: 0, uygulanamaz: 0, puanlar: [] as number[] }));
   for (const r of sonuc) {
     for (const o of r.puan?.olcutler ?? []) {
-      const k = String(o.olcut).slice(0, 80);
-      const v = ozet.get(k) ?? { gecti: 0, ikili: 0, puanlar: [] };
-      if (o.tur === "ikili") {
+      const v = ozet[o.no - 1];
+      if (!v) continue;
+      if (o.durum === "uygulanamaz") v.uygulanamaz++;
+      else if (o.tur === "ikili") {
         v.ikili++;
-        if (o.gecti) v.gecti++;
+        if (o.durum === "gecti") v.gecti++;
       } else if (typeof o.puan === "number") v.puanlar.push(o.puan);
-      ozet.set(k, v);
     }
   }
-  const satirlar = [...ozet.entries()].map(([k, v]) =>
-    v.ikili ? `| ${k} | ${v.gecti}/${v.ikili} |` : `| ${k} | ort. ${(v.puanlar.reduce((a, b) => a + b, 0) / Math.max(1, v.puanlar.length)).toFixed(1)}/5 |`,
+  const satirlar = ozet.map((v, i) => {
+    const ad = `${i + 1}. ${olcutAdlari[i].slice(0, 90)}`;
+    const ua = v.uygulanamaz ? ` (uygulanamaz: ${v.uygulanamaz})` : "";
+    return v.puanlar.length
+      ? `| ${ad} | ort. ${(v.puanlar.reduce((a, b) => a + b, 0) / v.puanlar.length).toFixed(1)}/5${ua} |`
+      : `| ${ad} | ${v.gecti}/${v.ikili}${ua} |`;
+  });
+  const kaldi = sonuc.flatMap((r) =>
+    (r.puan?.olcutler ?? [])
+      .filter((o: any) => o.durum !== "uygulanamaz" && ((o.tur === "ikili" && o.durum === "kaldi") || (o.tur === "puan" && o.puan < 4)))
+      .map((o: any) => `- **${r.id}** (${r.meslek}): ${o.no}. ${String(olcutAdlari[o.no - 1] ?? "").slice(0, 60)} — ${o.gerekce}`),
   );
-  const kaldi = sonuc
-    .flatMap((r) => (r.puan?.olcutler ?? []).filter((o: any) => (o.tur === "ikili" && !o.gecti) || (o.tur === "puan" && o.puan < 4)).map((o: any) => `- **${r.id}** (${r.meslek}): ${o.olcut} — ${o.gerekce}`));
   const md = `# Growtify Asistanı · ${bolum} değerlendirmesi · ${tarih}
 
 Senaryo: ${sonuc.length} · Geçiş eşiği (Course): ${p.degerlendirme.gecis_esigi}

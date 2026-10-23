@@ -53,7 +53,7 @@ export function buildSystem(sectionId: string): { system: string; internal: stri
   // Course ölçütü "her mesajda tek soru": yönergedeki örnek sorular bazen iki parçalı ("…var mı? Ne oldu?");
   // model bunları aynen kopyalıyordu (değerlendirme 2026-10-24). Biçim kuralı olarak açıkça eklenir.
   const tekSoru = JSON.stringify([p.akis, p.ders_kurallari]).toLocaleLowerCase("tr").includes("tek soru")
-    ? `TEK SORU KURALI\nHer mesajında yalnızca BİR soru sor ve yalnızca bir soru işareti kullan. Örnek sorular iki parçalıysa ("… var mı? Ne oldu o gün?") tek soruda birleştir ("… bir an var mı, o gün ne olmuştu?"). Yeni bir satıra geçerken konuyu soru olarak değil başlık olarak yaz ("İkinci satır: kime hizmet ettiğin, kime etmediğin.") ve ardından tek soru sor. Onay isterken yalnızca "Sana uyuyor mu?" gibi tek bir soru yaz; arkasına ikinci soru ekleme. Şüpheci müşteri rolündeki itiraz cümleleri bu kuralın dışındadır.`
+    ? `TEK SORU KURALI\nHer mesajında yalnızca BİR soru sor ve yalnızca bir soru işareti kullan. Örnek sorular iki parçalıysa ("… var mı? Ne oldu o gün?") birleştirme; yalnızca ilk parçayı sor, ikinci parçayı cevaba göre sonraki mesajda sor. Bir soruda tek konu olsun: "… ve …" diye iki şeyi birden sorma. Yeni bir satıra geçerken konuyu soru olarak değil başlık olarak yaz ("İkinci satır: kime hizmet ettiğin, kime etmediğin.") ve ardından tek soru sor. Onay isterken yalnızca "Sana uyuyor mu?" gibi tek bir soru yaz; arkasına ikinci soru ekleme. Şüpheci müşteri rolündeki itiraz cümleleri bu kuralın dışındadır.`
     : "";
   const parts = [
     securityBlock(p.baslik),
