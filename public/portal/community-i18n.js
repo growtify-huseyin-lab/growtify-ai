@@ -1533,3 +1533,13 @@
   s.async = true;
   document.head.appendChild(s);
 })();
+
+/* Çalışma Dosyam — panel menüsüne düğme + derslerdeki growtify.ai/dosyam bağlantıları (dosyam-link.js). */
+(function () {
+  if (document.getElementById("__gai_dosyam_link")) return;
+  var s = document.createElement("script");
+  s.id = "__gai_dosyam_link";
+  s.src = "https://growtify.ai/portal/dosyam-link.js?v=1";
+  s.async = true;
+  document.head.appendChild(s);
+})();
