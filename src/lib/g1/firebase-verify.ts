@@ -18,6 +18,8 @@ export interface FbVerifyResult {
   ok: boolean;
   uid?: string; // Firebase sub — the trusted member identity (see note in /g1)
   email?: string;
+  emailVerified?: boolean; // Firebase email_verified (Çalışma Dosyam e-posta yedeği yalnız doğrulanmışsa)
+  role?: string; // GHL portal özel kimliği: "admin" = hesap kullanıcısı (kişi değil)
   name?: string;
   reason?: string;
 }
@@ -32,11 +34,13 @@ export async function verifyFirebaseIdToken(token: string): Promise<FbVerifyResu
     const p = payload as JWTPayload & {
       user_id?: string;
       email?: string;
+      email_verified?: boolean;
+      role?: string;
       name?: string;
     };
     const uid = (p.sub ?? p.user_id) as string | undefined;
     if (!uid) return { ok: false, reason: "no_subject" };
-    return { ok: true, uid, email: p.email, name: p.name };
+    return { ok: true, uid, email: p.email, emailVerified: p.email_verified === true, role: p.role, name: p.name };
   } catch (e) {
     return { ok: false, reason: (e as Error).message };
   }

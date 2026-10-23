@@ -74,6 +74,20 @@ export async function getContact(id: string): Promise<GhlContact | null> {
   return body.contact?.id ? body.contact : null;
 }
 
+// Panel kimliği (Firebase) → GHL kişisi. Üyelerde Firebase kimliği = kişi kimliği (G1'de doğrulandı).
+// Panele hesap kullanıcısı olarak girenlerde (role "admin") kimlik kullanıcı kimliğidir: kullanıcının
+// e-postasıyla kişi aranır. Son yedek: yalnız DOĞRULANMIŞ Firebase e-postası (çağıran denetler).
+export async function contactFromFirebase(uid: string, email?: string, role?: string): Promise<GhlContact | null> {
+  const byId = await getContact(uid).catch(() => null);
+  if (byId) return byId;
+  if (role === "admin") {
+    const res = await ghl("GET", `/users/${encodeURIComponent(uid)}`).catch(() => null);
+    const user = res && res.ok ? ((await res.json().catch(() => ({}))) as { email?: string }) : {};
+    if (user.email) return findContactByEmail(user.email).catch(() => null);
+  }
+  return email ? findContactByEmail(email).catch(() => null) : null;
+}
+
 export interface Entitlement {
   package: "temel" | "tam";
   temel_baslangic: string;
