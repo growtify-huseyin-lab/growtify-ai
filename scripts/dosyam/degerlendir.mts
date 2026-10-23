@@ -13,7 +13,7 @@ import * as SectionsM from "../../src/lib/dosyam/sections.ts";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const mod = (m: any) => m.default ?? m;
-const { chat, draft, validateDraft } = mod(AsistanM);
+const { chat, draft, validateDraft, questionCount } = mod(AsistanM);
 const { checkUserInput } = mod(GuardM);
 const { getPrompt, openingMessage, dependencyMissing } = mod(PromptsM);
 const { getSection, renderSection } = mod(SectionsM);
@@ -90,7 +90,7 @@ async function sahteCekirdek(meslek: string, ozellik: string): Promise<Record<st
   return JSON.parse(metin(res.content));
 }
 
-const SORU_SAYISI = (t: string) => (t.match(/\?/g) ?? []).length;
+const SORU_SAYISI = questionCount;
 
 async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: string }, maxTur: number) {
   const section = getSection(bolum);
@@ -113,6 +113,7 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
       { role: "assistant", content: [{ type: "text", text: acilis }] },
     ];
     gecmis.push({ rol: "assistant", metin: acilis });
+    let sonOnay = false;
     for (let tur = 0; tur < maxTur; tur++) {
       let msj = await ogrenci(persona, gecmis);
       let giris = checkUserInput(msj);
@@ -122,6 +123,9 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
         giris = checkUserInput(msj);
       }
       gecmis.push({ rol: "user", metin: msj });
+      // Bitiş: yalnız son onay ("dosyana kaydedilecek; onaylıyor musun?") gösterildikten sonra öğrenci onaylarsa.
+      // Satır satır "onaylıyorum" bitiş sayılmaz (2026-10-24: önceki kural sohbetleri tek cümleden önce kesiyordu).
+      if (sonOnay && /onaylıyorum|onay/i.test(msj)) break;
       if (!giris.ok) {
         olaylar.push(`giris_${giris.kind}`);
         gecmis.push({ rol: "assistant", metin: giris.mesaj });
@@ -132,8 +136,7 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
       if (r.blocked) olaylar.push("cikis_engellendi");
       history.push({ role: "user", content: msj }, { role: "assistant", content: r.content });
       gecmis.push({ rol: "assistant", metin: r.text });
-      if (/onaylıyor musun/i.test(r.text) && /onaylıyorum|onay/i.test(msj)) break;
-      if (/onaylıyorum/i.test(msj) && tur > 4) break;
+      sonOnay = /dosyana kaydedilecek/i.test(r.text);
     }
   }
 
@@ -225,7 +228,7 @@ for (const bolum of bolumler) {
   const p = getPrompt(bolum);
   const senaryolar = (p.degerlendirme.senaryolar as { id: string; meslek: string; ozellik: string }[]).filter((s) => !sadece || sadece.includes(s.id));
   console.log(`\n${bolum}: ${senaryolar.length} senaryo`);
-  const sonuc = (await havuz(senaryolar, paralel, (s) => senaryo(bolum, s, bolum === "R2" ? 24 : 28))) as any[];
+  const sonuc = (await havuz(senaryolar, paralel, (s) => senaryo(bolum, s, bolum === "R2" ? 32 : 38))) as any[];
   toplamAsistan += sonuc.reduce((t, r) => t + (r.maliyetAsistan ?? 0), 0);
   fs.writeFileSync(path.join(cikti, `${tarih}-${bolum}.json`), JSON.stringify(sonuc, null, 1));
 

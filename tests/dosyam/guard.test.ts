@@ -3,7 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { checkModelOutput, checkUserInput, findPersonalData } from "../../src/lib/dosyam/guard";
 import { CANARY, buildContext, buildSystem, openingMessage } from "../../src/lib/dosyam/prompts";
-import { validateDraft } from "../../src/lib/dosyam/assistant";
+import { questionCount, validateDraft } from "../../src/lib/dosyam/assistant";
 
 test("kişisel veri: telefon, e-posta, geçerli TC, IBAN, kart yakalanır; sıradan sayılar geçer", () => {
   assert.deepEqual(findPersonalData("Ara beni 0532 123 45 67"), ["telefon"]);
@@ -90,4 +90,10 @@ test("açılış mesajı onaylı veriden dolar; taslak doğrulaması kuralları 
   assert.ok(u.some((x) => x.includes("üstünlük")));
   const r3 = validateDraft("R3", { soz: "Kesinlikle 4 haftada sonuç garanti", itirazlar: ["a", "b"], sayfa_iskeleti: ["", "", "", "", "", "", "", "", "Hemen 4.999 TL öde"] });
   assert.equal(r3.length, 3);
+});
+
+test("tek soru: tırnak dışındaki soru işaretleri sayılır", () => {
+  assert.equal(questionCount("Bu satırı şöyle yazdım: … Sana uyuyor mu?"), 1);
+  assert.equal(questionCount("Kime hizmet ediyorsun? En iyi sonuç aldığın danışan hangi dönemindeydi?"), 2);
+  assert.equal(questionCount('Danışanın "bunu ben mi yaptırdım?" dedi. Sana uyuyor mu?'), 1);
 });
