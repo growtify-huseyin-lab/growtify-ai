@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createQuizCoupon } from "@/app/[locale]/test/lib/ghl-client";
+import { couponRestrictions } from "@/app/[locale]/test/lib/ghl-client";
 
 // Custom field IDs created in Faz 1.1 (nurture-fields-result.json)
 const FIELD_COUPON_CODE = "d8uadNfpblyEuwG0GwTe";
@@ -194,7 +194,7 @@ async function createLongDurationCoupon(
           discountType: "percentage",
           discountValue: discountPercent,
           durationType: "once",
-          maxRedemptions: 1,
+          ...couponRestrictions(),
           startDate,
           endDate,
         }),
