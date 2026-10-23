@@ -6,6 +6,7 @@ export const maxDuration = 60;
 
 import { after } from "next/server";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { parseAttribution, sourceTag } from "@/lib/attribution";
 import type { QuizState } from "../../lib/types";
 import {
   upsertQuizContact,
@@ -64,7 +65,9 @@ export async function POST(request: Request) {
   // ========== FAST PATH (blocking — ~3s) ==========
 
   // 1. Upsert contact
-  const upsertResult = await upsertQuizContact(state, locale);
+  const attribution = parseAttribution((state as { attribution?: unknown }).attribution);
+  console.log("[quiz/submit-email] attribution →", JSON.stringify({ attribution: attribution ?? null, sourceTag: sourceTag(attribution) }));
+  const upsertResult = await upsertQuizContact(state, locale, attribution);
   if (!upsertResult.ok) {
     console.error("[quiz/submit-email] GHL upsert failed:", upsertResult);
     return Response.json(
