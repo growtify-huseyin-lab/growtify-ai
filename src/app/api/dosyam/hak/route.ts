@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   }
   const fb = await verifyFirebaseIdToken(body.ft ?? "");
   if (!fb.ok || !fb.uid) return Response.json({ ok: false }, { headers: CORS });
-  const contact = await contactFromFirebase(fb.uid, fb.emailVerified ? fb.email : undefined);
+  const contact = await contactFromFirebase(fb.uid, fb.emailVerified ? fb.email : undefined, fb.role);
   const ent = contact ? await entitlement(contact).catch(() => null) : null;
   return Response.json({ ok: !!ent }, { headers: { ...CORS, "Cache-Control": "no-store" } });
 }
