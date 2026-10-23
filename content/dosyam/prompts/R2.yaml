@@ -60,7 +60,7 @@ sorular:
       - "Süslü misyon cümlesi ('insanlara değer katmak') → somut ana in."
       - "Uydurma hikâye izlenimi → 'bu gerçekten yaşadığın bir şey mi?' diye sor; gerçek değilse kullanma."
 
-  - anahtar: kime
+  - anahtar: kime_kime_degil
     soru: "Kime hizmet ediyorsun, ve kime etmiyorsun?"
     neden_soruyoruz: "'Herkese' dediğin an kimse kendini orada görmez."
     derinlestirme:
@@ -133,7 +133,7 @@ uc_saniye_testi:
 
 cikti_alanlari:
   - {anahtar: neden,      etiket: "Neden",                       olcu: "gerçek bir an, 1–2 cümle",                     tur: kisa_metin, zorunlu: true}
-  - {anahtar: kime,       etiket: "Kime / kime değil",           olcu: "1–2 satır",                                    tur: kisa_metin, zorunlu: true}
+  - {anahtar: kime_kime_degil,       etiket: "Kime / kime değil",           olcu: "1–2 satır",                                    tur: kisa_metin, zorunlu: true}
   - {anahtar: donusum,    etiket: "Hangi dönüşüm",               olcu: "önce → sonra, 3 satır",                        tur: uzun_metin, zorunlu: true}
   - {anahtar: nasil,      etiket: "Nasıl (seni farklı kılan yol)", olcu: "1–2 cümle",                                  tur: kisa_metin, zorunlu: true}
   - {anahtar: durus,      etiket: "Duruş",                       olcu: "neye inanıyorum, neye karşıyım",               tur: kisa_metin, zorunlu: true}
