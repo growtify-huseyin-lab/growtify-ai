@@ -50,8 +50,14 @@ export function buildSystem(sectionId: string): { system: string; internal: stri
   const akis = typeof p.akis === "object" && !Array.isArray(p.akis)
     ? Object.entries(p.akis).map(([k, v]) => `${k}:\n${lines(v)}`).join("\n")
     : lines(p.akis);
+  // Course ölçütü "her mesajda tek soru": yönergedeki örnek sorular bazen iki parçalı ("…var mı? Ne oldu?");
+  // model bunları aynen kopyalıyordu (değerlendirme 2026-10-24). Biçim kuralı olarak açıkça eklenir.
+  const tekSoru = JSON.stringify([p.akis, p.ders_kurallari]).toLocaleLowerCase("tr").includes("tek soru")
+    ? `TEK SORU KURALI\nHer mesajında yalnızca BİR soru sor ve yalnızca bir soru işareti kullan. Örnek sorular iki parçalıysa ("… var mı? Ne oldu o gün?") tek soruda birleştir ("… bir an var mı, o gün ne olmuştu?"). Onay isterken de tek soru sor. Şüpheci müşteri rolündeki itiraz cümleleri bu kuralın dışındadır.`
+    : "";
   const parts = [
     securityBlock(p.baslik),
+    tekSoru,
     `ROL\n${p.rol}`,
     `AMAÇ\n${p.amac}`,
     p.yontem ? `YÖNTEM: ${p.yontem.ad}\nÖğrenciye anlatımı: ${p.yontem.ogrenciye_aciklama}` : "",
