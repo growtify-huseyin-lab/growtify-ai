@@ -3,7 +3,7 @@ name: dosyam-api
 
 on:
   pull_request:
-    paths: ["workers/dosyam-api/**", ".github/workflows/dosyam-api.yml"]
+    paths: ["workers/dosyam-api/**", "src/lib/dosyam/**", "content/dosyam/**", "src/data/dosyam/**", "tests/dosyam/**", ".github/workflows/dosyam-api.yml"]
   push:
     branches: [main]
     paths: ["workers/dosyam-api/**"]

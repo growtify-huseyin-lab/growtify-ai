@@ -1,0 +1,211 @@
+# Çalışma Dosyam · bölüm tanımları · R (Rota Dosyası, 8 bölüm)
+# Kaynak: scriptler/r/R.2 … R.9 teslim tabloları (2026-10-23). R.1 bölüm değil; Rota Dosyası'nın 8 bölüm başlığını açar.
+# Şema: MIMARI-TASLAK-v0.1 §2 section_defs + §7. GHL adları §3; R4–R9 için §3 "bölüm başına 1 büyük metin + gerekirse 1–2 kısa alan" kalıbıyla öneri.
+
+- anahtar: R2
+  baslik: "Kimlik Çekirdeğim"
+  ders: R.2
+  script: scriptler/r/R.2-kimsin-ne-yaparsin.md
+  modul: Rota Dosyası
+  bolum_no: 1
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: neden, etiket: "Neden", olcu: "gerçek bir an, 1–2 cümle", tur: kisa_metin, zorunlu: true}
+    - {anahtar: kime_kime_degil, etiket: "Kime / kime değil", olcu: "1–2 satır", tur: kisa_metin, zorunlu: true}
+    - {anahtar: donusum, etiket: "Hangi dönüşüm", olcu: "önce → sonra, 3 satır", tur: uzun_metin, zorunlu: true}
+    - {anahtar: nasil, etiket: "Nasıl (seni farklı kılan yol)", olcu: "1–2 cümle (O.2'de derinleşir)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: durus, etiket: "Duruş", olcu: "neye inanıyorum, neye karşıyım", tur: kisa_metin, zorunlu: true}
+    - {anahtar: ses, etiket: "Ses", olcu: "ham ses notu, 5 madde", tur: liste, zorunlu: true}
+    - {anahtar: tek_cumle, etiket: "Tek cümlem", olcu: "kime + sonuç + nasıl; ≤20 kelime; sıfatsız", tur: kisa_metin, zorunlu: true, dogrulama: "kelime_sayisi<=20; sifat_taramasi"}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "üç saniye testinde üç kişiden kaçı doğru söyledi?", tur: sayi, sonradan_doldurulur: true}
+  bagimli: []
+  ghl:
+    - {alan_adi: "GAI - R2 Kimlik Cekirdegi", tur: buyuk_metin, icerik: "6 satırın etiketli hali"}
+    - {alan_adi: "GAI - R2 Tek Cumle", tur: kisa_metin}
+    - {alan_adi: "GAI - R2 Tek Olcut", tur: kisa_metin}
+    - {etiket: gai_dosya_r2}
+  tam_yuvasi: "OV.2: Özel Değerler (tek cümle, kime, kısa tanıtım) · Marka Sesi (ses, duruş) · Bilgi Bankası (6 satır)"
+  sohbet_kipi: cikar
+  not: "Çekirdeğin 30 sn / 3 dk uzunlukları ve yüz denetimi OV.2'de; bu bölümde alan değil."
+
+- anahtar: R3
+  baslik: "Teklif Kartım"
+  ders: R.3
+  script: scriptler/r/R.3-teklif.md
+  modul: Rota Dosyası
+  bolum_no: 2
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: kim_icin, etiket: "Kim için", olcu: "Çekirdeğin \"kime\" satırıyla aynı", tur: kisa_metin, zorunlu: true, dogrulama: "R2.kime_kime_degil ile tutarlılık"}
+    - {anahtar: hangi_sonuc, etiket: "Hangi sonuç", olcu: "önce → sonra", tur: kisa_metin, zorunlu: true}
+    - {anahtar: hangi_yolla, etiket: "Hangi yolla", olcu: "1–2 cümle", tur: kisa_metin, zorunlu: true}
+    - {anahtar: hangi_bicimde, etiket: "Hangi biçimde", olcu: "süre, sıklık, birebir/grup, yer", tur: kisa_metin, zorunlu: true}
+    - {anahtar: soz, etiket: "Ne söz veriyorum", olcu: "süreç sözü; garanti yok", tur: kisa_metin, zorunlu: true, dogrulama: "garanti_dili_taramasi"}
+    - {anahtar: itirazlar, etiket: "En sert 5 itiraz + cevap", olcu: "5 × (itiraz + 1 cümle cevap)", tur: liste, adet: 5, zorunlu: true}
+    - {anahtar: sayfa_iskeleti, etiket: "Sayfa iskeleti", olcu: "9 başlık; fiyat boş", tur: liste, adet: 9, zorunlu: true, dogrulama: "fiyat_bos; kanit_yalniz_gercek"}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Teklifini gösterdiğin 3 kişiden kaçı \"bu kimin için ve ne veriyor\" sorusunu doğru cevapladı? Sonra: teklif görüşmesine dönen oran (W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
+  bagimli: [R2]
+  ghl:
+    - {alan_adi: "GAI - R3 Teklif Karti", tur: buyuk_metin}
+    - {alan_adi: "GAI - R3 Itirazlar", tur: buyuk_metin}
+    - {alan_adi: "GAI - R3 Sayfa Iskeleti", tur: buyuk_metin}
+    - {alan_adi: "GAI - R3 Tek Olcut", tur: kisa_metin}
+    - {etiket: gai_dosya_r3}
+  tam_yuvasi: "OV.3 / TP.2: Ürünler, satış hunisi sayfası, Bilgi Bankası"
+  sohbet_kipi: rol
+  not: "İki kip (MIMARI §7.2): önce kurma (cikar), sonra şüpheci müşteri (rol). Sayfa iskeletinin 9 başlığı ders altında sabit: başlık+söz · kimin için/hangi sorun · önce ve sonra · yolum · neler dahil · ben kimim · kanıt (yalnız gerçek) · sık sorulanlar (5 itiraz) · ilk adım (fiyat R.7)."
+
+- anahtar: R4
+  baslik: "Ekosistem Planım"
+  ders: R.4
+  script: scriptler/r/R.4-ekosistem.md
+  modul: Rota Dosyası
+  bolum_no: 3
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: kime, etiket: "Kime", olcu: "Çekirdeğin \"kime\" satırıyla aynı", tur: kisa_metin, zorunlu: true}
+    - {anahtar: en_kucuk_kitle, etiket: "En küçük kitle", olcu: "aylık hedef gelir ÷ müşteri başı aylık gelir = __ kişi", tur: sayi, zorunlu: true, not: "hesabın iki girdisi de istenirse ayrı alan olabilir"}
+    - {anahtar: ana_kanallar, etiket: "Ana kanal(lar)", olcu: "en fazla 2 · neden orada?", tur: liste, adet_max: 2, zorunlu: true}
+    - {anahtar: turev_kanallar, etiket: "Türev kanallar", olcu: "ana içerik nereye kısaltılarak gider", tur: kisa_metin, zorunlu: false}
+    - {anahtar: ilk_ucretsiz_deger, etiket: "İlk ücretsiz değer", olcu: "adı + biçimi (rehber / test / liste)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: en_sik_10_soru, etiket: "En sık 10 soru", olcu: "10 gerçek soru; ücretsiz değerin hammaddesi", tur: liste, adet: 10, zorunlu: true}
+    - {anahtar: ilginin_evi, etiket: "İlginin evi", olcu: "e-posta listesi / topluluk / randevu", tur: secim, secenekler: ["e-posta listesi", "topluluk", "randevu"], coklu: true, zorunlu: true}
+    - {anahtar: is_birligi_halkasi, etiket: "İş birliği halkası (isteğe bağlı)", olcu: "2–3 işletme türü", tur: liste, zorunlu: false}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Bir ay içinde evine kaç kişi girdi? (sayı W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
+  bagimli: [R2, R3]
+  ghl:
+    - {alan_adi: "GAI - R4 Ekosistem Plani", tur: buyuk_metin, not: "öneri (§3 kalıbı)"}
+    - {alan_adi: "GAI - R4 Sik Sorular", tur: buyuk_metin, not: "öneri; O.2 ve OV.6 Bilgi Bankası bunu kullanıyor, ayrı alan önerilir"}
+    - {etiket: gai_dosya_r4}
+  tam_yuvasi: "OV.4 / TP.3: Sosyal Planlayıcı, form/sayfa, otomasyon, liste/topluluk · en sık 10 soru → O.2 beyin dosyası, OV.6 Bilgi Bankası"
+  sohbet_kipi: cikar
+
+- anahtar: R5
+  baslik: "İşletme Röntgenim"
+  ders: R.5
+  script: scriptler/r/R.5-yolculuk.md
+  modul: Rota Dosyası
+  bolum_no: 4
+  tekrar: tek_sefer
+  alanlar:
+    - anahtar: asamalar
+      etiket: "8 aşama + Kaybedildi"
+      tur: tablo
+      satirlar: ["1 İlk ilgi", "2 İlk cevap", "3 Tanışma", "4 Sonraki adım ayarlandı", "5 Görüşme", "6 Teklif", "7 Karar bekleniyor", "8 Müşteri oldu", "Kaybedildi"]
+      sutunlar:
+        - {anahtar: ne_oluyor, etiket: "Benim işimde burada ne oluyor", tur: kisa_metin}
+        - {anahtar: nasil_kaybediyorum, etiket: "Burada nasıl kaybediyorum", tur: kisa_metin}
+        - {anahtar: durum, etiket: "Durum", tur: secim, secenekler: ["var", "kısmi", "yok"]}
+      zorunlu: true
+      not: "Kaybedildi satırının 'ne oluyor' sütunu nedenleri taşır: uygun değil · şimdi değil · gelmedi · sessiz kaldı. 'tablo' türü şemada yok; öneri."
+    - {anahtar: en_cok_kaybedilen, etiket: "En çok kaybettiğim aşama", olcu: "tek bir aşama", tur: secim, secenekler_kaynagi: asamalar, zorunlu: true}
+    - {anahtar: iki_yol, etiket: "İki yol", olcu: "hızlı karar veren için kısa yol (hangi aşamaları kısa geçer) · kanıt isteyen için kanıt yolu (ne görmeli)", tur: uzun_metin, zorunlu: true}
+    - {anahtar: on_gorusme_sorulari, etiket: "Ön görüşme soruları", olcu: "5–7 soru", tur: liste, adet_min: 5, adet_max: 7, zorunlu: true}
+    - {anahtar: mesaj_taslaklari, etiket: "En kritik 3 aşama için mesaj taslağı", olcu: "benim sesimle, her biri 2–4 cümle", tur: liste, adet: 3, zorunlu: true}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "En çok kaybettiğim aşamada bir ay sonra kaç kişi kayboldu? (W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
+  bagimli: [R2, R3, R4]
+  ghl:
+    - {alan_adi: "GAI - R5 Isletme Rontgeni", tur: buyuk_metin, not: "öneri"}
+    - {alan_adi: "GAI - R5 Asama Adlari", tur: kisa_metin, not: "öneri; Tam'da süreç aşamalarına gider (MIMARI §3 'R alanlarına referans')"}
+    - {etiket: gai_dosya_r5}
+  tam_yuvasi: "OV.5 / TP.4: 8 aşama → Fırsatlar › Süreç; ön görüşme soruları → form/özel alanlar; randevu → Takvimler"
+  sohbet_kipi: cikar
+  not: "8 aşama sabit olması CEO kararına bağlı (R.5 ⚠️); onaylanmazsa satır sayısı 5–8 serbest."
+
+- anahtar: R6
+  baslik: "Erişim Kartım"
+  ders: R.6
+  script: scriptler/r/R.6-erisim-iletisim.md
+  modul: Rota Dosyası
+  bolum_no: 5
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: ilk_karsilama, etiket: "İlk karşılama mesajım", olcu: "senin sesinde, 2–4 cümle, bir sonraki adımla", tur: uzun_metin, zorunlu: true}
+    - {anahtar: acik_kanallar, etiket: "Açık kanallar", olcu: "cevap vereceğin kanallar", tur: liste, zorunlu: true}
+    - {anahtar: saatlerim, etiket: "Benim saatlerim", olcu: "hangi gün/saat; dışında ne olur", tur: kisa_metin, zorunlu: true}
+    - {anahtar: yz_sorulari, etiket: "Yapay zekânın cevaplayacağı sorular", olcu: "en sık 10 sorudan seçilir", tur: liste, secenekler_kaynagi: R4.en_sik_10_soru, zorunlu: true}
+    - {anahtar: devir_anlari, etiket: "Bana devredilen anlar", olcu: "en az 3 durum + \"size dönüyorum\" cümlesi", tur: liste, adet_min: 3, zorunlu: true}
+    - {anahtar: iletisim_ritmi, etiket: "İletişim ritmim", olcu: "müşteriye ne zaman, hangi kanaldan haber veririm", tur: kisa_metin, zorunlu: true}
+    - {anahtar: erisim_kademeleri, etiket: "Erişim kademelerim", olcu: "kademe → neye erişir → ben hangi anda devredeyim", tur: liste, zorunlu: true}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "İlk mesaja ilk cevabın süresi (W'de ölçülür)", tur: kisa_metin, sonradan_doldurulur: true}
+  bagimli: [R2, R4]
+  ghl:
+    - {alan_adi: "GAI - R6 Erisim Karti", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_r6}
+  tam_yuvasi: "OV.6 / TP.5: Sohbetler, Hazır Metinler, Sohbet Yapay Zekası, Üyelikler · O.2 beyin dosyası · devir listesi R.9 ile birleşir"
+  sohbet_kipi: cikar
+
+- anahtar: R7
+  baslik: "Fiyat Tablom"
+  ders: R.7
+  script: scriptler/r/R.7-fiyat-odeme.md
+  modul: Rota Dosyası
+  bolum_no: 6
+  tekrar: tek_sefer
+  alanlar:
+    - anahtar: kademeler
+      etiket: "Kademeler"
+      tur: tablo
+      satirlar: ["Kendin uygula", "Takipli", "Birebir", "Devam üyeliği (isteğe bağlı)"]
+      sutunlar:
+        - {anahtar: icerik, etiket: "Ne içerir", tur: kisa_metin}
+        - {anahtar: fiyat_tl, etiket: "Fiyat (TL)", tur: sayi}
+        - {anahtar: odeme_bicimi, etiket: "Ödeme biçimi", tur: secim, secenekler: ["peşin", "taksit", "abonelik"]}
+        - {anahtar: taksit_bedeli_kimde, etiket: "Taksit bedeli kimde", tur: kisa_metin}
+      zorunlu: true
+      not: "Devam üyeliği satırı isteğe bağlı; fiyatı aylık, ödeme biçimi abonelik."
+    - {anahtar: sonucun_degeri, etiket: "Sonucun değeri (kaba hesap)", olcu: "müşterime ne kazandırıyor / neyi kaybetmekten kurtarıyor", tur: uzun_metin, zorunlu: true}
+    - {anahtar: revizyon_kurali, etiket: "Fiyat revizyon kuralım", olcu: "\"Fiyatlarımı ___ gözden geçiririm, mevcut müşterime ___ önce haber veririm.\"", tur: kisa_metin, zorunlu: true}
+    - {anahtar: iptal_iade, etiket: "İptal / iade kuralım", olcu: "tek paragraf", tur: uzun_metin, zorunlu: true}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Teklif verdiğim kişilerin hangi kademeyi seçtiği (W'de ölçülür)", tur: kisa_metin, sonradan_doldurulur: true}
+  bagimli: [R3, R6]
+  ghl:
+    - {alan_adi: "GAI - R7 Fiyat Tablosu", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_r7}
+  tam_yuvasi: "OV.7 / TP.6: Ürünler, Ödeme Bağlantıları, Abonelikler, Kuponlar"
+  sohbet_kipi: rol
+  not: "Stres testi R.3'teki şüpheci müşteriyle (rol); kurma kısmı çıkarma."
+
+- anahtar: R8
+  baslik: "Ağırlama Planım"
+  ders: R.8
+  script: scriptler/r/R.8-agirlama.md
+  modul: Rota Dosyası
+  bolum_no: 7
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: ilk_saatler, etiket: "İlk saatler: müşterim ne alır", olcu: "mesaj / doküman / video · içinde: süreç, beklenti, ilk adım", tur: uzun_metin, zorunlu: true}
+    - {anahtar: ilk_kazanim, etiket: "İlk kazanım", olcu: "ne · en geç ne zaman · nasıl hissedecek", tur: kisa_metin, zorunlu: true}
+    - {anahtar: destek_sinirlari, etiket: "Destek sınırlarım", olcu: "neyi nereden bulur · kime sorar · ne kadar sürede cevap (Erişim Kartım'dan)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: proaktif_yoklama, etiket: "Proaktif yoklama", olcu: "ne zaman, hangi soruyla gidişatı kontrol ederim", tur: kisa_metin, zorunlu: true}
+    - {anahtar: ugurlama, etiket: "Uğurlama", olcu: "süreç biterken ne hatırlatırım · kapıyı nasıl açık bırakırım", tur: kisa_metin, zorunlu: true}
+    - {anahtar: memnuniyet_yorum, etiket: "Memnuniyet ve yorum", olcu: "soru zamanı · yorum isteği zamanı (ilk kazanımdan sonra) · herkese aynı", tur: kisa_metin, zorunlu: true}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Yeni müşterilerin kaçı ilk kazanıma ulaştı; kaçı sessizce kayboldu (W'de ölçülür)", tur: kisa_metin, sonradan_doldurulur: true}
+  bagimli: [R3, R6]
+  ghl:
+    - {alan_adi: "GAI - R8 Agirlama Plani", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_r8}
+  tam_yuvasi: "OV.8 / TP.7: Otomasyon (ödeme anı), Formlar, İtibar › değerlendirme isteği"
+  sohbet_kipi: cikar
+  not: "Ders altında ayrıca ilk 7 gün şablonu (gün 0/1/3/7) ve 5 soruluk ön bilgi formu var; teslim tablosunda alan değil. İstenirse isteğe bağlı alt alan olarak eklenebilir."
+
+- anahtar: R9
+  baslik: "Güven Sözleşmem"
+  ders: R.9
+  script: scriptler/r/R.9-guven-sinir.md
+  modul: Rota Dosyası
+  bolum_no: 8
+  tekrar: tek_sefer
+  alanlar:
+    - {anahtar: dogrulama, etiket: "1 · Mutlaka kendim doğrularım", olcu: "hangi çıktı türleri (olgu, kaynak, doz, mevzuat, rakam, müşteriye giden her metin) · neyle doğrularım", tur: uzun_metin, zorunlu: true}
+    - {anahtar: musteri_verisi, etiket: "2 · Müşteri verisi", olcu: "yapay zekâya vermeden önce neyi çıkarırım · hangi veriyi hiç vermem · özel nitelikli veri topluyor muyum (rıza notu)", tur: uzun_metin, zorunlu: true}
+    - {anahtar: susma_ani, etiket: "3 · Susma anı", olcu: "yapay zekânın asla cevaplamayacağı en az 3 durum · \"size dönüyoruz\" cümlem · kim, ne kadar sürede döner", tur: uzun_metin, zorunlu: true}
+    - {anahtar: asistan_kurallari, etiket: "Asistan kuralları", olcu: "kendini asistan olarak tanıtır · yapmadığını \"yaptım\" demez · emin değilse devreder", tur: liste, zorunlu: true}
+  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Bir ayda yapay zekâ çıktısında yakaladığım hata sayısı (W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
+  bagimli: [R6]
+  ghl:
+    - {alan_adi: "GAI - R9 Guven Sozlesmesi", tur: buyuk_metin, not: "öneri"}
+    - {etiket: gai_dosya_r9}
+  tam_yuvasi: "O.2 beyin dosyası · OV.6 asistan talimatı ve devir listesi · OV.4 ve OV.8 form onay alanları"
+  sohbet_kipi: cikar
+  not: "R.9 ders olarak CEO kararına bağlı (💡 öneri). Onaylanmazsa Rota Dosyası 7 bölüm."

@@ -1,0 +1,3816 @@
+[
+ {
+  "anahtar": "R2",
+  "baslik": "Kimlik Çekirdeğim",
+  "ders": "R.2",
+  "script": "scriptler/r/R.2-kimsin-ne-yaparsin.md",
+  "modul": "Rota Dosyası",
+  "bolum_no": 1,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "neden",
+    "etiket": "Neden",
+    "olcu": "gerçek bir an, 1–2 cümle",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kime_kime_degil",
+    "etiket": "Kime / kime değil",
+    "olcu": "1–2 satır",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "donusum",
+    "etiket": "Hangi dönüşüm",
+    "olcu": "önce → sonra, 3 satır",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "nasil",
+    "etiket": "Nasıl (seni farklı kılan yol)",
+    "olcu": "1–2 cümle (O.2'de derinleşir)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "durus",
+    "etiket": "Duruş",
+    "olcu": "neye inanıyorum, neye karşıyım",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "ses",
+    "etiket": "Ses",
+    "olcu": "ham ses notu, 5 madde",
+    "tur": "liste",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "tek_cumle",
+    "etiket": "Tek cümlem",
+    "olcu": "kime + sonuç + nasıl; ≤20 kelime; sıfatsız",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "dogrulama": "kelime_sayisi<=20; sifat_taramasi"
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "üç saniye testinde üç kişiden kaçı doğru söyledi?",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [],
+  "ghl": [
+   {
+    "alan_adi": "GAI - R2 Kimlik Cekirdegi",
+    "tur": "buyuk_metin",
+    "icerik": "6 satırın etiketli hali"
+   },
+   {
+    "alan_adi": "GAI - R2 Tek Cumle",
+    "tur": "kisa_metin"
+   },
+   {
+    "alan_adi": "GAI - R2 Tek Olcut",
+    "tur": "kisa_metin"
+   },
+   {
+    "etiket": "gai_dosya_r2"
+   }
+  ],
+  "tam_yuvasi": "OV.2: Özel Değerler (tek cümle, kime, kısa tanıtım) · Marka Sesi (ses, duruş) · Bilgi Bankası (6 satır)",
+  "sohbet_kipi": "cikar",
+  "not": "Çekirdeğin 30 sn / 3 dk uzunlukları ve yüz denetimi OV.2'de; bu bölümde alan değil.",
+  "_dosya": "R.yaml"
+ },
+ {
+  "anahtar": "R3",
+  "baslik": "Teklif Kartım",
+  "ders": "R.3",
+  "script": "scriptler/r/R.3-teklif.md",
+  "modul": "Rota Dosyası",
+  "bolum_no": 2,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "kim_icin",
+    "etiket": "Kim için",
+    "olcu": "Çekirdeğin \"kime\" satırıyla aynı",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "dogrulama": "R2.kime_kime_degil ile tutarlılık"
+   },
+   {
+    "anahtar": "hangi_sonuc",
+    "etiket": "Hangi sonuç",
+    "olcu": "önce → sonra",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "hangi_yolla",
+    "etiket": "Hangi yolla",
+    "olcu": "1–2 cümle",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "hangi_bicimde",
+    "etiket": "Hangi biçimde",
+    "olcu": "süre, sıklık, birebir/grup, yer",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "soz",
+    "etiket": "Ne söz veriyorum",
+    "olcu": "süreç sözü; garanti yok",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "dogrulama": "garanti_dili_taramasi"
+   },
+   {
+    "anahtar": "itirazlar",
+    "etiket": "En sert 5 itiraz + cevap",
+    "olcu": "5 × (itiraz + 1 cümle cevap)",
+    "tur": "liste",
+    "adet": 5,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "sayfa_iskeleti",
+    "etiket": "Sayfa iskeleti",
+    "olcu": "9 başlık; fiyat boş",
+    "tur": "liste",
+    "adet": 9,
+    "zorunlu": true,
+    "dogrulama": "fiyat_bos; kanit_yalniz_gercek"
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Teklifini gösterdiğin 3 kişiden kaçı \"bu kimin için ve ne veriyor\" sorusunu doğru cevapladı? Sonra: teklif görüşmesine dönen oran (W'de ölçülür)",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R2"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - R3 Teklif Karti",
+    "tur": "buyuk_metin"
+   },
+   {
+    "alan_adi": "GAI - R3 Itirazlar",
+    "tur": "buyuk_metin"
+   },
+   {
+    "alan_adi": "GAI - R3 Sayfa Iskeleti",
+    "tur": "buyuk_metin"
+   },
+   {
+    "alan_adi": "GAI - R3 Tek Olcut",
+    "tur": "kisa_metin"
+   },
+   {
+    "etiket": "gai_dosya_r3"
+   }
+  ],
+  "tam_yuvasi": "OV.3 / TP.2: Ürünler, satış hunisi sayfası, Bilgi Bankası",
+  "sohbet_kipi": "rol",
+  "not": "İki kip (MIMARI §7.2): önce kurma (cikar), sonra şüpheci müşteri (rol). Sayfa iskeletinin 9 başlığı ders altında sabit: başlık+söz · kimin için/hangi sorun · önce ve sonra · yolum · neler dahil · ben kimim · kanıt (yalnız gerçek) · sık sorulanlar (5 itiraz) · ilk adım (fiyat R.7).",
+  "_dosya": "R.yaml"
+ },
+ {
+  "anahtar": "R4",
+  "baslik": "Ekosistem Planım",
+  "ders": "R.4",
+  "script": "scriptler/r/R.4-ekosistem.md",
+  "modul": "Rota Dosyası",
+  "bolum_no": 3,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "kime",
+    "etiket": "Kime",
+    "olcu": "Çekirdeğin \"kime\" satırıyla aynı",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "en_kucuk_kitle",
+    "etiket": "En küçük kitle",
+    "olcu": "aylık hedef gelir ÷ müşteri başı aylık gelir = __ kişi",
+    "tur": "sayi",
+    "zorunlu": true,
+    "not": "hesabın iki girdisi de istenirse ayrı alan olabilir"
+   },
+   {
+    "anahtar": "ana_kanallar",
+    "etiket": "Ana kanal(lar)",
+    "olcu": "en fazla 2 · neden orada?",
+    "tur": "liste",
+    "adet_max": 2,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "turev_kanallar",
+    "etiket": "Türev kanallar",
+    "olcu": "ana içerik nereye kısaltılarak gider",
+    "tur": "kisa_metin",
+    "zorunlu": false
+   },
+   {
+    "anahtar": "ilk_ucretsiz_deger",
+    "etiket": "İlk ücretsiz değer",
+    "olcu": "adı + biçimi (rehber / test / liste)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "en_sik_10_soru",
+    "etiket": "En sık 10 soru",
+    "olcu": "10 gerçek soru; ücretsiz değerin hammaddesi",
+    "tur": "liste",
+    "adet": 10,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "ilginin_evi",
+    "etiket": "İlginin evi",
+    "olcu": "e-posta listesi / topluluk / randevu",
+    "tur": "secim",
+    "secenekler": [
+     "e-posta listesi",
+     "topluluk",
+     "randevu"
+    ],
+    "coklu": true,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "is_birligi_halkasi",
+    "etiket": "İş birliği halkası (isteğe bağlı)",
+    "olcu": "2–3 işletme türü",
+    "tur": "liste",
+    "zorunlu": false
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Bir ay içinde evine kaç kişi girdi? (sayı W'de ölçülür)",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R2",
+   "R3"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - R4 Ekosistem Plani",
+    "tur": "buyuk_metin",
+    "not": "öneri (§3 kalıbı)"
+   },
+   {
+    "alan_adi": "GAI - R4 Sik Sorular",
+    "tur": "buyuk_metin",
+    "not": "öneri; O.2 ve OV.6 Bilgi Bankası bunu kullanıyor, ayrı alan önerilir"
+   },
+   {
+    "etiket": "gai_dosya_r4"
+   }
+  ],
+  "tam_yuvasi": "OV.4 / TP.3: Sosyal Planlayıcı, form/sayfa, otomasyon, liste/topluluk · en sık 10 soru → O.2 beyin dosyası, OV.6 Bilgi Bankası",
+  "sohbet_kipi": "cikar",
+  "_dosya": "R.yaml"
+ },
+ {
+  "anahtar": "R5",
+  "baslik": "İşletme Röntgenim",
+  "ders": "R.5",
+  "script": "scriptler/r/R.5-yolculuk.md",
+  "modul": "Rota Dosyası",
+  "bolum_no": 4,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "asamalar",
+    "etiket": "8 aşama + Kaybedildi",
+    "tur": "tablo",
+    "satirlar": [
+     "1 İlk ilgi",
+     "2 İlk cevap",
+     "3 Tanışma",
+     "4 Sonraki adım ayarlandı",
+     "5 Görüşme",
+     "6 Teklif",
+     "7 Karar bekleniyor",
+     "8 Müşteri oldu",
+     "Kaybedildi"
+    ],
+    "sutunlar": [
+     {
+      "anahtar": "ne_oluyor",
+      "etiket": "Benim işimde burada ne oluyor",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "nasil_kaybediyorum",
+      "etiket": "Burada nasıl kaybediyorum",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "durum",
+      "etiket": "Durum",
+      "tur": "secim",
+      "secenekler": [
+       "var",
+       "kısmi",
+       "yok"
+      ]
+     }
+    ],
+    "zorunlu": true,
+    "not": "Kaybedildi satırının 'ne oluyor' sütunu nedenleri taşır: uygun değil · şimdi değil · gelmedi · sessiz kaldı. 'tablo' türü şemada yok; öneri."
+   },
+   {
+    "anahtar": "en_cok_kaybedilen",
+    "etiket": "En çok kaybettiğim aşama",
+    "olcu": "tek bir aşama",
+    "tur": "secim",
+    "secenekler_kaynagi": "asamalar",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "iki_yol",
+    "etiket": "İki yol",
+    "olcu": "hızlı karar veren için kısa yol (hangi aşamaları kısa geçer) · kanıt isteyen için kanıt yolu (ne görmeli)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "on_gorusme_sorulari",
+    "etiket": "Ön görüşme soruları",
+    "olcu": "5–7 soru",
+    "tur": "liste",
+    "adet_min": 5,
+    "adet_max": 7,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "mesaj_taslaklari",
+    "etiket": "En kritik 3 aşama için mesaj taslağı",
+    "olcu": "benim sesimle, her biri 2–4 cümle",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "En çok kaybettiğim aşamada bir ay sonra kaç kişi kayboldu? (W'de ölçülür)",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R2",
+   "R3",
+   "R4"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - R5 Isletme Rontgeni",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "alan_adi": "GAI - R5 Asama Adlari",
+    "tur": "kisa_metin",
+    "not": "öneri; Tam'da süreç aşamalarına gider (MIMARI §3 'R alanlarına referans')"
+   },
+   {
+    "etiket": "gai_dosya_r5"
+   }
+  ],
+  "tam_yuvasi": "OV.5 / TP.4: 8 aşama → Fırsatlar › Süreç; ön görüşme soruları → form/özel alanlar; randevu → Takvimler",
+  "sohbet_kipi": "cikar",
+  "not": "8 aşama sabit olması CEO kararına bağlı (R.5 ⚠️); onaylanmazsa satır sayısı 5–8 serbest.",
+  "_dosya": "R.yaml"
+ },
+ {
+  "anahtar": "R6",
+  "baslik": "Erişim Kartım",
+  "ders": "R.6",
+  "script": "scriptler/r/R.6-erisim-iletisim.md",
+  "modul": "Rota Dosyası",
+  "bolum_no": 5,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "ilk_karsilama",
+    "etiket": "İlk karşılama mesajım",
+    "olcu": "senin sesinde, 2–4 cümle, bir sonraki adımla",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "acik_kanallar",
+    "etiket": "Açık kanallar",
+    "olcu": "cevap vereceğin kanallar",
+    "tur": "liste",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "saatlerim",
+    "etiket": "Benim saatlerim",
+    "olcu": "hangi gün/saat; dışında ne olur",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "yz_sorulari",
+    "etiket": "Yapay zekânın cevaplayacağı sorular",
+    "olcu": "en sık 10 sorudan seçilir",
+    "tur": "liste",
+    "secenekler_kaynagi": "R4.en_sik_10_soru",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "devir_anlari",
+    "etiket": "Bana devredilen anlar",
+    "olcu": "en az 3 durum + \"size dönüyorum\" cümlesi",
+    "tur": "liste",
+    "adet_min": 3,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "iletisim_ritmi",
+    "etiket": "İletişim ritmim",
+    "olcu": "müşteriye ne zaman, hangi kanaldan haber veririm",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "erisim_kademeleri",
+    "etiket": "Erişim kademelerim",
+    "olcu": "kademe → neye erişir → ben hangi anda devredeyim",
+    "tur": "liste",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "İlk mesaja ilk cevabın süresi (W'de ölçülür)",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R2",
+   "R4"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - R6 Erisim Karti",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_r6"
+   }
+  ],
+  "tam_yuvasi": "OV.6 / TP.5: Sohbetler, Hazır Metinler, Sohbet Yapay Zekası, Üyelikler · O.2 beyin dosyası · devir listesi R.9 ile birleşir",
+  "sohbet_kipi": "cikar",
+  "_dosya": "R.yaml"
+ },
+ {
+  "anahtar": "R7",
+  "baslik": "Fiyat Tablom",
+  "ders": "R.7",
+  "script": "scriptler/r/R.7-fiyat-odeme.md",
+  "modul": "Rota Dosyası",
+  "bolum_no": 6,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "kademeler",
+    "etiket": "Kademeler",
+    "tur": "tablo",
+    "satirlar": [
+     "Kendin uygula",
+     "Takipli",
+     "Birebir",
+     "Devam üyeliği (isteğe bağlı)"
+    ],
+    "sutunlar": [
+     {
+      "anahtar": "icerik",
+      "etiket": "Ne içerir",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "fiyat_tl",
+      "etiket": "Fiyat (TL)",
+      "tur": "sayi"
+     },
+     {
+      "anahtar": "odeme_bicimi",
+      "etiket": "Ödeme biçimi",
+      "tur": "secim",
+      "secenekler": [
+       "peşin",
+       "taksit",
+       "abonelik"
+      ]
+     },
+     {
+      "anahtar": "taksit_bedeli_kimde",
+      "etiket": "Taksit bedeli kimde",
+      "tur": "kisa_metin"
+     }
+    ],
+    "zorunlu": true,
+    "not": "Devam üyeliği satırı isteğe bağlı; fiyatı aylık, ödeme biçimi abonelik."
+   },
+   {
+    "anahtar": "sonucun_degeri",
+    "etiket": "Sonucun değeri (kaba hesap)",
+    "olcu": "müşterime ne kazandırıyor / neyi kaybetmekten kurtarıyor",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "revizyon_kurali",
+    "etiket": "Fiyat revizyon kuralım",
+    "olcu": "\"Fiyatlarımı ___ gözden geçiririm, mevcut müşterime ___ önce haber veririm.\"",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "iptal_iade",
+    "etiket": "İptal / iade kuralım",
+    "olcu": "tek paragraf",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Teklif verdiğim kişilerin hangi kademeyi seçtiği (W'de ölçülür)",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R3",
+   "R6"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - R7 Fiyat Tablosu",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_r7"
+   }
+  ],
+  "tam_yuvasi": "OV.7 / TP.6: Ürünler, Ödeme Bağlantıları, Abonelikler, Kuponlar",
+  "sohbet_kipi": "rol",
+  "not": "Stres testi R.3'teki şüpheci müşteriyle (rol); kurma kısmı çıkarma.",
+  "_dosya": "R.yaml"
+ },
+ {
+  "anahtar": "R8",
+  "baslik": "Ağırlama Planım",
+  "ders": "R.8",
+  "script": "scriptler/r/R.8-agirlama.md",
+  "modul": "Rota Dosyası",
+  "bolum_no": 7,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "ilk_saatler",
+    "etiket": "İlk saatler: müşterim ne alır",
+    "olcu": "mesaj / doküman / video · içinde: süreç, beklenti, ilk adım",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "ilk_kazanim",
+    "etiket": "İlk kazanım",
+    "olcu": "ne · en geç ne zaman · nasıl hissedecek",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "destek_sinirlari",
+    "etiket": "Destek sınırlarım",
+    "olcu": "neyi nereden bulur · kime sorar · ne kadar sürede cevap (Erişim Kartım'dan)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "proaktif_yoklama",
+    "etiket": "Proaktif yoklama",
+    "olcu": "ne zaman, hangi soruyla gidişatı kontrol ederim",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "ugurlama",
+    "etiket": "Uğurlama",
+    "olcu": "süreç biterken ne hatırlatırım · kapıyı nasıl açık bırakırım",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "memnuniyet_yorum",
+    "etiket": "Memnuniyet ve yorum",
+    "olcu": "soru zamanı · yorum isteği zamanı (ilk kazanımdan sonra) · herkese aynı",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Yeni müşterilerin kaçı ilk kazanıma ulaştı; kaçı sessizce kayboldu (W'de ölçülür)",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R3",
+   "R6"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - R8 Agirlama Plani",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_r8"
+   }
+  ],
+  "tam_yuvasi": "OV.8 / TP.7: Otomasyon (ödeme anı), Formlar, İtibar › değerlendirme isteği",
+  "sohbet_kipi": "cikar",
+  "not": "Ders altında ayrıca ilk 7 gün şablonu (gün 0/1/3/7) ve 5 soruluk ön bilgi formu var; teslim tablosunda alan değil. İstenirse isteğe bağlı alt alan olarak eklenebilir.",
+  "_dosya": "R.yaml"
+ },
+ {
+  "anahtar": "R9",
+  "baslik": "Güven Sözleşmem",
+  "ders": "R.9",
+  "script": "scriptler/r/R.9-guven-sinir.md",
+  "modul": "Rota Dosyası",
+  "bolum_no": 8,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "dogrulama",
+    "etiket": "1 · Mutlaka kendim doğrularım",
+    "olcu": "hangi çıktı türleri (olgu, kaynak, doz, mevzuat, rakam, müşteriye giden her metin) · neyle doğrularım",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "musteri_verisi",
+    "etiket": "2 · Müşteri verisi",
+    "olcu": "yapay zekâya vermeden önce neyi çıkarırım · hangi veriyi hiç vermem · özel nitelikli veri topluyor muyum (rıza notu)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "susma_ani",
+    "etiket": "3 · Susma anı",
+    "olcu": "yapay zekânın asla cevaplamayacağı en az 3 durum · \"size dönüyoruz\" cümlem · kim, ne kadar sürede döner",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "asistan_kurallari",
+    "etiket": "Asistan kuralları",
+    "olcu": "kendini asistan olarak tanıtır · yapmadığını \"yaptım\" demez · emin değilse devreder",
+    "tur": "liste",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Bir ayda yapay zekâ çıktısında yakaladığım hata sayısı (W'de ölçülür)",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R6"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - R9 Guven Sozlesmesi",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_r9"
+   }
+  ],
+  "tam_yuvasi": "O.2 beyin dosyası · OV.6 asistan talimatı ve devir listesi · OV.4 ve OV.8 form onay alanları",
+  "sohbet_kipi": "cikar",
+  "not": "R.9 ders olarak CEO kararına bağlı (💡 öneri). Onaylanmazsa Rota Dosyası 7 bölüm.",
+  "_dosya": "R.yaml"
+ },
+ {
+  "anahtar": "O0",
+  "baslik": "Sisteme Taşıma Başlangıç Kartı",
+  "ders": "O.0",
+  "script": "scriptler/o1/O.0-o-vsl.md",
+  "modul": "Beyin Dosyası",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "bir_numarali_surec",
+    "etiket": "1 numaralı süreç",
+    "olcu": "G › fırsat haritası (\"en çok zamanımı yiyen iş\")",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "G5.baslangic_noktasi"
+    ]
+   },
+   {
+    "anahtar": "cekirdek_ve_ses",
+    "etiket": "Kimlik çekirdeğim + ses notum",
+    "olcu": "R.2",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "R2"
+    ],
+    "zorunlu": true,
+    "not": "öğrenci yazmaz; R2'den gösterilir"
+   },
+   {
+    "anahtar": "teklif_tek_cumle",
+    "etiket": "Teklifim (tek cümle)",
+    "olcu": "R.3",
+    "tur": "kisa_metin",
+    "kaynak_alanlar": [
+     "R3.soz"
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "en_iyi_isler_nerede",
+    "etiket": "En iyi 3–5 işim nerede duruyor",
+    "olcu": "(klasör, dosya, mesaj geçmişi) — O.2'de lazım olacak",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "not": "kimliksiz"
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "O boyunca kaç parça \"çalışır\" hale geldi (O.1–O.4 teslimleri)",
+   "tur": "sayi",
+   "sonradan_doldurulur": true,
+   "not": "araç O1–O4 onaylarından otomatik sayabilir"
+  },
+  "bagimli": [
+   "R2",
+   "R3"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - O0 Baslangic Karti",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_o0"
+   }
+  ],
+  "tam_yuvasi": null,
+  "sohbet_kipi": "yok",
+  "_dosya": "O.yaml"
+ },
+ {
+  "anahtar": "O1",
+  "baslik": "İlk Sürecim",
+  "ders": "O.1",
+  "script": "scriptler/o1/O.1-yapmak-zorundasin.md",
+  "modul": "Beyin Dosyası",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "surec",
+    "etiket": "Taşıyacağım tek süreç",
+    "olcu": "fırsat haritasındaki \"en çok zamanımı yiyen iş\" ya da \"tekrar eden ve zanaat gerektirmeyen\" iş",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "neden",
+    "etiket": "Neden o",
+    "olcu": "tek cümle",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "dakika_sefer",
+    "etiket": "Bir seferde kaç dakika",
+    "tur": "sayi",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "haftada_kac",
+    "etiket": "Haftada kaç kez",
+    "tur": "sayi",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "haftalik_toplam",
+    "etiket": "Haftalık toplam (dakika)",
+    "olcu": "O.4'teki \"eskiden X → şimdi Y\" ölçümünün başlangıç değeri",
+    "tur": "sayi",
+    "hesaplanan": "dakika_sefer * haftada_kac"
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Bu sürecin haftalık süresi (O.4'te tekrar ölçülür)",
+   "tur": "sayi",
+   "sonradan_doldurulur": false,
+   "not": "haftalik_toplam ile aynı değer; O.4'te yeniden ölçülür"
+  },
+  "bagimli": [
+   "O0"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - O1 Ilk Surec",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_o1"
+   }
+  ],
+  "tam_yuvasi": null,
+  "sohbet_kipi": "cikar",
+  "_dosya": "O.yaml"
+ },
+ {
+  "anahtar": "O2",
+  "baslik": "Beyin Dosyam v1",
+  "ders": "O.2",
+  "script": "scriptler/o1/O.2-esiz-mekanizma.md",
+  "modul": "Beyin Dosyası",
+  "tekrar": "tek_sefer",
+  "olcu_genel": "en fazla ~3 sayfa",
+  "alanlar": [
+   {
+    "anahtar": "kim_ve_kime",
+    "etiket": "Kim ve kime",
+    "olcu": "Kimlik çekirdeği (6 satır)",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "R2"
+    ],
+    "toplanir": true
+   },
+   {
+    "anahtar": "teklif",
+    "etiket": "Teklif",
+    "olcu": "Teklif kartı + en sert 5 itiraz ve cevabı",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "R3"
+    ],
+    "toplanir": true
+   },
+   {
+    "anahtar": "sik_sorulanlar",
+    "etiket": "Sık sorulanlar",
+    "olcu": "En sık 10 soru ve cevabı",
+    "tur": "uzun_metin",
+    "kaynak_alanlar": [
+     "R4.en_sik_10_soru"
+    ],
+    "toplanir": true,
+    "not": "R4 yalnız soruları içeriyor; CEVAPLAR burada eklenir (README açık nokta)"
+   },
+   {
+    "anahtar": "erisim",
+    "etiket": "Erişim",
+    "olcu": "Kanallar, saatler, devir anları",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "R6.acik_kanallar",
+     "R6.saatlerim",
+     "R6.devir_anlari"
+    ],
+    "toplanir": true
+   },
+   {
+    "anahtar": "guven",
+    "etiket": "Güven",
+    "olcu": "Güven sözleşmesi (doğrula / kimliksizleştir / sus)",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "R9"
+    ],
+    "toplanir": true
+   },
+   {
+    "anahtar": "yontem_ilkeler",
+    "etiket": "Yöntem + ilkeler",
+    "olcu": "Adımlar + \"önce şuna bakarım, çünkü…\"",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kalite_kurallari",
+    "etiket": "Kalite kuralları",
+    "olcu": "\"İyi iş neye benzer\", kabul etmediklerim",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "ses",
+    "etiket": "Ses",
+    "olcu": "Kullan / kaçın listesi, çeviri kokusu yasakları",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R2.ses"
+    ],
+    "not": "R2 ham ses notu burada tamamlanır"
+   },
+   {
+    "anahtar": "ornek_isler",
+    "etiket": "Örnek işler",
+    "olcu": "3–5 iyi iş + neden iyi",
+    "tur": "liste",
+    "adet_min": 3,
+    "adet_max": 5,
+    "zorunlu": true,
+    "not": "kimliksiz"
+   },
+   {
+    "anahtar": "asla_verilmez",
+    "etiket": "Asla verilmez",
+    "olcu": "Yapay zekâya hiç girmeyecek bilgi türleri",
+    "tur": "liste",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R9.musteri_verisi"
+    ]
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Önce/sonra testinde ikinci cevabı kaç düzeltmeyle kullanılır buldum?",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "ek_teslim": "Dosyanın öğrencinin kendi yapay zekâ çalışma alanına bağlanmış hâli + önce/sonra ekran görüntüsü (toplulukta paylaşılabilir) — dosyada alan değil, 'kendi yapay zekâna kopyala' çıkışı.",
+  "bagimli": [
+   "R2",
+   "R3",
+   "R4",
+   "R6",
+   "R9"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - O2 Beyin Dosyasi",
+    "tur": "buyuk_metin",
+    "not": "MIMARI §3: alan sınırı aşılırsa özet + 'tam metin dosyada' bağlantısı"
+   },
+   {
+    "etiket": "gai_dosya_o2"
+   }
+  ],
+  "tam_yuvasi": "OV.6 / TP.5: Sohbet Yapay Zekası Bilgi Bankası",
+  "sohbet_kipi": "cikar",
+  "model": "agir",
+  "not": "R'den TOPLANIR, yeniden yazdırılmaz: araç R2/R3/R4/R6/R9 onaylı alanlarını doldurur, öğrenci yalnız yöntem, kalite, ses, örnek işleri ekler.",
+  "_dosya": "O.yaml"
+ },
+ {
+  "anahtar": "O3",
+  "baslik": "Yöntem Dosyam + çalıştırma kaydı",
+  "ders": "O.3",
+  "script": "scriptler/o1/O.3-surecleri-sisteme-tasi.md",
+  "modul": "Beyin Dosyası",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "surec",
+    "etiket": "Süreç",
+    "olcu": "(O.1'de seçtiğin)",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "O1.surec"
+    ]
+   },
+   {
+    "anahtar": "tetikleyici",
+    "etiket": "Tetikleyici",
+    "olcu": "Süreci ne başlatır",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "girdiler",
+    "etiket": "Girdiler",
+    "olcu": "Her seferinde ne vermem gerekir (kimliksizleştirme adımıyla)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "adimlar",
+    "etiket": "Adımlar (3–7)",
+    "tur": "tablo",
+    "adet_min": 3,
+    "adet_max": 7,
+    "sutunlar": [
+     {
+      "anahtar": "talimat",
+      "etiket": "Talimat",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "baglam",
+      "etiket": "Bağlam",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "iyi_ornek",
+      "etiket": "İyi örnek",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "yanit_bicimi",
+      "etiket": "Yanıt biçimi",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "basari_olcutu",
+      "etiket": "Başarı ölçütü",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "devret_birlikte_sende",
+      "etiket": "Devret / birlikte / sende",
+      "tur": "secim",
+      "secenekler": [
+       "devret",
+       "birlikte",
+       "sende"
+      ]
+     }
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "cikti",
+    "etiket": "Çıktı",
+    "olcu": "Sonunda ne teslim edilir",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "bana_don",
+    "etiket": "Ne zaman bana dön",
+    "olcu": "Çırağın durup beni çağıracağı durumlar",
+    "tur": "liste",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "calistirmalar",
+    "etiket": "3 çalıştırma",
+    "tur": "tablo",
+    "adet": 3,
+    "sutunlar": [
+     {
+      "anahtar": "tarih",
+      "etiket": "Tarih",
+      "tur": "tarih"
+     },
+     {
+      "anahtar": "duzeltme_sayisi",
+      "etiket": "Kaç düzeltme gerekti",
+      "tur": "sayi"
+     },
+     {
+      "anahtar": "sure_dk",
+      "etiket": "Süre",
+      "tur": "sayi"
+     }
+    ],
+    "zorunlu": true,
+    "not": "Program sırasında 3 çalıştırma dolmayabilir (28 gün); kayıt sonradan tamamlanabilir olmalı."
+   },
+   {
+    "anahtar": "siradaki_adaylar",
+    "etiket": "Sıradaki 3 aday",
+    "olcu": "Dört kaynaktan (ders altı)",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": false
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Üçüncü çalıştırmada düzeltme sayısı ve süre (O.1 başlangıç değeriyle kıyas)",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "O1",
+   "O2"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - O3 Yontem Dosyasi",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_o3"
+   }
+  ],
+  "tam_yuvasi": "Otomasyon (tetikleyicinin growtify.app karşılığı; playbook düzeltmesiz çalışınca otomasyona taşınır)",
+  "sohbet_kipi": "cikar",
+  "_dosya": "O.yaml"
+ },
+ {
+  "anahtar": "O4",
+  "baslik": "Üretim Sistemim + ölçüm",
+  "ders": "O.4",
+  "script": "scriptler/o1/O.4-ureten-sistemler.md",
+  "modul": "Beyin Dosyası",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "asil_teslimat",
+    "etiket": "Asıl teslimatım",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "uc_katman",
+    "etiket": "Üç katman",
+    "olcu": "Karar / yapı · Zanaat · Dokunuş — her biri bir cümle",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kurulan_katman",
+    "etiket": "Sistemi kurduğum katman",
+    "olcu": "(çoğunlukla karar / yapı)",
+    "tur": "secim",
+    "secenekler": [
+     "karar / yapı",
+     "zanaat",
+     "dokunuş"
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kaydedilmis_sistem",
+    "etiket": "Kaydedilmiş sistem",
+    "olcu": "Talimat + beyin dosyası + yöntem dosyası + 5–10 örnek iş (neden iyi)",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "O2",
+     "O3"
+    ]
+   },
+   {
+    "anahtar": "geri_besleme",
+    "etiket": "Geri besleme",
+    "olcu": "Kaç tur · hangi kuralları ekledim · sürüm notu",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "olcum",
+    "etiket": "Ölçüm",
+    "olcu": "Eskiden __ dk → şimdi __ dk · haftada __ kez · ayda __ saat (kendi ölçümüm)",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "not": "alt alanlar sayı olabilir: eskiden_dk, simdi_dk, haftada_kac, ayda_saat (hesaplanan)"
+   },
+   {
+    "anahtar": "ilk_asistan_adayi",
+    "etiket": "İlk asistan adayı",
+    "olcu": "Bu beyin müşteriye dokunsaydı ilk nerede çalışırdı? (tek paragraf; OV.6'ya köprü)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Bu katmanda aylık kazandığım saat",
+   "tur": "sayi",
+   "sonradan_doldurulur": false
+  },
+  "bagimli": [
+   "O2",
+   "O3"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - O4 Uretim Sistemi",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_o4"
+   }
+  ],
+  "tam_yuvasi": "OV.6 asistan (ilk asistan adayı)",
+  "sohbet_kipi": "cikar",
+  "_dosya": "O.yaml"
+ },
+ {
+  "anahtar": "OV0",
+  "baslik": "Kurulum Haritam açılır",
+  "ders": "OV.0",
+  "script": "scriptler/o-vitrin/OV.0-vitrin-girisi.md",
+  "modul": "Kurulum Haritam",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "isim_adi",
+    "etiket": "İşimin adı",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "dagilim_3_yer",
+    "etiket": "Müşterilerim bugün hangi 3 yerde dağılmış",
+    "olcu": "ör. WhatsApp · defter · tablo",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [],
+  "ghl": [
+   {
+    "alan_adi": "GAI - Harita OV0",
+    "tur": "buyuk_metin"
+   }
+  ],
+  "tam_yuvasi": "Tam ilk görüşmesinin gündemi (OV.9 harita özeti)",
+  "sohbet_kipi": "yok",
+  "not": "Scriptte tek ölçüt yok. 'Sonraki satırlar her OV dersinde eklenir' yalnız açıklama.",
+  "_dosya": "OV.yaml"
+ },
+ {
+  "anahtar": "OV2",
+  "baslik": "Yuva Haritam",
+  "ders": "OV.2",
+  "script": "scriptler/o-vitrin/OV.2-kimsin.md",
+  "modul": "Kurulum Haritam",
+  "satir": "Kimsin",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "isletme_profili",
+    "etiket": "İşletme Profili",
+    "olcu": "Ad, iletişim, adres (varsa), logo",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "tasarim_kiti",
+    "etiket": "Marka Panoları › Tasarım Kiti",
+    "olcu": "Logo, 2–3 renk, yazı tipi (yoksa \"henüz yok\")",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "ozel_degerler",
+    "etiket": "Özel Değerler",
+    "olcu": "Tek cümle (≤20 kelime) · kime (1 satır) · kısa tanıtım (3–4 cümle)",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R2.tek_cumle",
+     "R2.kime_kime_degil"
+    ],
+    "not": "tek cümle ve kime R2'den referans; yalnız kısa tanıtım yeni"
+   },
+   {
+    "anahtar": "marka_sesi",
+    "etiket": "Marka Panoları › Marka Sesi",
+    "olcu": "Ses notu (5 madde) + duruş (1–2 cümle) + kaçındığım kelimeler",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R2.ses",
+     "R2.durus"
+    ]
+   },
+   {
+    "anahtar": "bilgi_bankasi",
+    "etiket": "Bilgi Bankası",
+    "olcu": "Neden · kime / kime değil · dönüşüm (önce → sonra) · nasıl · duruş · en sık sorulan 5 soru ve cevabı",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R2"
+    ]
+   },
+   {
+    "anahtar": "disarida_elle",
+    "etiket": "Dışarıda, elle",
+    "olcu": "Instagram / LinkedIn biyografisi · Google İşletme açıklaması · WhatsApp Business açıklaması",
+    "tur": "uzun_metin",
+    "zorunlu": false
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "R2"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - Harita OV2",
+    "tur": "buyuk_metin"
+   }
+  ],
+  "tam_yuvasi": "TP.1: İşletme Profili, Tasarım Kiti, Özel Değerler, Marka Sesi, Bilgi Bankası",
+  "sohbet_kipi": "cikar",
+  "not": "İsteğe bağlı 'yüz denetimi' ders altında; alan değil. Scriptte tek ölçüt yok. Bilgi Bankası'ndaki '5 soru' R4'teki 10 sorunun ilk 5'i mi, ayrı mı: belirsiz.",
+  "_dosya": "OV.yaml"
+ },
+ {
+  "anahtar": "OV3",
+  "baslik": "Teklif Yerleşimim",
+  "ders": "OV.3",
+  "script": "scriptler/o-vitrin/OV.3-teklif.md",
+  "modul": "Kurulum Haritam",
+  "satir": "Teklif",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "teklif",
+    "etiket": "Teklif",
+    "olcu": "Ad · tek cümlelik söz (açıklama) · neler dahil (liste)",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R3.soz"
+    ]
+   },
+   {
+    "anahtar": "urun",
+    "etiket": "Ürün",
+    "olcu": "Ödeme kaleminin adı · biçim (tek seferlik / üyelik / seans) · fiyat: R.7'de",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "sayfa",
+    "etiket": "Sayfa",
+    "olcu": "9 başlık → 9 bölüm · kanıt yoksa bölüm yok · 5 itiraz → sık sorulanlar",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R3.sayfa_iskeleti",
+     "R3.itirazlar"
+    ]
+   },
+   {
+    "anahtar": "bilgi_bankasi",
+    "etiket": "Bilgi Bankası",
+    "olcu": "Aynı 5 soru-cevap",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R3.itirazlar"
+    ]
+   },
+   {
+    "anahtar": "sartlar",
+    "etiket": "Şartlar",
+    "olcu": "Söz sınırı (1–2 cümle) · ön bilgilendirme + mesafeli satış gerekli mi · imzalı sözleşme gerekli mi (birebir/uzun hizmet)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçüt",
+   "olcu": "Sayfanın ilk ekranını gösterdiğin üç kişiden kaçı \"bu kimin için ve ne veriyor\" sorusunu doğru cevapladı? (R.3 ile aynı ölçüt, bu kez sayfada.)",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R3"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - Harita OV3",
+    "tur": "buyuk_metin"
+   }
+  ],
+  "tam_yuvasi": "TP.2: Teklifler, Ürünler, satış hunisi sayfası, Belgeler ve Sözleşmeler, Bilgi Bankası",
+  "sohbet_kipi": "cikar",
+  "_dosya": "OV.yaml"
+ },
+ {
+  "anahtar": "OV4",
+  "baslik": "Ekosistem Yerleşimim",
+  "ders": "OV.4",
+  "script": "scriptler/o-vitrin/OV.4-ekosistem.md",
+  "modul": "Kurulum Haritam",
+  "satir": "Ekosistem",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "sosyal_planlayici",
+    "etiket": "Sosyal Planlayıcı",
+    "olcu": "Ana kanal(lar) + türev kanallar · haftada kaç paylaşım",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R4.ana_kanallar",
+     "R4.turev_kanallar"
+    ]
+   },
+   {
+    "anahtar": "kapi",
+    "etiket": "Kapı (sayfa + form)",
+    "olcu": "İlk ücretsiz değerin adı · formda istenecek bilgiler (en az) · iki onay: teslim için / ticari ileti için",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R4.ilk_ucretsiz_deger"
+    ]
+   },
+   {
+    "anahtar": "etiketler",
+    "etiket": "Etiketler",
+    "olcu": "Hangi değeri istedi · nereden geldi",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "yol_otomasyon",
+    "etiket": "Yol (otomasyon)",
+    "olcu": "Teslim maili · sonraki 3–5 mailin konusu (en sık 10 sorudan) · sessiz kalana dönüş günü",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R4.en_sik_10_soru"
+    ]
+   },
+   {
+    "anahtar": "ev",
+    "etiket": "Ev",
+    "olcu": "E-posta listesi / topluluk / randevu · kapıdan eve davet hangi mailde",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R4.ilginin_evi"
+    ]
+   },
+   {
+    "anahtar": "fiziksel_dunya",
+    "etiket": "Fiziksel dünya (isteğe bağlı)",
+    "olcu": "QR koyacağın bir nokta (masa, ayna, broşür)",
+    "tur": "kisa_metin",
+    "zorunlu": false
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçüt",
+   "olcu": "Bir ay içinde kapıdan giren kişilerin kaçı eve (listeye/topluluğa) ulaştı? (Sayı W'de ölçülür.)",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R4"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - Harita OV4",
+    "tur": "buyuk_metin"
+   }
+  ],
+  "tam_yuvasi": "TP.3: Sosyal Planlayıcı, Siteler/Formlar, Etiketler, Otomasyon, Topluluklar",
+  "sohbet_kipi": "cikar",
+  "_dosya": "OV.yaml"
+ },
+ {
+  "anahtar": "OV5",
+  "baslik": "Süreç Yerleşimim",
+  "ders": "OV.5",
+  "script": "scriptler/o-vitrin/OV.5-yolculuk.md",
+  "modul": "Kurulum Haritam",
+  "satir": "Yolculuk",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "surec_8_asama",
+    "etiket": "Süreç (8 aşama)",
+    "olcu": "Her aşamanın benim işimdeki adı",
+    "tur": "liste",
+    "adet": 8,
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R5.asamalar"
+    ]
+   },
+   {
+    "anahtar": "asamaya_giris",
+    "etiket": "Aşamaya giriş",
+    "olcu": "Her aşama için: elle mi, otomatik mi, neyle (form, randevu, ödeme, süre)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kaybedildi_nedenleri",
+    "etiket": "Kaybedildi nedenleri",
+    "olcu": "Uygun değil · şimdi değil · gelmedi · sessiz kaldı (+ bana özel varsa)",
+    "tur": "liste",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kisi_karti",
+    "etiket": "Kişi kartı",
+    "olcu": "Kaynak etiketi · ilgi/profil etiketi · ön görüşme cevapları (alanlar)",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R5.on_gorusme_sorulari"
+    ]
+   },
+   {
+    "anahtar": "takvim",
+    "etiket": "Takvim",
+    "olcu": "Randevu türü · süresi · ön görüşme soruları · onay + hatırlatma",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "ilk_akis",
+    "etiket": "İlk akış",
+    "olcu": "En çok kaybettiğim aşama · oraya kuracağım tek akış (kaç mesaj, hangi aralıkla, ne zaman durur)",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R5.en_cok_kaybedilen"
+    ]
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçüt",
+   "olcu": "İlk akışı kurduğun aşamada bir ay sonra kaybolan kişi sayısı azaldı mı? (W'de ölçülür.)",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R5"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - Harita OV5",
+    "tur": "buyuk_metin"
+   }
+  ],
+  "tam_yuvasi": "TP.4: Fırsatlar › Süreç (8 aşama), özel alanlar, Takvimler, Otomasyon",
+  "sohbet_kipi": "cikar",
+  "_dosya": "OV.yaml"
+ },
+ {
+  "anahtar": "OV6",
+  "baslik": "İletişim Yerleşimim",
+  "ders": "OV.6",
+  "script": "scriptler/o-vitrin/OV.6-erisim-iletisim.md",
+  "modul": "Kurulum Haritam",
+  "satir": "Erişim ve İletişim",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "tek_gelen_kutusu",
+    "etiket": "Tek gelen kutusu",
+    "olcu": "Bağlanacak kanallar (WhatsApp, Instagram, Facebook, e-posta, site sohbeti)",
+    "tur": "liste",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R6.acik_kanallar"
+    ]
+   },
+   {
+    "anahtar": "hazir_metinler",
+    "etiket": "Hazır Metinler",
+    "olcu": "İlk karşılama mesajım (mesai içi / dışı) · sık kullandığım 3 cevap",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R6.ilk_karsilama"
+    ]
+   },
+   {
+    "anahtar": "bilgi_bankasi",
+    "etiket": "Bilgi Bankası",
+    "olcu": "Kimlik Çekirdeği · teklif + 5 itiraz · en sık 10 soru · erişim kartı",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R2",
+     "R3.itirazlar",
+     "R4.en_sik_10_soru",
+     "R6"
+    ],
+    "not": "İçerik R'den toplanır; öğrenci yalnız seçer/onaylar."
+   },
+   {
+    "anahtar": "asistan_kurallari",
+    "etiket": "Asistan kuralları",
+    "olcu": "Cevaplayacağı 5 soru · asla cevaplamayacağı 3 durum · \"size dönüyoruz\" cümlesi · başlangıç modu: öneri",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R6.yz_sorulari",
+     "R6.devir_anlari",
+     "R9.susma_ani"
+    ]
+   },
+   {
+    "anahtar": "kademeler",
+    "etiket": "Kademeler",
+    "olcu": "Kademe → neye erişir → ben hangi anda devredeyim (kısa hali)",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R6.erisim_kademeleri"
+    ]
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçüt",
+   "olcu": "İlk mesaja ilk cevap süresi ve devredilen sohbetlere dönüş süresi (W'de ölçülür).",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R6",
+   "R9"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - Harita OV6",
+    "tur": "buyuk_metin"
+   }
+  ],
+  "tam_yuvasi": "TP.5: Sohbetler, Hazır Metinler, Sohbet Yapay Zekası + Bilgi Bankası, Üyelikler (+ TP.7.4 Topluluk)",
+  "sohbet_kipi": "cikar",
+  "_dosya": "OV.yaml"
+ },
+ {
+  "anahtar": "OV7",
+  "baslik": "Ödeme Yerleşimim",
+  "ders": "OV.7",
+  "script": "scriptler/o-vitrin/OV.7-fiyat-odeme.md",
+  "modul": "Kurulum Haritam",
+  "satir": "Fiyat ve Ödeme",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "urunler",
+    "etiket": "Ürünler",
+    "olcu": "Her kademe bir ürün: ad · fiyat (TL) · tek seferlik / abonelik",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R7.kademeler"
+    ]
+   },
+   {
+    "anahtar": "odeme_yolu",
+    "etiket": "Ödeme yolu",
+    "olcu": "Teklif sayfasından mı, görüşme sonrası bağlantıyla mı",
+    "tur": "secim",
+    "secenekler": [
+     "teklif sayfası",
+     "görüşme sonrası bağlantı"
+    ],
+    "coklu": true,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "abonelik",
+    "etiket": "Abonelik",
+    "olcu": "Hangi ürün · hangi gün · ilk dönem ücretsiz mi",
+    "tur": "kisa_metin",
+    "zorunlu": false
+   },
+   {
+    "anahtar": "bolunmus_odeme",
+    "etiket": "Bölünmüş ödeme / taksit",
+    "olcu": "Hangi kademe · kaç parça · bedeli kimde · (kart taksiti ödeme kuruluşunda)",
+    "tur": "kisa_metin",
+    "zorunlu": false
+   },
+   {
+    "anahtar": "indirim_kodu",
+    "etiket": "İndirim kodu",
+    "olcu": "Varsa: kime, ne kadar süre, gerçek süre mi",
+    "tur": "kisa_metin",
+    "zorunlu": false
+   },
+   {
+    "anahtar": "odeme_sonrasi",
+    "etiket": "Ödeme sonrası",
+    "olcu": "Ödeme gelince ne açılır (OV.8'de ayrıntı)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "havale",
+    "etiket": "Havale",
+    "olcu": "Kim takip eder, erişim nasıl verilir",
+    "tur": "kisa_metin",
+    "zorunlu": false
+   },
+   {
+    "anahtar": "hatirlatma_tonu",
+    "etiket": "Hatırlatma tonu",
+    "olcu": "Tek cümle",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "resmi_fatura",
+    "etiket": "Resmi fatura",
+    "olcu": "Muhasebe programı / mali müşavir / \"henüz yok\"",
+    "tur": "secim",
+    "secenekler": [
+     "muhasebe programı",
+     "mali müşavir",
+     "henüz yok"
+    ],
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçüt",
+   "olcu": "Ödeme bağlantısı gönderilenlerin kaçı ödedi; kaçına hatırlatma gerekti (W'de ölçülür).",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R7"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - Harita OV7",
+    "tur": "buyuk_metin"
+   }
+  ],
+  "tam_yuvasi": "TP.6: Ürünler, Ödeme Bağlantıları, Abonelikler, Kuponlar",
+  "sohbet_kipi": "cikar",
+  "_dosya": "OV.yaml"
+ },
+ {
+  "anahtar": "OV8",
+  "baslik": "Karşılama Yerleşimim",
+  "ders": "OV.8",
+  "script": "scriptler/o-vitrin/OV.8-agirlama.md",
+  "modul": "Kurulum Haritam",
+  "satir": "Ağırlama",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "odeme_ani_akisi",
+    "etiket": "Ödeme anı akışı",
+    "olcu": "Tetikleyici (ödeme / sözleşme) · etiket · süreçte müşteri aşaması · sorumlu",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "karsilama",
+    "etiket": "Karşılama",
+    "olcu": "Hoş geldin mesajı/dokümanı/videosu · içinde: süreç, beklenti, ilk adım",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R8.ilk_saatler"
+    ]
+   },
+   {
+    "anahtar": "erisim",
+    "etiket": "Erişim",
+    "olcu": "Ödeme anında ne açılır · süre sonunda ne olur",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "destek_kaynaklari",
+    "etiket": "Destek kaynakları",
+    "olcu": "Topluluk / e-posta / asistan · cevap süresi",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R8.destek_sinirlari"
+    ]
+   },
+   {
+    "anahtar": "proaktif_yoklama",
+    "etiket": "Proaktif yoklama",
+    "olcu": "Kaçıncı gün, hangi soruyla",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R8.proaktif_yoklama"
+    ]
+   },
+   {
+    "anahtar": "ugurlama",
+    "etiket": "Uğurlama",
+    "olcu": "Süreç biterken giden mesaj · kapıyı açık bırakan teklif ya da davet",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R8.ugurlama"
+    ]
+   },
+   {
+    "anahtar": "memnuniyet_yorum",
+    "etiket": "Memnuniyet ve yorum",
+    "olcu": "Soru zamanı · yorum isteği zamanı · herkese aynı",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "R8.memnuniyet_yorum"
+    ]
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçüt",
+   "olcu": "Yeni müşterilerin kaçı ilk kazanıma ulaştı; kaçı ilk hafta sessiz kaldı (W'de ölçülür).",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "R8"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - Harita OV8",
+    "tur": "buyuk_metin"
+   }
+  ],
+  "tam_yuvasi": "TP.7: Otomasyon (ödeme anı), Üyelikler, Formlar, İtibar",
+  "sohbet_kipi": "cikar",
+  "_dosya": "OV.yaml"
+ },
+ {
+  "anahtar": "OV9",
+  "baslik": "Ölçüm satırı + harita tamamlanır",
+  "ders": "OV.9",
+  "script": "scriptler/o-vitrin/OV.9-olcum.md",
+  "modul": "Kurulum Haritam",
+  "satir": "Ölçüm",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "izlenecek_3_sayi",
+    "etiket": "İzleyeceğim 3 sayı",
+    "olcu": "R'deki tek ölçütlerimden en önemli üçü (ör. haftalık yeni ilgi · görüşmeye gelme · ödeme)",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": true,
+    "secenekler_kaynagi": "R2–R9 tek_olcut"
+   },
+   {
+    "anahtar": "kaynak_etiketleri",
+    "etiket": "Kaynak etiketlerim",
+    "olcu": "Instagram / Google / tavsiye / QR / rehber…",
+    "tur": "liste",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "pazartesi_sorusu",
+    "etiket": "Pazartesi sorum",
+    "olcu": "Her pazartesi panoya baktığımda cevabını aradığım tek soru",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "harita_ozeti",
+    "etiket": "Harita özeti",
+    "olcu": "OV.0 + OV.2–OV.9: işimin kurulum planı (Tam'a girişte ilk görüşmenin gündemi)",
+    "tur": "uzun_metin",
+    "zorunlu": false,
+    "not": "öğrenci yazmaz; araç OV0–OV9'dan derler, öğrenci onaylar"
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "OV0",
+   "OV2",
+   "OV3",
+   "OV4",
+   "OV5",
+   "OV6",
+   "OV7",
+   "OV8"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - Harita OV9",
+    "tur": "buyuk_metin"
+   },
+   {
+    "etiket": "gai_harita_tamam",
+    "kosul": "OV0 ve OV2–OV9 onaylı"
+   }
+  ],
+  "tam_yuvasi": "TP.8 Ölçüm + TP.9 Uçtan uca; Tam ilk görüşmesinin gündemi",
+  "sohbet_kipi": "cikar",
+  "not": "Scriptte ayrı 'Tek ölçüt' satırı yok.",
+  "_dosya": "OV.yaml"
+ },
+ {
+  "anahtar": "W1",
+  "baslik": "Müşteriye Açılan Kapı",
+  "ders": "W.1",
+  "script": "scriptler/w/W.1-musteriye-acilan-kapi.md",
+  "modul": "Büyüme Döngüm",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "kapi_testi",
+    "etiket": "Kapı testi",
+    "olcu": "3 kanal (WhatsApp mutlaka) × dönüş süresi · gece mesajına ne oldu · bulunan 1 kilit · hangi O dersine dönülecek",
+    "tur": "tablo",
+    "adet": 3,
+    "sutunlar": [
+     {
+      "anahtar": "kanal",
+      "etiket": "Kanal",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "donus_suresi",
+      "etiket": "Dönüş süresi",
+      "tur": "kisa_metin"
+     }
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "gece_mesaji",
+    "etiket": "Gece mesajına ne oldu",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "bulunan_kilit",
+    "etiket": "Bulunan 1 kilit",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "donulecek_o_dersi",
+    "etiket": "Hangi O dersine dönülecek",
+    "tur": "secim",
+    "secenekler": [
+     "OV.2",
+     "OV.3",
+     "OV.4",
+     "OV.5",
+     "OV.6",
+     "OV.7",
+     "OV.8",
+     "OV.9"
+    ],
+    "zorunlu": false
+   },
+   {
+    "anahtar": "tersten_hesap",
+    "etiket": "Tersten hesap",
+    "olcu": "\"Ayda __ müşteri için haftada __ doğru kişi\" (varsayımlar yanında)",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "not": "alt alanlar sayı olabilir: aylik_musteri, haftalik_dogru_kisi, varsayimlar"
+   },
+   {
+    "anahtar": "ileri_plan",
+    "etiket": "İleri plan",
+    "olcu": "Takvimde haftalık saha bloğu (gün, saat)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Kapı testinde en yavaş kanalın dönüş süresi; bir sonraki testte kısaldı mı?",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "buyume_dongum": "Sayfayı açar: 8 temel sütun + ilk satır (son 30 gün, geriye dönük; bilinmeyen hücre: tahmin + ?)",
+  "bagimli": [],
+  "ghl": [
+   {
+    "alan_adi": "GAI - W1 Kapi Testi",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_w1"
+   }
+  ],
+  "tam_yuvasi": null,
+  "sohbet_kipi": "cikar",
+  "_dosya": "W.yaml"
+ },
+ {
+  "anahtar": "W2",
+  "baslik": "Potansiyel Müşteri Bulma",
+  "ders": "W.2",
+  "script": "scriptler/w/W.2-potansiyel-musteri-bulma.md",
+  "modul": "Büyüme Döngüm",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "iki_yol",
+    "etiket": "Seçtiğim 2 yol",
+    "olcu": "hızlı: __ · sabırlı: __",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "secenekler": [
+     "çekmek",
+     "gitmek",
+     "ödünç kitle",
+     "referans",
+     "uyuyan liste"
+    ],
+    "not": "iki ayrı seçim: hizli_yol, sabirli_yol"
+   },
+   {
+    "anahtar": "plan_14_gun",
+    "etiket": "14 günlük plan",
+    "olcu": "her yol için: kime · hangi mesaj · hangi eylem çağrısı · kaç kişi",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "bugun_5_kisi",
+    "etiket": "Bugün",
+    "olcu": "uyuyan listeden 5 kişi · her birine ne dendi · sonuç",
+    "tur": "liste",
+    "adet": 5,
+    "zorunlu": true,
+    "not": "kimliksiz (danışan 1 … 5); isim yok"
+   },
+   {
+    "anahtar": "sablon_adayi",
+    "etiket": "Şablon adayı",
+    "olcu": "5 mesajdan en iyi çalışanı (ileride akışın mesajı)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "İki yolun her birinden haftada gelen doğru kişi sayısı",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "buyume_dongum": "Kaynak sütunu (hangi yoldan geldi) + ilk satıra son 30 günün kaynak dağılımı (biliniyorsa)",
+  "bagimli": [
+   "R2",
+   "R3",
+   "R4"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - W2 Bulma Plani",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_w2"
+   }
+  ],
+  "tam_yuvasi": "Şablon adayı → otomasyon mesajı (30. gün dönüş türü akış)",
+  "sohbet_kipi": "cikar",
+  "_dosya": "W.yaml"
+ },
+ {
+  "anahtar": "W3",
+  "baslik": "Müşteri Edinimi",
+  "ders": "W.3",
+  "script": "scriptler/w/W.3-musteri-edinimi.md",
+  "modul": "Büyüme Döngüm",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "zincir",
+    "etiket": "Zincir tablosu",
+    "olcu": "6 halka × son 30 günün rakamı (bilinmeyen: tahmin + ?)",
+    "tur": "tablo",
+    "satirlar": [
+     "Gelen ilgi",
+     "İlk dönüş",
+     "Tanışma",
+     "Görüşme",
+     "Teklif",
+     "Satış"
+    ],
+    "sutunlar": [
+     {
+      "anahtar": "son_30_gun",
+      "etiket": "Son 30 gün",
+      "tur": "sayi"
+     },
+     {
+      "anahtar": "tahmin_mi",
+      "etiket": "Tahmin mi?",
+      "tur": "secim",
+      "secenekler": [
+       "gerçek",
+       "tahmin"
+      ]
+     }
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "en_buyuk_kacak",
+    "etiket": "En büyük kaçak",
+    "olcu": "hangi halka · neden",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "tek_kacak_plani",
+    "etiket": "2 haftalık tek-kaçak planı",
+    "olcu": "ne değişecek · kim · ne zaman",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "bugun_ilk_eylem",
+    "etiket": "Bugün",
+    "olcu": "atılan ilk eylem (ör. \"düşüneyim\" diyen 3 kişiye not, gelmeyene yeni saat)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "sablon_adayi",
+    "etiket": "Şablon adayı",
+    "olcu": "bugün yazdığın takip notlarından en iyi çalışanı (ileride akışın mesajı)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "En büyük kaçak halkasındaki oran; plan sonunda değişti mi?",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "buyume_dongum": "Görüşme · satış · gelmedi sütunları (ilk satıra son 30 gün)",
+  "bagimli": [
+   "R3",
+   "R5"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - W3 Edinim Zinciri",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_w3"
+   }
+  ],
+  "tam_yuvasi": "Şablon adayı → takip akışı mesajı",
+  "sohbet_kipi": "rol",
+  "not": "Sesli satış provası ders altında ve CEO kararıyla bekletiliyor (Aşama 4'ten çıktı). Rol kipi yalnız yazılı prova için; teslim tablosunda prova alanı yok.",
+  "_dosya": "W.yaml"
+ },
+ {
+  "anahtar": "W4",
+  "baslik": "Müşteri Deneyimi ve Memnuniyeti",
+  "ders": "W.4",
+  "script": "scriptler/w/W.4-musteri-deneyimi.md",
+  "modul": "Büyüme Döngüm",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "uce_ayrim",
+    "etiket": "Üçe ayrım",
+    "olcu": "aktif __ · riskli __ · bekleyen __ (sayı; isim değil)",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "not": "alt alanlar sayı: aktif, riskli, bekleyen"
+   },
+   {
+    "anahtar": "riskli_3",
+    "etiket": "Riskli 3 kişi",
+    "olcu": "yapılan dokunuş · cevap · sonuç",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": true,
+    "not": "kimliksiz"
+   },
+   {
+    "anahtar": "son_3_yeni",
+    "etiket": "Son 3 yeni müşteri",
+    "olcu": "ilk kazanımı yaşadı mı · eksik kalan ağırlama adımı",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": true,
+    "not": "kimliksiz"
+   },
+   {
+    "anahtar": "yorum_istegi",
+    "etiket": "Yorum isteği",
+    "olcu": "gönderilen sayısı · dönen · olumsuz yorum varsa verilen cevap",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "sablon_adayi",
+    "etiket": "Şablon adayı",
+    "olcu": "riskli kişiye yazdığın en iyi not (ileride akışın mesajı)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Riskli listeden bir ay içinde aktife dönen kişi sayısı",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "buyume_dongum": "Kalan · kaybedilen · yorum isteği · yorum/referans sütunları (ilk satıra son 30 gün)",
+  "bagimli": [
+   "R8"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - W4 Deneyim",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_w4"
+   }
+  ],
+  "tam_yuvasi": "Şablon adayı → riskli müşteri akışı (akıllı liste + görev)",
+  "sohbet_kipi": "cikar",
+  "_dosya": "W.yaml"
+ },
+ {
+  "anahtar": "W5",
+  "baslik": "Ölçüm ve Optimizasyon",
+  "ders": "W.5",
+  "script": "scriptler/w/W.5-olcum-optimizasyon.md",
+  "modul": "Büyüme Döngüm",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "adim_oranlari",
+    "etiket": "Adım oranları",
+    "olcu": "değilen → ilgi → görüşme → müşteri → kalan → getiren (geriye dönük)",
+    "tur": "tablo",
+    "satirlar": [
+     "değilen → ilgi",
+     "ilgi → görüşme",
+     "görüşme → müşteri",
+     "müşteri → kalan",
+     "kalan → getiren"
+    ],
+    "sutunlar": [
+     {
+      "anahtar": "oran",
+      "etiket": "Oran",
+      "tur": "sayi"
+     }
+    ],
+    "zorunlu": true,
+    "not": "Büyüme Döngüm sütunlarından araçla hesaplanabilir"
+   },
+   {
+    "anahtar": "darbogaz",
+    "etiket": "Darboğaz",
+    "olcu": "tek adım · neden",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "tek_degisiklik",
+    "etiket": "Tek değişiklik + eşik",
+    "olcu": "ne değişiyor · eşik (süre ya da kişi sayısı) · sonuç tarihi",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kaynak_siralamasi",
+    "etiket": "Kaynak sıralaması",
+    "olcu": "hangi yoldan kaç kişi (biliniyorsa)",
+    "tur": "liste",
+    "zorunlu": false
+   },
+   {
+    "anahtar": "kazanilan_saat",
+    "etiket": "Kazanılan saat",
+    "olcu": "iş · eskiden __ dk · şimdi __ dk (kendi ölçümün)",
+    "tur": "kisa_metin",
+    "zorunlu": false,
+    "kaynak_alanlar": [
+     "O1",
+     "O4.olcum"
+    ]
+   },
+   {
+    "anahtar": "test_yeniden",
+    "etiket": "Test yeniden",
+    "olcu": "yeni sonuç · ilk ölçümle kıyas (T.5'te birlikte gösterilir)",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "G1.yeniden_olcum"
+    ],
+    "not": "G1 motorundan gelir; öğrenci yazmaz"
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Seçtiğim darboğaz adımının oranı; eşik dolunca değişti mi?",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "buyume_dongum": "Haftalık rapor satırı (sabit sıra) + takvimde haftalık rapor saati",
+  "bagimli": [
+   "W1",
+   "W3"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - W5 Olcum",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_w5"
+   }
+  ],
+  "tam_yuvasi": "TP.8 Ölçüm",
+  "sohbet_kipi": "cikar",
+  "_dosya": "W.yaml"
+ },
+ {
+  "anahtar": "W6",
+  "baslik": "Büyüme Döngüsü",
+  "ders": "W.6",
+  "script": "scriptler/w/W.6-buyume-dongusu.md",
+  "modul": "Büyüme Döngüm",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "dongu_semasi",
+    "etiket": "Döngü şeman",
+    "olcu": "5 ok · her okun üstünde son 30 günün rakamı (tahmin: ?) · boş oklar işaretli",
+    "tur": "tablo",
+    "satirlar": [
+     "Bul",
+     "Kazan",
+     "Tut",
+     "Çoğalt",
+     "Yeniden bul"
+    ],
+    "sutunlar": [
+     {
+      "anahtar": "son_30_gun",
+      "etiket": "Son 30 gün",
+      "tur": "sayi"
+     },
+     {
+      "anahtar": "tahmin_mi",
+      "etiket": "Tahmin mi?",
+      "tur": "secim",
+      "secenekler": [
+       "gerçek",
+       "tahmin",
+       "boş"
+      ]
+     }
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "uc_hesap",
+    "etiket": "Üç hesap",
+    "olcu": "müşteri değeri (ödeme × kalma + referans) · kendini besleme oranı (bedava yollardan gelen / tüm yeni) · tur süresi",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "tek_kaldirac",
+    "etiket": "Tek kaldıraç",
+    "olcu": "hangi ok · ne yapacağım",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "sisteme_ilk_ok",
+    "etiket": "Sisteme verilecek ilk ok",
+    "olcu": "hangi oku ilk kez yazılı hale getirip otomatiğe taşırsın (ileride Tam'da)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "aylik_toplanti",
+    "etiket": "Aylık döngü toplantısı",
+    "olcu": "ilk tarih (takvimde)",
+    "tur": "tarih",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "t_sorusu",
+    "etiket": "T sorusu",
+    "olcu": "\"İki hafta kaybolsam döner mi?\" · dürüst cevap (T.0'a girdi)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Kendini besleme oranı: yeni müşterilerin kaçı bedava yollardan geldi",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "buyume_dongum": "Aylık döngü satırı (5 okun rakamı, ay sonunda)",
+  "bagimli": [
+   "W1",
+   "W2",
+   "W3",
+   "W4",
+   "W5"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - W6 Dongu",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_w6"
+   }
+  ],
+  "tam_yuvasi": "Sisteme verilecek ilk ok → Tam kurulumunun ilk işi",
+  "sohbet_kipi": "cikar",
+  "not": "'T.0'a girdi' scriptte geçiyor ama T'de T.0 yok (T.1'in kafes testi). Kaynak eşlemesi: t_sorusu → K1.kafes_testi.",
+  "_dosya": "W.yaml"
+ },
+ {
+  "anahtar": "BUYUME_DONGUM",
+  "baslik": "Büyüme Döngüm",
+  "ders": [
+   "W.1",
+   "W.2",
+   "W.3",
+   "W.4",
+   "W.5",
+   "W.6"
+  ],
+  "script": "scriptler/w/W.1-musteriye-acilan-kapi.md",
+  "modul": "Büyüme Döngüm",
+  "tekrar": "haftalik",
+  "satir_birimi": "hafta",
+  "ilk_satir": "Son 30 gün, geriye dönük (W.1); bilinmeyen hücre: tahmin + ? işareti",
+  "alanlar": [
+   {
+    "anahtar": "hafta_baslangici",
+    "etiket": "Hafta",
+    "tur": "tarih",
+    "zorunlu": true,
+    "not": "satır anahtarı; sütun sayısına dahil değil"
+   },
+   {
+    "anahtar": "degilen_dogru_kisi",
+    "etiket": "Değilen doğru kişi",
+    "tur": "sayi",
+    "eklendigi_ders": "W.1"
+   },
+   {
+    "anahtar": "gelen_ilgi",
+    "etiket": "Gelen ilgi (toplam)",
+    "tur": "sayi",
+    "eklendigi_ders": "W.1",
+    "hesaplanan": true,
+    "not": "Aşağıdaki beş kaynak sayısının toplamı; öğrenci ayrıca girmez (Course kararı 2026-10-23)"
+   },
+   {
+    "anahtar": "kaynak_cekme",
+    "etiket": "Kaynak: çekmek (içerik, arama, işletme kartı)",
+    "tur": "sayi",
+    "eklendigi_ders": "W.2"
+   },
+   {
+    "anahtar": "kaynak_gitme",
+    "etiket": "Kaynak: gitmek (iş birliği, yönlendirme, etkinlik)",
+    "tur": "sayi",
+    "eklendigi_ders": "W.2"
+   },
+   {
+    "anahtar": "kaynak_odunc",
+    "etiket": "Kaynak: ödünç kitle",
+    "tur": "sayi",
+    "eklendigi_ders": "W.2"
+   },
+   {
+    "anahtar": "kaynak_referans",
+    "etiket": "Kaynak: referans",
+    "tur": "sayi",
+    "eklendigi_ders": "W.2"
+   },
+   {
+    "anahtar": "kaynak_uyuyan",
+    "etiket": "Kaynak: uyuyan liste",
+    "tur": "sayi",
+    "eklendigi_ders": "W.2"
+   },
+   {
+    "anahtar": "gorusme",
+    "etiket": "Görüşme",
+    "tur": "sayi",
+    "eklendigi_ders": "W.1",
+    "tekrar_eden_ders": "W.3"
+   },
+   {
+    "anahtar": "yeni_musteri",
+    "etiket": "Yeni müşteri",
+    "tur": "sayi",
+    "eklendigi_ders": "W.1",
+    "not": "W.3'teki 'satış' sütunu ile aynı kabul edildi (README açık nokta)"
+   },
+   {
+    "anahtar": "kaybedilen",
+    "etiket": "Kaybedilen",
+    "tur": "sayi",
+    "eklendigi_ders": "W.1",
+    "tekrar_eden_ders": "W.4"
+   },
+   {
+    "anahtar": "yorum_referans",
+    "etiket": "Yorum / referans",
+    "tur": "sayi",
+    "eklendigi_ders": "W.1",
+    "tekrar_eden_ders": "W.4"
+   },
+   {
+    "anahtar": "sahaya_ayrilan_saat",
+    "etiket": "Sahaya ayrılan saat",
+    "tur": "sayi",
+    "eklendigi_ders": "W.1"
+   },
+   {
+    "anahtar": "gelmedi",
+    "etiket": "Gelmedi",
+    "tur": "sayi",
+    "eklendigi_ders": "W.3"
+   },
+   {
+    "anahtar": "kalan",
+    "etiket": "Kalan",
+    "tur": "sayi",
+    "eklendigi_ders": "W.4"
+   },
+   {
+    "anahtar": "yorum_istegi",
+    "etiket": "Yorum isteği (gönderilen)",
+    "tur": "sayi",
+    "eklendigi_ders": "W.4"
+   },
+   {
+    "anahtar": "not",
+    "etiket": "Not",
+    "tur": "kisa_metin",
+    "zorunlu": false,
+    "not": "MIMARI §2 saha_weeks.not; scriptte ayrı sütun değil"
+   }
+  ],
+  "ek_satir_turleri": [
+   {
+    "anahtar": "haftalik_rapor",
+    "etiket": "Haftalık rapor satırı (sabit sıra)",
+    "eklendigi_ders": "W.5",
+    "not": "Ayrı sütun değil; aynı haftanın satırına bağlı sabit sıralı yorum/rapor. + takvimde haftalık rapor saati (W5 bölümünde)."
+   },
+   {
+    "anahtar": "aylik_dongu",
+    "etiket": "Aylık döngü satırı",
+    "eklendigi_ders": "W.6",
+    "alanlar": [
+     "bul",
+     "kazan",
+     "tut",
+     "cogalt",
+     "yeniden_bul"
+    ],
+    "tur": "sayi",
+    "not": "Ay sonunda, 5 okun rakamı. Haftalık kayıttan ayrı aylık kayıt türü olabilir (README açık nokta)."
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "W1"
+  ],
+  "ghl": [
+   {
+    "ozel_nesne": "Büyüme Döngüm",
+    "kayit": "hafta",
+    "alanlar": "hafta + 15 sayı (gelen ilgi hesaplanır) + not",
+    "iliski": "kisi",
+    "not": "Course kararı 2026-10-23: kaynak, yol başına sayı (5 alan). Kesin sütunlar: değilen doğru kişi · 5 kaynak · görüşme · gelmedi · yeni müşteri · kalan · kaybedilen · yorum isteği (gönderilen) · yorum/referans (gelen) · sahaya ayrılan saat. MIMARI §3 '8 sayı' güncellenmeli; özel nesne şeması bu listeyle kurulur."
+   }
+  ],
+  "tam_yuvasi": "TP.8 Ölçüm (Pano, raporlar); Tam hesabına aynı yapı taşınır",
+  "sohbet_kipi": "yok",
+  "erisim_28_gun_sonrasi": "⚠️ CEO kararı: dosya salt okunur. Büyüme Döngüm'ün haftalık satırları açık kalsın mı (W ve T.5 'programdan sonra da sürer' diyor) — Course önerisi: istisna olarak açık kalsın.",
+  "_dosya": "BUYUME_DONGUM.yaml"
+ },
+ {
+  "anahtar": "K1",
+  "baslik": "Kurucu Dosyası › Sayfa 1",
+  "ders": "T.1",
+  "script": "scriptler/t/T.1-sahibi-mi-iscisi-mi.md",
+  "modul": "Kurucu Dosyası",
+  "sayfa_no": 1,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "kafes_testi",
+    "etiket": "Kafes testi",
+    "olcu": "\"Bugün iki hafta kaybolsam işim ne kadar döner?\" · 1–10 kafes skoru",
+    "tur": "sayi",
+    "aralik": [
+     1,
+     10
+    ],
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "W6.t_sorusu"
+    ]
+   },
+   {
+    "anahtar": "kafes_aciklama",
+    "etiket": "Kafes testi (cevabın)",
+    "tur": "kisa_metin",
+    "zorunlu": false,
+    "not": "skora eşlik eden dürüst cevap; scriptte aynı satırda"
+   },
+   {
+    "anahtar": "gorunen_gorevler",
+    "etiket": "Görünen görevlerim",
+    "olcu": "8–12 görev",
+    "tur": "liste",
+    "adet_min": 8,
+    "adet_max": 12,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "gorunmeyen_deger",
+    "etiket": "Müşterimin aldığı görünmeyen değer",
+    "olcu": "3–5 değer (güven, tanınma, rahatlama…)",
+    "tur": "liste",
+    "adet_min": 3,
+    "adet_max": 5,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "koruma_listesi",
+    "etiket": "Koruma listem",
+    "olcu": "Anlam veren, devretmeyeceğim ilk 5 iş · (sorumluluk meslekleri: imza ve son söz en başta)",
+    "tur": "liste",
+    "adet": 5,
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Kafes skoru; 60. gün testinde yeniden (T.5)",
+   "tur": "sayi",
+   "sonradan_doldurulur": false,
+   "not": "kafes_testi değeri; yeniden ölçüm T5.altmisinci_gun"
+  },
+  "bagimli": [
+   "W6"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - K1 Kafes ve Koruma",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "alan_adi": "GAI - K1 Kafes Skoru",
+    "tur": "kisa_metin",
+    "not": "öneri; 60. gün kıyası için sayısal tek alan"
+   },
+   {
+    "etiket": "gai_dosya_k1"
+   }
+  ],
+  "tam_yuvasi": null,
+  "sohbet_kipi": "cikar",
+  "_dosya": "T.yaml"
+ },
+ {
+  "anahtar": "K2",
+  "baslik": "Yapay Zekâ Ekip Şeması",
+  "ders": "T.2",
+  "script": "scriptler/t/T.2-yapay-zeka-ekibin.md",
+  "modul": "Kurucu Dosyası",
+  "sayfa_no": 2,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "koltuklar",
+    "etiket": "Koltuklar (5–8)",
+    "tur": "tablo",
+    "adet_min": 5,
+    "adet_max": 8,
+    "sutunlar": [
+     {
+      "anahtar": "koltuk",
+      "etiket": "Koltuk",
+      "tur": "kisa_metin",
+      "olcu": "karşılama · içerik · satış takibi · teslimat asistanı · arka ofis · analist…"
+     },
+     {
+      "anahtar": "su_an_kim",
+      "etiket": "Şu an kim yapıyor",
+      "tur": "secim",
+      "secenekler": [
+       "ben",
+       "yardımcım",
+       "kimse"
+      ]
+     },
+     {
+      "anahtar": "haftalik_saat",
+      "etiket": "Haftalık saat",
+      "tur": "sayi",
+      "olcu": "yaklaşık"
+     },
+     {
+      "anahtar": "kim_oturacak",
+      "etiket": "Kim oturacak",
+      "tur": "secim",
+      "secenekler": [
+       "yapay zekâ",
+       "insan",
+       "ikisi birlikte"
+      ]
+     },
+     {
+      "anahtar": "olgunluk",
+      "etiket": "Olgunluk",
+      "tur": "secim",
+      "secenekler": [
+       "cevap veren",
+       "seni bilen ortak",
+       "senin için çalışan sistem"
+      ],
+      "not": "G.3 kanonik adları"
+     },
+     {
+      "anahtar": "kontrol_noktasi",
+      "etiket": "İnsan kontrol noktası",
+      "tur": "kisa_metin",
+      "olcu": "\"ne zaman bana döner\""
+     },
+     {
+      "anahtar": "koltugun_evi",
+      "etiket": "Koltuğun evi",
+      "tur": "secim",
+      "secenekler": [
+       "sohbet asistanı",
+       "growtify.app iş akışı",
+       "insan"
+      ]
+     }
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "ilk_koltuk_is_tanimi",
+    "etiket": "İlk koltuğun iş tanımı",
+    "olcu": "bağlam · nasıl yapılır · uç durumlar · ne zaman bana döner · 5 deneme ve düzeltme sayısı",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "not": "5 denemenin düzeltme sayıları ayrı sayı alanı olabilir (deneme_1 … deneme_5)"
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "İlk koltukta 5 denemedeki düzeltme sayısı; bir hafta sonra yeniden",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "K1",
+   "O3"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - K2 Ekip Semasi",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_k2"
+   }
+  ],
+  "tam_yuvasi": "Yapay Zeka Ajanları / iş akışları (koltuğun evi)",
+  "sohbet_kipi": "cikar",
+  "not": "Karma ekip (insan da oturabilir) CEO kararına bağlı (T-SON-HAL soru 3); 'insan' seçenekleri karara göre kalır/çıkar.",
+  "_dosya": "T.yaml"
+ },
+ {
+  "anahtar": "K3",
+  "baslik": "Kurucu Dosyası › Sayfa 3",
+  "ders": "T.3",
+  "script": "scriptler/t/T.3-isinden-kovuldun.md",
+  "modul": "Kurucu Dosyası",
+  "sayfa_no": 3,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "zaman_denetimi",
+    "etiket": "Zaman denetimi",
+    "olcu": "bütün işler · sonucun çoğunu getiren 3 iş · tekrar edenler · kolaydan zora sıra",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "devir_plani",
+    "etiket": "Devir planı",
+    "olcu": "hangi koltuktan hangi hafta çıkıyorum (4–8 haftalık takvim)",
+    "tur": "tablo",
+    "sutunlar": [
+     {
+      "anahtar": "koltuk",
+      "etiket": "Koltuk",
+      "tur": "secim",
+      "secenekler_kaynagi": "K2.koltuklar"
+     },
+     {
+      "anahtar": "hafta",
+      "etiket": "Hafta",
+      "tur": "sayi"
+     }
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "devir_paketleri",
+    "etiket": "Devir paketleri",
+    "olcu": "her koltuk: bağlam · nasıl yapılır · uç durumlar · ne zaman bana döner · durum (hazır / taslak)",
+    "tur": "liste",
+    "zorunlu": true,
+    "not": "her öğe için durum: hazır / taslak"
+   },
+   {
+    "anahtar": "karar_ilkeleri",
+    "etiket": "Karar ilkeleri v1",
+    "olcu": "en sık 5–10 karar için \"eğer … olursa … yaparım\" · \"bu benim cevabım mı?\" denetimi",
+    "tur": "liste",
+    "adet_min": 5,
+    "adet_max": 10,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kalite_olcutu",
+    "etiket": "Kalite ölçütü",
+    "olcu": "\"iyi iş neye benzer\" (yapay zekâ da insan yardımcı da aynı ölçütle)",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "O2.kalite_kurallari"
+    ]
+   },
+   {
+    "anahtar": "yokluk_provasi",
+    "etiket": "Yokluk provası",
+    "olcu": "hangi gün · neler kırıldı · her kırılmanın yarattığı yeni iş tanımı / ilke",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "sonradan_doldurulur": true,
+    "not": "prova program içinde yapılmayabilir; tarih bugün, sonuç sonra"
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Haftada bana gelen soru sayısı; devir planından önce ve sonra",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "K2"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - K3 Devir Plani",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_k3"
+   }
+  ],
+  "tam_yuvasi": "Otomasyon (bir kez yazılan kararlar akışa), Görevler (ne zaman bana dön)",
+  "sohbet_kipi": "cikar",
+  "_dosya": "T.yaml"
+ },
+ {
+  "anahtar": "K4",
+  "baslik": "Kurucu Dosyası › Sayfa 4",
+  "ders": "T.4",
+  "script": "scriptler/t/T.4-bagimsizlik.md",
+  "modul": "Kurucu Dosyası",
+  "sayfa_no": 4,
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "hayal_is",
+    "etiket": "Hayal iş",
+    "olcu": "haftalık saat · kime hizmet · yeterli gelir · bırakacaklarım · \"yeterli büyüklük\" cümlesi",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kazanilan_zaman",
+    "etiket": "Kazanılan zaman",
+    "olcu": "\"haftada __ saat kazanırsam şuraya harcayacağım\"",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "sabit_degisken",
+    "etiket": "Sabit / değişken",
+    "olcu": "değerlerim, vizyonum, kime hizmet ettiğim · yöntemlerim ve araçlarım",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "hedef_90_gun",
+    "etiket": "90 günlük hedef sayfası",
+    "olcu": "hedef · engeller · önceden yazılmış çözümler · neden önemli (yapay zekâya eleştirtilmiş ve düzeltilmiş hali)",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "aylik_yonetim_saati",
+    "etiket": "Aylık yönetim saati",
+    "olcu": "takvimdeki tarih · dört masa sırası",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "not": "tarih alt alanı: tur tarih"
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "Kazanılan saatlerin kaçı yazdığım yere gitti? (ilk yönetim saatinde)",
+   "tur": "sayi",
+   "sonradan_doldurulur": true
+  },
+  "bagimli": [
+   "K1",
+   "K3",
+   "BUYUME_DONGUM"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - K4 Bagimsizlik Plani",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "etiket": "gai_dosya_k4"
+   }
+  ],
+  "tam_yuvasi": "Pano / raporlar (aylık yönetim saati)",
+  "sohbet_kipi": "rol",
+  "not": "90 günlük hedefin 'yapay zekâya eleştirtilmiş' hali ve dört masa (ayna masası vb.) rol kipini ima ediyor; kurma kısmı çıkarma.",
+  "_dosya": "T.yaml"
+ },
+ {
+  "anahtar": "T5",
+  "baslik": "Kurucu Dosyası › Kapanış",
+  "ders": "T.5",
+  "script": "scriptler/t/T.5-kapanis.md",
+  "modul": "Kurucu Dosyası",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "once_sonra_haritasi",
+    "etiket": "Önce/sonra haritan",
+    "olcu": "G'deki ilk ölçüm ↔ W.5'teki yeniden ölçüm (yan yana)",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "G1.ilk_olcum",
+     "G1.yeniden_olcum"
+    ],
+    "not": "G1 motorundan gelir; öğrenci yazmaz. 'Karne' denmez."
+   },
+   {
+    "anahtar": "altmisinci_gun",
+    "etiket": "60. gün tarihi",
+    "olcu": "takvimde · o gün: Kurucu Dosyası okuma + yönetim saati + kafes testi (T.1 puanıyla kıyas)",
+    "tur": "tarih",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "sonraki_adim",
+    "etiket": "Bir sonraki adımım",
+    "olcu": "kendi başıma · Tam Paket · uzman ekip (tek cümle)",
+    "tur": "secim",
+    "secenekler": [
+     "kendi başıma",
+     "Tam Paket",
+     "uzman ekip"
+    ],
+    "zorunlu": true,
+    "not": "+ tek cümlelik açıklama alanı"
+   }
+  ],
+  "tek_olcut": {
+   "etiket": "Tek ölçütüm",
+   "olcu": "60. günde Kurucu Dosyası'nı hâlâ açıyor muyum, kafes skorum değişti mi?",
+   "tur": "kisa_metin",
+   "sonradan_doldurulur": true,
+   "not": "60. günde kafes skoru K1.kafes_testi ile kıyaslanır; 28 gün sonrası salt okunur kararıyla çelişebilir (README)"
+  },
+  "bagimli": [
+   "K1",
+   "K2",
+   "K3",
+   "K4",
+   "W5"
+  ],
+  "ghl": [
+   {
+    "alan_adi": "GAI - T5 Kapanis",
+    "tur": "buyuk_metin",
+    "not": "öneri"
+   },
+   {
+    "alan_adi": "GAI - T5 Sonraki Adim",
+    "tur": "kisa_metin",
+    "not": "öneri; Tam/uzman ekip yönlendirmesi için segment"
+   },
+   {
+    "etiket": "gai_dosya_t5"
+   }
+  ],
+  "tam_yuvasi": "Tam köprüsü (seçim 'Tam Paket' ise)",
+  "sohbet_kipi": "yok",
+  "_dosya": "T.yaml"
+ },
+ {
+  "anahtar": "FREE2",
+  "baslik": "İşimde bir agent'ın alabileceği 3 köşe",
+  "ders": "Free.2",
+  "script": "scriptler/free/Free.2-ai-agents-ve-beklenti.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "uc_kose",
+    "etiket": "İşimde bir agent'ın alabileceği 3 köşe",
+    "olcu": "tekrar eden, her seferinde benzer işler",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "not": "Free.4'te 'yapay zekâya' sütununun başlangıcı.",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "FREE3",
+  "baslik": "Yapay zekânın benim işim hakkında bilmediği 3 şey",
+  "ders": "Free.3",
+  "script": "scriptler/free/Free.3-neden-simdi-neden-sen.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "bilmedigi_3_sey",
+    "etiket": "Yapay zekânın benim işim hakkında bilmediği 3 şey",
+    "olcu": "yöntemin, müşterini tanıma biçimin, asla atlamadığın bir şey",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "not": "İlk Kazanım dersinde bağlamın ilk parçası.",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "FREE4",
+  "baslik": "Neyi devredersin, neyi asla",
+  "ders": "Free.4",
+  "script": "scriptler/free/Free.4-neyi-devredersin-neyi-asla.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "on_is_uc_sutun",
+    "etiket": "Kendi haftandan 10 iş, üç sütunda",
+    "tur": "tablo",
+    "adet": 10,
+    "sutunlar": [
+     {
+      "anahtar": "is",
+      "etiket": "İş",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "sutun",
+      "etiket": "Sütun",
+      "tur": "secim",
+      "secenekler": [
+       "devret (yapay zekâya)",
+       "birlikte",
+       "sende"
+      ],
+      "not": "sütun adları scriptte üç sütun; adlar Free.4 metnine göre teyit edilmeli"
+     }
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "asla_listesi",
+    "etiket": "Üç satırlık \"asla\" listesi",
+    "olcu": "veri / karar / temas",
+    "tur": "tablo",
+    "satirlar": [
+     "veri",
+     "karar",
+     "temas"
+    ],
+    "sutunlar": [
+     {
+      "anahtar": "asla",
+      "etiket": "Asla",
+      "tur": "kisa_metin"
+     }
+    ],
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "FREE2"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "cikar",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "FREE4B",
+  "baslik": "İlk Kazanım",
+  "ders": "Free.4b",
+  "script": "scriptler/free/Free.4b-ilk-kazanim.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "gercek_cikti",
+    "etiket": "Kendi işinden gerçek bir çıktı",
+    "olcu": "bu hafta kullanacağın bir mesaj ya da metin",
+    "tur": "uzun_metin",
+    "zorunlu": true,
+    "not": "kimliksiz"
+   },
+   {
+    "anahtar": "once_sonra",
+    "etiket": "Önce/sonra",
+    "olcu": "bağlamsız cevap, bağlamlı cevap, kendi ölçtüğün kazanılan dakika",
+    "tur": "uzun_metin",
+    "zorunlu": false,
+    "not": "scriptte topluluk paylaşımı; dosyada isteğe bağlı kopya"
+   },
+   {
+    "anahtar": "kazanilan_dakika",
+    "etiket": "Kazanılan dakika",
+    "tur": "sayi",
+    "zorunlu": false
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "FREE3"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "cikar",
+  "not": "Free.4b ders olarak CEO onayına bağlı (Free.3 'onaylanırsa' diyor).",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "FREE5",
+  "baslik": "Mesele araç değil",
+  "ders": "Free.5",
+  "script": "scriptler/free/Free.5-mesele-arac-degil.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "versiyon",
+    "etiket": "Hangi versiyon",
+    "tur": "secim",
+    "secenekler": [
+     "A: İlk Kazanım çıktısına bir tasarım hamlesi",
+     "B: 'yapay zekâya' sütunundan bir işte üç hamle"
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "fark",
+    "etiket": "Fark",
+    "olcu": "iki cümle",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "FREE4"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "FREE6",
+  "baslik": "Karar",
+  "ders": "Free.6",
+  "script": "scriptler/free/Free.6-growtify-ai-nedir-ve-growt.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "cekici_asama",
+    "etiket": "GROWT'ta beni en çok çeken aşama ve neden",
+    "tur": "kisa_metin",
+    "zorunlu": false,
+    "not": "scriptte isteğe bağlı topluluk paylaşımı"
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "not": "Asıl teslim 'Temel'e devam / toplulukta kal' kararı; bu bir satın alma olayı, dosya alanı değil.",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "BB1",
+  "baslik": "Program tanıtımı",
+  "ders": "BB.1",
+  "script": "scriptler/buradan-basla/BB.1-program-tanitimi.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "takvim_bloklari",
+    "etiket": "4 haftalık günlük GROWT blokları",
+    "olcu": "takvimde; gün ve saat",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "not": "scriptte ekran görüntüsü; dosyada yazılı gün/saat önerilir"
+   },
+   {
+    "anahtar": "neden_basladim",
+    "etiket": "Neden başladım",
+    "olcu": "Free.1'deki cümle",
+    "tur": "kisa_metin",
+    "zorunlu": false,
+    "not": "topluluk tanışma postunun dosyadaki kopyası"
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "BB2",
+  "baslik": "Yapay zekâ teknik işleri",
+  "ders": "BB.2",
+  "script": "scriptler/buradan-basla/BB.2-yapay-zeka-teknik-isleri.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "gizlilik_ayari",
+    "etiket": "Gizlilik ayarı kapalı mı",
+    "tur": "secim",
+    "secenekler": [
+     "evet",
+     "hayır"
+    ],
+    "zorunlu": true,
+    "not": "scriptte ekran görüntüsü; dosyada onay kutusu"
+   },
+   {
+    "anahtar": "kalici_tohum",
+    "etiket": "Kalıcı alana yazdığın tohum",
+    "olcu": "3–5 cümle",
+    "tur": "uzun_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "FREE4",
+   "FREE4B"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "not": "'Açılmış GROWT defteri' teslimi Çalışma Dosyam'ın kendisi; alan değil.",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "BB3",
+  "baslik": "3 motor, 3 dağınıklık",
+  "ders": "BB.3",
+  "script": "scriptler/buradan-basla/BB.3-growtify-app-tanitimi.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "nasil_buluyorlar",
+    "etiket": "Beni nasıl buluyorlar? Şu an hangi araç / yöntem?",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "nasil_evet",
+    "etiket": "Nasıl \"evet\" diyorlar? (mesaj, randevu, ödeme nerede?)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "iceride_ne_yasiyorlar",
+    "etiket": "İçeri girince ne yaşıyorlar? (takip, teslim, iletişim nerede?)",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "not": "OV.0'daki 'müşterilerim hangi 3 yerde dağılmış' satırıyla örtüşüyor (README).",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "BB4",
+  "baslik": "Üç motor kartım",
+  "ders": "BB.4",
+  "script": "scriptler/buradan-basla/BB.4-takip-edilecek-yol-haritasi.md",
+  "modul": "Başlangıç",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "uc_motor",
+    "etiket": "Her motor için tek cümle",
+    "olcu": "Beni nasıl buluyorlar? / Nasıl \"evet\" diyorlar? / İçeri girince ne yaşıyorlar?",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "en_zayif_motor",
+    "etiket": "En zayıf motorum",
+    "tur": "secim",
+    "secenekler": [
+     "çekmek",
+     "dönüştürmek",
+     "tutmak"
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "en_dusuk_pencere",
+    "etiket": "Testteki en düşük pencerem",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "G1.en_dusuk_pencere"
+    ],
+    "not": "G1'den; test çözülmediyse G'de doldurulur"
+   },
+   {
+    "anahtar": "ilk_durak",
+    "etiket": "\"İlk durağım şu\" notu",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "doksan_gun_degisiklik",
+    "etiket": "90 gün sonra işimde görmek istediğim tek değişiklik",
+    "olcu": "bir cümle; rakam şart değil",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "BB3"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "G1",
+  "baslik": "Haftamda beni en çok yoran iş",
+  "ders": "G.1",
+  "script": "scriptler/g/G.1-gap-vsl.md",
+  "modul": "Gap Raporum",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "yoran_is",
+    "etiket": "Haftamda beni en çok yoran iş",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "tahmini_saat",
+    "etiket": "Tahminen kaç saat",
+    "tur": "sayi",
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "not": "Bölüm anahtarı G1 = G.1 dersi; G1 TESTİ (motor) ile karışmasın. Development farklı anahtar isterse G_1 kullanılabilir.",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "G2",
+  "baslik": "G1 profili ve PDF",
+  "ders": "G.2",
+  "script": "scriptler/g/G.2-kontrol-noktasi.md",
+  "modul": "Gap Raporum",
+  "tekrar": "tek_sefer",
+  "salt_okunur": true,
+  "kaynak": "G1 motoru (growtify.ai/g1); profil + PDF + g1_baseline",
+  "alanlar": [
+   {
+    "anahtar": "profil",
+    "etiket": "AI Olgunluk Profilim",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "G1.profil",
+     "G1.pdf"
+    ],
+    "not": "salt okunur, G1'den gelir"
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [],
+  "ghl": {
+   "mevcut": "G1 alanları (G1 Baseline, G1 Archetype, G1 Gap Summary, G1 Completed At …)"
+  },
+  "sohbet_kipi": "yok",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "G3",
+  "baslik": "Seviyem ve en zayıf halkam",
+  "ders": "G.3",
+  "script": "scriptler/g/G.3-ai-olgunluk-profilin.md",
+  "modul": "Gap Raporum",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "seviye",
+    "etiket": "Seviyem",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "G1.seviye"
+    ],
+    "not": "salt okunur, G1'den"
+   },
+   {
+    "anahtar": "en_zayif_halka",
+    "etiket": "En zayıf halkam (x/5)",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "G1.en_zayif_halka"
+    ],
+    "not": "salt okunur, G1'den"
+   },
+   {
+    "anahtar": "bende_gorunusu",
+    "etiket": "Bu bende şöyle görünüyor",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "ayna_sorusu",
+    "etiket": "Ayna sorusunun cevabı (isteğe bağlı)",
+    "olcu": "bir cümle",
+    "tur": "kisa_metin",
+    "zorunlu": false
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "G2"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "G4",
+  "baslik": "Mesleğim ve yapay zekâ",
+  "ders": "G.4",
+  "script": "scriptler/g/G.4-sektorun-nereye-gidiyor.md",
+  "modul": "Gap Raporum",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "yz_alacagi_isler",
+    "etiket": "Mesleğimde yapay zekânın aldığı / alacağı işler",
+    "tur": "liste",
+    "adet_min": 3,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "bende_kalan",
+    "etiket": "Bende kalan ve değer kazanan şeyler",
+    "tur": "liste",
+    "adet_min": 3,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "g1_kiyas_boyut",
+    "etiket": "G1 kıyasında önde / aynı / geride olduğum bir boyut",
+    "tur": "kisa_metin",
+    "zorunlu": false,
+    "kaynak_alanlar": [
+     "G1"
+    ]
+   },
+   {
+    "anahtar": "meslektas_taramasi",
+    "etiket": "Meslektaş taramasından üç isim ve devrettikleri işler",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": false,
+    "not": "kamuya açık meslektaşlar; kişisel veri değil ama isim içeriyor — README açık nokta"
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "G2"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "G5",
+  "baslik": "Fırsat Haritası",
+  "ders": "G.5",
+  "script": "scriptler/g/G.5-firsat-haritan.md",
+  "modul": "Gap Raporum",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "aday_isler",
+    "etiket": "Aday dijital işler (5–10)",
+    "tur": "tablo",
+    "adet_min": 5,
+    "adet_max": 10,
+    "sutunlar": [
+     {
+      "anahtar": "is",
+      "etiket": "İş",
+      "tur": "kisa_metin"
+     },
+     {
+      "anahtar": "haftalik_saat",
+      "etiket": "Haftalık saat",
+      "tur": "sayi"
+     },
+     {
+      "anahtar": "uygunluk",
+      "etiket": "Uygunluk puanı (0–6)",
+      "tur": "sayi",
+      "aralik": [
+       0,
+       6
+      ]
+     },
+     {
+      "anahtar": "korunuyor_mu",
+      "etiket": "Korunuyor mu?",
+      "tur": "secim",
+      "secenekler": [
+       "evet",
+       "hayır"
+      ]
+     }
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "baslangic_noktasi",
+    "etiket": "Seçilmiş 1 başlangıç noktası",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "neden_bu",
+    "etiket": "Neden bu",
+    "olcu": "tek cümle",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "g1_tahminle_kiyas",
+    "etiket": "G.1'deki tahminle karşılaştırma",
+    "olcu": "bir satır",
+    "tur": "kisa_metin",
+    "zorunlu": true,
+    "kaynak_alanlar": [
+     "G1.yoran_is",
+     "G1.tahmini_saat"
+    ]
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "G1",
+   "G4"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "cikar",
+  "not": "O0.bir_numarali_surec ve O1.surec buradan beslenir. G1 motoru da bir fırsat haritası üretiyorsa bu bölüm onunla birleştirilmeli (README).",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "G6",
+  "baslik": "Bedel kartı",
+  "ders": "G.6",
+  "script": "scriptler/g/G.6-hareketsizligin-bedeli.md",
+  "modul": "Gap Raporum",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "uc_rakam",
+    "etiket": "G1'den üç rakam",
+    "olcu": "yılda geri dönecek saat · kaçan ₺ · boş kapasite ₺/ay",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "G1.bedel_saat",
+     "G1.bedel_kacan_tl",
+     "G1.bedel_bos_kapasite"
+    ],
+    "not": "salt okunur, G1'den gelir"
+   },
+   {
+    "anahtar": "operasyonel_borc",
+    "etiket": "Operasyonel borç testinde \"evet\" dediğim maddeler",
+    "tur": "liste",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "kacak_adim",
+    "etiket": "Kaçağın olduğunu düşündüğün adım",
+    "tur": "secim",
+    "secenekler": [
+     "ilk mesaj",
+     "randevu",
+     "görüşme",
+     "karar"
+    ],
+    "zorunlu": true
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "G2"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "_dosya": "FREE_BB_G.yaml"
+ },
+ {
+  "anahtar": "G7",
+  "baslik": "Gap Raporum + İlk 30 Günüm",
+  "ders": "G.7",
+  "script": "scriptler/g/G.7-ilk-30-gunun.md",
+  "modul": "Gap Raporum",
+  "tekrar": "tek_sefer",
+  "alanlar": [
+   {
+    "anahtar": "gap_raporu",
+    "etiket": "Gap Raporum",
+    "olcu": "3 sayfa (profil PDF + Fırsat Haritası + Bedel kartı)",
+    "tur": "referans",
+    "kaynak_alanlar": [
+     "G2",
+     "G5",
+     "G6"
+    ],
+    "not": "derlenir; öğrenci yazmaz"
+   },
+   {
+    "anahtar": "dort_hafta_odak",
+    "etiket": "İlk 30 Günüm: 4 hafta × tek odak",
+    "olcu": "program / deneme / ölçüm şeritleri",
+    "tur": "tablo",
+    "satirlar": [
+     "Hafta 1",
+     "Hafta 2",
+     "Hafta 3",
+     "Hafta 4"
+    ],
+    "sutunlar": [
+     {
+      "anahtar": "odak",
+      "etiket": "Tek odak",
+      "tur": "kisa_metin"
+     }
+    ],
+    "zorunlu": true
+   },
+   {
+    "anahtar": "uc_engel",
+    "etiket": "3 engel + önceden çözüm",
+    "tur": "liste",
+    "adet": 3,
+    "zorunlu": true
+   },
+   {
+    "anahtar": "neden_onemli",
+    "etiket": "\"Neden önemli\" cümlesi",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "sabit_saat",
+    "etiket": "Takvimde sabit bir saat",
+    "tur": "kisa_metin",
+    "zorunlu": true
+   },
+   {
+    "anahtar": "olcum_gunlugu",
+    "etiket": "Ölçüm günlüğü başlığı",
+    "tur": "kisa_metin",
+    "zorunlu": false
+   }
+  ],
+  "tek_olcut": null,
+  "bagimli": [
+   "G2",
+   "G5",
+   "G6"
+  ],
+  "ghl": null,
+  "sohbet_kipi": "yok",
+  "not": "G kontrol noktası (5 aşama geçişi maili G.7→R). Topluluk paylaşımı alan değil.",
+  "_dosya": "FREE_BB_G.yaml"
+ }
+]

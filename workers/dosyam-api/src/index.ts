@@ -46,7 +46,7 @@ export interface Env {
 }
 
 const MAX_BODY = 256 * 1024;
-const SECTION_RE = /^[A-Z_]{1,16}[0-9]{0,2}[a-z]?$/;
+const SECTION_RE = /^[A-Z_]{1,16}[0-9]{0,2}[A-Z]?$/;
 const HEX64 = /^[0-9a-f]{64}$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 

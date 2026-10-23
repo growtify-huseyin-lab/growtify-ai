@@ -1,0 +1,43 @@
+# Çalışma Dosyam · bölüm tanımı · Büyüme Döngüm (eski adı: Saha Tablosu; CEO 2026-10-23)
+# Haftalık; programdan sonra da sürer. Kaynak: W.1 (sayfayı açar, 8 sütun) + W.2–W.6 "Büyüme Döngüm'e eklenen" satırları.
+# GHL: özel nesne "Büyüme Döngüm" (her kayıt bir hafta, kişiyle ilişkili) — MIMARI §3. Teknik tablo adı saha_weeks kalabilir (§2).
+# Sütunlar tekrar etmeden birleştirildi. W.1'in 8 temel sütunu + derslerin eklediği ve temelde olmayanlar.
+
+- anahtar: BUYUME_DONGUM
+  baslik: "Büyüme Döngüm"
+  ders: [W.1, W.2, W.3, W.4, W.5, W.6]
+  script: scriptler/w/W.1-musteriye-acilan-kapi.md
+  modul: Büyüme Döngüm
+  tekrar: haftalik
+  satir_birimi: hafta
+  ilk_satir: "Son 30 gün, geriye dönük (W.1); bilinmeyen hücre: tahmin + ? işareti"
+  alanlar:
+    # W.1 temel sütunları (8)
+    - {anahtar: hafta_baslangici, etiket: "Hafta", tur: tarih, zorunlu: true, not: "satır anahtarı; sütun sayısına dahil değil"}
+    - {anahtar: degilen_dogru_kisi, etiket: "Değilen doğru kişi", tur: sayi, eklendigi_ders: W.1}
+    - {anahtar: gelen_ilgi, etiket: "Gelen ilgi (toplam)", tur: sayi, eklendigi_ders: W.1, hesaplanan: true, not: "Aşağıdaki beş kaynak sayısının toplamı; öğrenci ayrıca girmez (Course kararı 2026-10-23)"}
+    - {anahtar: kaynak_cekme, etiket: "Kaynak: çekmek (içerik, arama, işletme kartı)", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: kaynak_gitme, etiket: "Kaynak: gitmek (iş birliği, yönlendirme, etkinlik)", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: kaynak_odunc, etiket: "Kaynak: ödünç kitle", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: kaynak_referans, etiket: "Kaynak: referans", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: kaynak_uyuyan, etiket: "Kaynak: uyuyan liste", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: gorusme, etiket: "Görüşme", tur: sayi, eklendigi_ders: W.1, tekrar_eden_ders: W.3}
+    - {anahtar: yeni_musteri, etiket: "Yeni müşteri", tur: sayi, eklendigi_ders: W.1, not: "W.3'teki 'satış' sütunu ile aynı kabul edildi (README açık nokta)"}
+    - {anahtar: kaybedilen, etiket: "Kaybedilen", tur: sayi, eklendigi_ders: W.1, tekrar_eden_ders: W.4}
+    - {anahtar: yorum_referans, etiket: "Yorum / referans", tur: sayi, eklendigi_ders: W.1, tekrar_eden_ders: W.4}
+    - {anahtar: sahaya_ayrilan_saat, etiket: "Sahaya ayrılan saat", tur: sayi, eklendigi_ders: W.1}
+    # Derslerin eklediği, temelde olmayan sütunlar
+    - {anahtar: gelmedi, etiket: "Gelmedi", tur: sayi, eklendigi_ders: W.3}
+    - {anahtar: kalan, etiket: "Kalan", tur: sayi, eklendigi_ders: W.4}
+    - {anahtar: yorum_istegi, etiket: "Yorum isteği (gönderilen)", tur: sayi, eklendigi_ders: W.4}
+    - {anahtar: not, etiket: "Not", tur: kisa_metin, zorunlu: false, not: "MIMARI §2 saha_weeks.not; scriptte ayrı sütun değil"}
+  ek_satir_turleri:
+    - {anahtar: haftalik_rapor, etiket: "Haftalık rapor satırı (sabit sıra)", eklendigi_ders: W.5, not: "Ayrı sütun değil; aynı haftanın satırına bağlı sabit sıralı yorum/rapor. + takvimde haftalık rapor saati (W5 bölümünde)."}
+    - {anahtar: aylik_dongu, etiket: "Aylık döngü satırı", eklendigi_ders: W.6, alanlar: ["bul", "kazan", "tut", "cogalt", "yeniden_bul"], tur: sayi, not: "Ay sonunda, 5 okun rakamı. Haftalık kayıttan ayrı aylık kayıt türü olabilir (README açık nokta)."}
+  tek_olcut: null
+  bagimli: [W1]
+  ghl:
+    - {ozel_nesne: "Büyüme Döngüm", kayit: hafta, alanlar: "hafta + 15 sayı (gelen ilgi hesaplanır) + not", iliski: kisi, not: "Course kararı 2026-10-23: kaynak, yol başına sayı (5 alan). Kesin sütunlar: değilen doğru kişi · 5 kaynak · görüşme · gelmedi · yeni müşteri · kalan · kaybedilen · yorum isteği (gönderilen) · yorum/referans (gelen) · sahaya ayrılan saat. MIMARI §3 '8 sayı' güncellenmeli; özel nesne şeması bu listeyle kurulur."}
+  tam_yuvasi: "TP.8 Ölçüm (Pano, raporlar); Tam hesabına aynı yapı taşınır"
+  sohbet_kipi: yok
+  erisim_28_gun_sonrasi: "⚠️ CEO kararı: dosya salt okunur. Büyüme Döngüm'ün haftalık satırları açık kalsın mı (W ve T.5 'programdan sonra da sürer' diyor) — Course önerisi: istisna olarak açık kalsın."
