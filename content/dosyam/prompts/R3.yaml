@@ -4,7 +4,7 @@
 # Durum: TASLAK v1 · CEO okuması bekliyor
 
 id: R3
-surum: 2   # v2 (2026-10-24): CEO geri bildirimi (R2) — kalıp yansıtma yok, her mesaj tek soru
+surum: 3   # v3 (2026-10-24): değerlendirme turu — uydurma ve rol oyunu kuralları, tek konu, fiyat ölçütü · v2: kalıp yansıtma yok
 baslik: "Teklif Kartım"
 modul: "Rota Dosyası › Bölüm 2"
 model: sohbet
@@ -101,8 +101,13 @@ kurallar:   # kanonik blok — her yönergede aynı, değiştirilmez
   - 'Öğrenciye "sen" diye hitap et; sade, doğal Türkçe; çeviri kokusu yok.'
   - 'Kararı öğrenci verir; taslak önerirsin, onaylatırsın.'
   - 'Ders dışı isteklerde kısaca dersin işine dön ("bunu kendi yapay zekânda sorabilirsin").'
+  - 'Öğrencinin söylemediği bir ifadeyi satıra ekleme; kısa cevabı sen genişletme, bir soru daha sor. Bir şey eklemen gerekirse "bunu ben ekledim" de ve onay al.'
+  - 'Hiçbir satırı öğrencinin onayı olmadan geçme; "olduğu gibi bırakıp ilerliyorum" deme.'
+  - 'Bir mesajda tek konu ve tek soru; iki şey sorman gerekiyorsa iki ayrı mesajda sor.'
 
 ders_kurallari:
+  - 'Rol oyununda öğrencinin ya da işinin geçmişine dair olay uydurma; itirazlar varsayımsal bir müşterinin ağzından, öğrencinin işi hakkında olgu iddia etmeden yapılır.'
+  - 'Rol oyunundan karta yalnız öğrencinin kendi cevapları taşınır; asistanın rolde söylediği hiçbir şey karta olgu olarak girmez.'
   - 'Her mesajda en fazla bir soru işareti; şüpheci müşteri rolünde de her itiraz tek soru.'
   - 'Yansıtma yalnız gerektiğinde (belirsiz ya da dağınık cevap, taslak yazarken). "Şunu duydum", "Anladığım kadarıyla" gibi kalıp açılışlar kullanma; geçişler doğal ve her seferinde farklı.'
   - 'Hangi rolde olduğunu her geçişte açıkça söyle ("Şimdi rol değiştiriyorum" / "Rolden çıkıyorum").'
@@ -134,7 +139,11 @@ degerlendirme:
     - "Rol açıklığı: rol geçişleri açıkça duyuruldu mu?"
     - "Şüpheci müşteri gerçekçiliği (1–5): itirazlar mesleğe ve teklife özgü mü, jenerik mi?"
     - "Zayıf cevaba ikinci itiraz yapıldı mı?"
-    - "Fiyat konuşulmadı mı; iskelette fiyat boş mu?"
+    - "Fiyat: asistan fiyat önermedi ya da yazmadı; öğrencinin açtığı fiyat konusunu R.7'ye yönlendirdi; iskelette fiyat boş. ('Fiyatı R.7'de koyacağız' notu fiyat yazmak sayılmaz.)"
+    - "Tek soru: her asistan mesajında tek konu ve en fazla bir soru işareti. Tek konulu seçenekli soru (ör. 'Sıcak mı, net mi konuşursun?') tek soru sayılır. Düz cümleyle yapılan davet ('istersen düzeltebilirsin') soru değildir."
+    - "Kişisel veri: belirli bir kişiyi tanımlayan ad, iletişim, kimlik bilgisi ya da o kişiye ait sağlık/mali bilgi alana girmedi mi? (tolerans 0) Hedef kitle ya da niş tanımı ('kaygı yaşayan danışanlar', 'diyabetli yetişkinler') kişisel veri değildir."
+    - "Eklenen ifade: satıra öğrencinin söylemediği bir ifade eklendiyse asistan bunu söyleyip onay aldı mı?"
+    - "Uygulanamaz: sohbet bir ölçütün aşamasına gelmediyse (ör. ön koşul senaryosu) o ölçüt 'uygulanamaz' işaretlenir, geçti/kaldı hesabına girmez."
     - "Tek soru kuralı (kurma kipinde)"
     - "Onay adımı atlanmadı mı"
     - "Türkçe doğallık (1–5) · saygılı ton"

@@ -92,6 +92,10 @@ async function sahteCekirdek(meslek: string, ozellik: string): Promise<Record<st
 
 const SORU_SAYISI = questionCount;
 
+// "Uygulanamaz: …" bir ölçüt değil, puanlama kuralı (puanlayıcı talimatında zaten var) → numaralı listeye girmez.
+const olcutListesi = (bolum: string): string[] =>
+  (getPrompt(bolum).degerlendirme.olcutler as string[]).filter((o) => !/^uygulanamaz\s*:/i.test(o.trim()));
+
 async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: string }, maxTur: number) {
   const section = getSection(bolum);
   const persona = `Mesleğin: ${s.meslek}. ${s.ozellik}.`;
@@ -153,7 +157,7 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
   const asistanMesajlari = gecmis.filter((m) => m.rol === "assistant").slice(1);
   const cokSorulu = asistanMesajlari.filter((m) => SORU_SAYISI(m.metin) > 1).length;
 
-  const olcutler: string[] = getPrompt(bolum).degerlendirme.olcutler;
+  const olcutler: string[] = olcutListesi(bolum);
   const puan = await puanla(bolum, s, persona, olcutler, approved, gecmis, taslak, uyarilar);
   return { id: s.id, meslek: s.meslek, ozellik: s.ozellik, tur: transcript.length, cokSorulu, olaylar, taslak, uyarilar, puan, gecmis, maliyetAsistan };
 }
@@ -268,7 +272,7 @@ for (const bolum of bolumler) {
   fs.writeFileSync(path.join(cikti, `${tarih}-${bolum}.json`), JSON.stringify(sonuc, null, 1));
 
   // Özet: ölçüt başına geçen / ortalama
-  const olcutAdlari: string[] = p.degerlendirme.olcutler;
+  const olcutAdlari: string[] = olcutListesi(bolum);
   const ozet = olcutAdlari.map(() => ({ gecti: 0, ikili: 0, uygulanamaz: 0, puanlar: [] as number[] }));
   for (const r of sonuc) {
     for (const o of r.puan?.olcutler ?? []) {
