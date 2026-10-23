@@ -49,6 +49,7 @@ function mergeScreen(base: ScreenConfig): ScreenConfig {
     phaseName: base.phaseName,
     type: base.type,
     stateKey: base.stateKey,
+    submitTrigger: base.submitTrigger,
     likertMin: base.likertMin ?? override.likertMin,
     likertMax: base.likertMax ?? override.likertMax,
     options: mergeOptions(base.options, override.options),
