@@ -13,10 +13,12 @@
 //   POST /v1/me/sections/:id/approve         {version, outbox[]}
 //   GET  /v1/me/weeks | PUT /v1/me/weeks/:week_start {data, note, outbox[]}
 //   POST /v1/outbox/claim {limit} | POST /v1/outbox/:id/done | POST /v1/outbox/:id/fail {error}
+//   POST /v1/yedek                           (elle yedek; her gece zamanlanmış görev de alır)
 //   GET  /v1/health
 // Loglara yalnız yöntem, yol kalıbı ve durum kodu düşer; gövde asla loglanmaz.
 
 import { HEADER, SIG_WINDOW_SECONDS, sha256Hex, verifySignature } from "./sig";
+import { type R2Like, runBackup } from "./backup";
 import {
   type D1Like,
   type OutboxItem,
@@ -41,6 +43,7 @@ import {
 
 export interface Env {
   DB: D1Like;
+  YEDEK?: R2Like;
   DOSYAM_HMAC_KEY: string;
   DOSYAM_HMAC_KEY_PREV?: string;
 }
@@ -190,6 +193,10 @@ async function route(
       return json(200, { ok: true, status: await failOutbox(db, m[1], str("error") || "bilinmiyor", nowMs) });
     }
     if (method === "GET" && path === "/v1/outbox/stats") return json(200, { ok: true, stats: await outboxStats(db) });
+    if (method === "POST" && path === "/v1/yedek") {
+      if (!env.YEDEK) return err(503, "yedek_deposu_yok");
+      return json(200, { ok: true, ...(await runBackup(db, env.YEDEK, nowMs)) });
+    }
     return err(404, "yok");
   }
 
@@ -238,6 +245,13 @@ async function route(
 }
 
 export default {
+  // Günlük yedek (wrangler.toml [triggers]). Sonuç yalnız sayı olarak loglanır.
+  async scheduled(_ev: unknown, env: Env): Promise<void> {
+    if (!env.YEDEK) return;
+    const r = await runBackup(env.DB, env.YEDEK, Date.now());
+    console.log(JSON.stringify({ evt: "yedek", key: r.key, rows: r.rows, bytes: r.bytes }));
+  },
+
   async fetch(req: Request, env: Env): Promise<Response> {
     try {
       return await handle(req, env);
