@@ -5,6 +5,7 @@ import { useLocale } from "next-intl";
 import { useState, FormEvent, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Loader2, CheckCircle2, AlertCircle, Download, Users } from "lucide-react";
+import { PrivacyNotice } from "./PrivacyNotice";
 import { trackEvent } from "@/lib/gtag";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
@@ -216,6 +217,7 @@ export function RehberForm({ sektor }: RehberFormProps) {
           </>
         )}
       </button>
+      <PrivacyNotice />
     </form>
   );
 }

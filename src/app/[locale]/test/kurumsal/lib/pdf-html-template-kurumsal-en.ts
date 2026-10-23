@@ -342,7 +342,7 @@ export function generateKurumsalPdfHtml(state: KurumsalQuizState): string {
     <div class="cta-url">app.growtify.app/widget/bookings/kurumsal-on-gorusme</div>
   </div>
 
-  <div class="p2-footer">This report is an automated analysis based on your responses to the Growtify.ai Corporate AI Maturity Assessment. Statistics and ratios are calculated from your test answers. Your personal data is processed under applicable data protection regulations and is not shared with third parties. © ${new Date().getFullYear()} Growtify — growtify.ai</div>
+  <div class="p2-footer">This report is an automated analysis based on your responses to the Growtify.ai Corporate AI Maturity Assessment. Statistics and ratios are calculated from your test answers. Your personal data is processed under applicable data protection regulations. © ${new Date().getFullYear()} Growtify — growtify.ai</div>
 </div>
 
 </body>
