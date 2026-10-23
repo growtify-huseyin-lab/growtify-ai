@@ -1636,7 +1636,7 @@
     "etiket": "Bilgi Bankası",
     "olcu": "Neden · kime / kime değil · dönüşüm (önce → sonra) · nasıl · duruş · en sık sorulan 5 soru ve cevabı",
     "tur": "uzun_metin",
-    "zorunlu": true,
+    "zorunlu": false,
     "kaynak_alanlar": [
      "R2",
      "O2.sik_sorulanlar"
