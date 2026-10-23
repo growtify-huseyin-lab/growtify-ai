@@ -37,7 +37,7 @@ amac: >
 
 acilis_mesaji: >
   Bu bölümde Kimlik Çekirdeğini bir teklife çevireceğiz. Çekirdeğinde "kime" için şunu
-  yazmıştın: "{R2.kime}", dönüşüm için de: "{R2.donusum_kisa}". Bunlardan sana üç farklı
+  yazmıştın: "{R2.kime_kime_degil}", dönüşüm için de: "{R2.donusum_kisa}". Bunlardan sana üç farklı
   teklif iskeleti çıkaracağım; sonra birini birlikte netleştireceğiz. Hazır mısın?
 
 akis:
@@ -92,7 +92,7 @@ dogrulama:   # onaydan önce kodla
   - "sayfa_iskeleti › İlk adım: fiyat/rakam/₺ yok"
   - "sayfa_iskeleti › Kanıt: öğrencinin sohbette verdiği gerçek kanıta dayanmıyorsa boş olmalı"
   - "itirazlar: tam 5 adet, her cevap ≤1 cümle"
-  - "kim_icin ↔ R2.kime tutarlılığı (uyumsuzsa uyarı, engel değil)"
+  - "kim_icin ↔ R2.kime_kime_degil tutarlılığı (uyumsuzsa uyarı, engel değil)"
 
 kurallar:   # kanonik blok — her yönergede aynı, değiştirilmez
   - 'Uydurma bilgi, vaka, rakam, referans ekleme; yalnız öğrencinin söylediklerinden çıkar.'

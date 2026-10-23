@@ -41,7 +41,7 @@
     ]
    },
    {
-    "anahtar": "kime",
+    "anahtar": "kime_kime_degil",
     "soru": "Kime hizmet ediyorsun, ve kime etmiyorsun?",
     "neden_soruyoruz": "'Herkese' dediğin an kimse kendini orada görmez.",
     "derinlestirme": [
@@ -129,7 +129,7 @@
     "zorunlu": true
    },
    {
-    "anahtar": "kime",
+    "anahtar": "kime_kime_degil",
     "etiket": "Kime / kime değil",
     "olcu": "1–2 satır",
     "tur": "kisa_metin",
@@ -322,7 +322,7 @@
   },
   "rol": "İki rolün var ve hangisinde olduğunu her zaman açıkça söylersin. (1) Teklif danışmanı: net, somut, sade; muğlaklığı bulur, \"hangi sonuç, kime, hangi biçimde\" sorularıyla teklifi keskinleştirirsin. Öğrencinin söylemediğini eklemezsin. (2) Şüpheci müşteri: öğrencinin hedef müşteri tipinden, daha önce iki kez parası boşa gitmiş biri. Kaba değil ama ikna olmaya da hazır değil. Gerçekçi itirazlar edersin.\n",
   "amac": "Tek, net bir çekirdek teklif (kim için · hangi sonuç · hangi yolla · hangi biçimde · ne söz) + en sert 5 itiraz ve her birine bir cümlelik cevap + satış sayfasının 9 başlıklı iskeleti (fiyat boş; fiyat R.7'de). Tek ölçütü öğrenci sonra girer.\n",
-  "acilis_mesaji": "Bu bölümde Kimlik Çekirdeğini bir teklife çevireceğiz. Çekirdeğinde \"kime\" için şunu yazmıştın: \"{R2.kime}\", dönüşüm için de: \"{R2.donusum_kisa}\". Bunlardan sana üç farklı teklif iskeleti çıkaracağım; sonra birini birlikte netleştireceğiz. Hazır mısın?\n",
+  "acilis_mesaji": "Bu bölümde Kimlik Çekirdeğini bir teklife çevireceğiz. Çekirdeğinde \"kime\" için şunu yazmıştın: \"{R2.kime_kime_degil}\", dönüşüm için de: \"{R2.donusum_kisa}\". Bunlardan sana üç farklı teklif iskeleti çıkaracağım; sonra birini birlikte netleştireceğiz. Hazır mısın?\n",
   "akis": {
    "kip_1_kurma": [
     "R2 onaylı çekirdeği bağlamdan oku. Ona dayanarak 3 teklif iskeleti öner (her biri 5 satır: kim için · hangi sonuç · hangi yolla · hangi biçimde · ne söz). Üçü birbirinden anlamlı biçimde farklı olsun (ör. biçim: birebir / grup / kısa paket).",
@@ -441,7 +441,7 @@
    "sayfa_iskeleti › İlk adım: fiyat/rakam/₺ yok",
    "sayfa_iskeleti › Kanıt: öğrencinin sohbette verdiği gerçek kanıta dayanmıyorsa boş olmalı",
    "itirazlar: tam 5 adet, her cevap ≤1 cümle",
-   "kim_icin ↔ R2.kime tutarlılığı (uyumsuzsa uyarı, engel değil)"
+   "kim_icin ↔ R2.kime_kime_degil tutarlılığı (uyumsuzsa uyarı, engel değil)"
   ],
   "kurallar": [
    "Uydurma bilgi, vaka, rakam, referans ekleme; yalnız öğrencinin söylediklerinden çıkar.",

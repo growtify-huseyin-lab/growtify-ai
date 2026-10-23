@@ -95,7 +95,8 @@ export function openingMessage(sectionId: string, approved: Record<string, Clean
   const r2 = approved.R2 ?? {};
   const first = (v: unknown) => String(v ?? "").split(/\n|\.\s/)[0].trim();
   const vars: Record<string, string> = {
-    "R2.kime": String(r2.kime_kime_degil ?? ""),
+    "R2.kime_kime_degil": String(r2.kime_kime_degil ?? ""),
+    "R2.kime": String(r2.kime_kime_degil ?? ""), // eski yönerge adı (geriye uyum)
     "R2.kime_kisa": first(String(r2.kime_kime_degil ?? "").split("/")[0]),
     "R2.donusum_kisa": first(r2.donusum),
   };
