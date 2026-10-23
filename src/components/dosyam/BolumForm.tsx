@@ -25,7 +25,7 @@ const input = "w-full rounded-xl border border-gray-300 px-3 py-2 text-base focu
 function Field({ f, value, onChange, disabled }: { f: FieldDef; value: Val; onChange: (v: Val) => void; disabled: boolean }) {
   switch (f.tur) {
     case "uzun_metin":
-      return <textarea rows={4} className={input} disabled={disabled} value={(value as string) ?? ""} onChange={(e) => onChange(e.target.value)} />;
+      return <textarea rows={4} className={input} placeholder={f.ornek} disabled={disabled} value={(value as string) ?? ""} onChange={(e) => onChange(e.target.value)} />;
     case "sayi":
       return <input type="number" inputMode="decimal" className={input} disabled={disabled} value={(value as number | undefined) ?? ""} onChange={(e) => onChange(e.target.value === "" ? undefined : Number(e.target.value))} />;
     case "tarih":
@@ -111,7 +111,7 @@ function Field({ f, value, onChange, disabled }: { f: FieldDef; value: Val; onCh
       );
     }
     default:
-      return <input className={input} disabled={disabled} value={(value as string) ?? ""} onChange={(e) => onChange(e.target.value)} />;
+      return <input className={input} placeholder={f.ornek} disabled={disabled} value={(value as string) ?? ""} onChange={(e) => onChange(e.target.value)} />;
   }
 }
 
@@ -196,11 +196,13 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
       </p>
       {fields.map((f) => (
         <div key={f.anahtar} className={eksik.includes(f.anahtar) ? "rounded-xl ring-2 ring-red-300 p-2 -m-2" : ""}>
+          {f.soru && <p className="mb-0.5 text-xs font-medium uppercase tracking-wide text-[#5d47f0]/70">{f.etiket}</p>}
           <p className="font-semibold text-[#232323]">
-            {f.etiket}
+            {f.soru ?? f.etiket}
             {f.zorunlu && !f.sonradan_doldurulur ? <span className="text-red-500"> *</span> : null}
           </p>
-          {f.olcu && <p className="mb-2 text-sm text-gray-500">{f.olcu}</p>}
+          {f.aciklama && <p className="text-sm text-gray-600">{f.aciklama}</p>}
+          {f.olcu && <p className="mb-2 text-xs text-gray-400">{f.aciklama ? `Uzunluk: ${f.olcu}` : f.olcu}</p>}
           {f.sonradan_doldurulur && <p className="mb-2 text-xs text-gray-400">Bunu sonra, sonucu gördüğünde doldurursun.</p>}
           {f.tur === "referans" ? (
             <p className="rounded-xl bg-gray-50 p-3 text-sm text-gray-700 whitespace-pre-line">
