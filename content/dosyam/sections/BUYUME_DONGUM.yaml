@@ -13,27 +13,27 @@
   ilk_satir: "Son 30 gün, geriye dönük (W.1); bilinmeyen hücre: tahmin + ? işareti"
   alanlar:
     # W.1 temel sütunları (8)
-    - {anahtar: hafta_baslangici, etiket: "Hafta", tur: tarih, zorunlu: true, not: "satır anahtarı; sütun sayısına dahil değil"}
-    - {anahtar: degilen_dogru_kisi, etiket: "Değilen doğru kişi", tur: sayi, eklendigi_ders: W.1}
-    - {anahtar: gelen_ilgi, etiket: "Gelen ilgi (toplam)", tur: sayi, eklendigi_ders: W.1, hesaplanan: true, not: "Aşağıdaki beş kaynak sayısının toplamı; öğrenci ayrıca girmez (Course kararı 2026-10-23)"}
-    - {anahtar: kaynak_cekme, etiket: "Kaynak: çekmek (içerik, arama, işletme kartı)", tur: sayi, eklendigi_ders: W.2}
-    - {anahtar: kaynak_gitme, etiket: "Kaynak: gitmek (iş birliği, yönlendirme, etkinlik)", tur: sayi, eklendigi_ders: W.2}
-    - {anahtar: kaynak_odunc, etiket: "Kaynak: ödünç kitle", tur: sayi, eklendigi_ders: W.2}
-    - {anahtar: kaynak_referans, etiket: "Kaynak: referans", tur: sayi, eklendigi_ders: W.2}
-    - {anahtar: kaynak_uyuyan, etiket: "Kaynak: uyuyan liste", tur: sayi, eklendigi_ders: W.2}
-    - {anahtar: gorusme, etiket: "Görüşme", tur: sayi, eklendigi_ders: W.1, tekrar_eden_ders: W.3}
-    - {anahtar: yeni_musteri, etiket: "Yeni müşteri", tur: sayi, eklendigi_ders: W.1, not: "W.3'teki 'satış' sütunu ile aynı kabul edildi (README açık nokta)"}
-    - {anahtar: kaybedilen, etiket: "Kaybedilen", tur: sayi, eklendigi_ders: W.1, tekrar_eden_ders: W.4}
-    - {anahtar: yorum_referans, etiket: "Yorum / referans", tur: sayi, eklendigi_ders: W.1, tekrar_eden_ders: W.4}
-    - {anahtar: sahaya_ayrilan_saat, etiket: "Sahaya ayrılan saat", tur: sayi, eklendigi_ders: W.1}
+    - {anahtar: hafta_baslangici, soru: "Bu satır hangi haftanın?", aciklama: "Haftanın ilk gününü seç; ilk satır son otuz günü geriye dönük anlatır.", etiket: "Hafta", tur: tarih, zorunlu: true, not: "satır anahtarı; sütun sayısına dahil değil"}
+    - {anahtar: degilen_dogru_kisi, soru: "Bu hafta kaç doğru kişiye ulaştın?", aciklama: "Hizmet ettiğin kişi tipine uyan ve senin mesaj attığın, konuştuğun ya da içeriğinle ulaştığın kişileri say; bilmiyorsan tahmin yaz.", etiket: "Değilen doğru kişi", tur: sayi, eklendigi_ders: W.1}
+    - {anahtar: gelen_ilgi, aciklama: "Beş kaynaktan gelen ilgilerin toplamı; kendiliğinden hesaplanır, ayrıca yazman gerekmez.", etiket: "Gelen ilgi (toplam)", tur: sayi, eklendigi_ders: W.1, hesaplanan: true, not: "Aşağıdaki beş kaynak sayısının toplamı; öğrenci ayrıca girmez (Course kararı 2026-10-23)"}
+    - {anahtar: kaynak_cekme, soru: "Bu hafta kaç kişi seni kendisi buldu?", aciklama: "Paylaşımın, aramalar ya da işletme kartın üzerinden sana gelen ilgileri say.", etiket: "Kaynak: çekmek (içerik, arama, işletme kartı)", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: kaynak_gitme, soru: "Bu hafta kaç kişi senin gidip tanıştığın yerlerden geldi?", aciklama: "İş birliği yaptığın işletmelerden, yönlendirmelerden ya da etkinliklerden gelen ilgileri say.", etiket: "Kaynak: gitmek (iş birliği, yönlendirme, etkinlik)", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: kaynak_odunc, soru: "Bu hafta kaç kişi başkasının topluluğundan geldi?", aciklama: "Konuk olduğun bir yayından, dernekten ya da başka birinin kitlesinden gelen ilgileri say.", etiket: "Kaynak: ödünç kitle", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: kaynak_referans, soru: "Bu hafta kaç kişi bir müşterinin tavsiyesiyle geldi?", aciklama: "Bir müşterinin ya da tanıdığın seni önermesiyle gelen ilgileri say.", etiket: "Kaynak: referans", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: kaynak_uyuyan, soru: "Bu hafta eski listenden kaç kişi geri döndü?", aciklama: "Bir süredir sesi çıkmayan ve senin yazmanla geri dönen kişileri say.", etiket: "Kaynak: uyuyan liste", tur: sayi, eklendigi_ders: W.2}
+    - {anahtar: gorusme, soru: "Bu hafta kaç tanışma ya da satış görüşmesi yaptın?", aciklama: "Gerçekleşen görüşmeleri say; gelmeyenleri aşağıdaki ayrı kutuya yaz.", etiket: "Görüşme", tur: sayi, eklendigi_ders: W.1, tekrar_eden_ders: W.3}
+    - {anahtar: yeni_musteri, soru: "Bu hafta kaç kişi müşterin oldu?", aciklama: "Ödeme yapan ya da sözleşme imzalayan yeni müşterileri say.", etiket: "Yeni müşteri", tur: sayi, eklendigi_ders: W.1, not: "W.3'teki 'satış' sütunu ile aynı kabul edildi (README açık nokta)"}
+    - {anahtar: kaybedilen, soru: "Bu hafta kaç müşterin ayrıldı?", aciklama: "Programını bırakan, devam etmeyen ya da sessizce kaybolan müşterileri say.", etiket: "Kaybedilen", tur: sayi, eklendigi_ders: W.1, tekrar_eden_ders: W.4}
+    - {anahtar: yorum_referans, soru: "Bu hafta kaç yorum ya da tavsiye aldın?", aciklama: "Gelen yorumları ve seni birine öneren müşterileri say.", etiket: "Yorum / referans", tur: sayi, eklendigi_ders: W.1, tekrar_eden_ders: W.4}
+    - {anahtar: sahaya_ayrilan_saat, soru: "Bu hafta müşteri bulmaya ve kazanmaya kaç saat ayırdın?", aciklama: "Mesajlara, görüşmelere, paylaşımlara ve takiplere ayırdığın toplam süreyi saat olarak yaz.", etiket: "Sahaya ayrılan saat", tur: sayi, eklendigi_ders: W.1}
     # Derslerin eklediği, temelde olmayan sütunlar
-    - {anahtar: gelmedi, etiket: "Gelmedi", tur: sayi, eklendigi_ders: W.3}
-    - {anahtar: kalan, etiket: "Kalan", tur: sayi, eklendigi_ders: W.4}
-    - {anahtar: yorum_istegi, etiket: "Yorum isteği (gönderilen)", tur: sayi, eklendigi_ders: W.4}
-    - {anahtar: not, etiket: "Not", tur: kisa_metin, zorunlu: false, not: "MIMARI §2 saha_weeks.not; scriptte ayrı sütun değil"}
+    - {anahtar: gelmedi, soru: "Bu hafta kaç kişi randevusuna gelmedi?", aciklama: "Randevu alıp gelmeyen ya da son anda iptal edenleri say.", etiket: "Gelmedi", tur: sayi, eklendigi_ders: W.3}
+    - {anahtar: kalan, soru: "Bu hafta devam eden kaç müşterin var?", aciklama: "Programına ya da hizmetine devam eden müşterilerinin sayısını yaz.", etiket: "Kalan", tur: sayi, eklendigi_ders: W.4}
+    - {anahtar: yorum_istegi, soru: "Bu hafta kaç kişiye yorum isteği gönderdin?", aciklama: "İlk kazanımını yaşamış müşterilerine gönderdiğin yorum isteklerini say; herkese aynı istek gider.", etiket: "Yorum isteği (gönderilen)", tur: sayi, eklendigi_ders: W.4}
+    - {anahtar: not, soru: "Bu haftayla ilgili not almak istediğin bir şey var mı?", aciklama: "Rakamların arkasındaki kısa bir gözlemi yaz; kişi adı ve sağlık bilgisi yazma.", ornek: "Bayram haftası; görüşmeler azdı, mesajlar arttı.", etiket: "Not", tur: kisa_metin, zorunlu: false, not: "MIMARI §2 saha_weeks.not; scriptte ayrı sütun değil"}
   ek_satir_turleri:
-    - {anahtar: haftalik_rapor, etiket: "Haftalık rapor satırı (sabit sıra)", eklendigi_ders: W.5, not: "Ayrı sütun değil; aynı haftanın satırına bağlı sabit sıralı yorum/rapor. + takvimde haftalık rapor saati (W5 bölümünde)."}
-    - {anahtar: aylik_dongu, etiket: "Aylık döngü satırı", eklendigi_ders: W.6, alanlar: ["bul", "kazan", "tut", "cogalt", "yeniden_bul"], tur: sayi, not: "Ay sonunda, 5 okun rakamı. Haftalık kayıttan ayrı aylık kayıt türü olabilir (README açık nokta)."}
+    - {anahtar: haftalik_rapor, soru: "Bu haftanın rakamları sana ne söylüyor?", aciklama: "Her hafta aynı sırayla kısa bir yorum yaz: ne iyi gitti, nerede kaybettin, gelecek hafta neyi deneyeceksin.", ornek: "Takip mesajları işe yaradı · görüşmeye gelmeyenler arttı · gelecek hafta bir gün önce hatırlatma göndereceğim", etiket: "Haftalık rapor satırı (sabit sıra)", eklendigi_ders: W.5, not: "Ayrı sütun değil; aynı haftanın satırına bağlı sabit sıralı yorum/rapor. + takvimde haftalık rapor saati (W5 bölümünde)."}
+    - {anahtar: aylik_dongu, soru: "Bu ay döngünün beş okunda neler oldu?", aciklama: "Ay sonunda bul, kazan, tut, çoğalt ve yeniden bul oklarının her biri için o ayın sayısını yaz.", etiket: "Aylık döngü satırı", eklendigi_ders: W.6, alanlar: ["bul", "kazan", "tut", "cogalt", "yeniden_bul"], tur: sayi, not: "Ay sonunda, 5 okun rakamı. Haftalık kayıttan ayrı aylık kayıt türü olabilir (README açık nokta)."}
   tek_olcut: null
   bagimli: [W1]
   ghl:

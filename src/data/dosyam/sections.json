@@ -10,6 +10,9 @@
   "alanlar": [
    {
     "anahtar": "neden",
+    "soru": "Para kazanmak dışında, bu işi neden yapıyorsun?",
+    "aciklama": "Seni bu mesleğe getiren ya da hâlâ bu işte tutan gerçek bir anı veya sebebi yaz.",
+    "ornek": "Annem diyabet hastasıydı; beslenmenin onun hayatını nasıl değiştirdiğini gördüm.",
     "etiket": "Neden",
     "olcu": "gerçek bir an, 1–2 cümle",
     "tur": "kisa_metin",
@@ -17,6 +20,9 @@
    },
    {
     "anahtar": "kime_kime_degil",
+    "soru": "Kime hizmet ediyorsun, kime etmiyorsun?",
+    "aciklama": "En iyi sonuç aldığın müşteriyi hayatındaki durumuyla tarif et; kime iyi gelmediğini de ekle.",
+    "ornek": "Kırkından sonra bedenini yeniden tanımak isteyen kadınlar. Hızlı kilo verme peşinde olanlarla çalışmıyorum.",
     "etiket": "Kime / kime değil",
     "olcu": "1–2 satır",
     "tur": "kisa_metin",
@@ -24,6 +30,9 @@
    },
    {
     "anahtar": "donusum",
+    "soru": "Seninle çalışmadan önce ve sonra müşterin nerede duruyor?",
+    "aciklama": "Önce ne hissettiğini, sonra hayatında neyin değiştiğini anlat; rakam ve garanti yazma.",
+    "ornek": "Önce: her diyeti yarıda bırakıyor, kendini suçluyor. Sonra: ne yiyeceğini biliyor, sofrada huzurlu.",
     "etiket": "Hangi dönüşüm",
     "olcu": "önce → sonra, 3 satır",
     "tur": "uzun_metin",
@@ -31,6 +40,9 @@
    },
    {
     "anahtar": "nasil",
+    "soru": "Seni aynı işi yapan diğerlerinden farklı kılan yol ne?",
+    "aciklama": "İşini hangi sırayla ele aldığını ve neyi asla atlamadığını kısaca anlat; bir ad vermek zorunda değilsin.",
+    "ornek": "Yasak listesiyle değil, kişinin kendi sofrasından başlarım; ilk ay hiçbir şeyi yasaklamam.",
     "etiket": "Nasıl (seni farklı kılan yol)",
     "olcu": "1–2 cümle (O.2'de derinleşir)",
     "tur": "kisa_metin",
@@ -38,6 +50,9 @@
    },
    {
     "anahtar": "durus",
+    "soru": "Sektöründe herkesin yaptığı ama senin yanlış bulduğun bir şey var mı?",
+    "aciklama": "Neye inandığını ve neye karşı olduğunu bir iki cümleyle yaz; kimseyi adıyla hedef alma.",
+    "ornek": "Mucize diyetlere ve önce-sonra fotoğraflarına karşıyım; kalıcı alışkanlığa inanırım.",
     "etiket": "Duruş",
     "olcu": "neye inanıyorum, neye karşıyım",
     "tur": "kisa_metin",
@@ -45,6 +60,9 @@
    },
    {
     "anahtar": "ses",
+    "soru": "Müşterilerinle nasıl konuşursun?",
+    "aciklama": "Tonunu beş maddede yaz: ton, cümle uzunluğu, hitap, sık kullandığın ve hiç kullanmadığın kelimeler.",
+    "ornek": "Sıcak ve sade · kısa cümleler · 'sen' diye hitap · 'adım adım' derim · 'yasak' kelimesini kullanmam",
     "etiket": "Ses",
     "olcu": "ham ses notu, 5 madde",
     "tur": "liste",
@@ -52,6 +70,9 @@
    },
    {
     "anahtar": "tek_cumle",
+    "soru": "Bütün bunları tek cümlede nasıl söylersin?",
+    "aciklama": "Kime, hangi sonucu, nasıl verdiğini yaz; en fazla 20 kelime, 'en iyi' gibi sıfatlar olmadan.",
+    "ornek": "Kırkından sonra bedenini yeniden tanımak isteyen kadınlara yasaksız, adım adım bir beslenme düzeni kurduruyorum.",
     "etiket": "Tek cümlem",
     "olcu": "kime + sonuç + nasıl; ≤20 kelime; sıfatsız",
     "tur": "kisa_metin",
@@ -60,6 +81,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Tek cümleni seni tanımayan üç kişiye gösterdiğinde kaçı ne yaptığını doğru söyledi?",
+   "aciklama": "Cümleni gösterip ne yaptığını tahmin etmelerini iste; doğru söyleyenlerin sayısını yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "üç saniye testinde üç kişiden kaçı doğru söyledi?",
    "tur": "sayi",
@@ -100,6 +123,9 @@
   "alanlar": [
    {
     "anahtar": "kim_icin",
+    "soru": "Bu teklif tam olarak kimin için?",
+    "aciklama": "Kimlik Çekirdeğindeki 'kime' satırınla aynı kişi olmalı; gerekirse daralt.",
+    "ornek": "Kırkından sonra bedenini yeniden tanımak isteyen çalışan kadınlar.",
     "etiket": "Kim için",
     "olcu": "Çekirdeğin \"kime\" satırıyla aynı",
     "tur": "kisa_metin",
@@ -108,6 +134,9 @@
    },
    {
     "anahtar": "hangi_sonuc",
+    "soru": "Bu teklifin sonunda müşterin nereden nereye geliyor?",
+    "aciklama": "Önceyi ve sonrayı bir iki cümleyle yaz; rakamlı sonuç vaadi yok.",
+    "ornek": "Önce: ne yiyeceğini bilmeden gün geçiriyor. Sonra: kendi düzenini kurmuş, yemekten keyif alıyor.",
     "etiket": "Hangi sonuç",
     "olcu": "önce → sonra",
     "tur": "kisa_metin",
@@ -115,6 +144,9 @@
    },
    {
     "anahtar": "hangi_yolla",
+    "soru": "Bu sonuca hangi yolla götürüyorsun?",
+    "aciklama": "Seni farklı kılan yaklaşımı bu teklif için bir iki cümleyle anlat.",
+    "ornek": "Kişinin kendi sofrasından başlayan, her hafta küçük bir adım ekleyen bir yol.",
     "etiket": "Hangi yolla",
     "olcu": "1–2 cümle",
     "tur": "kisa_metin",
@@ -122,6 +154,9 @@
    },
    {
     "anahtar": "hangi_bicimde",
+    "soru": "Bu teklif hangi biçimde yürüyor?",
+    "aciklama": "Süresini, görüşme sıklığını, birebir mi grup mu olduğunu ve nerede yapıldığını yaz.",
+    "ornek": "Sekiz hafta, haftada bir çevrim içi birebir görüşme, arada mesajla destek.",
     "etiket": "Hangi biçimde",
     "olcu": "süre, sıklık, birebir/grup, yer",
     "tur": "kisa_metin",
@@ -129,6 +164,9 @@
    },
    {
     "anahtar": "soz",
+    "soru": "Müşterine tam olarak ne söz veriyorsun?",
+    "aciklama": "Sonuç garantisi değil, sürece dair bir söz yaz: neyi, hangi sırayla birlikte yapacağınızı.",
+    "ornek": "Bu yolu seninle haftalık adımlarla yürüyeceğim; her hafta neyin işe yaradığına birlikte bakacağız.",
     "etiket": "Ne söz veriyorum",
     "olcu": "süreç sözü; garanti yok",
     "tur": "kisa_metin",
@@ -137,6 +175,9 @@
    },
    {
     "anahtar": "itirazlar",
+    "soru": "Şüpheci bir müşteri bu teklife hangi beş itirazı yapar, sen ne cevap verirsin?",
+    "aciklama": "En sert beş itirazı ve her birine tek cümlelik cevabını yaz; cevaplarda garanti verme.",
+    "ornek": "Zamanım yok → Görüşmeler kısa; düzen senin günlük hayatına göre kurulur.",
     "etiket": "En sert 5 itiraz + cevap",
     "olcu": "5 × (itiraz + 1 cümle cevap)",
     "tur": "liste",
@@ -145,6 +186,9 @@
    },
    {
     "anahtar": "sayfa_iskeleti",
+    "soru": "Bu teklif bir satış sayfasında nasıl dururdu?",
+    "aciklama": "Dokuz başlığın her birine bir iki cümle yaz; fiyatı boş bırak, gerçek kanıtın yoksa kanıt başlığını da boş bırak.",
+    "ornek": "Başlık ve söz: Yasaksız, adım adım; kendi sofranda kalıcı bir düzen.",
     "etiket": "Sayfa iskeleti",
     "olcu": "9 başlık; fiyat boş",
     "tur": "liste",
@@ -154,6 +198,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Teklifini gösterdiğin üç kişiden kaçı 'bu kimin için ve ne veriyor' sorusunu doğru cevapladı?",
+   "aciklama": "Teklif kartını seni tanımayan üç kişiye göster; doğru cevaplayanların sayısını yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Teklifini gösterdiğin 3 kişiden kaçı \"bu kimin için ve ne veriyor\" sorusunu doğru cevapladı? Sonra: teklif görüşmesine dönen oran (W'de ölçülür)",
    "tur": "sayi",
@@ -199,6 +245,9 @@
   "alanlar": [
    {
     "anahtar": "kime",
+    "soru": "Bu ekosistemi kimi çekmek için kuruyorsun?",
+    "aciklama": "Kimlik Çekirdeğindeki 'kime' satırınla aynı kişiyi yaz.",
+    "ornek": "Kırkından sonra bedenini yeniden tanımak isteyen kadınlar.",
     "etiket": "Kime",
     "olcu": "Çekirdeğin \"kime\" satırıyla aynı",
     "tur": "kisa_metin",
@@ -206,6 +255,8 @@
    },
    {
     "anahtar": "en_kucuk_kitle",
+    "soru": "Seni ayakta tutmaya yetecek en az kaç müşteriye ihtiyacın var?",
+    "aciklama": "Aylık hedef gelirini bir müşteriden aldığın aylık gelire böl ve çıkan sayıyı yaz.",
     "etiket": "En küçük kitle",
     "olcu": "aylık hedef gelir ÷ müşteri başı aylık gelir = __ kişi",
     "tur": "sayi",
@@ -214,6 +265,9 @@
    },
    {
     "anahtar": "ana_kanallar",
+    "soru": "Müşterilerine en çok hangi bir iki kanalda görünmelisin?",
+    "aciklama": "Müşterinin zaten zaman geçirdiği ve senin düzenli görünebileceğin en fazla iki kanalı nedeniyle birlikte yaz.",
+    "ornek": "Instagram, çünkü danışanlarım tarifleri ve günlük ipuçlarını orada arıyor.",
     "etiket": "Ana kanal(lar)",
     "olcu": "en fazla 2 · neden orada?",
     "tur": "liste",
@@ -222,6 +276,9 @@
    },
    {
     "anahtar": "turev_kanallar",
+    "soru": "Ana içeriğini kısaltarak başka nerelerde paylaşacaksın?",
+    "aciklama": "Ana kanalındaki içeriğin kısa hallerinin gideceği kanalları yaz; yoksa boş bırak.",
+    "ornek": "Facebook ve WhatsApp durum.",
     "etiket": "Türev kanallar",
     "olcu": "ana içerik nereye kısaltılarak gider",
     "tur": "kisa_metin",
@@ -229,6 +286,9 @@
    },
    {
     "anahtar": "ilk_ucretsiz_deger",
+    "soru": "İnsanlara ilk olarak hangi ücretsiz değeri vereceksin?",
+    "aciklama": "Ücretsiz değerin adını ve biçimini yaz: rehber, kısa test ya da kontrol listesi.",
+    "ornek": "Bayram sofrasından sonra kendini suçlamadan geri dönmenin beş yolu (kısa rehber)",
     "etiket": "İlk ücretsiz değer",
     "olcu": "adı + biçimi (rehber / test / liste)",
     "tur": "kisa_metin",
@@ -236,6 +296,9 @@
    },
    {
     "anahtar": "en_sik_10_soru",
+    "soru": "Müşterilerin sana en sık hangi on soruyu soruyor?",
+    "aciklama": "Her gün tek tek cevapladığın gerçek soruları yaz; cevaplarını şimdi yazman gerekmiyor.",
+    "ornek": "Akşam yemeğini atlamak işe yarar mı?",
     "etiket": "En sık 10 soru",
     "olcu": "10 gerçek soru; ücretsiz değerin hammaddesi",
     "tur": "liste",
@@ -244,6 +307,8 @@
    },
    {
     "anahtar": "ilginin_evi",
+    "soru": "İlgilenen insanlar seninle nerede kalacak?",
+    "aciklama": "E-posta listen, topluluğun ya da randevu kapın: ilgiyi taşıyacağın kendi yerini seç.",
     "etiket": "İlginin evi",
     "olcu": "e-posta listesi / topluluk / randevu",
     "tur": "secim",
@@ -257,6 +322,9 @@
    },
    {
     "anahtar": "is_birligi_halkasi",
+    "soru": "Senin müşterine hizmet eden ama rakibin olmayan hangi işletmeler var?",
+    "aciklama": "Birbirinize insan gönderebileceğiniz iki üç işletme türünü yaz; isteğe bağlı.",
+    "ornek": "Spor salonları · fizyoterapistler · sağlıklı yemek dükkânları",
     "etiket": "İş birliği halkası (isteğe bağlı)",
     "olcu": "2–3 işletme türü",
     "tur": "liste",
@@ -264,6 +332,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Bir ay içinde e-posta listene, topluluğuna ya da randevuna kaç kişi geldi?",
+   "aciklama": "Bir ay sonra say ve yaz; bunu W aşamasında ölçeceksin.",
    "etiket": "Tek ölçütüm",
    "olcu": "Bir ay içinde evine kaç kişi girdi? (sayı W'de ölçülür)",
    "tur": "sayi",
@@ -304,6 +374,8 @@
    {
     "anahtar": "asamalar",
     "etiket": "8 aşama + Kaybedildi",
+    "soru": "İlk ilgiden müşteri olmaya kadar her aşamada senin işinde neler oluyor?",
+    "aciklama": "Her aşama için ne olduğunu, orada nasıl müşteri kaybettiğini ve bunun bugün sende var mı, kısmen mi, yok mu olduğunu yaz.",
     "tur": "tablo",
     "satirlar": [
      "1 İlk ilgi",
@@ -319,16 +391,24 @@
     "sutunlar": [
      {
       "anahtar": "ne_oluyor",
+      "soru": "Bu aşamada senin işinde ne oluyor?",
+      "aciklama": "Bu aşamada müşteriyle aranızda neler olduğunu kısaca yaz; Kaybedildi satırında kaybetme nedenlerini yaz.",
+      "ornek": "Kişi Instagram'dan fiyat soruyor.",
       "etiket": "Benim işimde burada ne oluyor",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "nasil_kaybediyorum",
+      "soru": "Bu aşamada müşteriyi nasıl kaybediyorsun?",
+      "aciklama": "Bu aşamada insanların neden ve nasıl kaybolduğunu yaz.",
+      "ornek": "Ertesi gün dönüyorum; o arada başka birine yazmış oluyor.",
       "etiket": "Burada nasıl kaybediyorum",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "durum",
+      "soru": "Bu aşama bugün sende düzgün işliyor mu?",
+      "aciklama": "Var, kısmi ya da yok olarak işaretle.",
       "etiket": "Durum",
       "tur": "secim",
       "secenekler": [
@@ -343,6 +423,8 @@
    },
    {
     "anahtar": "en_cok_kaybedilen",
+    "soru": "En çok müşteriyi hangi aşamada kaybediyorsun?",
+    "aciklama": "Sekiz aşamadan yalnız birini seç.",
     "etiket": "En çok kaybettiğim aşama",
     "olcu": "tek bir aşama",
     "tur": "secim",
@@ -351,6 +433,9 @@
    },
    {
     "anahtar": "iki_yol",
+    "soru": "Hızlı karar veren müşteri ile kanıt isteyen müşteri için yolun nasıl ayrılıyor?",
+    "aciklama": "Hızlı karar verenin hangi aşamaları kısa geçtiğini, kanıt isteyenin karar vermeden önce neyi görmesi gerektiğini yaz.",
+    "ornek": "Hızlı karar veren: tanışmadan doğrudan randevuya · kanıt isteyen: önce sık sorulanları ve nasıl çalıştığımı görür",
     "etiket": "İki yol",
     "olcu": "hızlı karar veren için kısa yol (hangi aşamaları kısa geçer) · kanıt isteyen için kanıt yolu (ne görmeli)",
     "tur": "uzun_metin",
@@ -358,6 +443,9 @@
    },
    {
     "anahtar": "on_gorusme_sorulari",
+    "soru": "Tanışma görüşmesinde hangi beş yedi soruyu soracaksın?",
+    "aciklama": "Müşteriyi tanımak ve sana uygun olup olmadığını anlamak için soracağın soruları yaz.",
+    "ornek": "Bugüne kadar neleri denedin?",
     "etiket": "Ön görüşme soruları",
     "olcu": "5–7 soru",
     "tur": "liste",
@@ -367,6 +455,9 @@
    },
    {
     "anahtar": "mesaj_taslaklari",
+    "soru": "En kritik üç aşamada müşterine ne yazacaksın?",
+    "aciklama": "En çok kaybettiğin üç aşama için kendi sesinle iki dört cümlelik mesaj taslakları yaz; baskı ve sonuç vaadi olmasın.",
+    "ornek": "Aklında soru kaldıysa cevaplayayım; hazır olduğunda buradayım.",
     "etiket": "En kritik 3 aşama için mesaj taslağı",
     "olcu": "benim sesimle, her biri 2–4 cümle",
     "tur": "liste",
@@ -375,6 +466,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "En çok kaybettiğin aşamada bir ay sonra kaç kişi kayboldu?",
+   "aciklama": "Bir ay sonra say ve yaz; bunu W aşamasında ölçeceksin.",
    "etiket": "Tek ölçütüm",
    "olcu": "En çok kaybettiğim aşamada bir ay sonra kaç kişi kayboldu? (W'de ölçülür)",
    "tur": "sayi",
@@ -416,6 +509,9 @@
   "alanlar": [
    {
     "anahtar": "ilk_karsilama",
+    "soru": "Sana ilk kez yazan birine ne cevap vereceksin?",
+    "aciklama": "Kendi sesinle, iki dört cümlelik ve bir sonraki adımı söyleyen bir karşılama mesajı yaz.",
+    "ornek": "Merhaba, yazdığın için teşekkürler. Akşamları dokuzdan sonra cevap veremiyorum; sabah ilk iş sana döneceğim. Bu arada rehberime göz atabilirsin.",
     "etiket": "İlk karşılama mesajım",
     "olcu": "senin sesinde, 2–4 cümle, bir sonraki adımla",
     "tur": "uzun_metin",
@@ -423,6 +519,9 @@
    },
    {
     "anahtar": "acik_kanallar",
+    "soru": "Müşterilerin sana hangi kanallardan ulaşabilir?",
+    "aciklama": "Cevap vermeyi taahhüt ettiğin kanalları yaz; cevap vermeyeceğin kanalı açık bırakma.",
+    "ornek": "WhatsApp · Instagram · e-posta",
     "etiket": "Açık kanallar",
     "olcu": "cevap vereceğin kanallar",
     "tur": "liste",
@@ -430,6 +529,9 @@
    },
    {
     "anahtar": "saatlerim",
+    "soru": "Hangi gün ve saatlerde sen varsın, o saatlerin dışında ne oluyor?",
+    "aciklama": "Çalışma gün ve saatlerini, dışında gelen mesaja ne olacağını yaz.",
+    "ornek": "Hafta içi 09.00–18.00 · dışında otomatik karşılama, ertesi sabah dönüş",
     "etiket": "Benim saatlerim",
     "olcu": "hangi gün/saat; dışında ne olur",
     "tur": "kisa_metin",
@@ -437,6 +539,8 @@
    },
    {
     "anahtar": "yz_sorulari",
+    "soru": "Hangi soruları yapay zekâ senin yerine cevaplayabilir?",
+    "aciklama": "En sık sorulan on sorundan, cevabı herkese aynı olan ve hassas olmayanları seç.",
     "etiket": "Yapay zekânın cevaplayacağı sorular",
     "olcu": "en sık 10 sorudan seçilir",
     "tur": "liste",
@@ -445,6 +549,9 @@
    },
    {
     "anahtar": "devir_anlari",
+    "soru": "Hangi durumlarda konuşmayı yapay zekâ değil sen devralmalısın?",
+    "aciklama": "En az üç durumu ve o anda söylenecek \"size dönüyorum\" cümleni yaz.",
+    "ornek": "Sağlık durumuyla ilgili soru · şikâyet · fiyat pazarlığı · \"Bunu bizzat konuşalım, en kısa sürede dönüyorum.\"",
     "etiket": "Bana devredilen anlar",
     "olcu": "en az 3 durum + \"size dönüyorum\" cümlesi",
     "tur": "liste",
@@ -453,6 +560,9 @@
    },
    {
     "anahtar": "iletisim_ritmi",
+    "soru": "Müşterine ne zaman ve hangi kanaldan haber vereceksin?",
+    "aciklama": "Müşterinin sormadan ne zaman senden haber alacağını yaz.",
+    "ornek": "Her pazartesi WhatsApp'tan haftanın kısa planı.",
     "etiket": "İletişim ritmim",
     "olcu": "müşteriye ne zaman, hangi kanaldan haber veririm",
     "tur": "kisa_metin",
@@ -460,6 +570,9 @@
    },
    {
     "anahtar": "erisim_kademeleri",
+    "soru": "Müşterilerin hangi kademede neye erişecek ve sen ne zaman devreye gireceksin?",
+    "aciklama": "Her kademe için neye erişildiğini ve senin kişisel ilginin nerede başladığını yaz.",
+    "ornek": "Ücretsiz: rehber ve topluluk · Program: haftalık görüşme · Birebir: her gün mesajla destek",
     "etiket": "Erişim kademelerim",
     "olcu": "kademe → neye erişir → ben hangi anda devredeyim",
     "tur": "liste",
@@ -467,6 +580,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Sana ilk yazan birine ortalama ne kadar sürede cevap veriyorsun?",
+   "aciklama": "Bir hafta boyunca ilk cevap sürelerini not et ve ortalamasını yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "İlk mesaja ilk cevabın süresi (W'de ölçülür)",
    "tur": "kisa_metin",
@@ -502,6 +617,8 @@
    {
     "anahtar": "kademeler",
     "etiket": "Kademeler",
+    "soru": "Teklifini hangi kademelere ayırıyorsun ve her birinin fiyatı ne?",
+    "aciklama": "Aynı süreci farklı destek seviyeleriyle yaz: her kademe için ne içerdiğini, fiyatını TL olarak, ödeme biçimini ve taksit bedelini kimin üstlendiğini.",
     "tur": "tablo",
     "satirlar": [
      "Kendin uygula",
@@ -512,16 +629,23 @@
     "sutunlar": [
      {
       "anahtar": "icerik",
+      "soru": "Bu kademe neleri içeriyor?",
+      "aciklama": "Bu kademede müşterinin ne aldığını kısaca yaz.",
+      "ornek": "Haftalık görüşme ve mesajla takip.",
       "etiket": "Ne içerir",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "fiyat_tl",
+      "soru": "Bu kademenin fiyatı kaç TL?",
+      "aciklama": "Her şey dahil, müşterinin ödeyeceği tek rakamı yaz.",
       "etiket": "Fiyat (TL)",
       "tur": "sayi"
      },
      {
       "anahtar": "odeme_bicimi",
+      "soru": "Bu kademe nasıl ödenecek?",
+      "aciklama": "Peşin, taksit ya da abonelik seç.",
       "etiket": "Ödeme biçimi",
       "tur": "secim",
       "secenekler": [
@@ -532,6 +656,9 @@
      },
      {
       "anahtar": "taksit_bedeli_kimde",
+      "soru": "Taksit ya da vade farkını kim üstleniyor?",
+      "aciklama": "Taksit bedelini senin mi müşterinin mi ödeyeceğini yaz; taksit yoksa boş bırak.",
+      "ornek": "Ben üstleniyorum.",
       "etiket": "Taksit bedeli kimde",
       "tur": "kisa_metin"
      }
@@ -541,6 +668,9 @@
    },
    {
     "anahtar": "sonucun_degeri",
+    "soru": "Bu sonuç müşterine ne kazandırıyor ya da onu neyi kaybetmekten kurtarıyor?",
+    "aciklama": "Kesin rakam gerekmez; sonucun müşterin için değerini kaba bir hesapla anlat.",
+    "ornek": "Her ay yarıda bıraktığı diyetlere ve paketlere giden emeği ve parayı; sofrada yaşadığı suçluluğu.",
     "etiket": "Sonucun değeri (kaba hesap)",
     "olcu": "müşterime ne kazandırıyor / neyi kaybetmekten kurtarıyor",
     "tur": "uzun_metin",
@@ -548,6 +678,9 @@
    },
    {
     "anahtar": "revizyon_kurali",
+    "soru": "Fiyatlarını ne sıklıkla gözden geçireceksin ve mevcut müşterine ne kadar önce haber vereceksin?",
+    "aciklama": "Tek cümleyle yaz: ne sıklıkla gözden geçirdiğini ve mevcut müşteriye ne kadar önce haber verdiğini.",
+    "ornek": "Fiyatlarımı yılda iki kez gözden geçiririm, mevcut müşterime bir ay önce haber veririm.",
     "etiket": "Fiyat revizyon kuralım",
     "olcu": "\"Fiyatlarımı ___ gözden geçiririm, mevcut müşterime ___ önce haber veririm.\"",
     "tur": "kisa_metin",
@@ -555,6 +688,9 @@
    },
    {
     "anahtar": "iptal_iade",
+    "soru": "İptal ve iade kuralın ne?",
+    "aciklama": "Hangi durumda iade olduğunu, hangi durumda olmadığını ve ne kadar sürede yapıldığını tek paragrafta açıkça yaz; son hali için hukukçuna danış.",
+    "ornek": "İlk görüşmeden sonra vazgeçersen kalan görüşmelerin ücretini iade ederim; program yarıyı geçtiyse iade yapmam.",
     "etiket": "İptal / iade kuralım",
     "olcu": "tek paragraf",
     "tur": "uzun_metin",
@@ -562,6 +698,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Teklif verdiğin kişiler en çok hangi kademeyi seçti?",
+   "aciklama": "Bir ay sonra hangi kademenin kaç kez seçildiğini yaz; bunu W aşamasında ölçeceksin.",
    "etiket": "Tek ölçütüm",
    "olcu": "Teklif verdiğim kişilerin hangi kademeyi seçtiği (W'de ölçülür)",
    "tur": "kisa_metin",
@@ -597,6 +735,9 @@
   "alanlar": [
    {
     "anahtar": "ilk_saatler",
+    "soru": "Sana evet diyen müşteri ilk saatlerde ne alacak?",
+    "aciklama": "Süreci, beklentiyi ve ilk adımı anlatan mesajın, dokümanın ya da videonun içeriğini yaz.",
+    "ornek": "Hoş geldin mesajı: ilk görüşmeye kadar ne olacak, ilk hafta neler bekleniyor, ilk adım üç günlük sofra notu.",
     "etiket": "İlk saatler: müşterim ne alır",
     "olcu": "mesaj / doküman / video · içinde: süreç, beklenti, ilk adım",
     "tur": "uzun_metin",
@@ -604,6 +745,9 @@
    },
    {
     "anahtar": "ilk_kazanim",
+    "soru": "Müşterinin 'almaya başladım bile' diyeceği ilk kazanım ne olacak?",
+    "aciklama": "İlk kazanımın ne olduğunu, en geç ne zaman geleceğini ve müşterinin nasıl hissedeceğini yaz; sonuç vaadi yok.",
+    "ornek": "İlk görüşmede kendi sofrasına göre hazırlanmış ilk hafta planı; 'bunu yapabilirim' hissi.",
     "etiket": "İlk kazanım",
     "olcu": "ne · en geç ne zaman · nasıl hissedecek",
     "tur": "kisa_metin",
@@ -611,6 +755,9 @@
    },
    {
     "anahtar": "destek_sinirlari",
+    "soru": "Müşterin soru sormak istediğinde neyi nerede bulacak, kime soracak ve ne kadar sürede cevap alacak?",
+    "aciklama": "Destek kaynaklarını ve cevap süreni yaz; Erişim dersindeki kartınla aynı olmalı.",
+    "ornek": "Sık sorulanlar dokümanda · sorular WhatsApp'tan · bir iş günü içinde cevap",
     "etiket": "Destek sınırlarım",
     "olcu": "neyi nereden bulur · kime sorar · ne kadar sürede cevap (Erişim Kartım'dan)",
     "tur": "kisa_metin",
@@ -618,6 +765,9 @@
    },
    {
     "anahtar": "proaktif_yoklama",
+    "soru": "Müşterin sormadan sen ne zaman, hangi soruyla onu yoklayacaksın?",
+    "aciklama": "Kaçıncı gün yazacağını ve soracağın tek soruyu yaz.",
+    "ornek": "Üçüncü gün: Sofra notları nasıl gidiyor?",
     "etiket": "Proaktif yoklama",
     "olcu": "ne zaman, hangi soruyla gidişatı kontrol ederim",
     "tur": "kisa_metin",
@@ -625,6 +775,9 @@
    },
    {
     "anahtar": "ugurlama",
+    "soru": "Süreç biterken müşterine ne hatırlatacak ve kapıyı nasıl açık bırakacaksın?",
+    "aciklama": "Neyi başardığını hatırlatan mesajı ve devam etmek isterse önerdiğin yolu yaz.",
+    "ornek": "Kendi düzenini kurdun; istersen ayda bir takip görüşmesiyle devam edebiliriz.",
     "etiket": "Uğurlama",
     "olcu": "süreç biterken ne hatırlatırım · kapıyı nasıl açık bırakırım",
     "tur": "kisa_metin",
@@ -632,6 +785,9 @@
    },
    {
     "anahtar": "memnuniyet_yorum",
+    "soru": "Memnuniyeti ne zaman soracaksın ve yorum isteğini ne zaman göndereceksin?",
+    "aciklama": "İlk kazanımdan sonra soracağın soruyu ve herkese aynı gidecek yorum isteğinin zamanını yaz; karşılığında hediye yok.",
+    "ornek": "İlk kazanımdan sonra 'Nasıl gidiyor?' · programın sonunda herkese aynı yorum isteği",
     "etiket": "Memnuniyet ve yorum",
     "olcu": "soru zamanı · yorum isteği zamanı (ilk kazanımdan sonra) · herkese aynı",
     "tur": "kisa_metin",
@@ -639,6 +795,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Yeni müşterilerinin kaçı ilk kazanıma ulaştı ve kaçı sessizce kayboldu?",
+   "aciklama": "Bir ay sonra iki sayıyı yaz; bunu W aşamasında ölçeceksin.",
    "etiket": "Tek ölçütüm",
    "olcu": "Yeni müşterilerin kaçı ilk kazanıma ulaştı; kaçı sessizce kayboldu (W'de ölçülür)",
    "tur": "kisa_metin",
@@ -674,6 +832,9 @@
   "alanlar": [
    {
     "anahtar": "dogrulama",
+    "soru": "Yapay zekânın ürettiklerinden hangilerini müşteriye gitmeden mutlaka kendin doğrularsın?",
+    "aciklama": "Olgu, kaynak, doz, mevzuat, rakam gibi çıktı türlerini ve her birini neyle doğruladığını yaz.",
+    "ornek": "Besin değerleri ve takviye bilgisi resmi kaynaktan · müşteriye giden her metin benim okumamdan geçer",
     "etiket": "1 · Mutlaka kendim doğrularım",
     "olcu": "hangi çıktı türleri (olgu, kaynak, doz, mevzuat, rakam, müşteriye giden her metin) · neyle doğrularım",
     "tur": "uzun_metin",
@@ -681,6 +842,9 @@
    },
    {
     "anahtar": "musteri_verisi",
+    "soru": "Müşteri verisini yapay zekâya vermeden önce neyi çıkarırsın?",
+    "aciklama": "Neyi çıkardığını, hangi veriyi hiç vermediğini ve sağlık gibi özel bilgi topluyorsan rıza notunu yaz.",
+    "ornek": "İsim ve telefonu çıkarırım · hastalık ve ilaç bilgisini hiç vermem · ön görüşme formunda açık rıza alıyorum",
     "etiket": "2 · Müşteri verisi",
     "olcu": "yapay zekâya vermeden önce neyi çıkarırım · hangi veriyi hiç vermem · özel nitelikli veri topluyor muyum (rıza notu)",
     "tur": "uzun_metin",
@@ -688,6 +852,9 @@
    },
    {
     "anahtar": "susma_ani",
+    "soru": "Yapay zekâ hangi anlarda susup seni çağırmalı?",
+    "aciklama": "Asla cevaplamayacağı en az üç durumu, o anda söyleyeceği cümleyi ve kimin ne kadar sürede döneceğini yaz.",
+    "ornek": "Tıbbi tanı sorusu · kriz ya da yoğun duygu · şikâyet · \"Bunu ekibimize aktarıyorum, aynı gün dönüyoruz.\"",
     "etiket": "3 · Susma anı",
     "olcu": "yapay zekânın asla cevaplamayacağı en az 3 durum · \"size dönüyoruz\" cümlem · kim, ne kadar sürede döner",
     "tur": "uzun_metin",
@@ -695,6 +862,9 @@
    },
    {
     "anahtar": "asistan_kurallari",
+    "soru": "Asistanın müşterinle konuşurken hangi kurallara uyacak?",
+    "aciklama": "Kendini asistan olarak tanıtmasını, yapmadığı bir şeyi 'yaptım' dememesini ve emin değilse devretmesini kendi cümlelerinle yaz.",
+    "ornek": "Kendini 'asistan' olarak tanıtır · emin değilse bana devreder",
     "etiket": "Asistan kuralları",
     "olcu": "kendini asistan olarak tanıtır · yapmadığını \"yaptım\" demez · emin değilse devreder",
     "tur": "liste",
@@ -702,6 +872,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Bir ayda yapay zekânın çıktılarında kaç hata yakaladın?",
+   "aciklama": "Doğrularken yakaladığın hataları bir ay boyunca say ve yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Bir ayda yapay zekâ çıktısında yakaladığım hata sayısı (W'de ölçülür)",
    "tur": "sayi",
@@ -735,6 +907,9 @@
   "alanlar": [
    {
     "anahtar": "bir_numarali_surec",
+    "soru": "Yapay zekâya ilk taşıyacağın, sana en çok zaman kaybettiren iş hangisi?",
+    "aciklama": "G aşamasındaki fırsat haritanda bir numaraya koyduğun işi yaz.",
+    "ornek": "Her danışana haftalık beslenme planını sıfırdan yazmak.",
     "etiket": "1 numaralı süreç",
     "olcu": "G › fırsat haritası (\"en çok zamanımı yiyen iş\")",
     "tur": "kisa_metin",
@@ -745,6 +920,7 @@
    },
    {
     "anahtar": "cekirdek_ve_ses",
+    "aciklama": "Kimlik Çekirdeğin ve ses notun buraya Rota Dosyandan gelir; yeniden yazmana gerek yok.",
     "etiket": "Kimlik çekirdeğim + ses notum",
     "olcu": "R.2",
     "tur": "referans",
@@ -756,6 +932,9 @@
    },
    {
     "anahtar": "teklif_tek_cumle",
+    "soru": "Teklifini tek cümleyle nasıl söylersin?",
+    "aciklama": "Teklif Kartı'ndaki sözünü tek cümleye indir.",
+    "ornek": "Kendi sofranda, yasaksız ve adım adım kalıcı bir düzen kuruyoruz.",
     "etiket": "Teklifim (tek cümle)",
     "olcu": "R.3",
     "tur": "kisa_metin",
@@ -766,6 +945,9 @@
    },
    {
     "anahtar": "en_iyi_isler_nerede",
+    "soru": "En iyi üç beş işin şu an nerede duruyor?",
+    "aciklama": "Örnek olarak kullanacağın en iyi işlerinin klasörünü, dosyasını ya da mesaj geçmişini yaz; isim ve kişisel bilgi yazma.",
+    "ornek": "Bilgisayarda 'iyi planlar' klasörü",
     "etiket": "En iyi 3–5 işim nerede duruyor",
     "olcu": "(klasör, dosya, mesaj geçmişi) — O.2'de lazım olacak",
     "tur": "kisa_metin",
@@ -774,6 +956,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "O aşaması boyunca kaç parça çalışır hale geldi?",
+   "aciklama": "O.1'den O.4'e kadar her dersin sonunda çalışan bir parça olur; kaç tanesinin bittiğini say.",
    "etiket": "Tek ölçütüm",
    "olcu": "O boyunca kaç parça \"çalışır\" hale geldi (O.1–O.4 teslimleri)",
    "tur": "sayi",
@@ -808,6 +992,9 @@
   "alanlar": [
    {
     "anahtar": "surec",
+    "soru": "Yapay zekâya taşıyacağın tek süreç hangisi?",
+    "aciklama": "Fırsat haritandaki en çok zaman yiyen ya da tekrar eden ve zanaat gerektirmeyen bir işi yaz; birden fazla süreç seçme.",
+    "ornek": "Danışan görüşmesinden sonra haftalık planı yazmak.",
     "etiket": "Taşıyacağım tek süreç",
     "olcu": "fırsat haritasındaki \"en çok zamanımı yiyen iş\" ya da \"tekrar eden ve zanaat gerektirmeyen\" iş",
     "tur": "kisa_metin",
@@ -815,6 +1002,9 @@
    },
    {
     "anahtar": "neden",
+    "soru": "Neden bu süreci seçtin?",
+    "aciklama": "Tek cümleyle nedenini yaz.",
+    "ornek": "Her hafta aynı işi tekrar ediyorum ve en çok vaktimi bu alıyor.",
     "etiket": "Neden o",
     "olcu": "tek cümle",
     "tur": "kisa_metin",
@@ -822,18 +1012,23 @@
    },
    {
     "anahtar": "dakika_sefer",
+    "soru": "Bu iş bir seferde kaç dakika sürüyor?",
+    "aciklama": "Bugün elle yaptığında bir seferde geçen süreyi dakika olarak yaz.",
     "etiket": "Bir seferde kaç dakika",
     "tur": "sayi",
     "zorunlu": true
    },
    {
     "anahtar": "haftada_kac",
+    "soru": "Bu işi haftada kaç kez yapıyorsun?",
+    "aciklama": "Haftalık tekrar sayısını yaz.",
     "etiket": "Haftada kaç kez",
     "tur": "sayi",
     "zorunlu": true
    },
    {
     "anahtar": "haftalik_toplam",
+    "aciklama": "Bir seferlik süre ile haftalık tekrar sayısının çarpımı; kendiliğinden hesaplanır.",
     "etiket": "Haftalık toplam (dakika)",
     "olcu": "O.4'teki \"eskiden X → şimdi Y\" ölçümünün başlangıç değeri",
     "tur": "sayi",
@@ -841,6 +1036,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Bu süreç sana haftada toplam kaç dakikaya mal oluyor?",
+   "aciklama": "Bir seferlik süreyle haftalık tekrar sayısının çarpımı; O.4'te yeniden ölçeceksin.",
    "etiket": "Tek ölçütüm",
    "olcu": "Bu sürecin haftalık süresi (O.4'te tekrar ölçülür)",
    "tur": "sayi",
@@ -875,6 +1072,7 @@
   "alanlar": [
    {
     "anahtar": "kim_ve_kime",
+    "aciklama": "Kimlik Çekirdeğinin altı satırı Rota Dosyandan toplanır; burada yeniden yazmazsın.",
     "etiket": "Kim ve kime",
     "olcu": "Kimlik çekirdeği (6 satır)",
     "tur": "referans",
@@ -885,6 +1083,7 @@
    },
    {
     "anahtar": "teklif",
+    "aciklama": "Teklif Kartın ve beş itiraz Rota Dosyandan toplanır.",
     "etiket": "Teklif",
     "olcu": "Teklif kartı + en sert 5 itiraz ve cevabı",
     "tur": "referans",
@@ -895,6 +1094,9 @@
    },
    {
     "anahtar": "sik_sorulanlar",
+    "soru": "Müşterilerinin en sık sorduğu on soruya ne cevap veriyorsun?",
+    "aciklama": "Ekosistem dersinde yazdığın on sorunun her birine kendi sesinle kısa bir cevap yaz; danışan adı ve sağlık bilgisi yazma.",
+    "ornek": "Akşam yemeğini atlamak işe yarar mı? → Genelde hayır; atlanan öğün ertesi gün başka yerden çıkar.",
     "etiket": "Sık sorulanlar",
     "olcu": "En sık 10 soru ve cevabı",
     "tur": "uzun_metin",
@@ -906,6 +1108,7 @@
    },
    {
     "anahtar": "erisim",
+    "aciklama": "Kanalların, saatlerin ve devir anların Erişim Kartından toplanır.",
     "etiket": "Erişim",
     "olcu": "Kanallar, saatler, devir anları",
     "tur": "referans",
@@ -918,6 +1121,7 @@
    },
    {
     "anahtar": "guven",
+    "aciklama": "Güven Sözleşmen Rota Dosyandan toplanır.",
     "etiket": "Güven",
     "olcu": "Güven sözleşmesi (doğrula / kimliksizleştir / sus)",
     "tur": "referans",
@@ -928,6 +1132,9 @@
    },
    {
     "anahtar": "yontem_ilkeler",
+    "soru": "İşini hangi adımlarla, neye önce bakarak yapıyorsun?",
+    "aciklama": "Yönteminin adımlarını ve 'önce şuna bakarım, çünkü…' diye başlayan ilkelerini yaz.",
+    "ornek": "Önce kişinin bugünkü sofrasına bakarım, çünkü kalıcı değişiklik oradan başlar.",
     "etiket": "Yöntem + ilkeler",
     "olcu": "Adımlar + \"önce şuna bakarım, çünkü…\"",
     "tur": "uzun_metin",
@@ -935,6 +1142,9 @@
    },
    {
     "anahtar": "kalite_kurallari",
+    "soru": "Senin için iyi bir iş neye benziyor?",
+    "aciklama": "İyi işin özelliklerini ve asla kabul etmediğin şeyleri yaz; bunlar yapay zekânın ölçütü olacak.",
+    "ornek": "İyi plan kişinin gerçek gününe uyar · yasak listesiyle başlayan planı kabul etmem",
     "etiket": "Kalite kuralları",
     "olcu": "\"İyi iş neye benzer\", kabul etmediklerim",
     "tur": "uzun_metin",
@@ -942,6 +1152,9 @@
    },
    {
     "anahtar": "ses",
+    "soru": "Yapay zekâ senin gibi yazsın diye hangi kelimeleri kullanmalı, hangilerinden kaçınmalı?",
+    "aciklama": "Ham ses notunu kullan ve kaçın listesiyle tamamla; çeviri kokan kalıpları da yasakla.",
+    "ornek": "Kullan: 'adım adım', 'kendi sofran' · Kaçın: 'mucize', 'garanti', 'harika bir yolculuk'",
     "etiket": "Ses",
     "olcu": "Kullan / kaçın listesi, çeviri kokusu yasakları",
     "tur": "uzun_metin",
@@ -953,6 +1166,9 @@
    },
    {
     "anahtar": "ornek_isler",
+    "soru": "Örnek olarak verebileceğin en iyi üç beş işin hangileri ve neden iyiler?",
+    "aciklama": "Her iş için kısa bir tarif ve neden iyi olduğunu yaz; isimleri ve sağlık bilgilerini çıkar.",
+    "ornek": "Vardiyalı çalışan bir danışan için hazırladığım plan; çünkü yemek saatlerini değil, uyku saatlerini temel aldı.",
     "etiket": "Örnek işler",
     "olcu": "3–5 iyi iş + neden iyi",
     "tur": "liste",
@@ -963,6 +1179,9 @@
    },
    {
     "anahtar": "asla_verilmez",
+    "soru": "Hangi bilgileri yapay zekâya hiçbir zaman vermezsin?",
+    "aciklama": "Güven Sözleşmendeki listeyi kullan ve gerekirse tamamla.",
+    "ornek": "Danışan adı · telefon · hastalık ve ilaç bilgisi",
     "etiket": "Asla verilmez",
     "olcu": "Yapay zekâya hiç girmeyecek bilgi türleri",
     "tur": "liste",
@@ -973,6 +1192,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Önce ve sonra testinde ikinci cevabı kaç düzeltmeyle kullanılır buldun?",
+   "aciklama": "Beyin dosyasıyla aldığın cevabı kullanılır hale getirmek için yaptığın düzeltme sayısını yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Önce/sonra testinde ikinci cevabı kaç düzeltmeyle kullanılır buldum?",
    "tur": "sayi",
@@ -1012,6 +1233,7 @@
   "alanlar": [
    {
     "anahtar": "surec",
+    "aciklama": "O.1'de seçtiğin süreç buraya gelir.",
     "etiket": "Süreç",
     "olcu": "(O.1'de seçtiğin)",
     "tur": "referans",
@@ -1021,6 +1243,9 @@
    },
    {
     "anahtar": "tetikleyici",
+    "soru": "Bu süreci ne başlatıyor?",
+    "aciklama": "Sürecin ne olduğunda başladığını tek cümleyle yaz.",
+    "ornek": "Danışan görüşmesi bittiğinde.",
     "etiket": "Tetikleyici",
     "olcu": "Süreci ne başlatır",
     "tur": "kisa_metin",
@@ -1028,6 +1253,9 @@
    },
    {
     "anahtar": "girdiler",
+    "soru": "Bu süreci her çalıştırdığında yapay zekâya ne vermen gerekiyor?",
+    "aciklama": "Gerekli bilgileri ve kişisel bilgileri nasıl çıkaracağını yaz.",
+    "ornek": "Kimliksiz görüşme notu · danışanın hedefi · bu haftanın değişikliği",
     "etiket": "Girdiler",
     "olcu": "Her seferinde ne vermem gerekir (kimliksizleştirme adımıyla)",
     "tur": "uzun_metin",
@@ -1036,37 +1264,56 @@
    {
     "anahtar": "adimlar",
     "etiket": "Adımlar (3–7)",
+    "soru": "Bu süreç hangi adımlardan oluşuyor?",
+    "aciklama": "Üç ile yedi arasında adım yaz; her adım için talimatı, bağlamı, iyi örneği, yanıt biçimini, başarı ölçütünü ve kimde kalacağını doldur.",
     "tur": "tablo",
     "adet_min": 3,
     "adet_max": 7,
     "sutunlar": [
      {
       "anahtar": "talimat",
+      "soru": "Bu adımda yapay zekâya ne yapmasını söylüyorsun?",
+      "aciklama": "Adımın talimatını kısa ve net yaz.",
+      "ornek": "Görüşme notundan bu haftanın üç önceliğini çıkar.",
       "etiket": "Talimat",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "baglam",
+      "soru": "Bu adım için yapay zekâ neyi bilmeli?",
+      "aciklama": "Beyin dosyandan ya da girdilerden bu adıma gereken bağlamı yaz.",
+      "ornek": "Beyin dosyamdaki yöntem ve kalite kuralları.",
       "etiket": "Bağlam",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "iyi_ornek",
+      "soru": "Bu adımın iyi bir çıktısı neye benzer?",
+      "aciklama": "Kısa bir iyi örnek ya da örneğin nerede durduğunu yaz.",
+      "ornek": "Öncelikler kısa, kişinin kendi kelimeleriyle.",
       "etiket": "İyi örnek",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "yanit_bicimi",
+      "soru": "Bu adımın çıktısı hangi biçimde olmalı?",
+      "aciklama": "Liste mi, paragraf mı, tablo mu; uzunluğuyla birlikte yaz.",
+      "ornek": "Üç maddelik liste.",
       "etiket": "Yanıt biçimi",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "basari_olcutu",
+      "soru": "Bu adımın iyi gittiğini nereden anlarsın?",
+      "aciklama": "Çıktıyı kabul etmeden önce bakacağın ölçütü yaz.",
+      "ornek": "Her öncelik danışanın kendi gününe uyuyor.",
       "etiket": "Başarı ölçütü",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "devret_birlikte_sende",
+      "soru": "Bu adımı yapay zekâya mı bırakıyorsun, birlikte mi yapıyorsunuz, yoksa sende mi kalıyor?",
+      "aciklama": "Devret, birlikte ya da sende olarak seç.",
       "etiket": "Devret / birlikte / sende",
       "tur": "secim",
       "secenekler": [
@@ -1080,6 +1327,9 @@
    },
    {
     "anahtar": "cikti",
+    "soru": "Süreç sonunda ne teslim ediliyor?",
+    "aciklama": "Sürecin sonunda ortaya çıkan şeyi tek cümleyle yaz.",
+    "ornek": "Danışana gönderilecek haftalık plan taslağı.",
     "etiket": "Çıktı",
     "olcu": "Sonunda ne teslim edilir",
     "tur": "kisa_metin",
@@ -1087,6 +1337,9 @@
    },
    {
     "anahtar": "bana_don",
+    "soru": "Yapay zekâ hangi durumlarda durup seni çağırmalı?",
+    "aciklama": "Çırağın kendi başına karar vermemesi gereken durumları yaz.",
+    "ornek": "Sağlık durumuyla ilgili bir not varsa · danışan planı istemediğini söylediyse",
     "etiket": "Ne zaman bana dön",
     "olcu": "Çırağın durup beni çağıracağı durumlar",
     "tur": "liste",
@@ -1095,21 +1348,29 @@
    {
     "anahtar": "calistirmalar",
     "etiket": "3 çalıştırma",
+    "soru": "Bu yöntemi gerçek işte üç kez çalıştırdığında ne oldu?",
+    "aciklama": "Her çalıştırmanın tarihini, kaç düzeltme gerektiğini ve kaç dakika sürdüğünü yaz.",
     "tur": "tablo",
     "adet": 3,
     "sutunlar": [
      {
       "anahtar": "tarih",
+      "soru": "Bu çalıştırmayı ne zaman yaptın?",
+      "aciklama": "Çalıştırmanın tarihini seç.",
       "etiket": "Tarih",
       "tur": "tarih"
      },
      {
       "anahtar": "duzeltme_sayisi",
+      "soru": "Bu çalıştırmada kaç düzeltme gerekti?",
+      "aciklama": "Çıktıyı kullanılır hale getirmek için kaç kez düzelttiğini yaz.",
       "etiket": "Kaç düzeltme gerekti",
       "tur": "sayi"
      },
      {
       "anahtar": "sure_dk",
+      "soru": "Bu çalıştırma kaç dakika sürdü?",
+      "aciklama": "Baştan sona geçen süreyi dakika olarak yaz.",
       "etiket": "Süre",
       "tur": "sayi"
      }
@@ -1119,6 +1380,9 @@
    },
    {
     "anahtar": "siradaki_adaylar",
+    "soru": "Sıradaki hangi üç süreci taşıyabilirsin?",
+    "aciklama": "Aynı yolla taşıyabileceğin üç süreç adayını yaz; isteğe bağlı.",
+    "ornek": "Ön görüşme özetini çıkarmak · sık sorulan sorulara cevap taslağı · haftalık paylaşım fikirleri",
     "etiket": "Sıradaki 3 aday",
     "olcu": "Dört kaynaktan (ders altı)",
     "tur": "liste",
@@ -1127,6 +1391,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Üçüncü çalıştırmada kaç düzeltme gerekti ve ne kadar sürdü?",
+   "aciklama": "Üçüncü çalıştırmanın düzeltme sayısını ve süresini O.1'deki başlangıçla kıyasla.",
    "etiket": "Tek ölçütüm",
    "olcu": "Üçüncü çalıştırmada düzeltme sayısı ve süre (O.1 başlangıç değeriyle kıyas)",
    "tur": "kisa_metin",
@@ -1160,12 +1426,18 @@
   "alanlar": [
    {
     "anahtar": "asil_teslimat",
+    "soru": "Müşterine teslim ettiğin asıl iş ne?",
+    "aciklama": "Müşterinin senden aldığı asıl çıktıyı tek cümleyle yaz.",
+    "ornek": "Kişiye özel beslenme planı ve haftalık takip.",
     "etiket": "Asıl teslimatım",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "uc_katman",
+    "soru": "Asıl işin hangi üç katmandan oluşuyor?",
+    "aciklama": "Karar ve yapı, zanaat ve dokunuş katmanlarının her birini bir cümleyle yaz.",
+    "ornek": "Karar/yapı: planın iskeleti · Zanaat: kişiye göre ayar · Dokunuş: görüşmedeki ilgi",
     "etiket": "Üç katman",
     "olcu": "Karar / yapı · Zanaat · Dokunuş — her biri bir cümle",
     "tur": "uzun_metin",
@@ -1173,6 +1445,8 @@
    },
    {
     "anahtar": "kurulan_katman",
+    "soru": "Üretim sistemini hangi katmana kuruyorsun?",
+    "aciklama": "Çoğunlukla karar ve yapı katmanı seçilir; zanaat ve dokunuş sende kalır.",
     "etiket": "Sistemi kurduğum katman",
     "olcu": "(çoğunlukla karar / yapı)",
     "tur": "secim",
@@ -1185,6 +1459,9 @@
    },
    {
     "anahtar": "kaydedilmis_sistem",
+    "soru": "Kaydettiğin üretim sistemi nelerden oluşuyor?",
+    "aciklama": "Talimatı, beyin dosyasını, yöntem dosyasını ve neden iyi olduklarıyla beş on örnek işi listele.",
+    "ornek": "Plan talimatı · beyin dosyam · haftalık plan yöntem dosyası · altı örnek plan",
     "etiket": "Kaydedilmiş sistem",
     "olcu": "Talimat + beyin dosyası + yöntem dosyası + 5–10 örnek iş (neden iyi)",
     "tur": "uzun_metin",
@@ -1196,6 +1473,9 @@
    },
    {
     "anahtar": "geri_besleme",
+    "soru": "Sistemi kaç tur düzelttin ve hangi kuralları ekledin?",
+    "aciklama": "Tur sayısını, eklediğin kuralları ve kısa bir sürüm notunu yaz.",
+    "ornek": "Üç tur · 'öğün atlatma önerme' kuralı eklendi · sürüm 3",
     "etiket": "Geri besleme",
     "olcu": "Kaç tur · hangi kuralları ekledim · sürüm notu",
     "tur": "uzun_metin",
@@ -1203,6 +1483,8 @@
    },
    {
     "anahtar": "olcum",
+    "soru": "Bu iş eskiden kaç dakika sürüyordu, şimdi kaç dakika sürüyor?",
+    "aciklama": "Kendi ölçümünü yaz: eskiden ve şimdi kaç dakika, haftada kaç kez, ayda kaç saat kazanıyorsun.",
     "etiket": "Ölçüm",
     "olcu": "Eskiden __ dk → şimdi __ dk · haftada __ kez · ayda __ saat (kendi ölçümüm)",
     "tur": "kisa_metin",
@@ -1211,6 +1493,9 @@
    },
    {
     "anahtar": "ilk_asistan_adayi",
+    "soru": "Bu beyin müşteriye dokunsaydı ilk nerede çalışırdı?",
+    "aciklama": "Tek paragrafta, müşteriyle konuşan bir asistanın bu bilgiyle ilk hangi işi yapabileceğini yaz.",
+    "ornek": "Görüşmeler arasında danışanların sık sorduğu beslenme sorularına ilk cevabı verirdi; sağlıkla ilgili sorularda beni çağırırdı.",
     "etiket": "İlk asistan adayı",
     "olcu": "Bu beyin müşteriye dokunsaydı ilk nerede çalışırdı? (tek paragraf; OV.6'ya köprü)",
     "tur": "uzun_metin",
@@ -1218,6 +1503,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Bu katmanda ayda kaç saat kazanıyorsun?",
+   "aciklama": "Ölçümünden çıkan aylık kazancı saat olarak yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Bu katmanda aylık kazandığım saat",
    "tur": "sayi",
@@ -1251,12 +1538,18 @@
   "alanlar": [
    {
     "anahtar": "isim_adi",
+    "soru": "İşinin adı ne?",
+    "aciklama": "Müşterilerinin seni bildiği adı yaz; şirket adın farklıysa ikisini de ekleyebilirsin.",
+    "ornek": "(işinin adı)",
     "etiket": "İşimin adı",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "dagilim_3_yer",
+    "soru": "Müşterilerinin bilgileri bugün hangi üç yerde dağınık duruyor?",
+    "aciklama": "Mesajların, randevuların ve notların bugün nerede tutulduğunu üç madde olarak yaz.",
+    "ornek": "WhatsApp · randevu defteri · telefondaki notlar",
     "etiket": "Müşterilerim bugün hangi 3 yerde dağılmış",
     "olcu": "ör. WhatsApp · defter · tablo",
     "tur": "liste",
@@ -1288,6 +1581,9 @@
   "alanlar": [
    {
     "anahtar": "isletme_profili",
+    "soru": "İşletme profiline hangi temel bilgiler girecek?",
+    "aciklama": "Adını, iletişim bilgilerini, varsa adresini ve logonun olup olmadığını yaz.",
+    "ornek": "(işinin adı) · e-posta ve telefon · çevrim içi çalışıyorum · logo var",
     "etiket": "İşletme Profili",
     "olcu": "Ad, iletişim, adres (varsa), logo",
     "tur": "kisa_metin",
@@ -1295,6 +1591,9 @@
    },
    {
     "anahtar": "tasarim_kiti",
+    "soru": "Markanın görünüşü nasıl: logo, renkler ve yazı tipi neler?",
+    "aciklama": "Logonu, iki üç rengini ve kullandığın yazı tipini yaz; henüz yoksa \"henüz yok\" demen yeter.",
+    "ornek": "Yeşil yaprak logolu · açık yeşil ve krem · sade, yuvarlak bir yazı tipi",
     "etiket": "Marka Panoları › Tasarım Kiti",
     "olcu": "Logo, 2–3 renk, yazı tipi (yoksa \"henüz yok\")",
     "tur": "kisa_metin",
@@ -1302,6 +1601,9 @@
    },
    {
     "anahtar": "ozel_degerler",
+    "soru": "Her yerde aynı görünmesi gereken kısa metinlerin neler?",
+    "aciklama": "Tek cümleni ve kime hizmet ettiğini Kimlik Çekirdeğinden al, yanına üç dört cümlelik kısa bir tanıtım ekle.",
+    "ornek": "Kısa tanıtım: Kırkından sonra bedenini yeniden tanımak isteyen kadınlarla çalışıyorum. Yasak listesiyle değil, kendi sofrandan başlıyoruz.",
     "etiket": "Özel Değerler",
     "olcu": "Tek cümle (≤20 kelime) · kime (1 satır) · kısa tanıtım (3–4 cümle)",
     "tur": "uzun_metin",
@@ -1314,6 +1616,9 @@
    },
    {
     "anahtar": "marka_sesi",
+    "soru": "Yapay zekâ senin adına yazarken nasıl konuşmalı?",
+    "aciklama": "Ses notunun beş maddesini, duruşunu ve hiç kullanmadığın kelimeleri yaz.",
+    "ornek": "Sıcak ve sade, kısa cümleler, 'sen' diye hitap · mucize diyetlere karşıyım · 'yasak' ve 'garanti' kelimelerini kullanmam",
     "etiket": "Marka Panoları › Marka Sesi",
     "olcu": "Ses notu (5 madde) + duruş (1–2 cümle) + kaçındığım kelimeler",
     "tur": "uzun_metin",
@@ -1325,16 +1630,24 @@
    },
    {
     "anahtar": "bilgi_bankasi",
+    "soru": "Seni soran birine asistanın neleri bilerek cevap vermeli?",
+    "aciklama": "Kimlik Çekirdeğin ve beyin dosyandaki en sık sorulan beş soru ile cevapları buraya kendiliğinden gelir; burada yalnız eksik ya da değişecek bir şey varsa not et.",
+    "ornek": "Soru: Görüşmeler çevrim içi mi? Cevap: Evet, haftada bir çevrim içi görüşüyoruz.",
     "etiket": "Bilgi Bankası",
     "olcu": "Neden · kime / kime değil · dönüşüm (önce → sonra) · nasıl · duruş · en sık sorulan 5 soru ve cevabı",
     "tur": "uzun_metin",
     "zorunlu": true,
     "kaynak_alanlar": [
-     "R2"
-    ]
+     "R2",
+     "O2.sik_sorulanlar"
+    ],
+    "referans": true
    },
    {
     "anahtar": "disarida_elle",
+    "soru": "Sosyal medya biyografilerin ve işletme açıklamaların ne diyecek?",
+    "aciklama": "Instagram ya da LinkedIn biyografini, Google İşletme açıklamanı ve WhatsApp Business açıklamanı aynı çekirdekten kısaca yaz.",
+    "ornek": "Instagram: Kırkından sonra yasaksız ve adım adım beslenme. Randevu için mesaj at.",
     "etiket": "Dışarıda, elle",
     "olcu": "Instagram / LinkedIn biyografisi · Google İşletme açıklaması · WhatsApp Business açıklaması",
     "tur": "uzun_metin",
@@ -1353,7 +1666,7 @@
   ],
   "tam_yuvasi": "TP.1: İşletme Profili, Tasarım Kiti, Özel Değerler, Marka Sesi, Bilgi Bankası",
   "sohbet_kipi": "cikar",
-  "not": "İsteğe bağlı 'yüz denetimi' ders altında; alan değil. Scriptte tek ölçüt yok. Bilgi Bankası'ndaki '5 soru' R4'teki 10 sorunun ilk 5'i mi, ayrı mı: belirsiz.",
+  "not": "İsteğe bağlı 'yüz denetimi' ders altında; alan değil. Scriptte tek ölçüt yok. Course kararı 2026-10-24: Bilgi Bankası'ndaki 5 soru R4'teki 10 sorudan seçilir; cevaplar O2 beyin dosyasında yazılır, burada referans olarak gösterilir (iki kez yazdırılmaz).",
   "_dosya": "OV.yaml"
  },
  {
@@ -1367,6 +1680,9 @@
   "alanlar": [
    {
     "anahtar": "teklif",
+    "soru": "Teklifinin adı, tek cümlelik sözü ve içinde neler olacak?",
+    "aciklama": "Teklifin adını, müşteriye verdiğin sözü tek cümleyle ve dahil olanları liste olarak yaz; garanti verme.",
+    "ornek": "Kendi Sofran Programı · Bu yolu seninle haftalık adımlarla yürüyeceğim · haftalık görüşme, mesajla destek, kişisel plan",
     "etiket": "Teklif",
     "olcu": "Ad · tek cümlelik söz (açıklama) · neler dahil (liste)",
     "tur": "uzun_metin",
@@ -1377,6 +1693,9 @@
    },
    {
     "anahtar": "urun",
+    "soru": "Müşterinin ödeyeceği kalemin adı ne ve hangi biçimde satılacak?",
+    "aciklama": "Ödeme kaleminin adını ve tek seferlik mi, üyelik mi, seans mı olduğunu yaz; fiyatı Fiyat ve Ödeme dersinde koyacağız.",
+    "ornek": "Kendi Sofran Programı · tek seferlik paket",
     "etiket": "Ürün",
     "olcu": "Ödeme kaleminin adı · biçim (tek seferlik / üyelik / seans) · fiyat: R.7'de",
     "tur": "kisa_metin",
@@ -1384,6 +1703,9 @@
    },
    {
     "anahtar": "sayfa",
+    "soru": "Satış sayfanın bölümleri neler olacak?",
+    "aciklama": "Teklif dersindeki dokuz başlığı sayfanın bölümleri olarak sırala; gerçek kanıtın yoksa kanıt bölümünü koyma, beş itirazı sık sorulanlara yaz.",
+    "ornek": "Başlık ve söz · kimin için · önce ve sonra · yolum · neler dahil · ben kimim · sık sorulanlar · ilk adım",
     "etiket": "Sayfa",
     "olcu": "9 başlık → 9 bölüm · kanıt yoksa bölüm yok · 5 itiraz → sık sorulanlar",
     "tur": "uzun_metin",
@@ -1395,6 +1717,9 @@
    },
    {
     "anahtar": "bilgi_bankasi",
+    "soru": "Asistanın teklifinle ilgili hangi soruları cevaplayabilmeli?",
+    "aciklama": "Teklif dersindeki beş itirazı ve cevaplarını aynen buraya taşı.",
+    "ornek": "Zamanım yok → Görüşmeler kısa; düzen senin günlük hayatına göre kurulur.",
     "etiket": "Bilgi Bankası",
     "olcu": "Aynı 5 soru-cevap",
     "tur": "kisa_metin",
@@ -1405,6 +1730,9 @@
    },
    {
     "anahtar": "sartlar",
+    "soru": "Teklifinin şartları ne olacak?",
+    "aciklama": "Sözünün sınırını bir iki cümleyle yaz, internetten satıyorsan ön bilgilendirme ve mesafeli satış metni gerekip gerekmediğini, birebir uzun hizmette imzalı sözleşme isteyip istemediğini not et.",
+    "ornek": "Sonuç değil süreç sözü veriyorum · internetten satış için mesafeli satış metni gerekiyor · imzalı sözleşme istemiyorum",
     "etiket": "Şartlar",
     "olcu": "Söz sınırı (1–2 cümle) · ön bilgilendirme + mesafeli satış gerekli mi · imzalı sözleşme gerekli mi (birebir/uzun hizmet)",
     "tur": "uzun_metin",
@@ -1412,6 +1740,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Satış sayfanın ilk ekranını gösterdiğin üç kişiden kaçı 'bu kimin için ve ne veriyor' sorusunu doğru cevapladı?",
+   "aciklama": "İlk ekranı seni tanımayan üç kişiye göster; doğru cevaplayanların sayısını yaz.",
    "etiket": "Tek ölçüt",
    "olcu": "Sayfanın ilk ekranını gösterdiğin üç kişiden kaçı \"bu kimin için ve ne veriyor\" sorusunu doğru cevapladı? (R.3 ile aynı ölçüt, bu kez sayfada.)",
    "tur": "sayi",
@@ -1441,6 +1771,9 @@
   "alanlar": [
    {
     "anahtar": "sosyal_planlayici",
+    "soru": "Hangi kanallarda, haftada kaç kez paylaşım yapacaksın?",
+    "aciklama": "Ana kanalını ya da kanallarını, kısaltarak paylaşacağın türev kanalları ve haftalık paylaşım sayını yaz.",
+    "ornek": "Ana kanal Instagram, haftada üç paylaşım · Facebook'a kısaltarak",
     "etiket": "Sosyal Planlayıcı",
     "olcu": "Ana kanal(lar) + türev kanallar · haftada kaç paylaşım",
     "tur": "kisa_metin",
@@ -1452,6 +1785,9 @@
    },
    {
     "anahtar": "kapi",
+    "soru": "İnsanlar senin listene hangi ücretsiz değerle ve hangi formla girecek?",
+    "aciklama": "İlk ücretsiz değerinin adını, formda isteyeceğin en az bilgiyi ve iki ayrı onayı (teslim için, ticari ileti için) yaz.",
+    "ornek": "Bayram sofrasından sonra suçlamadan dönmenin beş yolu rehberi · ad ve e-posta · iki ayrı onay kutusu",
     "etiket": "Kapı (sayfa + form)",
     "olcu": "İlk ücretsiz değerin adı · formda istenecek bilgiler (en az) · iki onay: teslim için / ticari ileti için",
     "tur": "uzun_metin",
@@ -1462,6 +1798,9 @@
    },
    {
     "anahtar": "etiketler",
+    "soru": "Gelen kişiyi hangi bilgilere göre işaretleyeceksin?",
+    "aciklama": "Kişinin hangi değeri istediğini ve seni nereden bulduğunu gösterecek işaretleri yaz.",
+    "ornek": "Rehberi istedi · Instagram'dan geldi",
     "etiket": "Etiketler",
     "olcu": "Hangi değeri istedi · nereden geldi",
     "tur": "kisa_metin",
@@ -1469,6 +1808,9 @@
    },
    {
     "anahtar": "yol_otomasyon",
+    "soru": "Rehberi alan kişiye sonraki günlerde hangi mesajlar gidecek?",
+    "aciklama": "Teslim mailini, en sık sorulan sorulardan seçtiğin üç beş mailin konusunu ve sessiz kalana kaçıncı gün dönüleceğini yaz.",
+    "ornek": "Rehber teslimi · 'ara vermek normal' · 'kendi sofrandan başlamak' · 30. gün kısa bir dönüş mesajı",
     "etiket": "Yol (otomasyon)",
     "olcu": "Teslim maili · sonraki 3–5 mailin konusu (en sık 10 sorudan) · sessiz kalana dönüş günü",
     "tur": "uzun_metin",
@@ -1479,6 +1821,9 @@
    },
    {
     "anahtar": "ev",
+    "soru": "İnsanlar en sonunda nerede seninle kalacak?",
+    "aciklama": "E-posta listesi, topluluk ya da randevu: ilginin evini ve eve davetin hangi mailde yapılacağını yaz.",
+    "ornek": "E-posta listem · üçüncü mailde ücretsiz tanışma görüşmesine davet",
     "etiket": "Ev",
     "olcu": "E-posta listesi / topluluk / randevu · kapıdan eve davet hangi mailde",
     "tur": "kisa_metin",
@@ -1489,6 +1834,9 @@
    },
    {
     "anahtar": "fiziksel_dunya",
+    "soru": "Fiziksel dünyada nereye bir QR kod koyabilirsin?",
+    "aciklama": "Masan, kartvizitin ya da broşürün gibi bir nokta yaz; yoksa boş bırak.",
+    "ornek": "Muayenehanedeki masa kartı",
     "etiket": "Fiziksel dünya (isteğe bağlı)",
     "olcu": "QR koyacağın bir nokta (masa, ayna, broşür)",
     "tur": "kisa_metin",
@@ -1496,6 +1844,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Bir ay içinde rehberini alanlardan kaçı listene ya da topluluğuna ulaştı?",
+   "aciklama": "Bir ay sonra say ve yaz; bu sayıyı W aşamasında ölçeceksin.",
    "etiket": "Tek ölçüt",
    "olcu": "Bir ay içinde kapıdan giren kişilerin kaçı eve (listeye/topluluğa) ulaştı? (Sayı W'de ölçülür.)",
    "tur": "sayi",
@@ -1525,6 +1875,9 @@
   "alanlar": [
    {
     "anahtar": "surec_8_asama",
+    "soru": "Müşteri yolculuğunun sekiz aşaması senin işinde hangi adlarla anılıyor?",
+    "aciklama": "İlk ilgiden müşteri olmaya kadar sekiz aşamayı kendi işindeki adlarıyla sırala.",
+    "ornek": "İlk mesaj · ilk cevap · tanışma · ücretsiz görüşme ayarlandı · görüşme · teklif · karar bekleniyor · danışan oldu",
     "etiket": "Süreç (8 aşama)",
     "olcu": "Her aşamanın benim işimdeki adı",
     "tur": "liste",
@@ -1536,6 +1889,9 @@
    },
    {
     "anahtar": "asamaya_giris",
+    "soru": "Kişi her aşamaya nasıl geçiyor?",
+    "aciklama": "Her aşama için geçişin elle mi otomatik mi olduğunu ve neyle tetiklendiğini (form, randevu, ödeme, süre) yaz.",
+    "ornek": "Form gelince ilk ilgi otomatik · görüşme randevuyla otomatik · teklif sonrası kartı elle taşıyorum",
     "etiket": "Aşamaya giriş",
     "olcu": "Her aşama için: elle mi, otomatik mi, neyle (form, randevu, ödeme, süre)",
     "tur": "uzun_metin",
@@ -1543,6 +1899,9 @@
    },
    {
     "anahtar": "kaybedildi_nedenleri",
+    "soru": "Müşteri adayını kaybettiğinde hangi nedenleri not edeceksin?",
+    "aciklama": "Uygun değil, şimdi değil, gelmedi ve sessiz kaldı nedenlerini koru; işine özel bir neden varsa ekle.",
+    "ornek": "Uygun değil · şimdi değil · gelmedi · sessiz kaldı · başka bir uzmanla başladı",
     "etiket": "Kaybedildi nedenleri",
     "olcu": "Uygun değil · şimdi değil · gelmedi · sessiz kaldı (+ bana özel varsa)",
     "tur": "liste",
@@ -1550,6 +1909,9 @@
    },
    {
     "anahtar": "kisi_karti",
+    "soru": "Her kişinin kartında hangi bilgiler olacak?",
+    "aciklama": "Nereden geldiğini, neyle ilgilendiğini ve ön görüşme sorularının cevaplarını yaz; sağlık bilgisi kart alanına girmez.",
+    "ornek": "Kaynak: Instagram · ilgi: kendi sofran programı · ön görüşme: hedefi, neyi denedi, ne zaman başlamak istiyor",
     "etiket": "Kişi kartı",
     "olcu": "Kaynak etiketi · ilgi/profil etiketi · ön görüşme cevapları (alanlar)",
     "tur": "kisa_metin",
@@ -1560,6 +1922,9 @@
    },
    {
     "anahtar": "takvim",
+    "soru": "Ön görüşme randevun nasıl olacak?",
+    "aciklama": "Randevu türünü, süresini, randevu alırken soracağın soruları ve onay ile hatırlatma mesajlarını yaz.",
+    "ornek": "Ücretsiz tanışma görüşmesi · 20 dakika · iki soru · onay ve bir gün önce hatırlatma",
     "etiket": "Takvim",
     "olcu": "Randevu türü · süresi · ön görüşme soruları · onay + hatırlatma",
     "tur": "kisa_metin",
@@ -1567,6 +1932,9 @@
    },
    {
     "anahtar": "ilk_akis",
+    "soru": "En çok kaybettiğin aşamaya hangi akışı kuracaksın?",
+    "aciklama": "Aşamayı, kaç mesaj gideceğini, aralıklarını ve akışın ne zaman duracağını yaz.",
+    "ornek": "Karar bekleniyor · üç mesaj, ikişer gün arayla · ödeme gelince ya da cevap verince durur",
     "etiket": "İlk akış",
     "olcu": "En çok kaybettiğim aşama · oraya kuracağım tek akış (kaç mesaj, hangi aralıkla, ne zaman durur)",
     "tur": "uzun_metin",
@@ -1577,6 +1945,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "İlk akışı kurduğun aşamada bir ay sonra kaybolan kişi sayısı azaldı mı?",
+   "aciklama": "Bir ay sonra o aşamada kaybolanları say ve önceki ayla kıyasla; bunu W aşamasında ölçeceksin.",
    "etiket": "Tek ölçüt",
    "olcu": "İlk akışı kurduğun aşamada bir ay sonra kaybolan kişi sayısı azaldı mı? (W'de ölçülür.)",
    "tur": "kisa_metin",
@@ -1606,6 +1976,9 @@
   "alanlar": [
    {
     "anahtar": "tek_gelen_kutusu",
+    "soru": "Hangi mesaj kanalların tek bir kutuda toplanacak?",
+    "aciklama": "Müşterilerinin sana yazdığı kanalları sırala: WhatsApp, Instagram, Facebook, e-posta, site sohbeti.",
+    "ornek": "WhatsApp · Instagram · e-posta",
     "etiket": "Tek gelen kutusu",
     "olcu": "Bağlanacak kanallar (WhatsApp, Instagram, Facebook, e-posta, site sohbeti)",
     "tur": "liste",
@@ -1616,6 +1989,9 @@
    },
    {
     "anahtar": "hazir_metinler",
+    "soru": "İlk karşılama mesajın ve en sık kullandığın üç cevap ne?",
+    "aciklama": "Mesai içi ve mesai dışı karşılama mesajını ve sık yazdığın üç cevabı kendi sesinle yaz.",
+    "ornek": "Mesai dışı: Mesajın bana ulaştı, sabah dokuzda dönüyorum; bu arada rehbere göz atabilirsin.",
     "etiket": "Hazır Metinler",
     "olcu": "İlk karşılama mesajım (mesai içi / dışı) · sık kullandığım 3 cevap",
     "tur": "uzun_metin",
@@ -1626,6 +2002,8 @@
    },
    {
     "anahtar": "bilgi_bankasi",
+    "soru": "Asistanın bilgi bankasına hangi metinlerin girecek?",
+    "aciklama": "Kimlik Çekirdeğin, teklifin ve itirazların, en sık on soru ve erişim kartın buraya toplanır; sen yalnız seçip onaylarsın.",
     "etiket": "Bilgi Bankası",
     "olcu": "Kimlik Çekirdeği · teklif + 5 itiraz · en sık 10 soru · erişim kartı",
     "tur": "kisa_metin",
@@ -1640,6 +2018,9 @@
    },
    {
     "anahtar": "asistan_kurallari",
+    "soru": "Asistanın neleri cevaplayacak, neleri asla cevaplamayacak?",
+    "aciklama": "Cevaplayacağı beş soruyu, asla cevaplamayacağı üç durumu ve o anda kullanacağı \"size dönüyoruz\" cümlesini yaz; başlangıçta öneri modunda çalışır.",
+    "ornek": "Asla: tıbbi tanı, ilaç sorusu, şikâyet · \"Bunu bizzat konuşmamız daha doğru, en kısa sürede size dönüyorum.\"",
     "etiket": "Asistan kuralları",
     "olcu": "Cevaplayacağı 5 soru · asla cevaplamayacağı 3 durum · \"size dönüyoruz\" cümlesi · başlangıç modu: öneri",
     "tur": "uzun_metin",
@@ -1652,6 +2033,9 @@
    },
    {
     "anahtar": "kademeler",
+    "soru": "Müşterilerin hangi kademede neye erişecek ve sen ne zaman devreye gireceksin?",
+    "aciklama": "Erişim kademelerinin kısa halini yaz: kademe, neye erişir, senin devreye girdiğin an.",
+    "ornek": "Ücretsiz: rehber ve topluluk · Program: haftalık görüşme · Birebir: mesajla günlük destek, ben her gün bakarım",
     "etiket": "Kademeler",
     "olcu": "Kademe → neye erişir → ben hangi anda devredeyim (kısa hali)",
     "tur": "kisa_metin",
@@ -1662,6 +2046,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "İlk mesaja ne kadar sürede cevap veriyorsun ve devredilen sohbetlere ne kadar sürede dönüyorsun?",
+   "aciklama": "Bir hafta boyunca iki süreyi not al ve yaz; bunu W aşamasında ölçeceksin.",
    "etiket": "Tek ölçüt",
    "olcu": "İlk mesaja ilk cevap süresi ve devredilen sohbetlere dönüş süresi (W'de ölçülür).",
    "tur": "kisa_metin",
@@ -1692,6 +2078,9 @@
   "alanlar": [
    {
     "anahtar": "urunler",
+    "soru": "Her kademen hangi ürün olacak ve fiyatı ne?",
+    "aciklama": "Her kademeyi bir ürün olarak yaz: adı, fiyatı TL olarak ve tek seferlik mi abonelik mi olduğu.",
+    "ornek": "Kendi Sofran Programı · tek seferlik · Takip Üyeliği · aylık abonelik",
     "etiket": "Ürünler",
     "olcu": "Her kademe bir ürün: ad · fiyat (TL) · tek seferlik / abonelik",
     "tur": "uzun_metin",
@@ -1702,6 +2091,8 @@
    },
    {
     "anahtar": "odeme_yolu",
+    "soru": "Müşterin ödemeyi nereden yapacak?",
+    "aciklama": "Teklif sayfasından mı, görüşmeden sonra gönderdiğin bağlantıdan mı ödeyeceğini seç; ikisi de olabilir.",
     "etiket": "Ödeme yolu",
     "olcu": "Teklif sayfasından mı, görüşme sonrası bağlantıyla mı",
     "tur": "secim",
@@ -1714,6 +2105,9 @@
    },
    {
     "anahtar": "abonelik",
+    "soru": "Aboneliğin olacak mı, olacaksa nasıl işleyecek?",
+    "aciklama": "Hangi ürünün abonelik olduğunu, ayın hangi günü tahsil edileceğini ve ilk dönemin ücretsiz olup olmadığını yaz; yoksa boş bırak.",
+    "ornek": "Takip Üyeliği · her ayın ilk günü · ilk ay programla birlikte ücretsiz",
     "etiket": "Abonelik",
     "olcu": "Hangi ürün · hangi gün · ilk dönem ücretsiz mi",
     "tur": "kisa_metin",
@@ -1721,6 +2115,9 @@
    },
    {
     "anahtar": "bolunmus_odeme",
+    "soru": "Ödemeyi parçalara bölecek misin?",
+    "aciklama": "Hangi kademenin kaç parçaya bölüneceğini ve vade farkını kimin üstleneceğini yaz; kart taksiti ödeme kuruluşunun işidir.",
+    "ornek": "Program üç parçaya bölünebilir · bedelini ben üstleniyorum",
     "etiket": "Bölünmüş ödeme / taksit",
     "olcu": "Hangi kademe · kaç parça · bedeli kimde · (kart taksiti ödeme kuruluşunda)",
     "tur": "kisa_metin",
@@ -1728,6 +2125,9 @@
    },
    {
     "anahtar": "indirim_kodu",
+    "soru": "İndirim kodu kullanacak mısın?",
+    "aciklama": "Kullanacaksan kime, ne kadar süreyle verdiğini yaz; süre gerçek olmalı, sahte geri sayım yok.",
+    "ornek": "Rehberi alanlara özel, bir hafta geçerli kod",
     "etiket": "İndirim kodu",
     "olcu": "Varsa: kime, ne kadar süre, gerçek süre mi",
     "tur": "kisa_metin",
@@ -1735,6 +2135,9 @@
    },
    {
     "anahtar": "odeme_sonrasi",
+    "soru": "Ödeme geldiği an müşterine ne açılıyor?",
+    "aciklama": "Ödemeyle birlikte nelerin açıldığını kısaca yaz; ayrıntısını Ağırlama dersinde göreceksin.",
+    "ornek": "Hoş geldin mesajı · ilk görüşme randevu bağlantısı · topluluk daveti",
     "etiket": "Ödeme sonrası",
     "olcu": "Ödeme gelince ne açılır (OV.8'de ayrıntı)",
     "tur": "kisa_metin",
@@ -1742,6 +2145,9 @@
    },
    {
     "anahtar": "havale",
+    "soru": "Havale ile ödeme alırsan takibi kim yapacak?",
+    "aciklama": "Havaleyi kimin kontrol edeceğini ve erişimin nasıl verileceğini yaz; havale almıyorsan boş bırak.",
+    "ornek": "Ben kontrol ediyorum · ödeme görünce erişimi elle açıyorum",
     "etiket": "Havale",
     "olcu": "Kim takip eder, erişim nasıl verilir",
     "tur": "kisa_metin",
@@ -1749,6 +2155,9 @@
    },
    {
     "anahtar": "hatirlatma_tonu",
+    "soru": "Ödemesi gecikene hangi tonla hatırlatma yapacaksın?",
+    "aciklama": "Hatırlatma mesajının tonunu tek cümleyle yaz; suçlamayan ve seçenek sunan bir dil olsun.",
+    "ornek": "Kibar, suçlamayan ve başka bir ödeme yolu öneren bir dille.",
     "etiket": "Hatırlatma tonu",
     "olcu": "Tek cümle",
     "tur": "kisa_metin",
@@ -1756,6 +2165,8 @@
    },
    {
     "anahtar": "resmi_fatura",
+    "soru": "Resmi faturanı kim kesiyor?",
+    "aciklama": "Muhasebe programından mı, mali müşavirinden mi kesildiğini seç; henüz düzenin yoksa \"henüz yok\" de.",
     "etiket": "Resmi fatura",
     "olcu": "Muhasebe programı / mali müşavir / \"henüz yok\"",
     "tur": "secim",
@@ -1768,6 +2179,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Ödeme bağlantısı gönderdiğin kişilerin kaçı ödedi ve kaçına hatırlatma gerekti?",
+   "aciklama": "Bir ay sonra iki sayıyı yaz; bunu W aşamasında ölçeceksin.",
    "etiket": "Tek ölçüt",
    "olcu": "Ödeme bağlantısı gönderilenlerin kaçı ödedi; kaçına hatırlatma gerekti (W'de ölçülür).",
    "tur": "kisa_metin",
@@ -1797,6 +2210,9 @@
   "alanlar": [
    {
     "anahtar": "odeme_ani_akisi",
+    "soru": "Ödeme geldiği an arka planda neler olacak?",
+    "aciklama": "Neyin akışı başlattığını, kişiye hangi işaretin ekleneceğini, satış sürecinde hangi aşamaya geçeceğini ve sorumlusunu yaz.",
+    "ornek": "Ödeme gelince başlar · 'danışan' işareti · süreçte danışan aşaması · sorumlu benim",
     "etiket": "Ödeme anı akışı",
     "olcu": "Tetikleyici (ödeme / sözleşme) · etiket · süreçte müşteri aşaması · sorumlu",
     "tur": "kisa_metin",
@@ -1804,6 +2220,9 @@
    },
    {
     "anahtar": "karsilama",
+    "soru": "Yeni müşterin ilk saatlerde hangi karşılamayı alacak?",
+    "aciklama": "Hoş geldin mesajının, dokümanının ya da videonun içinde süreci, beklentiyi ve ilk adımı anlatan noktaları yaz.",
+    "ornek": "Hoş geldin mesajı: ilk görüşmeye kadar ne olacağı, ilk hafta beklentisi, ilk adım olarak üç günlük sofra notu",
     "etiket": "Karşılama",
     "olcu": "Hoş geldin mesajı/dokümanı/videosu · içinde: süreç, beklenti, ilk adım",
     "tur": "uzun_metin",
@@ -1814,6 +2233,9 @@
    },
    {
     "anahtar": "erisim",
+    "soru": "Ödeme anında müşterine ne açılacak ve süre bitince ne olacak?",
+    "aciklama": "Açılan kaynakları ve süre sonunda erişimin nasıl değişeceğini yaz.",
+    "ornek": "Kişisel plan ve topluluk açılır · program bitince topluluk açık kalır",
     "etiket": "Erişim",
     "olcu": "Ödeme anında ne açılır · süre sonunda ne olur",
     "tur": "kisa_metin",
@@ -1821,6 +2243,9 @@
    },
    {
     "anahtar": "destek_kaynaklari",
+    "soru": "Müşterin destek isterken nereye başvuracak ve ne kadar sürede cevap alacak?",
+    "aciklama": "Topluluk, e-posta ya da asistan gibi kaynakları ve cevap süreni yaz.",
+    "ornek": "Sorular önce toplulukta · acil durumda e-posta · bir iş günü içinde dönüş",
     "etiket": "Destek kaynakları",
     "olcu": "Topluluk / e-posta / asistan · cevap süresi",
     "tur": "kisa_metin",
@@ -1831,6 +2256,9 @@
    },
    {
     "anahtar": "proaktif_yoklama",
+    "soru": "Müşterin sormadan sen hangi gün, hangi soruyla onu yoklayacaksın?",
+    "aciklama": "Kaçıncı gün yazacağını ve soracağın tek soruyu yaz.",
+    "ornek": "Üçüncü gün: Sofra notları nasıl gidiyor, zorlandığın bir yer var mı?",
     "etiket": "Proaktif yoklama",
     "olcu": "Kaçıncı gün, hangi soruyla",
     "tur": "kisa_metin",
@@ -1841,6 +2269,9 @@
    },
    {
     "anahtar": "ugurlama",
+    "soru": "Süreç biterken müşterine ne söyleyeceksin?",
+    "aciklama": "Süreç sonunda giden mesajı ve kapıyı açık bırakan daveti ya da teklifi yaz.",
+    "ornek": "Neleri başardığını hatırlatan kısa bir mesaj · istersen aylık takip görüşmesiyle devam edebiliriz",
     "etiket": "Uğurlama",
     "olcu": "Süreç biterken giden mesaj · kapıyı açık bırakan teklif ya da davet",
     "tur": "kisa_metin",
@@ -1851,6 +2282,9 @@
    },
    {
     "anahtar": "memnuniyet_yorum",
+    "soru": "Memnuniyeti ne zaman soracaksın ve yorum isteğini ne zaman göndereceksin?",
+    "aciklama": "Memnuniyet sorusunun ve yorum isteğinin zamanını yaz; yorum isteği herkese aynı gider, karşılığında hediye yok.",
+    "ornek": "İlk kazanımdan sonra 'Nasıl gidiyor?' · ikinci ayın sonunda herkese aynı yorum isteği",
     "etiket": "Memnuniyet ve yorum",
     "olcu": "Soru zamanı · yorum isteği zamanı · herkese aynı",
     "tur": "kisa_metin",
@@ -1861,6 +2295,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Yeni müşterilerinin kaçı ilk kazanıma ulaştı ve kaçı ilk hafta sessiz kaldı?",
+   "aciklama": "Bir ay sonra iki sayıyı yaz; bunu W aşamasında ölçeceksin.",
    "etiket": "Tek ölçüt",
    "olcu": "Yeni müşterilerin kaçı ilk kazanıma ulaştı; kaçı ilk hafta sessiz kaldı (W'de ölçülür).",
    "tur": "kisa_metin",
@@ -1890,6 +2326,9 @@
   "alanlar": [
    {
     "anahtar": "izlenecek_3_sayi",
+    "soru": "Her hafta takip edeceğin en önemli üç sayı hangileri?",
+    "aciklama": "Önceki derslerdeki tek ölçütlerinden en önemli üçünü seç.",
+    "ornek": "Haftalık yeni ilgi · görüşmeye gelme · ödeme",
     "etiket": "İzleyeceğim 3 sayı",
     "olcu": "R'deki tek ölçütlerimden en önemli üçü (ör. haftalık yeni ilgi · görüşmeye gelme · ödeme)",
     "tur": "liste",
@@ -1899,6 +2338,9 @@
    },
    {
     "anahtar": "kaynak_etiketleri",
+    "soru": "Yeni gelenlerin seni nereden bulduğunu hangi başlıklarla işaretleyeceksin?",
+    "aciklama": "Müşterilerinin geldiği yerleri birer kaynak başlığı olarak sırala.",
+    "ornek": "Instagram · Google · tavsiye · rehber · QR",
     "etiket": "Kaynak etiketlerim",
     "olcu": "Instagram / Google / tavsiye / QR / rehber…",
     "tur": "liste",
@@ -1906,6 +2348,9 @@
    },
    {
     "anahtar": "pazartesi_sorusu",
+    "soru": "Her pazartesi panona baktığında cevabını aradığın tek soru ne?",
+    "aciklama": "Haftanın başında sana yön verecek tek bir soru yaz.",
+    "ornek": "Bu hafta karar bekleyen kim var ve onlara yazdım mı?",
     "etiket": "Pazartesi sorum",
     "olcu": "Her pazartesi panoya baktığımda cevabını aradığım tek soru",
     "tur": "kisa_metin",
@@ -1913,6 +2358,8 @@
    },
    {
     "anahtar": "harita_ozeti",
+    "soru": "Kurulum planının bütün satırları doğru mu?",
+    "aciklama": "Önceki satırlarından derlenen özeti oku, gerekirse düzelt ve onayla; Tam Paket'e geçersen ilk görüşmenin gündemi bu olur.",
     "etiket": "Harita özeti",
     "olcu": "OV.0 + OV.2–OV.9: işimin kurulum planı (Tam'a girişte ilk görüşmenin gündemi)",
     "tur": "uzun_metin",
@@ -1957,17 +2404,25 @@
    {
     "anahtar": "kapi_testi",
     "etiket": "Kapı testi",
+    "soru": "Kendi işine müşteri gibi yazdığında kanalların ne kadar sürede cevap verdi?",
+    "aciklama": "WhatsApp dahil üç kanaldan kendine yaz, form doldur ya da ara; her kanal için cevabın ne kadar sürede geldiğini not et.",
     "olcu": "3 kanal (WhatsApp mutlaka) × dönüş süresi · gece mesajına ne oldu · bulunan 1 kilit · hangi O dersine dönülecek",
     "tur": "tablo",
     "adet": 3,
     "sutunlar": [
      {
       "anahtar": "kanal",
+      "soru": "Hangi kanalı denedin?",
+      "aciklama": "Denediğin kanalın adını yaz.",
+      "ornek": "WhatsApp",
       "etiket": "Kanal",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "donus_suresi",
+      "soru": "Bu kanaldan cevap ne kadar sürede geldi?",
+      "aciklama": "Dakika, saat ya da gün olarak yaz; hiç gelmediyse \"gelmedi\" de.",
+      "ornek": "Ertesi gün öğlen",
       "etiket": "Dönüş süresi",
       "tur": "kisa_metin"
      }
@@ -1976,18 +2431,26 @@
    },
    {
     "anahtar": "gece_mesaji",
+    "soru": "Akşam saat onda attığın mesaja ne oldu?",
+    "aciklama": "Gece gönderdiğin mesaja cevap gelip gelmediğini, geldiyse ne zaman ve nasıl geldiğini yaz.",
+    "ornek": "Sabah dokuzda cevap geldi; o saate kadar hiçbir şey olmadı.",
     "etiket": "Gece mesajına ne oldu",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "bulunan_kilit",
+    "soru": "Testte kapının kilitli olduğu yeri buldun mu?",
+    "aciklama": "Bir müşterinin kapıda kaybolabileceği tek bir yeri yaz.",
+    "ornek": "Form bir e-posta kutusuna düşüyor ve kimse haftalarca bakmıyor.",
     "etiket": "Bulunan 1 kilit",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "donulecek_o_dersi",
+    "soru": "Bu kilidi açmak için hangi derse geri döneceksin?",
+    "aciklama": "Kilidin ilgili olduğu O vitrin dersini seç; gerekmiyorsa boş bırak.",
     "etiket": "Hangi O dersine dönülecek",
     "tur": "secim",
     "secenekler": [
@@ -2004,6 +2467,9 @@
    },
    {
     "anahtar": "tersten_hesap",
+    "soru": "Ayda istediğin müşteri sayısına ulaşmak için haftada kaç doğru kişiye ulaşman gerekiyor?",
+    "aciklama": "Hedef müşteri sayından geriye doğru hesapla ve varsayımlarını yanına yaz.",
+    "ornek": "Ayda 4 müşteri için haftada 15 doğru kişi · görüşmelerin üçte biri müşteri oluyor (tahmin)",
     "etiket": "Tersten hesap",
     "olcu": "\"Ayda __ müşteri için haftada __ doğru kişi\" (varsayımlar yanında)",
     "tur": "kisa_metin",
@@ -2012,6 +2478,9 @@
    },
    {
     "anahtar": "ileri_plan",
+    "soru": "Müşteri bulma işine takviminde hangi gün ve saati ayırıyorsun?",
+    "aciklama": "Her hafta tekrar eden bir saha bloğunun gününü ve saatini yaz.",
+    "ornek": "Her salı 10.00–11.00",
     "etiket": "İleri plan",
     "olcu": "Takvimde haftalık saha bloğu (gün, saat)",
     "tur": "kisa_metin",
@@ -2019,6 +2488,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Kapı testinde en yavaş kanalın dönüş süresi bir sonraki testte kısaldı mı?",
+   "aciklama": "İlk testteki en yavaş süreyi ve bir sonraki testteki süreyi yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Kapı testinde en yavaş kanalın dönüş süresi; bir sonraki testte kısaldı mı?",
    "tur": "kisa_metin",
@@ -2050,6 +2521,9 @@
   "alanlar": [
    {
     "anahtar": "iki_yol",
+    "soru": "Müşteriye ulaşmak için hangi iki yolu seçiyorsun?",
+    "aciklama": "Biri bu hafta sonuç veren hızlı yol, biri gelecek ayları dolduran sabırlı yol olsun: çekmek, gitmek, ödünç kitle, referans ya da uyuyan liste.",
+    "ornek": "Hızlı: uyuyan liste · sabırlı: çekmek",
     "etiket": "Seçtiğim 2 yol",
     "olcu": "hızlı: __ · sabırlı: __",
     "tur": "kisa_metin",
@@ -2065,6 +2539,9 @@
    },
    {
     "anahtar": "plan_14_gun",
+    "soru": "Önümüzdeki iki haftada bu iki yolla ne yapacaksın?",
+    "aciklama": "Her yol için kime, hangi mesajla, hangi eylem çağrısıyla ve kaç kişiye ulaşacağını yaz.",
+    "ornek": "Uyuyan liste: iki aydır gelmeyen danışanlara yargılamayan kısa not, haftada beş kişi · Çekmek: rehber paylaşımı, sonunda 'dönüş yaz' çağrısı",
     "etiket": "14 günlük plan",
     "olcu": "her yol için: kime · hangi mesaj · hangi eylem çağrısı · kaç kişi",
     "tur": "uzun_metin",
@@ -2072,6 +2549,9 @@
    },
    {
     "anahtar": "bugun_5_kisi",
+    "soru": "Bugün eski listenden hangi beş kişiye döndün ve ne oldu?",
+    "aciklama": "İsim yazmadan her biri için ne yazdığını ve sonucunu not et.",
+    "ornek": "Danışan 1: 'Aklıma geldin, kaldığın yerden devam edebiliriz' · cevap verdi, randevu istedi",
     "etiket": "Bugün",
     "olcu": "uyuyan listeden 5 kişi · her birine ne dendi · sonuç",
     "tur": "liste",
@@ -2081,6 +2561,9 @@
    },
    {
     "anahtar": "sablon_adayi",
+    "soru": "Bugün yazdığın beş mesajdan en iyi çalışanı hangisi?",
+    "aciklama": "En iyi sonucu veren mesajı aynen yaz; ileride otomatik takip mesajının taslağı olacak.",
+    "ornek": "Aklıma geldin. Ara vermek bu sürecin bir parçası; kaldığın yerden, hiçbir şeyi baştan yargılamadan devam edebiliriz.",
     "etiket": "Şablon adayı",
     "olcu": "5 mesajdan en iyi çalışanı (ileride akışın mesajı)",
     "tur": "uzun_metin",
@@ -2088,6 +2571,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Seçtiğin iki yolun her birinden haftada kaç doğru kişi geliyor?",
+   "aciklama": "Her yoldan gelen kişileri haftalık olarak say ve yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "İki yolun her birinden haftada gelen doğru kişi sayısı",
    "tur": "kisa_metin",
@@ -2124,6 +2609,8 @@
    {
     "anahtar": "zincir",
     "etiket": "Zincir tablosu",
+    "soru": "Son otuz günde satış zincirinin her halkasında kaç kişi vardı?",
+    "aciklama": "Gelen ilgiden satışa kadar altı halkaya son otuz günün sayısını yaz; bilmiyorsan tahmin yaz ve işaretle.",
     "olcu": "6 halka × son 30 günün rakamı (bilinmeyen: tahmin + ?)",
     "tur": "tablo",
     "satirlar": [
@@ -2137,11 +2624,15 @@
     "sutunlar": [
      {
       "anahtar": "son_30_gun",
+      "soru": "Son otuz günde bu halkada kaç kişi vardı?",
+      "aciklama": "Mesaj geçmişine ve takvimine geriye doğru bakıp say.",
       "etiket": "Son 30 gün",
       "tur": "sayi"
      },
      {
       "anahtar": "tahmin_mi",
+      "soru": "Bu sayı gerçek mi, tahmin mi?",
+      "aciklama": "Saydıysan gerçek, tahmin ettiysen tahmin seç.",
       "etiket": "Tahmin mi?",
       "tur": "secim",
       "secenekler": [
@@ -2154,6 +2645,9 @@
    },
    {
     "anahtar": "en_buyuk_kacak",
+    "soru": "Zincirinde en çok kişiyi hangi halkada kaybediyorsun?",
+    "aciklama": "Halkayı ve nedenini kısaca yaz.",
+    "ornek": "Teklif sonrası: 'düşüneyim' diyenlere bir daha yazmıyorum.",
     "etiket": "En büyük kaçak",
     "olcu": "hangi halka · neden",
     "tur": "kisa_metin",
@@ -2161,6 +2655,9 @@
    },
    {
     "anahtar": "tek_kacak_plani",
+    "soru": "Önümüzdeki iki hafta bu kaçağı kapatmak için ne değiştireceksin?",
+    "aciklama": "Neyin değişeceğini, kimin yapacağını ve ne zaman yapılacağını yaz; yalnız bu kaçağa odaklan.",
+    "ornek": "Teklif verdiğim herkese iki gün sonra kısa bir not · ben yazacağım · her salı ve cuma",
     "etiket": "2 haftalık tek-kaçak planı",
     "olcu": "ne değişecek · kim · ne zaman",
     "tur": "uzun_metin",
@@ -2168,6 +2665,9 @@
    },
    {
     "anahtar": "bugun_ilk_eylem",
+    "soru": "Bugün attığın ilk adım ne oldu?",
+    "aciklama": "Bugün yaptığın somut ilk eylemi yaz.",
+    "ornek": "'Düşüneyim' diyen üç kişiye suçlamadan kısa bir not yazdım.",
     "etiket": "Bugün",
     "olcu": "atılan ilk eylem (ör. \"düşüneyim\" diyen 3 kişiye not, gelmeyene yeni saat)",
     "tur": "kisa_metin",
@@ -2175,6 +2675,9 @@
    },
    {
     "anahtar": "sablon_adayi",
+    "soru": "Bugün yazdığın takip notlarından en iyi çalışanı hangisi?",
+    "aciklama": "En iyi sonucu veren notu aynen yaz; ileride otomatik takip mesajının taslağı olacak.",
+    "ornek": "Aklında soru kaldıysa cevaplayayım; hazır olduğunda buradayım.",
     "etiket": "Şablon adayı",
     "olcu": "bugün yazdığın takip notlarından en iyi çalışanı (ileride akışın mesajı)",
     "tur": "uzun_metin",
@@ -2182,6 +2685,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "En büyük kaçak halkasındaki oran planın sonunda değişti mi?",
+   "aciklama": "Planın başında ve sonunda o halkadaki oranı yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "En büyük kaçak halkasındaki oran; plan sonunda değişti mi?",
    "tur": "kisa_metin",
@@ -2217,6 +2722,9 @@
   "alanlar": [
    {
     "anahtar": "uce_ayrim",
+    "soru": "Müşterilerinin kaçı aktif, kaçı riskli, kaçı bekleyen durumda?",
+    "aciklama": "İsim yazmadan her gruptaki kişi sayısını yaz.",
+    "ornek": "aktif __ · riskli __ · bekleyen __",
     "etiket": "Üçe ayrım",
     "olcu": "aktif __ · riskli __ · bekleyen __ (sayı; isim değil)",
     "tur": "kisa_metin",
@@ -2225,6 +2733,9 @@
    },
    {
     "anahtar": "riskli_3",
+    "soru": "Riskli listendeki üç kişiye nasıl dokundun ve ne oldu?",
+    "aciklama": "İsim yazmadan her biri için ne yazdığını, gelen cevabı ve sonucu not et.",
+    "ornek": "Danışan 1: 'Bir süredir haberleşemedik, nasıl gidiyor?' · cevap verdi, seansı yeniden planladık",
     "etiket": "Riskli 3 kişi",
     "olcu": "yapılan dokunuş · cevap · sonuç",
     "tur": "liste",
@@ -2234,6 +2745,9 @@
    },
    {
     "anahtar": "son_3_yeni",
+    "soru": "Son üç yeni müşterin ilk kazanımı yaşadı mı?",
+    "aciklama": "İsim yazmadan her biri için ilk kazanımı yaşayıp yaşamadığını ve eksik kalan ağırlama adımını yaz.",
+    "ornek": "Müşteri 1: yaşadı · Müşteri 2: ilk hafta planı gecikti",
     "etiket": "Son 3 yeni müşteri",
     "olcu": "ilk kazanımı yaşadı mı · eksik kalan ağırlama adımı",
     "tur": "liste",
@@ -2243,6 +2757,9 @@
    },
    {
     "anahtar": "yorum_istegi",
+    "soru": "Kaç kişiye yorum isteği gönderdin ve kaçı döndü?",
+    "aciklama": "Gönderilen ve dönen sayısını, olumsuz bir yorum geldiyse verdiğin cevabı yaz; herkese aynı istek gider.",
+    "ornek": "Beş kişiye gönderdim, ikisi yorum yazdı.",
     "etiket": "Yorum isteği",
     "olcu": "gönderilen sayısı · dönen · olumsuz yorum varsa verilen cevap",
     "tur": "kisa_metin",
@@ -2250,6 +2767,9 @@
    },
    {
     "anahtar": "sablon_adayi",
+    "soru": "Riskli bir müşterine yazdığın en iyi not hangisi?",
+    "aciklama": "En iyi sonucu veren notu aynen yaz; ileride otomatik yoklama mesajının taslağı olacak.",
+    "ornek": "Bir süredir haberleşemedik, nasıl gidiyor? Zorlandığın bir yer varsa birlikte bakalım.",
     "etiket": "Şablon adayı",
     "olcu": "riskli kişiye yazdığın en iyi not (ileride akışın mesajı)",
     "tur": "uzun_metin",
@@ -2257,6 +2777,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Riskli listenden bir ay içinde kaç kişi yeniden aktif oldu?",
+   "aciklama": "Bir ay sonra say ve yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Riskli listeden bir ay içinde aktife dönen kişi sayısı",
    "tur": "sayi",
@@ -2290,6 +2812,8 @@
   "alanlar": [
    {
     "anahtar": "adim_oranlari",
+    "soru": "Zincirinde her adımdan bir sonrakine kaç kişi geçiyor?",
+    "aciklama": "Değilen kişiden tavsiye edene kadar her adımın oranını geriye dönük yaz; Büyüme Döngüm'deki sayılarından hesaplanabilir.",
     "etiket": "Adım oranları",
     "olcu": "değilen → ilgi → görüşme → müşteri → kalan → getiren (geriye dönük)",
     "tur": "tablo",
@@ -2303,6 +2827,8 @@
     "sutunlar": [
      {
       "anahtar": "oran",
+      "soru": "Bu adımın oranı ne?",
+      "aciklama": "Bir sonraki adıma geçenlerin sayısını, bu adımdakilerin sayısına böl.",
       "etiket": "Oran",
       "tur": "sayi"
      }
@@ -2312,6 +2838,9 @@
    },
    {
     "anahtar": "darbogaz",
+    "soru": "Zincirinin en zayıf adımı hangisi?",
+    "aciklama": "Tek bir adım seç ve nedenini yaz.",
+    "ornek": "Görüşme → müşteri: teklifi duyanlar düşünmek istiyor ve kayboluyor.",
     "etiket": "Darboğaz",
     "olcu": "tek adım · neden",
     "tur": "kisa_metin",
@@ -2319,6 +2848,9 @@
    },
    {
     "anahtar": "tek_degisiklik",
+    "soru": "O adımda neyi değiştireceksin ve sonucuna ne zaman bakacaksın?",
+    "aciklama": "Tek bir değişikliği, ne kadar süre ya da kaç kişi bekleyeceğini ve sonuç tarihini yaz; aynı anda başka bir şey değiştirme.",
+    "ornek": "Düşünmek isteyene ikinci not · iki hafta ya da on kişi · ayın sonunda bakacağım",
     "etiket": "Tek değişiklik + eşik",
     "olcu": "ne değişiyor · eşik (süre ya da kişi sayısı) · sonuç tarihi",
     "tur": "kisa_metin",
@@ -2326,6 +2858,9 @@
    },
    {
     "anahtar": "kaynak_siralamasi",
+    "soru": "Yeni gelenler en çok hangi yollardan geliyor?",
+    "aciklama": "Hangi yoldan kaç kişi geldiğini çoktan aza sırala; bilmiyorsan boş bırak.",
+    "ornek": "Uyuyan liste · Instagram · tavsiye",
     "etiket": "Kaynak sıralaması",
     "olcu": "hangi yoldan kaç kişi (biliniyorsa)",
     "tur": "liste",
@@ -2333,6 +2868,9 @@
    },
    {
     "anahtar": "kazanilan_saat",
+    "soru": "Yapay zekâya devrettiğin işler sana ne kadar zaman kazandırdı?",
+    "aciklama": "İşi, eskiden ve şimdi kaç dakika sürdüğünü kendi ölçümünle yaz.",
+    "ornek": "Haftalık plan · eskiden __ dk · şimdi __ dk",
     "etiket": "Kazanılan saat",
     "olcu": "iş · eskiden __ dk · şimdi __ dk (kendi ölçümün)",
     "tur": "kisa_metin",
@@ -2344,6 +2882,7 @@
    },
    {
     "anahtar": "test_yeniden",
+    "aciklama": "Programın başında çözdüğün testi yeniden çözdüğünde sonucun buraya gelir; ilk ölçümle kıyas kapanış dersinde gösterilir.",
     "etiket": "Test yeniden",
     "olcu": "yeni sonuç · ilk ölçümle kıyas (T.5'te birlikte gösterilir)",
     "tur": "referans",
@@ -2354,6 +2893,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Seçtiğin zayıf adımın oranı beklediğin süre dolunca değişti mi?",
+   "aciklama": "Değişiklikten önceki ve sonraki oranı yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Seçtiğim darboğaz adımının oranı; eşik dolunca değişti mi?",
    "tur": "kisa_metin",
@@ -2388,6 +2929,8 @@
   "alanlar": [
    {
     "anahtar": "dongu_semasi",
+    "soru": "Büyüme döngünün beş okunda son otuz günde neler oldu?",
+    "aciklama": "Bul, kazan, tut, çoğalt ve yeniden bul oklarının her birine son otuz günün sayısını yaz; bilmiyorsan tahmin, hiç yoksa boş olarak işaretle.",
     "etiket": "Döngü şeman",
     "olcu": "5 ok · her okun üstünde son 30 günün rakamı (tahmin: ?) · boş oklar işaretli",
     "tur": "tablo",
@@ -2401,11 +2944,15 @@
     "sutunlar": [
      {
       "anahtar": "son_30_gun",
+      "soru": "Son otuz günde bu okta kaç kişi vardı?",
+      "aciklama": "Büyüme Döngüm sayfandan ya da tahminle yaz.",
       "etiket": "Son 30 gün",
       "tur": "sayi"
      },
      {
       "anahtar": "tahmin_mi",
+      "soru": "Bu sayı gerçek mi, tahmin mi, yoksa ok boş mu?",
+      "aciklama": "Gerçek, tahmin ya da boş seç.",
       "etiket": "Tahmin mi?",
       "tur": "secim",
       "secenekler": [
@@ -2419,6 +2966,9 @@
    },
    {
     "anahtar": "uc_hesap",
+    "soru": "Bir müşteri sana ne getiriyor, döngün kendini ne kadar besliyor ve bir tur ne kadar sürüyor?",
+    "aciklama": "Müşteri değerini, bedava yollardan gelenlerin oranını ve bir müşterinin bulunmasından bir başkasını getirmesine kadar geçen süreyi kaba hesapla yaz.",
+    "ornek": "Müşteri değeri: programın ücreti ve getirdiği bir arkadaşı · kendini besleme: yeni müşterilerin bir kısmı tavsiyeyle · tur süresi: yaklaşık üç ay",
     "etiket": "Üç hesap",
     "olcu": "müşteri değeri (ödeme × kalma + referans) · kendini besleme oranı (bedava yollardan gelen / tüm yeni) · tur süresi",
     "tur": "uzun_metin",
@@ -2426,6 +2976,9 @@
    },
    {
     "anahtar": "tek_kaldirac",
+    "soru": "Gelecek ay döngünü hızlandırmak için hangi oka dokunacaksın?",
+    "aciklama": "Tek bir ok seç ve ne yapacağını yaz.",
+    "ornek": "Çoğalt: ilk kazanımı yaşayan herkese 'beni birine önermek ister misin?' diye soracağım.",
     "etiket": "Tek kaldıraç",
     "olcu": "hangi ok · ne yapacağım",
     "tur": "kisa_metin",
@@ -2433,6 +2986,9 @@
    },
    {
     "anahtar": "sisteme_ilk_ok",
+    "soru": "Hangi oku ilk kez yazılı hale getirip otomatiğe taşırsın?",
+    "aciklama": "İleride Tam Paket'te kendi hesabında kuracağın ilk oku yaz.",
+    "ornek": "Kazan: düşünmek isteyenlere giden takip mesajları.",
     "etiket": "Sisteme verilecek ilk ok",
     "olcu": "hangi oku ilk kez yazılı hale getirip otomatiğe taşırsın (ileride Tam'da)",
     "tur": "kisa_metin",
@@ -2440,6 +2996,8 @@
    },
    {
     "anahtar": "aylik_toplanti",
+    "soru": "Aylık döngü toplantının ilk tarihi ne?",
+    "aciklama": "Kendinle yarım saatlik döngü toplantısının ilk tarihini takvimine koy ve yaz.",
     "etiket": "Aylık döngü toplantısı",
     "olcu": "ilk tarih (takvimde)",
     "tur": "tarih",
@@ -2447,6 +3005,9 @@
    },
    {
     "anahtar": "t_sorusu",
+    "soru": "Bugün iki hafta ortadan kaybolsan işin döner mi?",
+    "aciklama": "Dürüstçe evet ya da hayır de ve nedenini bir cümleyle yaz.",
+    "ornek": "Hayır; takipleri ve yeni gelenlere dönüşü yalnız ben yapıyorum.",
     "etiket": "T sorusu",
     "olcu": "\"İki hafta kaybolsam döner mi?\" · dürüst cevap (T.0'a girdi)",
     "tur": "kisa_metin",
@@ -2454,6 +3015,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Yeni müşterilerinin kaçı bedava yollardan, yani tavsiye ya da eski listenden geldi?",
+   "aciklama": "Bir ay sonra say ve yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Kendini besleme oranı: yeni müşterilerin kaçı bedava yollardan geldi",
    "tur": "sayi",
@@ -2501,6 +3064,8 @@
   "alanlar": [
    {
     "anahtar": "hafta_baslangici",
+    "soru": "Bu satır hangi haftanın?",
+    "aciklama": "Haftanın ilk gününü seç; ilk satır son otuz günü geriye dönük anlatır.",
     "etiket": "Hafta",
     "tur": "tarih",
     "zorunlu": true,
@@ -2508,12 +3073,15 @@
    },
    {
     "anahtar": "degilen_dogru_kisi",
+    "soru": "Bu hafta kaç doğru kişiye ulaştın?",
+    "aciklama": "Hizmet ettiğin kişi tipine uyan ve senin mesaj attığın, konuştuğun ya da içeriğinle ulaştığın kişileri say; bilmiyorsan tahmin yaz.",
     "etiket": "Değilen doğru kişi",
     "tur": "sayi",
     "eklendigi_ders": "W.1"
    },
    {
     "anahtar": "gelen_ilgi",
+    "aciklama": "Beş kaynaktan gelen ilgilerin toplamı; kendiliğinden hesaplanır, ayrıca yazman gerekmez.",
     "etiket": "Gelen ilgi (toplam)",
     "tur": "sayi",
     "eklendigi_ders": "W.1",
@@ -2522,36 +3090,48 @@
    },
    {
     "anahtar": "kaynak_cekme",
+    "soru": "Bu hafta kaç kişi seni kendisi buldu?",
+    "aciklama": "Paylaşımın, aramalar ya da işletme kartın üzerinden sana gelen ilgileri say.",
     "etiket": "Kaynak: çekmek (içerik, arama, işletme kartı)",
     "tur": "sayi",
     "eklendigi_ders": "W.2"
    },
    {
     "anahtar": "kaynak_gitme",
+    "soru": "Bu hafta kaç kişi senin gidip tanıştığın yerlerden geldi?",
+    "aciklama": "İş birliği yaptığın işletmelerden, yönlendirmelerden ya da etkinliklerden gelen ilgileri say.",
     "etiket": "Kaynak: gitmek (iş birliği, yönlendirme, etkinlik)",
     "tur": "sayi",
     "eklendigi_ders": "W.2"
    },
    {
     "anahtar": "kaynak_odunc",
+    "soru": "Bu hafta kaç kişi başkasının topluluğundan geldi?",
+    "aciklama": "Konuk olduğun bir yayından, dernekten ya da başka birinin kitlesinden gelen ilgileri say.",
     "etiket": "Kaynak: ödünç kitle",
     "tur": "sayi",
     "eklendigi_ders": "W.2"
    },
    {
     "anahtar": "kaynak_referans",
+    "soru": "Bu hafta kaç kişi bir müşterinin tavsiyesiyle geldi?",
+    "aciklama": "Bir müşterinin ya da tanıdığın seni önermesiyle gelen ilgileri say.",
     "etiket": "Kaynak: referans",
     "tur": "sayi",
     "eklendigi_ders": "W.2"
    },
    {
     "anahtar": "kaynak_uyuyan",
+    "soru": "Bu hafta eski listenden kaç kişi geri döndü?",
+    "aciklama": "Bir süredir sesi çıkmayan ve senin yazmanla geri dönen kişileri say.",
     "etiket": "Kaynak: uyuyan liste",
     "tur": "sayi",
     "eklendigi_ders": "W.2"
    },
    {
     "anahtar": "gorusme",
+    "soru": "Bu hafta kaç tanışma ya da satış görüşmesi yaptın?",
+    "aciklama": "Gerçekleşen görüşmeleri say; gelmeyenleri aşağıdaki ayrı kutuya yaz.",
     "etiket": "Görüşme",
     "tur": "sayi",
     "eklendigi_ders": "W.1",
@@ -2559,6 +3139,8 @@
    },
    {
     "anahtar": "yeni_musteri",
+    "soru": "Bu hafta kaç kişi müşterin oldu?",
+    "aciklama": "Ödeme yapan ya da sözleşme imzalayan yeni müşterileri say.",
     "etiket": "Yeni müşteri",
     "tur": "sayi",
     "eklendigi_ders": "W.1",
@@ -2566,6 +3148,8 @@
    },
    {
     "anahtar": "kaybedilen",
+    "soru": "Bu hafta kaç müşterin ayrıldı?",
+    "aciklama": "Programını bırakan, devam etmeyen ya da sessizce kaybolan müşterileri say.",
     "etiket": "Kaybedilen",
     "tur": "sayi",
     "eklendigi_ders": "W.1",
@@ -2573,6 +3157,8 @@
    },
    {
     "anahtar": "yorum_referans",
+    "soru": "Bu hafta kaç yorum ya da tavsiye aldın?",
+    "aciklama": "Gelen yorumları ve seni birine öneren müşterileri say.",
     "etiket": "Yorum / referans",
     "tur": "sayi",
     "eklendigi_ders": "W.1",
@@ -2580,30 +3166,41 @@
    },
    {
     "anahtar": "sahaya_ayrilan_saat",
+    "soru": "Bu hafta müşteri bulmaya ve kazanmaya kaç saat ayırdın?",
+    "aciklama": "Mesajlara, görüşmelere, paylaşımlara ve takiplere ayırdığın toplam süreyi saat olarak yaz.",
     "etiket": "Sahaya ayrılan saat",
     "tur": "sayi",
     "eklendigi_ders": "W.1"
    },
    {
     "anahtar": "gelmedi",
+    "soru": "Bu hafta kaç kişi randevusuna gelmedi?",
+    "aciklama": "Randevu alıp gelmeyen ya da son anda iptal edenleri say.",
     "etiket": "Gelmedi",
     "tur": "sayi",
     "eklendigi_ders": "W.3"
    },
    {
     "anahtar": "kalan",
+    "soru": "Bu hafta devam eden kaç müşterin var?",
+    "aciklama": "Programına ya da hizmetine devam eden müşterilerinin sayısını yaz.",
     "etiket": "Kalan",
     "tur": "sayi",
     "eklendigi_ders": "W.4"
    },
    {
     "anahtar": "yorum_istegi",
+    "soru": "Bu hafta kaç kişiye yorum isteği gönderdin?",
+    "aciklama": "İlk kazanımını yaşamış müşterilerine gönderdiğin yorum isteklerini say; herkese aynı istek gider.",
     "etiket": "Yorum isteği (gönderilen)",
     "tur": "sayi",
     "eklendigi_ders": "W.4"
    },
    {
     "anahtar": "not",
+    "soru": "Bu haftayla ilgili not almak istediğin bir şey var mı?",
+    "aciklama": "Rakamların arkasındaki kısa bir gözlemi yaz; kişi adı ve sağlık bilgisi yazma.",
+    "ornek": "Bayram haftası; görüşmeler azdı, mesajlar arttı.",
     "etiket": "Not",
     "tur": "kisa_metin",
     "zorunlu": false,
@@ -2613,12 +3210,17 @@
   "ek_satir_turleri": [
    {
     "anahtar": "haftalik_rapor",
+    "soru": "Bu haftanın rakamları sana ne söylüyor?",
+    "aciklama": "Her hafta aynı sırayla kısa bir yorum yaz: ne iyi gitti, nerede kaybettin, gelecek hafta neyi deneyeceksin.",
+    "ornek": "Takip mesajları işe yaradı · görüşmeye gelmeyenler arttı · gelecek hafta bir gün önce hatırlatma göndereceğim",
     "etiket": "Haftalık rapor satırı (sabit sıra)",
     "eklendigi_ders": "W.5",
     "not": "Ayrı sütun değil; aynı haftanın satırına bağlı sabit sıralı yorum/rapor. + takvimde haftalık rapor saati (W5 bölümünde)."
    },
    {
     "anahtar": "aylik_dongu",
+    "soru": "Bu ay döngünün beş okunda neler oldu?",
+    "aciklama": "Ay sonunda bul, kazan, tut, çoğalt ve yeniden bul oklarının her biri için o ayın sayısını yaz.",
     "etiket": "Aylık döngü satırı",
     "eklendigi_ders": "W.6",
     "alanlar": [
@@ -2661,6 +3263,8 @@
   "alanlar": [
    {
     "anahtar": "kafes_testi",
+    "soru": "Bugün iki hafta ortadan kaybolsan işin ne kadar döner?",
+    "aciklama": "Bir ile on arasında puan ver: bir hiç dönmez, on sensiz de tamamen döner.",
     "etiket": "Kafes testi",
     "olcu": "\"Bugün iki hafta kaybolsam işim ne kadar döner?\" · 1–10 kafes skoru",
     "tur": "sayi",
@@ -2675,6 +3279,9 @@
    },
    {
     "anahtar": "kafes_aciklama",
+    "soru": "Bu puanı neden verdin?",
+    "aciklama": "Dürüst cevabını bir iki cümleyle yaz.",
+    "ornek": "Takipleri ve yeni gelenlere dönüşü yalnız ben yapıyorum; iki hafta yoksam her şey durur.",
     "etiket": "Kafes testi (cevabın)",
     "tur": "kisa_metin",
     "zorunlu": false,
@@ -2682,6 +3289,9 @@
    },
    {
     "anahtar": "gorunen_gorevler",
+    "soru": "Gün boyunca yaptığın görünen görevler neler?",
+    "aciklama": "Sekiz ile on iki arasında görev yaz; bunlar ileride yapay zekâya ya da bir yardımcıya gidebilecek işler.",
+    "ornek": "Randevu ayarlamak · haftalık plan yazmak · mesajlara cevap vermek · fatura kesmek",
     "etiket": "Görünen görevlerim",
     "olcu": "8–12 görev",
     "tur": "liste",
@@ -2691,6 +3301,9 @@
    },
    {
     "anahtar": "gorunmeyen_deger",
+    "soru": "Müşterin senden aslında hangi görünmeyen değeri alıyor?",
+    "aciklama": "Üç beş değer yaz: güven, anlaşılmak, rahatlama gibi; bunlar seninle büyüyecek şeyler.",
+    "ornek": "Yargılanmadan anlaşılmak · kendine güvenin geri gelmesi · yalnız olmadığını bilmek",
     "etiket": "Müşterimin aldığı görünmeyen değer",
     "olcu": "3–5 değer (güven, tanınma, rahatlama…)",
     "tur": "liste",
@@ -2700,6 +3313,9 @@
    },
    {
     "anahtar": "koruma_listesi",
+    "soru": "Verimli olsa bile hangi beş işi hiç devretmeyeceksin?",
+    "aciklama": "Sana anlam veren ilk beş işi yaz; sorumluluk taşıyan bir meslekteysen imza ve son sözü en başa koy.",
+    "ornek": "İlk görüşme · planın son kontrolü · zor bir günde danışanla konuşmak",
     "etiket": "Koruma listem",
     "olcu": "Anlam veren, devretmeyeceğim ilk 5 iş · (sorumluluk meslekleri: imza ve son söz en başta)",
     "tur": "liste",
@@ -2708,6 +3324,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Bugünkü kafes puanın kaç?",
+   "aciklama": "Yukarıdaki puan; altmışıncı gün testinde yeniden ölçeceksin.",
    "etiket": "Tek ölçütüm",
    "olcu": "Kafes skoru; 60. gün testinde yeniden (T.5)",
    "tur": "sayi",
@@ -2748,18 +3366,25 @@
    {
     "anahtar": "koltuklar",
     "etiket": "Koltuklar (5–8)",
+    "soru": "İşini bir şirket gibi düşünsen hangi koltuklara ayrılıyor?",
+    "aciklama": "Beş ile sekiz koltuk yaz; her biri için bugün kimin oturduğunu, haftalık süresini, kimin oturacağını, olgunluğunu, kontrol noktasını ve koltuğun evini doldur.",
     "tur": "tablo",
     "adet_min": 5,
     "adet_max": 8,
     "sutunlar": [
      {
       "anahtar": "koltuk",
+      "soru": "Bu koltuğun adı ne?",
+      "aciklama": "Koltuğun yaptığı işi kısa bir adla yaz.",
+      "ornek": "Karşılama",
       "etiket": "Koltuk",
       "tur": "kisa_metin",
       "olcu": "karşılama · içerik · satış takibi · teslimat asistanı · arka ofis · analist…"
      },
      {
       "anahtar": "su_an_kim",
+      "soru": "Bu koltukta şu an kim oturuyor?",
+      "aciklama": "Sen mi, bir yardımcın mı, yoksa kimse mi seç.",
       "etiket": "Şu an kim yapıyor",
       "tur": "secim",
       "secenekler": [
@@ -2770,12 +3395,16 @@
      },
      {
       "anahtar": "haftalik_saat",
+      "soru": "Bu koltuk haftada yaklaşık kaç saatini alıyor?",
+      "aciklama": "Yaklaşık saat olarak yaz.",
       "etiket": "Haftalık saat",
       "tur": "sayi",
       "olcu": "yaklaşık"
      },
      {
       "anahtar": "kim_oturacak",
+      "soru": "Bu koltuğa kim oturacak?",
+      "aciklama": "Yapay zekâ, insan ya da ikisi birlikte seç.",
       "etiket": "Kim oturacak",
       "tur": "secim",
       "secenekler": [
@@ -2786,6 +3415,8 @@
      },
      {
       "anahtar": "olgunluk",
+      "soru": "Bu koltukta yapay zekâ hangi seviyede çalışacak?",
+      "aciklama": "Cevap veren, seni bilen ortak ya da senin için çalışan sistem seç.",
       "etiket": "Olgunluk",
       "tur": "secim",
       "secenekler": [
@@ -2797,12 +3428,17 @@
      },
      {
       "anahtar": "kontrol_noktasi",
+      "soru": "Bu koltuk ne zaman sana dönmeli?",
+      "aciklama": "Koltuğun kendi başına karar vermeyip seni çağıracağı anı yaz.",
+      "ornek": "Sağlıkla ilgili bir soru geldiğinde.",
       "etiket": "İnsan kontrol noktası",
       "tur": "kisa_metin",
       "olcu": "\"ne zaman bana döner\""
      },
      {
       "anahtar": "koltugun_evi",
+      "soru": "Bu koltuğun işi nerede dönecek?",
+      "aciklama": "Sohbet asistanı, growtify.app iş akışı ya da insan seç.",
       "etiket": "Koltuğun evi",
       "tur": "secim",
       "secenekler": [
@@ -2817,6 +3453,9 @@
    {
     "anahtar": "ilk_koltuk_is_tanimi",
     "etiket": "İlk koltuğun iş tanımı",
+    "soru": "İlk boşaltacağın koltuğun iş tanımı ne?",
+    "aciklama": "Bağlamı, işin nasıl yapılacağını, uç durumları ve ne zaman sana döneceğini yaz; beş deneme yap ve düzeltme sayılarını not et.",
+    "ornek": "Karşılama: yeni gelene ilk mesajı atar, sık sorulara cevap verir, randevu bağlantısı gönderir; sağlık sorusunda bana döner.",
     "olcu": "bağlam · nasıl yapılır · uç durumlar · ne zaman bana döner · 5 deneme ve düzeltme sayısı",
     "tur": "uzun_metin",
     "zorunlu": true,
@@ -2824,6 +3463,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "İlk koltukta beş denemede kaç düzeltme gerekti?",
+   "aciklama": "Beş denemenin toplam düzeltme sayısını yaz; bir hafta sonra yeniden say.",
    "etiket": "Tek ölçütüm",
    "olcu": "İlk koltukta 5 denemedeki düzeltme sayısı; bir hafta sonra yeniden",
    "tur": "sayi",
@@ -2859,6 +3500,9 @@
   "alanlar": [
    {
     "anahtar": "zaman_denetimi",
+    "soru": "Bir hafta boyunca zamanın nereye gidiyor?",
+    "aciklama": "Bütün işlerini yaz, sonucun çoğunu getiren üç işi ve tekrar edenleri işaretle, devretme sırasını kolaydan zora diz.",
+    "ornek": "Mesajlar ve randevu ayarlamak her gün tekrar ediyor · sonucu getiren: görüşmeler ve plan · ilk devredilecek: randevu ayarlamak",
     "etiket": "Zaman denetimi",
     "olcu": "bütün işler · sonucun çoğunu getiren 3 iş · tekrar edenler · kolaydan zora sıra",
     "tur": "uzun_metin",
@@ -2866,18 +3510,24 @@
    },
    {
     "anahtar": "devir_plani",
+    "soru": "Hangi koltuktan hangi hafta çıkıyorsun?",
+    "aciklama": "Dört ile sekiz haftalık bir takvimde her koltuğun devir haftasını yaz.",
     "etiket": "Devir planı",
     "olcu": "hangi koltuktan hangi hafta çıkıyorum (4–8 haftalık takvim)",
     "tur": "tablo",
     "sutunlar": [
      {
       "anahtar": "koltuk",
+      "soru": "Hangi koltuktan çıkıyorsun?",
+      "aciklama": "Koltuklar listenden seç.",
       "etiket": "Koltuk",
       "tur": "secim",
       "secenekler_kaynagi": "K2.koltuklar"
      },
      {
       "anahtar": "hafta",
+      "soru": "Bu koltuktan kaçıncı hafta çıkıyorsun?",
+      "aciklama": "Devir takviminde haftanın numarasını yaz.",
       "etiket": "Hafta",
       "tur": "sayi"
      }
@@ -2886,6 +3536,9 @@
    },
    {
     "anahtar": "devir_paketleri",
+    "soru": "Her koltuğu devrederken neleri yazılı bırakıyorsun?",
+    "aciklama": "Her koltuk için bağlamı, nasıl yapıldığını, uç durumları, ne zaman sana döneceğini ve paketin hazır mı taslak mı olduğunu yaz.",
+    "ornek": "Randevu ayarlama: kimlere hangi saatler verilir · iptalde ne yapılır · fiyat sorusunda bana döner · hazır",
     "etiket": "Devir paketleri",
     "olcu": "her koltuk: bağlam · nasıl yapılır · uç durumlar · ne zaman bana döner · durum (hazır / taslak)",
     "tur": "liste",
@@ -2894,6 +3547,9 @@
    },
    {
     "anahtar": "karar_ilkeleri",
+    "soru": "En sık verdiğin kararları hangi ilkelerle başkasına bırakabilirsin?",
+    "aciklama": "Beş on kararı 'eğer … olursa … yaparım' biçiminde yaz ve her birini 'bu benim cevabım mı?' diye kontrol et.",
+    "ornek": "Eğer danışan seansı iki kez ertelerse, ona yargılamadan yeni bir saat öneririm.",
     "etiket": "Karar ilkeleri v1",
     "olcu": "en sık 5–10 karar için \"eğer … olursa … yaparım\" · \"bu benim cevabım mı?\" denetimi",
     "tur": "liste",
@@ -2903,6 +3559,9 @@
    },
    {
     "anahtar": "kalite_olcutu",
+    "soru": "Senin için iyi iş neye benziyor?",
+    "aciklama": "Yapay zekânın da insan yardımcının da aynı ölçütle çalışacağı kalite tarifini yaz.",
+    "ornek": "İyi cevap kısa, sıcak ve bir sonraki adımı söyler; asla sağlık tavsiyesi vermez.",
     "etiket": "Kalite ölçütü",
     "olcu": "\"iyi iş neye benzer\" (yapay zekâ da insan yardımcı da aynı ölçütle)",
     "tur": "uzun_metin",
@@ -2913,6 +3572,9 @@
    },
    {
     "anahtar": "yokluk_provasi",
+    "soru": "Bir gün hiç işe bakmadığında neler aksadı?",
+    "aciklama": "Provanın gününü, neyin aksadığını ve her aksamanın sana kazandırdığı yeni iş tanımını ya da ilkeyi yaz.",
+    "ornek": "Salı · iki mesaj cevapsız kaldı · yeni ilke: mesai dışı mesaja otomatik karşılama",
     "etiket": "Yokluk provası",
     "olcu": "hangi gün · neler kırıldı · her kırılmanın yarattığı yeni iş tanımı / ilke",
     "tur": "uzun_metin",
@@ -2922,6 +3584,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Haftada sana kaç soru geliyor?",
+   "aciklama": "Devir planından önce ve sonra haftalık soru sayını yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Haftada bana gelen soru sayısı; devir planından önce ve sonra",
    "tur": "kisa_metin",
@@ -2955,6 +3619,9 @@
   "alanlar": [
    {
     "anahtar": "hayal_is",
+    "soru": "Hayalindeki iş haftada kaç saat sürüyor, kime hizmet ediyor ve sana ne kadar yetiyor?",
+    "aciklama": "Haftalık çalışma saatini, kime hizmet ettiğini, sana yeten geliri, bırakacağın işleri ve 'yeterli büyüklük' cümleni yaz.",
+    "ornek": "Haftada dört gün çalışıyorum, kendi danışanlarımla ilgileniyorum, mesajlara ve randevulara ben bakmıyorum; bu bana yetiyor.",
     "etiket": "Hayal iş",
     "olcu": "haftalık saat · kime hizmet · yeterli gelir · bırakacaklarım · \"yeterli büyüklük\" cümlesi",
     "tur": "uzun_metin",
@@ -2962,6 +3629,9 @@
    },
    {
     "anahtar": "kazanilan_zaman",
+    "soru": "Kazandığın zamanı nereye harcayacaksın?",
+    "aciklama": "'Haftada __ saat kazanırsam şuraya harcayacağım' cümlesini tamamla.",
+    "ornek": "Haftada __ saat kazanırsam kendi atölyemi hazırlamaya ve aileme ayıracağım.",
     "etiket": "Kazanılan zaman",
     "olcu": "\"haftada __ saat kazanırsam şuraya harcayacağım\"",
     "tur": "kisa_metin",
@@ -2969,6 +3639,9 @@
    },
    {
     "anahtar": "sabit_degisken",
+    "soru": "İşinde neyi asla değiştirmeyeceksin, neyi değiştirebilirsin?",
+    "aciklama": "Sabit kalanları (değerler, vizyon, kime hizmet) ve değişebilenleri (yöntemler, araçlar) ayrı yaz.",
+    "ornek": "Sabit: yasaksız yaklaşım, kırkından sonraki kadınlar · Değişken: görüşme biçimi, kullandığım araçlar",
     "etiket": "Sabit / değişken",
     "olcu": "değerlerim, vizyonum, kime hizmet ettiğim · yöntemlerim ve araçlarım",
     "tur": "uzun_metin",
@@ -2976,6 +3649,9 @@
    },
    {
     "anahtar": "hedef_90_gun",
+    "soru": "Önümüzdeki doksan gün için hedefin ne?",
+    "aciklama": "Hedefi, önündeki engelleri, önceden yazdığın çözümleri ve neden önemli olduğunu yaz; yapay zekâya eleştirtip düzelttiğin halini kaydet.",
+    "ornek": "Hedef: randevu ve karşılama koltuğunu tamamen devretmek · engel: alışkanlık · çözüm: her akşam mesajlara değil, görevlere bakmak",
     "etiket": "90 günlük hedef sayfası",
     "olcu": "hedef · engeller · önceden yazılmış çözümler · neden önemli (yapay zekâya eleştirtilmiş ve düzeltilmiş hali)",
     "tur": "uzun_metin",
@@ -2983,6 +3659,9 @@
    },
    {
     "anahtar": "aylik_yonetim_saati",
+    "soru": "Aylık yönetim saatin ne zaman ve hangi sırayla ilerleyecek?",
+    "aciklama": "Takvimdeki ilk tarihi ve toplantının dört bölümünün sırasını yaz.",
+    "ornek": "Her ayın ilk pazartesi 09.00 · rakamlar, devirler, kararlar, gelecek ay",
     "etiket": "Aylık yönetim saati",
     "olcu": "takvimdeki tarih · dört masa sırası",
     "tur": "kisa_metin",
@@ -2991,6 +3670,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Kazandığın saatlerin kaçı yazdığın yere gitti?",
+   "aciklama": "İlk yönetim saatinde kazanılan saatleri ve nereye gittiklerini kıyaslayıp yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "Kazanılan saatlerin kaçı yazdığım yere gitti? (ilk yönetim saatinde)",
    "tur": "sayi",
@@ -3026,6 +3707,7 @@
   "alanlar": [
    {
     "anahtar": "once_sonra_haritasi",
+    "aciklama": "Programın başında çözdüğün test ile W aşamasında yeniden çözdüğün test burada yan yana görünür; sen yazmazsın.",
     "etiket": "Önce/sonra haritan",
     "olcu": "G'deki ilk ölçüm ↔ W.5'teki yeniden ölçüm (yan yana)",
     "tur": "referans",
@@ -3037,6 +3719,8 @@
    },
    {
     "anahtar": "altmisinci_gun",
+    "soru": "Altmışıncı gün kontrolünü hangi tarihe koyuyorsun?",
+    "aciklama": "O gün Kurucu Dosyanı okuyacak, yönetim saatini yapacak ve kafes testini yeniden çözeceksin; tarihi takvimine koy.",
     "etiket": "60. gün tarihi",
     "olcu": "takvimde · o gün: Kurucu Dosyası okuma + yönetim saati + kafes testi (T.1 puanıyla kıyas)",
     "tur": "tarih",
@@ -3044,6 +3728,8 @@
    },
    {
     "anahtar": "sonraki_adim",
+    "soru": "Buradan sonra hangi yoldan devam etmek istiyorsun?",
+    "aciklama": "Kendi başına, Tam Paket ile ya da uzman ekiple devam etmeyi seç ve istersen tek cümleyle nedenini yaz.",
     "etiket": "Bir sonraki adımım",
     "olcu": "kendi başıma · Tam Paket · uzman ekip (tek cümle)",
     "tur": "secim",
@@ -3057,6 +3743,8 @@
    }
   ],
   "tek_olcut": {
+   "soru": "Altmışıncı günde Kurucu Dosyanı hâlâ açıyor musun ve kafes puanın değişti mi?",
+   "aciklama": "Altmışıncı günde iki soruyu cevapla ve yeni puanını yaz.",
    "etiket": "Tek ölçütüm",
    "olcu": "60. günde Kurucu Dosyası'nı hâlâ açıyor muyum, kafes skorum değişti mi?",
    "tur": "kisa_metin",
@@ -3099,6 +3787,9 @@
   "alanlar": [
    {
     "anahtar": "uc_kose",
+    "soru": "İşinde her seferinde benzer şekilde tekrar eden hangi üç işi yapay zekâ senin yerine üstlenebilir?",
+    "aciklama": "Haftada birkaç kez, hep aynı adımlarla yaptığın üç işi yaz.",
+    "ornek": "Yeni gelene ilk mesajı yazmak · haftalık plan taslağı · sık sorulan sorulara cevap",
     "etiket": "İşimde bir agent'ın alabileceği 3 köşe",
     "olcu": "tekrar eden, her seferinde benzer işler",
     "tur": "liste",
@@ -3123,6 +3814,9 @@
   "alanlar": [
    {
     "anahtar": "bilmedigi_3_sey",
+    "soru": "Yapay zekânın senin işin hakkında bilmediği üç şey ne?",
+    "aciklama": "Yöntemini, müşterini tanıma biçimini ve asla atlamadığın bir şeyi yaz; bunlar ona vereceğin bağlamın ilk parçası.",
+    "ornek": "Yasak listesi vermem · ilk görüşmede önce günlük düzenini sorarım · her planı danışanla birlikte son kez okurum",
     "etiket": "Yapay zekânın benim işim hakkında bilmediği 3 şey",
     "olcu": "yöntemin, müşterini tanıma biçimin, asla atlamadığın bir şey",
     "tur": "liste",
@@ -3147,17 +3841,24 @@
   "alanlar": [
    {
     "anahtar": "on_is_uc_sutun",
+    "soru": "Haftanda yaptığın on işi hangi sütuna koyarsın?",
+    "aciklama": "On işini yaz ve her birini yapay zekâya devret, birlikte yap ya da sende kalsın diye ayır.",
     "etiket": "Kendi haftandan 10 iş, üç sütunda",
     "tur": "tablo",
     "adet": 10,
     "sutunlar": [
      {
       "anahtar": "is",
+      "soru": "Bu iş ne?",
+      "aciklama": "Haftanda yaptığın bir işi kısaca yaz.",
+      "ornek": "Randevu hatırlatması göndermek",
       "etiket": "İş",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "sutun",
+      "soru": "Bu iş hangi sütuna gidiyor?",
+      "aciklama": "Yapay zekâya devret, birlikte ya da sende seç.",
       "etiket": "Sütun",
       "tur": "secim",
       "secenekler": [
@@ -3172,6 +3873,8 @@
    },
    {
     "anahtar": "asla_listesi",
+    "soru": "Yapay zekâya asla bırakmayacağın üç şey ne?",
+    "aciklama": "Bir veri, bir karar ve bir temas için birer satır yaz.",
     "etiket": "Üç satırlık \"asla\" listesi",
     "olcu": "veri / karar / temas",
     "tur": "tablo",
@@ -3183,6 +3886,9 @@
     "sutunlar": [
      {
       "anahtar": "asla",
+      "soru": "Bu satırda asla neyi bırakmazsın?",
+      "aciklama": "Satırın konusuna göre tek bir şey yaz.",
+      "ornek": "Danışanın sağlık bilgisini sohbete yazmam",
       "etiket": "Asla",
       "tur": "kisa_metin"
      }
@@ -3208,6 +3914,9 @@
   "alanlar": [
    {
     "anahtar": "gercek_cikti",
+    "soru": "Bu hafta gerçekten kullanacağın hangi mesajı ya da metni yapay zekâyla hazırladın?",
+    "aciklama": "Çıktının son halini buraya kopyala; içinde müşteri adı ya da sağlık bilgisi olmasın.",
+    "ornek": "Yeni danışana gönderilecek, ilk görüşmeye nasıl hazırlanacağını anlatan kısa karşılama mesajı.",
     "etiket": "Kendi işinden gerçek bir çıktı",
     "olcu": "bu hafta kullanacağın bir mesaj ya da metin",
     "tur": "uzun_metin",
@@ -3216,6 +3925,8 @@
    },
    {
     "anahtar": "once_sonra",
+    "soru": "Bağlam vermeden ve bağlam vererek aldığın iki cevap arasında ne değişti?",
+    "aciklama": "İki cevabı kısaca karşılaştır ve kendi ölçtüğün zaman kazancını not et; bu alan isteğe bağlı.",
     "etiket": "Önce/sonra",
     "olcu": "bağlamsız cevap, bağlamlı cevap, kendi ölçtüğün kazanılan dakika",
     "tur": "uzun_metin",
@@ -3224,6 +3935,8 @@
    },
    {
     "anahtar": "kazanilan_dakika",
+    "soru": "Bu işte kaç dakika kazandın?",
+    "aciklama": "Kendi ölçtüğün dakikayı yaz; tahmin değil, ölçtüğün süre.",
     "etiket": "Kazanılan dakika",
     "tur": "sayi",
     "zorunlu": false
@@ -3248,6 +3961,8 @@
   "alanlar": [
    {
     "anahtar": "versiyon",
+    "soru": "Bu derste hangi denemeyi yaptın?",
+    "aciklama": "İlk Kazanım çıktına bir tasarım hamlesi ya da devrettiğin bir işte üç hamle seç.",
     "etiket": "Hangi versiyon",
     "tur": "secim",
     "secenekler": [
@@ -3258,6 +3973,9 @@
    },
    {
     "anahtar": "fark",
+    "soru": "Denemeden sonra çıktı nasıl değişti?",
+    "aciklama": "Farkı iki cümleyle yaz.",
+    "ornek": "İlk mesaj artık daha kısa ve sıcak. Danışan ne yapacağını ilk okumada anlıyor.",
     "etiket": "Fark",
     "olcu": "iki cümle",
     "tur": "kisa_metin",
@@ -3282,6 +4000,9 @@
   "alanlar": [
    {
     "anahtar": "cekici_asama",
+    "soru": "GROWT'un hangi aşaması seni en çok çekiyor ve neden?",
+    "aciklama": "Aşamayı ve nedenini bir iki cümleyle yaz; bu alan isteğe bağlı.",
+    "ornek": "Rota, çünkü müşterinin yolunu hiç baştan sona yazmadım.",
     "etiket": "GROWT'ta beni en çok çeken aşama ve neden",
     "tur": "kisa_metin",
     "zorunlu": false,
@@ -3305,6 +4026,9 @@
   "alanlar": [
    {
     "anahtar": "takvim_bloklari",
+    "soru": "Önümüzdeki dört hafta GROWT'a hangi gün ve saatlerde çalışacaksın?",
+    "aciklama": "Takvimine koyduğun günleri ve saatleri yaz.",
+    "ornek": "Hafta içi her sabah 08.30–09.00",
     "etiket": "4 haftalık günlük GROWT blokları",
     "olcu": "takvimde; gün ve saat",
     "tur": "kisa_metin",
@@ -3313,6 +4037,9 @@
    },
    {
     "anahtar": "neden_basladim",
+    "soru": "Bu programa neden başladın?",
+    "aciklama": "Başlarken yazdığın cümleyi buraya da koy; bu alan isteğe bağlı.",
+    "ornek": "Akşamları mesajlarla değil, ailemle olmak istiyorum.",
     "etiket": "Neden başladım",
     "olcu": "Free.1'deki cümle",
     "tur": "kisa_metin",
@@ -3336,6 +4063,8 @@
   "alanlar": [
    {
     "anahtar": "gizlilik_ayari",
+    "soru": "Yapay zekâ sohbetinde konuşmalarının modeli eğitmek için kullanılmasını kapattın mı?",
+    "aciklama": "Ayarı kontrol edip evet ya da hayır seç.",
     "etiket": "Gizlilik ayarı kapalı mı",
     "tur": "secim",
     "secenekler": [
@@ -3347,6 +4076,9 @@
    },
    {
     "anahtar": "kalici_tohum",
+    "soru": "Yapay zekânın her konuşmada hatırlaması için kendin ve işin hakkında ne yazdın?",
+    "aciklama": "Kalıcı hafıza alanına yazdığın üç beş cümleyi buraya kopyala; müşteri bilgisi yazma.",
+    "ornek": "Kırkından sonraki kadınlarla yasaksız beslenme üzerine çalışan bir diyetisyenim. Sade ve sıcak konuşurum, kısa cevapları severim.",
     "etiket": "Kalıcı alana yazdığın tohum",
     "olcu": "3–5 cümle",
     "tur": "uzun_metin",
@@ -3373,18 +4105,27 @@
   "alanlar": [
    {
     "anahtar": "nasil_buluyorlar",
+    "soru": "Müşterilerin seni bugün nasıl buluyor?",
+    "aciklama": "Hangi kanalı, aracı ya da yöntemi kullandığını yaz.",
+    "ornek": "Instagram paylaşımları ve tavsiye",
     "etiket": "Beni nasıl buluyorlar? Şu an hangi araç / yöntem?",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "nasil_evet",
+    "soru": "Müşterilerin sana nasıl 'evet' diyor?",
+    "aciklama": "Mesajın, randevunun ve ödemenin şu an nerede olduğunu yaz.",
+    "ornek": "WhatsApp'tan yazışıyoruz, randevuyu telefondan ayarlıyorum, ödeme havaleyle geliyor.",
     "etiket": "Nasıl \"evet\" diyorlar? (mesaj, randevu, ödeme nerede?)",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "iceride_ne_yasiyorlar",
+    "soru": "Seninle çalışmaya başlayan müşteri neler yaşıyor?",
+    "aciklama": "Takibin, teslimin ve iletişimin şu an nerede döndüğünü yaz.",
+    "ornek": "Haftalık planı PDF olarak gönderiyorum, takibi WhatsApp'tan yapıyorum.",
     "etiket": "İçeri girince ne yaşıyorlar? (takip, teslim, iletişim nerede?)",
     "tur": "kisa_metin",
     "zorunlu": true
@@ -3407,6 +4148,9 @@
   "alanlar": [
    {
     "anahtar": "uc_motor",
+    "soru": "Üç motorun her biri için bugünkü durumu tek cümleyle nasıl anlatırsın?",
+    "aciklama": "Bulunma, evet deme ve içeride yaşananlar için birer cümle yaz.",
+    "ornek": "İnsanlar beni çoğunlukla tavsiyeyle buluyor.",
     "etiket": "Her motor için tek cümle",
     "olcu": "Beni nasıl buluyorlar? / Nasıl \"evet\" diyorlar? / İçeri girince ne yaşıyorlar?",
     "tur": "liste",
@@ -3415,6 +4159,8 @@
    },
    {
     "anahtar": "en_zayif_motor",
+    "soru": "Üç motordan hangisi en zayıf?",
+    "aciklama": "Çekmek, dönüştürmek ya da tutmak seç.",
     "etiket": "En zayıf motorum",
     "tur": "secim",
     "secenekler": [
@@ -3426,6 +4172,7 @@
    },
    {
     "anahtar": "en_dusuk_pencere",
+    "aciklama": "Bu G testinden gelir; sen yazmazsın.",
     "etiket": "Testteki en düşük pencerem",
     "tur": "referans",
     "kaynak_alanlar": [
@@ -3435,12 +4182,18 @@
    },
    {
     "anahtar": "ilk_durak",
+    "soru": "İlk nereden başlayacaksın?",
+    "aciklama": "En zayıf motoruna göre ilk durağını tek cümleyle yaz.",
+    "ornek": "İlk durağım: bana yazan ama randevu almayanlara geri dönmek.",
     "etiket": "\"İlk durağım şu\" notu",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "doksan_gun_degisiklik",
+    "soru": "Doksan gün sonra işinde görmek istediğin tek değişiklik ne?",
+    "aciklama": "Tek bir cümle yaz; rakam şart değil.",
+    "ornek": "Akşamları mesaj cevaplamadan işimin dönmesi.",
     "etiket": "90 gün sonra işimde görmek istediğim tek değişiklik",
     "olcu": "bir cümle; rakam şart değil",
     "tur": "kisa_metin",
@@ -3465,12 +4218,17 @@
   "alanlar": [
    {
     "anahtar": "yoran_is",
+    "soru": "Haftanda seni en çok yoran iş ne?",
+    "aciklama": "Tek bir iş yaz; G aşamasının sonunda bu tahmini yeniden göreceksin.",
+    "ornek": "Danışanlardan gelen mesajlara tek tek cevap vermek",
     "etiket": "Haftamda beni en çok yoran iş",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "tahmini_saat",
+    "soru": "Bu iş haftada tahminen kaç saatini alıyor?",
+    "aciklama": "Tahmini saat yaz; ölçmen gerekmez.",
     "etiket": "Tahminen kaç saat",
     "tur": "sayi",
     "zorunlu": true
@@ -3495,6 +4253,7 @@
   "alanlar": [
    {
     "anahtar": "profil",
+    "aciklama": "Bu G testinden gelir; sen yazmazsın.",
     "etiket": "AI Olgunluk Profilim",
     "tur": "referans",
     "kaynak_alanlar": [
@@ -3522,6 +4281,7 @@
   "alanlar": [
    {
     "anahtar": "seviye",
+    "aciklama": "Bu G testinden gelir; sen yazmazsın.",
     "etiket": "Seviyem",
     "tur": "referans",
     "kaynak_alanlar": [
@@ -3531,6 +4291,7 @@
    },
    {
     "anahtar": "en_zayif_halka",
+    "aciklama": "Bu G testinden gelir; sen yazmazsın.",
     "etiket": "En zayıf halkam (x/5)",
     "tur": "referans",
     "kaynak_alanlar": [
@@ -3540,12 +4301,17 @@
    },
    {
     "anahtar": "bende_gorunusu",
+    "soru": "En zayıf halkan senin işinde nasıl görünüyor?",
+    "aciklama": "Bir iki cümleyle kendi işinden somut bir an anlat.",
+    "ornek": "Yapay zekâya her seferinde kendimi baştan anlatıyorum, bu yüzden cevaplar hep genel kalıyor.",
     "etiket": "Bu bende şöyle görünüyor",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "ayna_sorusu",
+    "soru": "Dersteki ayna sorusuna cevabın ne?",
+    "aciklama": "Tek cümle yaz; bu alan isteğe bağlı.",
     "etiket": "Ayna sorusunun cevabı (isteğe bağlı)",
     "olcu": "bir cümle",
     "tur": "kisa_metin",
@@ -3570,6 +4336,9 @@
   "alanlar": [
    {
     "anahtar": "yz_alacagi_isler",
+    "soru": "Mesleğinde yapay zekânın aldığı ya da alacağı işler neler?",
+    "aciklama": "En az üç iş yaz.",
+    "ornek": "Örnek menü taslağı · kalori hesabı · sık sorulara ilk cevap",
     "etiket": "Mesleğimde yapay zekânın aldığı / alacağı işler",
     "tur": "liste",
     "adet_min": 3,
@@ -3577,6 +4346,9 @@
    },
    {
     "anahtar": "bende_kalan",
+    "soru": "Mesleğinde sende kalan ve değeri artan şeyler neler?",
+    "aciklama": "En az üç şey yaz.",
+    "ornek": "Danışanı dinlemek · motivasyonun düştüğü haftayı fark etmek · son kararı vermek",
     "etiket": "Bende kalan ve değer kazanan şeyler",
     "tur": "liste",
     "adet_min": 3,
@@ -3584,6 +4356,8 @@
    },
    {
     "anahtar": "g1_kiyas_boyut",
+    "soru": "Testteki kıyasta hangi boyutta önde, aynı ya da geride olduğunu görüyorsun?",
+    "aciklama": "Bir boyutu ve konumunu yaz; bu alan isteğe bağlı.",
     "etiket": "G1 kıyasında önde / aynı / geride olduğum bir boyut",
     "tur": "kisa_metin",
     "zorunlu": false,
@@ -3593,6 +4367,8 @@
    },
    {
     "anahtar": "meslektas_taramasi",
+    "soru": "Mesleğinden hangi üç kişi yapay zekâya hangi işleri devretmiş?",
+    "aciklama": "Kamuya açık paylaşım yapan üç meslektaşının ne tür bir iş olduğunu ve yapay zekâya devrettikleri işi yaz; isim yazman gerekmez, bu alan isteğe bağlı.",
     "etiket": "Meslektaş taramasından üç isim ve devrettikleri işler",
     "tur": "liste",
     "adet": 3,
@@ -3619,22 +4395,31 @@
    {
     "anahtar": "aday_isler",
     "etiket": "Aday dijital işler (5–10)",
+    "soru": "Dijital olarak devredebileceğin hangi işler var?",
+    "aciklama": "Beş ile on iş yaz; her birinin haftalık saatini, sıfır ile altı arasında uygunluk puanını ve korunup korunmadığını doldur.",
     "tur": "tablo",
     "adet_min": 5,
     "adet_max": 10,
     "sutunlar": [
      {
       "anahtar": "is",
+      "soru": "Bu iş ne?",
+      "aciklama": "Dijital ortamda yaptığın bir işi kısaca yaz.",
+      "ornek": "Haftalık plan yazmak",
       "etiket": "İş",
       "tur": "kisa_metin"
      },
      {
       "anahtar": "haftalik_saat",
+      "soru": "Bu iş haftada kaç saatini alıyor?",
+      "aciklama": "Yaklaşık saat yaz.",
       "etiket": "Haftalık saat",
       "tur": "sayi"
      },
      {
       "anahtar": "uygunluk",
+      "soru": "Bu iş yapay zekâya ne kadar uygun?",
+      "aciklama": "Dersteki ölçütlere göre sıfır ile altı arasında puan ver.",
       "etiket": "Uygunluk puanı (0–6)",
       "tur": "sayi",
       "aralik": [
@@ -3644,6 +4429,8 @@
      },
      {
       "anahtar": "korunuyor_mu",
+      "soru": "Bu işi korunacak işler listene aldın mı?",
+      "aciklama": "Asla devretmeyeceğin bir işse evet seç.",
       "etiket": "Korunuyor mu?",
       "tur": "secim",
       "secenekler": [
@@ -3656,12 +4443,18 @@
    },
    {
     "anahtar": "baslangic_noktasi",
+    "soru": "Bu işlerden hangisiyle başlıyorsun?",
+    "aciklama": "Listeden tek bir iş seç.",
+    "ornek": "Haftalık plan yazmak",
     "etiket": "Seçilmiş 1 başlangıç noktası",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "neden_bu",
+    "soru": "Neden bu işle başlıyorsun?",
+    "aciklama": "Tek cümle yaz.",
+    "ornek": "Her hafta tekrar ediyor ve en çok zamanımı o alıyor.",
     "etiket": "Neden bu",
     "olcu": "tek cümle",
     "tur": "kisa_metin",
@@ -3669,6 +4462,9 @@
    },
    {
     "anahtar": "g1_tahminle_kiyas",
+    "soru": "G aşamasının başında tahmin ettiğin işle bugün seçtiğin iş arasında ne fark var?",
+    "aciklama": "İlk tahmininle bugünkü seçimini bir satırda karşılaştır.",
+    "ornek": "Mesajların yorduğunu sanıyordum, asıl zamanı plan yazmak alıyormuş.",
     "etiket": "G.1'deki tahminle karşılaştırma",
     "olcu": "bir satır",
     "tur": "kisa_metin",
@@ -3699,6 +4495,7 @@
   "alanlar": [
    {
     "anahtar": "uc_rakam",
+    "aciklama": "Bu G testinden gelir; sen yazmazsın.",
     "etiket": "G1'den üç rakam",
     "olcu": "yılda geri dönecek saat · kaçan ₺ · boş kapasite ₺/ay",
     "tur": "referans",
@@ -3711,12 +4508,16 @@
    },
    {
     "anahtar": "operasyonel_borc",
+    "soru": "Operasyonel borç testinde hangi maddelere 'evet' dedin?",
+    "aciklama": "Evet dediğin maddeleri olduğu gibi yaz.",
     "etiket": "Operasyonel borç testinde \"evet\" dediğim maddeler",
     "tur": "liste",
     "zorunlu": true
    },
    {
     "anahtar": "kacak_adim",
+    "soru": "Sence müşteri en çok hangi adımda kaçıyor?",
+    "aciklama": "İlk mesaj, randevu, görüşme ya da karar seç.",
     "etiket": "Kaçağın olduğunu düşündüğün adım",
     "tur": "secim",
     "secenekler": [
@@ -3746,6 +4547,7 @@
   "alanlar": [
    {
     "anahtar": "gap_raporu",
+    "aciklama": "Profil, Fırsat Haritası ve Bedel kartından kendiliğinden derlenir; sen yazmazsın.",
     "etiket": "Gap Raporum",
     "olcu": "3 sayfa (profil PDF + Fırsat Haritası + Bedel kartı)",
     "tur": "referans",
@@ -3758,6 +4560,8 @@
    },
    {
     "anahtar": "dort_hafta_odak",
+    "soru": "Önümüzdeki dört haftanın her biri için tek odağın ne?",
+    "aciklama": "Her haftaya tek bir odak yaz.",
     "etiket": "İlk 30 Günüm: 4 hafta × tek odak",
     "olcu": "program / deneme / ölçüm şeritleri",
     "tur": "tablo",
@@ -3770,6 +4574,9 @@
     "sutunlar": [
      {
       "anahtar": "odak",
+      "soru": "Bu hafta tek odağın ne?",
+      "aciklama": "Tek bir iş ya da hedef yaz.",
+      "ornek": "Haftalık plan taslağını yapay zekâyla hazırlamak",
       "etiket": "Tek odak",
       "tur": "kisa_metin"
      }
@@ -3778,6 +4585,9 @@
    },
    {
     "anahtar": "uc_engel",
+    "soru": "Seni yolda durdurabilecek üç engel ne ve her birini nasıl aşacaksın?",
+    "aciklama": "Her engelin yanına önceden düşündüğün çözümü yaz.",
+    "ornek": "Akşam yorgun oluyorum → çalışmayı sabaha alıyorum",
     "etiket": "3 engel + önceden çözüm",
     "tur": "liste",
     "adet": 3,
@@ -3785,18 +4595,27 @@
    },
    {
     "anahtar": "neden_onemli",
+    "soru": "Bu dört hafta senin için neden önemli?",
+    "aciklama": "Tek cümle yaz; zorlandığında bunu okuyacaksın.",
+    "ornek": "Akşamlarımı geri almak istiyorum.",
     "etiket": "\"Neden önemli\" cümlesi",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "sabit_saat",
+    "soru": "Takviminde bu iş için hangi sabit saati ayırdın?",
+    "aciklama": "Gün ve saat yaz.",
+    "ornek": "Her sabah 08.30",
     "etiket": "Takvimde sabit bir saat",
     "tur": "kisa_metin",
     "zorunlu": true
    },
    {
     "anahtar": "olcum_gunlugu",
+    "soru": "Ölçüm günlüğüne hangi başlığı koyuyorsun?",
+    "aciklama": "Neyi ölçeceğini anlatan kısa bir başlık yaz; bu alan isteğe bağlı.",
+    "ornek": "Plan yazma süresi",
     "etiket": "Ölçüm günlüğü başlığı",
     "tur": "kisa_metin",
     "zorunlu": false

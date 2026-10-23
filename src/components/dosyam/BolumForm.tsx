@@ -217,10 +217,9 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
           {f.aciklama && <p className="text-sm text-gray-600">{f.aciklama}</p>}
           {f.olcu && <p className="mb-2 text-xs text-gray-400">{f.aciklama ? `Uzunluk: ${f.olcu}` : f.olcu}</p>}
           {f.sonradan_doldurulur && <p className="mb-2 text-xs text-gray-400">Bunu sonra, sonucu gördüğünde doldurursun.</p>}
+          {f.tur !== "referans" && f.referans && <KaynakKutusu f={f} refs={refs} />}
           {f.tur === "referans" ? (
-            <p className="rounded-xl bg-gray-50 p-3 text-sm text-gray-700 whitespace-pre-line">
-              {(f.kaynak_alanlar ?? []).map((k) => refs[k]).filter(Boolean).join("\n") || "Kaynak bölüm henüz onaylanmadı."}
-            </p>
+            <KaynakKutusu f={f} refs={refs} />
           ) : (
             <Field
               f={f}
@@ -276,4 +275,12 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
     )}
     </div>
   );
+}
+
+// Başka bölümlerden gelen içerik (öğrenci burada yazmaz). G1.* = G testi sonucu (ayrı sistem).
+function KaynakKutusu({ f, refs }: { f: FieldDef; refs: Record<string, string> }) {
+  const kaynak = f.kaynak_alanlar ?? [];
+  const metin = kaynak.map((k) => refs[k]).filter(Boolean).join("\n\n");
+  const bos = kaynak.some((k) => k.startsWith("G1")) ? "G testini çözdüğünde buraya gelir." : "Kaynak bölüm onaylanınca buraya gelir.";
+  return <p className="mb-2 whitespace-pre-line rounded-xl bg-gray-50 p-3 text-sm text-gray-700">{metin || bos}</p>;
 }

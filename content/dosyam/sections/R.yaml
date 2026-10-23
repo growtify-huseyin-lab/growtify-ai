@@ -10,14 +10,14 @@
   bolum_no: 1
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: neden, etiket: "Neden", olcu: "gerçek bir an, 1–2 cümle", tur: kisa_metin, zorunlu: true}
-    - {anahtar: kime_kime_degil, etiket: "Kime / kime değil", olcu: "1–2 satır", tur: kisa_metin, zorunlu: true}
-    - {anahtar: donusum, etiket: "Hangi dönüşüm", olcu: "önce → sonra, 3 satır", tur: uzun_metin, zorunlu: true}
-    - {anahtar: nasil, etiket: "Nasıl (seni farklı kılan yol)", olcu: "1–2 cümle (O.2'de derinleşir)", tur: kisa_metin, zorunlu: true}
-    - {anahtar: durus, etiket: "Duruş", olcu: "neye inanıyorum, neye karşıyım", tur: kisa_metin, zorunlu: true}
-    - {anahtar: ses, etiket: "Ses", olcu: "ham ses notu, 5 madde", tur: liste, zorunlu: true}
-    - {anahtar: tek_cumle, etiket: "Tek cümlem", olcu: "kime + sonuç + nasıl; ≤20 kelime; sıfatsız", tur: kisa_metin, zorunlu: true, dogrulama: "kelime_sayisi<=20; sifat_taramasi"}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "üç saniye testinde üç kişiden kaçı doğru söyledi?", tur: sayi, sonradan_doldurulur: true}
+    - {anahtar: neden, soru: "Para kazanmak dışında, bu işi neden yapıyorsun?", aciklama: "Seni bu mesleğe getiren ya da hâlâ bu işte tutan gerçek bir anı veya sebebi yaz.", ornek: "Annem diyabet hastasıydı; beslenmenin onun hayatını nasıl değiştirdiğini gördüm.", etiket: "Neden", olcu: "gerçek bir an, 1–2 cümle", tur: kisa_metin, zorunlu: true}
+    - {anahtar: kime_kime_degil, soru: "Kime hizmet ediyorsun, kime etmiyorsun?", aciklama: "En iyi sonuç aldığın müşteriyi hayatındaki durumuyla tarif et; kime iyi gelmediğini de ekle.", ornek: "Kırkından sonra bedenini yeniden tanımak isteyen kadınlar. Hızlı kilo verme peşinde olanlarla çalışmıyorum.", etiket: "Kime / kime değil", olcu: "1–2 satır", tur: kisa_metin, zorunlu: true}
+    - {anahtar: donusum, soru: "Seninle çalışmadan önce ve sonra müşterin nerede duruyor?", aciklama: "Önce ne hissettiğini, sonra hayatında neyin değiştiğini anlat; rakam ve garanti yazma.", ornek: "Önce: her diyeti yarıda bırakıyor, kendini suçluyor. Sonra: ne yiyeceğini biliyor, sofrada huzurlu.", etiket: "Hangi dönüşüm", olcu: "önce → sonra, 3 satır", tur: uzun_metin, zorunlu: true}
+    - {anahtar: nasil, soru: "Seni aynı işi yapan diğerlerinden farklı kılan yol ne?", aciklama: "İşini hangi sırayla ele aldığını ve neyi asla atlamadığını kısaca anlat; bir ad vermek zorunda değilsin.", ornek: "Yasak listesiyle değil, kişinin kendi sofrasından başlarım; ilk ay hiçbir şeyi yasaklamam.", etiket: "Nasıl (seni farklı kılan yol)", olcu: "1–2 cümle (O.2'de derinleşir)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: durus, soru: "Sektöründe herkesin yaptığı ama senin yanlış bulduğun bir şey var mı?", aciklama: "Neye inandığını ve neye karşı olduğunu bir iki cümleyle yaz; kimseyi adıyla hedef alma.", ornek: "Mucize diyetlere ve önce-sonra fotoğraflarına karşıyım; kalıcı alışkanlığa inanırım.", etiket: "Duruş", olcu: "neye inanıyorum, neye karşıyım", tur: kisa_metin, zorunlu: true}
+    - {anahtar: ses, soru: "Müşterilerinle nasıl konuşursun?", aciklama: "Tonunu beş maddede yaz: ton, cümle uzunluğu, hitap, sık kullandığın ve hiç kullanmadığın kelimeler.", ornek: "Sıcak ve sade · kısa cümleler · 'sen' diye hitap · 'adım adım' derim · 'yasak' kelimesini kullanmam", etiket: "Ses", olcu: "ham ses notu, 5 madde", tur: liste, zorunlu: true}
+    - {anahtar: tek_cumle, soru: "Bütün bunları tek cümlede nasıl söylersin?", aciklama: "Kime, hangi sonucu, nasıl verdiğini yaz; en fazla 20 kelime, 'en iyi' gibi sıfatlar olmadan.", ornek: "Kırkından sonra bedenini yeniden tanımak isteyen kadınlara yasaksız, adım adım bir beslenme düzeni kurduruyorum.", etiket: "Tek cümlem", olcu: "kime + sonuç + nasıl; ≤20 kelime; sıfatsız", tur: kisa_metin, zorunlu: true, dogrulama: "kelime_sayisi<=20; sifat_taramasi"}
+  tek_olcut: {soru: "Tek cümleni seni tanımayan üç kişiye gösterdiğinde kaçı ne yaptığını doğru söyledi?", aciklama: "Cümleni gösterip ne yaptığını tahmin etmelerini iste; doğru söyleyenlerin sayısını yaz.", etiket: "Tek ölçütüm", olcu: "üç saniye testinde üç kişiden kaçı doğru söyledi?", tur: sayi, sonradan_doldurulur: true}
   bagimli: []
   ghl:
     - {alan_adi: "GAI - R2 Kimlik Cekirdegi", tur: buyuk_metin, icerik: "6 satırın etiketli hali"}
@@ -36,14 +36,14 @@
   bolum_no: 2
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: kim_icin, etiket: "Kim için", olcu: "Çekirdeğin \"kime\" satırıyla aynı", tur: kisa_metin, zorunlu: true, dogrulama: "R2.kime_kime_degil ile tutarlılık"}
-    - {anahtar: hangi_sonuc, etiket: "Hangi sonuç", olcu: "önce → sonra", tur: kisa_metin, zorunlu: true}
-    - {anahtar: hangi_yolla, etiket: "Hangi yolla", olcu: "1–2 cümle", tur: kisa_metin, zorunlu: true}
-    - {anahtar: hangi_bicimde, etiket: "Hangi biçimde", olcu: "süre, sıklık, birebir/grup, yer", tur: kisa_metin, zorunlu: true}
-    - {anahtar: soz, etiket: "Ne söz veriyorum", olcu: "süreç sözü; garanti yok", tur: kisa_metin, zorunlu: true, dogrulama: "garanti_dili_taramasi"}
-    - {anahtar: itirazlar, etiket: "En sert 5 itiraz + cevap", olcu: "5 × (itiraz + 1 cümle cevap)", tur: liste, adet: 5, zorunlu: true}
-    - {anahtar: sayfa_iskeleti, etiket: "Sayfa iskeleti", olcu: "9 başlık; fiyat boş", tur: liste, adet: 9, zorunlu: true, dogrulama: "fiyat_bos; kanit_yalniz_gercek"}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Teklifini gösterdiğin 3 kişiden kaçı \"bu kimin için ve ne veriyor\" sorusunu doğru cevapladı? Sonra: teklif görüşmesine dönen oran (W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
+    - {anahtar: kim_icin, soru: "Bu teklif tam olarak kimin için?", aciklama: "Kimlik Çekirdeğindeki 'kime' satırınla aynı kişi olmalı; gerekirse daralt.", ornek: "Kırkından sonra bedenini yeniden tanımak isteyen çalışan kadınlar.", etiket: "Kim için", olcu: "Çekirdeğin \"kime\" satırıyla aynı", tur: kisa_metin, zorunlu: true, dogrulama: "R2.kime_kime_degil ile tutarlılık"}
+    - {anahtar: hangi_sonuc, soru: "Bu teklifin sonunda müşterin nereden nereye geliyor?", aciklama: "Önceyi ve sonrayı bir iki cümleyle yaz; rakamlı sonuç vaadi yok.", ornek: "Önce: ne yiyeceğini bilmeden gün geçiriyor. Sonra: kendi düzenini kurmuş, yemekten keyif alıyor.", etiket: "Hangi sonuç", olcu: "önce → sonra", tur: kisa_metin, zorunlu: true}
+    - {anahtar: hangi_yolla, soru: "Bu sonuca hangi yolla götürüyorsun?", aciklama: "Seni farklı kılan yaklaşımı bu teklif için bir iki cümleyle anlat.", ornek: "Kişinin kendi sofrasından başlayan, her hafta küçük bir adım ekleyen bir yol.", etiket: "Hangi yolla", olcu: "1–2 cümle", tur: kisa_metin, zorunlu: true}
+    - {anahtar: hangi_bicimde, soru: "Bu teklif hangi biçimde yürüyor?", aciklama: "Süresini, görüşme sıklığını, birebir mi grup mu olduğunu ve nerede yapıldığını yaz.", ornek: "Sekiz hafta, haftada bir çevrim içi birebir görüşme, arada mesajla destek.", etiket: "Hangi biçimde", olcu: "süre, sıklık, birebir/grup, yer", tur: kisa_metin, zorunlu: true}
+    - {anahtar: soz, soru: "Müşterine tam olarak ne söz veriyorsun?", aciklama: "Sonuç garantisi değil, sürece dair bir söz yaz: neyi, hangi sırayla birlikte yapacağınızı.", ornek: "Bu yolu seninle haftalık adımlarla yürüyeceğim; her hafta neyin işe yaradığına birlikte bakacağız.", etiket: "Ne söz veriyorum", olcu: "süreç sözü; garanti yok", tur: kisa_metin, zorunlu: true, dogrulama: "garanti_dili_taramasi"}
+    - {anahtar: itirazlar, soru: "Şüpheci bir müşteri bu teklife hangi beş itirazı yapar, sen ne cevap verirsin?", aciklama: "En sert beş itirazı ve her birine tek cümlelik cevabını yaz; cevaplarda garanti verme.", ornek: "Zamanım yok → Görüşmeler kısa; düzen senin günlük hayatına göre kurulur.", etiket: "En sert 5 itiraz + cevap", olcu: "5 × (itiraz + 1 cümle cevap)", tur: liste, adet: 5, zorunlu: true}
+    - {anahtar: sayfa_iskeleti, soru: "Bu teklif bir satış sayfasında nasıl dururdu?", aciklama: "Dokuz başlığın her birine bir iki cümle yaz; fiyatı boş bırak, gerçek kanıtın yoksa kanıt başlığını da boş bırak.", ornek: "Başlık ve söz: Yasaksız, adım adım; kendi sofranda kalıcı bir düzen.", etiket: "Sayfa iskeleti", olcu: "9 başlık; fiyat boş", tur: liste, adet: 9, zorunlu: true, dogrulama: "fiyat_bos; kanit_yalniz_gercek"}
+  tek_olcut: {soru: "Teklifini gösterdiğin üç kişiden kaçı 'bu kimin için ve ne veriyor' sorusunu doğru cevapladı?", aciklama: "Teklif kartını seni tanımayan üç kişiye göster; doğru cevaplayanların sayısını yaz.", etiket: "Tek ölçütüm", olcu: "Teklifini gösterdiğin 3 kişiden kaçı \"bu kimin için ve ne veriyor\" sorusunu doğru cevapladı? Sonra: teklif görüşmesine dönen oran (W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
   bagimli: [R2]
   ghl:
     - {alan_adi: "GAI - R3 Teklif Karti", tur: buyuk_metin}
@@ -63,15 +63,15 @@
   bolum_no: 3
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: kime, etiket: "Kime", olcu: "Çekirdeğin \"kime\" satırıyla aynı", tur: kisa_metin, zorunlu: true}
-    - {anahtar: en_kucuk_kitle, etiket: "En küçük kitle", olcu: "aylık hedef gelir ÷ müşteri başı aylık gelir = __ kişi", tur: sayi, zorunlu: true, not: "hesabın iki girdisi de istenirse ayrı alan olabilir"}
-    - {anahtar: ana_kanallar, etiket: "Ana kanal(lar)", olcu: "en fazla 2 · neden orada?", tur: liste, adet_max: 2, zorunlu: true}
-    - {anahtar: turev_kanallar, etiket: "Türev kanallar", olcu: "ana içerik nereye kısaltılarak gider", tur: kisa_metin, zorunlu: false}
-    - {anahtar: ilk_ucretsiz_deger, etiket: "İlk ücretsiz değer", olcu: "adı + biçimi (rehber / test / liste)", tur: kisa_metin, zorunlu: true}
-    - {anahtar: en_sik_10_soru, etiket: "En sık 10 soru", olcu: "10 gerçek soru; ücretsiz değerin hammaddesi", tur: liste, adet: 10, zorunlu: true}
-    - {anahtar: ilginin_evi, etiket: "İlginin evi", olcu: "e-posta listesi / topluluk / randevu", tur: secim, secenekler: ["e-posta listesi", "topluluk", "randevu"], coklu: true, zorunlu: true}
-    - {anahtar: is_birligi_halkasi, etiket: "İş birliği halkası (isteğe bağlı)", olcu: "2–3 işletme türü", tur: liste, zorunlu: false}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Bir ay içinde evine kaç kişi girdi? (sayı W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
+    - {anahtar: kime, soru: "Bu ekosistemi kimi çekmek için kuruyorsun?", aciklama: "Kimlik Çekirdeğindeki 'kime' satırınla aynı kişiyi yaz.", ornek: "Kırkından sonra bedenini yeniden tanımak isteyen kadınlar.", etiket: "Kime", olcu: "Çekirdeğin \"kime\" satırıyla aynı", tur: kisa_metin, zorunlu: true}
+    - {anahtar: en_kucuk_kitle, soru: "Seni ayakta tutmaya yetecek en az kaç müşteriye ihtiyacın var?", aciklama: "Aylık hedef gelirini bir müşteriden aldığın aylık gelire böl ve çıkan sayıyı yaz.", etiket: "En küçük kitle", olcu: "aylık hedef gelir ÷ müşteri başı aylık gelir = __ kişi", tur: sayi, zorunlu: true, not: "hesabın iki girdisi de istenirse ayrı alan olabilir"}
+    - {anahtar: ana_kanallar, soru: "Müşterilerine en çok hangi bir iki kanalda görünmelisin?", aciklama: "Müşterinin zaten zaman geçirdiği ve senin düzenli görünebileceğin en fazla iki kanalı nedeniyle birlikte yaz.", ornek: "Instagram, çünkü danışanlarım tarifleri ve günlük ipuçlarını orada arıyor.", etiket: "Ana kanal(lar)", olcu: "en fazla 2 · neden orada?", tur: liste, adet_max: 2, zorunlu: true}
+    - {anahtar: turev_kanallar, soru: "Ana içeriğini kısaltarak başka nerelerde paylaşacaksın?", aciklama: "Ana kanalındaki içeriğin kısa hallerinin gideceği kanalları yaz; yoksa boş bırak.", ornek: "Facebook ve WhatsApp durum.", etiket: "Türev kanallar", olcu: "ana içerik nereye kısaltılarak gider", tur: kisa_metin, zorunlu: false}
+    - {anahtar: ilk_ucretsiz_deger, soru: "İnsanlara ilk olarak hangi ücretsiz değeri vereceksin?", aciklama: "Ücretsiz değerin adını ve biçimini yaz: rehber, kısa test ya da kontrol listesi.", ornek: "Bayram sofrasından sonra kendini suçlamadan geri dönmenin beş yolu (kısa rehber)", etiket: "İlk ücretsiz değer", olcu: "adı + biçimi (rehber / test / liste)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: en_sik_10_soru, soru: "Müşterilerin sana en sık hangi on soruyu soruyor?", aciklama: "Her gün tek tek cevapladığın gerçek soruları yaz; cevaplarını şimdi yazman gerekmiyor.", ornek: "Akşam yemeğini atlamak işe yarar mı?", etiket: "En sık 10 soru", olcu: "10 gerçek soru; ücretsiz değerin hammaddesi", tur: liste, adet: 10, zorunlu: true}
+    - {anahtar: ilginin_evi, soru: "İlgilenen insanlar seninle nerede kalacak?", aciklama: "E-posta listen, topluluğun ya da randevu kapın: ilgiyi taşıyacağın kendi yerini seç.", etiket: "İlginin evi", olcu: "e-posta listesi / topluluk / randevu", tur: secim, secenekler: ["e-posta listesi", "topluluk", "randevu"], coklu: true, zorunlu: true}
+    - {anahtar: is_birligi_halkasi, soru: "Senin müşterine hizmet eden ama rakibin olmayan hangi işletmeler var?", aciklama: "Birbirinize insan gönderebileceğiniz iki üç işletme türünü yaz; isteğe bağlı.", ornek: "Spor salonları · fizyoterapistler · sağlıklı yemek dükkânları", etiket: "İş birliği halkası (isteğe bağlı)", olcu: "2–3 işletme türü", tur: liste, zorunlu: false}
+  tek_olcut: {soru: "Bir ay içinde e-posta listene, topluluğuna ya da randevuna kaç kişi geldi?", aciklama: "Bir ay sonra say ve yaz; bunu W aşamasında ölçeceksin.", etiket: "Tek ölçütüm", olcu: "Bir ay içinde evine kaç kişi girdi? (sayı W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
   bagimli: [R2, R3]
   ghl:
     - {alan_adi: "GAI - R4 Ekosistem Plani", tur: buyuk_metin, not: "öneri (§3 kalıbı)"}
@@ -90,19 +90,21 @@
   alanlar:
     - anahtar: asamalar
       etiket: "8 aşama + Kaybedildi"
+      soru: "İlk ilgiden müşteri olmaya kadar her aşamada senin işinde neler oluyor?"
+      aciklama: "Her aşama için ne olduğunu, orada nasıl müşteri kaybettiğini ve bunun bugün sende var mı, kısmen mi, yok mu olduğunu yaz."
       tur: tablo
       satirlar: ["1 İlk ilgi", "2 İlk cevap", "3 Tanışma", "4 Sonraki adım ayarlandı", "5 Görüşme", "6 Teklif", "7 Karar bekleniyor", "8 Müşteri oldu", "Kaybedildi"]
       sutunlar:
-        - {anahtar: ne_oluyor, etiket: "Benim işimde burada ne oluyor", tur: kisa_metin}
-        - {anahtar: nasil_kaybediyorum, etiket: "Burada nasıl kaybediyorum", tur: kisa_metin}
-        - {anahtar: durum, etiket: "Durum", tur: secim, secenekler: ["var", "kısmi", "yok"]}
+        - {anahtar: ne_oluyor, soru: "Bu aşamada senin işinde ne oluyor?", aciklama: "Bu aşamada müşteriyle aranızda neler olduğunu kısaca yaz; Kaybedildi satırında kaybetme nedenlerini yaz.", ornek: "Kişi Instagram'dan fiyat soruyor.", etiket: "Benim işimde burada ne oluyor", tur: kisa_metin}
+        - {anahtar: nasil_kaybediyorum, soru: "Bu aşamada müşteriyi nasıl kaybediyorsun?", aciklama: "Bu aşamada insanların neden ve nasıl kaybolduğunu yaz.", ornek: "Ertesi gün dönüyorum; o arada başka birine yazmış oluyor.", etiket: "Burada nasıl kaybediyorum", tur: kisa_metin}
+        - {anahtar: durum, soru: "Bu aşama bugün sende düzgün işliyor mu?", aciklama: "Var, kısmi ya da yok olarak işaretle.", etiket: "Durum", tur: secim, secenekler: ["var", "kısmi", "yok"]}
       zorunlu: true
       not: "Kaybedildi satırının 'ne oluyor' sütunu nedenleri taşır: uygun değil · şimdi değil · gelmedi · sessiz kaldı. 'tablo' türü şemada yok; öneri."
-    - {anahtar: en_cok_kaybedilen, etiket: "En çok kaybettiğim aşama", olcu: "tek bir aşama", tur: secim, secenekler_kaynagi: asamalar, zorunlu: true}
-    - {anahtar: iki_yol, etiket: "İki yol", olcu: "hızlı karar veren için kısa yol (hangi aşamaları kısa geçer) · kanıt isteyen için kanıt yolu (ne görmeli)", tur: uzun_metin, zorunlu: true}
-    - {anahtar: on_gorusme_sorulari, etiket: "Ön görüşme soruları", olcu: "5–7 soru", tur: liste, adet_min: 5, adet_max: 7, zorunlu: true}
-    - {anahtar: mesaj_taslaklari, etiket: "En kritik 3 aşama için mesaj taslağı", olcu: "benim sesimle, her biri 2–4 cümle", tur: liste, adet: 3, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "En çok kaybettiğim aşamada bir ay sonra kaç kişi kayboldu? (W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
+    - {anahtar: en_cok_kaybedilen, soru: "En çok müşteriyi hangi aşamada kaybediyorsun?", aciklama: "Sekiz aşamadan yalnız birini seç.", etiket: "En çok kaybettiğim aşama", olcu: "tek bir aşama", tur: secim, secenekler_kaynagi: asamalar, zorunlu: true}
+    - {anahtar: iki_yol, soru: "Hızlı karar veren müşteri ile kanıt isteyen müşteri için yolun nasıl ayrılıyor?", aciklama: "Hızlı karar verenin hangi aşamaları kısa geçtiğini, kanıt isteyenin karar vermeden önce neyi görmesi gerektiğini yaz.", ornek: "Hızlı karar veren: tanışmadan doğrudan randevuya · kanıt isteyen: önce sık sorulanları ve nasıl çalıştığımı görür", etiket: "İki yol", olcu: "hızlı karar veren için kısa yol (hangi aşamaları kısa geçer) · kanıt isteyen için kanıt yolu (ne görmeli)", tur: uzun_metin, zorunlu: true}
+    - {anahtar: on_gorusme_sorulari, soru: "Tanışma görüşmesinde hangi beş yedi soruyu soracaksın?", aciklama: "Müşteriyi tanımak ve sana uygun olup olmadığını anlamak için soracağın soruları yaz.", ornek: "Bugüne kadar neleri denedin?", etiket: "Ön görüşme soruları", olcu: "5–7 soru", tur: liste, adet_min: 5, adet_max: 7, zorunlu: true}
+    - {anahtar: mesaj_taslaklari, soru: "En kritik üç aşamada müşterine ne yazacaksın?", aciklama: "En çok kaybettiğin üç aşama için kendi sesinle iki dört cümlelik mesaj taslakları yaz; baskı ve sonuç vaadi olmasın.", ornek: "Aklında soru kaldıysa cevaplayayım; hazır olduğunda buradayım.", etiket: "En kritik 3 aşama için mesaj taslağı", olcu: "benim sesimle, her biri 2–4 cümle", tur: liste, adet: 3, zorunlu: true}
+  tek_olcut: {soru: "En çok kaybettiğin aşamada bir ay sonra kaç kişi kayboldu?", aciklama: "Bir ay sonra say ve yaz; bunu W aşamasında ölçeceksin.", etiket: "Tek ölçütüm", olcu: "En çok kaybettiğim aşamada bir ay sonra kaç kişi kayboldu? (W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
   bagimli: [R2, R3, R4]
   ghl:
     - {alan_adi: "GAI - R5 Isletme Rontgeni", tur: buyuk_metin, not: "öneri"}
@@ -120,14 +122,14 @@
   bolum_no: 5
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: ilk_karsilama, etiket: "İlk karşılama mesajım", olcu: "senin sesinde, 2–4 cümle, bir sonraki adımla", tur: uzun_metin, zorunlu: true}
-    - {anahtar: acik_kanallar, etiket: "Açık kanallar", olcu: "cevap vereceğin kanallar", tur: liste, zorunlu: true}
-    - {anahtar: saatlerim, etiket: "Benim saatlerim", olcu: "hangi gün/saat; dışında ne olur", tur: kisa_metin, zorunlu: true}
-    - {anahtar: yz_sorulari, etiket: "Yapay zekânın cevaplayacağı sorular", olcu: "en sık 10 sorudan seçilir", tur: liste, secenekler_kaynagi: R4.en_sik_10_soru, zorunlu: true}
-    - {anahtar: devir_anlari, etiket: "Bana devredilen anlar", olcu: "en az 3 durum + \"size dönüyorum\" cümlesi", tur: liste, adet_min: 3, zorunlu: true}
-    - {anahtar: iletisim_ritmi, etiket: "İletişim ritmim", olcu: "müşteriye ne zaman, hangi kanaldan haber veririm", tur: kisa_metin, zorunlu: true}
-    - {anahtar: erisim_kademeleri, etiket: "Erişim kademelerim", olcu: "kademe → neye erişir → ben hangi anda devredeyim", tur: liste, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "İlk mesaja ilk cevabın süresi (W'de ölçülür)", tur: kisa_metin, sonradan_doldurulur: true}
+    - {anahtar: ilk_karsilama, soru: "Sana ilk kez yazan birine ne cevap vereceksin?", aciklama: "Kendi sesinle, iki dört cümlelik ve bir sonraki adımı söyleyen bir karşılama mesajı yaz.", ornek: "Merhaba, yazdığın için teşekkürler. Akşamları dokuzdan sonra cevap veremiyorum; sabah ilk iş sana döneceğim. Bu arada rehberime göz atabilirsin.", etiket: "İlk karşılama mesajım", olcu: "senin sesinde, 2–4 cümle, bir sonraki adımla", tur: uzun_metin, zorunlu: true}
+    - {anahtar: acik_kanallar, soru: "Müşterilerin sana hangi kanallardan ulaşabilir?", aciklama: "Cevap vermeyi taahhüt ettiğin kanalları yaz; cevap vermeyeceğin kanalı açık bırakma.", ornek: "WhatsApp · Instagram · e-posta", etiket: "Açık kanallar", olcu: "cevap vereceğin kanallar", tur: liste, zorunlu: true}
+    - {anahtar: saatlerim, soru: "Hangi gün ve saatlerde sen varsın, o saatlerin dışında ne oluyor?", aciklama: "Çalışma gün ve saatlerini, dışında gelen mesaja ne olacağını yaz.", ornek: "Hafta içi 09.00–18.00 · dışında otomatik karşılama, ertesi sabah dönüş", etiket: "Benim saatlerim", olcu: "hangi gün/saat; dışında ne olur", tur: kisa_metin, zorunlu: true}
+    - {anahtar: yz_sorulari, soru: "Hangi soruları yapay zekâ senin yerine cevaplayabilir?", aciklama: "En sık sorulan on sorundan, cevabı herkese aynı olan ve hassas olmayanları seç.", etiket: "Yapay zekânın cevaplayacağı sorular", olcu: "en sık 10 sorudan seçilir", tur: liste, secenekler_kaynagi: R4.en_sik_10_soru, zorunlu: true}
+    - {anahtar: devir_anlari, soru: "Hangi durumlarda konuşmayı yapay zekâ değil sen devralmalısın?", aciklama: "En az üç durumu ve o anda söylenecek \"size dönüyorum\" cümleni yaz.", ornek: "Sağlık durumuyla ilgili soru · şikâyet · fiyat pazarlığı · \"Bunu bizzat konuşalım, en kısa sürede dönüyorum.\"", etiket: "Bana devredilen anlar", olcu: "en az 3 durum + \"size dönüyorum\" cümlesi", tur: liste, adet_min: 3, zorunlu: true}
+    - {anahtar: iletisim_ritmi, soru: "Müşterine ne zaman ve hangi kanaldan haber vereceksin?", aciklama: "Müşterinin sormadan ne zaman senden haber alacağını yaz.", ornek: "Her pazartesi WhatsApp'tan haftanın kısa planı.", etiket: "İletişim ritmim", olcu: "müşteriye ne zaman, hangi kanaldan haber veririm", tur: kisa_metin, zorunlu: true}
+    - {anahtar: erisim_kademeleri, soru: "Müşterilerin hangi kademede neye erişecek ve sen ne zaman devreye gireceksin?", aciklama: "Her kademe için neye erişildiğini ve senin kişisel ilginin nerede başladığını yaz.", ornek: "Ücretsiz: rehber ve topluluk · Program: haftalık görüşme · Birebir: her gün mesajla destek", etiket: "Erişim kademelerim", olcu: "kademe → neye erişir → ben hangi anda devredeyim", tur: liste, zorunlu: true}
+  tek_olcut: {soru: "Sana ilk yazan birine ortalama ne kadar sürede cevap veriyorsun?", aciklama: "Bir hafta boyunca ilk cevap sürelerini not et ve ortalamasını yaz.", etiket: "Tek ölçütüm", olcu: "İlk mesaja ilk cevabın süresi (W'de ölçülür)", tur: kisa_metin, sonradan_doldurulur: true}
   bagimli: [R2, R4]
   ghl:
     - {alan_adi: "GAI - R6 Erisim Karti", tur: buyuk_metin, not: "öneri"}
@@ -145,19 +147,21 @@
   alanlar:
     - anahtar: kademeler
       etiket: "Kademeler"
+      soru: "Teklifini hangi kademelere ayırıyorsun ve her birinin fiyatı ne?"
+      aciklama: "Aynı süreci farklı destek seviyeleriyle yaz: her kademe için ne içerdiğini, fiyatını TL olarak, ödeme biçimini ve taksit bedelini kimin üstlendiğini."
       tur: tablo
       satirlar: ["Kendin uygula", "Takipli", "Birebir", "Devam üyeliği (isteğe bağlı)"]
       sutunlar:
-        - {anahtar: icerik, etiket: "Ne içerir", tur: kisa_metin}
-        - {anahtar: fiyat_tl, etiket: "Fiyat (TL)", tur: sayi}
-        - {anahtar: odeme_bicimi, etiket: "Ödeme biçimi", tur: secim, secenekler: ["peşin", "taksit", "abonelik"]}
-        - {anahtar: taksit_bedeli_kimde, etiket: "Taksit bedeli kimde", tur: kisa_metin}
+        - {anahtar: icerik, soru: "Bu kademe neleri içeriyor?", aciklama: "Bu kademede müşterinin ne aldığını kısaca yaz.", ornek: "Haftalık görüşme ve mesajla takip.", etiket: "Ne içerir", tur: kisa_metin}
+        - {anahtar: fiyat_tl, soru: "Bu kademenin fiyatı kaç TL?", aciklama: "Her şey dahil, müşterinin ödeyeceği tek rakamı yaz.", etiket: "Fiyat (TL)", tur: sayi}
+        - {anahtar: odeme_bicimi, soru: "Bu kademe nasıl ödenecek?", aciklama: "Peşin, taksit ya da abonelik seç.", etiket: "Ödeme biçimi", tur: secim, secenekler: ["peşin", "taksit", "abonelik"]}
+        - {anahtar: taksit_bedeli_kimde, soru: "Taksit ya da vade farkını kim üstleniyor?", aciklama: "Taksit bedelini senin mi müşterinin mi ödeyeceğini yaz; taksit yoksa boş bırak.", ornek: "Ben üstleniyorum.", etiket: "Taksit bedeli kimde", tur: kisa_metin}
       zorunlu: true
       not: "Devam üyeliği satırı isteğe bağlı; fiyatı aylık, ödeme biçimi abonelik."
-    - {anahtar: sonucun_degeri, etiket: "Sonucun değeri (kaba hesap)", olcu: "müşterime ne kazandırıyor / neyi kaybetmekten kurtarıyor", tur: uzun_metin, zorunlu: true}
-    - {anahtar: revizyon_kurali, etiket: "Fiyat revizyon kuralım", olcu: "\"Fiyatlarımı ___ gözden geçiririm, mevcut müşterime ___ önce haber veririm.\"", tur: kisa_metin, zorunlu: true}
-    - {anahtar: iptal_iade, etiket: "İptal / iade kuralım", olcu: "tek paragraf", tur: uzun_metin, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Teklif verdiğim kişilerin hangi kademeyi seçtiği (W'de ölçülür)", tur: kisa_metin, sonradan_doldurulur: true}
+    - {anahtar: sonucun_degeri, soru: "Bu sonuç müşterine ne kazandırıyor ya da onu neyi kaybetmekten kurtarıyor?", aciklama: "Kesin rakam gerekmez; sonucun müşterin için değerini kaba bir hesapla anlat.", ornek: "Her ay yarıda bıraktığı diyetlere ve paketlere giden emeği ve parayı; sofrada yaşadığı suçluluğu.", etiket: "Sonucun değeri (kaba hesap)", olcu: "müşterime ne kazandırıyor / neyi kaybetmekten kurtarıyor", tur: uzun_metin, zorunlu: true}
+    - {anahtar: revizyon_kurali, soru: "Fiyatlarını ne sıklıkla gözden geçireceksin ve mevcut müşterine ne kadar önce haber vereceksin?", aciklama: "Tek cümleyle yaz: ne sıklıkla gözden geçirdiğini ve mevcut müşteriye ne kadar önce haber verdiğini.", ornek: "Fiyatlarımı yılda iki kez gözden geçiririm, mevcut müşterime bir ay önce haber veririm.", etiket: "Fiyat revizyon kuralım", olcu: "\"Fiyatlarımı ___ gözden geçiririm, mevcut müşterime ___ önce haber veririm.\"", tur: kisa_metin, zorunlu: true}
+    - {anahtar: iptal_iade, soru: "İptal ve iade kuralın ne?", aciklama: "Hangi durumda iade olduğunu, hangi durumda olmadığını ve ne kadar sürede yapıldığını tek paragrafta açıkça yaz; son hali için hukukçuna danış.", ornek: "İlk görüşmeden sonra vazgeçersen kalan görüşmelerin ücretini iade ederim; program yarıyı geçtiyse iade yapmam.", etiket: "İptal / iade kuralım", olcu: "tek paragraf", tur: uzun_metin, zorunlu: true}
+  tek_olcut: {soru: "Teklif verdiğin kişiler en çok hangi kademeyi seçti?", aciklama: "Bir ay sonra hangi kademenin kaç kez seçildiğini yaz; bunu W aşamasında ölçeceksin.", etiket: "Tek ölçütüm", olcu: "Teklif verdiğim kişilerin hangi kademeyi seçtiği (W'de ölçülür)", tur: kisa_metin, sonradan_doldurulur: true}
   bagimli: [R3, R6]
   ghl:
     - {alan_adi: "GAI - R7 Fiyat Tablosu", tur: buyuk_metin, not: "öneri"}
@@ -174,13 +178,13 @@
   bolum_no: 7
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: ilk_saatler, etiket: "İlk saatler: müşterim ne alır", olcu: "mesaj / doküman / video · içinde: süreç, beklenti, ilk adım", tur: uzun_metin, zorunlu: true}
-    - {anahtar: ilk_kazanim, etiket: "İlk kazanım", olcu: "ne · en geç ne zaman · nasıl hissedecek", tur: kisa_metin, zorunlu: true}
-    - {anahtar: destek_sinirlari, etiket: "Destek sınırlarım", olcu: "neyi nereden bulur · kime sorar · ne kadar sürede cevap (Erişim Kartım'dan)", tur: kisa_metin, zorunlu: true}
-    - {anahtar: proaktif_yoklama, etiket: "Proaktif yoklama", olcu: "ne zaman, hangi soruyla gidişatı kontrol ederim", tur: kisa_metin, zorunlu: true}
-    - {anahtar: ugurlama, etiket: "Uğurlama", olcu: "süreç biterken ne hatırlatırım · kapıyı nasıl açık bırakırım", tur: kisa_metin, zorunlu: true}
-    - {anahtar: memnuniyet_yorum, etiket: "Memnuniyet ve yorum", olcu: "soru zamanı · yorum isteği zamanı (ilk kazanımdan sonra) · herkese aynı", tur: kisa_metin, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Yeni müşterilerin kaçı ilk kazanıma ulaştı; kaçı sessizce kayboldu (W'de ölçülür)", tur: kisa_metin, sonradan_doldurulur: true}
+    - {anahtar: ilk_saatler, soru: "Sana evet diyen müşteri ilk saatlerde ne alacak?", aciklama: "Süreci, beklentiyi ve ilk adımı anlatan mesajın, dokümanın ya da videonun içeriğini yaz.", ornek: "Hoş geldin mesajı: ilk görüşmeye kadar ne olacak, ilk hafta neler bekleniyor, ilk adım üç günlük sofra notu.", etiket: "İlk saatler: müşterim ne alır", olcu: "mesaj / doküman / video · içinde: süreç, beklenti, ilk adım", tur: uzun_metin, zorunlu: true}
+    - {anahtar: ilk_kazanim, soru: "Müşterinin 'almaya başladım bile' diyeceği ilk kazanım ne olacak?", aciklama: "İlk kazanımın ne olduğunu, en geç ne zaman geleceğini ve müşterinin nasıl hissedeceğini yaz; sonuç vaadi yok.", ornek: "İlk görüşmede kendi sofrasına göre hazırlanmış ilk hafta planı; 'bunu yapabilirim' hissi.", etiket: "İlk kazanım", olcu: "ne · en geç ne zaman · nasıl hissedecek", tur: kisa_metin, zorunlu: true}
+    - {anahtar: destek_sinirlari, soru: "Müşterin soru sormak istediğinde neyi nerede bulacak, kime soracak ve ne kadar sürede cevap alacak?", aciklama: "Destek kaynaklarını ve cevap süreni yaz; Erişim dersindeki kartınla aynı olmalı.", ornek: "Sık sorulanlar dokümanda · sorular WhatsApp'tan · bir iş günü içinde cevap", etiket: "Destek sınırlarım", olcu: "neyi nereden bulur · kime sorar · ne kadar sürede cevap (Erişim Kartım'dan)", tur: kisa_metin, zorunlu: true}
+    - {anahtar: proaktif_yoklama, soru: "Müşterin sormadan sen ne zaman, hangi soruyla onu yoklayacaksın?", aciklama: "Kaçıncı gün yazacağını ve soracağın tek soruyu yaz.", ornek: "Üçüncü gün: Sofra notları nasıl gidiyor?", etiket: "Proaktif yoklama", olcu: "ne zaman, hangi soruyla gidişatı kontrol ederim", tur: kisa_metin, zorunlu: true}
+    - {anahtar: ugurlama, soru: "Süreç biterken müşterine ne hatırlatacak ve kapıyı nasıl açık bırakacaksın?", aciklama: "Neyi başardığını hatırlatan mesajı ve devam etmek isterse önerdiğin yolu yaz.", ornek: "Kendi düzenini kurdun; istersen ayda bir takip görüşmesiyle devam edebiliriz.", etiket: "Uğurlama", olcu: "süreç biterken ne hatırlatırım · kapıyı nasıl açık bırakırım", tur: kisa_metin, zorunlu: true}
+    - {anahtar: memnuniyet_yorum, soru: "Memnuniyeti ne zaman soracaksın ve yorum isteğini ne zaman göndereceksin?", aciklama: "İlk kazanımdan sonra soracağın soruyu ve herkese aynı gidecek yorum isteğinin zamanını yaz; karşılığında hediye yok.", ornek: "İlk kazanımdan sonra 'Nasıl gidiyor?' · programın sonunda herkese aynı yorum isteği", etiket: "Memnuniyet ve yorum", olcu: "soru zamanı · yorum isteği zamanı (ilk kazanımdan sonra) · herkese aynı", tur: kisa_metin, zorunlu: true}
+  tek_olcut: {soru: "Yeni müşterilerinin kaçı ilk kazanıma ulaştı ve kaçı sessizce kayboldu?", aciklama: "Bir ay sonra iki sayıyı yaz; bunu W aşamasında ölçeceksin.", etiket: "Tek ölçütüm", olcu: "Yeni müşterilerin kaçı ilk kazanıma ulaştı; kaçı sessizce kayboldu (W'de ölçülür)", tur: kisa_metin, sonradan_doldurulur: true}
   bagimli: [R3, R6]
   ghl:
     - {alan_adi: "GAI - R8 Agirlama Plani", tur: buyuk_metin, not: "öneri"}
@@ -197,11 +201,11 @@
   bolum_no: 8
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: dogrulama, etiket: "1 · Mutlaka kendim doğrularım", olcu: "hangi çıktı türleri (olgu, kaynak, doz, mevzuat, rakam, müşteriye giden her metin) · neyle doğrularım", tur: uzun_metin, zorunlu: true}
-    - {anahtar: musteri_verisi, etiket: "2 · Müşteri verisi", olcu: "yapay zekâya vermeden önce neyi çıkarırım · hangi veriyi hiç vermem · özel nitelikli veri topluyor muyum (rıza notu)", tur: uzun_metin, zorunlu: true}
-    - {anahtar: susma_ani, etiket: "3 · Susma anı", olcu: "yapay zekânın asla cevaplamayacağı en az 3 durum · \"size dönüyoruz\" cümlem · kim, ne kadar sürede döner", tur: uzun_metin, zorunlu: true}
-    - {anahtar: asistan_kurallari, etiket: "Asistan kuralları", olcu: "kendini asistan olarak tanıtır · yapmadığını \"yaptım\" demez · emin değilse devreder", tur: liste, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Bir ayda yapay zekâ çıktısında yakaladığım hata sayısı (W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
+    - {anahtar: dogrulama, soru: "Yapay zekânın ürettiklerinden hangilerini müşteriye gitmeden mutlaka kendin doğrularsın?", aciklama: "Olgu, kaynak, doz, mevzuat, rakam gibi çıktı türlerini ve her birini neyle doğruladığını yaz.", ornek: "Besin değerleri ve takviye bilgisi resmi kaynaktan · müşteriye giden her metin benim okumamdan geçer", etiket: "1 · Mutlaka kendim doğrularım", olcu: "hangi çıktı türleri (olgu, kaynak, doz, mevzuat, rakam, müşteriye giden her metin) · neyle doğrularım", tur: uzun_metin, zorunlu: true}
+    - {anahtar: musteri_verisi, soru: "Müşteri verisini yapay zekâya vermeden önce neyi çıkarırsın?", aciklama: "Neyi çıkardığını, hangi veriyi hiç vermediğini ve sağlık gibi özel bilgi topluyorsan rıza notunu yaz.", ornek: "İsim ve telefonu çıkarırım · hastalık ve ilaç bilgisini hiç vermem · ön görüşme formunda açık rıza alıyorum", etiket: "2 · Müşteri verisi", olcu: "yapay zekâya vermeden önce neyi çıkarırım · hangi veriyi hiç vermem · özel nitelikli veri topluyor muyum (rıza notu)", tur: uzun_metin, zorunlu: true}
+    - {anahtar: susma_ani, soru: "Yapay zekâ hangi anlarda susup seni çağırmalı?", aciklama: "Asla cevaplamayacağı en az üç durumu, o anda söyleyeceği cümleyi ve kimin ne kadar sürede döneceğini yaz.", ornek: "Tıbbi tanı sorusu · kriz ya da yoğun duygu · şikâyet · \"Bunu ekibimize aktarıyorum, aynı gün dönüyoruz.\"", etiket: "3 · Susma anı", olcu: "yapay zekânın asla cevaplamayacağı en az 3 durum · \"size dönüyoruz\" cümlem · kim, ne kadar sürede döner", tur: uzun_metin, zorunlu: true}
+    - {anahtar: asistan_kurallari, soru: "Asistanın müşterinle konuşurken hangi kurallara uyacak?", aciklama: "Kendini asistan olarak tanıtmasını, yapmadığı bir şeyi 'yaptım' dememesini ve emin değilse devretmesini kendi cümlelerinle yaz.", ornek: "Kendini 'asistan' olarak tanıtır · emin değilse bana devreder", etiket: "Asistan kuralları", olcu: "kendini asistan olarak tanıtır · yapmadığını \"yaptım\" demez · emin değilse devreder", tur: liste, zorunlu: true}
+  tek_olcut: {soru: "Bir ayda yapay zekânın çıktılarında kaç hata yakaladın?", aciklama: "Doğrularken yakaladığın hataları bir ay boyunca say ve yaz.", etiket: "Tek ölçütüm", olcu: "Bir ayda yapay zekâ çıktısında yakaladığım hata sayısı (W'de ölçülür)", tur: sayi, sonradan_doldurulur: true}
   bagimli: [R6]
   ghl:
     - {alan_adi: "GAI - R9 Guven Sozlesmesi", tur: buyuk_metin, not: "öneri"}

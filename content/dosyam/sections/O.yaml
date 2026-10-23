@@ -10,11 +10,11 @@
   modul: Beyin Dosyası
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: bir_numarali_surec, etiket: "1 numaralı süreç", olcu: "G › fırsat haritası (\"en çok zamanımı yiyen iş\")", tur: kisa_metin, zorunlu: true, kaynak_alanlar: [G5.baslangic_noktasi]}
-    - {anahtar: cekirdek_ve_ses, etiket: "Kimlik çekirdeğim + ses notum", olcu: "R.2", tur: referans, kaynak_alanlar: [R2], zorunlu: true, not: "öğrenci yazmaz; R2'den gösterilir"}
-    - {anahtar: teklif_tek_cumle, etiket: "Teklifim (tek cümle)", olcu: "R.3", tur: kisa_metin, kaynak_alanlar: [R3.soz], zorunlu: true}
-    - {anahtar: en_iyi_isler_nerede, etiket: "En iyi 3–5 işim nerede duruyor", olcu: "(klasör, dosya, mesaj geçmişi) — O.2'de lazım olacak", tur: kisa_metin, zorunlu: true, not: kimliksiz}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "O boyunca kaç parça \"çalışır\" hale geldi (O.1–O.4 teslimleri)", tur: sayi, sonradan_doldurulur: true, not: "araç O1–O4 onaylarından otomatik sayabilir"}
+    - {anahtar: bir_numarali_surec, soru: "Yapay zekâya ilk taşıyacağın, sana en çok zaman kaybettiren iş hangisi?", aciklama: "G aşamasındaki fırsat haritanda bir numaraya koyduğun işi yaz.", ornek: "Her danışana haftalık beslenme planını sıfırdan yazmak.", etiket: "1 numaralı süreç", olcu: "G › fırsat haritası (\"en çok zamanımı yiyen iş\")", tur: kisa_metin, zorunlu: true, kaynak_alanlar: [G5.baslangic_noktasi]}
+    - {anahtar: cekirdek_ve_ses, aciklama: "Kimlik Çekirdeğin ve ses notun buraya Rota Dosyandan gelir; yeniden yazmana gerek yok.", etiket: "Kimlik çekirdeğim + ses notum", olcu: "R.2", tur: referans, kaynak_alanlar: [R2], zorunlu: true, not: "öğrenci yazmaz; R2'den gösterilir"}
+    - {anahtar: teklif_tek_cumle, soru: "Teklifini tek cümleyle nasıl söylersin?", aciklama: "Teklif Kartı'ndaki sözünü tek cümleye indir.", ornek: "Kendi sofranda, yasaksız ve adım adım kalıcı bir düzen kuruyoruz.", etiket: "Teklifim (tek cümle)", olcu: "R.3", tur: kisa_metin, kaynak_alanlar: [R3.soz], zorunlu: true}
+    - {anahtar: en_iyi_isler_nerede, soru: "En iyi üç beş işin şu an nerede duruyor?", aciklama: "Örnek olarak kullanacağın en iyi işlerinin klasörünü, dosyasını ya da mesaj geçmişini yaz; isim ve kişisel bilgi yazma.", ornek: "Bilgisayarda 'iyi planlar' klasörü", etiket: "En iyi 3–5 işim nerede duruyor", olcu: "(klasör, dosya, mesaj geçmişi) — O.2'de lazım olacak", tur: kisa_metin, zorunlu: true, not: kimliksiz}
+  tek_olcut: {soru: "O aşaması boyunca kaç parça çalışır hale geldi?", aciklama: "O.1'den O.4'e kadar her dersin sonunda çalışan bir parça olur; kaç tanesinin bittiğini say.", etiket: "Tek ölçütüm", olcu: "O boyunca kaç parça \"çalışır\" hale geldi (O.1–O.4 teslimleri)", tur: sayi, sonradan_doldurulur: true, not: "araç O1–O4 onaylarından otomatik sayabilir"}
   bagimli: [R2, R3]
   ghl:
     - {alan_adi: "GAI - O0 Baslangic Karti", tur: buyuk_metin, not: "öneri"}
@@ -29,12 +29,12 @@
   modul: Beyin Dosyası
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: surec, etiket: "Taşıyacağım tek süreç", olcu: "fırsat haritasındaki \"en çok zamanımı yiyen iş\" ya da \"tekrar eden ve zanaat gerektirmeyen\" iş", tur: kisa_metin, zorunlu: true}
-    - {anahtar: neden, etiket: "Neden o", olcu: "tek cümle", tur: kisa_metin, zorunlu: true}
-    - {anahtar: dakika_sefer, etiket: "Bir seferde kaç dakika", tur: sayi, zorunlu: true}
-    - {anahtar: haftada_kac, etiket: "Haftada kaç kez", tur: sayi, zorunlu: true}
-    - {anahtar: haftalik_toplam, etiket: "Haftalık toplam (dakika)", olcu: "O.4'teki \"eskiden X → şimdi Y\" ölçümünün başlangıç değeri", tur: sayi, hesaplanan: "dakika_sefer * haftada_kac"}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Bu sürecin haftalık süresi (O.4'te tekrar ölçülür)", tur: sayi, sonradan_doldurulur: false, not: "haftalik_toplam ile aynı değer; O.4'te yeniden ölçülür"}
+    - {anahtar: surec, soru: "Yapay zekâya taşıyacağın tek süreç hangisi?", aciklama: "Fırsat haritandaki en çok zaman yiyen ya da tekrar eden ve zanaat gerektirmeyen bir işi yaz; birden fazla süreç seçme.", ornek: "Danışan görüşmesinden sonra haftalık planı yazmak.", etiket: "Taşıyacağım tek süreç", olcu: "fırsat haritasındaki \"en çok zamanımı yiyen iş\" ya da \"tekrar eden ve zanaat gerektirmeyen\" iş", tur: kisa_metin, zorunlu: true}
+    - {anahtar: neden, soru: "Neden bu süreci seçtin?", aciklama: "Tek cümleyle nedenini yaz.", ornek: "Her hafta aynı işi tekrar ediyorum ve en çok vaktimi bu alıyor.", etiket: "Neden o", olcu: "tek cümle", tur: kisa_metin, zorunlu: true}
+    - {anahtar: dakika_sefer, soru: "Bu iş bir seferde kaç dakika sürüyor?", aciklama: "Bugün elle yaptığında bir seferde geçen süreyi dakika olarak yaz.", etiket: "Bir seferde kaç dakika", tur: sayi, zorunlu: true}
+    - {anahtar: haftada_kac, soru: "Bu işi haftada kaç kez yapıyorsun?", aciklama: "Haftalık tekrar sayısını yaz.", etiket: "Haftada kaç kez", tur: sayi, zorunlu: true}
+    - {anahtar: haftalik_toplam, aciklama: "Bir seferlik süre ile haftalık tekrar sayısının çarpımı; kendiliğinden hesaplanır.", etiket: "Haftalık toplam (dakika)", olcu: "O.4'teki \"eskiden X → şimdi Y\" ölçümünün başlangıç değeri", tur: sayi, hesaplanan: "dakika_sefer * haftada_kac"}
+  tek_olcut: {soru: "Bu süreç sana haftada toplam kaç dakikaya mal oluyor?", aciklama: "Bir seferlik süreyle haftalık tekrar sayısının çarpımı; O.4'te yeniden ölçeceksin.", etiket: "Tek ölçütüm", olcu: "Bu sürecin haftalık süresi (O.4'te tekrar ölçülür)", tur: sayi, sonradan_doldurulur: false, not: "haftalik_toplam ile aynı değer; O.4'te yeniden ölçülür"}
   bagimli: [O0]
   ghl:
     - {alan_adi: "GAI - O1 Ilk Surec", tur: buyuk_metin, not: "öneri"}
@@ -50,17 +50,17 @@
   tekrar: tek_sefer
   olcu_genel: "en fazla ~3 sayfa"
   alanlar:
-    - {anahtar: kim_ve_kime, etiket: "Kim ve kime", olcu: "Kimlik çekirdeği (6 satır)", tur: referans, kaynak_alanlar: [R2], toplanir: true}
-    - {anahtar: teklif, etiket: "Teklif", olcu: "Teklif kartı + en sert 5 itiraz ve cevabı", tur: referans, kaynak_alanlar: [R3], toplanir: true}
-    - {anahtar: sik_sorulanlar, etiket: "Sık sorulanlar", olcu: "En sık 10 soru ve cevabı", tur: uzun_metin, kaynak_alanlar: [R4.en_sik_10_soru], toplanir: true, not: "R4 yalnız soruları içeriyor; CEVAPLAR burada eklenir (README açık nokta)"}
-    - {anahtar: erisim, etiket: "Erişim", olcu: "Kanallar, saatler, devir anları", tur: referans, kaynak_alanlar: [R6.acik_kanallar, R6.saatlerim, R6.devir_anlari], toplanir: true}
-    - {anahtar: guven, etiket: "Güven", olcu: "Güven sözleşmesi (doğrula / kimliksizleştir / sus)", tur: referans, kaynak_alanlar: [R9], toplanir: true}
-    - {anahtar: yontem_ilkeler, etiket: "Yöntem + ilkeler", olcu: "Adımlar + \"önce şuna bakarım, çünkü…\"", tur: uzun_metin, zorunlu: true}
-    - {anahtar: kalite_kurallari, etiket: "Kalite kuralları", olcu: "\"İyi iş neye benzer\", kabul etmediklerim", tur: uzun_metin, zorunlu: true}
-    - {anahtar: ses, etiket: "Ses", olcu: "Kullan / kaçın listesi, çeviri kokusu yasakları", tur: uzun_metin, zorunlu: true, kaynak_alanlar: [R2.ses], not: "R2 ham ses notu burada tamamlanır"}
-    - {anahtar: ornek_isler, etiket: "Örnek işler", olcu: "3–5 iyi iş + neden iyi", tur: liste, adet_min: 3, adet_max: 5, zorunlu: true, not: kimliksiz}
-    - {anahtar: asla_verilmez, etiket: "Asla verilmez", olcu: "Yapay zekâya hiç girmeyecek bilgi türleri", tur: liste, zorunlu: true, kaynak_alanlar: [R9.musteri_verisi]}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Önce/sonra testinde ikinci cevabı kaç düzeltmeyle kullanılır buldum?", tur: sayi, sonradan_doldurulur: true}
+    - {anahtar: kim_ve_kime, aciklama: "Kimlik Çekirdeğinin altı satırı Rota Dosyandan toplanır; burada yeniden yazmazsın.", etiket: "Kim ve kime", olcu: "Kimlik çekirdeği (6 satır)", tur: referans, kaynak_alanlar: [R2], toplanir: true}
+    - {anahtar: teklif, aciklama: "Teklif Kartın ve beş itiraz Rota Dosyandan toplanır.", etiket: "Teklif", olcu: "Teklif kartı + en sert 5 itiraz ve cevabı", tur: referans, kaynak_alanlar: [R3], toplanir: true}
+    - {anahtar: sik_sorulanlar, soru: "Müşterilerinin en sık sorduğu on soruya ne cevap veriyorsun?", aciklama: "Ekosistem dersinde yazdığın on sorunun her birine kendi sesinle kısa bir cevap yaz; danışan adı ve sağlık bilgisi yazma.", ornek: "Akşam yemeğini atlamak işe yarar mı? → Genelde hayır; atlanan öğün ertesi gün başka yerden çıkar.", etiket: "Sık sorulanlar", olcu: "En sık 10 soru ve cevabı", tur: uzun_metin, kaynak_alanlar: [R4.en_sik_10_soru], toplanir: true, not: "R4 yalnız soruları içeriyor; CEVAPLAR burada eklenir (README açık nokta)"}
+    - {anahtar: erisim, aciklama: "Kanalların, saatlerin ve devir anların Erişim Kartından toplanır.", etiket: "Erişim", olcu: "Kanallar, saatler, devir anları", tur: referans, kaynak_alanlar: [R6.acik_kanallar, R6.saatlerim, R6.devir_anlari], toplanir: true}
+    - {anahtar: guven, aciklama: "Güven Sözleşmen Rota Dosyandan toplanır.", etiket: "Güven", olcu: "Güven sözleşmesi (doğrula / kimliksizleştir / sus)", tur: referans, kaynak_alanlar: [R9], toplanir: true}
+    - {anahtar: yontem_ilkeler, soru: "İşini hangi adımlarla, neye önce bakarak yapıyorsun?", aciklama: "Yönteminin adımlarını ve 'önce şuna bakarım, çünkü…' diye başlayan ilkelerini yaz.", ornek: "Önce kişinin bugünkü sofrasına bakarım, çünkü kalıcı değişiklik oradan başlar.", etiket: "Yöntem + ilkeler", olcu: "Adımlar + \"önce şuna bakarım, çünkü…\"", tur: uzun_metin, zorunlu: true}
+    - {anahtar: kalite_kurallari, soru: "Senin için iyi bir iş neye benziyor?", aciklama: "İyi işin özelliklerini ve asla kabul etmediğin şeyleri yaz; bunlar yapay zekânın ölçütü olacak.", ornek: "İyi plan kişinin gerçek gününe uyar · yasak listesiyle başlayan planı kabul etmem", etiket: "Kalite kuralları", olcu: "\"İyi iş neye benzer\", kabul etmediklerim", tur: uzun_metin, zorunlu: true}
+    - {anahtar: ses, soru: "Yapay zekâ senin gibi yazsın diye hangi kelimeleri kullanmalı, hangilerinden kaçınmalı?", aciklama: "Ham ses notunu kullan ve kaçın listesiyle tamamla; çeviri kokan kalıpları da yasakla.", ornek: "Kullan: 'adım adım', 'kendi sofran' · Kaçın: 'mucize', 'garanti', 'harika bir yolculuk'", etiket: "Ses", olcu: "Kullan / kaçın listesi, çeviri kokusu yasakları", tur: uzun_metin, zorunlu: true, kaynak_alanlar: [R2.ses], not: "R2 ham ses notu burada tamamlanır"}
+    - {anahtar: ornek_isler, soru: "Örnek olarak verebileceğin en iyi üç beş işin hangileri ve neden iyiler?", aciklama: "Her iş için kısa bir tarif ve neden iyi olduğunu yaz; isimleri ve sağlık bilgilerini çıkar.", ornek: "Vardiyalı çalışan bir danışan için hazırladığım plan; çünkü yemek saatlerini değil, uyku saatlerini temel aldı.", etiket: "Örnek işler", olcu: "3–5 iyi iş + neden iyi", tur: liste, adet_min: 3, adet_max: 5, zorunlu: true, not: kimliksiz}
+    - {anahtar: asla_verilmez, soru: "Hangi bilgileri yapay zekâya hiçbir zaman vermezsin?", aciklama: "Güven Sözleşmendeki listeyi kullan ve gerekirse tamamla.", ornek: "Danışan adı · telefon · hastalık ve ilaç bilgisi", etiket: "Asla verilmez", olcu: "Yapay zekâya hiç girmeyecek bilgi türleri", tur: liste, zorunlu: true, kaynak_alanlar: [R9.musteri_verisi]}
+  tek_olcut: {soru: "Önce ve sonra testinde ikinci cevabı kaç düzeltmeyle kullanılır buldun?", aciklama: "Beyin dosyasıyla aldığın cevabı kullanılır hale getirmek için yaptığın düzeltme sayısını yaz.", etiket: "Tek ölçütüm", olcu: "Önce/sonra testinde ikinci cevabı kaç düzeltmeyle kullanılır buldum?", tur: sayi, sonradan_doldurulur: true}
   ek_teslim: "Dosyanın öğrencinin kendi yapay zekâ çalışma alanına bağlanmış hâli + önce/sonra ekran görüntüsü (toplulukta paylaşılabilir) — dosyada alan değil, 'kendi yapay zekâna kopyala' çıkışı."
   bagimli: [R2, R3, R4, R6, R9]
   ghl:
@@ -78,36 +78,40 @@
   modul: Beyin Dosyası
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: surec, etiket: "Süreç", olcu: "(O.1'de seçtiğin)", tur: referans, kaynak_alanlar: [O1.surec]}
-    - {anahtar: tetikleyici, etiket: "Tetikleyici", olcu: "Süreci ne başlatır", tur: kisa_metin, zorunlu: true}
-    - {anahtar: girdiler, etiket: "Girdiler", olcu: "Her seferinde ne vermem gerekir (kimliksizleştirme adımıyla)", tur: uzun_metin, zorunlu: true}
+    - {anahtar: surec, aciklama: "O.1'de seçtiğin süreç buraya gelir.", etiket: "Süreç", olcu: "(O.1'de seçtiğin)", tur: referans, kaynak_alanlar: [O1.surec]}
+    - {anahtar: tetikleyici, soru: "Bu süreci ne başlatıyor?", aciklama: "Sürecin ne olduğunda başladığını tek cümleyle yaz.", ornek: "Danışan görüşmesi bittiğinde.", etiket: "Tetikleyici", olcu: "Süreci ne başlatır", tur: kisa_metin, zorunlu: true}
+    - {anahtar: girdiler, soru: "Bu süreci her çalıştırdığında yapay zekâya ne vermen gerekiyor?", aciklama: "Gerekli bilgileri ve kişisel bilgileri nasıl çıkaracağını yaz.", ornek: "Kimliksiz görüşme notu · danışanın hedefi · bu haftanın değişikliği", etiket: "Girdiler", olcu: "Her seferinde ne vermem gerekir (kimliksizleştirme adımıyla)", tur: uzun_metin, zorunlu: true}
     - anahtar: adimlar
       etiket: "Adımlar (3–7)"
+      soru: "Bu süreç hangi adımlardan oluşuyor?"
+      aciklama: "Üç ile yedi arasında adım yaz; her adım için talimatı, bağlamı, iyi örneği, yanıt biçimini, başarı ölçütünü ve kimde kalacağını doldur."
       tur: tablo
       adet_min: 3
       adet_max: 7
       sutunlar:
-        - {anahtar: talimat, etiket: "Talimat", tur: kisa_metin}
-        - {anahtar: baglam, etiket: "Bağlam", tur: kisa_metin}
-        - {anahtar: iyi_ornek, etiket: "İyi örnek", tur: kisa_metin}
-        - {anahtar: yanit_bicimi, etiket: "Yanıt biçimi", tur: kisa_metin}
-        - {anahtar: basari_olcutu, etiket: "Başarı ölçütü", tur: kisa_metin}
-        - {anahtar: devret_birlikte_sende, etiket: "Devret / birlikte / sende", tur: secim, secenekler: ["devret", "birlikte", "sende"]}
+        - {anahtar: talimat, soru: "Bu adımda yapay zekâya ne yapmasını söylüyorsun?", aciklama: "Adımın talimatını kısa ve net yaz.", ornek: "Görüşme notundan bu haftanın üç önceliğini çıkar.", etiket: "Talimat", tur: kisa_metin}
+        - {anahtar: baglam, soru: "Bu adım için yapay zekâ neyi bilmeli?", aciklama: "Beyin dosyandan ya da girdilerden bu adıma gereken bağlamı yaz.", ornek: "Beyin dosyamdaki yöntem ve kalite kuralları.", etiket: "Bağlam", tur: kisa_metin}
+        - {anahtar: iyi_ornek, soru: "Bu adımın iyi bir çıktısı neye benzer?", aciklama: "Kısa bir iyi örnek ya da örneğin nerede durduğunu yaz.", ornek: "Öncelikler kısa, kişinin kendi kelimeleriyle.", etiket: "İyi örnek", tur: kisa_metin}
+        - {anahtar: yanit_bicimi, soru: "Bu adımın çıktısı hangi biçimde olmalı?", aciklama: "Liste mi, paragraf mı, tablo mu; uzunluğuyla birlikte yaz.", ornek: "Üç maddelik liste.", etiket: "Yanıt biçimi", tur: kisa_metin}
+        - {anahtar: basari_olcutu, soru: "Bu adımın iyi gittiğini nereden anlarsın?", aciklama: "Çıktıyı kabul etmeden önce bakacağın ölçütü yaz.", ornek: "Her öncelik danışanın kendi gününe uyuyor.", etiket: "Başarı ölçütü", tur: kisa_metin}
+        - {anahtar: devret_birlikte_sende, soru: "Bu adımı yapay zekâya mı bırakıyorsun, birlikte mi yapıyorsunuz, yoksa sende mi kalıyor?", aciklama: "Devret, birlikte ya da sende olarak seç.", etiket: "Devret / birlikte / sende", tur: secim, secenekler: ["devret", "birlikte", "sende"]}
       zorunlu: true
-    - {anahtar: cikti, etiket: "Çıktı", olcu: "Sonunda ne teslim edilir", tur: kisa_metin, zorunlu: true}
-    - {anahtar: bana_don, etiket: "Ne zaman bana dön", olcu: "Çırağın durup beni çağıracağı durumlar", tur: liste, zorunlu: true}
+    - {anahtar: cikti, soru: "Süreç sonunda ne teslim ediliyor?", aciklama: "Sürecin sonunda ortaya çıkan şeyi tek cümleyle yaz.", ornek: "Danışana gönderilecek haftalık plan taslağı.", etiket: "Çıktı", olcu: "Sonunda ne teslim edilir", tur: kisa_metin, zorunlu: true}
+    - {anahtar: bana_don, soru: "Yapay zekâ hangi durumlarda durup seni çağırmalı?", aciklama: "Çırağın kendi başına karar vermemesi gereken durumları yaz.", ornek: "Sağlık durumuyla ilgili bir not varsa · danışan planı istemediğini söylediyse", etiket: "Ne zaman bana dön", olcu: "Çırağın durup beni çağıracağı durumlar", tur: liste, zorunlu: true}
     - anahtar: calistirmalar
       etiket: "3 çalıştırma"
+      soru: "Bu yöntemi gerçek işte üç kez çalıştırdığında ne oldu?"
+      aciklama: "Her çalıştırmanın tarihini, kaç düzeltme gerektiğini ve kaç dakika sürdüğünü yaz."
       tur: tablo
       adet: 3
       sutunlar:
-        - {anahtar: tarih, etiket: "Tarih", tur: tarih}
-        - {anahtar: duzeltme_sayisi, etiket: "Kaç düzeltme gerekti", tur: sayi}
-        - {anahtar: sure_dk, etiket: "Süre", tur: sayi}
+        - {anahtar: tarih, soru: "Bu çalıştırmayı ne zaman yaptın?", aciklama: "Çalıştırmanın tarihini seç.", etiket: "Tarih", tur: tarih}
+        - {anahtar: duzeltme_sayisi, soru: "Bu çalıştırmada kaç düzeltme gerekti?", aciklama: "Çıktıyı kullanılır hale getirmek için kaç kez düzelttiğini yaz.", etiket: "Kaç düzeltme gerekti", tur: sayi}
+        - {anahtar: sure_dk, soru: "Bu çalıştırma kaç dakika sürdü?", aciklama: "Baştan sona geçen süreyi dakika olarak yaz.", etiket: "Süre", tur: sayi}
       zorunlu: true
       not: "Program sırasında 3 çalıştırma dolmayabilir (28 gün); kayıt sonradan tamamlanabilir olmalı."
-    - {anahtar: siradaki_adaylar, etiket: "Sıradaki 3 aday", olcu: "Dört kaynaktan (ders altı)", tur: liste, adet: 3, zorunlu: false}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Üçüncü çalıştırmada düzeltme sayısı ve süre (O.1 başlangıç değeriyle kıyas)", tur: kisa_metin, sonradan_doldurulur: true}
+    - {anahtar: siradaki_adaylar, soru: "Sıradaki hangi üç süreci taşıyabilirsin?", aciklama: "Aynı yolla taşıyabileceğin üç süreç adayını yaz; isteğe bağlı.", ornek: "Ön görüşme özetini çıkarmak · sık sorulan sorulara cevap taslağı · haftalık paylaşım fikirleri", etiket: "Sıradaki 3 aday", olcu: "Dört kaynaktan (ders altı)", tur: liste, adet: 3, zorunlu: false}
+  tek_olcut: {soru: "Üçüncü çalıştırmada kaç düzeltme gerekti ve ne kadar sürdü?", aciklama: "Üçüncü çalıştırmanın düzeltme sayısını ve süresini O.1'deki başlangıçla kıyasla.", etiket: "Tek ölçütüm", olcu: "Üçüncü çalıştırmada düzeltme sayısı ve süre (O.1 başlangıç değeriyle kıyas)", tur: kisa_metin, sonradan_doldurulur: true}
   bagimli: [O1, O2]
   ghl:
     - {alan_adi: "GAI - O3 Yontem Dosyasi", tur: buyuk_metin, not: "öneri"}
@@ -122,14 +126,14 @@
   modul: Beyin Dosyası
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: asil_teslimat, etiket: "Asıl teslimatım", tur: kisa_metin, zorunlu: true}
-    - {anahtar: uc_katman, etiket: "Üç katman", olcu: "Karar / yapı · Zanaat · Dokunuş — her biri bir cümle", tur: uzun_metin, zorunlu: true}
-    - {anahtar: kurulan_katman, etiket: "Sistemi kurduğum katman", olcu: "(çoğunlukla karar / yapı)", tur: secim, secenekler: ["karar / yapı", "zanaat", "dokunuş"], zorunlu: true}
-    - {anahtar: kaydedilmis_sistem, etiket: "Kaydedilmiş sistem", olcu: "Talimat + beyin dosyası + yöntem dosyası + 5–10 örnek iş (neden iyi)", tur: uzun_metin, zorunlu: true, kaynak_alanlar: [O2, O3]}
-    - {anahtar: geri_besleme, etiket: "Geri besleme", olcu: "Kaç tur · hangi kuralları ekledim · sürüm notu", tur: uzun_metin, zorunlu: true}
-    - {anahtar: olcum, etiket: "Ölçüm", olcu: "Eskiden __ dk → şimdi __ dk · haftada __ kez · ayda __ saat (kendi ölçümüm)", tur: kisa_metin, zorunlu: true, not: "alt alanlar sayı olabilir: eskiden_dk, simdi_dk, haftada_kac, ayda_saat (hesaplanan)"}
-    - {anahtar: ilk_asistan_adayi, etiket: "İlk asistan adayı", olcu: "Bu beyin müşteriye dokunsaydı ilk nerede çalışırdı? (tek paragraf; OV.6'ya köprü)", tur: uzun_metin, zorunlu: true}
-  tek_olcut: {etiket: "Tek ölçütüm", olcu: "Bu katmanda aylık kazandığım saat", tur: sayi, sonradan_doldurulur: false}
+    - {anahtar: asil_teslimat, soru: "Müşterine teslim ettiğin asıl iş ne?", aciklama: "Müşterinin senden aldığı asıl çıktıyı tek cümleyle yaz.", ornek: "Kişiye özel beslenme planı ve haftalık takip.", etiket: "Asıl teslimatım", tur: kisa_metin, zorunlu: true}
+    - {anahtar: uc_katman, soru: "Asıl işin hangi üç katmandan oluşuyor?", aciklama: "Karar ve yapı, zanaat ve dokunuş katmanlarının her birini bir cümleyle yaz.", ornek: "Karar/yapı: planın iskeleti · Zanaat: kişiye göre ayar · Dokunuş: görüşmedeki ilgi", etiket: "Üç katman", olcu: "Karar / yapı · Zanaat · Dokunuş — her biri bir cümle", tur: uzun_metin, zorunlu: true}
+    - {anahtar: kurulan_katman, soru: "Üretim sistemini hangi katmana kuruyorsun?", aciklama: "Çoğunlukla karar ve yapı katmanı seçilir; zanaat ve dokunuş sende kalır.", etiket: "Sistemi kurduğum katman", olcu: "(çoğunlukla karar / yapı)", tur: secim, secenekler: ["karar / yapı", "zanaat", "dokunuş"], zorunlu: true}
+    - {anahtar: kaydedilmis_sistem, soru: "Kaydettiğin üretim sistemi nelerden oluşuyor?", aciklama: "Talimatı, beyin dosyasını, yöntem dosyasını ve neden iyi olduklarıyla beş on örnek işi listele.", ornek: "Plan talimatı · beyin dosyam · haftalık plan yöntem dosyası · altı örnek plan", etiket: "Kaydedilmiş sistem", olcu: "Talimat + beyin dosyası + yöntem dosyası + 5–10 örnek iş (neden iyi)", tur: uzun_metin, zorunlu: true, kaynak_alanlar: [O2, O3]}
+    - {anahtar: geri_besleme, soru: "Sistemi kaç tur düzelttin ve hangi kuralları ekledin?", aciklama: "Tur sayısını, eklediğin kuralları ve kısa bir sürüm notunu yaz.", ornek: "Üç tur · 'öğün atlatma önerme' kuralı eklendi · sürüm 3", etiket: "Geri besleme", olcu: "Kaç tur · hangi kuralları ekledim · sürüm notu", tur: uzun_metin, zorunlu: true}
+    - {anahtar: olcum, soru: "Bu iş eskiden kaç dakika sürüyordu, şimdi kaç dakika sürüyor?", aciklama: "Kendi ölçümünü yaz: eskiden ve şimdi kaç dakika, haftada kaç kez, ayda kaç saat kazanıyorsun.", etiket: "Ölçüm", olcu: "Eskiden __ dk → şimdi __ dk · haftada __ kez · ayda __ saat (kendi ölçümüm)", tur: kisa_metin, zorunlu: true, not: "alt alanlar sayı olabilir: eskiden_dk, simdi_dk, haftada_kac, ayda_saat (hesaplanan)"}
+    - {anahtar: ilk_asistan_adayi, soru: "Bu beyin müşteriye dokunsaydı ilk nerede çalışırdı?", aciklama: "Tek paragrafta, müşteriyle konuşan bir asistanın bu bilgiyle ilk hangi işi yapabileceğini yaz.", ornek: "Görüşmeler arasında danışanların sık sorduğu beslenme sorularına ilk cevabı verirdi; sağlıkla ilgili sorularda beni çağırırdı.", etiket: "İlk asistan adayı", olcu: "Bu beyin müşteriye dokunsaydı ilk nerede çalışırdı? (tek paragraf; OV.6'ya köprü)", tur: uzun_metin, zorunlu: true}
+  tek_olcut: {soru: "Bu katmanda ayda kaç saat kazanıyorsun?", aciklama: "Ölçümünden çıkan aylık kazancı saat olarak yaz.", etiket: "Tek ölçütüm", olcu: "Bu katmanda aylık kazandığım saat", tur: sayi, sonradan_doldurulur: false}
   bagimli: [O2, O3]
   ghl:
     - {alan_adi: "GAI - O4 Uretim Sistemi", tur: buyuk_metin, not: "öneri"}
