@@ -82,7 +82,8 @@ export function getStudent(db: D1Like, id: string): Promise<Student | null> {
 
 export const CODE_TTL_MS = 10 * 60_000;
 export const CODE_MAX_ATTEMPTS = 5;
-export const SESSION_TTL_MS = 30 * DAY;
+// Program boyu (Tam ≈ 112 gün): öğrenci bir kez kodla girer, panelden sonrası tek tık.
+export const SESSION_TTL_MS = 120 * DAY;
 
 export async function createAuthCode(
   db: D1Like,

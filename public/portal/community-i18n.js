@@ -1529,7 +1529,7 @@
   if (document.getElementById("__gai_g1_link")) return;
   var s = document.createElement("script");
   s.id = "__gai_g1_link";
-  s.src = "https://growtify.ai/portal/g1-link.js?v=2";
+  s.src = "https://growtify.ai/portal/g1-link.js?v=3";
   s.async = true;
   document.head.appendChild(s);
 })();

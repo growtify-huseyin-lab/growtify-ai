@@ -181,7 +181,7 @@ test("oturum: oluştur, çöz, sil; süresi dolan oturum çözülmez", async () 
   const idh = await sha256Hex("cerez-degeri");
   await call(e, "POST", "/v1/sessions", { body: { id_hash: idh, student_id: a } });
   assert.equal((await call(e, "POST", "/v1/sessions/resolve", { body: { id_hash: idh } })).body.student.id, a);
-  const late = T0 + 31 * 86_400_000;
+  const late = T0 + 121 * 86_400_000;
   assert.equal((await call(e, "POST", "/v1/sessions/resolve", { body: { id_hash: idh }, now: late })).body.ok, false);
   await call(e, "POST", "/v1/sessions/delete", { body: { id_hash: idh } });
   assert.equal((await call(e, "POST", "/v1/sessions/resolve", { body: { id_hash: idh } })).body.ok, false);

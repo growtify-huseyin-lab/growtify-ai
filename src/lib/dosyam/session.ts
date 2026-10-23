@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { dosyamApi, type DosyamStudent } from "./api";
 
 export const COOKIE = "gai_dosyam";
-const MAX_AGE = 30 * 24 * 3600;
+const MAX_AGE = 120 * 24 * 3600; // Worker'daki oturum süresiyle aynı
 
 export const hashHex = (s: string) => crypto.createHash("sha256").update(s).digest("hex");
 

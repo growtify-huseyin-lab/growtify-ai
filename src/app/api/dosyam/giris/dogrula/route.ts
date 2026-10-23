@@ -1,9 +1,9 @@
-// POST /api/dosyam/giris/dogrula  {email, kod} — kodu doğrular, oturum açar.
+// POST /api/dosyam/giris/dogrula  {ch, kod} — kodu doğrular, oturum açar. ch = e-postanın hash'i (kod adımında verilir).
 import { getClientIp } from "@/lib/rate-limit";
 import { allow, dosyamApi } from "@/lib/dosyam/api";
 import { getContact } from "@/lib/dosyam/ghl";
 import { loginContact } from "@/lib/dosyam/login";
-import { emailHash, hashHex, sameOrigin } from "@/lib/dosyam/session";
+import { hashHex, sameOrigin } from "@/lib/dosyam/session";
 
 const MESAJ: Record<string, string> = {
   yok: "Kod bulunamadı. Yeni kod iste.",
@@ -14,16 +14,15 @@ const MESAJ: Record<string, string> = {
 
 export async function POST(req: Request) {
   if (!sameOrigin(req)) return Response.json({ ok: false }, { status: 403 });
-  const body = (await req.json().catch(() => ({}))) as { email?: string; kod?: string };
-  const email = (body.email ?? "").trim().toLowerCase();
+  const body = (await req.json().catch(() => ({}))) as { ch?: string; kod?: string };
+  const ch = (body.ch ?? "").toLowerCase();
   const kod = (body.kod ?? "").replace(/\D/g, "");
-  if (!email || kod.length !== 6) return Response.json({ ok: false, mesaj: "6 haneli kodu yaz." }, { status: 400 });
+  if (!/^[0-9a-f]{64}$/.test(ch) || kod.length !== 6) return Response.json({ ok: false, mesaj: "6 haneli kodu yaz." }, { status: 400 });
   if (!(await allow(`dogrula:ip:${hashHex(getClientIp(req))}`, 30, 3600))) {
     return Response.json({ ok: false, mesaj: "Çok fazla deneme. Biraz sonra tekrar dene." }, { status: 429 });
   }
-  const eh = emailHash(email);
   const r = await dosyamApi<{ contact_id?: string; reason?: string }>("POST", "/v1/auth/verify", {
-    body: { email_hash: eh, code_hash: hashHex(`${eh}:${kod}`) },
+    body: { email_hash: ch, code_hash: hashHex(`${ch}:${kod}`) },
   });
   if (!r.body.ok || !r.body.contact_id) {
     return Response.json({ ok: false, mesaj: MESAJ[r.body.reason ?? ""] ?? "Giriş yapılamadı." }, { status: 400 });

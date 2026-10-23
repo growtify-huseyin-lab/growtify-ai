@@ -33,7 +33,7 @@ export default async function DosyamPage({
     );
   }
   const student = await currentStudent();
-  if (!student) return <GirisForm panelHata={sp.giris === "panel"} />;
+  if (!student) return <GirisForm ipucu={sp.k} devam={sp.devam?.startsWith("/dosyam") ? sp.devam : undefined} />;
 
   const r = await dosyamApi<{ sections: Submission[] }>("GET", "/v1/me/sections", { student: student.id });
   const byId = new Map((r.body.sections ?? []).map((s) => [s.section_id, s]));

@@ -10,13 +10,20 @@ import BolumForm from "@/components/dosyam/BolumForm";
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Çalışma Dosyam", robots: { index: false, follow: false } };
 
-export default async function BolumPage({ params }: { params: Promise<{ locale: string; bolum: string }> }) {
+export default async function BolumPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string; bolum: string }>;
+  searchParams: Promise<Record<string, string | undefined>>;
+}) {
   const { locale, bolum } = await params;
+  const sp = await searchParams;
   if (locale !== "tr") notFound();
   const section = getSection(bolum);
   if (!section || bolum === "BUYUME_DONGUM") notFound();
   const student = await currentStudent();
-  if (!student) redirect("/dosyam");
+  if (!student) redirect(`/dosyam?devam=/dosyam/${bolum}${sp.k ? `&k=${encodeURIComponent(sp.k)}` : ""}`);
 
   const [cur, all] = await Promise.all([
     dosyamApi<{ latest: Submission | null; approved: Submission | null }>("GET", `/v1/me/sections/${bolum}`, { student: student.id }),
