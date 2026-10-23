@@ -27,6 +27,13 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // Panelde Çalışma Dosyam düğmesi (community-i18n.js yükler) — aynı kısa önbellek.
+        source: "/portal/dosyam-link.js",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=60, s-maxage=60, must-revalidate" },
+        ],
+      },
+      {
         // Growtify.app CRM Türkçe katmanı (GHL ajans Custom JS yükler): betik, ayar ve katalog.
         source: "/crm/:path*",
         headers: [

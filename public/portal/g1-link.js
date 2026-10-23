@@ -155,6 +155,9 @@
     true
   );
 
+  // Çalışma Dosyam düğmesi (dosyam-link.js) aynı taze kimliği kullanır.
+  window.gaiPortalToken = freshToken;
+
   enrich();
   // GHL portal is a SPA — re-scan as the member navigates between lessons.
   setInterval(enrich, 1000);
