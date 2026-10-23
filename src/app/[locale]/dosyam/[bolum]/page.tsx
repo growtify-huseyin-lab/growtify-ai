@@ -53,20 +53,24 @@ export default async function BolumPage({
   );
 
   return (
-    <main className="mx-auto max-w-2xl px-4 py-10">
-      <Link href="/dosyam" className="text-sm text-gray-500">
-        ← Çalışma Dosyam
-      </Link>
-      <p className="mt-4 text-xs uppercase tracking-wide text-gray-400">
-        {section.modul} · {Array.isArray(section.ders) ? section.ders.join(", ") : section.ders}
-      </p>
-      <h1 className="mb-2 text-2xl font-bold text-[#232323]">{section.baslik}</h1>
-      {eksikBagimli.length > 0 && (
-        <p className="mb-6 rounded-xl bg-blue-50 p-3 text-sm text-blue-800">
-          Bu bölüm şunlara dayanıyor: {eksikBagimli.join(", ")}. Önce onları onaylarsan burası daha kolay olur.
-        </p>
-      )}
+    <main className="mx-auto max-w-6xl px-4 py-10">
       <BolumForm
+        ust={
+          <div>
+            <Link href="/dosyam" className="text-sm text-gray-500">
+              ← Çalışma Dosyam
+            </Link>
+            <p className="mt-4 text-xs uppercase tracking-wide text-gray-400">
+              {section.modul} · {Array.isArray(section.ders) ? section.ders.join(", ") : section.ders}
+            </p>
+            <h1 className="mb-2 text-2xl font-bold text-[#232323]">{section.baslik}</h1>
+            {eksikBagimli.length > 0 && (
+              <p className="mb-6 rounded-xl bg-blue-50 p-3 text-sm text-blue-800">
+                Bu bölüm şunlara dayanıyor: {eksikBagimli.join(", ")}. Önce onları onaylarsan burası daha kolay olur.
+              </p>
+            )}
+          </div>
+        }
         id={section.anahtar}
         fields={[...section.alanlar.filter((f) => f.tur === "referans"), ...editableFields(section)]}
         refs={refs}

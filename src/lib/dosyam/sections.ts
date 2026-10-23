@@ -8,6 +8,9 @@ export type FieldType = "kisa_metin" | "uzun_metin" | "liste" | "sayi" | "secim"
 export interface FieldDef {
   anahtar: string;
   etiket: string;
+  soru?: string; // açık soru, "sen" diliyle (formda başlık) — Course
+  aciklama?: string; // ne yazılacağını anlatan tek cümle — Course
+  ornek?: string; // kutunun içinde gri örnek (varsayımsal, sade) — Course
   tur: FieldType;
   olcu?: string;
   zorunlu?: boolean;

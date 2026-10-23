@@ -21,14 +21,19 @@ interface Durum {
   salt_okunur: boolean;
 }
 
+// Sağdan açılan panel (masaüstünde formun yanında, telefonda tam ekran). Kapatılınca bileşen yerinde kalır,
+// sohbet kaybolmaz; açılınca kaldığı yerden devam eder.
 export default function AsistanPanel({
   bolum,
+  acik,
+  onKapat,
   onTaslak,
 }: {
   bolum: string;
+  acik: boolean;
+  onKapat: () => void;
   onTaslak: (veri: Record<string, unknown>, uyarilar: string[]) => void;
 }) {
-  const [acik, setAcik] = useState(false);
   const [d, setD] = useState<Durum | null>(null);
   const [sohbetId, setSohbetId] = useState<string | null>(null);
   const [mesajlar, setMesajlar] = useState<Mesaj[]>([]);
@@ -114,26 +119,16 @@ export default function AsistanPanel({
     }
   }
 
-  if (!acik) {
-    return (
-      <button
-        onClick={() => setAcik(true)}
-        className="w-full rounded-2xl border border-[#5d47f0]/30 bg-[#5d47f0]/5 p-4 text-left"
-      >
-        <p className="font-semibold text-[#5d47f0]">Asistanla çalış →</p>
-        <p className="text-sm text-gray-600">Sana soru sorarak bu bölümü birlikte çıkaralım. Taslağı sen onaylarsın.</p>
-      </button>
-    );
-  }
+  if (!acik) return null;
 
   return (
-    <div className="rounded-2xl border border-gray-200">
+    <div className="fixed inset-0 z-50 flex flex-col bg-white lg:sticky lg:inset-auto lg:top-24 lg:z-auto lg:h-[calc(100vh-7rem)] lg:rounded-2xl lg:border lg:border-gray-200 lg:shadow-sm">
       <div className="flex items-center justify-between border-b border-gray-100 px-4 py-3">
         <p className="font-semibold text-[#232323]">Growtify Asistanı</p>
         <div className="flex items-center gap-3 text-xs text-gray-500">
           {kalan !== null && <span>Bugün {kalan} mesaj hakkın var</span>}
-          <button onClick={() => setAcik(false)} className="underline">
-            Kapat
+          <button onClick={onKapat} aria-label="Asistanı kapat" className="rounded-lg px-2 py-1 text-lg leading-none hover:bg-gray-100">
+            ×
           </button>
         </div>
       </div>
@@ -159,7 +154,7 @@ export default function AsistanPanel({
 
       {sohbetId && (
         <>
-          <div className="max-h-[28rem] space-y-3 overflow-y-auto p-4">
+          <div className="min-h-0 flex-1 space-y-3 overflow-y-auto p-4">
             {mesajlar.map((m, i) => (
               <div key={i} className={m.rol === "user" ? "flex justify-end" : "flex justify-start"}>
                 <p
