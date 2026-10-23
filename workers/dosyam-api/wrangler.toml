@@ -17,6 +17,15 @@ database_name = "gai-dosyam"
 database_id = "69a158af-4f0a-42ab-95b5-8194e3ca17df"
 migrations_dir = "migrations"
 
+# Günlük yedek (ADR K10): R2 "gai-dosyam-yedek" (AB yargı yetkisi), 35 gün yaşam döngüsü kuralı (yedek/ öneki).
+[[r2_buckets]]
+binding = "YEDEK"
+bucket_name = "gai-dosyam-yedek"
+jurisdiction = "eu"
+
+[triggers]
+crons = ["30 1 * * *"]
+
 [observability]
 # Yalnız yöntem, yol ve durum kodu loglanır; gövde ve öğrenci içeriği asla loglanmaz (K9).
 enabled = true
