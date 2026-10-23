@@ -14,8 +14,12 @@ export async function POST(req: Request) {
     return Response.json({ ok: false }, { status: 429, headers: CORS });
   }
   const fb = await verifyFirebaseIdToken(body.ft ?? "");
-  if (!fb.ok || !fb.uid) return Response.json({ ok: false }, { headers: CORS });
+  if (!fb.ok || !fb.uid) {
+    console.log(`[dosyam] hak: kimlik doğrulanamadı (${fb.reason ?? "?"})`);
+    return Response.json({ ok: false }, { headers: CORS });
+  }
   const contact = await contactFromFirebase(fb.uid, fb.emailVerified ? fb.email : undefined, fb.role);
   const ent = contact ? await entitlement(contact).catch(() => null) : null;
+  console.log(`[dosyam] hak: rol ${fb.role ?? "-"}, kişi ${contact ? "bulundu" : "yok"}, hak ${ent ? ent.package : "yok"}`);
   return Response.json({ ok: !!ent }, { headers: { ...CORS, "Cache-Control": "no-store" } });
 }

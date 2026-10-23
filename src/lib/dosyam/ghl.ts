@@ -83,6 +83,8 @@ export async function contactFromFirebase(uid: string, email?: string, role?: st
   if (role === "admin") {
     const res = await ghl("GET", `/users/${encodeURIComponent(uid)}`).catch(() => null);
     const user = res && res.ok ? ((await res.json().catch(() => ({}))) as { email?: string }) : {};
+    // Tanı: yalnız durum kodu (kişisel veri yok).
+    console.log(`[dosyam] panel admin → kullanıcı ${res ? res.status : "ağ hatası"}, e-posta ${user.email ? "var" : "yok"}`);
     if (user.email) return findContactByEmail(user.email).catch(() => null);
   }
   return email ? findContactByEmail(email).catch(() => null) : null;
