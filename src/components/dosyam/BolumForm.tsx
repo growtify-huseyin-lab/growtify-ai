@@ -18,6 +18,7 @@ interface Props {
   approvedAt: string | null;
   readOnly: boolean;
   asistan?: boolean; // bu bölümde Growtify Asistanı var mı (ders yönergesi tanımlı)
+  ust?: React.ReactNode; // sayfa başlığı (asistan açıkken formla birlikte sola kayar)
 }
 
 const input = "w-full rounded-xl border border-gray-300 px-3 py-2 text-base focus:border-[#5d47f0] focus:outline-none disabled:bg-gray-50";
@@ -115,7 +116,9 @@ function Field({ f, value, onChange, disabled }: { f: FieldDef; value: Val; onCh
   }
 }
 
-export default function BolumForm({ id, fields, refs, initial, version, status, approvedAt, readOnly, asistan }: Props) {
+export default function BolumForm({ id, fields, refs, initial, version, status, approvedAt, readOnly, asistan, ust }: Props) {
+  const [asistanAcik, setAsistanAcik] = useState(false);
+  const asistanVar = Boolean(asistan && !readOnly);
   const [data, setData] = useState<Data>(initial);
   const [ver, setVer] = useState(version);
   const [durum, setDurum] = useState(status);
@@ -185,8 +188,18 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
   }
 
   return (
+    <div className={asistanVar && asistanAcik ? "lg:grid lg:grid-cols-[minmax(0,42rem)_420px] lg:justify-center lg:gap-8" : "mx-auto max-w-2xl"}>
     <div className="space-y-6">
-      {asistan && !readOnly && <AsistanPanel bolum={id} onTaslak={taslakAl} />}
+      {ust}
+      {asistanVar && !asistanAcik && (
+        <button
+          onClick={() => setAsistanAcik(true)}
+          className="w-full rounded-2xl border border-[#5d47f0]/30 bg-[#5d47f0]/5 p-4 text-left"
+        >
+          <p className="font-semibold text-[#5d47f0]">Asistanla çalış →</p>
+          <p className="text-sm text-gray-600">Sana soru sorarak bu bölümü birlikte çıkaralım. Taslağı sen onaylarsın.</p>
+        </button>
+      )}
       <p className="text-sm text-gray-500">
         {durum === "onayli" && !degisti
           ? `✓ Onaylı${onayTarihi ? ` · ${new Date(onayTarihi).toLocaleDateString("tr-TR")}` : ""}`
@@ -239,6 +252,28 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
         </div>
       )}
       {mesaj && <p className="whitespace-pre-line rounded-xl bg-gray-50 p-4 text-sm text-gray-700">{mesaj}</p>}
+    </div>
+    {asistanVar && (
+      <AsistanPanel
+        bolum={id}
+        acik={asistanAcik}
+        onKapat={() => setAsistanAcik(false)}
+        onTaslak={(veri, uyarilar) => {
+          taslakAl(veri, uyarilar);
+          // Telefonda panel formu örtüyor: taslak gelince kapanır ki öğrenci alanları görsün.
+          if (typeof window !== "undefined" && window.innerWidth < 1024) setAsistanAcik(false);
+        }}
+      />
+    )}
+    {asistanVar && !asistanAcik && (
+      <button
+        onClick={() => setAsistanAcik(true)}
+        className="fixed bottom-24 right-4 z-40 rounded-full px-5 py-3 font-semibold text-white shadow-lg"
+        style={{ background: PRIMARY }}
+      >
+        Asistan
+      </button>
+    )}
     </div>
   );
 }
