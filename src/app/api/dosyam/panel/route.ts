@@ -3,7 +3,7 @@
 // Firebase sub = GHL kişi kimliği (G1'de doğrulandı).
 import { NextResponse } from "next/server";
 import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
-import { getContact } from "@/lib/dosyam/ghl";
+import { contactFromFirebase } from "@/lib/dosyam/ghl";
 import { loginContact } from "@/lib/dosyam/login";
 
 export async function GET(req: Request) {
@@ -13,7 +13,7 @@ export async function GET(req: Request) {
   const dest = new URL(/^[A-Z_]{1,16}[0-9]{0,2}[A-Z]?$/.test(bolum) ? `/dosyam/${bolum}` : "/dosyam", url.origin);
   const fb = await verifyFirebaseIdToken(ft);
   if (fb.ok && fb.uid) {
-    const contact = await getContact(fb.uid);
+    const contact = await contactFromFirebase(fb.uid, fb.emailVerified ? fb.email : undefined);
     if (contact) {
       const login = await loginContact(contact);
       if (login.ok) return NextResponse.redirect(dest, 303);

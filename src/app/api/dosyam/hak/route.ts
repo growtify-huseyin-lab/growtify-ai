@@ -3,7 +3,7 @@
 import { verifyFirebaseIdToken } from "@/lib/g1/firebase-verify";
 import { getClientIp } from "@/lib/rate-limit";
 import { allow } from "@/lib/dosyam/api";
-import { entitlement, getContact } from "@/lib/dosyam/ghl";
+import { contactFromFirebase, entitlement } from "@/lib/dosyam/ghl";
 import { hashHex } from "@/lib/dosyam/session";
 
 const CORS = { "Access-Control-Allow-Origin": "https://panel.growtify.ai", Vary: "Origin" };
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   }
   const fb = await verifyFirebaseIdToken(body.ft ?? "");
   if (!fb.ok || !fb.uid) return Response.json({ ok: false }, { headers: CORS });
-  const contact = await getContact(fb.uid);
+  const contact = await contactFromFirebase(fb.uid, fb.emailVerified ? fb.email : undefined);
   const ent = contact ? await entitlement(contact).catch(() => null) : null;
   return Response.json({ ok: !!ent }, { headers: { ...CORS, "Cache-Control": "no-store" } });
 }
