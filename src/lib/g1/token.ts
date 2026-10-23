@@ -21,8 +21,12 @@ export type VerifyResult =
   | { ok: true; payload: G1TokenPayload }
   | { ok: false; reason: string };
 
+// G1_TOKEN_SECRET tanımlı değilse (yayında hiç kurulmadı) Çalışma Dosyam anahtarından amaca özel türetilir:
+// imza ve doğrulama aynı fonksiyonu kullandığı için tutarlıdır; Dosyam anahtarının kendisi kullanılmaz.
 function secret(): string {
-  return process.env.G1_TOKEN_SECRET ?? "";
+  if (process.env.G1_TOKEN_SECRET) return process.env.G1_TOKEN_SECRET;
+  const base = process.env.DOSYAM_HMAC_KEY ?? "";
+  return base ? crypto.createHmac("sha256", base).update("g1-token-v1").digest("hex") : "";
 }
 
 export function signG1Token(
