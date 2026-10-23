@@ -216,7 +216,7 @@ export interface OutboxItem {
 }
 
 export class WriteError extends Error {
-  constructor(public code: "salt_okunur" | "surum_cakismasi" | "taslak_yok") {
+  constructor(public code: "salt_okunur" | "surum_cakismasi" | "taslak_yok" | "sohbet_siniri" | "sohbet_yok") {
     super(code);
   }
 }
@@ -348,6 +348,118 @@ export class StudentScope {
     ]);
   }
 
+  // --- asistan sohbetleri --------------------------------------------------------
+
+  async listChats(sectionId: string): Promise<{ id: string; created_at: string; last_message_at: string }[]> {
+    const { results } = await this.db
+      .prepare(
+        `SELECT id, created_at, last_message_at FROM chat_sessions
+         WHERE student_id = ? AND section_id = ? ORDER BY created_at DESC`,
+      )
+      .bind(this.id, sectionId)
+      .all<{ id: string; created_at: string; last_message_at: string }>();
+    return results;
+  }
+
+  // Bölüm başına sohbet sınırı (CEO: 5). Silinen sohbetler sayılmaz.
+  async createChat(sectionId: string, maxPerSection: number, nowMs: number): Promise<string> {
+    this.assertWritable(nowMs);
+    const n = await this.db
+      .prepare(`SELECT COUNT(*) AS n FROM chat_sessions WHERE student_id = ? AND section_id = ?`)
+      .bind(this.id, sectionId)
+      .first<{ n: number }>();
+    if ((n?.n ?? 0) >= maxPerSection) throw new WriteError("sohbet_siniri");
+    const id = uuid();
+    const now = iso(nowMs);
+    await this.db
+      .prepare(`INSERT INTO chat_sessions (id, student_id, section_id, created_at, last_message_at) VALUES (?, ?, ?, ?, ?)`)
+      .bind(id, this.id, sectionId, now, now)
+      .run();
+    return id;
+  }
+
+  async getChat(chatId: string): Promise<{ section_id: string; messages: { seq: number; role: string; content: unknown }[] } | null> {
+    const chat = await this.db
+      .prepare(`SELECT section_id FROM chat_sessions WHERE id = ? AND student_id = ?`)
+      .bind(chatId, this.id)
+      .first<{ section_id: string }>();
+    if (!chat) return null;
+    const { results } = await this.db
+      .prepare(`SELECT seq, role, content_json FROM chat_messages WHERE session_id = ? AND student_id = ? ORDER BY seq`)
+      .bind(chatId, this.id)
+      .all<{ seq: number; role: string; content_json: string }>();
+    return { section_id: chat.section_id, messages: results.map((r) => ({ seq: r.seq, role: r.role, content: JSON.parse(r.content_json) })) };
+  }
+
+  // Bir turu (öğrenci + asistan mesajları) ve kullanımı tek işlemde ekler; yalnız sona ekler (geçmiş değişmez).
+  async appendTurn(
+    chatId: string,
+    expectedSeq: number,
+    messages: { role: "user" | "assistant"; content: unknown }[],
+    usage: { input_tokens: number; output_tokens: number; cost_micro: number; counts: boolean },
+    nowMs: number,
+  ): Promise<void> {
+    this.assertWritable(nowMs);
+    const chat = await this.getChat(chatId);
+    if (!chat) throw new WriteError("sohbet_yok");
+    const next = chat.messages.length ? chat.messages[chat.messages.length - 1].seq + 1 : 1;
+    if (next !== expectedSeq) throw new WriteError("surum_cakismasi");
+    const now = iso(nowMs);
+    const day = now.slice(0, 10);
+    await this.db.batch([
+      ...messages.map((m, i) =>
+        this.db
+          .prepare(
+            `INSERT INTO chat_messages (id, session_id, student_id, seq, role, content_json, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          )
+          .bind(uuid(), chatId, this.id, next + i, m.role, JSON.stringify(m.content), now),
+      ),
+      this.db.prepare(`UPDATE chat_sessions SET last_message_at = ? WHERE id = ? AND student_id = ?`).bind(now, chatId, this.id),
+      this.db
+        .prepare(
+          `INSERT INTO usage_daily (student_id, day, messages, input_tokens, output_tokens, cost_micro) VALUES (?, ?, ?, ?, ?, ?)
+           ON CONFLICT (student_id, day) DO UPDATE SET
+             messages = usage_daily.messages + excluded.messages,
+             input_tokens = usage_daily.input_tokens + excluded.input_tokens,
+             output_tokens = usage_daily.output_tokens + excluded.output_tokens,
+             cost_micro = usage_daily.cost_micro + excluded.cost_micro`,
+        )
+        .bind(this.id, day, usage.counts ? 1 : 0, usage.input_tokens, usage.output_tokens, usage.cost_micro),
+    ]);
+  }
+
+  async deleteChat(chatId: string): Promise<boolean> {
+    const r = await this.db.prepare(`SELECT 1 AS x FROM chat_sessions WHERE id = ? AND student_id = ?`).bind(chatId, this.id).first();
+    if (!r) return false;
+    await this.db.batch([
+      this.db.prepare(`DELETE FROM chat_messages WHERE session_id = ? AND student_id = ?`).bind(chatId, this.id),
+      this.db.prepare(`DELETE FROM chat_sessions WHERE id = ? AND student_id = ?`).bind(chatId, this.id),
+    ]);
+    return true;
+  }
+
+  // Mesaj sayılmayan maliyet (ör. taslak çıkarma) — kota mesajları değil, günlük harcamayı artırır.
+  async addUsage(usage: { input_tokens: number; output_tokens: number; cost_micro: number }, nowMs: number): Promise<void> {
+    await this.db
+      .prepare(
+        `INSERT INTO usage_daily (student_id, day, messages, input_tokens, output_tokens, cost_micro) VALUES (?, ?, 0, ?, ?, ?)
+         ON CONFLICT (student_id, day) DO UPDATE SET
+           input_tokens = usage_daily.input_tokens + excluded.input_tokens,
+           output_tokens = usage_daily.output_tokens + excluded.output_tokens,
+           cost_micro = usage_daily.cost_micro + excluded.cost_micro`,
+      )
+      .bind(this.id, iso(nowMs).slice(0, 10), usage.input_tokens, usage.output_tokens, usage.cost_micro)
+      .run();
+  }
+
+  async usageToday(nowMs: number): Promise<{ messages: number; cost_micro: number }> {
+    const r = await this.db
+      .prepare(`SELECT messages, cost_micro FROM usage_daily WHERE student_id = ? AND day = ?`)
+      .bind(this.id, iso(nowMs).slice(0, 10))
+      .first<{ messages: number; cost_micro: number }>();
+    return { messages: r?.messages ?? 0, cost_micro: r?.cost_micro ?? 0 };
+  }
+
   private outboxStmt(o: OutboxItem, nowMs: number): D1Stmt {
     const now = iso(nowMs);
     return this.db
@@ -416,4 +528,33 @@ export async function failOutbox(db: D1Like, id: string, error: string, nowMs: n
 export async function outboxStats(db: D1Like): Promise<Record<string, number>> {
   const { results } = await db.prepare(`SELECT status, COUNT(*) AS n FROM ghl_outbox GROUP BY status`).all<{ status: string; n: number }>();
   return Object.fromEntries(results.map((r) => [r.status, r.n]));
+}
+
+// --- asistan: genel kullanım ve saklama ------------------------------------------
+
+export async function usageGlobal(db: D1Like, nowMs: number): Promise<{ messages: number; cost_micro: number }> {
+  const r = await db
+    .prepare(`SELECT COALESCE(SUM(messages), 0) AS messages, COALESCE(SUM(cost_micro), 0) AS cost_micro FROM usage_daily WHERE day = ?`)
+    .bind(iso(nowMs).slice(0, 10))
+    .first<{ messages: number; cost_micro: number }>();
+  return { messages: r?.messages ?? 0, cost_micro: r?.cost_micro ?? 0 };
+}
+
+// Saklama (CEO 2026-10-23): son mesajdan 30 gün geçmiş sohbet silinir; Tam öğrencide Tam bitişi + 30 güne kadar korunur.
+export async function purgeChats(db: D1Like, nowMs: number): Promise<number> {
+  const cutoff = iso(nowMs - 30 * DAY);
+  const { results } = await db
+    .prepare(
+      `SELECT c.id FROM chat_sessions c JOIN students s ON s.id = c.student_id
+       WHERE c.last_message_at < ? AND (s.package != 'tam' OR s.tam_bitis IS NULL OR s.tam_bitis < ?)`,
+    )
+    .bind(cutoff, cutoff)
+    .all<{ id: string }>();
+  for (const r of results) {
+    await db.batch([
+      db.prepare(`DELETE FROM chat_messages WHERE session_id = ?`).bind(r.id),
+      db.prepare(`DELETE FROM chat_sessions WHERE id = ?`).bind(r.id),
+    ]);
+  }
+  return results.length;
 }

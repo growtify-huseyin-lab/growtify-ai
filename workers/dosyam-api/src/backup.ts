@@ -3,7 +3,8 @@
 // Saklama: R2 yaşam döngüsü kuralı 35 günden eski yedekleri siler ("yedek/" öneki).
 import type { D1Like } from "./db";
 
-export const BACKUP_TABLES = ["students", "submissions", "buyume_weeks", "ghl_outbox", "audit_log"] as const;
+// Sohbetler (chat_*) yedeğe girer: saklama süresi boyunca öğrencinin verisidir; yedek de 35 günde silinir.
+export const BACKUP_TABLES = ["students", "submissions", "buyume_weeks", "ghl_outbox", "audit_log", "chat_sessions", "chat_messages", "usage_daily"] as const;
 
 export interface R2Like {
   put(key: string, value: ArrayBuffer | Uint8Array, opts?: { httpMetadata?: { contentType?: string; contentEncoding?: string } }): Promise<unknown>;

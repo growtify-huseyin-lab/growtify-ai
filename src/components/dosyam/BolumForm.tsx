@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { FieldDef } from "@/lib/dosyam/sections";
+import AsistanPanel from "./AsistanPanel";
 
 const PRIMARY = "#5d47f0";
 type Val = unknown;
@@ -16,6 +17,7 @@ interface Props {
   status: "taslak" | "onayli" | null;
   approvedAt: string | null;
   readOnly: boolean;
+  asistan?: boolean; // bu bölümde Growtify Asistanı var mı (ders yönergesi tanımlı)
 }
 
 const input = "w-full rounded-xl border border-gray-300 px-3 py-2 text-base focus:border-[#5d47f0] focus:outline-none disabled:bg-gray-50";
@@ -113,7 +115,7 @@ function Field({ f, value, onChange, disabled }: { f: FieldDef; value: Val; onCh
   }
 }
 
-export default function BolumForm({ id, fields, refs, initial, version, status, approvedAt, readOnly }: Props) {
+export default function BolumForm({ id, fields, refs, initial, version, status, approvedAt, readOnly, asistan }: Props) {
   const [data, setData] = useState<Data>(initial);
   const [ver, setVer] = useState(version);
   const [durum, setDurum] = useState(status);
@@ -171,8 +173,20 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
     setBekle(false);
   }
 
+  // Asistanın taslağı forma gelir ama kaydedilmez: öğrenci kontrol eder, kaydeder, onaylar.
+  function taslakAl(veri: Record<string, unknown>, uyarilar: string[]) {
+    setData((d) => ({ ...d, ...veri }));
+    setDegisti(true);
+    setEksik([]);
+    setMesaj(
+      `Asistanın taslağı forma aktarıldı. Kontrol et, gerekirse düzelt, sonra "Taslağı kaydet" ya da "Onayla".` +
+        (uyarilar.length ? `\nDüzeltilmesi gerekenler:\n- ${uyarilar.join("\n- ")}` : ""),
+    );
+  }
+
   return (
     <div className="space-y-6">
+      {asistan && !readOnly && <AsistanPanel bolum={id} onTaslak={taslakAl} />}
       <p className="text-sm text-gray-500">
         {durum === "onayli" && !degisti
           ? `✓ Onaylı${onayTarihi ? ` · ${new Date(onayTarihi).toLocaleDateString("tr-TR")}` : ""}`
@@ -222,7 +236,7 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
           </button>
         </div>
       )}
-      {mesaj && <p className="rounded-xl bg-gray-50 p-4 text-sm text-gray-700">{mesaj}</p>}
+      {mesaj && <p className="whitespace-pre-line rounded-xl bg-gray-50 p-4 text-sm text-gray-700">{mesaj}</p>}
     </div>
   );
 }

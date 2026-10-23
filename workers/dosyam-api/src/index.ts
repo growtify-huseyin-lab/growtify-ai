@@ -12,6 +12,9 @@
 //   PUT  /v1/me/sections/:id                 {data, expected_version?}
 //   POST /v1/me/sections/:id/approve         {version, outbox[]}
 //   GET  /v1/me/weeks | PUT /v1/me/weeks/:week_start {data, note, outbox[]}
+//   GET  /v1/me/sections/:id/chats | POST /v1/me/sections/:id/chats       (asistan sohbetleri, bölüm başına 5)
+//   GET  /v1/me/chats/:id | POST /v1/me/chats/:id/turn {expected_seq, messages[], usage} | POST /v1/me/chats/:id/delete
+//   GET  /v1/me/usage | POST /v1/me/usage/add | GET /v1/usage/global                               (kota ve günlük harcama)
 //   POST /v1/outbox/claim {limit} | POST /v1/outbox/:id/done | POST /v1/outbox/:id/fail {error}
 //   POST /v1/yedek                           (elle yedek; her gece zamanlanmış görev de alır)
 //   GET  /v1/health
@@ -35,9 +38,11 @@ import {
   idemGet,
   idemPut,
   outboxStats,
+  purgeChats,
   rateLimit,
   resolveSession,
   upsertStudent,
+  usageGlobal,
   useNonce,
 } from "./db";
 
@@ -48,7 +53,8 @@ export interface Env {
   DOSYAM_HMAC_KEY_PREV?: string;
 }
 
-const MAX_BODY = 256 * 1024;
+const MAX_BODY = 512 * 1024;
+const CHAT_MAX_PER_SECTION = 5; // CEO 2026-10-23
 const SECTION_RE = /^[A-Z_]{1,16}[0-9]{0,2}[A-Z]?$/;
 const HEX64 = /^[0-9a-f]{64}$/;
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -193,6 +199,7 @@ async function route(
       return json(200, { ok: true, status: await failOutbox(db, m[1], str("error") || "bilinmiyor", nowMs) });
     }
     if (method === "GET" && path === "/v1/outbox/stats") return json(200, { ok: true, stats: await outboxStats(db) });
+    if (method === "GET" && path === "/v1/usage/global") return json(200, { ok: true, ...(await usageGlobal(db, nowMs)) });
     if (method === "POST" && path === "/v1/yedek") {
       if (!env.YEDEK) return err(503, "yedek_deposu_yok");
       return json(200, { ok: true, ...(await runBackup(db, env.YEDEK, nowMs)) });
@@ -228,6 +235,53 @@ async function route(
       }
     }
 
+    if (method === "GET" && path === "/v1/me/usage") return json(200, { ok: true, ...(await scope.usageToday(nowMs)) });
+    if (method === "POST" && path === "/v1/me/usage/add") {
+      const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) && v >= 0 ? Math.floor(v) : 0);
+      await scope.addUsage({ input_tokens: num(body.input_tokens), output_tokens: num(body.output_tokens), cost_micro: num(body.cost_micro) }, nowMs);
+      return json(200, { ok: true });
+    }
+
+    const sc = path.match(/^\/v1\/me\/sections\/([^/]+)\/chats$/);
+    if (sc) {
+      const id = decodeURIComponent(sc[1]);
+      if (!SECTION_RE.test(id)) return err(400, "gecersiz_bolum");
+      if (method === "GET") return json(200, { ok: true, chats: await scope.listChats(id) });
+      if (method === "POST") return json(200, { ok: true, id: await scope.createChat(id, CHAT_MAX_PER_SECTION, nowMs) });
+    }
+
+    const ch = path.match(/^\/v1\/me\/chats\/([0-9a-f-]{36})(\/turn|\/delete)?$/);
+    if (ch) {
+      if (method === "GET" && !ch[2]) {
+        const chat = await scope.getChat(ch[1]);
+        return chat ? json(200, { ok: true, ...chat }) : err(404, "sohbet_yok");
+      }
+      if (method === "POST" && ch[2] === "/delete") {
+        return (await scope.deleteChat(ch[1])) ? json(200, { ok: true }) : err(404, "sohbet_yok");
+      }
+      if (method === "POST" && ch[2] === "/turn") {
+        const msgs = body.messages;
+        const u = (body.usage ?? {}) as Record<string, unknown>;
+        if (
+          !Array.isArray(msgs) ||
+          msgs.length === 0 ||
+          msgs.length > 4 ||
+          !msgs.every((m) => m && typeof m === "object" && ["user", "assistant"].includes((m as { role: string }).role))
+        ) {
+          return err(400, "gecersiz_tur");
+        }
+        const num = (v: unknown) => (typeof v === "number" && Number.isFinite(v) && v >= 0 ? Math.floor(v) : 0);
+        await scope.appendTurn(
+          ch[1],
+          num(body.expected_seq),
+          msgs as { role: "user" | "assistant"; content: unknown }[],
+          { input_tokens: num(u.input_tokens), output_tokens: num(u.output_tokens), cost_micro: num(u.cost_micro), counts: u.counts !== false },
+          nowMs,
+        );
+        return json(200, { ok: true });
+      }
+    }
+
     const wk = path.match(/^\/v1\/me\/weeks\/(\d{4}-\d{2}-\d{2})$/);
     if (wk && method === "PUT") {
       if (!DATE_RE.test(wk[1]) || body.data === undefined) return err(400, "gecersiz_hafta");
@@ -247,9 +301,14 @@ async function route(
 export default {
   // Günlük yedek (wrangler.toml [triggers]). Sonuç yalnız sayı olarak loglanır.
   async scheduled(_ev: unknown, env: Env): Promise<void> {
-    if (!env.YEDEK) return;
+    if (!env.YEDEK) {
+      await purgeChats(env.DB, Date.now());
+      return;
+    }
     const r = await runBackup(env.DB, env.YEDEK, Date.now());
     console.log(JSON.stringify({ evt: "yedek", key: r.key, rows: r.rows, bytes: r.bytes }));
+    const silinen = await purgeChats(env.DB, Date.now());
+    console.log(JSON.stringify({ evt: "sohbet_saklama", silinen }));
   },
 
   async fetch(req: Request, env: Env): Promise<Response> {

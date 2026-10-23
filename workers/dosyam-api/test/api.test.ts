@@ -206,3 +206,53 @@ test("Büyüme Döngüm haftası: yaz, güncelle, yalnız sahibi görür", async
   assert.equal(wa.body.weeks[0].data.gorusme, 4);
   assert.deepEqual((await call(e, "GET", "/v1/me/weeks", { student: b })).body.weeks, []);
 });
+
+test("asistan: bölüm başına 5 sohbet, tur ekleme sırası, yalnız sahibi görür, silme", async () => {
+  const e = env();
+  const a = await student(e, "c-a");
+  const b = await student(e, "c-b");
+  const ids: string[] = [];
+  for (let i = 0; i < 5; i++) ids.push((await call(e, "POST", "/v1/me/sections/R2/chats", { student: a, body: {} })).body.id);
+  const sixth = await call(e, "POST", "/v1/me/sections/R2/chats", { student: a, body: {} });
+  assert.equal(sixth.status, 409);
+  assert.equal(sixth.body.error, "sohbet_siniri");
+  const turn = {
+    expected_seq: 1,
+    messages: [
+      { role: "user", content: "Başlayalım." },
+      { role: "assistant", content: [{ type: "text", text: "İlk soru: neden?" }] },
+    ],
+    usage: { input_tokens: 100, output_tokens: 20, cost_micro: 400, counts: false },
+  };
+  assert.equal((await call(e, "POST", `/v1/me/chats/${ids[0]}/turn`, { student: a, body: turn })).status, 200);
+  const stale = await call(e, "POST", `/v1/me/chats/${ids[0]}/turn`, { student: a, body: turn });
+  assert.equal(stale.body.error, "surum_cakismasi"); // aynı sıra ikinci kez eklenemez
+  const turn2 = { ...turn, expected_seq: 3, usage: { input_tokens: 50, output_tokens: 10, cost_micro: 200 } };
+  await call(e, "POST", `/v1/me/chats/${ids[0]}/turn`, { student: a, body: turn2 });
+  const got = await call(e, "GET", `/v1/me/chats/${ids[0]}`, { student: a });
+  assert.equal(got.body.messages.length, 4);
+  assert.equal(got.body.messages[1].content[0].text, "İlk soru: neden?");
+  assert.equal((await call(e, "GET", `/v1/me/chats/${ids[0]}`, { student: b })).status, 404);
+  const u = await call(e, "GET", "/v1/me/usage", { student: a });
+  assert.equal(u.body.messages, 1); // açılış turu sayılmaz
+  assert.equal(u.body.cost_micro, 600);
+  assert.equal((await call(e, "GET", "/v1/usage/global")).body.cost_micro, 600);
+  assert.equal((await call(e, "POST", `/v1/me/chats/${ids[0]}/delete`, { student: b, body: {} })).status, 404);
+  assert.equal((await call(e, "POST", `/v1/me/chats/${ids[0]}/delete`, { student: a, body: {} })).status, 200);
+  assert.equal((await call(e, "GET", "/v1/me/sections/R2/chats", { student: a })).body.chats.length, 4);
+});
+
+test("asistan saklama: Temel'de 30 gün sessiz sohbet silinir; Tam'da Tam bitişi + 30 güne kadar kalır", async () => {
+  const { purgeChats } = await import("../src/db");
+  const e = env();
+  const t = await student(e, "c-t", "temel", "2026-11-01T00:00:00Z");
+  const f = await student(e, "c-f", "tam", "2026-11-01T00:00:00Z");
+  const ct = (await call(e, "POST", "/v1/me/sections/R2/chats", { student: t, body: {} })).body.id;
+  const cf = (await call(e, "POST", "/v1/me/sections/R2/chats", { student: f, body: {} })).body.id;
+  const later = T0 + 31 * 86_400_000;
+  assert.equal(await purgeChats(e.DB, later), 1);
+  assert.equal((await call(e, "GET", `/v1/me/chats/${ct}`, { student: t, now: later })).status, 404);
+  assert.equal((await call(e, "GET", `/v1/me/chats/${cf}`, { student: f, now: later })).status, 200);
+  const afterTam = Date.parse("2027-02-22T00:00:00Z") + 31 * 86_400_000; // Tam bitişi (≈ 21 Şubat) + 31 gün
+  assert.equal(await purgeChats(e.DB, afterTam), 1);
+});
