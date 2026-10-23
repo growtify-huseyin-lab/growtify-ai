@@ -45,8 +45,23 @@
   var IKON =
     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 h-4 w-4 text-inherit" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 13h4"/><path d="M10 17h4"/></svg>';
 
+  // Seçili olmayan bir menü öğesinin görünümü (Kurslar seçiliyken kopyalanınca düğme de seçili görünmesin).
+  function pasifSinif() {
+    var links = document.querySelectorAll('a[id^="cp-portal-sidebar-nav-"]');
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].id !== ITEM_ID && links[i].getAttribute("aria-current") !== "page") return links[i].className;
+    }
+    return null;
+  }
+
   function menuyeEkle() {
-    if (hak !== true || document.getElementById(ITEM_ID)) return;
+    if (hak !== true) return;
+    var mevcut = document.getElementById(ITEM_ID);
+    if (mevcut) {
+      var c = pasifSinif();
+      if (c && mevcut.className !== c) mevcut.className = c;
+      return;
+    }
     var kurslar = document.getElementById("cp-portal-sidebar-nav-courses");
     var li = kurslar && kurslar.closest("li");
     if (!li) return;
@@ -57,7 +72,7 @@
     a.removeAttribute("aria-current");
     a.setAttribute("role", "link");
     a.setAttribute("tabindex", "0");
-    a.className = a.className.replace(/\b(router-link-active|router-link-exact-active|is-active|active)\b/g, "");
+    a.className = pasifSinif() || a.className.replace(/\b(router-link-active|router-link-exact-active|is-active|active)\b/g, "");
     var svg = a.querySelector("svg");
     if (svg) svg.outerHTML = IKON;
     var etiket = a.querySelector(".hr-text") || a.querySelector(".app-sidebar-nav-item__label") || a;
