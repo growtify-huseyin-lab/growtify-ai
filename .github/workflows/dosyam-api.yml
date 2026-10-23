@@ -1,0 +1,21 @@
+# Çalışma Dosyam veri katmanı — tip kontrolü + testler (ADR-20261023 K13: yeşil olmadan deploy yok).
+name: dosyam-api
+
+on:
+  pull_request:
+    paths: ["workers/dosyam-api/**", ".github/workflows/dosyam-api.yml"]
+  push:
+    branches: [main]
+    paths: ["workers/dosyam-api/**"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run test:dosyam

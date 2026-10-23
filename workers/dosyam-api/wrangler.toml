@@ -1,0 +1,24 @@
+# gai-dosyam-api — Çalışma Dosyam veri katmanı (ADR-20261023-gai-dosyam-ayri-d1).
+# Cloudflare hesabı: "Growtify Ai" — YALNIZ bu sisteme özel (CEO kuralı). Ops hesabına deploy edilmez.
+# Yayına alma: CLOUDFLARE_API_TOKEN = ~/.growtify/cloudflare-gai-dosyam.json içindeki token, sonra
+#   npx wrangler d1 migrations apply gai-dosyam --remote && npx wrangler deploy
+# Worker yalnız veri katmanıdır: Claude / GHL anahtarı burada YOK. Her istek imzalı (src/sig.ts).
+name = "gai-dosyam-api"
+main = "src/index.ts"
+account_id = "7caae05b959b6eb164e99890b6046e77"
+compatibility_date = "2026-08-01"
+# Bu hesapta alan adı (zone) yok; erişim workers.dev üzerinden, imzasız istek gövdesi okunmadan reddedilir.
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "gai-dosyam"
+# 2026-10-23 oluşturuldu: `wrangler d1 create gai-dosyam --jurisdiction eu` (K2: AB yargı yetkisi, bölge EEUR).
+database_id = "69a158af-4f0a-42ab-95b5-8194e3ca17df"
+migrations_dir = "migrations"
+
+[observability]
+# Yalnız yöntem, yol ve durum kodu loglanır; gövde ve öğrenci içeriği asla loglanmaz (K9).
+enabled = true
+
+# Gizli değişkenler (wrangler secret put): DOSYAM_HMAC_KEY, DOSYAM_HMAC_KEY_PREV (rotasyon, boş olabilir)

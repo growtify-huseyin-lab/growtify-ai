@@ -7,7 +7,8 @@
     "build": "next build",
     "generate-pdfs": "npx tsx scripts/generate-pdfs.ts",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:dosyam": "tsc -p workers/dosyam-api && node --no-warnings --import tsx --test workers/dosyam-api/test/*.test.ts"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.4.1",
