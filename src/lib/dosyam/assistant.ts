@@ -215,6 +215,8 @@ export async function draft(
     system: `Sen Growtify Asistanısın. Aşağıdaki sohbet dökümünden "${section.baslik}" bölümünün alanlarını doldurursun.
 Kurallar:
 - Yalnız öğrencinin söyledikleri ve sohbette onayladığı taslaklardan çıkar; uydurma bilgi, rakam, vaka, referans ekleme.
+- Sohbette bir alanın onaylanmış hâli varsa onu KELİMESİ KELİMESİNE aynen al: kısaltma, birleştirme, bağlaç ekleme, yeniden yazma yok. Aynı alan birden çok kez düzeltildiyse en son onaylanan hâli al.
+- Sohbette gösterilmemiş yeni bir satır, başlık ya da cümle ekleme (ör. "Fark:" gibi).
 - Sohbette karşılığı olmayan alanı boş bırak (metinde "", listede [], sayıda null).
 - Sonuç garantisi, kesin sonuç vaadi, üstünlük iddiası yazma. Kişisel veri (ad, telefon, sağlık bilgisi) yazma.
 - Sade, doğal Türkçe; öğrencinin kendi kelimelerini koru.
