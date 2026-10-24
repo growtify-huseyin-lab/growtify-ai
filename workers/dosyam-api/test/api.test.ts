@@ -144,12 +144,22 @@ test("kuyruk: aynı idempotency anahtarı ikinci kez kuyruğa girmez; hata geri 
   assert.equal(status, "olu");
 });
 
-test("erişim modu: Temel 28 gün sonra salt okunur; Tam 112 gün aktif", async () => {
+test("erişim modu: Temel 28 gün aktif, 58. güne kadar ölçüm, sonra salt okunur; Tam 112 gün aktif", async () => {
   const e = env();
   const t = await student(e, "c-t", "temel", "2026-10-01T00:00:00Z");
-  const me = await call(e, "GET", "/v1/me", { student: t });
+  const olcum = Date.parse("2026-11-10T00:00:00Z"); // 1 Ekim + 40 gün
+  assert.equal((await call(e, "GET", "/v1/me", { student: t, now: olcum })).body.student.mode, "olcum");
+  // Ölçüm penceresinde bölüm ve hafta yazılır, asistan sohbeti açılmaz.
+  assert.equal((await call(e, "PUT", "/v1/me/sections/R2", { student: t, body: { data: {} }, now: olcum })).status, 200);
+  assert.equal((await call(e, "POST", "/v1/me/sections/R2/approve", { student: t, body: { version: 1, outbox: [] }, now: olcum })).status, 200);
+  assert.equal((await call(e, "PUT", "/v1/me/weeks/2026-11-09", { student: t, body: { data: {}, note: null, outbox: [] }, now: olcum })).status, 200);
+  const sohbet = await call(e, "POST", "/v1/me/sections/R2/chats", { student: t, body: {}, now: olcum });
+  assert.equal(sohbet.status, 409);
+  assert.equal(sohbet.body.error, "salt_okunur");
+  const bitti = Date.parse("2026-11-29T00:00:00Z"); // 1 Ekim + 59 gün
+  const me = await call(e, "GET", "/v1/me", { student: t, now: bitti });
   assert.equal(me.body.student.mode, "salt_okunur");
-  const w = await call(e, "PUT", "/v1/me/sections/R2", { student: t, body: { data: {} } });
+  const w = await call(e, "PUT", "/v1/me/sections/R2", { student: t, body: { data: {} }, now: bitti });
   assert.equal(w.status, 409);
   assert.equal(w.body.error, "salt_okunur");
   const full = await student(e, "c-f", "tam", "2026-10-01T00:00:00Z");

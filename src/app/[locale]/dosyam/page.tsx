@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { dosyamApi, type Submission } from "@/lib/dosyam/api";
-import { modules } from "@/lib/dosyam/sections";
+import { modules, olcumBitis } from "@/lib/dosyam/sections";
 import { currentStudent } from "@/lib/dosyam/session";
 import GirisForm from "@/components/dosyam/GirisForm";
 import CikisButton from "@/components/dosyam/CikisButton";
@@ -53,7 +53,13 @@ export default async function DosyamPage({
         </div>
         <CikisButton />
       </div>
-      {student.mode !== "aktif" && (
+      {student.mode === "olcum" && (
+        <p className="mb-6 rounded-xl bg-amber-50 p-4 text-sm text-amber-800">
+          28 günlük program süren doldu. {olcumBitis(student.temel_baslangic).toLocaleDateString("tr-TR")} tarihine kadar sonucu gördükten
+          sonra doldurulan ölçüm alanlarını ve Büyüme Döngüm&apos;ü yazabilirsin; asistan kapalı. Tam pakete geçince her şey yeniden açılır.
+        </p>
+      )}
+      {student.mode !== "aktif" && student.mode !== "olcum" && (
         <p className="mb-6 rounded-xl bg-amber-50 p-4 text-sm text-amber-800">
           Dosyan salt okunur: görüntüleyebilir ve kopyalayabilirsin.{" "}
           {student.package === "temel" ? "Tam pakete geçince yeniden yazabilirsin." : ""}

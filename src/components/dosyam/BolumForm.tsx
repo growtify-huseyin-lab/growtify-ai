@@ -17,6 +17,7 @@ interface Props {
   status: "taslak" | "onayli" | null;
   approvedAt: string | null;
   readOnly: boolean;
+  yalnizOlcum?: string; // ölçüm penceresi (Temel bitti): yalnız sonradan doldurulan alanlar açık; değer = son gün
   asistan?: boolean; // bu bölümde Growtify Asistanı var mı (ders yönergesi tanımlı)
   ust?: React.ReactNode; // sayfa başlığı (asistan açıkken formla birlikte sola kayar)
 }
@@ -116,7 +117,7 @@ function Field({ f, value, onChange, disabled }: { f: FieldDef; value: Val; onCh
   }
 }
 
-export default function BolumForm({ id, fields, refs, initial, version, status, approvedAt, readOnly, asistan, ust }: Props) {
+export default function BolumForm({ id, fields, refs, initial, version, status, approvedAt, readOnly, yalnizOlcum, asistan, ust }: Props) {
   const [asistanAcik, setAsistanAcik] = useState(false);
   const asistanVar = Boolean(asistan && !readOnly);
   const [data, setData] = useState<Data>(initial);
@@ -200,6 +201,11 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
           <p className="text-sm text-gray-600">Sana soru sorarak bu bölümü birlikte çıkaralım. Taslağı sen onaylarsın.</p>
         </button>
       )}
+      {yalnizOlcum && !readOnly && (
+        <p className="rounded-xl bg-amber-50 p-4 text-sm text-amber-800">
+          Program süren doldu; bu bölümde yalnız sonucu gördükten sonra doldurulan alanları {yalnizOlcum} tarihine kadar yazabilirsin.
+        </p>
+      )}
       <p className="text-sm text-gray-500">
         {durum === "onayli" && !degisti
           ? `✓ Onaylı${onayTarihi ? ` · ${new Date(onayTarihi).toLocaleDateString("tr-TR")}` : ""}`
@@ -223,7 +229,7 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
           ) : (
             <Field
               f={f}
-              disabled={readOnly || bekle}
+              disabled={readOnly || bekle || (Boolean(yalnizOlcum) && !f.sonradan_doldurulur)}
               value={data[f.anahtar]}
               onChange={(v) => {
                 setData((d) => ({ ...d, [f.anahtar]: v }));

@@ -2,7 +2,7 @@
 import { after } from "next/server";
 import { dosyamApi, type Submission } from "@/lib/dosyam/api";
 import { processOutbox } from "@/lib/dosyam/outbox";
-import { getSection, missingRequired, outboxFor } from "@/lib/dosyam/sections";
+import { getSection, laterFields, missingRequired, outboxFor } from "@/lib/dosyam/sections";
 import { currentStudent, sameOrigin } from "@/lib/dosyam/session";
 
 export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -12,6 +12,9 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
   const student = await currentStudent();
   if (!student) return Response.json({ ok: false }, { status: 401 });
   if (!section || section.salt_okunur) return Response.json({ ok: false }, { status: 404 });
+  if (student.mode === "olcum" && !laterFields(section).length) {
+    return Response.json({ ok: false, mesaj: "Dosyan şu an salt okunur." }, { status: 409 });
+  }
   const body = (await req.json().catch(() => ({}))) as { version?: number };
 
   const cur = await dosyamApi<{ latest: Submission | null }>("GET", `/v1/me/sections/${encodeURIComponent(id)}`, { student: student.id });

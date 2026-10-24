@@ -27,7 +27,7 @@ export default async function BuyumePage({ params }: { params: Promise<{ locale:
       </Link>
       <h1 className="mt-4 mb-2 text-2xl font-bold text-[#232323]">Büyüme Döngüm</h1>
       <p className="mb-6 text-gray-600">Her satır bir hafta. Rakamı bilmiyorsan tahmin yaz; önemli olan her hafta yazmak.</p>
-      <BuyumeForm fields={section.alanlar} weeks={r.body.weeks ?? []} readOnly={student.mode !== "aktif"} />
+      <BuyumeForm fields={section.alanlar} weeks={r.body.weeks ?? []} readOnly={student.mode !== "aktif" && student.mode !== "olcum"} />
     </main>
   );
 }
