@@ -1,7 +1,7 @@
 // GET  /api/dosyam/bolum/:id — bölümün son sürümü + son onaylı sürüm
 // PUT  /api/dosyam/bolum/:id {data, expected_version?} — taslak kaydet
-import { dosyamApi } from "@/lib/dosyam/api";
-import { cleanData, getSection } from "@/lib/dosyam/sections";
+import { dosyamApi, type Submission } from "@/lib/dosyam/api";
+import { cleanData, getSection, laterFields } from "@/lib/dosyam/sections";
 import { currentStudent, sameOrigin } from "@/lib/dosyam/session";
 
 const HATA: Record<string, string> = {
@@ -26,9 +26,22 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   if (!student) return Response.json({ ok: false }, { status: 401 });
   if (!section || section.salt_okunur) return Response.json({ ok: false }, { status: 404 });
   const body = (await req.json().catch(() => ({}))) as { data?: unknown; expected_version?: number };
+  let data = cleanData(section, body.data);
+  if (student.mode === "olcum") {
+    // Ölçüm penceresi: yalnız sonradan doldurulan alanlar değişir; geri kalanı kayıtlı hâlinden alınır.
+    const later = laterFields(section).map((f) => f.anahtar);
+    if (!later.length) return Response.json({ ok: false, mesaj: HATA.salt_okunur }, { status: 409 });
+    const cur = await dosyamApi<{ latest: Submission | null }>("GET", `/v1/me/sections/${encodeURIComponent(id)}`, { student: student.id });
+    const base = { ...(cur.body.latest?.data ?? {}) };
+    for (const k of later) {
+      if (data[k] === undefined) delete base[k];
+      else base[k] = data[k];
+    }
+    data = base;
+  }
   const r = await dosyamApi("PUT", `/v1/me/sections/${encodeURIComponent(id)}`, {
     student: student.id,
-    body: { data: cleanData(section, body.data), expected_version: body.expected_version },
+    body: { data, expected_version: body.expected_version },
   });
   if (!r.body.ok) return Response.json({ ok: false, mesaj: HATA[r.body.error ?? ""] ?? "Kaydedilemedi." }, { status: r.status });
   return Response.json(r.body);

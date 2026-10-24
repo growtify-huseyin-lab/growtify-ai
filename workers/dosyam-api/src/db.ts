@@ -18,6 +18,8 @@ export interface D1Like {
 
 export const TEMEL_DAYS = 28;
 export const TAM_DAYS = 112; // 28 gün + 3 ay (CEO 2026-09-29, 2026-10-23)
+// Temel bitince ölçüm alanları + Büyüme Döngüm 30 gün daha yazılabilir; asistan kapalı (CEO 2026-10-24: "58 gün kalsın").
+export const OLCUM_DAYS = 30;
 const DAY = 86_400_000;
 
 export const iso = (ms: number) => new Date(ms).toISOString();
@@ -29,18 +31,19 @@ export interface Student {
   package: "temel" | "tam";
   temel_baslangic: string;
   tam_bitis: string | null;
-  mode: "aktif" | "salt_okunur" | "kapali";
+  mode: "aktif" | "olcum" | "salt_okunur" | "kapali";
   first_name: string | null;
 }
 
 // Erişim modu tarihten hesaplanır; `kapali` yalnız silme talebinde elle konur.
+// `olcum`: Temel bitti, ölçüm penceresi açık — yalnız sonradan doldurulan alanlar ve Büyüme Döngüm yazılır
+// (alan süzmesi growtify.ai sunucusunda; Worker bölüm şemasını bilmez). Sohbet/asistan yalnız `aktif`te.
 export function effectiveMode(s: Student, nowMs: number): Student["mode"] {
   if (s.mode === "kapali") return "kapali";
-  const end =
-    s.package === "tam" && s.tam_bitis
-      ? Date.parse(s.tam_bitis)
-      : Date.parse(s.temel_baslangic) + TEMEL_DAYS * DAY;
-  return nowMs < end ? "aktif" : "salt_okunur";
+  if (s.package === "tam" && s.tam_bitis) return nowMs < Date.parse(s.tam_bitis) ? "aktif" : "salt_okunur";
+  const end = Date.parse(s.temel_baslangic) + TEMEL_DAYS * DAY;
+  if (nowMs < end) return "aktif";
+  return nowMs < end + OLCUM_DAYS * DAY ? "olcum" : "salt_okunur";
 }
 
 export function tamBitis(temelBaslangic: string): string {
@@ -247,8 +250,9 @@ export class StudentScope {
     return this.student.id;
   }
 
-  private assertWritable(nowMs: number) {
-    if (effectiveMode(this.student, nowMs) !== "aktif") throw new WriteError("salt_okunur");
+  private assertWritable(nowMs: number, olcumOk = false) {
+    const m = effectiveMode(this.student, nowMs);
+    if (m !== "aktif" && !(olcumOk && m === "olcum")) throw new WriteError("salt_okunur");
   }
 
   // Her bölümün en son sürümü.
@@ -280,7 +284,7 @@ export class StudentScope {
   // Taslağı kaydeder. En son sürüm onaylıysa yeni sürüm açar. expectedVersion verilirse
   // en son sürüm onunla eşleşmeli (iki sekmeden aynı anda yazma).
   async saveDraft(sectionId: string, data: unknown, nowMs: number, expectedVersion?: number): Promise<Submission> {
-    this.assertWritable(nowMs);
+    this.assertWritable(nowMs, true);
     const { latest } = await this.getSection(sectionId);
     if (expectedVersion !== undefined && (latest?.version ?? 0) !== expectedVersion) throw new WriteError("surum_cakismasi");
     const now = iso(nowMs);
@@ -305,7 +309,7 @@ export class StudentScope {
 
   // Son taslağı onaylar ve GHL kuyruğunu aynı işlemde (batch) doldurur.
   async approve(sectionId: string, version: number, outbox: OutboxItem[], nowMs: number): Promise<Submission> {
-    this.assertWritable(nowMs);
+    this.assertWritable(nowMs, true);
     const { latest } = await this.getSection(sectionId);
     if (!latest || latest.status !== "taslak") throw new WriteError("taslak_yok");
     if (latest.version !== version) throw new WriteError("surum_cakismasi");
@@ -330,10 +334,9 @@ export class StudentScope {
     return results.map((r) => ({ week_start: r.week_start, data: JSON.parse(r.data_json), note: r.note, updated_at: r.updated_at }));
   }
 
-  // Büyüme Döngüm haftaları programdan sonra da açık kalabilir (Course önerisi, CEO kararı bekliyor);
-  // karar gelene kadar diğer yazmalarla aynı kural geçerli.
+  // Büyüme Döngüm haftaları ölçüm penceresinde de yazılır (CEO 2026-10-24).
   async upsertWeek(weekStart: string, data: unknown, note: string | null, outbox: OutboxItem[], nowMs: number): Promise<void> {
-    this.assertWritable(nowMs);
+    this.assertWritable(nowMs, true);
     const now = iso(nowMs);
     await this.db.batch([
       this.db

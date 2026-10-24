@@ -75,6 +75,16 @@ export function editableFields(s: SectionDef): FieldDef[] {
   return s.tek_olcut ? [...fs, s.tek_olcut] : fs;
 }
 
+// Sonucu görünce doldurulan alanlar; Temel bitince ölçüm penceresinde yalnız bunlar yazılır (CEO 2026-10-24).
+export function laterFields(s: SectionDef): FieldDef[] {
+  return editableFields(s).filter((f) => f.sonradan_doldurulur);
+}
+
+// Ölçüm penceresi sonu: Temel başlangıcı + 28 + 30 gün (Worker OLCUM_DAYS ile aynı).
+export function olcumBitis(temelBaslangic: string): Date {
+  return new Date(Date.parse(temelBaslangic) + 58 * 86_400_000);
+}
+
 // --- doğrulama -------------------------------------------------------------------
 
 const LIMIT = { kisa_metin: 600, uzun_metin: 5000, hucre: 600, liste_max: 30, tablo_max: 60 };

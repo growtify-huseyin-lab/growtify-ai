@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { dosyamApi, type Submission } from "@/lib/dosyam/api";
-import { editableFields, getSection, loadSections, renderSection, type Clean } from "@/lib/dosyam/sections";
+import { editableFields, getSection, laterFields, loadSections, olcumBitis, renderSection, type Clean } from "@/lib/dosyam/sections";
 import { currentStudent } from "@/lib/dosyam/session";
 import BolumForm from "@/components/dosyam/BolumForm";
 import { hasAssistant } from "@/lib/dosyam/prompts";
@@ -79,8 +79,9 @@ export default async function BolumPage({
         version={latest?.version ?? 0}
         status={latest?.status ?? null}
         approvedAt={cur.body.approved?.approved_at ?? null}
-        readOnly={student.mode !== "aktif" || !!section.salt_okunur}
-        asistan={hasAssistant(section.anahtar) && Boolean(process.env.DOSYAM_ANTHROPIC_API_KEY)}
+        readOnly={!!section.salt_okunur || !(student.mode === "aktif" || (student.mode === "olcum" && laterFields(section).length > 0))}
+        yalnizOlcum={student.mode === "olcum" ? olcumBitis(student.temel_baslangic).toLocaleDateString("tr-TR") : undefined}
+        asistan={student.mode === "aktif" && hasAssistant(section.anahtar) && Boolean(process.env.DOSYAM_ANTHROPIC_API_KEY)}
       />
     </main>
   );

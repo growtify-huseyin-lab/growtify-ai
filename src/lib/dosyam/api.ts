@@ -7,7 +7,7 @@ export interface DosyamStudent {
   package: "temel" | "tam";
   temel_baslangic: string;
   tam_bitis: string | null;
-  mode: "aktif" | "salt_okunur" | "kapali";
+  mode: "aktif" | "olcum" | "salt_okunur" | "kapali"; // olcum: Temel bitti, yalnız ölçüm alanları yazılır
   first_name: string | null;
 }
 
