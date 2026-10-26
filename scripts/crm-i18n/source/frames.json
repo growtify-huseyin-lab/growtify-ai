@@ -114,5 +114,11 @@
   "domOnly": ".ui-toolbar, .custom-sidebar, .hr-tooltip__content",
   "domText": "catalog",
   "_domOnly_note": "Öğe tür adları uygulama yüklenirken bir kez hesaplanıyor (Türkçe katalog sonradan gelir) → sözlük yalnız üst araç çubuğu, sol/sağ kenar panelleri ve ipuçlarında; tuval hariç; yalnız uygulama kataloğundan eşlemeler."
+ },
+ "memb": {
+  "origin": "https://backend.memberships.apisystem.tech",
+  "proxy": "https://crm-uyelik.growtify.app",
+  "screens": "Üyelikler > Kurslar: ürünler, kurs düzenleyici (bölüm/ders), teklif ayrıntıları, üye listesi",
+  "_catalog_note": "Vue 2 + vue-i18n 8; katalog uygulama dosyasında JSON.parse içinde (13 dil). Yenileme: node scripts/crm-i18n/memb-catalog.mjs out.en.json → crm-en.flat.json ile fark → çevir."
  }
 }

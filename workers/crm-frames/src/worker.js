@@ -2,7 +2,7 @@
  * crm-*.growtify.app — GHL CRM'in iframe ile gömdüğü uygulamaları Türkçe katmanla sunar.
  *
  * CRM'deki bazı ekranlar (Ayarlar > Takvimler, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar,
- * Sohbet Sağlayıcıları, Satış Ortaklığı, Yapay Zeka Stüdyosu, form, sayfa ve e-posta oluşturucular) GHL'in
+ * Sohbet Sağlayıcıları, Satış Ortaklığı, Yapay Zeka Stüdyosu, form, sayfa ve e-posta oluşturucular, Üyelikler > Kurslar) GHL'in
  * ayrı alan adlarındaki uygulamalardan iframe ile gelir; ajans Custom JS oraya ulaşamaz. CRM'deki Türkçe
  * yükleyici (growtify.ai/crm/crm-i18n.js) bu iframe'lerin adresini buradaki karşılığına çevirir; bu
  * Worker aynı uygulamayı GHL'den alıp sayfanın başına yükleyiciyi ekler. Kullanıcı aynı ekranda kalır.
@@ -41,6 +41,9 @@ const APPS = {
   "crm-sayfa.growtify.app": { origin: "https://page-builder.leadconnectorhq.com", frame: "page" },
   // E-posta oluşturucu: E-postalar çerçevesinin (crm-epostalar) içinde iç içe çerçeve (dosyaları CORS vermiyor → vekilden geçer).
   "crm-eposta-tasarim.growtify.app": { origin: "https://email-builder-prod.leadconnectorhq.com", frame: "ebuild" },
+  // Üyelikler > Kurslar (ürünler, kurs düzenleyici, teklif ayrıntıları): Vue 2 uygulaması; dosyaları GHL'in Google
+  // Cloud deposundan tam adresle gelir (CORS açık) → vekilden yalnız sayfa geçer.
+  "crm-uyelik.growtify.app": { origin: "https://backend.memberships.apisystem.tech", frame: "memb" },
 };
 
 // Kodda sabit olup ekrana değil işleme giden metinler: Yapay Zeka Stüdyosu şablonuna tıklanınca istem kutusuna yazılan
