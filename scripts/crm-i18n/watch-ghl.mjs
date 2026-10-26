@@ -18,7 +18,8 @@ for (const [id, t] of Object.entries(targets)) {
     const r = await fetch(t.url, { redirect: "follow", signal: AbortSignal.timeout(30000) });
     if (!r.ok) throw new Error("HTTP " + r.status);
     if (t.kind === "etag") now[id] = r.headers.get("etag") || r.headers.get("last-modified") || "?";
-    else now[id] = ((await r.text()).match(/\/assets\/index[-.][A-Za-z0-9_-]+\.js/) || ["?"])[0];
+    // Üyelikler (memb) dosyalarını GHL'in Google Cloud deposundan tam adresle yükler: app.<özet>.js
+    else now[id] = ((await r.text()).match(/\/assets\/index[-.][A-Za-z0-9_-]+\.js|live-membership-builder\/app\.[0-9a-f]+\.js/) || ["?"])[0];
   } catch (e) {
     now[id] = "error: " + e.message;
   }
