@@ -143,7 +143,12 @@
   "storeWidgetApp",
   "preferenceManagementApp",
   "redirectApp",
-  "formSurveyApp"
+  "formSurveyApp",
+  "restaurants",
+  "restoreContacts",
+  "templateLibraryApp",
+  "wordpressApp",
+  "calendarComponentsApp"
  ],
  "conv-a": [
   "yes",
