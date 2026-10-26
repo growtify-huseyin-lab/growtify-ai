@@ -24,18 +24,19 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.2.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.15.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.15.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
 | Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.6** | Yayında |
-| Üyelikler > Kurslar (ürünler, kurs düzenleyici, teklif ayrıntıları) | crm-uyelik.growtify.app (backend.memberships.apisystem.tech) | **1.15.0** | Hazır — açılış crm-config `frames` ile |
+| Üyelikler > Kurslar (ürünler, kurs düzenleyici, teklif ayrıntıları) | crm-uyelik.growtify.app (backend.memberships.apisystem.tech) | **1.15.2** | Yayında |
 | E-posta oluşturucu | crm-eposta-tasarim.growtify.app (email-builder-prod) — şablon düzenleyici CRM sayfasında; kampanya düzenleyicisi E-postalar içinde iç içe | **1.8.1** | Açık (önce hazırla ile): şablon düzenleyici CRM sayfasında, kampanya düzenleyicisi E-postalar içinde iç içe |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
 
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.15.2** — 2026-10-26 — Üyelikler kullanıcıya açıldı (`crm-config.json` `frames`). Kodda sabit iki düzeltme: üye sayısındaki İngilizce çoğul eki ("30 Üyes" → "30 Üye", dom-rules) ve tamamlama ipucu. Canlı denemede ürün listesi + kurs düzenleyici Türkçe.
 - **1.15.1** — 2026-10-26 — Üyelikler kataloğu uygulanmıyordu: `instance-keys.json`'a `memb` üst anahtarları eklenmemişti (eşleşme puanı 0). "Your Products" → "Ürünler".
 - **1.15.0** — 2026-10-26 — **Üyelikler > Kurslar Türkçe (CEO: "çevirilerde hâlâ çok İngilizce var, özellikle üyeliklerde").**
   Kurs/ürün oluşturucu GHL'in ayrı bir Vue 2 uygulaması (`backend.memberships.apisystem.tech`, iframe `membership-builder`);

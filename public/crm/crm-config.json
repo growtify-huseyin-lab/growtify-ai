@@ -22,7 +22,8 @@
   "https://leadgen-vibe-ai-builder.leadconnectorhq.com": "https://crm-studyo.growtify.app",
   "https://leadgen-apps-form-survey-builder.leadconnectorhq.com": "https://crm-formlar.growtify.app",
   "https://page-builder.leadconnectorhq.com": "https://crm-sayfa.growtify.app",
-  "https://email-builder-prod.leadconnectorhq.com": "https://crm-eposta-tasarim.growtify.app"
+  "https://email-builder-prod.leadconnectorhq.com": "https://crm-eposta-tasarim.growtify.app",
+  "https://backend.memberships.apisystem.tech": "https://crm-uyelik.growtify.app"
  },
  "_warm_note": "Önce hazırla: bu vekil ekranlar dosyaları kişinin tarayıcısında hazırsa anında Türkçe açılır; hazır değilse ilk açılışta Growtify yükleme ekranıyla bir kez iner. Hazırlık (10 uygulama ≈ 29 MB) arka planda YALNIZ sayfa sakinken yapılır (1.11.2): girişten en az 30 sn sonra, son 8 sn'de sayfa büyük dosya indirmemişse, her uygulamadan önce yeniden; dokunmatik cihazda ve 4G'den yavaş bağlantıda hiç yapılmaz. Sıra: sık kullanılan ve küçük önce, en büyük (e-posta oluşturucu) sona.",
  "warm": [

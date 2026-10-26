@@ -394,5 +394,9 @@
  [
   "^Completion Rate: (\\d+)%\\s+(\\d+) Enrollments?$",
   "Tamamlanma Oranı: %$1 · $2 kayıt"
+ ],
+ [
+  "^(\\d+) Üyes$",
+  "$1 Üye"
  ]
 ]

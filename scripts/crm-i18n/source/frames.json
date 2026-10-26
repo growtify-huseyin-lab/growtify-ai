@@ -119,6 +119,10 @@
   "origin": "https://backend.memberships.apisystem.tech",
   "proxy": "https://crm-uyelik.growtify.app",
   "screens": "Üyelikler > Kurslar: ürünler, kurs düzenleyici (bölüm/ders), teklif ayrıntıları, üye listesi",
-  "_catalog_note": "Vue 2 + vue-i18n 8; katalog uygulama dosyasında JSON.parse içinde (13 dil). Yenileme: node scripts/crm-i18n/memb-catalog.mjs out.en.json → crm-en.flat.json ile fark → çevir."
+  "_catalog_note": "Vue 2 + vue-i18n 8; katalog uygulama dosyasında JSON.parse içinde (13 dil). Yenileme: node scripts/crm-i18n/memb-catalog.mjs out.en.json → crm-en.flat.json ile fark → çevir.",
+  "text": {
+   "This will be triggered once the course is 100% completed and this wont be reflected on the preview": "Kurs %100 tamamlandığında tetiklenir; önizlemede görünmez."
+  },
+  "_text_note": "Uygulama kodunda sabit metinler (katalogda yok). Üye sayısında İngilizce çoğul eki ('s') kodda sabit → dom-rules '^(\\d+) Üyes$'."
  }
 }
