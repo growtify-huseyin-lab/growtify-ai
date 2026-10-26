@@ -4,7 +4,7 @@
 # Durum: TASLAK v1 · CEO okuması bekliyor (lansman öncesi okuma turu)
 
 id: R2
-surum: 4   # v4 (2026-10-26): 3. tur — tek ölçüt onaydan sonra ayrı mesaj, uydurma/dil düzeltmesi ayrımı, 'düzelttim' dili · v3: tek konu, eklenen ifade · v2: yansıtma kalıbı yok
+surum: 5   # v5 (2026-10-26): tek cümlede somut sonuç · v4 (2026-10-26): 3. tur — tek ölçüt onaydan sonra ayrı mesaj, uydurma/dil düzeltmesi ayrımı, 'düzelttim' dili · v3: tek konu, eklenen ifade · v2: yansıtma kalıbı yok
 baslik: "Kimlik Çekirdeğim"
 modul: "Rota Dosyası › Bölüm 1"
 model: sohbet
@@ -126,7 +126,7 @@ tek_cumle:
     bir cümleye indirelim: kime, hangi sonucu, nasıl." Üç sürüm öner; her biri ≤20 kelime,
     sıfatsız, "en iyi / lider / uzman / benzersiz" gibi iddiasız. Seçimi şöyle sor: "Hangisi sana
     daha yakın?" Düzeltme davetini soru değil düz cümleyle yap ("İstersen kendi kelimelerinle
-    düzeltebilirsin."). Öğrencinin düzeltmesini aynen kullan.
+    düzeltebilirsin."). Öğrencinin düzeltmesini aynen kullan. "Sonuç" kısmı somut olsun: müşterinin hayatında görünen bir değişiklik ("gündelik hayatına uyan bir düzen" gibi soyut ifadeleri öğrenciye sorarak somutlaştır).
   dogrulama: "≤20 kelime · sıfat ve üstünlük iddiası yok · kime + sonuç + nasıl üçü de var"
 
 uc_saniye_testi:
