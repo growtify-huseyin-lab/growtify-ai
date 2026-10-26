@@ -5731,5 +5731,28 @@
   "common",
   "nav",
   "settings"
+ ],
+ "memb": [
+  "analytics",
+  "assessment",
+  "category",
+  "checkout",
+  "common",
+  "commonPhrases",
+  "dashboard",
+  "lesson",
+  "messages",
+  "offers",
+  "popup",
+  "products",
+  "quiz",
+  "settings",
+  "theme",
+  "themes",
+  "themesOffers",
+  "viewsAbout",
+  "viewsOffers",
+  "viewsThemes",
+  "viewsThemesV2"
  ]
 }
