@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.3.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.15.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.16.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -36,6 +36,10 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.16.0** — 2026-10-26 — **GHL güncellemesi (bekçi #204) — gömülü ekranlar: 938 metin.** Otomasyon (wf) 768 yeni + 105
+  değişen (iş akışı haritası/görünümleri, temizlik paneli, yapay zeka yardımcısı istemleri), sayfa oluşturucu (page) 65 yeni
+  (sohbet widget'ı, blog yorumları). `frame-diff.mjs` oturumsuz; 125'i mevcut çevirilerden, 813 yeni (3 paralel çeviri,
+  validate 0 hata). Kabuk taraması ayrı sürümde.
 - **1.15.2** — 2026-10-26 — Üyelikler kullanıcıya açıldı (`crm-config.json` `frames`). Kodda sabit iki düzeltme: üye sayısındaki İngilizce çoğul eki ("30 Üyes" → "30 Üye", dom-rules) ve tamamlama ipucu. Canlı denemede ürün listesi + kurs düzenleyici Türkçe.
 - **1.15.1** — 2026-10-26 — Üyelikler kataloğu uygulanmıyordu: `instance-keys.json`'a `memb` üst anahtarları eklenmemişti (eşleşme puanı 0). "Your Products" → "Ürünler".
 - **1.15.0** — 2026-10-26 — **Üyelikler > Kurslar Türkçe (CEO: "çevirilerde hâlâ çok İngilizce var, özellikle üyeliklerde").**
