@@ -62,12 +62,16 @@ export async function chat(
   const built = buildSystem(section.anahtar);
   if (!built) throw new Error("yonerge_yok");
   const messages = [...history, { role: "user", content: userText }] as Anthropic.Beta.Messages.BetaMessageParam[];
+  // Üretim kipinde (FREE4B: öğrencinin müşterisine gidecek mesajı yazar) derin düşünme açık — CEO 2026-10-26,
+  // sohbet başına ~+0,10–0,20 $. Diğer bölümler hızlı ve ucuz (low, düşünmesiz).
+  const uret = section.sohbet_kipi === "uret";
   const res = await api().beta.messages.create({
     model: MODEL,
-    max_tokens: 4000,
+    max_tokens: uret ? 16000 : 4000,
     betas: BETAS,
     fallbacks: "default",
-    output_config: { effort: "low" },
+    ...(uret ? { thinking: { type: "adaptive" as const } } : {}),
+    output_config: { effort: uret ? "high" : "low" },
     // Sabit yönerge önce (önbelleğe alınır), öğrenci bağlamı sonra; en sondaki blok da otomatik önbelleklenir.
     system: [
       { type: "text", text: built.system, cache_control: { type: "ephemeral" } },
