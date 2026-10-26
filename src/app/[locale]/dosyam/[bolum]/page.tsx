@@ -7,6 +7,7 @@ import { editableFields, getSection, laterFields, loadSections, olcumBitis, rend
 import { currentStudent } from "@/lib/dosyam/session";
 import BolumForm from "@/components/dosyam/BolumForm";
 import { hasAssistant } from "@/lib/dosyam/prompts";
+import { g1Refs } from "@/lib/dosyam/g1-refs";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = { title: "Çalışma Dosyam", robots: { index: false, follow: false } };
@@ -49,6 +50,10 @@ export default async function BolumPage({
       }
     }
   }
+  // G testi sonucu (profil, seviye, en zayıf halka, ilk/yeniden ölçüm) GHL kişisinden; Dosyam'ın kendi G1 bölümü yukarıda.
+  const g1Keys = [...wanted].filter((k) => k.startsWith("G1.") && !refs[k]);
+  if (g1Keys.length) Object.assign(refs, await g1Refs(student.ghl_contact_id, g1Keys));
+
   // Kaynağı başka bölümde olan yazılabilir metin alanları (ör. O2 "Ses" ← R2.ses) boşsa kaynakla başlar; öğrenci tamamlar.
   const initial = { ...((latest?.data ?? {}) as Record<string, unknown>) };
   for (const f of editableFields(section)) {
