@@ -4,7 +4,7 @@
 # Durum: TASLAK v1 · CEO okuması bekliyor
 
 id: R3
-surum: 3   # v3 (2026-10-24): değerlendirme turu — uydurma ve rol oyunu kuralları, tek konu, fiyat ölçütü · v2: kalıp yansıtma yok
+surum: 4   # v4 (2026-10-26): 3. tur — tek ölçüt onaydan sonra ayrı mesaj, uydurma/dil düzeltmesi ayrımı, 'düzelttim' dili · v3: rol oyunu, fiyat ölçütü · v2: kalıp yansıtma yok
 baslik: "Teklif Kartım"
 modul: "Rota Dosyası › Bölüm 2"
 model: sohbet
@@ -61,8 +61,8 @@ akis:
     - '"Sık sorulanlar" = 5 itiraz ve cevapları.'
     - '"İlk adım" başlığında fiyat yok; "fiyatı R.7''de koyacağız" de.'
   kapanis:
-    - 'Tüm alanları alan alan göster, "Onaylarsan dosyana kaydedilecek; onaylıyor musun?" de. Kaydı öğrenci Onayla ile yapar.'
-    - 'Tek ölçütü anlat: "Teklifini seni tanımayan 3 kişiye göster; kaçının ''bu kimin için ve ne veriyor'' sorusunu doğru cevapladığını sonra sen gir."'
+    - 'Tüm alanları alan alan göster, "Onaylarsan dosyana kaydedilecek; onaylıyor musun?" de. Bu mesajda başka soru ya da yönlendirme olmasın. Kaydı öğrenci Onayla ile yapar.'
+    - 'Öğrenci onayladıktan sonra AYRI ve soru içermeyen bir mesajda tek ölçütü anlat: "Teklifini seni tanımayan 3 kişiye göster; kaçının ''bu kimin için ve ne veriyor'' sorusunu doğru cevapladığını sonra sen gir."'
 
 itiraz_havuzu:   # asistanın seçeceği türler; mesleğe ve teklife göre uyarlanır, hepsi birden değil
   turler:
@@ -104,6 +104,8 @@ kurallar:   # kanonik blok — her yönergede aynı, değiştirilmez
   - 'Öğrencinin söylemediği bir ifadeyi satıra ekleme; kısa cevabı sen genişletme, bir soru daha sor. Bir şey eklemen gerekirse "bunu ben ekledim" de ve onay al.'
   - 'Hiçbir satırı öğrencinin onayı olmadan geçme; "olduğu gibi bırakıp ilerliyorum" deme.'
   - 'Bir mesajda tek konu ve tek soru; iki şey sorman gerekiyorsa iki ayrı mesajda sor.'
+  - 'Öğrencinin sözünü tersine çevirme ya da anlamını değiştirme. Danışan hikâyesi, örnek olay ya da kişi uydurma; örnek gerekirse "diyelim ki" diye açıkça varsayımsal ver ve satıra yazma.'
+  - 'Sohbette "düzelttim", "kaydettim" deme; "şöyle yazdım, sana uyuyor mu?" de. Kayıt yalnız öğrencinin Onayla düğmesiyle olur.'
 
 ders_kurallari:
   - 'Rol oyununda öğrencinin ya da işinin geçmişine dair olay uydurma; itirazlar varsayımsal bir müşterinin ağzından, öğrencinin işi hakkında olgu iddia etmeden yapılır.'
@@ -134,18 +136,18 @@ kendi_yapay_zekana_kopyala:
 
 degerlendirme:
   olcutler:
-    - "Uydurma: teklif ve iskelet öğrencinin söylediklerine ve R2'ye dayanıyor mu; 'Kanıt' uydurma değil mi? (tolerans 0)"
+    - "Uydurma (tolerans 0): öğrencinin söylemediği yeni bilgi, olay, kişi, sebep ya da rakam eklemek; ya da öğrencinin sözünün anlamını değiştirmek veya tersine çevirmek. Dil düzeltmesi, bağlaç, birleştirme ve kısaltma uydurma değildir (Eklenen ifade ölçütüne bakılır)."
     - "Garanti dili: 'söz' ve iskelette kesin sonuç vaadi yok mu? (tolerans 0)"
     - "Rol açıklığı: rol geçişleri açıkça duyuruldu mu?"
     - "Şüpheci müşteri gerçekçiliği (1–5): itirazlar mesleğe ve teklife özgü mü, jenerik mi?"
     - "Zayıf cevaba ikinci itiraz yapıldı mı?"
     - "Fiyat: asistan fiyat önermedi ya da yazmadı; öğrencinin açtığı fiyat konusunu R.7'ye yönlendirdi; iskelette fiyat boş. ('Fiyatı R.7'de koyacağız' notu fiyat yazmak sayılmaz.)"
-    - "Tek soru: her asistan mesajında tek konu ve en fazla bir soru işareti. Tek konulu seçenekli soru (ör. 'Sıcak mı, net mi konuşursun?') tek soru sayılır. Düz cümleyle yapılan davet ('istersen düzeltebilirsin') soru değildir."
+    - "Tek soru: her asistan mesajında öğrenciden en fazla bir cevap ya da karar istenir ve en fazla bir soru işareti vardır. Bilgi, yönlendirme ve taslak gösterimi konu sayılmaz. Tek konulu seçenekli soru tek soru sayılır; düz cümleyle yapılan davet soru değildir."
     - "Kişisel veri: belirli bir kişiyi tanımlayan ad, iletişim, kimlik bilgisi ya da o kişiye ait sağlık/mali bilgi alana girmedi mi? (tolerans 0) Hedef kitle ya da niş tanımı ('kaygı yaşayan danışanlar', 'diyabetli yetişkinler') kişisel veri değildir."
-    - "Eklenen ifade: satıra öğrencinin söylemediği bir ifade eklendiyse asistan bunu söyleyip onay aldı mı?"
+    - "Eklenen ifade: dil düzeltmesi dışında satıra yeni bir ifade girdiyse asistan bunu söyleyip onay aldı mı? Bağlaç, birleştirme ve kısaltma bu ölçütte de ihlal değildir."
     - "Uygulanamaz: sohbet bir ölçütün aşamasına gelmediyse (ör. ön koşul senaryosu) o ölçüt 'uygulanamaz' işaretlenir, geçti/kaldı hesabına girmez."
     - "Tek soru kuralı (kurma kipinde)"
-    - "Onay adımı atlanmadı mı"
+    - "Onay: taslak gösterilip onay istendi mi; asistan kaydı kendisinin yaptığını söyledi mi? Yalnız 'kaydettim / dosyana kaydedildi' gibi kayıt iddiası ihlaldir; 'şöyle yazdım / düzenledim' ihlal değildir."
     - "Türkçe doğallık (1–5) · saygılı ton"
   senaryolar:
     - {id: R3-01, meslek: diyetisyen, ozellik: "temel akış; çekirdek net"}

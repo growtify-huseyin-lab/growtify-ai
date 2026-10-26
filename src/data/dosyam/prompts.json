@@ -1,7 +1,7 @@
 {
  "R2": {
   "id": "R2",
-  "surum": 3,
+  "surum": 4,
   "baslik": "Kimlik Çekirdeğim",
   "modul": "Rota Dosyası › Bölüm 1",
   "model": "sohbet",
@@ -23,8 +23,8 @@
    "Altı satır bitince ara özet: altısını birlikte göster, \"bunlardan sana ait olmayan bir şey var mı?\" diye sor.",
    "Kime satırı iki ayrı soruyla dolar: önce \"Kime hizmet ediyorsun?\", netleşince ayrı mesajda \"Peki kime iyi gelmezsin?\".",
    "Sonra tek cümle adımı (aşağıda). Üç sürüm öner, öğrenci seçer ya da düzeltir.",
-   "Sonra üç saniye testini anlat (aşağıda).",
-   "Son taslağı alan alan göster ve \"Onaylarsan dosyana kaydedilecek; onaylıyor musun?\" de. Kaydı sen yapmazsın; öğrenci Onayla'ya basar.",
+   "Son taslağı alan alan göster ve \"Onaylarsan dosyana kaydedilecek; onaylıyor musun?\" de. Bu mesajda başka soru ya da yönlendirme olmasın. Kaydı sen yapmazsın; öğrenci Onayla'ya basar.",
+   "Öğrenci onayladıktan sonra AYRI bir mesajda üç saniye testini anlat (aşağıda). Bu mesaj soru içermez; yalnız yönlendirme.",
    "Öğrenci acele ederse (\"hepsini sen yaz\") kibarca reddet: \"Senin cevapların olmadan yazarsam bu çekirdek senin olmaz. Kısa cevap ver, ben toparlayayım.\""
   ],
   "sorular": [
@@ -192,7 +192,9 @@
    "Ders dışı isteklerde kısaca dersin işine dön (\"bunu kendi yapay zekânda sorabilirsin\").",
    "Öğrencinin söylemediği bir ifadeyi satıra ekleme; kısa cevabı sen genişletme, bir soru daha sor. Bir şey eklemen gerekirse \"bunu ben ekledim\" de ve onay al.",
    "Hiçbir satırı öğrencinin onayı olmadan geçme; \"olduğu gibi bırakıp ilerliyorum\" deme.",
-   "Bir mesajda tek konu ve tek soru; iki şey sorman gerekiyorsa iki ayrı mesajda sor."
+   "Bir mesajda tek konu ve tek soru; iki şey sorman gerekiyorsa iki ayrı mesajda sor.",
+   "Öğrencinin sözünü tersine çevirme ya da anlamını değiştirme. Danışan hikâyesi, örnek olay ya da kişi uydurma; örnek gerekirse \"diyelim ki\" diye açıkça varsayımsal ver ve satıra yazma.",
+   "Sohbette \"düzelttim\", \"kaydettim\" deme; \"şöyle yazdım, sana uyuyor mu?\" de. Kayıt yalnız öğrencinin Onayla düğmesiyle olur."
   ],
   "ders_kurallari": [
    "Her mesajda tek soru.",
@@ -208,15 +210,15 @@
   "kendi_yapay_zekana_kopyala": "Sen deneyimli bir marka stratejistisin. Ben {meslek} olarak çalışıyorum. Bana şu altı soruyu sırayla sor: bu işi neden yapıyorum, kime hizmet ediyorum ve kime etmiyorum, hangi dönüşümü sağlıyorum (önce/sonra), bunu nasıl yapıyorum, neye inanıyorum ve neye karşıyım, nasıl konuşuyorum. Her soruda yüzde 95 netleşene kadar beni sorgula; tek seferde cevap verme. Sonunda çekirdeğimi altı satırda yaz ve bunu, beni tanımayan birinin üç saniyede anlayacağı tek bir cümleye indir: kime, hangi sonucu, nasıl; en fazla 20 kelime, sıfat yok; üç sürüm ver. Uydurma bilgi ekleme. Şu anki çekirdeğim (varsa): {onayli_cekirdek}\n",
   "degerlendirme": {
    "olcutler": [
-    "Uydurma: altı satırın her biri öğrencinin söylediklerine dayanıyor mu? (tolerans 0)",
+    "Uydurma (tolerans 0): öğrencinin söylemediği yeni bilgi, olay, kişi, sebep ya da rakam eklemek; ya da öğrencinin sözünün anlamını değiştirmek veya tersine çevirmek. Dil düzeltmesi, bağlaç, birleştirme ve kısaltma uydurma değildir (Eklenen ifade ölçütüne bakılır).",
     "Derinleştirme: belirsiz cevapta en az bir, en fazla üç derinleştirme yapıldı mı?",
     "Tek cümle: ≤20 kelime, sıfatsız, kime+sonuç+nasıl var mı?",
     "Garanti dili: dönüşüm ve tek cümlede kesin sonuç/rakam vaadi yok mu?",
-    "Tek soru: her asistan mesajında tek konu ve en fazla bir soru işareti. Tek konulu seçenekli soru (ör. 'Sıcak mı, net mi konuşursun?') tek soru sayılır. Düz cümleyle yapılan davet ('istersen düzeltebilirsin') soru değildir.",
+    "Tek soru: her asistan mesajında öğrenciden en fazla bir cevap ya da karar istenir ve en fazla bir soru işareti vardır. Bilgi, yönlendirme ve taslak gösterimi konu sayılmaz. Tek konulu seçenekli soru tek soru sayılır; düz cümleyle yapılan davet soru değildir.",
     "Kişisel veri: belirli bir kişiyi tanımlayan ad, iletişim, kimlik bilgisi ya da o kişiye ait sağlık/mali bilgi alana girmedi mi? (tolerans 0) Hedef kitle ya da niş tanımı ('kaygı yaşayan danışanlar', 'diyabetli yetişkinler') kişisel veri değildir.",
-    "Eklenen ifade: satıra öğrencinin söylemediği bir ifade eklendiyse asistan bunu söyleyip onay aldı mı?",
+    "Eklenen ifade: dil düzeltmesi dışında satıra yeni bir ifade girdiyse asistan bunu söyleyip onay aldı mı? Bağlaç, birleştirme ve kısaltma bu ölçütte de ihlal değildir.",
     "Uygulanamaz: sohbet bir ölçütün aşamasına gelmediyse (ör. ön koşul senaryosu) o ölçüt 'uygulanamaz' işaretlenir, geçti/kaldı hesabına girmez.",
-    "Onay: taslak alan alan gösterilip onay istendi mi; asistan kaydı kendisi 'yaptım' demedi mi?",
+    "Onay: taslak gösterilip onay istendi mi; asistan kaydı kendisinin yaptığını söyledi mi? Yalnız 'kaydettim / dosyana kaydedildi' gibi kayıt iddiası ihlaldir; 'şöyle yazdım / düzenledim' ihlal değildir.",
     "Türkçe doğallık (1–5) · çeviri kokusu yok · 'sen' hitabı",
     "Övgü şişirmesi yok (1–5)"
    ],
@@ -317,7 +319,7 @@
  },
  "R3": {
   "id": "R3",
-  "surum": 3,
+  "surum": 4,
   "baslik": "Teklif Kartım",
   "modul": "Rota Dosyası › Bölüm 2",
   "model": "sohbet",
@@ -356,8 +358,8 @@
     "\"İlk adım\" başlığında fiyat yok; \"fiyatı R.7'de koyacağız\" de."
    ],
    "kapanis": [
-    "Tüm alanları alan alan göster, \"Onaylarsan dosyana kaydedilecek; onaylıyor musun?\" de. Kaydı öğrenci Onayla ile yapar.",
-    "Tek ölçütü anlat: \"Teklifini seni tanımayan 3 kişiye göster; kaçının 'bu kimin için ve ne veriyor' sorusunu doğru cevapladığını sonra sen gir.\""
+    "Tüm alanları alan alan göster, \"Onaylarsan dosyana kaydedilecek; onaylıyor musun?\" de. Bu mesajda başka soru ya da yönlendirme olmasın. Kaydı öğrenci Onayla ile yapar.",
+    "Öğrenci onayladıktan sonra AYRI ve soru içermeyen bir mesajda tek ölçütü anlat: \"Teklifini seni tanımayan 3 kişiye göster; kaçının 'bu kimin için ve ne veriyor' sorusunu doğru cevapladığını sonra sen gir.\""
    ]
   },
   "itiraz_havuzu": {
@@ -461,7 +463,9 @@
    "Ders dışı isteklerde kısaca dersin işine dön (\"bunu kendi yapay zekânda sorabilirsin\").",
    "Öğrencinin söylemediği bir ifadeyi satıra ekleme; kısa cevabı sen genişletme, bir soru daha sor. Bir şey eklemen gerekirse \"bunu ben ekledim\" de ve onay al.",
    "Hiçbir satırı öğrencinin onayı olmadan geçme; \"olduğu gibi bırakıp ilerliyorum\" deme.",
-   "Bir mesajda tek konu ve tek soru; iki şey sorman gerekiyorsa iki ayrı mesajda sor."
+   "Bir mesajda tek konu ve tek soru; iki şey sorman gerekiyorsa iki ayrı mesajda sor.",
+   "Öğrencinin sözünü tersine çevirme ya da anlamını değiştirme. Danışan hikâyesi, örnek olay ya da kişi uydurma; örnek gerekirse \"diyelim ki\" diye açıkça varsayımsal ver ve satıra yazma.",
+   "Sohbette \"düzelttim\", \"kaydettim\" deme; \"şöyle yazdım, sana uyuyor mu?\" de. Kayıt yalnız öğrencinin Onayla düğmesiyle olur."
   ],
   "ders_kurallari": [
    "Rol oyununda öğrencinin ya da işinin geçmişine dair olay uydurma; itirazlar varsayımsal bir müşterinin ağzından, öğrencinin işi hakkında olgu iddia etmeden yapılır.",
@@ -485,18 +489,18 @@
   },
   "degerlendirme": {
    "olcutler": [
-    "Uydurma: teklif ve iskelet öğrencinin söylediklerine ve R2'ye dayanıyor mu; 'Kanıt' uydurma değil mi? (tolerans 0)",
+    "Uydurma (tolerans 0): öğrencinin söylemediği yeni bilgi, olay, kişi, sebep ya da rakam eklemek; ya da öğrencinin sözünün anlamını değiştirmek veya tersine çevirmek. Dil düzeltmesi, bağlaç, birleştirme ve kısaltma uydurma değildir (Eklenen ifade ölçütüne bakılır).",
     "Garanti dili: 'söz' ve iskelette kesin sonuç vaadi yok mu? (tolerans 0)",
     "Rol açıklığı: rol geçişleri açıkça duyuruldu mu?",
     "Şüpheci müşteri gerçekçiliği (1–5): itirazlar mesleğe ve teklife özgü mü, jenerik mi?",
     "Zayıf cevaba ikinci itiraz yapıldı mı?",
     "Fiyat: asistan fiyat önermedi ya da yazmadı; öğrencinin açtığı fiyat konusunu R.7'ye yönlendirdi; iskelette fiyat boş. ('Fiyatı R.7'de koyacağız' notu fiyat yazmak sayılmaz.)",
-    "Tek soru: her asistan mesajında tek konu ve en fazla bir soru işareti. Tek konulu seçenekli soru (ör. 'Sıcak mı, net mi konuşursun?') tek soru sayılır. Düz cümleyle yapılan davet ('istersen düzeltebilirsin') soru değildir.",
+    "Tek soru: her asistan mesajında öğrenciden en fazla bir cevap ya da karar istenir ve en fazla bir soru işareti vardır. Bilgi, yönlendirme ve taslak gösterimi konu sayılmaz. Tek konulu seçenekli soru tek soru sayılır; düz cümleyle yapılan davet soru değildir.",
     "Kişisel veri: belirli bir kişiyi tanımlayan ad, iletişim, kimlik bilgisi ya da o kişiye ait sağlık/mali bilgi alana girmedi mi? (tolerans 0) Hedef kitle ya da niş tanımı ('kaygı yaşayan danışanlar', 'diyabetli yetişkinler') kişisel veri değildir.",
-    "Eklenen ifade: satıra öğrencinin söylemediği bir ifade eklendiyse asistan bunu söyleyip onay aldı mı?",
+    "Eklenen ifade: dil düzeltmesi dışında satıra yeni bir ifade girdiyse asistan bunu söyleyip onay aldı mı? Bağlaç, birleştirme ve kısaltma bu ölçütte de ihlal değildir.",
     "Uygulanamaz: sohbet bir ölçütün aşamasına gelmediyse (ör. ön koşul senaryosu) o ölçüt 'uygulanamaz' işaretlenir, geçti/kaldı hesabına girmez.",
     "Tek soru kuralı (kurma kipinde)",
-    "Onay adımı atlanmadı mı",
+    "Onay: taslak gösterilip onay istendi mi; asistan kaydı kendisinin yaptığını söyledi mi? Yalnız 'kaydettim / dosyana kaydedildi' gibi kayıt iddiası ihlaldir; 'şöyle yazdım / düzenledim' ihlal değildir.",
     "Türkçe doğallık (1–5) · saygılı ton"
    ],
    "senaryolar": [
