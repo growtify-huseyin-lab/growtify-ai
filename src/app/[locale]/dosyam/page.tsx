@@ -68,7 +68,7 @@ export default async function DosyamPage({
       {student.mode !== "aktif" && student.mode !== "olcum" && (
         <p className="mb-6 rounded-xl bg-amber-50 p-4 text-sm text-amber-800">
           Dosyan salt okunur: görüntüleyebilir ve kopyalayabilirsin.{" "}
-          {student.package === "temel" ? "Tam pakete geçince yeniden yazabilirsin." : ""}
+          {student.package === "temel" ? "Tam pakete geçince yeniden yazabilirsin." : student.package === "free" ? "Ücretsiz dönemin (30 gün) doldu; GROWT programına katıldığında dosyan yeniden açılır, yazdıkların yerinde kalır." : ""}
         </p>
       )}
       {free ? (

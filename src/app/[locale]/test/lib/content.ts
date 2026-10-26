@@ -41,7 +41,7 @@ const engage: ScreenConfig[] = [
     stateKey: "segment",
     title: "AI Dijital Olgunluk Testi",
     subtitle:
-      "2 dakikada, AI'dan ne kadar geride kaldığını ve neyi değiştirmen gerektiğini öğren.",
+      "5 dakikada, AI'dan ne kadar geride kaldığını ve neyi değiştirmen gerektiğini öğren.",
     caption: "37 soru · %100 kişiselleştirilmiş rapor",
     options: [
       { value: "bireysel", label: "Bireysel Profesyonel", emoji: "👤" },
@@ -72,7 +72,7 @@ const engage: ScreenConfig[] = [
     extra: {
       metrics: [
         { label: "Toplam Katılımcı", value: "12.487" },
-        { label: "Ortalama Tamamlama", value: "2 dk 14 sn" },
+        { label: "Ortalama Tamamlama", value: "~5 dk" },
         { label: "Kullanıcı Memnuniyeti", value: "%94" },
       ],
     },

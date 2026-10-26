@@ -27,7 +27,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   1: {
     caption: "37 soru · %100 kişiselleştirilmiş rapor",
     title: "AI Dijital Olgunluk Testi",
-    subtitle: "2 dakikada, AI'dan ne kadar geride kaldığını ve neyi değiştirmen gerektiğini öğren.",
+    subtitle: "5 dakikada, AI'dan ne kadar geride kaldığını ve neyi değiştirmen gerektiğini öğren.",
     cta: "Başla",
     options: [
       { value: "bireysel", label: "Bireysel Profesyonel", emoji: "👤" },
@@ -68,7 +68,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
     extra: {
       metrics: [
         { label: "Testi tamamlayan", value: "Binlerce profesyonel" },
-        { label: "Ortalama süre", value: "~2 dakika" },
+        { label: "Ortalama süre", value: "~5 dakika" },
         { label: "Kişiselleştirilmiş rapor", value: "%100" },
       ],
     },

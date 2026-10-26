@@ -20,7 +20,7 @@ export const TEMEL_DAYS = 28;
 export const TAM_DAYS = 112; // 28 gün + 3 ay (CEO 2026-09-29, 2026-10-23)
 // Temel bitince ölçüm alanları + Büyüme Döngüm 30 gün daha yazılabilir; asistan kapalı (CEO 2026-10-24: "58 gün kalsın").
 export const OLCUM_DAYS = 30;
-export const FREE_DAYS: number | null = null;
+export const FREE_DAYS: number | null = 30; // CEO 2026-10-26: 30 gün yazılır, sonra salt okunur (silinmez)
 const DAY = 86_400_000;
 
 export const iso = (ms: number) => new Date(ms).toISOString();
@@ -41,7 +41,7 @@ export interface Student {
 // (alan süzmesi growtify.ai sunucusunda; Worker bölüm şemasını bilmez). Sohbet/asistan yalnız `aktif`te.
 export function effectiveMode(s: Student, nowMs: number): Student["mode"] {
   if (s.mode === "kapali") return "kapali";
-  // Free: süre CEO kararını bekliyor (öneri 30 gün); karar gelene kadar açık. Temel alınca package değişir.
+  // Free: Dosyam'ı ilk açtığı günden 30 gün yazılır, sonra salt okunur. Temel alınca package değişir, dosya yeniden açılır.
   if (s.package === "free") return FREE_DAYS && nowMs >= Date.parse(s.temel_baslangic) + FREE_DAYS * DAY ? "salt_okunur" : "aktif";
   if (s.package === "tam" && s.tam_bitis) return nowMs < Date.parse(s.tam_bitis) ? "aktif" : "salt_okunur";
   const end = Date.parse(s.temel_baslangic) + TEMEL_DAYS * DAY;
