@@ -44,7 +44,7 @@ export function buildSystem(sectionId: string): { system: string; internal: stri
   const sorular = (p.sorular ?? [])
     .map(
       (q: Prompt) =>
-        `Soru (${q.anahtar}): ${q.soru}${q.ikinci_soru ? `\n  Bu soru netleşince AYRI bir mesajda sor: ${q.ikinci_soru} (iki cevap aynı satıra yazılır)` : ""}${q.neden_soruyoruz ? `\n  Öğrenci neden sorduğunu merak ederse: ${q.neden_soruyoruz}` : ""}\n  Derinleştirme örnekleri: ${(q.derinlestirme ?? []).join(" | ")}\n  İyi cevap: ${q.iyi_cevap}\n  Dikkat: ${(q.kirmizi_bayrak ?? []).join(" | ")}`,
+        `Soru (${q.anahtar}): ${q.soru}${q.kosul ? `\n  Ne zaman sorulur: ${q.kosul}` : ""}${q.on_bilgi ? `\n  Sormadan önce: ${q.on_bilgi}` : ""}${q.ikinci_soru ? `\n  Bu soru netleşince AYRI bir mesajda sor: ${q.ikinci_soru} (iki cevap aynı satıra yazılır)` : ""}${q.neden_soruyoruz ? `\n  Öğrenci neden sorduğunu merak ederse: ${q.neden_soruyoruz}` : ""}\n  Derinleştirme örnekleri: ${(q.derinlestirme ?? []).join(" | ")}\n  İyi cevap: ${q.iyi_cevap}\n  Dikkat: ${(q.kirmizi_bayrak ?? []).join(" | ")}`,
     )
     .join("\n");
   const akis = typeof p.akis === "object" && !Array.isArray(p.akis)
@@ -63,6 +63,7 @@ export function buildSystem(sectionId: string): { system: string; internal: stri
     p.yontem ? `YÖNTEM: ${p.yontem.ad}\nÖğrenciye anlatımı: ${p.yontem.ogrenciye_aciklama}` : "",
     `AKIŞ\n${akis}`,
     sorular ? `SORULAR\n${sorular}` : "",
+    p.kalip_yasagi ? `KALIP YASAĞI — yazdığın metinde bunlar ve benzerleri geçmez:\n${lines(p.kalip_yasagi)}` : "",
     p.tek_cumle ? `TEK CÜMLE\n${p.tek_cumle.talimat}\nDoğrulama: ${p.tek_cumle.dogrulama}` : "",
     p.uc_saniye_testi ? `ÜÇ SANİYE TESTİ\n${p.uc_saniye_testi.talimat}\n${p.uc_saniye_testi.not ?? ""}` : "",
     p.itiraz_havuzu ? `İTİRAZ TÜRLERİ\n${lines(p.itiraz_havuzu.turler)}\n${p.itiraz_havuzu.not ?? ""}` : "",

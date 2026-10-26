@@ -2,10 +2,10 @@
 # Sahibi: Course (içerik) · Uygulayan: Development · Şema: MIMARI-TASLAK-v0.1.md §7
 # Kaynak ders: _handoff/program-v2/scriptler/free/Free.4b-ilk-kazanim.md (v3, 2026-10-26)
 # Karar: CEO 2026-10-26 — Free.4b'de Growtify Asistanı kullanılır (ücretsiz katmanda TEK asistanlı bölüm, sınırlı kota).
-# Durum: TASLAK v1 · CEO okuması bekliyor
+# Durum: TASLAK v2 · CEO denemesi sonrası ("wow anı yok, 2. sürüm genel geçer")
 
 id: FREE4B
-surum: 1
+surum: 2   # v2 (2026-10-26): CEO denemesi — derin sorular, gerçek mesaj, 2. sürümde ≥3 somut ayrıntı öğrencinin kelimeleriyle, kalıp yasağı, "neyi senden aldım" notu
 baslik: "İlk Kazanım"
 modul: "Başlangıç"
 model: sohbet
@@ -45,7 +45,8 @@ akis:
   - 'FREE4 bölümünde "yapay zekâya" sütunu doluysa açılıştan sonraki ilk mesajda oradan en fazla üç işi düz cümleyle hatırlat ("Free.4''te şunları yapay zekâya ayırmıştın: …"), sonra hangisiyle başlamak istediğini sor. Boşsa açılış sorusunun cevabını kullan.'
   - 'Öğrenci bir mesaj seçince 1. SÜRÜMÜ yaz: yalnız görevi bilerek, meslek ve kişi bilgisi olmadan. Başına "1. sürüm: seni tanımadan" yaz. Aynı mesajda soru sorma; sonuna yalnız "Şimdi seni tanımak için birkaç kısa soru soracağım." cümlesini ekle.'
   - 'Sonra aşağıdaki soruları sırayla, her biri ayrı mesajda sor. Cevabı net olan soruyu tekrar sorma.'
-  - 'Sorular bitince 2. SÜRÜMÜ yaz: yalnız öğrencinin söyledikleriyle. Başına "2. sürüm: seni tanıyarak" yaz. Bilmediğin her bilgiyi köşeli parantezle boş bırak ([fiyat], [gün], [ad]). Ardından tek soru: "Bu sürümde değiştirmek istediğin bir yer var mı?"'
+  - 'Sorular bitince 2. SÜRÜMÜ yaz. Başına "2. sürüm: seni tanıyarak" yaz. Kurallar: (a) öğrencinin cevaplarından EN AZ ÜÇ somut ayrıntı mesajda geçer ve mümkün olduğunca öğrencinin kendi kelimeleriyle (hep sorduğu soru, alıcının kaygısı, kendi yöntemi); (b) öğrenci gerçek bir mesaj yapıştırdıysa onun sesini taklit et: hitap (sen/siz), cümle uzunluğu, sık kullandığı kelimeler, selamlama ve kapanış biçimi, uzunluk; (c) "asla" dediği ifade ve davranış mesajda yok; (d) kalıp_yasagi listesindeki ifadeler ve benzerleri yok; (e) bilmediğin her bilgi köşeli parantezle boş ([fiyat], [gün], [ad]).'
+  - '2. sürümün hemen altında, aynı mesajda, "Senden aldıklarım:" başlığıyla en fazla üç kısa madde yaz: her maddede öğrencinin kendi sözünü tırnak içinde an ve mesajda nereye koyduğunu söyle (ör. "\"önce günlük düzenini sorarım\" dedin; ikinci cümle bu soru."). Bu maddeler bilgi; soru değil. Mesajın son cümlesi tek soru: "Bu sürümde değiştirmek istediğin bir yer var mı?"'
   - 'Öğrenci düzeltme verirse uygula ve yeni hali göster; "şöyle yazdım, sana uyuyor mu?" de. En fazla üç düzeltme turu; sonra "istersen sonra da düzeltebilirsin" de.'
   - 'Öğrenci "kısalt", "benim gibi konuş" gibi bir şey isterse uygula; kendiliğinden yeni bilgi ekleme.'
   - 'Son hali göster ve "Onaylarsan dosyana kaydedilecek; onaylıyor musun?" de. Bu mesajda başka soru olmasın. Kaydı sen yapmazsın; öğrenci Onayla''ya basar.'
@@ -53,31 +54,49 @@ akis:
   - 'En son AYRI bir mesajda, soru sormadan kapanış yap: mesajı bu hafta gerçekten kullanmasını, kazandığı dakikayı kendisi ölçüp "Kazanılan dakika" alanına yazmasını söyle; "yontemi_gor" maddelerinden birini kısaca ekle.'
   - 'Öğrenci acele ederse ("direkt yaz") 1. sürümü yaz, sonra en az ilk iki soruyu sor: "İki soruya cevap ver, farkı göreceksin."'
 
-sorular:
+sorular:   # v2: yüzey bilgisi değil, öğrencinin kendine özgü ayrıntısı. Sıra önemli; cevabı net olanı tekrar sorma.
   - anahtar: meslek
     soru: "Hangi işi yapıyorsun?"
     neden_soruyoruz: "Mesleği bilmeyen yapay zekâ herkese uyan bir mesaj yazar."
-    iyi_cevap: "Meslek ve varsa çalışma biçimi (tek başına, küçük ekip)."
-  - anahtar: alici
-    soru: "Bu mesaj kime gidiyor?"
-    neden_soruyoruz: "Mesajı alan kişinin durumu tonu ve içeriği belirler."
+    iyi_cevap: "Meslek ve varsa kime hizmet ettiği; kısa."
+  - anahtar: alici_kaygisi
+    soru: "Bu mesajı alan kişinin o an aklından geçen asıl kaygı ne?"
+    on_bilgi: "Sorudan önce düz cümle: 'Mesajı alan kişiyi düşün, adını yazmadan.'"
+    neden_soruyoruz: "Genel mesaj herkese konuşur; iyi mesaj o kişinin kafasındaki soruya cevap verir."
     derinlestirme:
-      - "Bu kişi sana yazdığında genelde hangi durumda oluyor?"
-    iyi_cevap: "Kişi türü + durumu (ör. 'ilk kez yazan, kararsız biri'); isim yok."
-  - anahtar: bilmedigi
-    soru: "Bu mesajda senin hep dikkat ettiğin, yapay zekânın bilemeyeceği bir şey ne?"
-    on_bilgi: "FREE3 doluysa sorudan önce düz cümleyle göster: 'Free.3'te yapay zekânın işin hakkında bilmediği şu üç şeyi yazmıştın: …' Sonra soruyu 'Bunlardan bu mesaj için önemli olan hangisi?' diye sor."
-    iyi_cevap: "Yöntemden ya da yaklaşımdan somut bir ayrıntı."
-  - anahtar: ornek
-    soru: "Daha önce yazdığın, beğendiğin bir mesaj var mı?"
-    on_bilgi: "Sorudan önce düz cümle: 'Varsa buraya yapıştırabilirsin; içindeki ad, telefon ve sağlık bilgisini çıkar. Yoksa geçebiliriz.'"
-    iyi_cevap: "Kişi bilgisi çıkarılmış gerçek bir mesaj; ya da 'yok'."
+      - "Bu kişi sana bunu hangi kelimelerle soruyor ya da söylüyor?"
+    iyi_cevap: "Somut bir kaygı, mümkünse alıcının kendi kelimeleriyle ('yine yasaklarla dolu bir liste mi gelecek')."
+  - anahtar: hep_yaptigin
+    soru: "Bu kişiyle ilk temasta senin hep yaptığın ya da sorduğun şey ne?"
+    on_bilgi: "FREE3 doluysa sorudan önce düz cümleyle göster: 'Free.3'te şunları yazmıştın: …' ve soruyu 'Bunlardan bu mesaja girmesi gereken hangisi?' diye sor."
+    neden_soruyoruz: "Seni başkasından ayıran şey bu; yapay zekâ bunu bilemez."
+    iyi_cevap: "Yöntemden somut bir ayrıntı; öğrencinin kendi cümlesiyle."
+  - anahtar: gercek_mesaj
+    soru: "Bu konuda daha önce gönderdiğin gerçek bir mesajı buraya yapıştırır mısın?"
+    on_bilgi: "Sorudan önce düz cümle: 'Senin sesini en iyi senin yazdığın bir mesaj taşır. İçindeki ad, telefon ve sağlık bilgisini çıkar; yoksa geçebiliriz.'"
+    neden_soruyoruz: "Ses ve üslup en güvenilir şekilde gerçek bir örnekten çıkar."
+    iyi_cevap: "Kişi bilgisi çıkarılmış gerçek bir mesaj."
     kirmizi_bayrak:
       - "Yapıştırılan metinde kişi adı, telefon ya da sağlık bilgisi → uyar, o kısımları kullanma."
+  - anahtar: asla
+    soru: "Bu mesajda asla kullanmayacağın bir ifade ya da asla yapmayacağın bir şey var mı?"
+    neden_soruyoruz: "Neyi yapmadığın, ne yaptığın kadar seni anlatır."
+    iyi_cevap: "Bir ifade ya da davranış ('yasak kelimesini kullanmam', 'ilk mesajda fiyat yazmam')."
   - anahtar: ton
     soru: "Bu mesaj nasıl bir tonda ve uzunlukta olsun?"
+    kosul: "YALNIZ gercek_mesaj sorusu atlandıysa sor; gerçek mesaj varsa ton ve uzunluğu ondan çıkar, sorma."
     on_bilgi: "Sorudan önce düz cümle: 'Sıcak, net, resmî ya da samimi olabilir; iki cümle de olabilir, bir paragraf da.'"
     iyi_cevap: "Ton + yaklaşık uzunluk; 'sen' mi 'siz' mi."
+
+kalip_yasagi:   # 2. sürümde kullanılmaz (benzerleri de)
+  - "Size yardımcı olmaktan mutluluk duyarım"
+  - "… yolculuğunuzda yanınızdayım"
+  - "Sağlıklı bir yaşam için ilk adımı attınız"
+  - "Merak ettiğiniz her şey için bana ulaşabilirsiniz"
+  - "En iyi hizmeti sunmak için buradayım"
+  - "Hayalinizdeki …"
+  - "Birlikte harika işler başaracağız"
+  - "Bu heyecan verici süreçte"
 
 cikti_alanlari:
   - {anahtar: gercek_cikti, etiket: "Kendi işinden gerçek bir çıktı", olcu: "bu hafta kullanacağın bir mesaj ya da metin", tur: uzun_metin, zorunlu: true, not: "2. sürümün onaylı son hali; köşeli parantezler öğrencide kalır"}
@@ -106,20 +125,25 @@ ders_kurallari:
   - 'Satış yapma, program ya da paket önerme.'
 
 yontemi_gor:   # "bu yöntemi nasıl kullanırım" kutusu (MIMARI ilke)
-  - "İlk sürüm seni tanımadan yazıldı; ikincisi beş kısa cevabınla. Aradaki fark, ona kendini anlatıp anlatmaman."
+  - "İlk sürüm seni tanımadan yazıldı; ikincisi senin kelimelerinle. Aradaki fark, ona kendini anlatıp anlatmaman."
   - "Kendi yapay zekânda da aynısını yap: önce kendini tanıt, beğendiğin bir örnek ver, tonu söyle ve 'emin olana kadar bana soru sor' de."
   - "Sesle de anlatabilirsin: aklındakini döküp 'bunu toparla, benim gibi konuş' demek çoğu zaman yazmaktan kolaydır."
 
 kendi_yapay_zekana_kopyala: >
-  Ben {meslek} olarak çalışıyorum. Bu mesaj {alici} kişisine gidiyor. İşimde bu mesaj için
-  dikkat ettiğim şey: {bilmedigi}. Beğendiğim bir mesaj örneği: "{ornek}". Mesaj {ton}
-  olsun. Görev: {gorev}. Bilmediğin bilgileri uydurma, köşeli parantezle boş bırak. Emin
-  olana kadar bana soru sor.
+  Ben {meslek} olarak çalışıyorum. Bu mesajı alan kişinin aklındaki asıl kaygı: {alici_kaygisi}.
+  İlk temasta hep yaptığım şey: {hep_yaptigin}. Asla yapmadığım ya da kullanmadığım: {asla}.
+  Daha önce gönderdiğim gerçek bir mesaj (sesimi buradan al): "{gercek_mesaj}".
+  Görev: {gorev}. Benim kelimelerimi kullan, genel geçer kalıp cümle kurma. Bilmediğin
+  bilgileri uydurma, köşeli parantezle boş bırak. Yazdıktan sonra benden neyi aldığını üç
+  maddede söyle. Emin olana kadar bana soru sor.
 
 degerlendirme:
   olcutler:
     - "Uydurma (tolerans 0): 2. sürümde öğrencinin söylemediği somut bilgi (fiyat, tarih, süre, adres, ad, hizmet ayrıntısı, sonuç) var mı? Bilinmeyen bilgi köşeli parantezle mi bırakıldı?"
     - "İki sürüm: önce bağlamsız 1. sürüm, sorulardan sonra bağlamlı 2. sürüm yazıldı mı; ikisi açıkça etiketlendi mi?"
+    - "Kişiselleştirme (wow): 2. sürümde öğrencinin cevaplarından en az üç somut ayrıntı var mı, mümkün olduğunca öğrencinin kendi kelimeleriyle? Gerçek mesaj verildiyse 2. sürüm onun hitabını, uzunluğunu ve üslubunu taşıyor mu? (1–5; eşik ≥4)"
+    - "Kalıp yasağı: 2. sürümde kalip_yasagi listesindeki ya da benzeri genel geçer ifade var mı? (tolerans 0)"
+    - "Fark notu: 2. sürümün altında 'Senden aldıklarım' maddeleri var mı; her madde öğrencinin gerçekten söylediği bir sözü doğru aktarıyor mu? (uydurma alıntı = uydurma ihlali)"
     - "1. sürüm dürüst mü: kasten bozuk değil, düzgün ama genel mi?"
     - "Tek soru: her asistan mesajında en fazla bir soru işareti ve tek konu."
     - "Kişisel veri (tolerans 0): belirli bir kişiyi tanımlayan bilgi mesaja ya da alana girdi mi?"
