@@ -23,6 +23,8 @@ const bolumler = args.filter((a) => /^[A-Z]+\d*$/.test(a));
 const cikti = args.includes("--cikti") ? args[args.indexOf("--cikti") + 1] : "degerlendirme";
 const paralel = args.includes("--paralel") ? Number(args[args.indexOf("--paralel") + 1]) : 4;
 const sadece = args.includes("--senaryo") ? args[args.indexOf("--senaryo") + 1].split(",") : null;
+// --yeniden-puanla TARIH: o günün dökümlerini (asistan + benzetim yeniden koşmadan) yalnız puanlayıcıdan geçirir.
+const yenidenPuanla = args.includes("--yeniden-puanla") ? args[args.indexOf("--yeniden-puanla") + 1] : null;
 
 const client = new Anthropic({ apiKey: process.env.DOSYAM_ANTHROPIC_API_KEY, maxRetries: 3 });
 const SIM = "claude-haiku-5-5";
@@ -161,7 +163,7 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
 
   const olcutler: string[] = olcutListesi(bolum);
   const puan = await puanla(bolum, s, persona, olcutler, approved, gecmis, taslak, uyarilar);
-  return { id: s.id, meslek: s.meslek, ozellik: s.ozellik, tur: transcript.length, cokSorulu, olaylar, taslak, uyarilar, puan, gecmis, maliyetAsistan };
+  return { id: s.id, meslek: s.meslek, ozellik: s.ozellik, tur: transcript.length, cokSorulu, olaylar, taslak, uyarilar, puan, gecmis, approved, maliyetAsistan };
 }
 
 // Puanlayıcı: ölçüt numarası sabit (özet tablosu ölçüt başına tek satır), "uygulanamaz" ayrı sayılır,
@@ -228,7 +230,7 @@ async function puanlaBir(
       },
     },
     system:
-      "Bir eğitim asistanının sohbetini, verilen ölçütlerle tarafsız ve katı biçimde değerlendiriyorsun. Her ölçüt için bir kayıt; 'no' ölçüt numarasıdır. Evet/hayır ölçütlerinde tur='ikili' ve durum ('gecti' ya da 'kaldi'); '(1–5)' yazanlarda tur='puan' ve puan (1–5). Ölçüt bu sohbette gerçekten uygulanamıyorsa (ör. senaryo gereği o aşamaya hiç gelinmemesi beklenir) durum='uygulanamaz' ve puan=null. Gerekçe 1 cümle, Türkçe. Senaryonun beklenen davranışını da hesaba kat.",
+      "Bir eğitim asistanının sohbetini, verilen ölçütlerle tarafsız biçimde değerlendiriyorsun. Her ölçüt için bir kayıt; 'no' ölçüt numarasıdır. KANIT KURALI (2026-10-26: ilk puanlama öğrencinin kendi söylediklerini uydurma saydı): uydurma ve eklenen ifade ölçütlerinde 'kaldi' demeden önce eklenen ifadeyi gerekçede tırnakla ver ve ÖĞRENCİ mesajlarının hiçbirinde ve onaylı bağlamda karşılığı olmadığını tek tek kontrol et. Öğrencinin sohbetin herhangi bir yerinde söylediği bilgi uydurma değildir. Eşanlamlı kelime değişimi (ör. teyze → kadın), kısaltma, birleştirme, bağlaç, zaman ve kip düzeltmesi, 'sanırım' gibi bir kesinlik yumuşatıcısının düşmesi dil düzeltmesidir; uydurma da yeni ifade de sayılmaz. Tek soru ölçütünde 'kaldi' için ihlal eden asistan mesajını tırnakla ver ve o mesajda öğrenciden istenen iki ayrı cevabı ya da kararı adıyla yaz; seçenekli tek soru ('sen mi, siz mi?'), düz cümle davet ('istersen düzeltebilirsin') ve bilgi tek soru kuralını bozmaz. Onay ölçütünde yönergenin zorunlu tuttuğu 'Onaylarsan dosyana kaydedilecek; onaylıyor musun?' cümlesi kayıt iddiası değildir; ihlal yalnız 'kaydettim', 'dosyana kaydedildi' gibi kaydı yapılmış gösteren ifadedir. Kanıt gösteremiyorsan 'gecti'. Evet/hayır ölçütlerinde tur='ikili' ve durum ('gecti' ya da 'kaldi'); '(1–5)' yazanlarda tur='puan' ve puan (1–5). Ölçüt bu sohbette gerçekten uygulanamıyorsa (ör. senaryo gereği o aşamaya hiç gelinmemesi beklenir) durum='uygulanamaz' ve puan=null. Gerekçe 1 cümle, Türkçe. Senaryonun beklenen davranışını da hesaba kat.",
     messages: [
       {
         role: "user",
@@ -269,9 +271,21 @@ for (const bolum of bolumler) {
   const p = getPrompt(bolum);
   const senaryolar = (p.degerlendirme.senaryolar as { id: string; meslek: string; ozellik: string }[]).filter((s) => !sadece || sadece.includes(s.id));
   console.log(`\n${bolum}: ${senaryolar.length} senaryo`);
-  const sonuc = (await havuz(senaryolar, paralel, (s) => senaryo(bolum, s, bolum === "R2" ? 32 : 38))) as any[];
-  toplamAsistan += sonuc.reduce((t, r) => t + (r.maliyetAsistan ?? 0), 0);
-  fs.writeFileSync(path.join(cikti, `${tarih}-${bolum}.json`), JSON.stringify(sonuc, null, 1));
+  let sonuc: any[];
+  let ek = "";
+  if (yenidenPuanla) {
+    const eski = JSON.parse(fs.readFileSync(path.join(cikti, `${yenidenPuanla}-${bolum}.json`), "utf8")) as any[];
+    if (bolum !== "R2" && eski.some((r) => r.gecmis && !r.approved)) console.log(`  uyarı: ${bolum} dökümlerinde onaylı bağlam yok; uydurma puanı güvenilmez`);
+    const olcutler = olcutListesi(bolum);
+    sonuc = await havuz(eski, paralel, async (r) =>
+      r.gecmis ? { ...r, puan: await puanla(bolum, r, `Mesleğin: ${r.meslek}. ${r.ozellik}.`, olcutler, r.approved ?? {}, r.gecmis, r.taslak, r.uyarilar ?? []) } : r,
+    );
+    ek = "-yeniden-puan";
+  } else {
+    sonuc = (await havuz(senaryolar, paralel, (s) => senaryo(bolum, s, bolum === "R2" ? 32 : 38))) as any[];
+  }
+  toplamAsistan += yenidenPuanla ? 0 : sonuc.reduce((t, r) => t + (r.maliyetAsistan ?? 0), 0);
+  fs.writeFileSync(path.join(cikti, `${tarih}-${bolum}${ek}.json`), JSON.stringify(sonuc, null, 1));
 
   // Özet: ölçüt başına geçen / ortalama
   const olcutAdlari: string[] = olcutListesi(bolum);
@@ -315,8 +329,8 @@ ${kaldi.join("\n") || "Yok."}
 ## Senaryo notları
 ${sonuc.map((r) => `- **${r.id}** (${r.meslek} — ${r.ozellik}): ${r.hata ? `HATA: ${r.hata}` : r.puan?.genel_not}`).join("\n")}
 
-Tam dökümler: \`${tarih}-${bolum}.json\`
+Tam dökümler: \`${tarih}-${bolum}${ek}.json\`${yenidenPuanla ? ` (${yenidenPuanla} dökümleri yeniden puanlandı)` : ""}
 `;
-  fs.writeFileSync(path.join(cikti, `${tarih}-${bolum}.md`), md);
+  fs.writeFileSync(path.join(cikti, `${tarih}-${bolum}${ek}.md`), md);
 }
 console.log(`\nAsistan maliyeti ≈ $${toplamAsistan.toFixed(3)} · benzetim + puanlayıcı ≈ $${ekMaliyet.toFixed(3)}`);
