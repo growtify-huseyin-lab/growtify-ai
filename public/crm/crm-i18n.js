@@ -371,8 +371,14 @@
     return msgs || {};
   }
 
+  // vue-i18n 9 (Vue 3) dili ref içinde tutar; vue-i18n 8 (Vue 2, ör. Üyelikler/kurs oluşturucu) düz metin.
+  function localeOf(g) {
+    var l = g.locale;
+    return l && typeof l === "object" ? l.value : l;
+  }
+
   function patchInstance(rootEl, g) {
-    var locale = g.locale && g.locale.value;
+    var locale = localeOf(g);
     if (!isEnglish(locale)) return; // kullanıcı GHL'de başka bir dil seçmiş
     var entry = g.__gaiTr || pickCatalog(rootEl, localeMessages(g, locale));
     if (!entry) return;
@@ -585,8 +591,16 @@
   function scanCatalog() {
     if (!catalog) return;
     try {
-      var els = document.querySelectorAll("#app, [data-v-app]");
+      // Çerçevede gövdenin doğrudan çocukları da: Vue 2 kök bileşeni #app'i kendi öğesiyle değiştirir (id taşımayabilir).
+      var els = document.querySelectorAll(FRAME ? "#app, [data-v-app], body > *" : "#app, [data-v-app]");
       for (var i = 0; i < els.length; i++) {
+        // Vue 2 + vue-i18n 8: kök bileşenin $i18n'i (Üyelikler / kurs oluşturucu çerçevesi).
+        var vm = !els[i].__vue_app__ && els[i].__vue__;
+        var g2 = vm && vm.$root && vm.$root.$i18n;
+        if (g2 && typeof g2.mergeLocaleMessage === "function" && typeof g2.getLocaleMessage === "function") {
+          patchInstance(els[i], g2);
+          continue;
+        }
         var app = els[i].__vue_app__;
         if (!app || !app._context) continue;
         var prov = app._context.provides;
@@ -670,7 +684,7 @@
     return true;
   }
   function huntInstance(rootEl, g) {
-    var loc = g.locale && g.locale.value;
+    var loc = localeOf(g);
     if (!isEnglish(loc)) return;
     var msgs = localeMessages(g, loc);
     var keys = Object.keys(msgs);
@@ -1515,7 +1529,7 @@
           for (var j = 0; j < syms.length; j++) {
             var g = prov[syms[j]] && prov[syms[j]].global;
             if (!g || typeof g.getLocaleMessage !== "function") continue;
-            var loc = g.locale && (g.locale.value || g.locale);
+            var loc = localeOf(g);
             var msgs = localeMessages(g, loc);
             res.push({ root: (els[i].id || String(els[i].className || "")).slice(0, 40), locale: loc, top: Object.keys(msgs), flat: flattenMsgs(msgs, "", {}) });
             break;
@@ -1847,6 +1861,8 @@
             if (r.type === "childList") {
               if (r.target.__vue_app__) mounted = true; // yeni bir Vue uygulaması bağlandı
               for (var j = 0; j < r.addedNodes.length; j++) {
+                var v2 = r.addedNodes[j].__vue__;
+                if (v2 && v2.$root === v2) mounted = true; // Vue 2 kök bileşeni bağlandı
                 if (sync) trNode(r.addedNodes[j], d);
                 else queue.push(r.addedNodes[j]);
               }

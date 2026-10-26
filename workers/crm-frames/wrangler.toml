@@ -18,6 +18,7 @@ routes = [
   { pattern = "crm-formlar.growtify.app/*", zone_name = "growtify.app" },
   { pattern = "crm-sayfa.growtify.app/*", zone_name = "growtify.app" },
   { pattern = "crm-eposta-tasarim.growtify.app/*", zone_name = "growtify.app" },
+  { pattern = "crm-uyelik.growtify.app/*", zone_name = "growtify.app" },
 ]
 
 [observability]
