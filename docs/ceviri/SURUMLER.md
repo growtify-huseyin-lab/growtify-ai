@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.2.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.15.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.15.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -36,6 +36,7 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.15.1** — 2026-10-26 — Üyelikler kataloğu uygulanmıyordu: `instance-keys.json`'a `memb` üst anahtarları eklenmemişti (eşleşme puanı 0). "Your Products" → "Ürünler".
 - **1.15.0** — 2026-10-26 — **Üyelikler > Kurslar Türkçe (CEO: "çevirilerde hâlâ çok İngilizce var, özellikle üyeliklerde").**
   Kurs/ürün oluşturucu GHL'in ayrı bir Vue 2 uygulaması (`backend.memberships.apisystem.tech`, iframe `membership-builder`);
   katmana hiç girmemişti. Katalog uygulama dosyasında `JSON.parse` içinde (13 dil; İngilizce 1.049 metin) → 443'ü mevcut
