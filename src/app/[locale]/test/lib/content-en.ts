@@ -27,7 +27,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
   1: {
     caption: "37 questions · 100% personalized report",
     title: "AI Digital Maturity Test",
-    subtitle: "In 2 minutes, find out how far behind AI you are and what you need to change.",
+    subtitle: "In about 5 minutes, find out how far behind AI you are and what you need to change.",
     cta: "Start",
     options: [
       { value: "bireysel", label: "Individual Professional", emoji: "👤" },
@@ -68,7 +68,7 @@ export const QUIZ_COPY: Record<number, Partial<ScreenConfig>> = {
     extra: {
       metrics: [
         { label: "Completed the test", value: "Thousands of professionals" },
-        { label: "Average time", value: "~2 minutes" },
+        { label: "Average time", value: "~5 minutes" },
         { label: "Personalized report", value: "100%" },
       ],
     },

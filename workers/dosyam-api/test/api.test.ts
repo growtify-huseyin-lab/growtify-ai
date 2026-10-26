@@ -178,6 +178,8 @@ test("free: topluluk üyesi aktif, başlangıç ilk açılışta sabit, Temel al
   const b = await up("free", "2026-11-20T00:00:00Z");
   assert.equal(b.body.student.temel_baslangic, "2026-10-26T00:00:00Z");
   assert.equal(b.body.student.id, a.body.student.id);
+  const dolu = Date.parse("2026-11-26T00:00:00Z"); // ilk açılış + 31 gün
+  assert.equal((await call(e, "GET", "/v1/me", { student: a.body.student.id, now: dolu })).body.student.mode, "salt_okunur");
   const c = await up("temel", "2026-11-21T00:00:00Z");
   assert.equal(c.body.student.package, "temel");
   assert.equal(c.body.student.temel_baslangic, "2026-11-21T00:00:00Z");

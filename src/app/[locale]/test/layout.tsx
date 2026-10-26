@@ -12,8 +12,8 @@ export async function generateMetadata({
       ? "AI Digital Maturity Test"
       : "AI Dijital Olgunluk Testi",
     description: en
-      ? "Discover your AI digital maturity level in 2 minutes. A personalised 37-question report."
-      : "2 dakikada AI dijital olgunluk seviyeni öğren. 37 soruluk kişiselleştirilmiş rapor.",
+      ? "Discover your AI digital maturity level in about 5 minutes. A personalised 37-question report."
+      : "5 dakikada AI dijital olgunluk seviyeni öğren. 37 soruluk kişiselleştirilmiş rapor.",
     robots: { index: false, follow: false },
   };
 }
