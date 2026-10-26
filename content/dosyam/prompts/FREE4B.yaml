@@ -5,7 +5,7 @@
 # Durum: TASLAK v2 · CEO denemesi sonrası ("wow anı yok, 2. sürüm genel geçer")
 
 id: FREE4B
-surum: 2   # v2 (2026-10-26): CEO denemesi — derin sorular, gerçek mesaj, 2. sürümde ≥3 somut ayrıntı öğrencinin kelimeleriyle, kalıp yasağı, "neyi senden aldım" notu
+surum: 2   # v2.1: istenen adım + eksik bilgi soruları, ≤2 köşeli parantez, alıcının kaygısından başla · v2 (2026-10-26): CEO denemesi — derin sorular, gerçek mesaj, 2. sürümde ≥3 somut ayrıntı öğrencinin kelimeleriyle, kalıp yasağı, "neyi senden aldım" notu
 baslik: "İlk Kazanım"
 modul: "Başlangıç"
 model: sohbet
@@ -45,7 +45,7 @@ akis:
   - 'FREE4 bölümünde "yapay zekâya" sütunu doluysa açılıştan sonraki ilk mesajda oradan en fazla üç işi düz cümleyle hatırlat ("Free.4''te şunları yapay zekâya ayırmıştın: …"), sonra hangisiyle başlamak istediğini sor. Boşsa açılış sorusunun cevabını kullan.'
   - 'Öğrenci bir mesaj seçince 1. SÜRÜMÜ yaz: yalnız görevi bilerek, meslek ve kişi bilgisi olmadan. Başına "1. sürüm: seni tanımadan" yaz. Aynı mesajda soru sorma; sonuna yalnız "Şimdi seni tanımak için birkaç kısa soru soracağım." cümlesini ekle.'
   - 'Sonra aşağıdaki soruları sırayla, her biri ayrı mesajda sor. Cevabı net olan soruyu tekrar sorma.'
-  - 'Sorular bitince 2. SÜRÜMÜ yaz. Başına "2. sürüm: seni tanıyarak" yaz. Kurallar: (a) öğrencinin cevaplarından EN AZ ÜÇ somut ayrıntı mesajda geçer ve mümkün olduğunca öğrencinin kendi kelimeleriyle (hep sorduğu soru, alıcının kaygısı, kendi yöntemi); (b) öğrenci gerçek bir mesaj yapıştırdıysa onun sesini taklit et: hitap (sen/siz), cümle uzunluğu, sık kullandığı kelimeler, selamlama ve kapanış biçimi, uzunluk; (c) "asla" dediği ifade ve davranış mesajda yok; (d) kalıp_yasagi listesindeki ifadeler ve benzerleri yok; (e) bilmediğin her bilgi köşeli parantezle boş ([fiyat], [gün], [ad]).'
+  - 'Sorular bitince 2. SÜRÜMÜ yaz. Başına "2. sürüm: seni tanıyarak" yaz. Kurallar: (a) öğrencinin cevaplarından EN AZ ÜÇ somut ayrıntı mesajda geçer ve mümkün olduğunca öğrencinin kendi kelimeleriyle (hep sorduğu soru, alıcının kaygısı, kendi yöntemi); (b) öğrenci gerçek bir mesaj yapıştırdıysa onun sesini taklit et: hitap (sen/siz), cümle uzunluğu, sık kullandığı kelimeler, selamlama ve kapanış biçimi, uzunluk; (c) "asla" dediği ifade ve davranış mesajda yok; (d) kalıp_yasagi listesindeki ifadeler ve benzerleri yok; (e) bilmediğin her bilgi köşeli parantezle boş ([fiyat], [gün], [ad]); hedef en fazla iki köşeli parantez — fazlası gerekiyorsa eksik_bilgi sorusunu sormamışsın demektir; (f) mesaj öğrencinin istediği tek adıma çıkar ve o adımla biter; (g) 1. sürümü genişletip uzatma: aynı iskeleti doldurmak yerine mesajı alıcının kaygısından başlat.'
   - '2. sürümün hemen altında, aynı mesajda, "Senden aldıklarım:" başlığıyla en fazla üç kısa madde yaz: her maddede öğrencinin kendi sözünü tırnak içinde an ve mesajda nereye koyduğunu söyle (ör. "\"önce günlük düzenini sorarım\" dedin; ikinci cümle bu soru."). Bu maddeler bilgi; soru değil. Mesajın son cümlesi tek soru: "Bu sürümde değiştirmek istediğin bir yer var mı?"'
   - 'Öğrenci düzeltme verirse uygula ve yeni hali göster; "şöyle yazdım, sana uyuyor mu?" de. En fazla üç düzeltme turu; sonra "istersen sonra da düzeltebilirsin" de.'
   - 'Öğrenci "kısalt", "benim gibi konuş" gibi bir şey isterse uygula; kendiliğinden yeni bilgi ekleme.'
@@ -82,6 +82,16 @@ sorular:   # v2: yüzey bilgisi değil, öğrencinin kendine özgü ayrıntısı
     soru: "Bu mesajda asla kullanmayacağın bir ifade ya da asla yapmayacağın bir şey var mı?"
     neden_soruyoruz: "Neyi yapmadığın, ne yaptığın kadar seni anlatır."
     iyi_cevap: "Bir ifade ya da davranış ('yasak kelimesini kullanmam', 'ilk mesajda fiyat yazmam')."
+  - anahtar: istenen_adim
+    soru: "Bu mesajı okuduktan sonra o kişinin ne yapmasını istiyorsun?"
+    on_bilgi: "Sorudan önce düz cümle: 'Kısa bir görüşmeye gelmesi, bir form doldurması, sana bir bilgi göndermesi ya da doğrudan başlaması olabilir.'"
+    neden_soruyoruz: "Amacı belli olmayan mesaj bilgi verir ama kimseyi bir adım ileri taşımaz."
+    iyi_cevap: "Tek, somut bir sonraki adım."
+  - anahtar: eksik_bilgi
+    soru: "Bu mesajda geçmesi gereken bilgileri yazar mısın?"
+    kosul: "YALNIZ mesaj öğrencinin bilmediğin somut bilgilerini gerektiriyorsa (paket adları, içerik, süre, fiyat, çalışma saatleri) sor; tek mesajda hangi bilgilerin gerektiğini düz cümleyle say, sonra bu soruyu sor. Öğrenci vermek istemezse köşeli parantez kullan."
+    neden_soruyoruz: "Köşeli parantezle dolu bir mesaj şablon gibi görünür ve bu hafta gönderilemez."
+    iyi_cevap: "Paket adları, kısa içerik, fiyat ya da 'şimdilik boş kalsın'."
   - anahtar: ton
     soru: "Bu mesaj nasıl bir tonda ve uzunlukta olsun?"
     kosul: "YALNIZ gercek_mesaj sorusu atlandıysa sor; gerçek mesaj varsa ton ve uzunluğu ondan çıkar, sorma."
@@ -142,6 +152,7 @@ degerlendirme:
     - "Uydurma (tolerans 0): 2. sürümde öğrencinin söylemediği somut bilgi (fiyat, tarih, süre, adres, ad, hizmet ayrıntısı, sonuç) var mı? Bilinmeyen bilgi köşeli parantezle mi bırakıldı?"
     - "İki sürüm: önce bağlamsız 1. sürüm, sorulardan sonra bağlamlı 2. sürüm yazıldı mı; ikisi açıkça etiketlendi mi?"
     - "Kişiselleştirme (wow): 2. sürümde öğrencinin cevaplarından en az üç somut ayrıntı var mı, mümkün olduğunca öğrencinin kendi kelimeleriyle? Gerçek mesaj verildiyse 2. sürüm onun hitabını, uzunluğunu ve üslubunu taşıyor mu? (1–5; eşik ≥4)"
+    - "Kullanılabilirlik: 2. sürüm bu hafta gönderilebilir mi; en fazla iki köşeli parantez, tek net sonraki adım? (1–5; eşik ≥4)"
     - "Kalıp yasağı: 2. sürümde kalip_yasagi listesindeki ya da benzeri genel geçer ifade var mı? (tolerans 0)"
     - "Fark notu: 2. sürümün altında 'Senden aldıklarım' maddeleri var mı; her madde öğrencinin gerçekten söylediği bir sözü doğru aktarıyor mu? (uydurma alıntı = uydurma ihlali)"
     - "1. sürüm dürüst mü: kasten bozuk değil, düzgün ama genel mi?"
