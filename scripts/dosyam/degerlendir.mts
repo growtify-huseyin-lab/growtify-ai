@@ -129,7 +129,8 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
       gecmis.push({ rol: "user", metin: msj });
       // Bitiş: yalnız son onay ("dosyana kaydedilecek; onaylıyor musun?") gösterildikten sonra öğrenci onaylarsa.
       // Satır satır "onaylıyorum" bitiş sayılmaz (2026-10-24: önceki kural sohbetleri tek cümleden önce kesiyordu).
-      if (sonOnay && /onaylıyorum|onay/i.test(msj)) break;
+      // v4 (2026-10-26): onaydan sonra asistan tek ölçüt + üç saniye testini ayrı mesajda verir; o mesaj da puanlanır.
+      const bitir = sonOnay && /onaylıyorum|onay/i.test(msj);
       if (!giris.ok) {
         olaylar.push(`giris_${giris.kind}`);
         gecmis.push({ rol: "assistant", metin: giris.mesaj });
@@ -141,6 +142,7 @@ async function senaryo(bolum: string, s: { id: string; meslek: string; ozellik: 
       history.push({ role: "user", content: msj }, { role: "assistant", content: r.content });
       gecmis.push({ rol: "assistant", metin: r.text });
       sonOnay = /dosyana kaydedilecek/i.test(r.text);
+      if (bitir) break;
     }
   }
 
