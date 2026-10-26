@@ -57,6 +57,7 @@ export interface GhlContact {
   firstName?: string;
   email?: string;
   customFields?: { id: string; value?: unknown; field_value?: unknown }[];
+  tags?: string[];
 }
 
 export async function findContactByEmail(email: string): Promise<GhlContact | null> {
@@ -75,7 +76,7 @@ export async function getContact(id: string): Promise<GhlContact | null> {
 }
 
 export interface Entitlement {
-  package: "temel" | "tam";
+  package: "free" | "temel" | "tam";
   temel_baslangic: string;
 }
 
@@ -98,6 +99,10 @@ export async function entitlement(contact: GhlContact): Promise<Entitlement | nu
   const tier = String(val("contact.gai__package_tier") ?? "").toLowerCase();
   const start = toIsoDate(val("contact.gai__purchase_date"));
   if ((tier === "temel" || tier === "tam") && start) return { package: tier, temel_baslangic: start };
+  // Free (CEO 2026-10-26): topluluk üyesi (GHL teyidi: gai_community_member). Temel/Tam önce sayılır — alıcıda bu tag kalır.
+  if ((contact.tags ?? []).some((t) => t.toLowerCase() === "gai_community_member")) {
+    return { package: "free", temel_baslangic: new Date().toISOString() };
+  }
   const testIds = (process.env.DOSYAM_TEST_CONTACT_IDS ?? "").split(",").map((s) => s.trim()).filter(Boolean);
   if (testIds.includes(contact.id)) return { package: "tam", temel_baslangic: new Date().toISOString() };
   return null;

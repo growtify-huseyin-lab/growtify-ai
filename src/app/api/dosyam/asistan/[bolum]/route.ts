@@ -15,7 +15,7 @@ import {
 } from "@/lib/dosyam/assistant-data";
 import { checkUserInput } from "@/lib/dosyam/guard";
 import { dependencyMissing, getPrompt, hasAssistant, openingMessage } from "@/lib/dosyam/prompts";
-import { getSection } from "@/lib/dosyam/sections";
+import { getSection, sectionAllowed } from "@/lib/dosyam/sections";
 import { currentStudent, sameOrigin } from "@/lib/dosyam/session";
 
 const err = (status: number, mesaj: string) => Response.json({ ok: false, mesaj }, { status });
@@ -24,7 +24,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ bolum: 
   const { bolum } = await params;
   const student = await currentStudent();
   if (!student) return err(401, "Giriş yap.");
-  if (!hasAssistant(bolum)) return err(404, "Bu bölümde asistan yok.");
+  if (!hasAssistant(bolum) || !sectionAllowed(student.package, bolum)) return err(404, "Bu bölümde asistan yok.");
   const p = getPrompt(bolum)!;
   const [list, approved, kota] = await Promise.all([
     dosyamApi<{ chats: { id: string; created_at: string }[] }>("GET", `/v1/me/sections/${bolum}/chats`, { student: student.id }),
@@ -52,7 +52,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ bolum: 
   const student = await currentStudent();
   if (!student) return err(401, "Giriş yap.");
   const section = getSection(bolum);
-  if (!section || !hasAssistant(bolum)) return err(404, "Bu bölümde asistan yok.");
+  if (!section || !hasAssistant(bolum) || !sectionAllowed(student.package, bolum)) return err(404, "Bu bölümde asistan yok.");
   if (student.mode !== "aktif") return err(409, "Dosyan salt okunur; asistan kapalı.");
   const body = (await req.json().catch(() => ({}))) as { sohbet_id?: string; yeni?: boolean; mesaj?: string };
 
@@ -91,7 +91,10 @@ export async function POST(req: Request, { params }: { params: Promise<{ bolum: 
   }
   const kota = await quota(student);
   if (kota.kapali) return err(503, "Asistan şu an geçici olarak kapalı. Formu kendin doldurabilirsin; birazdan tekrar dene.");
-  if (kota.kalan <= 0) return err(429, "Bugünlük mesaj hakkın doldu (günde 60). Yarın devam edebilirsin; formu kendin de doldurabilirsin.");
+  if (kota.kalan <= 0) {
+    const gunluk = student.package === "free" ? 20 : 60;
+    return err(429, `Bugünlük mesaj hakkın doldu (günde ${gunluk}). Yarın devam edebilirsin; formu kendin de doldurabilirsin.`);
+  }
 
   const sohbet = await getChat(student, String(body.sohbet_id));
   if (!sohbet || sohbet.section_id !== bolum) return err(404, "Sohbet bulunamadı.");

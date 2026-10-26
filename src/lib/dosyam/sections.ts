@@ -71,6 +71,12 @@ export function modules(): { modul: string; sections: SectionDef[] }[] {
   return [...map.entries()].map(([modul, sections]) => ({ modul, sections }));
 }
 
+// Free (ücretsiz topluluk üyesi) yalnız bu bölümleri görür; FREE4B'de asistan var (CEO 2026-10-26).
+export const FREE_SECTIONS = ["FREE2", "FREE3", "FREE4", "FREE4B", "FREE5", "FREE6"];
+export function sectionAllowed(pkg: string, sectionId: string): boolean {
+  return pkg !== "free" || FREE_SECTIONS.includes(sectionId);
+}
+
 // Öğrencinin yazdığı alanlar (referans ve hesaplanan alanlar öğrenciden alınmaz).
 export function editableFields(s: SectionDef): FieldDef[] {
   const fs = s.alanlar.filter((f) => f.tur !== "referans" && !f.hesaplanan);

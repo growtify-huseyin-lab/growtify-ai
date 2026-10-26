@@ -17,6 +17,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ hafta: s
   }
   const section = getSection("BUYUME_DONGUM");
   if (!section) return Response.json({ ok: false }, { status: 500 });
+  if (student.package === "free") return Response.json({ ok: false }, { status: 404 }); // Büyüme Döngüm Temel'le açılır
   const body = (await req.json().catch(() => ({}))) as { data?: unknown; note?: string };
   const data = cleanData(section, body.data);
   delete data.hafta_baslangici;

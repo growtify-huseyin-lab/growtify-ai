@@ -87,7 +87,9 @@ export async function chat(
     console.log(JSON.stringify({ evt: "asistan_cikis_engellendi", neden: check.ok ? "bos" : check.neden, bolum: section.anahtar }));
     return { content: [{ type: "text", text: SABIT_CEVAP_SIZINTI }], text: SABIT_CEVAP_SIZINTI, blocked: true, usage };
   }
-  if (questionCount(text) > 1) {
+  // Üretim kipinde (FREE4B: asistan öğrencinin müşterisine gidecek mesajı yazar) taslak mesajın kendi soruları olabilir;
+  // tek soru düzeltmesi o metni bozacağı için uygulanmaz.
+  if (section.sohbet_kipi !== "uret" && questionCount(text) > 1) {
     // Course ölçütü "her mesajda tek soru"; talimat %5 civarında kaçırıyor (değerlendirme 2026-10-24) → kısa düzeltme turu.
     const fixed = await singleQuestion(text, built.internal);
     if (fixed) {
