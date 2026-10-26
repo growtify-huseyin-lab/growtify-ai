@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { dosyamApi, type Submission } from "@/lib/dosyam/api";
-import { modules, olcumBitis } from "@/lib/dosyam/sections";
+import { modules, olcumBitis, sectionAllowed } from "@/lib/dosyam/sections";
+import { refreshFree } from "@/lib/dosyam/login";
 import { currentStudent } from "@/lib/dosyam/session";
 import GirisForm from "@/components/dosyam/GirisForm";
 import CikisButton from "@/components/dosyam/CikisButton";
@@ -32,12 +33,17 @@ export default async function DosyamPage({
       </main>
     );
   }
-  const student = await currentStudent();
-  if (!student) return <GirisForm ipucu={sp.k} devam={sp.devam?.startsWith("/dosyam") ? sp.devam : undefined} />;
+  const oturum = await currentStudent();
+  if (!oturum) return <GirisForm ipucu={sp.k} devam={sp.devam?.startsWith("/dosyam") ? sp.devam : undefined} />;
+  const student = await refreshFree(oturum);
+  const free = student.package === "free";
 
   const r = await dosyamApi<{ sections: Submission[] }>("GET", "/v1/me/sections", { student: student.id });
   const byId = new Map((r.body.sections ?? []).map((s) => [s.section_id, s]));
-  const mods = modules();
+  // Free yalnız Free bölümlerini görür; Temel'e geçince aynı kayıtta hepsi açılır.
+  const mods = modules()
+    .map((m) => ({ ...m, sections: m.sections.filter((x) => sectionAllowed(student.package, x.anahtar)) }))
+    .filter((m) => m.sections.length);
   const toplam = mods.reduce((t, m) => t + m.sections.length, 0);
   const onayli = [...byId.values()].filter((s) => s.status === "onayli").length;
 
@@ -65,10 +71,16 @@ export default async function DosyamPage({
           {student.package === "temel" ? "Tam pakete geçince yeniden yazabilirsin." : ""}
         </p>
       )}
-      <Link href="/dosyam/buyume-dongum" className="mb-8 block rounded-2xl border border-[#5d47f0]/30 bg-[#5d47f0]/5 p-4">
-        <p className="font-semibold text-[#5d47f0]">Büyüme Döngüm →</p>
-        <p className="text-sm text-gray-600">Her hafta sayıların: kaç doğru kişiye değdin, kaç ilgi geldi, kaç müşteri kazandın.</p>
-      </Link>
+      {free ? (
+        <p className="mb-8 rounded-2xl border border-[#5d47f0]/30 bg-[#5d47f0]/5 p-4 text-sm text-gray-700">
+          Ücretsiz modülün bölümleri burada. GROWT programına katıldığında dosyanın tamamı açılır; burada yazdıkların yerinde kalır.
+        </p>
+      ) : (
+        <Link href="/dosyam/buyume-dongum" className="mb-8 block rounded-2xl border border-[#5d47f0]/30 bg-[#5d47f0]/5 p-4">
+          <p className="font-semibold text-[#5d47f0]">Büyüme Döngüm →</p>
+          <p className="text-sm text-gray-600">Her hafta sayıların: kaç doğru kişiye değdin, kaç ilgi geldi, kaç müşteri kazandın.</p>
+        </Link>
+      )}
       {mods.map((m) => (
         <section key={m.modul} className="mb-8">
           <h2 className="mb-3 text-lg font-bold text-[#232323]">{m.modul}</h2>

@@ -6,7 +6,7 @@ import { dosyamApi } from "@/lib/dosyam/api";
 import { draft } from "@/lib/dosyam/assistant";
 import { approvedDeps, displayText, getChat, quota } from "@/lib/dosyam/assistant-data";
 import { hasAssistant } from "@/lib/dosyam/prompts";
-import { getSection } from "@/lib/dosyam/sections";
+import { getSection, sectionAllowed } from "@/lib/dosyam/sections";
 import { currentStudent, sameOrigin } from "@/lib/dosyam/session";
 
 const err = (status: number, mesaj: string) => Response.json({ ok: false, mesaj }, { status });
@@ -17,7 +17,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ bolum: 
   const student = await currentStudent();
   if (!student) return err(401, "Giriş yap.");
   const section = getSection(bolum);
-  if (!section || !hasAssistant(bolum)) return err(404, "Bu bölümde asistan yok.");
+  if (!section || !hasAssistant(bolum) || !sectionAllowed(student.package, bolum)) return err(404, "Bu bölümde asistan yok.");
   if (student.mode !== "aktif") return err(409, "Dosyan salt okunur.");
   const body = (await req.json().catch(() => ({}))) as { sohbet_id?: string };
   const sohbet = await getChat(student, String(body.sohbet_id ?? ""));

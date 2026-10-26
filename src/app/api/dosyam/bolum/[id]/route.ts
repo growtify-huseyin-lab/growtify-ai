@@ -1,7 +1,7 @@
 // GET  /api/dosyam/bolum/:id — bölümün son sürümü + son onaylı sürüm
 // PUT  /api/dosyam/bolum/:id {data, expected_version?} — taslak kaydet
 import { dosyamApi, type Submission } from "@/lib/dosyam/api";
-import { cleanData, editableFields, getSection, laterFields } from "@/lib/dosyam/sections";
+import { cleanData, editableFields, getSection, laterFields, sectionAllowed } from "@/lib/dosyam/sections";
 import { currentStudent, sameOrigin } from "@/lib/dosyam/session";
 
 const HATA: Record<string, string> = {
@@ -13,7 +13,7 @@ export async function GET(_req: Request, { params }: { params: Promise<{ id: str
   const { id } = await params;
   const student = await currentStudent();
   if (!student) return Response.json({ ok: false }, { status: 401 });
-  if (!getSection(id)) return Response.json({ ok: false }, { status: 404 });
+  if (!getSection(id) || !sectionAllowed(student.package, id)) return Response.json({ ok: false }, { status: 404 });
   const r = await dosyamApi("GET", `/v1/me/sections/${encodeURIComponent(id)}`, { student: student.id });
   return Response.json(r.body, { status: r.status });
 }
@@ -24,7 +24,7 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   const section = getSection(id);
   const student = await currentStudent();
   if (!student) return Response.json({ ok: false }, { status: 401 });
-  if (!section || section.salt_okunur) return Response.json({ ok: false }, { status: 404 });
+  if (!section || section.salt_okunur || !sectionAllowed(student.package, id)) return Response.json({ ok: false }, { status: 404 });
   const body = (await req.json().catch(() => ({}))) as { data?: unknown; expected_version?: number };
   let data = cleanData(section, body.data);
   // Tarih alanında "en geç programın N. günü" sınırı (T5 kontrol günü = 58. gün, ölçüm penceresinin son günü).

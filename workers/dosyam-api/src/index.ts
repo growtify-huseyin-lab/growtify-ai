@@ -145,12 +145,12 @@ async function route(
     if (method === "POST" && path === "/v1/students/upsert") {
       const pkg = str("package");
       const start = str("temel_baslangic");
-      if (!str("ghl_contact_id") || !["temel", "tam"].includes(pkg) || Number.isNaN(Date.parse(start))) {
+      if (!str("ghl_contact_id") || !["free", "temel", "tam"].includes(pkg) || Number.isNaN(Date.parse(start))) {
         return err(400, "gecersiz_ogrenci");
       }
       const s = await upsertStudent(
         db,
-        { ghl_contact_id: str("ghl_contact_id"), package: pkg as "temel" | "tam", temel_baslangic: start, first_name: str("first_name") || null },
+        { ghl_contact_id: str("ghl_contact_id"), package: pkg as "free" | "temel" | "tam", temel_baslangic: start, first_name: str("first_name") || null },
         nowMs,
       );
       return json(200, { ok: true, student: { ...s, mode: effectiveMode(s, nowMs) } });

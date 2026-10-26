@@ -111,6 +111,8 @@ export function openingMessage(sectionId: string, approved: Record<string, Clean
 
 export function dependencyMissing(sectionId: string, approved: Record<string, Clean>): string | null {
   const p = PROMPTS[sectionId];
+  // Ön koşul mesajı tanımlı değilse bağımlı bölümler yalnız bağlamdır, sohbeti engellemez (FREE4B: FREE3/FREE4 doluysa kullanılır).
+  if (!p?.on_kosul_mesaji) return null;
   const missing = ((p?.bagimli ?? []) as string[]).filter((d) => !approved[d]);
   return missing.length ? String(p?.on_kosul_mesaji ?? "Önce bağlı bölümü tamamlayalım.") : null;
 }

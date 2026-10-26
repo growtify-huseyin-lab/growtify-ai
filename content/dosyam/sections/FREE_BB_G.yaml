@@ -57,13 +57,14 @@
   tekrar: tek_sefer
   alanlar:
     - {anahtar: gercek_cikti, soru: "Bu hafta gerçekten kullanacağın hangi mesajı ya da metni yapay zekâyla hazırladın?", aciklama: "Çıktının son halini buraya kopyala; içinde müşteri adı ya da sağlık bilgisi olmasın.", ornek: "Yeni danışana gönderilecek, ilk görüşmeye nasıl hazırlanacağını anlatan kısa karşılama mesajı.", etiket: "Kendi işinden gerçek bir çıktı", olcu: "bu hafta kullanacağın bir mesaj ya da metin", tur: uzun_metin, zorunlu: true, not: kimliksiz}
-    - {anahtar: once_sonra, soru: "Bağlam vermeden ve bağlam vererek aldığın iki cevap arasında ne değişti?", aciklama: "İki cevabı kısaca karşılaştır ve kendi ölçtüğün zaman kazancını not et; bu alan isteğe bağlı.", etiket: "Önce/sonra", olcu: "bağlamsız cevap, bağlamlı cevap, kendi ölçtüğün kazanılan dakika", tur: uzun_metin, zorunlu: false, not: "scriptte topluluk paylaşımı; dosyada isteğe bağlı kopya"}
-    - {anahtar: kazanilan_dakika, soru: "Bu işte kaç dakika kazandın?", aciklama: "Kendi ölçtüğün dakikayı yaz; tahmin değil, ölçtüğün süre.", etiket: "Kazanılan dakika", tur: sayi, zorunlu: false}
+    - {anahtar: once_sonra, soru: "Sence iki sürüm arasındaki en büyük fark ne?", aciklama: "Seni tanımadan ve seni tanıyarak yazılan iki sürümü karşılaştır; kendi cümlenle yaz. Bu alan isteğe bağlı.", etiket: "Önce/sonra", olcu: "bağlamsız cevap, bağlamlı cevap, kendi ölçtüğün kazanılan dakika", tur: uzun_metin, zorunlu: false, not: "scriptte topluluk paylaşımı; dosyada isteğe bağlı kopya"}
+    - {anahtar: kazanilan_dakika, soru: "Bu işte kaç dakika kazandın?", aciklama: "Kendi ölçtüğün dakikayı yaz; tahmin değil, ölçtüğün süre.", etiket: "Kazanılan dakika", tur: sayi, zorunlu: false, sonradan_doldurulur: true}
   tek_olcut: null
   bagimli: [FREE3]
   ghl: null
-  sohbet_kipi: cikar
-  not: "Free.4b ders olarak CEO onayına bağlı (Free.3 'onaylanırsa' diyor)."
+  sohbet_kipi: uret   # CEO 2026-10-26: Growtify Asistanı (prompts/FREE4B.yaml); ücretsiz katmanda tek asistanlı bölüm
+  yonerge: FREE4B
+  not: "Ders kalıyor (CEO 2026-10-26). 2. sürüm (bağlamlı) gercek_cikti alanına onayla girer."
 
 - anahtar: FREE5
   baslik: "Mesele araç değil"
@@ -270,7 +271,7 @@
   modul: Gap Raporum
   tekrar: tek_sefer
   alanlar:
-    - {anahtar: gap_raporu, aciklama: "Profil, Fırsat Haritası ve Bedel kartından kendiliğinden derlenir; sen yazmazsın.", etiket: "Gap Raporum", olcu: "3 sayfa (profil PDF + Fırsat Haritası + Bedel kartı)", tur: referans, kaynak_alanlar: [G2, G5, G6], not: "derlenir; öğrenci yazmaz"}
+    - {anahtar: gap_raporu, aciklama: "Profilin, sektör resmin, Fırsat Haritan, Bedel kartın ve İlk 30 Günün kendiliğinden derlenir; sen yazmazsın.", etiket: "Gap Raporum", olcu: "5 parça (profil · sektör resmi · Fırsat Haritası · Bedel kartı · İlk 30 Günüm); G.1 ile aynı", tur: referans, kaynak_alanlar: [G2, G3, G4, G5, G6], not: "derlenir; öğrenci yazmaz; İlk 30 Günüm bu sayfanın kendi alanları"}
     - {anahtar: dort_hafta_odak, soru: "Önümüzdeki dört haftanın her biri için tek odağın ne?", aciklama: "Her haftaya tek bir odak yaz.", etiket: "İlk 30 Günüm: 4 hafta × tek odak", olcu: "program / deneme / ölçüm şeritleri", tur: tablo, satirlar: ["Hafta 1", "Hafta 2", "Hafta 3", "Hafta 4"], sutunlar: [{anahtar: odak, soru: "Bu hafta tek odağın ne?", aciklama: "Tek bir iş ya da hedef yaz.", ornek: "Haftalık plan taslağını yapay zekâyla hazırlamak", etiket: "Tek odak", tur: kisa_metin}], zorunlu: true}
     - {anahtar: uc_engel, soru: "Seni yolda durdurabilecek üç engel ne ve her birini nasıl aşacaksın?", aciklama: "Her engelin yanına önceden düşündüğün çözümü yaz.", ornek: "Akşam yorgun oluyorum → çalışmayı sabaha alıyorum", etiket: "3 engel + önceden çözüm", tur: liste, adet: 3, zorunlu: true}
     - {anahtar: neden_onemli, soru: "Bu dört hafta senin için neden önemli?", aciklama: "Tek cümle yaz; zorlandığında bunu okuyacaksın.", ornek: "Akşamlarımı geri almak istiyorum.", etiket: "\"Neden önemli\" cümlesi", tur: kisa_metin, zorunlu: true}

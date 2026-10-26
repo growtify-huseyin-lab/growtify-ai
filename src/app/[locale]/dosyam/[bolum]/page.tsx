@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { dosyamApi, type Submission } from "@/lib/dosyam/api";
-import { editableFields, getSection, laterFields, loadSections, olcumBitis, renderSection, type Clean } from "@/lib/dosyam/sections";
+import { editableFields, getSection, laterFields, loadSections, olcumBitis, renderSection, sectionAllowed, type Clean } from "@/lib/dosyam/sections";
+import { refreshFree } from "@/lib/dosyam/login";
 import { currentStudent } from "@/lib/dosyam/session";
 import BolumForm from "@/components/dosyam/BolumForm";
 import { hasAssistant } from "@/lib/dosyam/prompts";
@@ -24,8 +25,10 @@ export default async function BolumPage({
   if (locale !== "tr") notFound();
   const section = getSection(bolum);
   if (!section || bolum === "BUYUME_DONGUM") notFound();
-  const student = await currentStudent();
-  if (!student) redirect(`/dosyam?devam=/dosyam/${bolum}${sp.k ? `&k=${encodeURIComponent(sp.k)}` : ""}`);
+  const oturum = await currentStudent();
+  if (!oturum) redirect(`/dosyam?devam=/dosyam/${bolum}${sp.k ? `&k=${encodeURIComponent(sp.k)}` : ""}`);
+  const student = await refreshFree(oturum);
+  if (!sectionAllowed(student.package, bolum)) redirect("/dosyam");
 
   const [cur, all] = await Promise.all([
     dosyamApi<{ latest: Submission | null; approved: Submission | null }>("GET", `/v1/me/sections/${bolum}`, { student: student.id }),

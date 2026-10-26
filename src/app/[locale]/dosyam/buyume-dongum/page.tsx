@@ -14,7 +14,7 @@ export default async function BuyumePage({ params }: { params: Promise<{ locale:
   const { locale } = await params;
   if (locale !== "tr") notFound();
   const student = await currentStudent();
-  if (!student) redirect("/dosyam");
+  if (!student || student.package === "free") redirect("/dosyam");
   const section = getSection("BUYUME_DONGUM");
   if (!section) notFound();
   const r = await dosyamApi<{ weeks: { week_start: string; data: Record<string, number>; note: string | null }[] }>("GET", "/v1/me/weeks", {

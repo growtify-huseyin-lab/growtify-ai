@@ -168,6 +168,22 @@ test("erişim modu: Temel 28 gün aktif, 58. güne kadar ölçüm, sonra salt ok
   assert.equal((await call(e, "GET", "/v1/me", { student: full, now: later })).body.student.mode, "salt_okunur");
 });
 
+test("free: topluluk üyesi aktif, başlangıç ilk açılışta sabit, Temel alınca aynı kayıt üst pakete geçer", async () => {
+  const e = env();
+  const up = (pkg: string, start: string) =>
+    call(e, "POST", "/v1/students/upsert", { body: { ghl_contact_id: "c-free", package: pkg, temel_baslangic: start } });
+  const a = await up("free", "2026-10-26T00:00:00Z");
+  assert.equal(a.body.student.package, "free");
+  assert.equal(a.body.student.mode, "aktif");
+  const b = await up("free", "2026-11-20T00:00:00Z");
+  assert.equal(b.body.student.temel_baslangic, "2026-10-26T00:00:00Z");
+  assert.equal(b.body.student.id, a.body.student.id);
+  const c = await up("temel", "2026-11-21T00:00:00Z");
+  assert.equal(c.body.student.package, "temel");
+  assert.equal(c.body.student.temel_baslangic, "2026-11-21T00:00:00Z");
+  assert.equal(c.body.student.id, a.body.student.id);
+});
+
 test("giriş kodu: yanlış kod sayılır, 5. denemede kilitlenir; doğru kod bir kez geçer", async () => {
   const e = env();
   const eh = await sha256Hex("ali@ornek.com");

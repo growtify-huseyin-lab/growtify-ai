@@ -4,6 +4,7 @@ import { getPrompt } from "./prompts";
 import type { Clean } from "./sections";
 
 export const GUNLUK_MESAJ = 60; // CEO 2026-10-23
+export const GUNLUK_MESAJ_FREE = 20; // Free: yalnız FREE4B; ~0,20 $/sohbet (Course önerisi 2026-10-26)
 export const GUNLUK_TAVAN_MICRO = Number(process.env.DOSYAM_DAILY_USD_CAP ?? "25") * 1_000_000; // tüm öğrenciler
 
 export type HistoryMsg = { role: "user" | "assistant"; content: unknown };
@@ -57,7 +58,7 @@ export async function quota(student: DosyamStudent): Promise<{ kalan: number; ka
     dosyamApi<{ cost_micro: number }>("GET", "/v1/usage/global"),
   ]);
   return {
-    kalan: Math.max(0, GUNLUK_MESAJ - (mine.body.messages ?? 0)),
+    kalan: Math.max(0, (student.package === "free" ? GUNLUK_MESAJ_FREE : GUNLUK_MESAJ) - (mine.body.messages ?? 0)),
     kapali: (all.body.cost_micro ?? 0) >= GUNLUK_TAVAN_MICRO,
   };
 }

@@ -3927,8 +3927,8 @@
    },
    {
     "anahtar": "once_sonra",
-    "soru": "Bağlam vermeden ve bağlam vererek aldığın iki cevap arasında ne değişti?",
-    "aciklama": "İki cevabı kısaca karşılaştır ve kendi ölçtüğün zaman kazancını not et; bu alan isteğe bağlı.",
+    "soru": "Sence iki sürüm arasındaki en büyük fark ne?",
+    "aciklama": "Seni tanımadan ve seni tanıyarak yazılan iki sürümü karşılaştır; kendi cümlenle yaz. Bu alan isteğe bağlı.",
     "etiket": "Önce/sonra",
     "olcu": "bağlamsız cevap, bağlamlı cevap, kendi ölçtüğün kazanılan dakika",
     "tur": "uzun_metin",
@@ -3941,7 +3941,8 @@
     "aciklama": "Kendi ölçtüğün dakikayı yaz; tahmin değil, ölçtüğün süre.",
     "etiket": "Kazanılan dakika",
     "tur": "sayi",
-    "zorunlu": false
+    "zorunlu": false,
+    "sonradan_doldurulur": true
    }
   ],
   "tek_olcut": null,
@@ -3949,8 +3950,9 @@
    "FREE3"
   ],
   "ghl": null,
-  "sohbet_kipi": "cikar",
-  "not": "Free.4b ders olarak CEO onayına bağlı (Free.3 'onaylanırsa' diyor).",
+  "sohbet_kipi": "uret",
+  "yonerge": "FREE4B",
+  "not": "Ders kalıyor (CEO 2026-10-26). 2. sürüm (bağlamlı) gercek_cikti alanına onayla girer.",
   "_dosya": "FREE_BB_G.yaml"
  },
  {
@@ -4549,16 +4551,18 @@
   "alanlar": [
    {
     "anahtar": "gap_raporu",
-    "aciklama": "Profil, Fırsat Haritası ve Bedel kartından kendiliğinden derlenir; sen yazmazsın.",
+    "aciklama": "Profilin, sektör resmin, Fırsat Haritan, Bedel kartın ve İlk 30 Günün kendiliğinden derlenir; sen yazmazsın.",
     "etiket": "Gap Raporum",
-    "olcu": "3 sayfa (profil PDF + Fırsat Haritası + Bedel kartı)",
+    "olcu": "5 parça (profil · sektör resmi · Fırsat Haritası · Bedel kartı · İlk 30 Günüm); G.1 ile aynı",
     "tur": "referans",
     "kaynak_alanlar": [
      "G2",
+     "G3",
+     "G4",
      "G5",
      "G6"
     ],
-    "not": "derlenir; öğrenci yazmaz"
+    "not": "derlenir; öğrenci yazmaz; İlk 30 Günüm bu sayfanın kendi alanları"
    },
    {
     "anahtar": "dort_hafta_odak",
