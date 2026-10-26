@@ -21,7 +21,7 @@ bu dosyanın o anki özetidir.
 
 | Bileşen | Nerede | Güncel sürüm | Durum |
 |---|---|---|---|
-| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.2.0** | Yayında |
+| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.3.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
 | CRM | Growtify.app CRM (admin.growtify.app) | **1.15.2** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
@@ -421,6 +421,9 @@ bu dosyanın o anki özetidir.
   hatırlanır). CEO'nun CRM sekmesinde dosya yükleme yöntemiyle doğrulandı; yayında değil.
 
 ### Öğrenci paneli (panel.growtify.ai)
+- **2.3.0** — 2026-10-26 — **GHL güncellemesi (bekçi #205): 9 metin** (8 yeni + 1 değişen): etkinlik katılımcı listesinde
+  görünürlük ("Beni listede göster", Görünür/Gizli), "Tarih ve saat", takip edilen gönderilere yorum bildirimi, kurs dili
+  Fransızca/Portekizce. Katalog 5.356, tamamı Türkçe.
 - **2.2.0** — 2026-10-17 — **GHL güncellemesi (bekçi #202 — panel bekçisinin ilk yakaladığı fark): 385 metin** (356 yeni + 29 değişen;
   rozetler, karşılama kurulumu, etkinlik hesap sayfaları, ödeme/deneme metinleri). Katalog 5.011 → 5.358, tamamı Türkçe.
 - **2.1.0** — 2026-10-12 — **Yeni Sadakat (Loyalty) sayfası + GHL'in sonradan eklediği metinler Türkçe** (CEO: "Loyalty sekmesi

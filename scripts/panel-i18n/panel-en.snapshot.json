@@ -1091,6 +1091,7 @@
    "roleUpdatedInPrivateChannel": "Role updated in private channel",
    "newCourseAvailable": "New course added to the group",
    "newEventCreated": "New event created",
+   "followedPostActivity": "New comments on posts you follow",
    "newCourseComment": "New course comment",
    "certificateIssued": "Certificate issued",
    "invoiceReceived": "New invoice received",
@@ -1945,8 +1946,10 @@
      "es": "Spanish",
      "fr-CA": "French (Canada)",
      "fr-FR": "French (France)",
+     "fr": "French",
      "pt-PT": "Portuguese (Portugal)",
      "pt-BR": "Portuguese (Brazil)",
+     "pt": "Portuguese",
      "de": "German",
      "nl": "Dutch",
      "it": "Italian",
@@ -5964,8 +5967,7 @@
     "organizedByLabel": "Organized by",
     "aboutReadMore": "Read more",
     "aboutReadLess": "Read less",
-    "metaDates": "Dates",
-    "metaTime": "Time",
+    "metaDateTime": "Date and time",
     "metaLocation": "Location",
     "metaFormat": "Format",
     "formatInPerson": "In person",
@@ -6067,6 +6069,10 @@
     "attendeesSearchEmptyDescription": "No one matches \"{query}\". Try a different name or email.",
     "attendeesLoadingAriaLabel": "Loading attendees",
     "attendeesOpenDetails": "View details for {name}",
+    "attendeesVisibilityTitle": "Show me in the list",
+    "attendeesVisibilityDescription": "Others can find you in the attendee list and connect with you. Turn off to hide your profile.",
+    "attendeesVisibleTag": "Visible",
+    "attendeesHiddenTag": "Hidden",
     "userBack": "Back",
     "userOpenProfile": "View profile of {name}",
     "userLoadingAria": "Loading profile",
@@ -6248,7 +6254,7 @@
   "dashboard": {
    "welcomeBack": "Welcome back,",
    "welcomeBackName": "{name}! 👋",
-   "welcomeSubtitle": "Here's what happening with your journey.",
+   "welcomeSubtitle": "Here's what's happening with your journey.",
    "stats": {
     "communities": "Communities",
     "courses": "Courses",
@@ -6631,18 +6637,6 @@
    "freeAriaLabel": "Show only free listings"
   },
   "options": {
-   "language": {
-    "en": "English",
-    "es": "Spanish",
-    "fr": "French",
-    "de": "German",
-    "pt": "Portuguese"
-   },
-   "difficulty": {
-    "beginner": "Beginner",
-    "intermediate": "Intermediate",
-    "advanced": "Advanced"
-   },
    "category": {
     "design": "Design",
     "business": "Business",
