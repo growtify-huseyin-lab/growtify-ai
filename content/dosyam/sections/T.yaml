@@ -16,11 +16,11 @@
     - {anahtar: gorunen_gorevler, soru: "Gün boyunca yaptığın görünen görevler neler?", aciklama: "Sekiz ile on iki arasında görev yaz; bunlar ileride yapay zekâya ya da bir yardımcıya gidebilecek işler.", ornek: "Randevu ayarlamak · haftalık plan yazmak · mesajlara cevap vermek · fatura kesmek", etiket: "Görünen görevlerim", olcu: "8–12 görev", tur: liste, adet_min: 8, adet_max: 12, zorunlu: true}
     - {anahtar: gorunmeyen_deger, soru: "Müşterin senden aslında hangi görünmeyen değeri alıyor?", aciklama: "Üç beş değer yaz: güven, anlaşılmak, rahatlama gibi; bunlar seninle büyüyecek şeyler.", ornek: "Yargılanmadan anlaşılmak · kendine güvenin geri gelmesi · yalnız olmadığını bilmek", etiket: "Müşterimin aldığı görünmeyen değer", olcu: "3–5 değer (güven, tanınma, rahatlama…)", tur: liste, adet_min: 3, adet_max: 5, zorunlu: true}
     - {anahtar: koruma_listesi, soru: "Verimli olsa bile hangi beş işi hiç devretmeyeceksin?", aciklama: "Sana anlam veren ilk beş işi yaz; sorumluluk taşıyan bir meslekteysen imza ve son sözü en başa koy.", ornek: "İlk görüşme · planın son kontrolü · zor bir günde danışanla konuşmak", etiket: "Koruma listem", olcu: "Anlam veren, devretmeyeceğim ilk 5 iş · (sorumluluk meslekleri: imza ve son söz en başta)", tur: liste, adet: 5, zorunlu: true}
-  tek_olcut: {soru: "Bugünkü kafes puanın kaç?", aciklama: "Yukarıdaki puan; altmışıncı gün testinde yeniden ölçeceksin.", etiket: "Tek ölçütüm", olcu: "Kafes skoru; 60. gün testinde yeniden (T.5)", tur: sayi, sonradan_doldurulur: false, not: "kafes_testi değeri; yeniden ölçüm T5.altmisinci_gun"}
+  tek_olcut: {soru: "Bugünkü kafes puanın kaç?", aciklama: "Yukarıdaki puan; program bittikten bir ay sonra yeniden ölçeceksin.", etiket: "Tek ölçütüm", olcu: "Kafes skoru; 58. gün kontrolünde yeniden (T.5)", tur: sayi, sonradan_doldurulur: false, not: "kafes_testi değeri; yeniden ölçüm T5.kontrol_gunu"}
   bagimli: [W6]
   ghl:
     - {alan_adi: "GAI - K1 Kafes ve Koruma", tur: buyuk_metin, not: "öneri"}
-    - {alan_adi: "GAI - K1 Kafes Skoru", tur: kisa_metin, not: "öneri; 60. gün kıyası için sayısal tek alan"}
+    - {alan_adi: "GAI - K1 Kafes Skoru", tur: kisa_metin, not: "öneri; 58. gün kıyası için sayısal tek alan"}
     - {etiket: gai_dosya_k1}
   tam_yuvasi: null
   sohbet_kipi: cikar
@@ -119,9 +119,9 @@
   tekrar: tek_sefer
   alanlar:
     - {anahtar: once_sonra_haritasi, aciklama: "Programın başında çözdüğün test ile W aşamasında yeniden çözdüğün test burada yan yana görünür; sen yazmazsın.", etiket: "Önce/sonra haritan", olcu: "G'deki ilk ölçüm ↔ W.5'teki yeniden ölçüm (yan yana)", tur: referans, kaynak_alanlar: [G1.ilk_olcum, G1.yeniden_olcum], not: "G1 motorundan gelir; öğrenci yazmaz. 'Karne' denmez."}
-    - {anahtar: altmisinci_gun, soru: "Altmışıncı gün kontrolünü hangi tarihe koyuyorsun?", aciklama: "O gün Kurucu Dosyanı okuyacak, yönetim saatini yapacak ve kafes testini yeniden çözeceksin; tarihi takvimine koy.", etiket: "60. gün tarihi", olcu: "takvimde · o gün: Kurucu Dosyası okuma + yönetim saati + kafes testi (T.1 puanıyla kıyas)", tur: tarih, zorunlu: true}
+    - {anahtar: kontrol_gunu, soru: "Bir ay sonraki kontrolü takviminde hangi güne koydun?", aciklama: "O gün Kurucu Dosyanı okuyacak, yönetim saatini yapacak ve kafes testini yeniden çözeceksin; tarihi takvimine koy.", etiket: "Kontrol günü (58. gün)", olcu: "takvimde · o gün: Kurucu Dosyası okuma + yönetim saati + kafes testi (T.1 puanıyla kıyas)", tur: tarih, en_gec_gun: 58, zorunlu: true, not: "en geç programın 58. günü (ölçüm penceresi); CEO 2026-10-26"}
     - {anahtar: sonraki_adim, soru: "Buradan sonra hangi yoldan devam etmek istiyorsun?", aciklama: "Kendi başına, Tam Paket ile ya da uzman ekiple devam etmeyi seç ve istersen tek cümleyle nedenini yaz.", etiket: "Bir sonraki adımım", olcu: "kendi başıma · Tam Paket · uzman ekip (tek cümle)", tur: secim, secenekler: ["kendi başıma", "Tam Paket", "uzman ekip"], zorunlu: true, not: "+ tek cümlelik açıklama alanı"}
-  tek_olcut: {soru: "Altmışıncı günde Kurucu Dosyanı hâlâ açıyor musun ve kafes puanın değişti mi?", aciklama: "Altmışıncı günde iki soruyu cevapla ve yeni puanını yaz.", etiket: "Tek ölçütüm", olcu: "60. günde Kurucu Dosyası'nı hâlâ açıyor muyum, kafes skorum değişti mi?", tur: kisa_metin, sonradan_doldurulur: true, not: "60. günde kafes skoru K1.kafes_testi ile kıyaslanır; 28 gün sonrası salt okunur kararıyla çelişebilir (README)"}
+  tek_olcut: {soru: "Bir ay sonra Kurucu Dosyanı hâlâ açıyor musun ve kafes puanın değişti mi?", aciklama: "Kontrol gününde iki soruyu cevapla ve yeni puanını yaz.", etiket: "Tek ölçütüm", olcu: "58. günde Kurucu Dosyası'nı hâlâ açıyor muyum, kafes skorum değişti mi?", tur: kisa_metin, sonradan_doldurulur: true, not: "58. günde kafes skoru K1.kafes_testi ile kıyaslanır; ölçüm penceresinin son günü (CEO 2026-10-26)"}
   bagimli: [K1, K2, K3, K4, W5]
   ghl:
     - {alan_adi: "GAI - T5 Kapanis", tur: buyuk_metin, not: "öneri"}

@@ -17,21 +17,23 @@ interface Props {
   status: "taslak" | "onayli" | null;
   approvedAt: string | null;
   readOnly: boolean;
-  yalnizOlcum?: string; // ölçüm penceresi (Temel bitti): yalnız sonradan doldurulan alanlar açık; değer = son gün
+  yalnizOlcum?: string;
+  programBaslangic?: string; // tarih alanlarındaki "en geç N. gün" sınırı için
+  tekParca?: string; // verilirse bölümün tamamı tek metin olarak kopyalanır (başlık) // ölçüm penceresi (Temel bitti): yalnız sonradan doldurulan alanlar açık; değer = son gün
   asistan?: boolean; // bu bölümde Growtify Asistanı var mı (ders yönergesi tanımlı)
   ust?: React.ReactNode; // sayfa başlığı (asistan açıkken formla birlikte sola kayar)
 }
 
 const input = "w-full rounded-xl border border-gray-300 px-3 py-2 text-base focus:border-[#5d47f0] focus:outline-none disabled:bg-gray-50";
 
-function Field({ f, value, onChange, disabled }: { f: FieldDef; value: Val; onChange: (v: Val) => void; disabled: boolean }) {
+function Field({ f, value, onChange, disabled, max }: { f: FieldDef; value: Val; onChange: (v: Val) => void; disabled: boolean; max?: string }) {
   switch (f.tur) {
     case "uzun_metin":
       return <textarea rows={4} className={input} placeholder={f.ornek} disabled={disabled} value={(value as string) ?? ""} onChange={(e) => onChange(e.target.value)} />;
     case "sayi":
       return <input type="number" inputMode="decimal" className={input} disabled={disabled} value={(value as number | undefined) ?? ""} onChange={(e) => onChange(e.target.value === "" ? undefined : Number(e.target.value))} />;
     case "tarih":
-      return <input type="date" className={input} disabled={disabled} value={(value as string) ?? ""} onChange={(e) => onChange(e.target.value)} />;
+      return <input type="date" className={input} disabled={disabled} max={max} value={(value as string) ?? ""} onChange={(e) => onChange(e.target.value)} />;
     case "secim": {
       const opts = f.secenekler ?? [];
       if (f.coklu) {
@@ -117,7 +119,32 @@ function Field({ f, value, onChange, disabled }: { f: FieldDef; value: Val; onCh
   }
 }
 
-export default function BolumForm({ id, fields, refs, initial, version, status, approvedAt, readOnly, yalnizOlcum, asistan, ust }: Props) {
+// Tek parça kopya (O2 → öğrencinin kendi yapay zekâsı): her alan başlığıyla, kaynak alanlar kaynağın onaylı içeriğiyle.
+function tekMetin(baslik: string, fields: FieldDef[], refs: Record<string, string>, data: Data): string {
+  const deger = (f: FieldDef): string => {
+    const v = data[f.anahtar];
+    if (f.tur === "referans") return (f.kaynak_alanlar ?? []).map((k) => refs[k]).filter(Boolean).join("\n\n");
+    if (Array.isArray(v)) {
+      return v
+        .map((x) => (x && typeof x === "object" ? Object.values(x as Data).filter((y) => y !== undefined && y !== "").join(" · ") : String(x ?? "")))
+        .filter((x) => x.trim())
+        .map((x) => `- ${x}`)
+        .join("\n");
+    }
+    return v === undefined || v === null ? "" : String(v);
+  };
+  const parcalar = fields.map((f) => [f.etiket, deger(f).trim()] as const).filter(([, v]) => v);
+  return [`# ${baslik}`, ...parcalar.map(([e, v]) => `## ${e}\n${v}`)].join("\n\n");
+}
+
+function sonGun(baslangic: string | undefined, gun: number | undefined): string | undefined {
+  if (!baslangic || !gun) return undefined;
+  const t = Date.parse(baslangic);
+  return Number.isNaN(t) ? undefined : new Date(t + (gun - 1) * 86_400_000).toISOString().slice(0, 10);
+}
+
+export default function BolumForm({ id, fields, refs, initial, version, status, approvedAt, readOnly, yalnizOlcum, programBaslangic, tekParca, asistan, ust }: Props) {
+  const [kopyalandi, setKopyalandi] = useState(false);
   const [asistanAcik, setAsistanAcik] = useState(false);
   const asistanVar = Boolean(asistan && !readOnly);
   const [data, setData] = useState<Data>(initial);
@@ -230,6 +257,7 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
             <Field
               f={f}
               disabled={readOnly || bekle || (Boolean(yalnizOlcum) && !f.sonradan_doldurulur)}
+              max={sonGun(programBaslangic, f.en_gec_gun)}
               value={data[f.anahtar]}
               onChange={(v) => {
                 setData((d) => ({ ...d, [f.anahtar]: v }));
@@ -239,6 +267,30 @@ export default function BolumForm({ id, fields, refs, initial, version, status, 
           )}
         </div>
       ))}
+      {tekParca && (
+        <div className="rounded-2xl border border-[#5d47f0]/30 bg-[#5d47f0]/5 p-4">
+          <p className="font-semibold text-[#232323]">Kendi yapay zekâna taşı</p>
+          <p className="mb-3 text-sm text-gray-600">
+            Dosyanın tamamı tek metin olarak kopyalanır; kendi yapay zekânın proje ya da talimat alanına yapıştır.
+          </p>
+          <button
+            type="button"
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(tekMetin(tekParca, fields, refs, data));
+                setKopyalandi(true);
+                setTimeout(() => setKopyalandi(false), 2500);
+              } catch {
+                setMesaj("Kopyalanamadı; tarayıcın panoya erişime izin vermedi.");
+              }
+            }}
+            className="rounded-xl px-4 py-2 font-semibold text-white"
+            style={{ background: PRIMARY }}
+          >
+            {kopyalandi ? "Kopyalandı ✓" : "Tümünü kopyala"}
+          </button>
+        </div>
+      )}
       {readOnly ? (
         <p className="rounded-xl bg-amber-50 p-4 text-sm text-amber-800">Dosyan şu an salt okunur: görüntüleyebilir ve kopyalayabilirsin.</p>
       ) : (

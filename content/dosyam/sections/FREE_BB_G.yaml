@@ -2,7 +2,8 @@
 # Kaynak: scriptler/free, buradan-basla, g teslimleri (2026-10-23). Bu scriptlerde teslimler "GROWT defteri"ne yazılıyor;
 # Çalışma Dosyam'da bu defterin karşılığı bu bölümlerdir (README açık nokta: "GROWT defteri" adı scriptlerde güncellenmeli mi).
 # G1 testi bizim sitemizde ayrı çalışır; G1'den gelen profil / ölçüm / bedel rakamları SALT OKUNUR (G1 motoru yazar).
-# Free dersleri Temel öncesi (ücretsiz katman) — Çalışma Dosyam'a dahil olup olmadığı CEO kararı (README).
+# CEO KARARI 2026-10-26: ücretsiz kullanıcı da Çalışma Dosyam'ı kullanır — yalnız Free bölümleri, asistansız; Temel'e geçince aynı kayıt sürer.
+# Scriptler 2026-10-26 v2'de "GROWT defteri" yerine Çalışma Dosyam'a hizalandı.
 # Teslimlerin çoğu "ders altı görev kutusu"; alan ölçüleri scriptte gevşek, uydurma alan eklenmedi.
 
 # ---------- Free ----------

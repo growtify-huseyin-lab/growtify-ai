@@ -1,7 +1,7 @@
 // GET  /api/dosyam/bolum/:id — bölümün son sürümü + son onaylı sürüm
 // PUT  /api/dosyam/bolum/:id {data, expected_version?} — taslak kaydet
 import { dosyamApi, type Submission } from "@/lib/dosyam/api";
-import { cleanData, getSection, laterFields } from "@/lib/dosyam/sections";
+import { cleanData, editableFields, getSection, laterFields } from "@/lib/dosyam/sections";
 import { currentStudent, sameOrigin } from "@/lib/dosyam/session";
 
 const HATA: Record<string, string> = {
@@ -27,6 +27,15 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
   if (!section || section.salt_okunur) return Response.json({ ok: false }, { status: 404 });
   const body = (await req.json().catch(() => ({}))) as { data?: unknown; expected_version?: number };
   let data = cleanData(section, body.data);
+  // Tarih alanında "en geç programın N. günü" sınırı (T5 kontrol günü = 58. gün, ölçüm penceresinin son günü).
+  for (const f of editableFields(section)) {
+    if (f.tur !== "tarih" || !f.en_gec_gun || typeof data[f.anahtar] !== "string") continue;
+    const son = Date.parse(student.temel_baslangic) + (f.en_gec_gun - 1) * 86_400_000;
+    if (Date.parse(String(data[f.anahtar])) > son) {
+      const tarih = new Date(son).toLocaleDateString("tr-TR");
+      return Response.json({ ok: false, mesaj: `${f.etiket}: en geç ${tarih} olabilir (programın ${f.en_gec_gun}. günü).` }, { status: 400 });
+    }
+  }
   if (student.mode === "olcum") {
     // Ölçüm penceresi: yalnız sonradan doldurulan alanlar değişir; geri kalanı kayıtlı hâlinden alınır.
     const later = laterFields(section).map((f) => f.anahtar);
