@@ -45,8 +45,8 @@ export interface SectionDef {
   not?: string;
 }
 
-// Öğrencinin dosyasındaki modüller ve sırası. FREE_BB_G dahil mi — CEO kararı bekliyor (Course README); şimdilik dışarıda.
-const FILES = ["R.yaml", "O.yaml", "OV.yaml", "W.yaml", "BUYUME_DONGUM.yaml", "T.yaml"];
+// Öğrencinin dosyasındaki modüller ve sırası: Başlangıç (Free, Buradan Başla, G) → Rota → … (CEO 2026-10-26: Free dahil).
+const FILES = ["FREE_BB_G.yaml", "R.yaml", "O.yaml", "OV.yaml", "W.yaml", "BUYUME_DONGUM.yaml", "T.yaml"];
 
 let cache: SectionDef[] | null = null;
 
@@ -54,6 +54,7 @@ export function loadSections(): SectionDef[] {
   if (cache) return cache;
   cache = (sectionsJson as unknown as (SectionDef & { _dosya: string })[])
     .filter((s) => FILES.includes(s._dosya))
+    .sort((a, b) => FILES.indexOf(a._dosya) - FILES.indexOf(b._dosya)) // dosya içi sıra korunur (kararlı sıralama)
     .map((s) => (s.tek_olcut ? { ...s, tek_olcut: { ...s.tek_olcut, anahtar: "tek_olcut" } } : s));
   return cache;
 }

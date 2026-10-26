@@ -3,12 +3,14 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { cleanData, fieldKeyFromName, getSection, loadSections, missingRequired, modules, outboxFor } from "../../src/lib/dosyam/sections";
 
-test("tanımlar: 34 bölüm dosyada (FREE/BB/G hariç), anahtarlar tekil", () => {
+test("tanımlar: 51 bölüm (Free/BB/G dahil, en başta), anahtarlar tekil", () => {
   const all = loadSections();
-  assert.equal(all.length, 34);
+  assert.equal(all.length, 51);
   assert.equal(new Set(all.map((s) => s.anahtar)).size, all.length);
   assert.ok(getSection("R2") && getSection("BUYUME_DONGUM"));
-  assert.equal(getSection("G1"), undefined);
+  // 2026-10-26: FREE_BB_G yüklenmiyordu → Free/BB/G sayfaları 404. Free, Buradan Başla ve G dosyada ve ilk sırada.
+  for (const k of ["FREE2", "FREE4B", "BB1", "G1", "G2"]) assert.ok(getSection(k), k);
+  assert.equal(all[0].anahtar.startsWith("FREE"), true);
   assert.ok(!modules().some((m) => m.sections.some((s) => s.anahtar === "BUYUME_DONGUM")));
 });
 
