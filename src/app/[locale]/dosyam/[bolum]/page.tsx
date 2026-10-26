@@ -49,6 +49,13 @@ export default async function BolumPage({
       }
     }
   }
+  // Kaynağı başka bölümde olan yazılabilir metin alanları (ör. O2 "Ses" ← R2.ses) boşsa kaynakla başlar; öğrenci tamamlar.
+  const initial = { ...((latest?.data ?? {}) as Record<string, unknown>) };
+  for (const f of editableFields(section)) {
+    if (f.tur !== "kisa_metin" && f.tur !== "uzun_metin") continue;
+    const kaynak = (f.kaynak_alanlar ?? []).map((k) => refs[k]).filter(Boolean).join("\n\n");
+    if (kaynak && (initial[f.anahtar] === undefined || initial[f.anahtar] === "")) initial[f.anahtar] = kaynak;
+  }
   const eksikBagimli = (section.bagimli ?? []).filter(
     (b) => !(all.body.sections ?? []).some((s) => s.section_id === b && s.status === "onayli"),
   );
@@ -75,7 +82,9 @@ export default async function BolumPage({
         id={section.anahtar}
         fields={[...section.alanlar.filter((f) => f.tur === "referans"), ...editableFields(section)]}
         refs={refs}
-        initial={(latest?.data ?? {}) as Record<string, unknown>}
+        initial={initial}
+        programBaslangic={student.temel_baslangic}
+        tekParca={/kopyala/i.test(section.ek_teslim ?? "") ? section.baslik : undefined}
         version={latest?.version ?? 0}
         status={latest?.status ?? null}
         approvedAt={cur.body.approved?.approved_at ?? null}

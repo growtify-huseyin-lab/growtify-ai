@@ -3325,12 +3325,12 @@
   ],
   "tek_olcut": {
    "soru": "Bugünkü kafes puanın kaç?",
-   "aciklama": "Yukarıdaki puan; altmışıncı gün testinde yeniden ölçeceksin.",
+   "aciklama": "Yukarıdaki puan; program bittikten bir ay sonra yeniden ölçeceksin.",
    "etiket": "Tek ölçütüm",
-   "olcu": "Kafes skoru; 60. gün testinde yeniden (T.5)",
+   "olcu": "Kafes skoru; 58. gün kontrolünde yeniden (T.5)",
    "tur": "sayi",
    "sonradan_doldurulur": false,
-   "not": "kafes_testi değeri; yeniden ölçüm T5.altmisinci_gun"
+   "not": "kafes_testi değeri; yeniden ölçüm T5.kontrol_gunu"
   },
   "bagimli": [
    "W6"
@@ -3344,7 +3344,7 @@
    {
     "alan_adi": "GAI - K1 Kafes Skoru",
     "tur": "kisa_metin",
-    "not": "öneri; 60. gün kıyası için sayısal tek alan"
+    "not": "öneri; 58. gün kıyası için sayısal tek alan"
    },
    {
     "etiket": "gai_dosya_k1"
@@ -3718,13 +3718,15 @@
     "not": "G1 motorundan gelir; öğrenci yazmaz. 'Karne' denmez."
    },
    {
-    "anahtar": "altmisinci_gun",
-    "soru": "Altmışıncı gün kontrolünü hangi tarihe koyuyorsun?",
+    "anahtar": "kontrol_gunu",
+    "soru": "Bir ay sonraki kontrolü takviminde hangi güne koydun?",
     "aciklama": "O gün Kurucu Dosyanı okuyacak, yönetim saatini yapacak ve kafes testini yeniden çözeceksin; tarihi takvimine koy.",
-    "etiket": "60. gün tarihi",
+    "etiket": "Kontrol günü (58. gün)",
     "olcu": "takvimde · o gün: Kurucu Dosyası okuma + yönetim saati + kafes testi (T.1 puanıyla kıyas)",
     "tur": "tarih",
-    "zorunlu": true
+    "en_gec_gun": 58,
+    "zorunlu": true,
+    "not": "en geç programın 58. günü (ölçüm penceresi); CEO 2026-10-26"
    },
    {
     "anahtar": "sonraki_adim",
@@ -3743,13 +3745,13 @@
    }
   ],
   "tek_olcut": {
-   "soru": "Altmışıncı günde Kurucu Dosyanı hâlâ açıyor musun ve kafes puanın değişti mi?",
-   "aciklama": "Altmışıncı günde iki soruyu cevapla ve yeni puanını yaz.",
+   "soru": "Bir ay sonra Kurucu Dosyanı hâlâ açıyor musun ve kafes puanın değişti mi?",
+   "aciklama": "Kontrol gününde iki soruyu cevapla ve yeni puanını yaz.",
    "etiket": "Tek ölçütüm",
-   "olcu": "60. günde Kurucu Dosyası'nı hâlâ açıyor muyum, kafes skorum değişti mi?",
+   "olcu": "58. günde Kurucu Dosyası'nı hâlâ açıyor muyum, kafes skorum değişti mi?",
    "tur": "kisa_metin",
    "sonradan_doldurulur": true,
-   "not": "60. günde kafes skoru K1.kafes_testi ile kıyaslanır; 28 gün sonrası salt okunur kararıyla çelişebilir (README)"
+   "not": "58. günde kafes skoru K1.kafes_testi ile kıyaslanır; ölçüm penceresinin son günü (CEO 2026-10-26)"
   },
   "bagimli": [
    "K1",

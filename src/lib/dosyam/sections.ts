@@ -25,6 +25,7 @@ export interface FieldDef {
   referans?: boolean; // yazılabilir alan + üstünde kaynak alanların içeriği gösterilir (OV2)
   hesaplanan?: boolean;
   sonradan_doldurulur?: boolean;
+  en_gec_gun?: number; // tarih alanı: programın en geç N. günü (T5 kontrol günü = 58)
   not?: string;
 }
 
@@ -40,6 +41,7 @@ export interface SectionDef {
   bagimli?: string[];
   sohbet_kipi?: string;
   salt_okunur?: boolean;
+  ek_teslim?: string; // "kopyala" geçiyorsa bölümün tamamı tek parça kopyalanır (O2 Beyin Dosyam)
   not?: string;
 }
 
