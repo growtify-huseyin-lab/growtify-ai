@@ -1172,5 +1172,15 @@
  "Describe what your agent should do...": "Ajanının ne yapması gerektiğini anlat...",
  "Describe your agent": "Ajanını anlat",
  "Tag added": "Etiket eklendi",
- "Web search": "Web araması"
+ "Web search": "Web araması",
+ "Templates": "Şablonlar",
+ "Delivered": "Teslim edildi",
+ "Opened": "Açıldı",
+ "Clicked": "Tıklandı",
+ "Ordered": "Sipariş verildi",
+ "Email delivered": "Teslim edilen e-posta",
+ "Total delivery": "Toplam teslimat",
+ "Open rate": "Açılma oranı",
+ "Email sequences": "E-posta dizileri",
+ "Verified sender emails": "Doğrulanmış gönderen e-postaları"
 }

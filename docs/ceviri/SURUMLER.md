@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.3.1** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.19.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.19.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -36,6 +36,7 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.19.1** — 2026-10-28 — E-posta pazarlama: "Templates" sekmesi ve etkileşim grafiği etiketleri (birden çok karşılığı olduğu için yedek sözlükte yoktu) sayfa sözlüğüne. Canlı kontrol: E-posta pazarlama, Ajan Stüdyosu, Ödemeler > Ürünler Türkçe.
 - **1.19.0** — 2026-10-28 — **Yedek sözlük + tam ekran turu.** CEO: "çeviriler yine karışık", "tüm sistemi tara baştan sona".
   Ekran turu (323 sayfa, tıklamalı) 495 İngilizce metin buldu. Kök neden: GHL bazı uygulamaları kabuğa kendi (dışarıdan
   erişilemeyen) dil nesneleriyle yerleştiriyor — E-posta pazarlama ana sayfası (eskiden iframe), Ödemeler (kupon, ürün,
