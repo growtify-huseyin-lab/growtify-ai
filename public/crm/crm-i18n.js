@@ -524,7 +524,11 @@
       return d + " " + ms(m1);
     }],
     [new RegExp("^(Created on: )?(\\d{1,2}) " + M + " (\\d{4})(,? .*)?$"), function (x, pre, d, m1, y, rest) {
-      return (pre ? "Oluşturulma: " : "") + d + " " + ms(m1) + " " + y + (rest || "");
+      // "Created on: 24 Jun 2026, 9:32 PM (GMT +03)" → "Oluşturulma: 24 Haz 2026, 21:32 (GMT +03)"
+      rest = (rest || "").replace(/(\d{1,2}):(\d{2}) ?(AM|PM|am|pm)\b/, function (z, h, mm, ap) {
+        return to24(h, mm, ap);
+      });
+      return (pre ? "Oluşturulma: " : "") + d + " " + ms(m1) + " " + y + rest;
     }],
     [new RegExp("^" + M + " (\\d{4})$"), function (x, m1, y) {
       return MONTHS_TR[m1.slice(0, 3).toLowerCase()] + " " + y;
