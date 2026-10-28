@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.3.1** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.17.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.18.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -36,6 +36,7 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.18.0** — 2026-10-28 — **Copilot (Yapay Zekaya Sor) Türkçe: 1.458 metin** (bekçi #245 kabuk kısmı). GHL'in yeni yapay zeka yardımcısı `copilotApp` (projeler, güvenli depo, bilgisayar kullanımı, alt hesap toplu işlemleri). 325 mevcut çeviriden, 1.133 yeni (5 paralel çeviri, validate 0 hata). Kabuk taraması 103 sayfa.
 - **1.17.1** — 2026-10-28 — Günlük kontrol (bekçi #245): E-postalar + e-posta oluşturucu 8 yeni + 22 değişen (gelen kutusu önizlemesi "Generate" → "Prepare", kampanya zamanlamasında segment dondurma). Kabuk taraması ayrı.
 - **1.17.0** — 2026-10-26 — **GHL güncellemesi (bekçi #204) — kabuk: 3.587 metin.** Yeni WordPress barındırma uygulaması
   (`wordpressApp`, 3.044), güç arayıcı (186), bloglar (115), şablon kütüphanesi (86), fırsatlar, telefon sistemi (34), özel
