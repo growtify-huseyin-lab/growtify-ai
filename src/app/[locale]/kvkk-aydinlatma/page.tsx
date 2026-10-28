@@ -216,6 +216,11 @@ export default async function KVKKAydinlatmaPage({ params }: { params: Promise<{
                 sunulması amacıyla
               </li>
               <li>
+                Analiz ve reklam ölçüm hizmet sağlayıcıları (Google, Meta) —
+                yalnızca çerez tercihlerinizde izin vermeniz halinde, site
+                kullanımının analizi ve reklam performansının ölçülmesi amacıyla
+              </li>
+              <li>
                 Yasal zorunluluk halinde yetkili kamu kurum ve kuruluşları
               </li>
             </ul>
