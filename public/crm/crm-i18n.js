@@ -506,6 +506,14 @@
     [new RegExp("^([^:]{1,40}: )?" + M + " (\\d{1,2}),? (\\d{4}),? (\\d{1,2}):(\\d{2}) ?(AM|PM|am|pm)( \\((?:GMT|UTC) ?[+-]?\\d{1,2}(?::?\\d{2})?\\))?$"), function (x, pre, m1, d, y, h, mm, ap, tz) {
       return (pre || "") + d + " " + ms(m1) + " " + y + " " + to24(h, mm, ap) + (tz || "");
     }],
+    // "Oct 1 at 04:40 PM", "Oct 1, 2026 at 4:40 PM" (ürün/sipariş listeleri) → "1 Eki 16:40", "1 Eki 2026 16:40"
+    [new RegExp("^" + M + " (\\d{1,2})(?:,? (\\d{4}))? at (\\d{1,2}):(\\d{2}) ?(AM|PM|am|pm)$"), function (x, m1, d, y, h, mm, ap) {
+      return d + " " + ms(m1) + (y ? " " + y : "") + " " + to24(h, mm, ap);
+    }],
+    // "Today at 4:40 PM" / "Yesterday at 9:05 AM" / "Tomorrow at …"
+    [/^(Today|Yesterday|Tomorrow) at (\d{1,2}):(\d{2}) ?(AM|PM|am|pm)$/, function (x, w, h, mm, ap) {
+      return { Today: "Bugün", Yesterday: "Dün", Tomorrow: "Yarın" }[w] + " " + to24(h, mm, ap);
+    }],
     [new RegExp("^" + M + " (\\d{1,2}) (\\d{4})$"), function (x, m1, d, y) {
       return d + " " + ms(m1) + " " + y;
     }],
