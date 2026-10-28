@@ -1771,6 +1771,37 @@
       return false;
     }
   }
+  /* Yedek sözlük (crm-yedek.json): GHL'in kabuğa kendi dil nesnesiyle yerleştirdiği uygulamalarda (E-posta pazarlama,
+   * Ödemeler, Ajan Stüdyosu…) katalog örneğine ulaşılamıyor; metinlerin çoğu kataloğumuzda zaten var. Sayfa açıldıktan
+   * sonra arka planda bir kez indirilir; sayfa sözlüğünde olmayan birebir eşleşmeler eklenir ve ekran yeniden taranır.
+   * Sayfa sözlüğü önceliklidir (üzerine yazılmaz). */
+  var yedekState = 0;
+  function loadYedek() {
+    if (FRAME || yedekState || !catalog || !catalog.text || catalog.noDom) return;
+    yedekState = 1;
+    var run = function () {
+      fetch(BASE + "crm-yedek.json?v=" + encodeURIComponent(catalog.version || ""))
+        .then(function (r) {
+          return r.ok ? r.json() : null;
+        })
+        .then(function (j) {
+          if (!j || !j.text || mode !== "tr") return;
+          var d = catalog.text;
+          for (var k in j.text) if (!Object.prototype.hasOwnProperty.call(d, k)) d[k] = j.text[k];
+          if (LCACHE) LCACHE.clear();
+          trTree(document.body, d);
+          yedekState = 2;
+        })
+        .catch(function () {
+          yedekState = 0; // sonraki açılışta yeniden dener
+        });
+    };
+    var idle = window.requestIdleCallback || function (f) { return setTimeout(f, 1); };
+    setTimeout(function () {
+      idle(run, { timeout: 4000 });
+    }, 2500);
+  }
+
   function loadCatalog() {
     if (catalog || loading || Date.now() < nextLoad) return;
     if (window.__gaiCrmCatalog) {
@@ -1789,6 +1820,7 @@
         catalog = j;
         markVersion();
         scanCatalog();
+        loadYedek();
       })
       .catch(loadFailed);
   }

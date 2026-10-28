@@ -132,6 +132,33 @@ const catalog = {
   textPages: Object.fromEntries(Object.entries(fs.existsSync(path.join(dir, "source", "dom-pages.json")) ? src("dom-pages.json") : {}).map(([p, d]) => [p, clean(d)])), // yalnız o sayfada geçerli metinler
 };
 fs.writeFileSync(out, JSON.stringify(catalog));
+
+// Yedek sözlük (crm-yedek.json): GHL bazı uygulamaları kabuğa kendi dil nesneleriyle (dışarıdan erişilemeyen) yerleştiriyor
+// (ör. 2026-10: E-posta pazarlama ana sayfası, Ödemeler, Ajan Stüdyosu). Metinleri çoğu zaman kataloğumuzda zaten var;
+// yükleyici bu dosyayı sayfa açıldıktan sonra arka planda indirir ve ekranda İngilizce kalan metne birebir uygular.
+// Yalnız güvenli eşleşmeler: yer tutucusuz, işaretlemesiz, ≤140 karakter, İngilizceden farklı ve TEK Türkçe karşılığı olan.
+// Oluşturucu tuvalleri (form/page/ebuild) hariç; sayfa sözlüğündeki metinler zaten var.
+{
+  const seen = new Map();
+  for (const [k, v] of Object.entries(en)) {
+    const pfx = k.split("::")[0];
+    // Çerçeve uygulamaları kendi çerçevesinde çevriliyor; e-posta ana sayfası 2026-10'da kabuğa taşındığı için dahil.
+    if ((frameIds.includes(pfx) && pfx !== "email") || ["form", "page", "ebuild"].includes(pfx)) continue;
+    const t = tr[k];
+    if (typeof v !== "string" || typeof t !== "string") continue;
+    const e = v.trim();
+    if (e.length < 2 || e.length > 140 || /[{}|@<>]/.test(e) || /[{}<>]/.test(t) || t.trim() === e) continue;
+    if (Object.prototype.hasOwnProperty.call(catalog.text, e)) continue;
+    const prev = seen.get(e);
+    if (prev === undefined) seen.set(e, t.trim());
+    else if (prev !== t.trim()) seen.set(e, null); // birden çok farklı karşılık → belirsiz, kullanılmaz
+  }
+  const text = {};
+  for (const [e, t] of seen) if (t) text[e] = t;
+  const yedekOut = path.join(path.dirname(out), "crm-yedek.json");
+  fs.writeFileSync(yedekOut, JSON.stringify({ version: VERSION, text }));
+  console.error(`crm-yedek.json: ${Object.keys(text).length} metin, ${(fs.statSync(yedekOut).size / 1024) | 0} KB`);
+}
 const framesDir = path.join(path.dirname(out), "frames");
 fs.mkdirSync(framesDir, { recursive: true });
 const frameReport = {};
