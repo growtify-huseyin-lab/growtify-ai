@@ -21,10 +21,10 @@ bu dosyanın o anki özetidir.
 
 | Bileşen | Nerede | Güncel sürüm | Durum |
 |---|---|---|---|
-| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.3.0** | Yayında |
+| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.3.1** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.0** | Yayında (2026-10-03 doğrulandı) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.17.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.17.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -36,6 +36,7 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.17.1** — 2026-10-28 — Günlük kontrol (bekçi #245): E-postalar + e-posta oluşturucu 8 yeni + 22 değişen (gelen kutusu önizlemesi "Generate" → "Prepare", kampanya zamanlamasında segment dondurma). Kabuk taraması ayrı.
 - **1.17.0** — 2026-10-26 — **GHL güncellemesi (bekçi #204) — kabuk: 3.587 metin.** Yeni WordPress barındırma uygulaması
   (`wordpressApp`, 3.044), güç arayıcı (186), bloglar (115), şablon kütüphanesi (86), fırsatlar, telefon sistemi (34), özel
   nesneler, pazar yeri, kuponlar. Kabuk taraması admin.growtify.app'te (rota listesinden uygulama başına 1 sayfa, 103 sayfa;
@@ -430,6 +431,7 @@ bu dosyanın o anki özetidir.
   hatırlanır). CEO'nun CRM sekmesinde dosya yükleme yöntemiyle doğrulandı; yayında değil.
 
 ### Öğrenci paneli (panel.growtify.ai)
+- **2.3.1** — 2026-10-28 — Bekçi #247: 2 metin (bildirimlerde "Daha fazla / az göster").
 - **2.3.0** — 2026-10-26 — **GHL güncellemesi (bekçi #205): 9 metin** (8 yeni + 1 değişen): etkinlik katılımcı listesinde
   görünürlük ("Beni listede göster", Görünür/Gizli), "Tarih ve saat", takip edilen gönderilere yorum bildirimi, kurs dili
   Fransızca/Portekizce. Katalog 5.356, tamamı Türkçe.
