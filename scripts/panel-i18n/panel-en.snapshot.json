@@ -1,5 +1,4 @@
 {
- "welcome": "Welcome",
  "auth": {
   "branding": {
    "defaultPortalName": "ClientPortal"
@@ -289,7 +288,9 @@
   "whenYouGetNotifications": "When you get notifications, they'll appear here",
   "notificationItem": "Notification Item",
   "notificationBadge": "Notification badge",
-  "user": "User"
+  "user": "User",
+  "showMore": "Show more",
+  "showLess": "Show less"
  },
  "payment": {
   "failed": {
