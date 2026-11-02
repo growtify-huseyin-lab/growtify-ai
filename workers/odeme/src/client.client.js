@@ -366,6 +366,12 @@
   }
   setTimeout(markReady, 4000);
 
+  // Sunucunun çizdiği İngilizce ilk halden kalan etiketler (GHL'in kendi metinleri).
+  var EN_LEFT = /(^|\n)\s*(First Name|Last Name|Subtotal|Recurring Products|One-time Products)\s*\*?\s*(\n|$)/;
+  function domEnglish() {
+    try { return EN_LEFT.test(document.body.innerText || ""); } catch (e) { return false; }
+  }
+
   function apply() {
     try {
       var list = getComposers();
@@ -382,7 +388,9 @@
       if (document.documentElement.lang !== "tr") document.documentElement.lang = "tr";
       if (document.title !== TITLE) document.title = TITLE;
       // Vue değişikliği boyamadan önce (mikro görevde) uygular; İngilizce görünmez.
-      if (list[0].t(SENTINEL) === TR.paymentLink.firstName) markReady();
+      // GHL sayfanın ilk halini sunucuda İngilizce çiziyor; uygulama onu ~1 sn sonra Türkçeyle değiştiriyor.
+      // Mesajlar Türkçe olsa da ekranda İngilizce kaldıkça sayfayı açma (emniyet süresi yine geçerli).
+      if (list[0].t(SENTINEL) === TR.paymentLink.firstName && !domEnglish()) markReady();
     } catch (e) {}
   }
 
