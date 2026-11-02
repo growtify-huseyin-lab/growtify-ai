@@ -39,7 +39,7 @@ const HEADER_HTML = `
     <span class="gai-pay-header__secure">${LOCK_SVG}<span>Güvenli Ödeme</span></span>
   </div>
 </header>
-<div class="gai-pay-loader" role="status" aria-live="polite"><span class="gai-pay-loader__spin" aria-hidden="true"></span><span>Ödeme sayfası hazırlanıyor…</span></div>`;
+<div class="gai-pay-loader" role="status" aria-live="polite"><div class="gai-pay-loader__w" aria-hidden="true">growtify<span class="gai-pay-loader__d">.</span></div><div class="gai-pay-loader__b" aria-hidden="true"><i></i></div><span class="gai-pay-loader__t">Ödeme sayfası hazırlanıyor…</span></div>`;
 
 function footerHtml(year) {
   return `
