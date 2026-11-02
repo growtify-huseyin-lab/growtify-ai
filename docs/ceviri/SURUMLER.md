@@ -22,7 +22,7 @@ bu dosyanın o anki özetidir.
 | Bileşen | Nerede | Güncel sürüm | Durum |
 |---|---|---|---|
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.3.1** | Yayında |
-| Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.1.1** | Kod main'de, Worker yayını bekliyor (CEO) |
+| Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Kod main'de, Worker yayını bekliyor (CEO) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
 | CRM | Growtify.app CRM (admin.growtify.app) | **1.19.3** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
@@ -463,6 +463,8 @@ bu dosyanın o anki özetidir.
 - **1.0.0** — 2026-06-03 — Harici yükleyici (`community-i18n.js`, GHL Header Code'da tek satır), DOM sözlüğü.
 
 ### Ödeme sayfası (odeme.growtify.app)
+- **1.2.0** — 2026-11-02 — Yükleme ekranı: dönen halka yerine CRM'in gömülü ekranlarındaki Growtify animasyonu
+  ("growtify" + zıplayan nokta + akan çubuk), koyu zemine uyarlandı; 0,3 sn sonra belirir (kısa yüklemede görünmez).
 - **1.1.1** — 2026-11-02 — GHL sayfanın ilk halini sunucuda İngilizce çizmeye başladı; sayfa Türkçe mesajlar yüklenince
   açıldığı için ~1 sn "First Name / Subtotal / Pay" görünüyordu. Artık ekranda İngilizce etiket kalmayınca açılıyor
   (emniyet süresi 3,5 sn aynı). Sayfa üzerinde ölçüldü: İngilizce aralıkta kapalı, Türkçe gelince açık.
