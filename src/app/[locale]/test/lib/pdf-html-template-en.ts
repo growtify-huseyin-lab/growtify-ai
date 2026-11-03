@@ -480,7 +480,7 @@ export function generatePdfHtml(state: QuizState, couponCode?: string, couponExp
     </div>
   </div>
 
-  <div class="p2-footer">This report is an automated assessment based on the answers given to the Growtify.ai AI Digital Maturity Test. It does not constitute or replace professional, legal, financial, or medical advice. Results are based on individual perception and are not an objective measurement. The statistics and percentages are calculated from your test answers. Your personal data is processed under the GDPR and is not shared with third parties. © ${new Date().getFullYear()} Growtify — growtify.ai</div>
+  <div class="p2-footer">This report is an automated assessment based on the answers given to the Growtify.ai AI Digital Maturity Test. It does not constitute or replace professional, legal, financial, or medical advice. Results are based on individual perception and are not an objective measurement. The statistics and percentages are calculated from your test answers. Your personal data is processed under the GDPR. © ${new Date().getFullYear()} Growtify — growtify.ai</div>
 </div>
 
 </body>

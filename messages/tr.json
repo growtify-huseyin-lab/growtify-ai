@@ -163,6 +163,10 @@
     "submitting": "Gönderiliyor...",
     "submit": "Gönder"
   },
+  "FormPrivacyC": {
+    "notice": "Kişisel verilerin, <link>KVKK Aydınlatma Metni</link>'nde açıklandığı şekilde işlenir.",
+    "href": "/kvkk-aydinlatma"
+  },
   "LeadFormC": {
     "successHeading": "{formatLabel} hazır!",
     "successEmailNote": "Ayrıca email adresine de gönderdik.",
