@@ -136,9 +136,15 @@ fs.writeFileSync(out, JSON.stringify(catalog));
 // Yedek sözlük (crm-yedek.json): GHL bazı uygulamaları kabuğa kendi dil nesneleriyle (dışarıdan erişilemeyen) yerleştiriyor
 // (ör. 2026-10: E-posta pazarlama ana sayfası, Ödemeler, Ajan Stüdyosu). Metinleri çoğu zaman kataloğumuzda zaten var;
 // yükleyici bu dosyayı sayfa açıldıktan sonra arka planda indirir ve ekranda İngilizce kalan metne birebir uygular.
-// Yalnız güvenli eşleşmeler: yer tutucusuz, işaretlemesiz, ≤140 karakter, İngilizceden farklı ve TEK Türkçe karşılığı olan.
+// Yalnız güvenli eşleşmeler: yer tutucusuz, işaretlemesiz, ≤600 karakter, İngilizceden farklı, TEK Türkçe karşılığı olan ve
+// bizim Türkçe çıktılarımızdan biriyle aynı yazılmayan.
 // Oluşturucu tuvalleri (form/page/ebuild) hariç; sayfa sözlüğündeki metinler zaten var.
 {
+  // Bizim Türkçe çıktılarımızla aynı yazılan İngilizce metinler yedeğe girmez: "First Name" → "Ad" çevrildikten sonra
+  // yedek "Ad"ı (İng. reklam) bir kez daha çevirip "Reklam" yapıyordu (2026-11-03).
+  const trOut = new Set();
+  for (const t of Object.values(tr)) if (typeof t === "string") trOut.add(t.trim());
+  for (const t of Object.values(catalog.text)) if (typeof t === "string") trOut.add(t.trim());
   const seen = new Map();
   for (const [k, v] of Object.entries(en)) {
     const pfx = k.split("::")[0];
@@ -147,8 +153,9 @@ fs.writeFileSync(out, JSON.stringify(catalog));
     const t = tr[k];
     if (typeof v !== "string" || typeof t !== "string") continue;
     const e = v.trim();
-    if (e.length < 2 || e.length > 140 || /[{}|@<>]/.test(e) || /[{}<>]/.test(t) || t.trim() === e) continue;
-    if (Object.prototype.hasOwnProperty.call(catalog.text, e)) continue;
+    // Uzun metin (paragraf) tek anlamlıdır, belirsizlik riski düşük: 600 karaktere kadar (ör. kişi silme uyarısı).
+    if (e.length < 2 || e.length > 600 || /[{}|@<>]/.test(e) || /[{}<>]/.test(t) || t.trim() === e) continue;
+    if (Object.prototype.hasOwnProperty.call(catalog.text, e) || trOut.has(e)) continue;
     const prev = seen.get(e);
     if (prev === undefined) seen.set(e, t.trim());
     else if (prev !== t.trim()) seen.set(e, null); // birden çok farklı karşılık → belirsiz, kullanılmaz

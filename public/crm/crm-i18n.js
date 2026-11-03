@@ -941,9 +941,10 @@
     var core = t.trim();
     if (!core) return;
     if (core.length > 160) {
-      // Uzun paragraflar yalnız sayfanın kendi sözlüğünde aranır (ör. Laboratuvar açıklamaları).
+      // Uzun paragraflar yalnız birebir eşleşmeyle çevrilir: sayfanın kendi sözlüğü (ör. Laboratuvar açıklamaları) ya da
+      // genel sözlük/yedek (ör. kişi silme uyarısı; uygulama dil nesnesine dışarıdan erişilemiyor).
       var pd = pageDict();
-      if (!pd || !Object.prototype.hasOwnProperty.call(pd, core)) return;
+      if (!(pd && Object.prototype.hasOwnProperty.call(pd, core)) && !(core.length <= 600 && Object.prototype.hasOwnProperty.call(dict, core))) return;
     }
     var tr = lookup(core, dict);
     tr = fixMoney(tr === null ? core : tr);

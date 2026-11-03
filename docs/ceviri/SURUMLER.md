@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.3.1** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Kod main'de, Worker yayını bekliyor (CEO) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.19.3** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.20.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
@@ -36,6 +36,12 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.20.0** — 2026-11-03 — **"Ad" → "Reklam" hatası düzeldi** (CEO: "tüm sistemde Name Reklam olarak çevrilmiş"): "First Name"
+  doğru şekilde "Ad"a çevriliyor, sonra yedek sözlük bu "Ad"ı İngilizce "ad" (reklam) sanıp bir kez daha çeviriyordu. Artık
+  bizim Türkçe çıktılarımızla aynı yazılan İngilizce metinler yedeğe girmiyor (zincirleme çeviri sınıfı kapandı). Uzun metinler
+  (≤600 karakter) birebir eşleşmeyle çevriliyor: kişi silme uyarısı Türkçe + "Silinen kişileri geri yükleme süresi: 60 gün."
+  GHL güncellemesi (2026-10-28…31): e-posta düzenleyici "Vibe Editor" → "AI editor" (4 metin, "Yapay zeka düzenleyici"),
+  ayarlarda yeni yetki başlığı "İçerik Üretici Stüdyosu". Yedek sözlük 50.023 → 51.037 metin.
 - **1.19.3** — 2026-10-28 — Konuşmalar: "Oluşturulma: 24 Haz 2026, 9:32 PM" → "…, 21:32" (saat 24 saat biçiminde). 15 liste sayfası tarandı, başka İngilizce tarih kalmadı.
 - **1.19.2** — 2026-10-28 — Tarihler (CEO: "tarihleri de Türkçe yap"): "Oct 1 at 04:40 PM" → "1 Eki 16:40", yıllısı "1 Eki 2026 16:40"; "Today/Yesterday/Tomorrow at …" → "Bugün/Dün/Yarın 16:40".
 - **1.19.1** — 2026-10-28 — E-posta pazarlama: "Templates" sekmesi ve etkileşim grafiği etiketleri (birden çok karşılığı olduğu için yedek sözlükte yoktu) sayfa sözlüğüne. Canlı kontrol: E-posta pazarlama, Ajan Stüdyosu, Ödemeler > Ürünler Türkçe.

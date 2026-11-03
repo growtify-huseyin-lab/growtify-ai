@@ -22160,7 +22160,7 @@
  "email::emailBuilder.assist.starter.libBlank": "Kod Düzenleyici",
  "email::emailBuilder.assist.starter.libHtml": "Tasarım Düzenleyici",
  "email::emailBuilder.assist.starter.libText": "Metin Düzenleyici",
- "email::emailBuilder.assist.starter.libVibeEditor": "Vibe Editor",
+ "email::emailBuilder.assist.starter.libVibeEditor": "Yapay zeka düzenleyici",
  "email::emailBuilder.assist.starter.minutesAgo": "{count} dk önce",
  "email::emailBuilder.assist.starter.noItemsBody": "Aramanı değiştirmeyi dene.",
  "email::emailBuilder.assist.starter.noItemsTitle": "Şablon bulunamadı",
@@ -23757,8 +23757,8 @@
  "email::emailTemplate.designEditor": "Tasarım düzenleyici",
  "email::emailTemplate.designEditorSubText": "Görsel, sürükle-bırak düzenleme.",
  "email::emailTemplate.disabled": "Devre dışı",
- "email::emailTemplate.editWithVibeEditor": "Vibe Editor ile Düzenle",
- "email::emailTemplate.editWithVibeEditorHelper": "Bu şablonu yapay zeka destekli Vibe Editor ile aç",
+ "email::emailTemplate.editWithVibeEditor": "Yapay zeka düzenleyiciyle düzenle",
+ "email::emailTemplate.editWithVibeEditorHelper": "Bu şablonu yapay zeka düzenleyicisinde aç",
  "email::emailTemplate.emailTemplateLower": "e-posta şablonu",
  "email::emailTemplate.emptyState.createPrompt": "Yeni bir şablon oluştur",
  "email::emailTemplate.emptyState.noFolders": "Klasör yok",
@@ -23848,7 +23848,7 @@
  "email::emailTemplate.updatedPermission": "İzin güncellendi",
  "email::emailTemplate.uploadTemplate": "E-posta şablonlarına yükle",
  "email::emailTemplate.uploadTemplateHelper": "Bu şablonu şablon kütüphanesine yükle",
- "email::emailTemplate.vibeEditor": "Vibe Editor",
+ "email::emailTemplate.vibeEditor": "Yapay zeka düzenleyici",
  "email::emails.aiContent.error.contentGenerationFailed": "Yapay zeka içeriği oluşturulamadı veya geçersiz biçimde döndü",
  "email::emails.aiContent.error.googleTokenFailed": "Google erişim token'ı alınamadı",
  "email::emails.aiContent.error.themeGenerationFailed": "Yapay zeka teması oluşturulamadı veya geçersiz biçimde döndü",
@@ -131543,5 +131543,6 @@
  "shell::copilotApp.copilot.askAi.announce.newSkills.title": "Yeni becerilerle ilgili karar gerekiyor",
  "shell::copilotApp.copilot.askAi.announce.newSkills.body": "Yapay Zekaya Sor'a {count} beceri eklendi. Hangi erişim düzeylerinin bunları alacağını incele.",
  "shell::copilotApp.copilot.askAi.announce.newSkills.bodyOne": "Yapay Zekaya Sor'a {count} beceri eklendi. Hangi erişim düzeylerinin bunu alacağını incele.",
- "shell::copilotApp.copilot.askAi.announce.newSkills.cta": "Yeni becerileri incele"
+ "shell::copilotApp.copilot.askAi.announce.newSkills.cta": "Yeni becerileri incele",
+ "crmset::user.permission.heading.creatorStudio": "İçerik Üretici Stüdyosu"
 }

@@ -1182,5 +1182,7 @@
  "Total delivery": "Toplam teslimat",
  "Open rate": "Açılma oranı",
  "Email sequences": "E-posta dizileri",
- "Verified sender emails": "Doğrulanmış gönderen e-postaları"
+ "Verified sender emails": "Doğrulanmış gönderen e-postaları",
+ "You can restore deleted contacts within": "Silinen kişileri geri yükleme süresi:",
+ "60 days": "60 gün"
 }
