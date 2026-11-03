@@ -254,6 +254,7 @@ const personalize: KurumsalScreenConfig[] = [
     subtitle: "Strateji gorusmesi icin sizinle iletisime gececegiz.",
     placeholder: "+90 5XX XXX XX XX",
     cta: "Raporumu Olustur",
+    submitTrigger: true,
   },
 ];
 
