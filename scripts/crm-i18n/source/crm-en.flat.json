@@ -22173,7 +22173,7 @@
  "email::emailBuilder.assist.starter.libBlank": "Code Editor",
  "email::emailBuilder.assist.starter.libHtml": "Design Editor",
  "email::emailBuilder.assist.starter.libText": "Text Editor",
- "email::emailBuilder.assist.starter.libVibeEditor": "Vibe Editor",
+ "email::emailBuilder.assist.starter.libVibeEditor": "AI editor",
  "email::emailBuilder.assist.starter.minutesAgo": "{count}m ago",
  "email::emailBuilder.assist.starter.noItemsBody": "Try adjusting your search.",
  "email::emailBuilder.assist.starter.noItemsTitle": "No templates found",
@@ -23779,8 +23779,8 @@
  "email::emailTemplate.designEditor": "Design editor",
  "email::emailTemplate.designEditorSubText": "Visual, drag & drop editing.",
  "email::emailTemplate.disabled": "Disabled",
- "email::emailTemplate.editWithVibeEditor": "Edit with Vibe Editor",
- "email::emailTemplate.editWithVibeEditorHelper": "Open this template in the AI-powered Vibe Editor",
+ "email::emailTemplate.editWithVibeEditor": "Edit with AI editor",
+ "email::emailTemplate.editWithVibeEditorHelper": "Open this template in the AI editor",
  "email::emailTemplate.emailTemplateLower": "email template",
  "email::emailTemplate.emptyState.createPrompt": "Create a new template",
  "email::emailTemplate.emptyState.noFolders": "No folders",
@@ -23870,7 +23870,7 @@
  "email::emailTemplate.updatedPermission": "Updated permission",
  "email::emailTemplate.uploadTemplate": "Upload to email templates",
  "email::emailTemplate.uploadTemplateHelper": "Upload this template to the template library",
- "email::emailTemplate.vibeEditor": "Vibe Editor",
+ "email::emailTemplate.vibeEditor": "AI editor",
  "email::emails.aiContent.error.contentGenerationFailed": "AI content generation failed or returned invalid format",
  "email::emails.aiContent.error.googleTokenFailed": "Failed to obtain Google access token",
  "email::emails.aiContent.error.themeGenerationFailed": "AI theme generation failed or returned invalid format",
@@ -132062,5 +132062,6 @@
  "shell::copilotApp.copilot.askAi.announce.newSkills.body": "{count} skills were added to Ask AI. Review which access levels get them.",
  "shell::copilotApp.copilot.askAi.announce.newSkills.bodyOne": "{count} skill was added to Ask AI. Review which access levels get it.",
  "shell::copilotApp.copilot.askAi.announce.newSkills.cta": "Review new skills",
- "pay-a::error.paypalGiftCardNotSupported": "A gift card can't be combined with a saved PayPal card. Remove the gift card or choose another payment method."
+ "pay-a::error.paypalGiftCardNotSupported": "A gift card can't be combined with a saved PayPal card. Remove the gift card or choose another payment method.",
+ "crmset::user.permission.heading.creatorStudio": "Creator Studio"
 }
