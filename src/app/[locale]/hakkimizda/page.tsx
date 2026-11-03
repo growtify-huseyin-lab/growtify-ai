@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { localeAltPair } from "@/lib/seo-alternates";
 import { Link } from "@/i18n/navigation";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { ArrowRight, Lightbulb, Target, Heart, Rocket } from "lucide-react";
 import { CTA } from "@/components/sections/CTA";
-import { COMMUNITY_URL } from "@/lib/gtag";
+import { COMMUNITY_URL, EN_COMMUNITY_URL } from "@/lib/gtag";
 import { BookingModal } from "@/components/BookingModal";
 
 export async function generateMetadata({
@@ -26,6 +26,7 @@ export async function generateMetadata({
 
 export default async function HakkimizdaPage() {
   const t = await getTranslations("HakkimizdaPage");
+  const locale = await getLocale();
 
   const values = [
     {
@@ -99,7 +100,7 @@ export default async function HakkimizdaPage() {
       name: t("ecosystemCommunityName"),
       category: t("ecosystemCommunityCategory"),
       description: t("ecosystemCommunityDescription"),
-      href: COMMUNITY_URL,
+      href: locale === "en" ? EN_COMMUNITY_URL : COMMUNITY_URL,
       external: true,
       cta: t("ecosystemCommunityCta"),
     },

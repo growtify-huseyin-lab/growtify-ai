@@ -5,7 +5,7 @@ import { useLocale } from "next-intl";
 import { useState, FormEvent, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Loader2, CheckCircle2, AlertCircle, Download, Users } from "lucide-react";
-import { trackEvent } from "@/lib/gtag";
+import { trackEvent, COMMUNITY_URL, EN_COMMUNITY_URL } from "@/lib/gtag";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -140,7 +140,10 @@ export function RehberForm({ sektor }: RehberFormProps) {
             {t("communityDescription")}
           </p>
           <a
-            href="https://panel.growtify.ai/communities/groups/growtify-ai/"
+            href={locale === "en" ? EN_COMMUNITY_URL : COMMUNITY_URL}
+            onClick={() =>
+              trackEvent("join_group", { method: "community_cta", source: "guide_form_success" })
+            }
             target="_blank"
             rel="noopener noreferrer"
             className="mt-5 inline-flex items-center gap-2 rounded-xl border-2 border-primary/20 bg-primary/5 px-5 py-2.5 text-sm font-semibold text-primary transition hover:border-primary/40 hover:bg-primary/10"
