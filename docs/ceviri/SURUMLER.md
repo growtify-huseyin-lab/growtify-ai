@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.4.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Yayında (2026-11-02, Worker 9c3284d1) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.21.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.22.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.2** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.3** | Yayında |
@@ -36,6 +36,11 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.22.0** — 2026-11-07 — Ana ekran taraması (103 sayfa): GHL güncellemesinden 207 yeni metin. "Yapay Zekaya Sor"un yeni
+  **bilgisayar** özelliği (152: kontrol al/geri ver, arka plan işleri, onay türleri, Güvenli Depo'ya oturum kaydı, örnek
+  görevler TR'ye uyarlandı), **üyelik/müşteri portalı geçiş duyurusu** (klasik portal 1 Aralık 2026'da kalkıyor, 30 Kasım'a
+  kadar geri dönülebilir), Facebook ve Instagram Mağazaları, Facebook sorun giderme, telefon numarası A2P durumları (12).
+  "HighLevel Marketplace" → "Uygulama Pazarı" (white-label). Doğrulama 207/207, 0 hata. GHL bekçi izleri güncellendi.
 - **1.21.0** — 2026-11-07 — GHL güncellemesi (2026-11-02…06), gömülü ekranlar 28 yeni metin: sayfa oluşturucuda yeni
   **stok durumu** ayarları (23: Stokta var / Stokta az kaldı / Son {token} adet / Stokta yok, renkler, eşik), form (fatura
   adresi, "Otomatik" yükseklik), iş akışı arama anahtar kelimeleri (Metin, Metin mesajı), satış ortaklığı (ürün yükleme hatası).
