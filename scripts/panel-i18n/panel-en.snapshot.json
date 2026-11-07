@@ -93,11 +93,15 @@
    "button": "Proceed to sign in"
   },
   "setPassword": {
+   "heading": "Set your password",
    "newPasswordLabel": "New password",
    "newPasswordPlaceholder": "At least 8 characters",
    "confirmPasswordLabel": "Confirm password",
    "confirmPasswordPlaceholder": "Re-enter your password",
    "button": "Set password",
+   "successHeading": "Password set successfully",
+   "successMessage": "Your password has been set successfully.",
+   "goToDashboard": "Go to dashboard",
    "sessionFinalizeFailed": "We couldn't complete your sign-in. Please try signing in again."
   },
   "resetPasswordPage": {
@@ -1254,7 +1258,20 @@
     "feedback": "This is the email you login with"
    },
    "password": {
-    "section_title": "Change Password"
+    "section_title": "Change Password",
+    "set_section_title": "Set Password",
+    "set_description": "We will email you a link to set your password.",
+    "set_action": "Set Password",
+    "set_cooldown_message": "Please check your inbox. Resend in {seconds}s",
+    "set_link_sent": {
+     "title": "Set password link sent",
+     "description": "Check your email",
+     "content": "Set password link sent to your email",
+     "meta": "Set password",
+     "error_title": "Could not send set password link",
+     "error_description": "Try again",
+     "error_content": "Something went wrong"
+    }
    },
    "current_password": {
     "label": "Current Password",
@@ -3776,7 +3793,43 @@
    "gamificationAndRewards": "Gamification & Rewards",
    "gamificationDescription": "Decide how members earn points, name your levels, and set up rewards.",
    "gamificationTabLevels": "Levels",
+   "gamificationTabPointSources": "Point sources",
    "gamificationTabRewards": "Rewards",
+   "pointSourcesHeading": "Point sources",
+   "pointSourcesDescription": "Members earn points automatically for the actions below. A member's total points set their level. Set any value to 0 to turn an action off.",
+   "pointSourcesPostsTitle": "Posts",
+   "pointSourcesPostsHelper": "Points awarded to the author when a post is published.",
+   "pointSourcesParticipationTitle": "Participation",
+   "pointSourcesParticipationHelper": "Points awarded for engaging beyond posting.",
+   "pointSourcesModerationTitle": "Moderation",
+   "pointSourcesModerationHelper": "Points deducted from the author when an admin confirms content as spam.",
+   "pointSourcesReactionsTitle": "Reactions received",
+   "pointSourcesReactionsHelper": "Give the author points each time someone reacts to their post or comment. Use carefully — it can reward popularity over participation.",
+   "pointSourcesAdvancedBadge": "Advanced",
+   "pointSourcesPtsLabel": "pts",
+   "pointSourcePostText": "Text post",
+   "pointSourcePostTextDescription": "A post with text only.",
+   "pointSourcePostMedia": "Image, video or GIF post",
+   "pointSourcePostMediaDescription": "A post with at least one image, video or GIF.",
+   "pointSourcePostAudio": "Audio post",
+   "pointSourcePostAudioDescription": "A post with an audio clip or voice note.",
+   "pointSourceComments": "Comment",
+   "pointSourceCommentsDescription": "Each comment or reply on someone else's post or comment — not your own.",
+   "pointSourceConfirmedSpam": "Confirmed spam",
+   "pointSourceConfirmedSpamDescription": "Applies to posts and comments.",
+   "pointSourceInvitedUser": "Successful invite",
+   "pointSourceInvitedUserDescription": "When someone they invited joins the community.",
+   "pointSourceComingSoon": "Coming soon",
+   "pointSourcePostReactions": "Reactions on post",
+   "pointSourcePostReactionsDescription": "Points go to the author when someone reacts to their post.",
+   "pointSourceCommentReactions": "Reactions on comment",
+   "pointSourceCommentReactionsDescription": "Points go to the author when someone reacts to their comment.",
+   "gamificationPointSourcesLoadFailed": "Could not load point sources. Please refresh and try again.",
+   "gamificationPointSourcesSaveFailed": "Point sources could not be saved. Your previous values are still shown. Please try again.",
+   "gamificationPointSourceValidation": {
+    "pointSourcePointsOutOfRange": "Points for {event} must be between {min} and {max}",
+    "pointSourcePointsNotInteger": "Points for {event} must be a whole number"
+   },
    "levelTitleOnly": "Level {id}",
    "levelStartsAtZero": "Starts at 0 pts",
    "levelNeedsPoints": "Needs {points} pts",
@@ -3786,7 +3839,10 @@
    "levelScaleBarTop": "{points} pts",
    "levelEditorLabel": "Level {id}",
    "gamificationLevelsLoadFailed": "Could not load level thresholds. Please refresh and try again.",
-   "gamificationRewardsSaveFailedAfterLevels": "Level changes were saved, but rewards could not be saved. Please try again.",
+   "gamificationRewardsSaveFailedAfterLevels": "Your other changes were saved, but rewards could not be saved. Please try again.",
+   "gamificationRewardsSaveFailedAfterPartialSave": "Some settings were saved, but rewards failed to save. Please try saving again.",
+   "courseCompletionOverridesSaveFailedAfterPartialSave": "Some settings were saved, but course completion points failed to save. Please try saving again.",
+   "levelFallback": "Level {level}",
    "gamificationValidation": {
     "exactLevelCount": "Exactly {count} levels are required",
     "minPointsNonNegative": "Level {level} points must be a non-negative number",
@@ -3894,6 +3950,21 @@
     "commentContextUnavailable": "The post this comment was left on is no longer available.",
     "commentIsReply": "· reply",
     "commentNeedsReview": "Needs review"
+   },
+   "courseCompletionOverridesTitle": "Course completion",
+   "courseCompletionOverridesHelper": "Set custom points for specific courses. Courses you haven't added award no points. Points are awarded only to members who complete the course after you add it.",
+   "courseCompletionOverridesEmptyTitle": "No course overrides",
+   "courseCompletionOverridesEmpty": "Add a course to award points when members complete it.",
+   "courseCompletionOverridesAddCourse": "Add course",
+   "courseCompletionOverridesRemove": "Remove",
+   "courseCompletionOverridesPickCourse": "Select a course",
+   "courseCompletionOverridesLoadFailed": "Could not load course completion points. Please refresh and try again.",
+   "courseCompletionOverridesForbidden": "You do not have permission to change course completion points.",
+   "courseCompletionOverridesNotFound": "That course is no longer in this group.",
+   "courseUntitled": "Untitled course",
+   "gamificationCourseCompletionOverrideValidation": {
+    "courseCompletionOverrideOutOfRange": "Override points must be between {min} and {max}",
+    "courseCompletionOverrideNotInteger": "Override points must be a whole number"
    }
   },
   "customCode": {
@@ -5580,7 +5651,7 @@
    "referralLink": "Referral link",
    "copyLink": "Copy link",
    "linkCopied": "Link copied!",
-   "customiseReferralId": "Customise Referral ID",
+   "customiseReferralId": "Customize Referral ID",
    "commission": "Commission",
    "clicks": "Clicks",
    "leads": "Leads",
@@ -5612,7 +5683,7 @@
    "customReferralUpdatedTitle": "Referral ID updated",
    "customReferralUpdateFailedTitle": "Could not update referral ID",
    "customiseReferralIdModal": {
-    "title": "Customise referral ID",
+    "title": "Customize referral ID",
     "campaignName": "Campaign name: {name}",
     "referralIdLabel": "Referral ID",
     "referralIdPlaceholder": "Enter referral ID",
@@ -6199,6 +6270,7 @@
     "exhibitorCenterEditWebsiteInvalid": "Enter a valid https:// URL.",
     "exhibitorCenterEditSave": "Save changes",
     "exhibitorCenterEditSaveFailed": "Couldn't save your changes. Try again.",
+    "exhibitorCenterEditDescriptionLocked": "The organizer has locked this description, so your changes weren't saved.",
     "exhibitorsOpenDetails": "View details for {name}",
     "exhibitorsBoothLabel": "Booth {number}",
     "exhibitorsBoothNoteLine": "{booth} - {note}",

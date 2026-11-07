@@ -21,14 +21,14 @@ bu dosyanın o anki özetidir.
 
 | Bileşen | Nerede | Güncel sürüm | Durum |
 |---|---|---|---|
-| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.3.1** | Yayında |
-| Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Kod main'de, Worker yayını bekliyor (CEO) |
+| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.4.0** | Yayında |
+| Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Yayında (2026-11-02, Worker 9c3284d1) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.20.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
-| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.1** | Yayında |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.21.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.2** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
-| Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.2** | Yayında |
-| Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.6** | Yayında |
+| Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.3** | Yayında |
+| Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.7** | Yayında |
 | Üyelikler > Kurslar (ürünler, kurs düzenleyici, teklif ayrıntıları) | crm-uyelik.growtify.app (backend.memberships.apisystem.tech) | **1.15.2** | Yayında |
 | E-posta oluşturucu | crm-eposta-tasarim.growtify.app (email-builder-prod) — şablon düzenleyici CRM sayfasında; kampanya düzenleyicisi E-postalar içinde iç içe | **1.8.1** | Açık (önce hazırla ile): şablon düzenleyici CRM sayfasında, kampanya düzenleyicisi E-postalar içinde iç içe |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
@@ -36,6 +36,10 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.21.0** — 2026-11-07 — GHL güncellemesi (2026-11-02…06), gömülü ekranlar 28 yeni metin: sayfa oluşturucuda yeni
+  **stok durumu** ayarları (23: Stokta var / Stokta az kaldı / Son {token} adet / Stokta yok, renkler, eşik), form (fatura
+  adresi, "Otomatik" yükseklik), iş akışı arama anahtar kelimeleri (Metin, Metin mesajı), satış ortaklığı (ürün yükleme hatası).
+  Gömülü ekran sürümleri: sayfa 1.6.7, form 1.6.3, iframe ekranları (otomasyon, ortaklık) 1.4.2. Doğrulama: 28/28, 0 hata.
 - **1.20.0** — 2026-11-03 — **"Ad" → "Reklam" hatası düzeldi** (CEO: "tüm sistemde Name Reklam olarak çevrilmiş"): "First Name"
   doğru şekilde "Ad"a çevriliyor, sonra yedek sözlük bu "Ad"ı İngilizce "ad" (reklam) sanıp bir kez daha çeviriyordu. Artık
   bizim Türkçe çıktılarımızla aynı yazılan İngilizce metinler yedeğe girmiyor (zincirleme çeviri sınıfı kapandı). Uzun metinler
@@ -450,6 +454,9 @@ bu dosyanın o anki özetidir.
   hatırlanır). CEO'nun CRM sekmesinde dosya yükleme yöntemiyle doğrulandı; yayında değil.
 
 ### Öğrenci paneli (panel.growtify.ai)
+- **2.4.0** — 2026-11-07 — GHL güncellemesi: 66 yeni + 3 değişen metin. Topluluk oyunlaştırmasında yeni **puan kaynakları**
+  (gönderi, yorum, tepki, davet, onaylanmış spam) ve **kurs tamamlama puanları**; hesap ekranında e-postayla **şifre belirleme**
+  akışı; satış ortaklığında "Customise" → "Customize" yazım değişikliği (Türkçe aynı kaldı). Panel bekçisi kaydı #255.
 - **2.3.1** — 2026-10-28 — Bekçi #247: 2 metin (bildirimlerde "Daha fazla / az göster").
 - **2.3.0** — 2026-10-26 — **GHL güncellemesi (bekçi #205): 9 metin** (8 yeni + 1 değişen): etkinlik katılımcı listesinde
   görünürlük ("Beni listede göster", Görünür/Gizli), "Tarih ve saat", takip edilen gönderilere yorum bildirimi, kurs dili
