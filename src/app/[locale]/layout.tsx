@@ -9,6 +9,7 @@ import { Footer } from "@/components/layout/Footer";
 import { CommunityCTA } from "@/components/CommunityCTA";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { CookieBanner } from "@/components/legal/CookieBanner";
+import { MetaPixel } from "@/components/MetaPixel";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { routing } from "@/i18n/routing";
 
@@ -157,6 +158,7 @@ export default async function LocaleLayout({
             <CommunityCTA source="site-wide" />
             <Footer />
             <CookieBanner />
+            <MetaPixel />
             <GoogleAnalytics />
           </NextIntlClientProvider>
         </ThemeProvider>
