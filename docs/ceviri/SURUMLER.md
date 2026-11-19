@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.5.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Yayında (2026-11-02, Worker 9c3284d1) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.24.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.24.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.3** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.6.0** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.3** | Yayında |
@@ -36,6 +36,8 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.24.1** — 2026-11-19 — Sohbetler boş kutu düğmesi: GHL kelimeleri tek tek dizdiği için "Görüntüle Tümü Ekip gelen kutusu
+  Sohbetler" çıkıyordu → "Tüm Ekip gelen kutusu sohbetlerini görüntüle" (sayfa kuralı).
 - **1.24.0** — 2026-11-19 — Ana ekran **tam sayfa sayfa tarama** (CEO: "tümü güncel olsun"; 126 sayfa, liste yeniden
   çıkarıldı): **7.230 anahtar**. 5.651'i GHL'in eski metinleri yeni anahtarlara taşıması (aynı İngilizce → mevcut Türkçe
   kullanıldı), 1.579'u gerçekten yeni: müşteri portalı oluşturucu (383: roller ve erişim, yeni portal geçişi), reklam

@@ -398,5 +398,13 @@
  [
   "^(\\d+) Üyes$",
   "$1 Üye"
+ ],
+ [
+  "^Görüntüle Tümü (.+) Sohbetler$",
+  "Tüm $1 sohbetlerini görüntüle"
+ ],
+ [
+  "^View All (.+) Conversations$",
+  "Tüm $1 sohbetlerini görüntüle"
  ]
 ]
