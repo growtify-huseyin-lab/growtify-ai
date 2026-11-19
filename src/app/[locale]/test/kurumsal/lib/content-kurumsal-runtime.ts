@@ -34,6 +34,7 @@ function mergeScreen(base: KurumsalScreenConfig): KurumsalScreenConfig {
     phaseName: base.phaseName,
     type: base.type,
     stateKey: base.stateKey,
+    submitTrigger: base.submitTrigger,
     likertMin: override.likertMin ?? base.likertMin,
     likertMax: override.likertMax ?? base.likertMax,
     options: mergeOptions(base.options, override.options as KurumsalOptionItem[] | undefined),

@@ -19,15 +19,10 @@ export function TextInputScreen({ screen }: { screen: ScreenConfig }) {
 
   const isEmail = key === "email";
   const isPhone = key === ("phone" as string);
-  // Submit trigger: only fire on screens with explicit submit CTA
-  const isSubmitTrigger =
-    screen.cta === "Planımı Hazırla" ||
-    screen.cta === "Raporumu Oluştur" ||
-    screen.cta === "Raporumu Olustur" ||
-    screen.cta === "Prepare My Plan" ||
-    screen.cta === "Generate My Plan" ||
-    screen.cta === "Generate My Report" ||
-    screen.cta === "Create My Report"; // EN kurumsal submit screen (screen 17) — was missing → EN POST never fired
+  // Submit trigger comes from the screen skeleton (content.ts / content-kurumsal.ts),
+  // not from the CTA text. The old CTA-string whitelist silently stopped lead
+  // capture whenever a CTA was reworded (EN kurumsal got 0 leads that way).
+  const isSubmitTrigger = screen.submitTrigger === true;
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [kvkkConsent, setKvkkConsent] = useState(false);
