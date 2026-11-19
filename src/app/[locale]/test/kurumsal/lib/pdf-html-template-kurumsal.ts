@@ -342,7 +342,7 @@ export function generateKurumsalPdfHtml(state: KurumsalQuizState): string {
     <div class="cta-url">app.growtify.app/widget/bookings/kurumsal-on-gorusme</div>
   </div>
 
-  <div class="p2-footer">Bu rapor Growtify.ai Kurumsal AI Olgunluk De\u011ferlendirmesi'ne verilen cevaplara dayal\u0131 otomatik bir analizdir. \u0130statistikler ve oranlar test cevaplar\u0131ndan hesaplanm\u0131\u015ft\u0131r. Ki\u015fisel verileriniz 6698 say\u0131l\u0131 KVKK kapsam\u0131nda i\u015flenmekte olup \u00fc\u00e7\u00fcnc\u00fc taraflarla payla\u015f\u0131lmamaktad\u0131r. \u00a9 ${new Date().getFullYear()} Growtify \u2014 growtify.ai</div>
+  <div class="p2-footer">Bu rapor Growtify.ai Kurumsal AI Olgunluk De\u011ferlendirmesi'ne verilen cevaplara dayal\u0131 otomatik bir analizdir. \u0130statistikler ve oranlar test cevaplar\u0131ndan hesaplanm\u0131\u015ft\u0131r. Ki\u015fisel verileriniz 6698 say\u0131l\u0131 KVKK kapsam\u0131nda i\u015flenmektedir. \u00a9 ${new Date().getFullYear()} Growtify \u2014 growtify.ai</div>
 </div>
 
 </body>
