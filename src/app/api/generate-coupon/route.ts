@@ -161,9 +161,19 @@ async function createLongDurationCoupon(
   const apiBase =
     process.env.GHL_API_BASE ?? "https://services.leadconnectorhq.com";
   const apiVersion = process.env.GHL_API_VERSION ?? "2021-07-28";
+  const temelProductId = process.env.GHL_TEMEL_PRODUCT_ID ?? "";
+  const temelPriceId = process.env.GHL_TEMEL_PRICE_ID ?? "";
 
   if (!apiToken || !locationId) {
     return { ok: false, error: "GHL credentials missing" };
+  }
+  // ghl-008: nurture coupons must also be scoped to the Temel product, else the
+  // % applies location-wide (incl. Tam ₺49.000). Fail closed.
+  if (!temelProductId) {
+    console.error(
+      "[nurture-coupon] GHL_TEMEL_PRODUCT_ID missing — refusing to create an unrestricted (location-wide) coupon",
+    );
+    return { ok: false, error: "coupon_scope_env_missing" };
   }
 
   const MAX_ATTEMPTS = 3;
@@ -189,6 +199,8 @@ async function createLongDurationCoupon(
         body: JSON.stringify({
           altId: locationId,
           altType: "location",
+          productIds: [temelProductId],
+          ...(temelPriceId ? { priceIds: [temelPriceId] } : {}),
           name: `Nurture Discount — ${code}`,
           code,
           discountType: "percentage",
