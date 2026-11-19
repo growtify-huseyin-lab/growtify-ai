@@ -21,14 +21,14 @@ bu dosyanın o anki özetidir.
 
 | Bileşen | Nerede | Güncel sürüm | Durum |
 |---|---|---|---|
-| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.4.0** | Yayında |
+| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.5.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Yayında (2026-11-02, Worker 9c3284d1) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.22.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
-| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.2** | Yayında |
-| Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.5.1** | Yayında |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.23.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.3** | Yayında |
+| Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.6.0** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.3** | Yayında |
-| Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.6.7** | Yayında |
+| Satış hunisi / web sitesi sayfa oluşturucu | crm-sayfa.growtify.app (page-builder) | **1.7.0** | Yayında |
 | Üyelikler > Kurslar (ürünler, kurs düzenleyici, teklif ayrıntıları) | crm-uyelik.growtify.app (backend.memberships.apisystem.tech) | **1.15.2** | Yayında |
 | E-posta oluşturucu | crm-eposta-tasarim.growtify.app (email-builder-prod) — şablon düzenleyici CRM sayfasında; kampanya düzenleyicisi E-postalar içinde iç içe | **1.8.1** | Açık (önce hazırla ile): şablon düzenleyici CRM sayfasında, kampanya düzenleyicisi E-postalar içinde iç içe |
 | Mobil | Telefon tarayıcısı + ana ekran simgesi | — | Lansman sonrası test; kendi uygulamamız yok (CEO kararı) |
@@ -36,6 +36,11 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.23.0** — 2026-11-19 — GHL güncellemesi (2026-11-09…18), gömülü ekranlar 621 yeni metin: sayfa oluşturucu 526
+  (yeni **etkinlik/bilet sayfaları**: etkinlik ayrıntısı, program, konuşmacılar, sergileyen firmalar, bilet ödeme ve onay
+  ekranları — son müşterinin gördüğü metinler "siz" hitabıyla; editör tarafı "sen"), Yapay Zeka Stüdyosu 69 (Beceriler,
+  Bulut), satış ortaklığı 18 (onay formu, uyumluluk, W9/W8), iş akışı 8 (test çalıştırması). Sürümler: sayfa 1.7.0,
+  stüdyo 1.6.0, iframe ekranları 1.4.3. Doğrulama 621/621, 0 hata (9 uyarı: marka adı/sembol, beklenen).
 - **1.22.0** — 2026-11-07 — Ana ekran taraması (103 sayfa): GHL güncellemesinden 207 yeni metin. "Yapay Zekaya Sor"un yeni
   **bilgisayar** özelliği (152: kontrol al/geri ver, arka plan işleri, onay türleri, Güvenli Depo'ya oturum kaydı, örnek
   görevler TR'ye uyarlandı), **üyelik/müşteri portalı geçiş duyurusu** (klasik portal 1 Aralık 2026'da kalkıyor, 30 Kasım'a
@@ -459,6 +464,9 @@ bu dosyanın o anki özetidir.
   hatırlanır). CEO'nun CRM sekmesinde dosya yükleme yöntemiyle doğrulandı; yayında değil.
 
 ### Öğrenci paneli (panel.growtify.ai)
+- **2.5.0** — 2026-11-19 — GHL güncellemesi: 60 yeni + 9 değişen metin. Satış ortaklığı **onay formu** akışı (hakediş
+  ödemesi onaya bağlı), grup **ücretsiz plan** seçeneği, randevu kataloğunda **kiralık ürünler**, yorum sıralama, ajans
+  e-postası senkronu, etkinlik "Sergileyen Firma" sayfası. Panel bekçisi kaydı #262.
 - **2.4.0** — 2026-11-07 — GHL güncellemesi: 66 yeni + 3 değişen metin. Topluluk oyunlaştırmasında yeni **puan kaynakları**
   (gönderi, yorum, tepki, davet, onaylanmış spam) ve **kurs tamamlama puanları**; hesap ekranında e-postayla **şifre belirleme**
   akışı; satış ortaklığında "Customise" → "Customize" yazım değişikliği (Türkçe aynı kaldı). Panel bekçisi kaydı #255.
