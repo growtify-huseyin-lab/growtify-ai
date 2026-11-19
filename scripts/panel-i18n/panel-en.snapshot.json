@@ -1257,6 +1257,15 @@
     "placeholder": "Email Address",
     "feedback": "This is the email you login with"
    },
+   "agency_email": {
+    "label": "Agency email",
+    "feedback": "This is the email for your agency or sub-account login. Sync it if you want to keep or update the email on the client portal, same as the agency's sub-account email.",
+    "sync": "Sync email",
+    "sync_success": "Email synced",
+    "email_in_use": "This email is already used by another portal user. Contact support.",
+    "multi_contact": "This account is linked to multiple contacts. Contact support to sync it.",
+    "sync_failed": "Couldn't sync your email. Please try again."
+   },
    "password": {
     "section_title": "Change Password",
     "set_section_title": "Set Password",
@@ -2359,6 +2368,8 @@
    "noContinueWatchingDescription": "When you start a course, it'll show up here.",
    "continueWatchingLoadErrorTitle": "Unable to load continue watching",
    "continueWatchingLoadErrorDescription": "We couldn't load your in-progress course details right now. Please try again.",
+   "progressLoadErrorTitle": "Unable to load course progress",
+   "progressLoadErrorDescription": "We couldn't load your course progress right now. Please try again.",
    "noInProgressCoursesTitle": "No courses in progress",
    "noInProgressCoursesDescription": "Courses you start watching will appear here.",
    "noCompletedCoursesTitle": "No completed courses yet",
@@ -3246,6 +3257,12 @@
    "reported": "Comment reported successfully",
    "reportFailed": "Failed to report comment"
   },
+  "sort": {
+   "newest": "Newest",
+   "oldest": "Oldest",
+   "accessibilityLabel": "Sort order: {order}",
+   "loading": "Updating order"
+  },
   "moderation": {
    "heldBadge": "In review",
    "heldTooltip": "We feel that your comment is violating the guidelines of this group. We have sent this to admin for review. If admin approves, your comment will be visible. Otherwise, it will be removed."
@@ -4127,7 +4144,7 @@
      "toggleDisabledHelper": "Activate any one plan to make this community paid",
      "confirm": {
       "title": "Make this community free?",
-      "description": "This switches off all active plans. You can start charging again anytime by activating a plan.",
+      "description": "This switches off all active paid plans. You can start charging again anytime by activating a plan.",
       "warning": "New members join for free. Existing members keep their access.",
       "cancelSubscriptions": "Cancel active subscriptions",
       "cancelSubscriptionsHint": "Stops recurring billing. Members keep their access.",
@@ -4208,6 +4225,13 @@
       "descriptionPlaceholder": "What this plan includes and who it's for."
      },
      "pricing": {
+      "planType": "Plan type",
+      "paid": "Paid",
+      "paidDescription": "Charge a recurring or one-time fee",
+      "free": "Free",
+      "freeDescription": "Members join at no cost",
+      "freeNoticeTitle": "This plan will be free for members",
+      "freeNotice": "Anyone can join the group with this plan without paying. Choose Paid if you want to charge for access.",
       "currency": "Currency",
       "freeTrial": "Free trial",
       "days": "days",
@@ -4247,6 +4271,8 @@
       "namePlaceholder": "Plan name",
       "descriptionPlaceholder": "Description will appear here",
       "noPrice": "$—",
+      "free": "Free",
+      "joinFree": "Join for free",
       "priceWeekly": "{amount}/wk",
       "priceMonthly": "{amount}/mo",
       "priceYearly": "{amount}/yr",
@@ -4286,12 +4312,14 @@
      "deactivateLastTitle": "Deactivate your last plan?",
      "activateDescription": "Members will be able to subscribe to this plan.",
      "deactivateDescription": "This plan won't be available to new members.",
-     "deactivateLastDescription": "This is your only active plan. Switching off the plan makes the community free.",
-     "becomesPaid": "This is your first active plan, so the community becomes paid. New members will have to subscribe to join.",
+     "deactivateLastDescription": "This is your only active paid plan. Switching off the plan makes the community free.",
+     "becomesPaid": "This is your first active paid plan, so the community becomes paid. New members will have to subscribe to join.",
      "appearsOnJoin": "The plan appears on the join screen straight away.",
      "keepsExistingMembers": "Current subscribers keep their access and stay billed as usual.",
      "confirmActivate": "Activate plan",
-     "confirmDeactivate": "Deactivate plan"
+     "confirmDeactivate": "Deactivate plan",
+     "activateBlockedAtCapTooltip": "You can have at most 5 active plans. Deactivate one before activating another.",
+     "activateBlockedSecondFreeTooltip": "Only one free plan can be active at a time. Deactivate the other free plan first."
     },
     "deleteConfirm": {
      "title": "Delete {name}?",
@@ -4566,7 +4594,8 @@
     "successBody": "You're now on {planName}.",
     "errorTitle": "Couldn't change plan",
     "errorBody": "Something went wrong switching your plan. Try again.",
-    "frequencyChangeWarning": "You'll be charged the new amount now, and your billing date resets to today."
+    "frequencyChangeWarning": "You'll be charged the new amount now, and your billing date resets to today.",
+    "switchToFreeWarning": "You won't be charged. This plan is free."
    },
    "emptyBody": "This community has no plans on offer right now.",
    "errorTitle": "Couldn't load plans",
@@ -4605,6 +4634,7 @@
     "perWeek": "{amount}/wk",
     "perMonth": "{amount}/mo",
     "perYear": "{amount}/yr",
+    "free": "Free",
     "oneTime": "One-time payment",
     "billedEvery": "billed {period}",
     "billedYearlyNote": "{monthly}/mo, billed yearly",
@@ -4628,6 +4658,7 @@
      "monthly": "Monthly",
      "yearly": "Annual",
      "oneTime": "One-time",
+     "free": "Free",
      "unknown": "Unknown"
     }
    },
@@ -4653,6 +4684,7 @@
     "accessUntil": "Access until",
     "billing": "Billing",
     "oneTimePayment": "One-time",
+    "free": "Free",
     "paymentMethod": "Payment method",
     "memberSince": "Member since",
     "notApplicable": "—"
@@ -4670,6 +4702,7 @@
    "footer": {
     "renews": "Renews automatically.",
     "oneTime": "One-time payment. No renewals.",
+    "free": "Free. No charge.",
     "updateCard": "Update your card to keep access."
    },
    "alert": {
@@ -5193,8 +5226,11 @@
    "loadFailed": "Failed to load posts"
   },
   "empty": {
-   "noPosts": "No posts found",
-   "beFirst": "Be the first to create a post!",
+   "noPosts": "No contributions yet",
+   "noPostsUnavailable": "Nothing here yet",
+   "noPostsUnavailableHint": "You'll see posts here when members share an update, idea, or question.",
+   "beFirst": "Make your first contribution with an update, idea, or question.",
+   "createPost": "Create post",
    "reachedEnd": "You've reached the end of the posts",
    "noReactions": "No matching reactions yet"
   },
@@ -5576,10 +5612,14 @@
    "uploadTaxForm": "Upload your tax form for compliance to start receiving your commissions.",
    "uploadTaxFormSingle": "Upload the tax form for ({affiliateName}) for compliance to start receiving your commissions.",
    "uploadTaxFormMulti": "Upload the tax forms for ({affiliateNames}) for compliance to start receiving your commissions.",
+   "signConsent": "Review and accept the consent form to avoid payout delays.",
+   "signConsentSingle": "Review and accept the consent form for ({affiliateName}) to avoid payout delays.",
+   "signConsentMulti": "Review and accept the consent forms for ({affiliateNames}) to avoid payout delays.",
    "setupPayoutMethod": "Set up your primary payout method to start receiving your commissions.",
    "setupPayoutMethodSingle": "Set up your primary payout method for ({affiliateName}) to start receiving your commissions.",
    "setupPayoutMethodMulti": "Set up your primary payout method for ({affiliateNames}) to start receiving your commissions.",
    "ctaUploadTaxForm": "Upload tax form",
+   "ctaSignConsent": "Provide Consent",
    "ctaSetupPayoutMethod": "Set up payout method"
   },
   "common": {
@@ -5734,12 +5774,17 @@
    "payoutMethodsTitle": "Payout methods",
    "taxFormsTitle": "Tax forms",
    "taxFormsInfo": "Upload your W9 or W8 form for compliance. Only one form can be uploaded at a time.",
+   "consentTitle": "Consent",
+   "consentInfo": "Your payouts are on hold until you agree to the commission consent form",
    "emptyPayoutTitle": "No payout method added",
    "emptyPayoutDescription": "Add a payout method to receive your earnings.",
    "emptyTaxTitle": "No tax form added",
    "emptyTaxDescription": "Submit your tax form to avoid payout interruptions.",
    "addPayoutMethod": "Add payout method",
    "uploadTaxForm": "Upload tax form",
+   "signForm": "Sign form",
+   "viewConsent": "View consent",
+   "consentFormName": "Affiliate consent form",
    "table": {
     "addedOn": "Added on",
     "type": "Type",
@@ -5798,6 +5843,10 @@
    "taxFormW8Info": "For Non-US residents, to confirm that you are not a US taxpayer.",
    "taxFormW9Info": "For US residents or citizens, confirm your tax ID number (TIN).",
    "taxUploadTitle": "Upload tax form",
+   "consentNoContent": "No consent form content is available.",
+   "consentLoadError": "We couldn't load the consent form. Please try again.",
+   "consentRetry": "Try again",
+   "consentAgree": "I've downloaded and reviewed the consent form, and I agree to its terms.",
    "taxUploadHint": "Choose your Tax form type and Upload for Compliance",
    "uploadButton": "Upload",
    "taxUploadClickToUpload": "Click to upload or drag and drop",
@@ -5815,6 +5864,7 @@
    "successPayoutDeleted": "Payout method removed.",
    "successTaxUploaded": "Tax form uploaded.",
    "successTaxDeleted": "Tax form removed.",
+   "successConsentSigned": "Affiliate consent signed.",
    "errorGeneric": "Something went wrong. Try again.",
    "validation": {
     "bankCountryRequired": "Select bank country.",
@@ -5824,7 +5874,11 @@
     "postalRequired": "Enter postal code.",
     "fieldRequired": "{fieldName} is required.",
     "fieldFormatInvalid": "{fieldName} format is invalid."
-   }
+   },
+   "consentGiven": "Consent given",
+   "consentValidNote": "Your consent stays valid as long as this form doesn't change. If it's ever updated, you'll need to give consent again before your next payout.",
+   "giveConsent": "Give consent",
+   "consentStaleAlert": "The consent form was updated. Your previous consent no longer applies. Please review and give consent again to keep your payouts active."
   },
   "table": {
    "rowsPerPage": "Rows per page",
@@ -5842,25 +5896,29 @@
   },
   "catalog": {
    "title": "Catalog",
-   "searchPlaceholder": "Search calendars, service booking pages",
+   "searchPlaceholder": "Search calendars, services, and rentals",
    "searchPlaceholderCalendars": "Search calendars",
    "searchPlaceholderServices": "Search service booking pages",
+   "searchPlaceholderRentals": "Search rentals",
    "empty": "No booking options match your filters.",
-   "unavailable": "No calendars or services enabled for booking from clientportal.",
+   "unavailable": "No calendars, services, or rentals enabled for booking from clientportal.",
    "viewAll": "View all",
    "viewAllCalendars": "View all calendars",
    "viewAllServices": "View all services",
+   "viewAllRentals": "View all rentals",
    "moreAvailable": "{count} more available to book",
    "detailNotFound": "This booking option is unavailable.",
    "filters": {
     "ariaLabel": "Booking type filters",
     "all": "All",
     "calendars": "Calendars",
-    "services": "Services"
+    "services": "Services",
+    "rentals": "Rentals"
    },
    "sections": {
-    "calendars": "Calendars {count}",
-    "services": "Services {count}"
+    "calendars": "Calendars",
+    "services": "Services",
+    "rentals": "Rentals"
    },
    "card": {
     "book": "Book",
@@ -5868,6 +5926,7 @@
     "free": "Free",
     "serviceCount": "{count} services",
     "allServices": "All Services",
+    "allRentals": "All Rentals",
     "noDescription": "No description added",
     "rescheduleAllowed": "Reschedulable",
     "rescheduleNotAllowed": "Non-reschedulable",
@@ -6037,6 +6096,7 @@
    "detail": {
     "agendaTitle": "Agenda",
     "organizedByLabel": "Organized by",
+    "aboutTitle": "About this event",
     "aboutReadMore": "Read more",
     "aboutReadLess": "Read less",
     "metaDateTime": "Date and time",
@@ -6450,7 +6510,9 @@
    "bannerMessage": "You're in preview mode. Please review and update any custom code before enabling it for all"
   },
   "adminPreview": {
-   "bannerMessage": "You're in admin preview mode. This is how members see this course."
+   "bannerMessage": "You're in admin preview mode. This is how members see this course.",
+   "viewContent": "View Content (Unlocked)",
+   "hideContent": "Hide Content"
   },
   "pages": {
    "dashboard": {
@@ -6500,6 +6562,10 @@
    "eventUser": {
     "title": "Profile",
     "description": "See who someone is at this event and the booths they staff."
+   },
+   "eventExhibitor": {
+    "title": "Exhibitor",
+    "description": "See an exhibitor's booth, contact details and team at this event."
    },
    "eventsUpcoming": {
     "title": "Upcoming events",
