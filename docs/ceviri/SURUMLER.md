@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.5.0** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Yayında (2026-11-02, Worker 9c3284d1) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.23.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.24.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.3** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.6.0** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.3** | Yayında |
@@ -36,6 +36,12 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.24.0** — 2026-11-19 — Ana ekran **tam sayfa sayfa tarama** (CEO: "tümü güncel olsun"; 126 sayfa, liste yeniden
+  çıkarıldı): **7.230 anahtar**. 5.651'i GHL'in eski metinleri yeni anahtarlara taşıması (aynı İngilizce → mevcut Türkçe
+  kullanıldı), 1.579'u gerçekten yeni: müşteri portalı oluşturucu (383: roller ve erişim, yeni portal geçişi), reklam
+  yayınlama (368: TikTok, senkron, dönüşüm yeri), yeni sohbet ekranı (449: compact composer, aramalar, Ses Analizi,
+  yazma yardımı), takvim/e-posta/mağaza/Yapay Zekaya Sor/itibar/hediye kartları/telefon (379). Doğrulama 7.230/7.230,
+  0 hata. Katalog 5,39 → 5,76 MB (sıkıştırılmış 1,6 MB). GHL bekçi izleri güncellendi.
 - **1.23.0** — 2026-11-19 — GHL güncellemesi (2026-11-09…18), gömülü ekranlar 621 yeni metin: sayfa oluşturucu 526
   (yeni **etkinlik/bilet sayfaları**: etkinlik ayrıntısı, program, konuşmacılar, sergileyen firmalar, bilet ödeme ve onay
   ekranları — son müşterinin gördüğü metinler "siz" hitabıyla; editör tarafı "sen"), Yapay Zeka Stüdyosu 69 (Beceriler,
