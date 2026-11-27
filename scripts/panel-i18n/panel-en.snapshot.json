@@ -167,6 +167,1000 @@
   "previous": "Previous",
   "next": "Next"
  },
+ "account": {
+  "certifications": {
+   "preview": {
+    "download": "Download",
+    "downloadMenuAriaLabel": "Choose download format",
+    "downloadFormat": {
+     "pdf": "PDF",
+     "png": "PNG",
+     "jpg": "JPG"
+    },
+    "copyLink": "Copy Link",
+    "expiredStamp": "EXPIRED",
+    "noPreview": "Preview not available",
+    "verificationModal": {
+     "title": "Credential verification",
+     "subtitle": "Credential verified successfully",
+     "description": "All information displayed matches our records.",
+     "error": "Something went wrong",
+     "step1": {
+      "title": "Verifying recipient",
+      "description": "{recipient}"
+     },
+     "step2": {
+      "title": "Verifying issuer",
+      "description": "{issuer}"
+     },
+     "step3": {
+      "title": "Verifying credential ID",
+      "description": "Identifier {credentialId} is unique and valid"
+     }
+    },
+    "verifyCredential": "Verify Credential",
+    "verifyCredentials": "Verify Credential",
+    "downloadFailed": {
+     "title": "Download failed",
+     "content": "Something went wrong while downloading. Please try again."
+    },
+    "orShareTo": "OR SHARE TO",
+    "shareNative": "Share certificate",
+    "expiringOn": "Expiring on",
+    "expiredOn": "Expired on"
+   },
+   "actions": {
+    "linkCopied": "Copied",
+    "download": "Download",
+    "share": "Share",
+    "copyLink": "Copy Link",
+    "linkCopiedCertificate": "Certificate link copied",
+    "linkCopiedBadge": "Badge link copied",
+    "copyFailed": {
+     "title": "Copy failed",
+     "content": "Something went wrong while copying the link. Please try again."
+    },
+    "downloadAriaLabel": "Download certificate: {title}",
+    "shareAriaLabel": "Share certificate",
+    "copyLinkAriaLabel": "Copy certificate link"
+   },
+   "title": "Certificates & Badges",
+   "subtitle": "View and manage your certificates and badges",
+   "listRowTitleFallback": "Certificate",
+   "queryErrorFallback": "Something went wrong while loading your credentials. Please try again.",
+   "fieldNotAvailable": "Not available",
+   "share": {
+    "nativeTitle": "{name}"
+   },
+   "tabsAriaLabel": "Certificates and badges",
+   "tabs": {
+    "certificates": "Certificates",
+    "badges": "Badges"
+   },
+   "searchPlaceholderCertificates": "Search certificates",
+   "searchPlaceholderBadges": "Search badges",
+   "searchPlaceholder": "Search for certificates",
+   "loadingCertificatesList": "Loading your certificates…",
+   "loadingBadgesList": "Loading your badges…",
+   "empty": {
+    "certificatesTitle": "No certificates found",
+    "certificatesDescription": "Your certificates will appear here once issued.",
+    "badgesTitle": "No badges found",
+    "badgesDescription": "Your badges will appear here once issued."
+   },
+   "noSearchResults": {
+    "certificatesTitle": "No certificates match your search",
+    "badgesTitle": "No badges match your search",
+    "description": "Try adjusting your search or clear it to see all items."
+   },
+   "clearSearch": "Clear search",
+   "certificatePreview": {
+    "title": "Certificate Preview"
+   },
+   "pagination": {
+    "certificates": "certificates",
+    "badges": "badges"
+   },
+   "sort": {
+    "button": "Sort",
+    "sortBy": "Sort by",
+    "ascending": "Ascending",
+    "descending": "Descending"
+   },
+   "completedOn": "Issued on",
+   "expiresOn": "Expires on",
+   "tableHeaders": {
+    "name": "Name",
+    "courseAssignmentName": "Course/Assignment Name",
+    "badgeName": "Badge name",
+    "completionDate": "Completion Date",
+    "issueDate": "Issue Date",
+    "expiryDate": "Expiry Date",
+    "actions": "Actions"
+   }
+  },
+  "certificatePreview": {
+   "title": "Certificate Preview",
+   "badge": "Badge"
+  },
+  "settings": {
+   "title": "Account Settings"
+  },
+  "profile": {
+   "header": "Profile",
+   "subheader": "Update your basic details here",
+   "upload": {
+    "label": "Upload",
+    "feedback": "Recommended dimensions of 500 x 500"
+   },
+   "photo": {
+    "label": "Photo",
+    "feedback": "Recommended dimensions of 500 x 500",
+    "click": "Click to change photo"
+   },
+   "full_name": {
+    "label": "Full Name",
+    "placeholder": "Full Name",
+    "feedback": "This is how you will appear to others",
+    "required": "Full name is required"
+   },
+   "profile_url": {
+    "label": "Profile URL",
+    "placeholder": "Profile URL",
+    "feedback": "Unique link of your profile"
+   },
+   "title": {
+    "label": "Title",
+    "placeholder": "e.g. Head of growth",
+    "feedback": "This is displayed throughout the platform, usually with your full name",
+    "maxLength": "Title cannot exceed 80 characters"
+   },
+   "bio": {
+    "label": "Bio",
+    "placeholder": "Input Text",
+    "feedback": "Tell everyone more about yourself",
+    "maxLength": "Bio cannot exceed 200 characters"
+   },
+   "location": {
+    "label": "Location",
+    "placeholder": "Your location",
+    "feedback": "Where have you joined from?"
+   },
+   "timezone": {
+    "label": "Time Zone",
+    "placeholder": "Select your time zone",
+    "feedback": "What time zone are you in?",
+    "required": "Time zone is required"
+   },
+   "slug": {
+    "label": "Profile Slug",
+    "placeholder": "your-name",
+    "feedback": "Unique link of your profile",
+    "required": "Profile slug is required",
+    "invalid": "Slug can only contain lowercase letters, numbers, and hyphens"
+   },
+   "company": {
+    "label": "Company",
+    "placeholder": "e.g. Acme Agency",
+    "feedback": "Where you currently work"
+   },
+   "website": {
+    "label": "Website",
+    "placeholder": "example.com",
+    "feedback": "Link people can visit from your profile",
+    "invalid": "Enter a valid website, e.g. example.com"
+   },
+   "language_preference": {
+    "label": "Preferred language"
+   },
+   "cover": {
+    "upload": {
+     "success": {
+      "title": "Cover Uploaded",
+      "description": "Your profile cover has been uploaded. Click Save to update.",
+      "meta": "Cover Update"
+     },
+     "errorMissingLocation": {
+      "title": "Cover Upload Failed",
+      "description": "Missing location context",
+      "content": "Please refresh the page and try again.",
+      "meta": "Cover Upload Error"
+     },
+     "errorFailed": {
+      "title": "Cover Upload Failed",
+      "description": "Failed to upload your profile cover",
+      "genericContent": "Please try again with a different image",
+      "meta": "Cover Upload Error"
+     }
+    }
+   },
+   "avatar": {
+    "upload": {
+     "success": {
+      "title": "Avatar Uploaded",
+      "description": "Your profile photo has been uploaded. Click Save to update.",
+      "content": "Remember to save your changes",
+      "meta": "Avatar Update"
+     },
+     "error": {
+      "title": "Upload Failed",
+      "description": "Failed to upload profile photo. Please try again.",
+      "meta": "Avatar Update Error"
+     },
+     "errorMissingLocation": {
+      "title": "Avatar Upload Failed",
+      "description": "Missing location context",
+      "content": "Please refresh the page and try again.",
+      "meta": "Avatar Upload Error"
+     },
+     "errorFailed": {
+      "title": "Avatar Upload Failed",
+      "description": "Failed to upload your profile photo",
+      "genericContent": "Please try again with a different image",
+      "meta": "Avatar Upload Error"
+     }
+    },
+    "validation": {
+     "error": {
+      "title": "Invalid Image"
+     },
+     "invalidFile": "Invalid image file",
+     "fileSizeExceeded": "Image size exceeds 10MB limit",
+     "dimensionExceeded": "Image dimensions exceed 2000x2000 pixels",
+     "invalidType": "Invalid image type. Please use JPEG, PNG, GIF, or WebP",
+     "selectValid": "Please select a valid image file",
+     "meta": "Image Validation Error"
+    }
+   },
+   "save": {
+    "success": {
+     "title": "Profile saved successfully",
+     "description": "Your profile information has been updated",
+     "content": "All changes have been saved to your account",
+     "meta": "Profile Update"
+    },
+    "error": {
+     "title": "Failed to save profile",
+     "description": "An error occurred while updating your profile",
+     "content": "Please check your information and try again",
+     "meta": "Profile Update Error"
+    }
+   },
+   "validation": {
+    "error": {
+     "title": "Validation Failed",
+     "description": "Please fix the errors in the form",
+     "content": "Make sure all required fields are filled correctly",
+     "meta": "Form Validation"
+    }
+   }
+  },
+  "details": {
+   "title": "Account Details",
+   "subtitle": "View account email and change password",
+   "email": {
+    "label": "Your account email",
+    "placeholder": "Email address",
+    "feedback": "This the email you login with"
+   },
+   "password": {
+    "change_title": "Change Password",
+    "current": {
+     "label": "Current Password",
+     "placeholder": "Enter current password",
+     "feedback": "Enter the password you currently use to login"
+    },
+    "new": {
+     "label": "New Password",
+     "placeholder": "Enter new password",
+     "feedback": "Make your password stronger by using 8+ characters with letters, numbers & symbols"
+    },
+    "confirm": {
+     "label": "Confirm New Password",
+     "placeholder": "Confirm new password",
+     "feedback": "Enter the new password again"
+    }
+   }
+  },
+  "billing": {
+   "title": "Billing & Subscriptions",
+   "subtitle": "View and manage your subscriptions and payment methods.",
+   "loading": "Loading billing information...",
+   "tabs": {
+    "subscriptions": "Subscriptions",
+    "transactions": "Transactions",
+    "manageCards": "Manage Cards"
+   },
+   "paymentMethod": "Payment Method",
+   "billingDetails": "Billing Details",
+   "address": "Address",
+   "default": "Default",
+   "ellipsis": "⋯",
+   "maskedCard": "XXXX XXXX XXXX",
+   "endingIn": "ending in",
+   "expiresOn": "Expires on",
+   "cardBrandLogoAlt": "{brand} card logo",
+   "deleteCard": {
+    "title": "Remove payment method",
+    "description": "Are you sure you want to remove this payment method?",
+    "linkedSubscriptionsNotice": "Linked subscription(s) will be affected.",
+    "cancel": "Cancel",
+    "deleteCard": "Remove card",
+    "endingIn": "ending in",
+    "expires": "Expires",
+    "ariaLabel": "Remove card"
+   },
+   "paymentMethodToast": {
+    "removedTitle": "Card removed",
+    "removedDescription": "The payment method was deleted successfully",
+    "removedMeta": "Payment method",
+    "deleteErrorTitle": "Could not delete card",
+    "deleteErrorDescription": "An error occurred while removing this payment method",
+    "deleteErrorTryLater": "Please try again later",
+    "deleteErrorMeta": "Payment method error"
+   },
+   "subscriptionActionToast": {
+    "errorTitle": "Subscription action failed",
+    "errorDescription": "An error occurred while processing the subscription action",
+    "errorTryLater": "Please try again later",
+    "errorMeta": "Subscription Error"
+   },
+   "cancelSubscription": {
+    "title": "Cancel subscription",
+    "description": "Are you sure you want to cancel {subscriptionName} subscription?",
+    "descriptionStart": "Are you sure you want to cancel ",
+    "descriptionEnd": " subscription?",
+    "notice": "Your subscription will be canceled. You may retain access until the end of the current billing period depending on your plan.",
+    "keepSubscription": "Keep subscription",
+    "confirmCancel": "Cancel subscription"
+   },
+   "cancelSubscriptionToast": {
+    "successTitle": "Subscription canceled",
+    "successDescription": "Your subscription has been canceled successfully",
+    "successMeta": "Subscription",
+    "errorTitle": "Could not cancel subscription",
+    "errorDescription": "An error occurred while canceling this subscription",
+    "errorTryLater": "Please try again later",
+    "errorMeta": "Subscription error"
+   },
+   "transactionActionToast": {
+    "errorTitle": "Transaction action failed",
+    "errorDescription": "An error occurred while processing the transaction action",
+    "errorTryLater": "Please try again later",
+    "errorMeta": "Transaction Error"
+   },
+   "showing": "Showing",
+   "of": "of",
+   "loadingData": "Loading data...",
+   "noFound": "Not found",
+   "emptyState": {
+    "subscriptions": {
+     "title": "No subscriptions found",
+     "description": "When your business adds a subscription for you, it will appear here."
+    },
+    "transactions": {
+     "title": "No transactions found",
+     "description": "Your transactions will appear here once they are processed."
+    }
+   },
+   "sort": {
+    "button": "Sort",
+    "sortBy": "Sort by",
+    "ascending": "Ascending",
+    "descending": "Descending"
+   },
+   "manageCards": {
+    "loadingPaymentMethodsAria": "Loading payment methods",
+    "loadingBillingDetailsAria": "Loading billing details",
+    "error": {
+     "generic": "Something went wrong. Please try again."
+    },
+    "empty": {
+     "paymentMethodsTitle": "No payment methods found",
+     "paymentMethodsDescription": "When a card is saved to your account, it will show up here.",
+     "billingDetailsTitle": "No billing details found",
+     "billingDetailsDescription": "Your name, email, and address will appear here when your business adds them."
+    }
+   },
+   "actions": {
+    "view": "View",
+    "cancel": "Cancel",
+    "paymentLink": "Payment Link"
+   },
+   "subscriptionDetails": {
+    "title": "Details",
+    "nextInvoice": "Next Invoice",
+    "subscriptionId": "Subscription ID",
+    "orderId": "Order ID",
+    "type": "Type",
+    "id": "ID",
+    "pageUrl": "Page URL"
+   },
+   "transactionDetails": {
+    "title": "Transaction Details",
+    "transactionId": "Transaction ID",
+    "source": "Source",
+    "sourceType": "Source Type",
+    "provider": "Provider",
+    "amount": "Amount",
+    "type": "Type",
+    "date": "Date"
+   },
+   "auth": {
+    "errorToastMeta": "Billing authentication",
+    "authenticateAccount": "Authenticate Account",
+    "willSendVerificationTo": "We'll send a verification code to",
+    "sentVerificationEmail": "We've sent a verification code to",
+    "generateSecureCode": "Generate Secure Code",
+    "didntGetCode": "Didn't receive a code?",
+    "clickToResend": "Click to resend",
+    "resending": "Resending...",
+    "incorrectCode": "The code you entered is incorrect. Please try again.",
+    "sendFailedTitle": "Couldn't send verification code",
+    "resendFailedTitle": "Couldn't resend verification code",
+    "sendFailedDescription": "An error occurred while sending the verification code",
+    "verifyFailedTitle": "Verification failed",
+    "verifyFailedDescription": "We couldn't verify the code you entered",
+    "tryAgain": "Please try again"
+   },
+   "tableHeaders": {
+    "subscriptions": {
+     "subscriptionName": "Subscription Name",
+     "source": "Source",
+     "startDate": "Start Date",
+     "amount": "Amount",
+     "status": "Status",
+     "actions": "Actions"
+    },
+    "transactions": {
+     "source": "Source",
+     "provider": "Provider",
+     "amount": "Amount",
+     "status": "Status",
+     "date": "Date",
+     "actions": "Actions"
+    }
+   },
+   "noRecordsFound": "No records found",
+   "noRecordsSearchTitle": "No matching records",
+   "noRecordsSearchHint": "Try another keyword or clear your search to see all rows on this page.",
+   "clearSearch": "Clear search",
+   "search": {
+    "subscriptions": "Search subscriptions",
+    "transactions": "Search transactions",
+    "placeholder": "Search"
+   },
+   "searchMatchSummary": "Filtering by \"{query}\" — {count} result{s}"
+  },
+  "certificates": {
+   "preview": {
+    "loading": "Loading certificate...",
+    "loadingBadge": "Loading badge...",
+    "notFound": "Certificate not found",
+    "noPreview": "Preview not available",
+    "expired": "EXPIRED ON",
+    "issuedTo": "Issued to",
+    "issuedBy": "Issued by",
+    "addToLinkedin": "Add to LinkedIn Profile",
+    "download": "Download",
+    "shareCredential": "Share Your Credential",
+    "shareDescription": "Show your credential on your social network",
+    "verification": "CREDENTIAL VERIFICATION",
+    "issueDate": "Issue Date",
+    "expiryDate": "Expiry Date",
+    "verify": "Verify Credential",
+    "error": {
+     "loadFailed": "Failed to load certificate",
+     "downloadFailed": "Download failed"
+    }
+   }
+  },
+  "notifications": {
+   "title": "Notifications",
+   "subtitle": "Manage your notification preferences",
+   "general": {
+    "title": "General Notifications"
+   },
+   "email": {
+    "title": "Email Notifications"
+   },
+   "push": {
+    "title": "Push Notifications"
+   }
+  },
+  "notificationPreferences": {
+   "title": "Notification preferences",
+   "description": "Manage how you receive notifications",
+   "willNotReceiveNotificationsIfAdminDisabled": "You will not receive notifications if disabled by admin",
+   "newActivity": "New activity",
+   "email": "Email",
+   "push": "Push",
+   "allNotifications": "All notifications",
+   "allEmailNotificationsDescription": "Receive all email notifications",
+   "allPushNotificationsDescription": "Receive all push notifications",
+   "individualSettings": "Individual Settings",
+   "masterControlsDescription": "Master controls override individual settings",
+   "postLike": "Post like",
+   "newComment": "New comment",
+   "postMention": "Post {'@'}mention",
+   "postEveryoneTagged": "Post {'@'}everyone tagged",
+   "postTags": "Post tags",
+   "commentEveryoneTagged": "Comment {'@'}everyone tagged",
+   "commentMention": "Comment {'@'}mention",
+   "commentLike": "Comment like",
+   "newMemberRequestToJoinGroup": "New member request to join group",
+   "groupJoiningRequestApproved": "Group joining request approved",
+   "groupJoiningRequestRejected": "Group joining request rejected",
+   "roleUpdatedInPrivateChannel": "Role updated in private channel",
+   "newCourseAvailable": "New course added to the group",
+   "newEventCreated": "New event created",
+   "followedPostActivity": "New comments on posts you follow",
+   "newCourseComment": "New course comment",
+   "certificateIssued": "Certificate issued",
+   "invoiceReceived": "New invoice received",
+   "estimateReceived": "New estimate received",
+   "contractReceived": "New contract received",
+   "info": {
+    "tooltip": "Notification settings information"
+   },
+   "success": {
+    "updated": "Notification preferences were updated.",
+    "emailPreferencesUpdated": "Email notification preferences updated successfully",
+    "pushPreferencesUpdated": "Push notification preferences updated successfully",
+    "optionUpdated": "Notification preference updated successfully",
+    "title": "Saved",
+    "individualEmail": "Updated Notification settings for : {label}",
+    "individualPush": "Updated Notification settings for : {label}",
+    "allEmailMaster": "All email notifications were updated.",
+    "allPushMaster": "All push notifications were updated."
+   },
+   "error": {
+    "loadFailed": "Failed to load notification preferences",
+    "updateFailed": "Update failed",
+    "genericError": "Something went wrong. Please try again.",
+    "title": "Couldn’t save changes",
+    "individualUpdateFailed": "We couldn’t update this notification. Try again.",
+    "globalUpdateFailed": "We couldn’t update your default notification settings. Try again."
+   },
+   "clientPortalTab": "Client portal",
+   "communitiesTab": "Communities",
+   "communitiesTabBody": "Group-level email and push preferences for each community are available in the Communities experience. Client portal rows above apply to portal-wide notifications.",
+   "sectionSocialEngagement": "Social engagement",
+   "sectionPostsComments": "Posts and comments",
+   "sectionCommunityGroupManagement": "Community and group management",
+   "allowNotifications": "Allow notifications",
+   "notificationType": "Notification type",
+   "enableEmailForGroup": "Enable email for this group",
+   "enablePushForGroup": "Enable push for this group",
+   "saveAndCopyTo": "Save and copy to…",
+   "communitiesListEmpty": "You’re not a member of any active communities yet.",
+   "sort": "Sort",
+   "sortBy": "Sort by",
+   "sortAscending": "Ascending",
+   "sortDescending": "Descending",
+   "sortFieldName": "Name",
+   "sortFieldJoined": "Recently joined",
+   "sortByName": "Sort by name",
+   "sortByJoined": "Sort by joined date",
+   "toggleSortDirection": "Toggle sort direction",
+   "searchGroups": "Search groups",
+   "searchCommunity": "Search community...",
+   "clearSearch": "Clear search",
+   "noSearchResults": "No communities match your search",
+   "noSearchResultsDescription": "Try adjusting your search or clear it to see all items.",
+   "copyModalTitle": "Copy notification preferences",
+   "copyModalSearchPlaceholder": "Search groups…",
+   "copyModalSelectTargets": "Select groups",
+   "copyModalSelectAll": "Select all",
+   "copyModalNoResults": "No groups match your search",
+   "copyModalConfirm": "Copy preferences",
+   "copyConfirmSuccess": "Preferences copied successfully.",
+   "copyConfirmSuccessCopied": "Preferences copied to {count} group(s).",
+   "copyConfirmSuccessSourceOnly": "Source preferences were updated.",
+   "copyConfirmError": "We couldn’t copy your preferences. Please try again.",
+   "tabsAriaLabel": "Notification categories",
+   "emailColumn": "Email",
+   "pushColumn": "Push",
+   "emailNotificationNotAvailable": "Email notifications are not available for this alert.",
+   "pushNotificationNotAvailable": "Push notifications are not available for this alert.",
+   "pauseAll": "Pause all",
+   "loading": "Loading notification preferences...",
+   "badgeIssued": "Badge issued",
+   "welcomeBadgeIssued": "Welcome badge issued",
+   "newsletter": "Newsletter",
+   "newPostFollowers": "New post from followed user",
+   "newFollower": "Get notified when someone follows you.",
+   "sharedFileReceived": "Get notified when an admin shares a file with you"
+  },
+  "social_media": {
+   "title": "Social Media",
+   "subtitle": "Add your social media details here",
+   "contact": {
+    "title": "Contact Information",
+    "phone": {
+     "label": "Phone Number",
+     "placeholder": "Phone number",
+     "feedback": "Your contact phone number"
+    },
+    "website": {
+     "label": "Website",
+     "placeholder": "https://yourwebsite.com",
+     "feedback": "Your personal or business website"
+    },
+    "email": {
+     "label": "Email",
+     "placeholder": "your email"
+    }
+   },
+   "links": {
+    "title": "Social Media Links",
+    "facebook": {
+     "label": "Facebook",
+     "placeholder": "https://facebook.com/marketing",
+     "feedback": "Your Facebook profile or page"
+    },
+    "twitter": {
+     "label": "X",
+     "placeholder": "https://x.com/marketing",
+     "feedback": "Your Twitter profile"
+    },
+    "instagram": {
+     "label": "Instagram",
+     "placeholder": "https://instagram.com/marketing",
+     "feedback": "Your Instagram profile"
+    },
+    "linkedin": {
+     "label": "LinkedIn",
+     "placeholder": "https://linkedin.com/marketing",
+     "feedback": "Your LinkedIn profile"
+    },
+    "youtube": {
+     "label": "YouTube",
+     "placeholder": "https://youtube.com/marketing",
+     "feedback": "Your YouTube channel"
+    }
+   },
+   "visibleToEveryone": "Visible to Everyone",
+   "validation": {
+    "phone": "Please enter a valid phone number",
+    "email": "Please enter a valid email address",
+    "facebook": "Please enter a valid Facebook URL",
+    "youtube": "Please enter a valid YouTube URL",
+    "twitter": "Please enter a valid X URL",
+    "instagram": "Please enter a valid Instagram URL",
+    "linkedin": "Please enter a valid LinkedIn URL"
+   },
+   "notifications": {
+    "success": {
+     "title": "Success",
+     "description": "Social media updated successfully",
+     "content": "Your social links and contact details have been saved",
+     "meta": "Social media update"
+    },
+    "validation_failed": {
+     "title": "Validation Failed",
+     "description": "Please fix the errors in the form"
+    },
+    "update_failed": {
+     "title": "Error",
+     "description": "Failed to update social media details"
+    }
+   }
+  },
+  "account": {
+   "header": "Account",
+   "subheader": "View account email and change password.",
+   "email": {
+    "label": "Your Account Email",
+    "placeholder": "Email Address",
+    "feedback": "This is the email you login with"
+   },
+   "agency_email": {
+    "label": "Agency email",
+    "feedback": "This is the email for your agency or sub-account login. Sync it if you want to keep or update the email on the client portal, same as the agency's sub-account email.",
+    "sync": "Sync email",
+    "sync_success": "Email synced",
+    "email_in_use": "This email is already used by another portal user. Contact support.",
+    "multi_contact": "This account is linked to multiple contacts. Contact support to sync it.",
+    "sync_failed": "Couldn't sync your email. Please try again."
+   },
+   "password": {
+    "section_title": "Change Password",
+    "set_section_title": "Set Password",
+    "set_description": "We will email you a link to set your password.",
+    "set_action": "Set Password",
+    "set_cooldown_message": "Please check your inbox. Resend in {seconds}s",
+    "set_link_sent": {
+     "title": "Set password link sent",
+     "description": "Check your email",
+     "content": "Set password link sent to your email",
+     "meta": "Set password",
+     "error_title": "Could not send set password link",
+     "error_description": "Try again",
+     "error_content": "Something went wrong"
+    }
+   },
+   "current_password": {
+    "label": "Current Password",
+    "placeholder": "Enter current password",
+    "feedback": "Enter the password you currently use to login"
+   },
+   "new_password": {
+    "label": "New Password",
+    "placeholder": "Enter new password",
+    "feedback": "Password must have at least 8 characters, including uppercase, lowercase, number & special character"
+   },
+   "confirm_password": {
+    "label": "Confirm New Password",
+    "placeholder": "Confirm New Password",
+    "feedback": "Enter the new password again"
+   },
+   "revoke_all_sessions": {
+    "label": "Log out from all devices."
+   },
+   "validation": {
+    "passwords_match": "Passwords do not match",
+    "not_valid": "Password must include uppercase, lowercase, number & special character",
+    "password_length": "Password must have at least 8 characters",
+    "passwords_valid": "Passwords match and are valid"
+   },
+   "forgot_password": "Forgot Password?",
+   "forgot_password_screen": {
+    "reset_link_hint": "We'll send a password reset link to this email",
+    "send_link": "Send Link",
+    "success": {
+     "title": "Check your email",
+     "description": "If an account exists for that address, we sent a password reset link.",
+     "content": "Follow the link in the email to choose a new password.",
+     "meta": "Password reset"
+    },
+    "error": {
+     "title": "Could not send reset link",
+     "description": "Something went wrong while sending the email.",
+     "meta": "Password reset"
+    }
+   },
+   "field_validation": {
+    "email_required": "Email is required",
+    "email_invalid": "Please enter a valid email address",
+    "current_password_required": "Current password is required",
+    "new_password_required": "New password is required",
+    "confirm_password_required": "Please confirm your new password",
+    "password_min_length": "Password must be at least 8 characters long"
+   },
+   "password_update": {
+    "success": {
+     "title": "Password updated successfully",
+     "description": "Your password has been changed",
+     "content": "Please use your new password for future logins",
+     "meta": "Password Update"
+    },
+    "error": {
+     "title": "Failed to update password",
+     "description": "An error occurred while changing your password",
+     "content_fallback": "Please check your current password and try again",
+     "meta": "Password Update Error"
+    },
+    "validation_failed": {
+     "title": "Validation Failed",
+     "description": "Please fix the errors in the form",
+     "content": "Make sure all required fields are filled correctly",
+     "meta": "Form Validation"
+    }
+   }
+  },
+  "content": {
+   "not_found": {
+    "title": "Content Not Found",
+    "message": "The requested settings section could not be found."
+   }
+  },
+  "mobile": {
+   "title": "Account",
+   "header": {
+    "title": "Account"
+   },
+   "buttons": {
+    "edit_profile": "Edit Profile"
+   },
+   "sections": {
+    "account_records": "Account Records",
+    "settings_preferences": "Settings & Preferences",
+    "billing": "Billing & Subscription",
+    "certificates": "Certificates & Badges",
+    "dark_mode": "Dark Mode",
+    "languages": "Languages",
+    "chat_settings": "Chat Settings",
+    "meeting": "Meeting",
+    "notifications": "Notifications",
+    "location_timezone": "Location & Timezone",
+    "social_links": "Social Links",
+    "change_password": "Change Password"
+   }
+  },
+  "web": {
+   "title": "Account Settings",
+   "sidebar": {
+    "profile": "Profile",
+    "account": "Account",
+    "social_media": "Social Media",
+    "certifications": "Certificates & Badges",
+    "billing_subscriptions": "Billing & Subscriptions",
+    "chats": "Chat",
+    "meeting": "Meeting",
+    "language_settings": "Language Settings",
+    "notifications": "Notifications",
+    "events": "Events"
+   }
+  },
+  "events": {
+   "title": "Events",
+   "tabsAriaLabel": "Events sections",
+   "subtitle": {
+    "tickets": "Tickets for events you have registered for",
+    "connections": "People you have met at events",
+    "schedule": "Sessions you have saved across every event",
+    "bookmarks": "Everything you have bookmarked at events"
+   },
+   "tabs": {
+    "tickets": "My tickets",
+    "connections": "My connections",
+    "schedule": "My schedule",
+    "bookmarks": "My bookmarks"
+   },
+   "emptyState": {
+    "title": "Nothing here yet"
+   },
+   "status": {
+    "live": "Live",
+    "upcoming": "Upcoming",
+    "past": "Past"
+   },
+   "tickets": {
+    "countOne": "1 ticket",
+    "countMany": "{count} tickets",
+    "pageRange": "Showing {start}–{end} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "emptyTitle": "No tickets yet",
+    "emptyDescription": "Tickets you purchase will show up here.",
+    "errorTitle": "We could not load your tickets",
+    "errorDescription": "Something went wrong. Please refresh the page and try again."
+   },
+   "connections": {
+    "message": "Message",
+    "pageRange": "Showing {start}–{end} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "emptyTitle": "No connections yet",
+    "emptyDescription": "People you connect with at events appear here.",
+    "errorTitle": "We could not load your connections",
+    "errorDescription": "Something went wrong. Please refresh the page and try again."
+   },
+   "schedule": {
+    "countOne": "1 session",
+    "countMany": "{count} sessions",
+    "pageRange": "Showing {start}–{end} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "allEvents": "All events",
+    "addToCalendar": "Add to calendar",
+    "addedToCalendar": "Added to calendar",
+    "mySchedule": "My schedule",
+    "calendarMenu": "Calendar options",
+    "calendarGoogle": "Google Calendar",
+    "calendarApple": "Apple Calendar",
+    "calendarOutlook": "Outlook",
+    "calendarOthers": "Others (.ics file)",
+    "emptyTitle": "Nothing on your schedule",
+    "emptyDescription": "Sessions you save from an event will show up here.",
+    "errorTitle": "We could not load your schedule",
+    "errorDescription": "Something went wrong. Please refresh the page and try again."
+   },
+   "ticket": {
+    "allTickets": "All tickets",
+    "ticketPosition": "Ticket {index} / {total}",
+    "qrRailLabelOne": "1 ticket for this event",
+    "qrRailLabelMany": "{count} tickets for this event",
+    "qrAria": "Ticket QR code",
+    "qrUnavailable": "QR code unavailable",
+    "scanAtVenue": "Scan at venue",
+    "previousTicket": "Previous ticket",
+    "nextTicket": "Next ticket",
+    "fieldTicketType": "Ticket type",
+    "fieldVenue": "Venue",
+    "getDirections": "Get directions",
+    "downloadTicket": "Download ticket",
+    "online": {
+     "title": "Online event",
+     "statusUpcoming": "Not started yet",
+     "statusLive": "Live now",
+     "statusPast": "Ended",
+     "helperUpcoming": "You can join anytime before it starts.",
+     "helperLive": "The event has started.",
+     "helperPast": "This event has already ended.",
+     "join": "Join event",
+     "copyLink": "Copy link",
+     "linkCopied": "Link copied",
+     "availableAt": "The join link will be available on {date}",
+     "unavailable": "The join link isn't available yet"
+    }
+   },
+   "placeholder": {
+    "tickets": {
+     "title": "No tickets yet",
+     "description": "Tickets you purchase will show up here."
+    },
+    "connections": {
+     "title": "No connections yet",
+     "description": "People you connect with at events appear here."
+    },
+    "schedule": {
+     "title": "Nothing on your schedule",
+     "description": "Sessions you save from an event will show up here."
+    },
+    "bookmarks": {
+     "title": "No bookmarks yet",
+     "description": "Exhibitors you bookmark will show up here."
+    }
+   },
+   "bookmarks": {
+    "pageRange": "Showing {start}–{end} of {total}",
+    "previous": "Previous",
+    "next": "Next",
+    "allEvents": "All events",
+    "emptyTitle": "No bookmarks yet",
+    "emptyDescription": "Exhibitors you bookmark will show up here.",
+    "errorTitle": "We could not load your bookmarks",
+    "errorDescription": "Something went wrong. Please refresh the page and try again.",
+    "saved": "Remove bookmark",
+    "unsaved": "Save bookmark",
+    "openExhibitor": "Open {name}"
+   }
+  },
+  "language_settings": {
+   "header": "Language Settings",
+   "subheader": "Update language settings here",
+   "field_label": "Choose your preferred language",
+   "placeholder": "Select language",
+   "mobile": {
+    "select_label": "Select Language",
+    "update_button": "Update"
+   },
+   "options": {
+    "en": "English",
+    "es": "Spanish",
+    "fr-CA": "French (Canada)",
+    "fr-FR": "French (France)",
+    "pt-PT": "Portuguese (Portugal)",
+    "pt-BR": "Portuguese (Brazil)",
+    "de": "German",
+    "nl": "Dutch",
+    "it": "Italian",
+    "da": "Danish",
+    "no": "Norwegian",
+    "fi": "Finnish",
+    "sv": "Swedish"
+   },
+   "save": {
+    "success": {
+     "title": "Language saved",
+     "description": "Your language preference has been updated.",
+     "content": "Changes are saved to your account.",
+     "meta": "Language preference"
+    },
+    "error": {
+     "title": "Could not save language",
+     "description": "Something went wrong while updating your preference.",
+     "content": "Please try again.",
+     "meta": "Language preference error"
+    }
+   }
+  },
+  "locationTimezone": {
+   "selectTimezone": "Select timezone"
+  }
+ },
  "editor": {
   "loadingEmojis": "Loading emojis...",
   "emojiPicker": {
@@ -542,6 +1536,7 @@
   "confirm": "Confirm",
   "copied": "Copied!",
   "copy": "Copy",
+  "copyFailed": "Failed to copy to clipboard",
   "copyLink": "Copy Link",
   "delete": "Delete",
   "description": "Description",
@@ -567,1005 +1562,6 @@
   },
   "emailPlaceholder": "Enter your email",
   "unnamed": "Unnamed User"
- },
- "account": {
-  "settings": {
-   "title": "Account Settings"
-  },
-  "profile": {
-   "header": "Profile",
-   "subheader": "Update your basic details here",
-   "upload": {
-    "label": "Upload",
-    "feedback": "Recommended dimensions of 500 x 500"
-   },
-   "photo": {
-    "label": "Photo",
-    "feedback": "Recommended dimensions of 500 x 500",
-    "click": "Click to change photo"
-   },
-   "full_name": {
-    "label": "Full Name",
-    "placeholder": "Full Name",
-    "feedback": "This is how you will appear to others",
-    "required": "Full name is required"
-   },
-   "profile_url": {
-    "label": "Profile URL",
-    "placeholder": "Profile URL",
-    "feedback": "Unique link of your profile"
-   },
-   "title": {
-    "label": "Title",
-    "placeholder": "e.g. Head of growth",
-    "feedback": "This is displayed throughout the platform, usually with your full name",
-    "maxLength": "Title cannot exceed 80 characters"
-   },
-   "bio": {
-    "label": "Bio",
-    "placeholder": "Input Text",
-    "feedback": "Tell everyone more about yourself",
-    "maxLength": "Bio cannot exceed 200 characters"
-   },
-   "location": {
-    "label": "Location",
-    "placeholder": "Your location",
-    "feedback": "Where have you joined from?"
-   },
-   "timezone": {
-    "label": "Time Zone",
-    "placeholder": "Select your time zone",
-    "feedback": "What time zone are you in?",
-    "required": "Time zone is required"
-   },
-   "slug": {
-    "label": "Profile Slug",
-    "placeholder": "your-name",
-    "feedback": "Unique link of your profile",
-    "required": "Profile slug is required",
-    "invalid": "Slug can only contain lowercase letters, numbers, and hyphens"
-   },
-   "company": {
-    "label": "Company",
-    "placeholder": "e.g. Acme Agency",
-    "feedback": "Where you currently work"
-   },
-   "website": {
-    "label": "Website",
-    "placeholder": "example.com",
-    "feedback": "Link people can visit from your profile",
-    "invalid": "Enter a valid website, e.g. example.com"
-   },
-   "language_preference": {
-    "label": "Preferred language"
-   },
-   "cover": {
-    "upload": {
-     "success": {
-      "title": "Cover Uploaded",
-      "description": "Your profile cover has been uploaded. Click Save to update.",
-      "meta": "Cover Update"
-     },
-     "errorMissingLocation": {
-      "title": "Cover Upload Failed",
-      "description": "Missing location context",
-      "content": "Please refresh the page and try again.",
-      "meta": "Cover Upload Error"
-     },
-     "errorFailed": {
-      "title": "Cover Upload Failed",
-      "description": "Failed to upload your profile cover",
-      "genericContent": "Please try again with a different image",
-      "meta": "Cover Upload Error"
-     }
-    }
-   },
-   "avatar": {
-    "upload": {
-     "success": {
-      "title": "Avatar Uploaded",
-      "description": "Your profile photo has been uploaded. Click Save to update.",
-      "content": "Remember to save your changes",
-      "meta": "Avatar Update"
-     },
-     "error": {
-      "title": "Upload Failed",
-      "description": "Failed to upload profile photo. Please try again.",
-      "meta": "Avatar Update Error"
-     },
-     "errorMissingLocation": {
-      "title": "Avatar Upload Failed",
-      "description": "Missing location context",
-      "content": "Please refresh the page and try again.",
-      "meta": "Avatar Upload Error"
-     },
-     "errorFailed": {
-      "title": "Avatar Upload Failed",
-      "description": "Failed to upload your profile photo",
-      "genericContent": "Please try again with a different image",
-      "meta": "Avatar Upload Error"
-     }
-    },
-    "validation": {
-     "error": {
-      "title": "Invalid Image"
-     },
-     "invalidFile": "Invalid image file",
-     "fileSizeExceeded": "Image size exceeds 10MB limit",
-     "dimensionExceeded": "Image dimensions exceed 2000x2000 pixels",
-     "invalidType": "Invalid image type. Please use JPEG, PNG, GIF, or WebP",
-     "selectValid": "Please select a valid image file",
-     "meta": "Image Validation Error"
-    }
-   },
-   "save": {
-    "success": {
-     "title": "Profile saved successfully",
-     "description": "Your profile information has been updated",
-     "content": "All changes have been saved to your account",
-     "meta": "Profile Update"
-    },
-    "error": {
-     "title": "Failed to save profile",
-     "description": "An error occurred while updating your profile",
-     "content": "Please check your information and try again",
-     "meta": "Profile Update Error"
-    }
-   },
-   "validation": {
-    "error": {
-     "title": "Validation Failed",
-     "description": "Please fix the errors in the form",
-     "content": "Make sure all required fields are filled correctly",
-     "meta": "Form Validation"
-    }
-   }
-  },
-  "details": {
-   "title": "Account Details",
-   "subtitle": "View account email and change password",
-   "email": {
-    "label": "Your account email",
-    "placeholder": "Email address",
-    "feedback": "This the email you login with"
-   },
-   "password": {
-    "change_title": "Change Password",
-    "current": {
-     "label": "Current Password",
-     "placeholder": "Enter current password",
-     "feedback": "Enter the password you currently use to login"
-    },
-    "new": {
-     "label": "New Password",
-     "placeholder": "Enter new password",
-     "feedback": "Make your password stronger by using 8+ characters with letters, numbers & symbols"
-    },
-    "confirm": {
-     "label": "Confirm New Password",
-     "placeholder": "Confirm new password",
-     "feedback": "Enter the new password again"
-    }
-   }
-  },
-  "billing": {
-   "title": "Billing & Subscriptions",
-   "subtitle": "View and manage your subscriptions and payment methods.",
-   "loading": "Loading billing information...",
-   "tabs": {
-    "subscriptions": "Subscriptions",
-    "transactions": "Transactions",
-    "manageCards": "Manage Cards"
-   },
-   "paymentMethod": "Payment Method",
-   "billingDetails": "Billing Details",
-   "address": "Address",
-   "default": "Default",
-   "ellipsis": "⋯",
-   "maskedCard": "XXXX XXXX XXXX",
-   "endingIn": "ending in",
-   "expiresOn": "Expires on",
-   "cardBrandLogoAlt": "{brand} card logo",
-   "deleteCard": {
-    "title": "Remove payment method",
-    "description": "Are you sure you want to remove this payment method?",
-    "linkedSubscriptionsNotice": "Linked subscription(s) will be affected.",
-    "cancel": "Cancel",
-    "deleteCard": "Remove card",
-    "endingIn": "ending in",
-    "expires": "Expires",
-    "ariaLabel": "Remove card"
-   },
-   "paymentMethodToast": {
-    "removedTitle": "Card removed",
-    "removedDescription": "The payment method was deleted successfully",
-    "removedMeta": "Payment method",
-    "deleteErrorTitle": "Could not delete card",
-    "deleteErrorDescription": "An error occurred while removing this payment method",
-    "deleteErrorTryLater": "Please try again later",
-    "deleteErrorMeta": "Payment method error"
-   },
-   "subscriptionActionToast": {
-    "errorTitle": "Subscription action failed",
-    "errorDescription": "An error occurred while processing the subscription action",
-    "errorTryLater": "Please try again later",
-    "errorMeta": "Subscription Error"
-   },
-   "cancelSubscription": {
-    "title": "Cancel subscription",
-    "description": "Are you sure you want to cancel {subscriptionName} subscription?",
-    "descriptionStart": "Are you sure you want to cancel ",
-    "descriptionEnd": " subscription?",
-    "notice": "Your subscription will be canceled. You may retain access until the end of the current billing period depending on your plan.",
-    "keepSubscription": "Keep subscription",
-    "confirmCancel": "Cancel subscription"
-   },
-   "cancelSubscriptionToast": {
-    "successTitle": "Subscription canceled",
-    "successDescription": "Your subscription has been canceled successfully",
-    "successMeta": "Subscription",
-    "errorTitle": "Could not cancel subscription",
-    "errorDescription": "An error occurred while canceling this subscription",
-    "errorTryLater": "Please try again later",
-    "errorMeta": "Subscription error"
-   },
-   "transactionActionToast": {
-    "errorTitle": "Transaction action failed",
-    "errorDescription": "An error occurred while processing the transaction action",
-    "errorTryLater": "Please try again later",
-    "errorMeta": "Transaction Error"
-   },
-   "showing": "Showing",
-   "of": "of",
-   "loadingData": "Loading data...",
-   "noFound": "Not found",
-   "emptyState": {
-    "subscriptions": {
-     "title": "No subscriptions found",
-     "description": "When your business adds a subscription for you, it will appear here."
-    },
-    "transactions": {
-     "title": "No transactions found",
-     "description": "Your transactions will appear here once they are processed."
-    }
-   },
-   "sort": {
-    "button": "Sort",
-    "sortBy": "Sort by",
-    "ascending": "Ascending",
-    "descending": "Descending"
-   },
-   "manageCards": {
-    "loadingPaymentMethodsAria": "Loading payment methods",
-    "loadingBillingDetailsAria": "Loading billing details",
-    "error": {
-     "generic": "Something went wrong. Please try again."
-    },
-    "empty": {
-     "paymentMethodsTitle": "No payment methods found",
-     "paymentMethodsDescription": "When a card is saved to your account, it will show up here.",
-     "billingDetailsTitle": "No billing details found",
-     "billingDetailsDescription": "Your name, email, and address will appear here when your business adds them."
-    }
-   },
-   "actions": {
-    "view": "View",
-    "cancel": "Cancel",
-    "paymentLink": "Payment Link"
-   },
-   "subscriptionDetails": {
-    "title": "Details",
-    "nextInvoice": "Next Invoice",
-    "subscriptionId": "Subscription ID",
-    "orderId": "Order ID",
-    "type": "Type",
-    "id": "ID",
-    "pageUrl": "Page URL"
-   },
-   "transactionDetails": {
-    "title": "Transaction Details",
-    "transactionId": "Transaction ID",
-    "source": "Source",
-    "sourceType": "Source Type",
-    "provider": "Provider",
-    "amount": "Amount",
-    "type": "Type",
-    "date": "Date"
-   },
-   "auth": {
-    "errorToastMeta": "Billing authentication",
-    "authenticateAccount": "Authenticate Account",
-    "willSendVerificationTo": "We'll send a verification code to",
-    "sentVerificationEmail": "We've sent a verification code to",
-    "generateSecureCode": "Generate Secure Code",
-    "didntGetCode": "Didn't receive a code?",
-    "clickToResend": "Click to resend",
-    "resending": "Resending...",
-    "incorrectCode": "The code you entered is incorrect. Please try again.",
-    "sendFailedTitle": "Couldn't send verification code",
-    "resendFailedTitle": "Couldn't resend verification code",
-    "sendFailedDescription": "An error occurred while sending the verification code",
-    "verifyFailedTitle": "Verification failed",
-    "verifyFailedDescription": "We couldn't verify the code you entered",
-    "tryAgain": "Please try again"
-   },
-   "tableHeaders": {
-    "subscriptions": {
-     "subscriptionName": "Subscription Name",
-     "source": "Source",
-     "startDate": "Start Date",
-     "amount": "Amount",
-     "status": "Status",
-     "actions": "Actions"
-    },
-    "transactions": {
-     "source": "Source",
-     "provider": "Provider",
-     "amount": "Amount",
-     "status": "Status",
-     "date": "Date",
-     "actions": "Actions"
-    }
-   },
-   "noRecordsFound": "No records found",
-   "noRecordsSearchTitle": "No matching records",
-   "noRecordsSearchHint": "Try another keyword or clear your search to see all rows on this page.",
-   "clearSearch": "Clear search",
-   "search": {
-    "subscriptions": "Search subscriptions",
-    "transactions": "Search transactions",
-    "placeholder": "Search"
-   },
-   "searchMatchSummary": "Filtering by \"{query}\" — {count} result{s}"
-  },
-  "certifications": {
-   "title": "Certificates & Badges",
-   "subtitle": "View and manage your certificates and badges",
-   "listRowTitleFallback": "Certificate",
-   "queryErrorFallback": "Something went wrong while loading your credentials. Please try again.",
-   "fieldNotAvailable": "Not available",
-   "share": {
-    "nativeTitle": "{name}",
-    "nativeText": "Check out my certificate for {name}"
-   },
-   "tabsAriaLabel": "Certificates and badges",
-   "tabs": {
-    "certificates": "Certificates",
-    "badges": "Badges"
-   },
-   "searchPlaceholderCertificates": "Search certificates",
-   "searchPlaceholderBadges": "Search badges",
-   "searchPlaceholder": "Search for certificates",
-   "loadingCertificatesList": "Loading your certificates…",
-   "loadingBadgesList": "Loading your badges…",
-   "empty": {
-    "certificatesTitle": "No certificates found",
-    "certificatesDescription": "Your certificates will appear here once issued.",
-    "badgesTitle": "No badges found",
-    "badgesDescription": "Your badges will appear here once issued."
-   },
-   "noSearchResults": {
-    "certificatesTitle": "No certificates match your search",
-    "badgesTitle": "No badges match your search",
-    "description": "Try adjusting your search or clear it to see all items."
-   },
-   "clearSearch": "Clear search",
-   "certificatePreview": {
-    "title": "Certificate Preview"
-   },
-   "pagination": {
-    "certificates": "certificates",
-    "badges": "badges"
-   },
-   "sort": {
-    "button": "Sort",
-    "sortBy": "Sort by",
-    "ascending": "Ascending",
-    "descending": "Descending"
-   },
-   "completedOn": "Issued on",
-   "expiresOn": "Expires on",
-   "tableHeaders": {
-    "name": "Name",
-    "courseAssignmentName": "Course/Assignment Name",
-    "badgeName": "Badge name",
-    "completionDate": "Completion Date",
-    "issueDate": "Issue Date",
-    "expiryDate": "Expiry Date",
-    "actions": "Actions"
-   },
-   "actions": {
-    "download": "Download",
-    "share": "Share",
-    "copyLink": "Copy Link",
-    "linkCopied": "Copied",
-    "linkCopiedCertificate": "Certificate link copied",
-    "linkCopiedBadge": "Badge link copied",
-    "copyFailed": {
-     "title": "Copy failed",
-     "content": "Something went wrong while copying the link. Please try again."
-    },
-    "downloadAriaLabel": "Download certificate: {title}",
-    "shareAriaLabel": "Share certificate",
-    "copyLinkAriaLabel": "Copy certificate link"
-   },
-   "preview": {
-    "loadingCertificate": "Loading certificate preview",
-    "loadingBadge": "Loading badge preview",
-    "loadingSubtitle": "Fetching details and preparing your preview.",
-    "verifyCredential": "Verify Credential",
-    "verifyCredentials": "Verify Credential",
-    "download": "Download",
-    "downloadFormat": {
-     "pdf": "PDF",
-     "png": "PNG",
-     "jpg": "JPG"
-    },
-    "downloadMenuAriaLabel": "Choose download format",
-    "downloadFailed": {
-     "title": "Download failed",
-     "content": "Something went wrong while downloading. Please try again."
-    },
-    "copyLink": "Copy Link",
-    "linkCopied": "Link copied",
-    "linkCopiedCertificate": "Certificate link copied",
-    "linkCopiedBadge": "Badge link copied",
-    "orShareTo": "OR SHARE TO",
-    "shareNative": "Share certificate",
-    "expiringOn": "Expiring on",
-    "expiredOn": "Expired on",
-    "expiredStamp": "EXPIRED",
-    "verificationModal": {
-     "title": "Credential verification",
-     "subtitle": "Credential verified successfully",
-     "description": "All information displayed matches our records.",
-     "step1": {
-      "title": "Verifying recipient",
-      "description": "{recipient}"
-     },
-     "step2": {
-      "title": "Verifying issuer",
-      "description": "{issuer}"
-     },
-     "step3": {
-      "title": "Verifying credential ID",
-      "description": "Identifier {credentialId} is unique and valid"
-     }
-    }
-   }
-  },
-  "certificates": {
-   "preview": {
-    "loading": "Loading certificate...",
-    "loadingBadge": "Loading badge...",
-    "notFound": "Certificate not found",
-    "noPreview": "Preview not available",
-    "expired": "EXPIRED ON",
-    "issuedTo": "Issued to",
-    "issuedBy": "Issued by",
-    "addToLinkedin": "Add to LinkedIn Profile",
-    "download": "Download",
-    "shareCredential": "Share Your Credential",
-    "shareDescription": "Show your credential on your social network",
-    "verification": "CREDENTIAL VERIFICATION",
-    "issueDate": "Issue Date",
-    "expiryDate": "Expiry Date",
-    "verify": "Verify Credential",
-    "error": {
-     "loadFailed": "Failed to load certificate",
-     "downloadFailed": "Download failed"
-    }
-   }
-  },
-  "notifications": {
-   "title": "Notifications",
-   "subtitle": "Manage your notification preferences",
-   "general": {
-    "title": "General Notifications"
-   },
-   "email": {
-    "title": "Email Notifications"
-   },
-   "push": {
-    "title": "Push Notifications"
-   }
-  },
-  "notificationPreferences": {
-   "title": "Notification preferences",
-   "description": "Manage how you receive notifications",
-   "willNotReceiveNotificationsIfAdminDisabled": "You will not receive notifications if disabled by admin",
-   "newActivity": "New activity",
-   "email": "Email",
-   "push": "Push",
-   "allNotifications": "All notifications",
-   "allEmailNotificationsDescription": "Receive all email notifications",
-   "allPushNotificationsDescription": "Receive all push notifications",
-   "individualSettings": "Individual Settings",
-   "masterControlsDescription": "Master controls override individual settings",
-   "postLike": "Post like",
-   "newComment": "New comment",
-   "postMention": "Post {'@'}mention",
-   "postEveryoneTagged": "Post {'@'}everyone tagged",
-   "postTags": "Post tags",
-   "commentEveryoneTagged": "Comment {'@'}everyone tagged",
-   "commentMention": "Comment {'@'}mention",
-   "commentLike": "Comment like",
-   "newMemberRequestToJoinGroup": "New member request to join group",
-   "groupJoiningRequestApproved": "Group joining request approved",
-   "groupJoiningRequestRejected": "Group joining request rejected",
-   "roleUpdatedInPrivateChannel": "Role updated in private channel",
-   "newCourseAvailable": "New course added to the group",
-   "newEventCreated": "New event created",
-   "followedPostActivity": "New comments on posts you follow",
-   "newCourseComment": "New course comment",
-   "certificateIssued": "Certificate issued",
-   "invoiceReceived": "New invoice received",
-   "estimateReceived": "New estimate received",
-   "contractReceived": "New contract received",
-   "info": {
-    "tooltip": "Notification settings information"
-   },
-   "success": {
-    "updated": "Notification preferences were updated.",
-    "emailPreferencesUpdated": "Email notification preferences updated successfully",
-    "pushPreferencesUpdated": "Push notification preferences updated successfully",
-    "optionUpdated": "Notification preference updated successfully",
-    "title": "Saved",
-    "individualEmail": "Updated Notification settings for : {label}",
-    "individualPush": "Updated Notification settings for : {label}",
-    "allEmailMaster": "All email notifications were updated.",
-    "allPushMaster": "All push notifications were updated."
-   },
-   "error": {
-    "loadFailed": "Failed to load notification preferences",
-    "updateFailed": "Update failed",
-    "genericError": "Something went wrong. Please try again.",
-    "title": "Couldn’t save changes",
-    "individualUpdateFailed": "We couldn’t update this notification. Try again.",
-    "globalUpdateFailed": "We couldn’t update your default notification settings. Try again."
-   },
-   "clientPortalTab": "Client portal",
-   "communitiesTab": "Communities",
-   "communitiesTabBody": "Group-level email and push preferences for each community are available in the Communities experience. Client portal rows above apply to portal-wide notifications.",
-   "sectionSocialEngagement": "Social engagement",
-   "sectionPostsComments": "Posts and comments",
-   "sectionCommunityGroupManagement": "Community and group management",
-   "allowNotifications": "Allow notifications",
-   "notificationType": "Notification type",
-   "enableEmailForGroup": "Enable email for this group",
-   "enablePushForGroup": "Enable push for this group",
-   "saveAndCopyTo": "Save and copy to…",
-   "communitiesListEmpty": "You’re not a member of any active communities yet.",
-   "sort": "Sort",
-   "sortBy": "Sort by",
-   "sortAscending": "Ascending",
-   "sortDescending": "Descending",
-   "sortFieldName": "Name",
-   "sortFieldJoined": "Recently joined",
-   "sortByName": "Sort by name",
-   "sortByJoined": "Sort by joined date",
-   "toggleSortDirection": "Toggle sort direction",
-   "searchGroups": "Search groups",
-   "searchCommunity": "Search community...",
-   "clearSearch": "Clear search",
-   "noSearchResults": "No communities match your search",
-   "noSearchResultsDescription": "Try adjusting your search or clear it to see all items.",
-   "copyModalTitle": "Copy notification preferences",
-   "copyModalSearchPlaceholder": "Search groups…",
-   "copyModalSelectTargets": "Select groups",
-   "copyModalSelectAll": "Select all",
-   "copyModalNoResults": "No groups match your search",
-   "copyModalConfirm": "Copy preferences",
-   "copyConfirmSuccess": "Preferences copied successfully.",
-   "copyConfirmSuccessCopied": "Preferences copied to {count} group(s).",
-   "copyConfirmSuccessSourceOnly": "Source preferences were updated.",
-   "copyConfirmError": "We couldn’t copy your preferences. Please try again.",
-   "tabsAriaLabel": "Notification categories",
-   "emailColumn": "Email",
-   "pushColumn": "Push",
-   "emailNotificationNotAvailable": "Email notifications are not available for this alert.",
-   "pushNotificationNotAvailable": "Push notifications are not available for this alert.",
-   "pauseAll": "Pause all",
-   "loading": "Loading notification preferences...",
-   "badgeIssued": "Badge issued",
-   "welcomeBadgeIssued": "Welcome badge issued",
-   "newsletter": "Newsletter",
-   "newPostFollowers": "New post from followed user",
-   "newFollower": "Get notified when someone follows you.",
-   "sharedFileReceived": "Get notified when an admin shares a file with you"
-  },
-  "social_media": {
-   "title": "Social Media",
-   "subtitle": "Add your social media details here",
-   "contact": {
-    "title": "Contact Information",
-    "phone": {
-     "label": "Phone Number",
-     "placeholder": "Phone number",
-     "feedback": "Your contact phone number"
-    },
-    "website": {
-     "label": "Website",
-     "placeholder": "https://yourwebsite.com",
-     "feedback": "Your personal or business website"
-    },
-    "email": {
-     "label": "Email",
-     "placeholder": "your email"
-    }
-   },
-   "links": {
-    "title": "Social Media Links",
-    "facebook": {
-     "label": "Facebook",
-     "placeholder": "https://facebook.com/marketing",
-     "feedback": "Your Facebook profile or page"
-    },
-    "twitter": {
-     "label": "X",
-     "placeholder": "https://x.com/marketing",
-     "feedback": "Your Twitter profile"
-    },
-    "instagram": {
-     "label": "Instagram",
-     "placeholder": "https://instagram.com/marketing",
-     "feedback": "Your Instagram profile"
-    },
-    "linkedin": {
-     "label": "LinkedIn",
-     "placeholder": "https://linkedin.com/marketing",
-     "feedback": "Your LinkedIn profile"
-    },
-    "youtube": {
-     "label": "YouTube",
-     "placeholder": "https://youtube.com/marketing",
-     "feedback": "Your YouTube channel"
-    }
-   },
-   "visibleToEveryone": "Visible to Everyone",
-   "validation": {
-    "phone": "Please enter a valid phone number",
-    "email": "Please enter a valid email address",
-    "facebook": "Please enter a valid Facebook URL",
-    "youtube": "Please enter a valid YouTube URL",
-    "twitter": "Please enter a valid X URL",
-    "instagram": "Please enter a valid Instagram URL",
-    "linkedin": "Please enter a valid LinkedIn URL"
-   },
-   "notifications": {
-    "success": {
-     "title": "Success",
-     "description": "Social media updated successfully",
-     "content": "Your social links and contact details have been saved",
-     "meta": "Social media update"
-    },
-    "validation_failed": {
-     "title": "Validation Failed",
-     "description": "Please fix the errors in the form"
-    },
-    "update_failed": {
-     "title": "Error",
-     "description": "Failed to update social media details"
-    }
-   }
-  },
-  "account": {
-   "header": "Account",
-   "subheader": "View account email and change password.",
-   "email": {
-    "label": "Your Account Email",
-    "placeholder": "Email Address",
-    "feedback": "This is the email you login with"
-   },
-   "agency_email": {
-    "label": "Agency email",
-    "feedback": "This is the email for your agency or sub-account login. Sync it if you want to keep or update the email on the client portal, same as the agency's sub-account email.",
-    "sync": "Sync email",
-    "sync_success": "Email synced",
-    "email_in_use": "This email is already used by another portal user. Contact support.",
-    "multi_contact": "This account is linked to multiple contacts. Contact support to sync it.",
-    "sync_failed": "Couldn't sync your email. Please try again."
-   },
-   "password": {
-    "section_title": "Change Password",
-    "set_section_title": "Set Password",
-    "set_description": "We will email you a link to set your password.",
-    "set_action": "Set Password",
-    "set_cooldown_message": "Please check your inbox. Resend in {seconds}s",
-    "set_link_sent": {
-     "title": "Set password link sent",
-     "description": "Check your email",
-     "content": "Set password link sent to your email",
-     "meta": "Set password",
-     "error_title": "Could not send set password link",
-     "error_description": "Try again",
-     "error_content": "Something went wrong"
-    }
-   },
-   "current_password": {
-    "label": "Current Password",
-    "placeholder": "Enter current password",
-    "feedback": "Enter the password you currently use to login"
-   },
-   "new_password": {
-    "label": "New Password",
-    "placeholder": "Enter new password",
-    "feedback": "Password must have at least 8 characters, including uppercase, lowercase, number & special character"
-   },
-   "confirm_password": {
-    "label": "Confirm New Password",
-    "placeholder": "Confirm New Password",
-    "feedback": "Enter the new password again"
-   },
-   "revoke_all_sessions": {
-    "label": "Log out from all devices."
-   },
-   "validation": {
-    "passwords_match": "Passwords do not match",
-    "not_valid": "Password must include uppercase, lowercase, number & special character",
-    "password_length": "Password must have at least 8 characters",
-    "passwords_valid": "Passwords match and are valid"
-   },
-   "forgot_password": "Forgot Password?",
-   "forgot_password_screen": {
-    "reset_link_hint": "We'll send a password reset link to this email",
-    "send_link": "Send Link",
-    "success": {
-     "title": "Check your email",
-     "description": "If an account exists for that address, we sent a password reset link.",
-     "content": "Follow the link in the email to choose a new password.",
-     "meta": "Password reset"
-    },
-    "error": {
-     "title": "Could not send reset link",
-     "description": "Something went wrong while sending the email.",
-     "meta": "Password reset"
-    }
-   },
-   "field_validation": {
-    "email_required": "Email is required",
-    "email_invalid": "Please enter a valid email address",
-    "current_password_required": "Current password is required",
-    "new_password_required": "New password is required",
-    "confirm_password_required": "Please confirm your new password",
-    "password_min_length": "Password must be at least 8 characters long"
-   },
-   "password_update": {
-    "success": {
-     "title": "Password updated successfully",
-     "description": "Your password has been changed",
-     "content": "Please use your new password for future logins",
-     "meta": "Password Update"
-    },
-    "error": {
-     "title": "Failed to update password",
-     "description": "An error occurred while changing your password",
-     "content_fallback": "Please check your current password and try again",
-     "meta": "Password Update Error"
-    },
-    "validation_failed": {
-     "title": "Validation Failed",
-     "description": "Please fix the errors in the form",
-     "content": "Make sure all required fields are filled correctly",
-     "meta": "Form Validation"
-    }
-   }
-  },
-  "certificatePreview": {
-   "title": "Certificate Preview",
-   "badge": "Badge"
-  },
-  "content": {
-   "not_found": {
-    "title": "Content Not Found",
-    "message": "The requested settings section could not be found."
-   }
-  },
-  "mobile": {
-   "title": "Account",
-   "header": {
-    "title": "Account"
-   },
-   "buttons": {
-    "edit_profile": "Edit Profile"
-   },
-   "sections": {
-    "account_records": "Account Records",
-    "settings_preferences": "Settings & Preferences",
-    "billing": "Billing & Subscription",
-    "certificates": "Certificates & Badges",
-    "dark_mode": "Dark Mode",
-    "languages": "Languages",
-    "chat_settings": "Chat Settings",
-    "meeting": "Meeting",
-    "notifications": "Notifications",
-    "location_timezone": "Location & Timezone",
-    "social_links": "Social Links",
-    "change_password": "Change Password"
-   }
-  },
-  "web": {
-   "title": "Account Settings",
-   "sidebar": {
-    "profile": "Profile",
-    "account": "Account",
-    "social_media": "Social Media",
-    "certifications": "Certificates & Badges",
-    "billing_subscriptions": "Billing & Subscriptions",
-    "chats": "Chat",
-    "meeting": "Meeting",
-    "language_settings": "Language Settings",
-    "notifications": "Notifications",
-    "events": "Events"
-   }
-  },
-  "events": {
-   "title": "Events",
-   "tabsAriaLabel": "Events sections",
-   "subtitle": {
-    "tickets": "Tickets for events you have registered for",
-    "connections": "People you have met at events",
-    "schedule": "Sessions you have saved across every event",
-    "bookmarks": "Everything you have bookmarked at events"
-   },
-   "tabs": {
-    "tickets": "My tickets",
-    "connections": "My connections",
-    "schedule": "My schedule",
-    "bookmarks": "My bookmarks"
-   },
-   "emptyState": {
-    "title": "Nothing here yet"
-   },
-   "status": {
-    "live": "Live",
-    "upcoming": "Upcoming",
-    "past": "Past"
-   },
-   "tickets": {
-    "countOne": "1 ticket",
-    "countMany": "{count} tickets",
-    "pageRange": "Showing {start}–{end} of {total}",
-    "previous": "Previous",
-    "next": "Next",
-    "emptyTitle": "No tickets yet",
-    "emptyDescription": "Tickets you purchase will show up here.",
-    "errorTitle": "We could not load your tickets",
-    "errorDescription": "Something went wrong. Please refresh the page and try again."
-   },
-   "connections": {
-    "message": "Message",
-    "pageRange": "Showing {start}–{end} of {total}",
-    "previous": "Previous",
-    "next": "Next",
-    "emptyTitle": "No connections yet",
-    "emptyDescription": "People you connect with at events appear here.",
-    "errorTitle": "We could not load your connections",
-    "errorDescription": "Something went wrong. Please refresh the page and try again."
-   },
-   "schedule": {
-    "countOne": "1 session",
-    "countMany": "{count} sessions",
-    "pageRange": "Showing {start}–{end} of {total}",
-    "previous": "Previous",
-    "next": "Next",
-    "allEvents": "All events",
-    "addToCalendar": "Add to calendar",
-    "addedToCalendar": "Added to calendar",
-    "mySchedule": "My schedule",
-    "calendarMenu": "Calendar options",
-    "calendarGoogle": "Google Calendar",
-    "calendarApple": "Apple Calendar",
-    "calendarOutlook": "Outlook",
-    "calendarOthers": "Others (.ics file)",
-    "emptyTitle": "Nothing on your schedule",
-    "emptyDescription": "Sessions you save from an event will show up here.",
-    "errorTitle": "We could not load your schedule",
-    "errorDescription": "Something went wrong. Please refresh the page and try again."
-   },
-   "ticket": {
-    "allTickets": "All tickets",
-    "ticketPosition": "Ticket {index} / {total}",
-    "qrRailLabelOne": "1 ticket for this event",
-    "qrRailLabelMany": "{count} tickets for this event",
-    "qrAria": "Ticket QR code",
-    "qrUnavailable": "QR code unavailable",
-    "scanAtVenue": "Scan at venue",
-    "previousTicket": "Previous ticket",
-    "nextTicket": "Next ticket",
-    "fieldTicketType": "Ticket type",
-    "fieldVenue": "Venue",
-    "getDirections": "Get directions",
-    "downloadTicket": "Download ticket",
-    "online": {
-     "title": "Online event",
-     "statusUpcoming": "Not started yet",
-     "statusLive": "Live now",
-     "statusPast": "Ended",
-     "helperUpcoming": "You can join anytime before it starts.",
-     "helperLive": "The event has started.",
-     "helperPast": "This event has already ended.",
-     "join": "Join event",
-     "copyLink": "Copy link",
-     "linkCopied": "Link copied",
-     "availableAt": "The join link will be available on {date}",
-     "unavailable": "The join link isn't available yet"
-    }
-   },
-   "placeholder": {
-    "tickets": {
-     "title": "No tickets yet",
-     "description": "Tickets you purchase will show up here."
-    },
-    "connections": {
-     "title": "No connections yet",
-     "description": "People you connect with at events appear here."
-    },
-    "schedule": {
-     "title": "Nothing on your schedule",
-     "description": "Sessions you save from an event will show up here."
-    },
-    "bookmarks": {
-     "title": "No bookmarks yet",
-     "description": "Exhibitors you bookmark will show up here."
-    }
-   },
-   "bookmarks": {
-    "pageRange": "Showing {start}–{end} of {total}",
-    "previous": "Previous",
-    "next": "Next",
-    "allEvents": "All events",
-    "emptyTitle": "No bookmarks yet",
-    "emptyDescription": "Exhibitors you bookmark will show up here.",
-    "errorTitle": "We could not load your bookmarks",
-    "errorDescription": "Something went wrong. Please refresh the page and try again.",
-    "saved": "Remove bookmark",
-    "unsaved": "Save bookmark",
-    "openExhibitor": "Open {name}"
-   }
-  },
-  "language_settings": {
-   "header": "Language Settings",
-   "subheader": "Update language settings here",
-   "field_label": "Choose your preferred language",
-   "placeholder": "Select language",
-   "mobile": {
-    "select_label": "Select Language",
-    "update_button": "Update"
-   },
-   "options": {
-    "en": "English",
-    "es": "Spanish",
-    "fr-CA": "French (Canada)",
-    "fr-FR": "French (France)",
-    "pt-PT": "Portuguese (Portugal)",
-    "pt-BR": "Portuguese (Brazil)",
-    "de": "German",
-    "nl": "Dutch",
-    "it": "Italian",
-    "da": "Danish",
-    "no": "Norwegian",
-    "fi": "Finnish",
-    "sv": "Swedish"
-   },
-   "save": {
-    "success": {
-     "title": "Language saved",
-     "description": "Your language preference has been updated.",
-     "content": "Changes are saved to your account.",
-     "meta": "Language preference"
-    },
-    "error": {
-     "title": "Could not save language",
-     "description": "Something went wrong while updating your preference.",
-     "content": "Please try again.",
-     "meta": "Language preference error"
-    }
-   }
-  },
-  "locationTimezone": {
-   "selectTimezone": "Select timezone"
-  }
  },
  "chats": {
   "title": "Chat",
@@ -5392,7 +5388,8 @@
    "oldest": "Oldest",
    "accessibilityLabel": "Sort order: {order}",
    "loading": "Updating order"
-  }
+  },
+  "reactionsAll": "All"
  },
  "welcomeSetup": {
   "pageTitle": "Welcome setup",
@@ -5707,12 +5704,12 @@
    "copyCoupon": "Copy coupon code",
    "payout": "Payout",
    "payoutLabels": {
-    "PAY_7": "Net-7",
-    "PAY_15": "Net-15",
-    "PAY_30": "Net-30",
-    "PAY_45": "Net-45",
-    "PAY_60": "Net-60",
-    "PAY_90": "Net-90"
+    "PAY_7": "7 days after month ends",
+    "PAY_15": "15 days after month ends",
+    "PAY_30": "30 days after month ends",
+    "PAY_45": "45 days after month ends",
+    "PAY_60": "60 days after month ends",
+    "PAY_90": "90 days after month ends"
    },
    "live": "Live",
    "paused": "Paused",

@@ -21,10 +21,10 @@ bu dosyanın o anki özetidir.
 
 | Bileşen | Nerede | Güncel sürüm | Durum |
 |---|---|---|---|
-| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.5.0** | Yayında |
+| Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.5.1** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Yayında (2026-11-02, Worker 9c3284d1) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.24.1** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.25.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.3** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.6.0** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.3** | Yayında |
@@ -36,6 +36,11 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.25.0** — 2026-11-27 — GHL güncellemesi (2026-11-19…26), gömülü ekranlar 62 metin: takvim bildirimlerinde
+  **WhatsApp hesabı seçimi** (11), ayarlarda yeni kenar çubuğu simgesi / tam logo (10), e-postada yeniden adlandırma ve
+  E-posta Yapay Zekası kullanım sınırı (16), iş akışında "Eki oku" yapay zeka eylemi ve tarih biçimleri (9), Yapay Zeka
+  Stüdyosu model seçici (8), sayfa oluşturucuda sohbet widget'ı artık `{source}` (huni ya da site) (5), form (2), satış
+  ortaklığı hakediş açıklaması (1). Doğrulama 62/62, 0 hata.
 - **1.24.1** — 2026-11-19 — Sohbetler boş kutu düğmesi: GHL kelimeleri tek tek dizdiği için "Görüntüle Tümü Ekip gelen kutusu
   Sohbetler" çıkıyordu → "Tüm Ekip gelen kutusu sohbetlerini görüntüle" (sayfa kuralı).
 - **1.24.0** — 2026-11-19 — Ana ekran **tam sayfa sayfa tarama** (CEO: "tümü güncel olsun"; 126 sayfa, liste yeniden
@@ -472,6 +477,8 @@ bu dosyanın o anki özetidir.
   hatırlanır). CEO'nun CRM sekmesinde dosya yükleme yöntemiyle doğrulandı; yayında değil.
 
 ### Öğrenci paneli (panel.growtify.ai)
+- **2.5.1** — 2026-11-27 — GHL: 4 yeni + 6 değişen metin (satış ortaklığı hakediş vadeleri "Net-30" → "Ay bitiminden
+  30 gün sonra", sertifika önizleme, kopyalama hatası, tepkiler "Tümü"). Panel bekçisi #267.
 - **2.5.0** — 2026-11-19 — GHL güncellemesi: 60 yeni + 9 değişen metin. Satış ortaklığı **onay formu** akışı (hakediş
   ödemesi onaya bağlı), grup **ücretsiz plan** seçeneği, randevu kataloğunda **kiralık ürünler**, yorum sıralama, ajans
   e-postası senkronu, etkinlik "Sergileyen Firma" sayfası. Panel bekçisi kaydı #262.
