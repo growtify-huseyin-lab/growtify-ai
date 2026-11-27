@@ -384,6 +384,7 @@ const personalize: ScreenConfig[] = [
       "PDF raporunu ve 30 günlük AI yol haritanı bu adrese göndereceğiz.",
     placeholder: "ornek@mail.com",
     cta: "Planımı Hazırla",
+    submitTrigger: true,
   },
 ];
 

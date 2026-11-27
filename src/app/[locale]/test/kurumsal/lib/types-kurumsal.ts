@@ -99,6 +99,8 @@ export interface KurumsalScreenConfig {
   likertMin?: string;
   likertMax?: string;
   cta?: string;
+  /** Structural flag: this text_input screen submits the lead. See ScreenConfig.submitTrigger. */
+  submitTrigger?: boolean;
   placeholder?: string;
   extra?: Record<string, unknown>;
 }
