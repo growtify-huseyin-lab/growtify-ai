@@ -24,7 +24,7 @@ bu dosyanın o anki özetidir.
 | Öğrenci paneli | panel.growtify.ai (GHL Client Portal) | **2.5.1** | Yayında |
 | Ödeme sayfası | odeme.growtify.app (GHL ödeme linki) | **1.2.0** | Yayında (2026-11-02, Worker 9c3284d1) |
 | Program satın alma sayfası | panel.growtify.ai/courses/offers/* | **1.1.0** | Yayında |
-| CRM | Growtify.app CRM (admin.growtify.app) | **1.25.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
+| CRM | Growtify.app CRM (admin.growtify.app) | **1.26.0** | Yayında — varsayılan Türkçe (Harrington Housing ve Rentser İngilizce) |
 | CRM iframe ekranları: takvim ayarları, İşletme Profili, E-posta Hizmetleri, Otomasyon, E-postalar, Satış Ortaklığı, Sohbet Sağlayıcıları | crm-takvim / crm-ayarlar / crm-eposta / crm-otomasyon / crm-epostalar / crm-ortaklik / crm-sohbet .growtify.app (workers/crm-frames) | **1.4.3** | Yayında |
 | Yapay Zeka Stüdyosu | crm-studyo.growtify.app (leadgen-vibe-ai-builder) | **1.6.0** | Yayında |
 | Form / Anket / Test oluşturucu | crm-formlar.growtify.app (leadgen-apps-form-survey-builder) | **1.6.3** | Yayında |
@@ -36,6 +36,12 @@ bu dosyanın o anki özetidir.
 ## Değişiklik kaydı
 
 ### CRM (Growtify.app CRM)
+- **1.26.0** — 2026-11-27 — Ana ekran tam tarama (126 sayfa, Türkçe modda): **4.122 anahtar**, 1.261'i mevcut
+  Türkçeyle eşleşti, 2.861 yeni: **Superagents** (623: ajan, alt ajan, rutin, bilgisayar, Güvenli Depo), reklam yayınlamada
+  **ChatGPT (OpenAI) reklamları** (526), **ajan kayıtları / izleme** (517), CRM ortak metinleri + akıllı liste formülleri ve
+  **markalı arama** (500), diğer (695: Voice AI, sertifikalar, sohbet widget'ı, Uygulama Pazarı, marka panosu…). Doğrulama
+  4.122/4.122, 0 hata; beyaz etiket ihlali yok. Katalog 5,76 → 5,99 MB (sıkıştırılmış 1,68 MB).
+  Not: tarayıcıda dil EN seçiliyken tarama katmanı devre dışı görür ("unpatched") → taramadan önce `gai_crm_lang=tr`.
 - **1.25.0** — 2026-11-27 — GHL güncellemesi (2026-11-19…26), gömülü ekranlar 62 metin: takvim bildirimlerinde
   **WhatsApp hesabı seçimi** (11), ayarlarda yeni kenar çubuğu simgesi / tam logo (10), e-postada yeniden adlandırma ve
   E-posta Yapay Zekası kullanım sınırı (16), iş akışında "Eki oku" yapay zeka eylemi ve tarih biçimleri (9), Yapay Zeka
